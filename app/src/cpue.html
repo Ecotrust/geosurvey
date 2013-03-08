@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en" ng-app>
+	<head>
+		<!-- Sets initial viewport load and disables zooming  -->
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+
+		<!-- Makes your prototype chrome-less once bookmarked to your phone's home screen -->
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		
+		<!-- Set a shorter title for iOS6 devices when saved to home screen -->
+		<meta name="apple-mobile-web-app-title" content="Digital Deck">
+
+		<!-- Set Apple icons for when prototype is saved to home screen -->
+		<link rel="apple-touch-icon-precomposed" sizes="114x114" href="touch-icons/apple-touch-icon-114x114.png">
+		<link rel="apple-touch-icon-precomposed" sizes="72x72" href="touch-icons/apple-touch-icon-72x72.png">
+		<link rel="apple-touch-icon-precomposed" sizes="57x57" href="touch-icons/apple-touch-icon-57x57.png">
+		
+
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+		<title>Solomon Islands</title>
+	    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<meta name="author" content="Your name" />
+		<link rel="shortcut icon" href="../favicon.ico"> 
+		<link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+		<link rel="stylesheet" type="text/css" href="assets/css/transitions.css" />
+		<link rel="stylesheet" type="text/css" href="assets/lib/css/ratchet.css" />
+		<link rel="stylesheet" type="text/css" href="assets/lib/css/font-awesome.min.css" />
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.1.1/angular.min.js"></script>
+		
+		<style type="text/css">
+		    .welcome {
+		      line-height: 1.5;
+		      color: #555;
+		    }
+		</style>
+		<script src="assets/lib/js/ratchet.js"></script>
+	</head>
+	<body ng-controller="SurveyCtrl">
+		<header class="bar-title">
+			<a class="button-prev" ng-click="back()" ng-show="backButton">
+			   Back
+			 </a>
+		  <h1 class="title">Solomon Islands</h1>
+		</header>
+		<nav class="bar-tab primary-nav">
+		  <ul class="tab-inner">
+		    <li class="tab-item">
+		      <a href="#home">
+		        <img class="tab-icon" src="assets/img/icon-home.png">
+		        <div class="tab-label">Home</div>
+		      </a>
+		    </li>
+		    <li class="tab-item">
+		      <a href="#markets">
+		        <img class="tab-icon" src="assets/img/market.png">
+		        <div class="tab-label">Markets</div>
+		      </a>
+		    </li>
+		    <li class="tab-item">
+		      <a href="#vendors">
+		        <img class="tab-icon" src="assets/img/store.png">
+		        <div class="tab-label">Vendors</div>
+		      </a>
+		    </li>
+		    
+		   
+		    <li class="tab-item active">
+		      <a href="#survey">
+		        <img class="tab-icon" src="assets/img/survey.png">
+		        <div class="tab-label">Survey</div>
+		      </a>
+		    </li>
+		  </ul>
+		</nav>
+		<div class="pane">
+			<div class="content">
+			    <div class="content-padded">
+			    	<p class="welcome">Stuff</p>
+			    </div>
+			</div>
+		</div>
+		<div id="home" class="pane">
+			<div class="content">
+			    <div class="content-padded">
+			    	<h2>Interviewer Information</h2>
+			    	<form>
+			    	  <div class="input-group">
+			    	    <input type="text" placeholder="Full name">
+			    	    <input type="email" placeholder="Email">
+			    	    <input type="text" placeholder="Username">
+			    	  </div>
+			    	  <a class="button button-block button-main">Save</a>
+			    	</form>
+				   	
+				</div>
+			</div>
+		</div>
+		<div id="survey-done" class="pane">
+			<div class="content">
+			    <div class="content-padded">
+			    	<h2>Survey for {{ survey.vendor.value.GivenName}} {{ survey.vendor.value.Surname}}</h2>
+			    	<p>Completed on <strong>{{ survey.completedAt.toString("yyyy-MM-dd HH:mm") }}</strong></p>
+			    	<ul class="list inset">
+			    	  <li ng-repeat="question in surveyList" ng-show="question.title" ng-click="edit(question)">
+			    	    <a>
+			    	      	<strong ng-show="question.currentLoop">{{ question.currentLoop }}: {{ question.title }}</strong>
+		    				<strong  ng-hide="question.currentLoop">{{ question.title }}</strong>
+			    	      <div ng-switch on="question.type" ng-show="question.value">
+			    	      	<span class="count-positive" ng-switch-default>{{question.prefixUnit}}{{ question.value }} {{ question.suffixUnit }}</span>
+			    	      	<span class="count-positive" ng-switch-when="single-select">{{ question.value.name }}</span>
+			    	      </div>
+			    	      <span class="count-negative" ng-hide="question.value">Not Entered</span>
+			    	    </a>
+			    	  </li>
+			    	</ul>
+					<a class="button button-main button-block" ng-click="finalizeSurvey()">done</a>
+
+			    </div>
+			</div>
+		</div>
+		<div id="survey" class="pane">
+			<div class="content">
+			    <div class="content-padded">
+			    	<h2>{{ question.title }}</h2>
+			    	<div ng-show="question.submit" class="add-new">
+			    		<a class="button btn-main button-block" ng-click="addNewItem(question, question.fields)">Add New</a>
+			    	</div>
+			    	<h2 ng-show="question.currentLoop">{{ question.currentLoop }}</h2>
+			    	<div ng-switch on="question.type">
+			    		<div ng-switch-default>
+					    	<div class="number-input-display">
+					    		{{ question.prefixUnit }}
+					    		<strong ng-hide="numberInput" ng-switch on="question.type">
+					    			<span ng-switch-default>0.00</span>
+					    			<span ng-switch-when="integer">0</span>
+					    		</strong>
+					    		<strong ng-show="numberInput">{{ numberInput }}</strong>
+					    		{{ question.suffixUnit }}
+					    	</div>
+					    	<button class="delete-button" ng-click="delete()">delete</button>
+					    	<table class="number-input" ng-click="padClick($event)">
+					    		<tr>
+					    			<td><button>1</button></td>
+					    			<td><button>2</button></td>
+					    			<td><button>3</button></td>
+					    		</tr>
+					    		<tr>
+					    			<td><button>4</button></td>
+					    			<td><button>5</button></td>
+					    			<td><button>6</button></td>
+					    		</tr>
+					    		<tr>
+					    			<td><button>7</button></td>
+					    			<td><button>8</button></td>
+					    			<td><button>9</button></td>
+					    		</tr>
+					    		<tr>
+					    			<td><button class="dot" ng-disabled="question.type == 'integer'">.</button></td>
+					    			<td><button>0</button></td>
+					    			<td><button class="enter"><strong>enter</strong></button></td>
+					    		</tr>
+
+					    	</table>
+						</div>
+						<div ng-switch-when="single-select" class="select">
+							<p>{{question.text}}</p>
+							<input type="search" placeholder="Search" ng-mode="vendorSearchTerm">
+							<ul class="list inset">
+							  <li ng-repeat="choice in question.choices" ng-click="selectChoice(choice, question)">
+							    <a>
+							      <strong>{{ choice[question.name] }}</strong>
+							      <span class="chevron"></span>
+							    </a>
+							    <ul class="list inset child" ng-show="choice.selected && choice.children">
+							    	<li ng-repeat="child in choice.children">
+							    		<a  ng-click="selectChoice(child)">
+							    		  	<strong>
+							    		  		{{ child[question.name] }}
+							    		  	</strong>
+							    		</a>
+							    	</li>
+							    </ul>
+							  </li>
+							</ul>
+						</div>
+						<div ng-switch-when="multi-select" class="select">
+							<p>{{question.text}}</p>
+						<ul class="list inset">
+							  	<li ng-repeat="choice in question.choices">
+								    <a ng-click="pickMultiChoice(choice)">
+								      	<strong>
+								      		<i ng-show="choice.selected" class="icon-check"></i>
+								      		<i ng-hide="choice.selected" class="icon-check-empty"></i>
+								      		{{ choice[question.name] }}
+								      	</strong>
+								    </a>
+								    <ul class="list inset child" ng-show="choice.selected && choice.children">
+								    	<li ng-repeat="child in choice.children">
+								    		<a  ng-click="pickMultiChoice(child)">
+								    		  	<strong>
+								    		  		<i ng-show="child.selected" class="icon-check"></i>
+								    		  		<i ng-hide="child.selected" class="icon-check-empty"></i>
+								    		  		{{ child[question.name] }}
+								    		  	</strong>
+								    		</a>
+								    	</li>
+								    </ul>
+							  	</li>
+							</ul>
+							<a class="button button-main button-block" ng-click="selectMultiChoice()">continue</a>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+		<div class="pane" id="add-new">
+			<div class="content">
+			    <div class="content-padded">
+					<h2>Add New {{ question.submit }}</h2>
+					<div ng-repeat="field in question.fields">
+						<input type="text" placeholder="{{ field.name }}" ng-model="newItem[field.name]">
+					</div>
+					<a class="button button-main button-block" ng-click="addNewItem(question, newItem)" href="#survey">Submit {{ question.submit }}</a>
+				</div>
+			</div>
+		</div>
+		
+	</body>
+
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/datejs/1.0/date.min.js"></script>
+	<script src="assets/js/fixtures.js"></script>
+	<script src="assets/js/cpue-questions.js"></script>
+	<script src="assets/js/app.js"></script>
+
+	
+
+</html>

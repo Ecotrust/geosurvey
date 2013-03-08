@@ -1,0 +1,83 @@
+.content-padded {
+	margin-top: 50px;
+	margin-bottom: 75px;
+}
+
+
+.number-input-display {
+	text-align: right;
+	font-size: 16px;
+	border: 1px solid rgba(0, 0, 0, .3);
+	padding: 16px 10px;
+	margin: 5px 0px;
+	width: 174px;
+	float: left;
+}
+button.delete-button,
+button.delete-button:active {
+	width: 102px;
+	float: right;
+	margin: 5px 0px;
+	padding: 17px 0px;
+
+}
+	
+.child li {
+	width: 185px;
+}
+.select h2 {
+	margin-bottom: 10px;
+}
+
+.select input {
+	
+}
+
+.add-new {
+	margin: 10px 0px;
+}
+
+.number-input {
+	width: 100%;
+	height: 250px;
+	margin-left: auto;
+	margin-right: auto;
+}
+	.number-input td {
+		text-align: center;
+		font-size: 20px;
+		font-weight: bold;
+	}
+	.number-input button {
+		padding: 15px 30px;
+		width: 100%;
+	}
+	.number-input button.enter {
+		padding: 14px 13px;
+	}
+	.number-input button.dot {
+		padding: 15px 33px;
+	}
+
+.pane .list [class*="count"] {
+	margin-top: 5px;
+	position: relative;
+}
+
+.pane .count-main {
+	font-size: 16px;
+}
+
+.bar-tab.primary-nav {
+	height: 55px;
+}
+.tab-item .tab-icon {
+	height: 24px;
+}
+.tab-item .tab-label {
+	font-size: 12px;
+}
+
+.list.inset.child {
+	margin-top: 5px;
+}
