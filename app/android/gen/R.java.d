@@ -1,0 +1,23 @@
+/Users/eknuth/projects/digital_deck/solomon_islands/app/android/gen/org/ecotrust/solomon/R.java \
+ : /Users/eknuth/projects/digital_deck/solomon_islands/app/android/res/drawable/icon.png \
+/Users/eknuth/projects/digital_deck/solomon_islands/app/android/res/drawable-hdpi/ic_launcher.png \
+/Users/eknuth/projects/digital_deck/solomon_islands/app/android/res/drawable-hdpi/icon.png \
+/Users/eknuth/projects/digital_deck/solomon_islands/app/android/res/drawable-ldpi/ic_launcher.png \
+/Users/eknuth/projects/digital_deck/solomon_islands/app/android/res/drawable-ldpi/icon.png \
+/Users/eknuth/projects/digital_deck/solomon_islands/app/android/res/drawable-mdpi/ic_launcher.png \
+/Users/eknuth/projects/digital_deck/solomon_islands/app/android/res/drawable-mdpi/icon.png \
+/Users/eknuth/projects/digital_deck/solomon_islands/app/android/res/drawable-xhdpi/ic_launcher.png \
+/Users/eknuth/projects/digital_deck/solomon_islands/app/android/res/drawable-xhdpi/icon.png \
+/Users/eknuth/projects/digital_deck/solomon_islands/app/android/res/layout/main.xml \
+/Users/eknuth/projects/digital_deck/solomon_islands/app/android/res/values/strings.xml \
+/Users/eknuth/projects/digital_deck/solomon_islands/app/android/res/xml/config.xml \
+/Users/eknuth/projects/digital_deck/solomon_islands/app/android/bin/res/drawable/icon.png \
+/Users/eknuth/projects/digital_deck/solomon_islands/app/android/bin/res/drawable-hdpi/ic_launcher.png \
+/Users/eknuth/projects/digital_deck/solomon_islands/app/android/bin/res/drawable-hdpi/icon.png \
+/Users/eknuth/projects/digital_deck/solomon_islands/app/android/bin/res/drawable-ldpi/ic_launcher.png \
+/Users/eknuth/projects/digital_deck/solomon_islands/app/android/bin/res/drawable-ldpi/icon.png \
+/Users/eknuth/projects/digital_deck/solomon_islands/app/android/bin/res/drawable-mdpi/ic_launcher.png \
+/Users/eknuth/projects/digital_deck/solomon_islands/app/android/bin/res/drawable-mdpi/icon.png \
+/Users/eknuth/projects/digital_deck/solomon_islands/app/android/bin/res/drawable-xhdpi/ic_launcher.png \
+/Users/eknuth/projects/digital_deck/solomon_islands/app/android/bin/res/drawable-xhdpi/icon.png \
+/Users/eknuth/projects/digital_deck/solomon_islands/app/android/bin/AndroidManifest.xml \
