@@ -13,12 +13,14 @@ describe('Controller: SurveyListCtrl', function () {
     $httpBackend.expectGET('surveys/all.json').respond(
       [
         {
-          name:'Cheese Survey',
-          slug:'cheese-survey'
+          'name':'Cheese Survey',
+          'slug':'cheese-survey',
+          'firstQuestion': 'favorite-cheese'
         }, 
         {
-          name:'Trees Survey',
-          slug:'trees-survey'
+          'name':'Trees Survey',
+          'slug':'trees-survey',
+          'firstQuestion': 'favorite-tree'
         }]
     );
 
@@ -38,5 +40,7 @@ describe('Controller: SurveyListCtrl', function () {
       function (survey) { return survey.name; } )).toEqual([ 'Cheese Survey', 'Trees Survey' ]);
     expect(_.map(scope.surveys,
       function (survey) { return survey.slug; } )).toEqual([ 'cheese-survey', 'trees-survey' ]);
+    expect(_.map(scope.surveys,
+      function (survey) { return survey.firstQuestion; } )).toEqual([ 'favorite-cheese', 'favorite-tree' ]);
   });
 });

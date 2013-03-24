@@ -11,7 +11,7 @@ angular.module('askApp', [])
         templateUrl: 'views/SurveyList.html',
         controller: 'SurveyListCtrl'
       })
-      .when('/survey/:surveySlug', {
+      .when('/survey/:surveySlug/:questionSlug', {
         templateUrl: 'views/SurveyDetail.html',
         controller: 'SurveyDetailCtrl'
       })

@@ -5,7 +5,9 @@ angular.module('askApp')
   	
   	$http.get('surveys/' + $routeParams.surveySlug + '.json').success(function(data) {
 	  	  $scope.survey = data;
-	  	  $scope.question = $scope.survey.questions[0];
+	  	  $scope.question = _.find($scope.survey.questions, function (question) {
+	  	  	return question.slug === $routeParams.questionSlug;
+	  	  });
 	  	});
     
   });
