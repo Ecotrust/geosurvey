@@ -1,1 +1,10 @@
-<p>This is the SurveyDetail view: {{ survey.name }}</p>
+<h2>{{ survey.name }}</h2>
+<p ng-hide="survey.questions.length">This survey has no questions.</p>
+<form class="question" ng-show="survey.questions.length">
+	<h3>
+		{{ question.title }}
+		<span class="subtitle pull-right">{{ survey.questions.indexOf(question) + 1 }} of {{ survey.questions.length }}</span>
+	</h3>
+	<input class="input-block-level" type="text" placeholder="{{ question.label }}"/>
+	<button class="btn btn-primary btn-block">continue</button>
+</form>

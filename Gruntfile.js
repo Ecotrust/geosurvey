@@ -91,7 +91,7 @@ module.exports = function (grunt) {
     karma: {
       unit: {
         configFile: 'karma.conf.js',
-        singleRun: true
+        singleRun: false
       }
     },
     coffee: {
@@ -245,6 +245,12 @@ module.exports = function (grunt) {
     'open',
     'watch'
   ]);
+
+  grunt.registerTask('ci', [
+    'clean:server',
+    'connect:test',
+    'karma'
+  ])
 
   grunt.registerTask('test', [
     'clean:server',

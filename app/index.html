@@ -40,11 +40,13 @@
                   </a>
                 </li>
                 <li>
-                  <a href="#/SurveyList">
+                  <a>
                     Surveys
                   </a>
                   <ul ng-controller="SurveyListCtrl">
-                    <li ng-repeat="survey in awesomeThings"><a href="#">{{ survey }}</a></li>
+                    <li ng-repeat="survey in surveys">
+                      <a href="#/survey/{{ survey.slug }}">{{ survey.name }}</a>
+                    </li>
                     
                     
                   </ul> 
@@ -86,6 +88,7 @@
     <script src="components/angular-resource/angular-resource.js"></script>
     <script src="components/angular-cookies/angular-cookies.js"></script>
     <script src="components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="components/underscore/underscore.js"></script>
     <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
     <!-- build:js scripts/scripts.js -->
     <script src="scripts/app.js"></script>

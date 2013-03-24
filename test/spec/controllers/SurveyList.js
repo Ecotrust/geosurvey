@@ -11,7 +11,15 @@ describe('Controller: SurveyListCtrl', function () {
   beforeEach(inject(function(_$httpBackend_, $rootScope, $controller) {
     $httpBackend = _$httpBackend_;
     $httpBackend.expectGET('surveys/all.json').respond(
-      [{name:'Cheese Survey'}, {name:'Trees Survey'}]
+      [
+        {
+          name:'Cheese Survey',
+          slug:'cheese-survey'
+        }, 
+        {
+          name:'Trees Survey',
+          slug:'trees-survey'
+        }]
     );
 
     scope = $rootScope.$new();
@@ -25,5 +33,10 @@ describe('Controller: SurveyListCtrl', function () {
     expect(scope.surveys).toBeUndefined();
     $httpBackend.flush();
     expect(scope.surveys.length).toBe(2);
+    
+    expect(_.map(scope.surveys,
+      function (survey) { return survey.name; } )).toEqual([ 'Cheese Survey', 'Trees Survey' ]);
+    expect(_.map(scope.surveys,
+      function (survey) { return survey.slug; } )).toEqual([ 'cheese-survey', 'trees-survey' ]);
   });
 });
