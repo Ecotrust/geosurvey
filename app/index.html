@@ -10,6 +10,10 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles/flat-ui/css/flat-ui.css">
     <link rel="stylesheet" href="styles/main.css">
   </head>
   <body ng-app="askApp">
@@ -23,16 +27,74 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div class="container" ng-view></div>
+    <div class="container-fluid">
+      <div class="navbar navbar-inverse">
+        <div class="navbar-inner">
+          <div class="container"> 
+
+            <div class="">
+              <ul class="nav">
+                <li>
+                  <a href="#/">
+                    Home
+                  </a>
+                </li>
+                <li>
+                  <a href="#/SurveyList">
+                    Surveys
+                  </a>
+                  <ul ng-controller="SurveyListCtrl">
+                    <li ng-repeat="survey in awesomeThings"><a href="#">{{ survey }}</a></li>
+                    
+                    
+                  </ul> 
+                </li>
+                <li  class="active">
+                  <a href="#">
+                    Completed Surveys
+                    <span class="navbar-unread">1</span>
+                  </a>
+                </li>
+              </ul>
+             <!-- <ul class="nav pull-right">
+                <li>
+                  <a href="#">
+                    User
+                  </a>
+                  <ul>
+                    <li><a href="#">Element One</a></li>
+                    <li>
+                      <a href="#">Sub menu</a>
+                      <ul>
+                        <li><a href="#">Element One</a></li>
+                        <li><a href="#">Element Two</a></li>
+                        <li><a href="#">Element Three</a></li>
+                      </ul> 
+                    </li>
+                    <li><a href="#">Element Three</a></li>
+                  </ul> 
+                </li>
+              </ul>-->
+            </div><!--/.nav-collapse -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid" ng-view></div>
 
     <script src="components/angular/angular.js"></script>
     <script src="components/angular-resource/angular-resource.js"></script>
     <script src="components/angular-cookies/angular-cookies.js"></script>
     <script src="components/angular-sanitize/angular-sanitize.js"></script>
-
+    <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
     <!-- build:js scripts/scripts.js -->
     <script src="scripts/app.js"></script>
     <script src="scripts/controllers/main.js"></script>
+
+    <script src="scripts/services/Survey.js"></script>
+
+    <script src="scripts/controllers/SurveyList.js"></script>
+    <script src="scripts/controllers/SurveyDetail.js"></script>
     <!-- endbuild -->
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->

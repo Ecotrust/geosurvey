@@ -7,6 +7,14 @@ angular.module('askApp', [])
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
+      .when('/surveys', {
+        templateUrl: 'views/SurveyList.html',
+        controller: 'SurveyListCtrl'
+      })
+      .when('/survey/:surveyName', {
+        templateUrl: 'views/SurveyDetail.html',
+        controller: 'SurveyDetailCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
