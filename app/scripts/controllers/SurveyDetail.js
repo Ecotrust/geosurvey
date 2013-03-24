@@ -10,4 +10,15 @@ angular.module('askApp')
 	  	  });
 	  	});
     
+  	$scope.answerQuestion = function () {
+  		var url = 'surveys/answer';
+  		$http.post(url, {
+  			'survey': $scope.survey.slug,
+  			'question': $scope.question.slug,
+  			'answer': $scope.answer 
+  		}).success(function (data) {
+
+  		});
+  	}
+
   });

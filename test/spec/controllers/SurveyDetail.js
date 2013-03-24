@@ -2,6 +2,7 @@
 
 var survey = {
     "name":'Cheese Survey',
+    "slug": 'cheese-survey',
     "questions": [
       {
         "title": "What is your favorite cheese?",
@@ -43,6 +44,11 @@ describe('Controller: SurveyDetailCtrl', function () {
 
   }));
 
+  afterEach(function() {
+    $httpBackend.verifyNoOutstandingExpectation();
+    $httpBackend.verifyNoOutstandingRequest();
+  });
+   
 
   it('should attach a survey', function () {
 
@@ -58,10 +64,32 @@ describe('Controller: SurveyDetailCtrl', function () {
   
 
   it('should attach a survey with a different question', function () {
+    
     inject(function(_$httpBackend_, $rootScope,$routeParams, $controller) {
       $routeParams.questionSlug = 'favorite-cheese-smell';
     });
+    
     $httpBackend.flush();
+    
     expect(scope.question.slug).toBe("favorite-cheese-smell");
   });
+
+  it('should allow a survey question to be answered', function () {
+      
+      $httpBackend.flush();
+      
+      $httpBackend.expectPOST('surveys/answer', {
+        'survey': 'cheese-survey',
+        'question': 'favorite-cheese-color',
+        'answer': "Blue"
+      }).respond(201, '');
+      
+      
+      scope.answer = "Blue";
+      
+      scope.answerQuestion();
+      $httpBackend.flush();
+
+  });
+
 });
