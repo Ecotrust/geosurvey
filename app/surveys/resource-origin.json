@@ -1,0 +1,11 @@
+{
+	"name": "Resouce Origin Survey",
+	"questions": [
+		{
+			"title": "Enter the Vendor's first name.",
+			"slug": "first-name",
+			"label": "First Name",
+			"type": "text"
+		}
+	]
+}

@@ -1,0 +1,12 @@
+[
+	{
+		"name": "Resource Origin Survey",
+		"slug": "resource-origin",
+		"firstQuestion": "first-name"
+	},
+	{
+		"name": "CPUE Survey",
+		"slug": "cpue-survey",
+		"firstQuestion": "firstQuestion"
+	 }
+]

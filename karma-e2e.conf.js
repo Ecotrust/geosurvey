@@ -2,6 +2,8 @@
 
 // base path, that will be used to resolve files and exclude
 basePath = '';
+// basePath = '../';
+
 
 // list of files / patterns to load in the browser
 files = [
@@ -31,7 +33,7 @@ colors = true;
 logLevel = LOG_INFO;
 
 // enable / disable watching file and executing tests whenever any file changes
-autoWatch = false;
+autoWatch = true;
 
 // Start these browsers, currently available:
 // - Chrome
