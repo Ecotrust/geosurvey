@@ -1,5 +1,6 @@
 {
 	"name": "Resouce Origin Survey",
+	"slug": "resource-origin",
 	"questions": [
 		{
 			"title": "What is the Vendor's first name?",

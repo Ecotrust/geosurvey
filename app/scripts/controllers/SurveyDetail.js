@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('askApp')
-  .controller('SurveyDetailCtrl', function ($scope, $routeParams, $http, offlineSurvey) {
+  .controller('SurveyDetailCtrl', function ($scope, $routeParams, $http, $location, offlineSurvey) {
   	
   	$http.get('surveys/' + $routeParams.surveySlug + '.json').success(function(data) {
 	  	  $scope.survey = data;
@@ -10,10 +10,18 @@ angular.module('askApp')
 	  	  });
 	  	});
     
-  	$scope.answerQuestion = function () {
-  		var url = 'surveys/answer';
+    $scope.getNextQuestion = function () {
+      // should return the slug of the next question
+      var nextQuestion = $scope.survey.questions[_.indexOf($scope.survey.questions,$scope.question)+1];
 
-      if (survey.offline) {
+      return nextQuestion.slug;
+    };
+
+  	$scope.answerQuestion = function () {
+  		var url = 'surveys/answer',
+        nextUrl = ['survey', $scope.survey.slug, $scope.getNextQuestion()].join('/');
+
+      if ($scope.survey.offline) {
         offlineSurvey.answerQuestion($scope.survey, $scope.question, $scope.answer);
       } else {
         $http.post(url, {
@@ -24,7 +32,7 @@ angular.module('askApp')
 
         });  
       }
-
+      $location.path(nextUrl);
   		
   	}
 

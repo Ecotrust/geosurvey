@@ -24,7 +24,21 @@ describe('Geosurvey App', function() {
 	});	
 
 	
+	
 });
+
+describe('Text Input Tests', function () {
+
+	beforeEach(function () {
+		browser().navigateTo('index.html#/survey/resource-origin/first-name');	
+	});
+
+	it('should advance to next question when clicking continue', function () {
+		expect(browser().location().url()).toBe("/survey/resource-origin/first-name");
+		element('button').click();
+		expect(browser().location().url()).toBe("/survey/resource-origin/vendor-location");
+	});
+})
 
 
 describe('Single Select Tests', function () {

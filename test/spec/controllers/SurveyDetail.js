@@ -18,6 +18,11 @@ var survey = {
         "title": "What does your favorite cheese smell like?",
         "slug": "favorite-cheese-smell",
         "type": "text"
+      },
+      {
+        "title": "Where does your favorite cheese come from?",
+        "slug": "favorite-cheese-location",
+        "type": "text"
       }
     ]
   };
@@ -92,6 +97,10 @@ describe('Controller: SurveyDetailCtrl', function () {
 
   });
 
+  it('should get the slug of the next question', function () {
+    $httpBackend.flush();
+    expect(scope.getNextQuestion()).toBe('favorite-cheese-smell');
+  })
 
 });
 describe('Controller: SurveyDetailCtrl Offline', function () {
