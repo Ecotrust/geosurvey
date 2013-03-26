@@ -6,8 +6,6 @@ angular.module('askApp', [])
       .when('/', {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl',
-        
-
       })
       .when('/surveys', {
         templateUrl: 'views/SurveyList.html',

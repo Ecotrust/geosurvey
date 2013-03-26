@@ -2,6 +2,24 @@
 <form class="question" ng-show="survey.questions.length" ng-submit="answerQuestion()">
 	<h2>{{ question.title }}</h2>
 	<span class="subtitle pull-right">{{ survey.questions.indexOf(question) + 1 }} of {{ survey.questions.length }}</span>
-	<input class="input-block-level" type="text" placeholder="{{ question.label }}"/>
+
+	<div ng-switch on="question.type">
+
+
+		<div ng-switch-when="text">
+			<input class="input-block-level" type="text" placeholder="{{ question.label }}"/>
+		</div>
+
+
+		<div ng-switch-when="single-select">
+
+			<label class="radio" ng-repeat="option in question.options">
+			  <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">
+			  {{ option }}
+			</label>
+		</div>
+
+
+	</div>
 	<button class="btn btn-primary btn-block">continue</button>
 </form>

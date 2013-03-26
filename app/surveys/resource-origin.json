@@ -2,10 +2,21 @@
 	"name": "Resouce Origin Survey",
 	"questions": [
 		{
-			"title": "Enter the Vendor's first name.",
+			"title": "What is the Vendor's first name?",
 			"slug": "first-name",
 			"label": "First Name",
 			"type": "text"
+		},
+		{
+			"title": "Where does the vendor live?",
+			"slug": "vendor-location",
+			"label": "Vendor Location",
+			"type": "single-select",
+			"options": [
+				"Florence",
+				"Naples",
+				"Rome"
+			]
 		}
 	]
 }
