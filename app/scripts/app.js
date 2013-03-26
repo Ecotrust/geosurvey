@@ -5,7 +5,9 @@ angular.module('askApp', [])
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
+        controller: 'MainCtrl',
+        
+
       })
       .when('/surveys', {
         templateUrl: 'views/SurveyList.html',

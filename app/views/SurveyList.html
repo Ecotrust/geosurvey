@@ -1,1 +1,9 @@
-<p>This is the SurveyList view: {{surveys.length}}</p>
+<h2>SurveyList</h2>
+{{surveys.length}}
+<ul>
+  <li ng-repeat="survey in surveys" class=".survey-list">
+    <a href="#/survey/{{ survey.slug }}/{{ survey.firstQuestion }}">{{ survey.name }}</a>
+  </li>
+  
+  
+</ul> 

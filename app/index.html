@@ -40,10 +40,10 @@
                   </a>
                 </li>
                 <li>
-                  <a>
+                  <a href="#/surveys">
                     Surveys
                   </a>
-                  <ul ng-controller="SurveyListCtrl">
+                  <ul ng-controller="SurveyListCtrl"  class="survey-list"> 
                     <li ng-repeat="survey in surveys">
                       <a href="#/survey/{{ survey.slug }}/{{ survey.firstQuestion }}">{{ survey.name }}</a>
                     </li>
