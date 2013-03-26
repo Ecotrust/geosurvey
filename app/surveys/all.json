@@ -5,6 +5,11 @@
 		"firstQuestion": "first-name"
 	},
 	{
+		"name": "Resource Origin Survey [Offline]",
+		"slug": "resource-origin-offline",
+		"firstQuestion": "first-name"
+	},
+	{
 		"name": "CPUE Survey",
 		"slug": "cpue-survey",
 		"firstQuestion": "firstQuestion"

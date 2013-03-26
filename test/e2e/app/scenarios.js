@@ -11,7 +11,7 @@ describe('Geosurvey App', function() {
 		expect(browser().location().url()).toBe('/');
 		
 		expect(element('h2').text()).toBe('Please sign in');
-		expect(repeater('.survey-list li').count()).toBe(2);
+		expect(repeater('.survey-list li').count()).toBe(3);
 	});
 
 	it('should launch a survey', function () {

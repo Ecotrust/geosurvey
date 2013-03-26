@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('askApp')
-  .controller('SurveyDetailCtrl', function ($scope, $routeParams, $http) {
+  .controller('SurveyDetailCtrl', function ($scope, $routeParams, $http, offlineSurvey) {
   	
   	$http.get('surveys/' + $routeParams.surveySlug + '.json').success(function(data) {
 	  	  $scope.survey = data;
@@ -12,13 +12,20 @@ angular.module('askApp')
     
   	$scope.answerQuestion = function () {
   		var url = 'surveys/answer';
-  		$http.post(url, {
-  			'survey': $scope.survey.slug,
-  			'question': $scope.question.slug,
-  			'answer': $scope.answer 
-  		}).success(function (data) {
 
-  		});
+      if (survey.offline) {
+        offlineSurvey.answerQuestion($scope.survey, $scope.question, $scope.answer);
+      } else {
+        $http.post(url, {
+          'survey': $scope.survey.slug,
+          'question': $scope.question.slug,
+          'answer': $scope.answer 
+        }).success(function (data) {
+
+        });  
+      }
+
+  		
   	}
 
   });
