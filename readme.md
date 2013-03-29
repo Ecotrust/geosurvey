@@ -32,7 +32,7 @@ grunt c-e2e
 
 # Using the angular app generator
 
-Add a new route, view, controller:
+Add a new route, view, controller, unit test:
 ```bash
 yo angular:route myRoute
 ```
