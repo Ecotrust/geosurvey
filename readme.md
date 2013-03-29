@@ -1,4 +1,5 @@
 # Install Requirements
+From the geosurvey project directory
 ```bash
 npm install -g yo grunt-cli bower
 npm install && bower install --dev
