@@ -2,6 +2,7 @@
 ```bash
 npm install -g yo grunt-cli bower
 npm install && bower install --dev
+npm install generator-angular generator-karma
 ```
 
 # Launching Server
@@ -29,8 +30,9 @@ grunt c-e2e
 ```
 
 
-# Starting a new angular app
-Not required for this project:
+# Using the angular app generator
+
+Add a new route, view, controller:
 ```bash
-npm install generator-angular generator-karma
+yo angular:route myRoute
 ```
