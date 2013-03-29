@@ -9,7 +9,8 @@
     "angular-cookies": "~1.0.5",
     "angular-sanitize": "~1.0.5",
     "underscore": "~1.4.4",
-    "amplify": "~1.1.0"
+    "amplify": "~1.1.0",
+    "openlayers": "latest"
   },
   "devDependencies": {
     "angular-mocks": "~1.0.5",
