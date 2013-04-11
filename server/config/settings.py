@@ -133,6 +133,7 @@ INSTALLED_APPS = (
 
     # Project specific apps go here
     # 'my_app',
+    'tracker',
 )
 
 # A sample logging configuration. The only tangible logging
