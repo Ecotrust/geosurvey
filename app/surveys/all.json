@@ -18,5 +18,10 @@
 		"name": "Activity Locations Survey",
 		"slug": "activity-locations",
 		"firstQuestion": "activity-location"
+	},
+	{
+		"name": "MARCO",
+		"slug": "marco",
+		"firstQuestion": "activity-location"
 	}
 ]

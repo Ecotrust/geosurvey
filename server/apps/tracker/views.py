@@ -6,16 +6,21 @@ from django.core.mail import EmailMultiAlternatives
 from django.template.loader import get_template
 from django.template import Context
 
-
 from tracker.models import Respondant
 
 
 def send_email(email, uuid):
+    from django.contrib.sites.models import Site
 
+    current_site = Site.objects.get_current()
+    
     plaintext = get_template('tracker/email.txt')
     htmly = get_template('tracker/email.html')
 
-    d = Context({'uuid': uuid})
+    d = Context({
+        'uuid': uuid,
+        'SITE_URL': current_site.domain
+        })
 
     subject, from_email, to = 'Take The Survey', 'eknuth@ecotrust.org', email
     text_content = plaintext.render(d)
