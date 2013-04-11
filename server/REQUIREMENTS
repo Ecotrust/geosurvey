@@ -4,5 +4,5 @@ south
 fabric
 django-grappelli
 django-extensions
-
+simplejson
 git+git://github.com/jezdez/django_compressor.git
