@@ -27,6 +27,9 @@ def collectstatic():
 def migrate():
 	run('cd /vagrant/server && /usr/local/venv/geosurvey/bin/python manage.py migrate')
 
+def install():
+        run('cd /vagrant/server && /usr/local/venv/geosurvey/bin/python manage.py syncdb')
+
 def run_server():
 	run('cd /vagrant/server && /usr/local/venv/geosurvey/bin/python manage.py runserver 0.0.0.0:8000')
 
