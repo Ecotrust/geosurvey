@@ -12,7 +12,9 @@ admin.autodiscover()
 urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^grappelli/', include('grappelli.urls')),
-    url(r'^tracker', include(tracker_urls))
+    url(r'^tracker', include(tracker_urls)),
+    (r'^survey/(?P<path>.*)$', 'django.views.static.serve',
+            {'document_root': settings.SURVEY_ROOT, 'show_indexes': True }),
 )
 
 urlpatterns += staticfiles_urlpatterns()
