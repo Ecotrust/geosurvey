@@ -1,3 +1,9 @@
+# Server
+```base
+vagrant up
+fab dev run_server
+```
+
 # Install Requirements
 From the geosurvey project directory
 ```bash
