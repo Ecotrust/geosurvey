@@ -25,7 +25,12 @@ def collectstatic():
 
 
 def migrate():
-	run('cd /vagrant/server && /usr/local/venv/geosurvey/bin/python manage.py migrate')
+  run('cd /vagrant/server && /usr/local/venv/geosurvey/bin/python manage.py migrate')
+
+def update():
+  run('/usr/local/venv/geosurvey/bin/pip install -r /vagrant/server/REQUIREMENTS')
+  run('cd /vagrant/server && /usr/local/venv/geosurvey/bin/python manage.py syncdb')
+  run('cd /vagrant/server && /usr/local/venv/geosurvey/bin/python manage.py migrate')
 
 def run_server():
 	run('cd /vagrant/server && /usr/local/venv/geosurvey/bin/python manage.py runserver 0.0.0.0:8000')
