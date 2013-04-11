@@ -15,4 +15,4 @@ class Respondant(models.Model):
     uuid = models.CharField(max_length=36, primary_key=True, default=make_uuid, editable=False)
 
     def __str__(self):
-        return self.email
+        return "%s" % self.email
