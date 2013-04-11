@@ -45,6 +45,8 @@ USE_L10N = False
 # If you set this to False, Django will not use timezone-aware datetimes.
 USE_TZ = True
 
+SURVEY_ROOT = PROJECT_ROOT / '../app'
+
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
 MEDIA_ROOT = PROJECT_ROOT / 'public/media'
@@ -133,7 +135,7 @@ INSTALLED_APPS = (
 
     # Project specific apps go here
     # 'my_app',
-    'tracker',
+    'apps.tracker',
 )
 
 # A sample logging configuration. The only tangible logging
