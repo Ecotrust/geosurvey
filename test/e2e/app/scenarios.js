@@ -4,14 +4,14 @@
 describe('Geosurvey App', function() {
 	
 	beforeEach(function () {
-		browser().navigateTo('index.html');	
+		browser().navigateTo('/survey/index.html');	
 	});
 
 	it('should redirect index.html to index.html', function() {
 		expect(browser().location().url()).toBe('/');
 		
 		expect(element('h2').text()).toBe('Please sign in');
-		expect(repeater('.survey-list li').count()).toBe(3);
+		expect(repeater('.survey-list li').count()).toBe(5);
 	});
 
 	it('should launch a survey', function () {
@@ -30,7 +30,7 @@ describe('Geosurvey App', function() {
 describe('Text Input Tests', function () {
 
 	beforeEach(function () {
-		browser().navigateTo('index.html#/survey/resource-origin/first-name');	
+		browser().navigateTo('/survey/index.html#/survey/resource-origin/first-name');	
 	});
 
 	it('should advance to next question when clicking continue', function () {
@@ -43,7 +43,7 @@ describe('Text Input Tests', function () {
 
 describe('Single Select Tests', function () {
 	beforeEach(function () {
-		browser().navigateTo('index.html#/survey/resource-origin/vendor-location');	
+		browser().navigateTo('/survey/index.html#/survey/resource-origin/vendor-location');	
 		expect(browser().location().url()).toBe("/survey/resource-origin/vendor-location");
 	});
 
