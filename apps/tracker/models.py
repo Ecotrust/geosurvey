@@ -12,5 +12,7 @@ class Respondant(models.Model):
     ts = models.DateTimeField(default=datetime.datetime.now())
     email = models.EmailField(max_length=254)
 
-    uuid = models.CharField(max_length=36, primary_key=True,
-          default=make_uuid, editable=False)
+    uuid = models.CharField(max_length=36, primary_key=True, default=make_uuid, editable=False)
+
+    def __str__(self):
+        return self.email
