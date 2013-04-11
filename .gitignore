@@ -3,3 +3,11 @@ dist
 .tmp
 .sass-cache
 app/components
+*.pyc
+*.pyo
+.DS_Store
+*~
+server/config/environments/local.py
+server/media
+server/public/static
+.vagrant

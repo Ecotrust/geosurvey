@@ -1,7 +1,15 @@
+# Server
+```base
+vagrant up
+fab dev run_server
+```
+
 # Install Requirements
+From the geosurvey project directory
 ```bash
 npm install -g yo grunt-cli bower
 npm install && bower install --dev
+npm install generator-angular generator-karma
 ```
 
 # Launching Server
@@ -11,14 +19,17 @@ The app will be served on port 9000.  A browser window will open automatically.
 ```bash
 grunt server
 ```
+# Running Tests
 
-Unit tests will run whenever you save a file.
+With the server running in port 9000, run the following commands for continuous test running.
+
+Unit tests will run whenever you save a file:
 
 ```bash
 grunt c-unit
 ```
 
-End to end tests will run whenever you save a file.
+End to end tests will run whenever you save a file:
 
 
 ```bash
@@ -26,8 +37,9 @@ grunt c-e2e
 ```
 
 
-# Starting a new angular app
-Not required for this project:
+# Using the angular app generator
+
+Add a new route, view, controller, unit test:
 ```bash
-npm install generator-angular generator-karma
+yo angular:route myRoute
 ```
