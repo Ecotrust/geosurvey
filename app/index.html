@@ -28,14 +28,13 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div class="container-fluid">
+    <div class="container-fluid" ng-controller="MenuCtrl">
       <div class="navbar navbar-inverse">
         <div class="navbar-inner">
           <div class="container"> 
-
             <div class="">
               <ul class="nav">
-                <li>
+                <li ng-class="{ 'active': isActive('Home') }">
                   <a href="#/">
                     Home
                   </a>
@@ -47,10 +46,8 @@
                   <ul ng-controller="SurveyListCtrl"  class="survey-list"> 
                     <li ng-repeat="survey in surveys">
                       <a href="#/survey/{{ survey.slug }}/{{ survey.firstQuestion }}">{{ survey.name }}</a>
-                    </li>
-                    
-                    
-                  </ul> 
+                    </li>  
+                  </ul>
                 </li>
                 <li  class="active">
                   <a href="#">
@@ -95,10 +92,9 @@
     <!-- // <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script> -->
     <!-- build:js scripts/scripts.js -->
     <script src="scripts/app.js"></script>
+
     <script src="scripts/controllers/main.js"></script>
-
-    <script src="scripts/services/Survey.js"></script>
-
+    <script src="scripts/controllers/menu.js"></script>
     <script src="scripts/controllers/SurveyList.js"></script>
     <script src="scripts/controllers/SurveyDetail.js"></script>
     <script src="scripts/services/offlineSurvey.js"></script>
