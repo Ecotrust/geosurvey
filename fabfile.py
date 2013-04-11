@@ -21,17 +21,17 @@ def all():
 
 
 def install_requirements():
-	run('cd /usr/local/app/geosurvey && /usr/local/venv/geosurvey/bin/pip install -r REQUIREMENTS')
+	run('cd /vagrant/server && /usr/local/venv/geosurvey/bin/pip install -r REQUIREMENTS')
 
 def install_django():
 	run('/vargrant/server && /usr/local/venv/geosurvey/bin/python manage.py syncdb && /usr/local/venv/geosurvey/bin/python manage.py migrate && /usr/local/venv/geosurvey/bin/python manage.py install_media')	
 
 def install_media():
-	run('cd /usr/local/apps/geosurvey && /usr/local/venv/geosurvey/bin/python manage.py install_media')	
+	run('cd /vagrant/server && /usr/local/venv/geosurvey/bin/python manage.py install_media')	
 
 
 def run_server():
-	run('cd /usr/local/apps/geosurvey && /usr/local/venv/geosurvey/bin/python manage.py runserver 0.0.0.0:8000')
+	run('cd /vagrant/server && /usr/local/venv/geosurvey/bin/python manage.py runserver 0.0.0.0:8000')
 
 def kill_server():
         run('killall python')
