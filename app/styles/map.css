@@ -1,0 +1,12 @@
+.question {
+	max-width: 700px;
+}
+
+#map {
+    height: 300px;
+    border: 1px solid #ccc;
+}
+
+.user-controls {
+	margin-top: 20px;
+}

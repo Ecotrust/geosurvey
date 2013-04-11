@@ -1,1 +1,25 @@
-<p>This is the mapView view.</p>
+<p ng-hide="survey.questions.length">This survey has no questions.</p>
+<form class="question" ng-show="survey.questions.length" ng-submit="answerQuestion()">
+	<h2>{{ question.title }}</h2>
+	<!-- <span class="subtitle pull-right">{{ survey.questions.indexOf(question) + 1 }} of {{ survey.questions.length }}</span> -->
+
+	
+	<div ng-switch on="question.type">
+
+
+		<div ng-switch-when="map-create-point">
+			<div id="map" class="smallmap" ng-init="loadMap()"></div>
+		</div>
+
+
+		<div ng-switch-when="map-review-points">
+			<p>{{ question.label }}</p>
+		</div>
+
+
+	</div>
+	<div class="row-fluid user-controls">
+		<button class="btn btn-primary pull-right" ng-click="answerQuestion()"><i class="icon-plus"></i> Add Location</button>
+		<button class="btn pull-left" ng-click="answerQuestion()"><i class="icon-list"></i> My Activities</button>
+	</div>
+</form>

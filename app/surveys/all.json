@@ -13,5 +13,10 @@
 		"name": "CPUE Survey",
 		"slug": "cpue-survey",
 		"firstQuestion": "firstQuestion"
-	 }
+	},
+	{
+		"name": "Activity Locations Survey",
+		"slug": "activity-locations",
+		"firstQuestion": "activity-location"
+	}
 ]
