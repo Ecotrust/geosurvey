@@ -19,6 +19,10 @@ angular.module('askApp', [])
         templateUrl: 'views/SurveyDetail.html',
         controller: 'SurveyDetailCtrl'
       })
+      .when('/landing', {
+        templateUrl: 'views/landing.html',
+        controller: 'LandingCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
