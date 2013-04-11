@@ -18,6 +18,18 @@ package { "build-essential":
 
 }
 
+
+package { "postfix":
+    ensure => "installed"
+
+}
+
+package { "mailutils":
+    ensure => "installed"
+
+}
+
+
 package { "git-core":
     ensure => "latest"
 }
