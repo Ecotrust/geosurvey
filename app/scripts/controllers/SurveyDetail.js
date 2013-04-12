@@ -15,26 +15,30 @@ angular.module('askApp')
         // should return the slug of the next question
         var nextQuestion = $scope.survey.questions[_.indexOf($scope.survey.questions, $scope.question) + 1];
 
-        return nextQuestion.slug;
+        return nextQuestion ? nextQuestion.slug: null;
     };
 
     $scope.answerQuestion = function() {
         var url = ['/respond/answer',$scope.survey.slug, $routeParams.questionSlug, $routeParams.uuidSlug].join('/'),
-            nextUrl = ['survey', $scope.survey.slug, $scope.getNextQuestion(), $routeParams.uuidSlug].join('/');
+            nextQuestion = $scope.getNextQuestion(),
+            nextUrl = ['survey', $scope.survey.slug, nextQuestion, $routeParams.uuidSlug].join('/');
 
         if ($scope.survey.offline) {
             offlineSurvey.answerQuestion($scope.survey, $scope.question, $scope.answer);
         } else {
-            $http.post(url, {
-                'survey': $scope.survey.slug,
-                'question': $scope.question.slug,
-                'answer': $scope.answer
+            $http({
+                url: url,
+                method: 'POST',
+                headers: {'X-CSRFToken' : token },
+                data: {
+                    'answer': $scope.answer
+                }
             }).success(function(data) {
 
             });
         }
         $location.path(nextUrl);
 
-    }
+    };
 
 });
