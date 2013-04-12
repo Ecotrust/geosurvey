@@ -2,7 +2,7 @@
 
 angular.module('askApp')
   .controller('SurveyListCtrl', function ($scope, $http) {
-  	$http.get('/survey/surveys/all.json').success(function(data) {
-  	  $scope.surveys = data;
+  	$http.get('/api/v1/survey/?format=json').success(function(data) {
+  	  $scope.surveys = data.objects;
   	})
   });

@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Controller: SurveyListCtrl', function () {
+describe('Controller: SurveyListCtrl', function() {
 
   // load the controller's module
   beforeEach(module('askApp'));
@@ -10,19 +10,27 @@ describe('Controller: SurveyListCtrl', function () {
   // Initialize the controller and a mock scope
   beforeEach(inject(function(_$httpBackend_, $rootScope, $controller) {
     $httpBackend = _$httpBackend_;
-    $httpBackend.expectGET('/survey/surveys/all.json').respond(
-      [
-        {
-          'name':'Cheese Survey',
-          'slug':'cheese-survey',
-          'firstQuestion': 'favorite-cheese'
-        }, 
-        {
-          'name':'Trees Survey',
-          'slug':'trees-survey',
-          'firstQuestion': 'favorite-tree'
-        }]
-    );
+    $httpBackend.expectGET('/api/v1/survey/?format=json').respond({
+      "meta": {
+        "limit": 20,
+        "next": null,
+        "offset": 0,
+        "previous": null,
+        "total_count": 1
+      },
+      "objects": [{
+        "id": 1,
+        "name": "Cheese Survey",
+        "resource_uri": "/api/v1/survey/1/",
+        "slug": "cheese-survey"
+      },
+      {
+        "id": 2,
+        "name": "Trees Survey",
+        "resource_uri": "/api/v1/survey/2/",
+        "slug": "trees-survey"
+      }]
+    });
 
     scope = $rootScope.$new();
 
@@ -31,16 +39,18 @@ describe('Controller: SurveyListCtrl', function () {
     });
   }));
 
-  it('should attach a list of surveys to the scope', function () {
+  it('should attach a list of surveys to the scope', function() {
     expect(scope.surveys).toBeUndefined();
     $httpBackend.flush();
     expect(scope.surveys.length).toBe(2);
-    
-    expect(_.map(scope.surveys,
-      function (survey) { return survey.name; } )).toEqual([ 'Cheese Survey', 'Trees Survey' ]);
-    expect(_.map(scope.surveys,
-      function (survey) { return survey.slug; } )).toEqual([ 'cheese-survey', 'trees-survey' ]);
-    expect(_.map(scope.surveys,
-      function (survey) { return survey.firstQuestion; } )).toEqual([ 'favorite-cheese', 'favorite-tree' ]);
+
+    expect(_.map(scope.surveys, function(survey) {
+      return survey.name;
+    })).toEqual(['Cheese Survey', 'Trees Survey']);
+
+    expect(_.map(scope.surveys, function(survey) {
+      return survey.slug;
+    })).toEqual(['cheese-survey', 'trees-survey']);
+
   });
 });
