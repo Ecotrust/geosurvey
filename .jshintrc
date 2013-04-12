@@ -1,6 +1,6 @@
 {
   "node": true,
-  "browser": true,
+  "browser": false,
   "es5": true,
   "esnext": true,
   "bitwise": true,
@@ -8,7 +8,7 @@
   "curly": true,
   "eqeqeq": true,
   "immed": true,
-  "indent": 2,
+  "indent": 4,
   "latedef": true,
   "newcap": true,
   "noarg": true,
@@ -20,6 +20,20 @@
   "trailing": true,
   "smarttabs": true,
   "globals": {
-    "angular": false
+    "angular": false,
+    "jasmine": false,
+    "spyOn": false,
+    "it": false,
+    "console": false,
+    "describe": false,
+    "expect": false,
+    "beforeEach": false,
+    "waits": false,
+    "waitsFor": false,
+    "runs": false,
+    "browser": false,
+    "element": false,
+    "navigateTo": false,
+    "input": false
   }
 }
