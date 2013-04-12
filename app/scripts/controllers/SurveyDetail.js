@@ -3,7 +3,7 @@
 angular.module('askApp')
   .controller('SurveyDetailCtrl', function ($scope, $routeParams, $http, $location, offlineSurvey) {
   	
-  	$http.get('/survey/surveys/' + $routeParams.surveySlug + '.json').success(function(data) {
+	$http.get('/survey/surveys/' + $routeParams.surveySlug + '.json').success(function(data) {
 	  	  $scope.survey = data;
 	  	  $scope.question = _.find($scope.survey.questions, function (question) {
 	  	  	return question.slug === $routeParams.questionSlug;
@@ -19,7 +19,7 @@ angular.module('askApp')
 
   	$scope.answerQuestion = function () {
   		var url = '/respond/answer',
-        nextUrl = ['survey', $scope.survey.slug, $scope.getNextQuestion()].join('/');
+        nextUrl = ['survey', $scope.survey.slug, $scope.getNextQuestion(), $routeParams.uuidSlug].join('/');
 
       if ($scope.survey.offline) {
         offlineSurvey.answerQuestion($scope.survey, $scope.question, $scope.answer);
