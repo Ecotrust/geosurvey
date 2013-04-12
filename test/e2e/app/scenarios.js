@@ -14,9 +14,9 @@ describe('Geosurvey App', function() {
 		expect(repeater('.survey-list li').count()).toBe(5);
 	});
 
-	it('should launch a survey', function () {
+	it('should go to first question of the survey', function () {
 		element('.survey-list li:first-child a').click();
-		expect(browser().location().url()).toBe("/survey/resource-origin/first-name");
+		expect(browser().location().url()).toBe("/survey/resource-origin/first-name/uuid");
 		expect(element('h2').text()).toBe("What is the Vendor's first name?");
 
 		// expect a text question
@@ -30,13 +30,13 @@ describe('Geosurvey App', function() {
 describe('Text Input Tests', function () {
 
 	beforeEach(function () {
-		browser().navigateTo('/survey/index.html#/survey/resource-origin/first-name');	
+		browser().navigateTo('/survey/index.html#/survey/resource-origin/first-name/uuid');	
 	});
 
 	it('should advance to next question when clicking continue', function () {
-		expect(browser().location().url()).toBe("/survey/resource-origin/first-name");
+		expect(browser().location().url()).toBe("/survey/resource-origin/first-name/uuid");
 		element('button').click();
-		expect(browser().location().url()).toBe("/survey/resource-origin/vendor-location");
+		expect(browser().location().url()).toBe("/survey/resource-origin/vendor-location/uuid");
 	});
 })
 
