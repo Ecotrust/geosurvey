@@ -43,11 +43,13 @@
                   <a href="#/surveys">
                     Survey
                   </a>
+                  {% verbatim %}
                   <ul ng-controller="SurveyListCtrl"  class="survey-list"> 
                     <li ng-repeat="survey in surveys">
                       <a href="#/survey/{{ survey.slug }}/{{ survey.firstQuestion }}/uuid">{{ survey.name }}</a>
                     </li>  
                   </ul>
+                  {% endverbatim %}
                 </li>
                 <li  class="active">
                   <a href="#">
