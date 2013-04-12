@@ -32,7 +32,7 @@ describe('Text Input Tests', function() {
     });
 
     it('should allow the question to be answered and advance to the next question', function() {
-        input('question.answer').enter('Gerald');
+        input('answer').enter('Gerald');
 
     });
 });

@@ -41,6 +41,7 @@ describe('Controller: SurveyDetailCtrl', function() {
 
     $routeParams.surveySlug = "test-survey";
     $routeParams.questionSlug = 'name';
+    $routeParams.uuidSlug = 'uuid-xxxxy'
     scope = $rootScope.$new();
 
     scope.token = "csrftoken";
@@ -84,7 +85,7 @@ describe('Controller: SurveyDetailCtrl', function() {
 
     $httpBackend.flush();
 
-    $httpBackend.expectPOST('/respond/answer/test-survey/name/', {
+    $httpBackend.expectPOST('/respond/answer/test-survey/name/uuid-xxxxy', {
       'answer': "Gerald"
     }).respond(201, '');
 

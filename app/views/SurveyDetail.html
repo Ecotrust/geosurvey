@@ -1,25 +1,19 @@
 <p ng-hide="survey.questions.length">This survey has no questions.</p>
-<form class="question" ng-show="survey.questions.length" ng-submit="answerQuestion()">
 	<h2>{{ question.title }}</h2>
 	<span class="subtitle pull-right">{{ survey.questions.indexOf(question) + 1 }} of {{ survey.questions.length }}</span>
 
 	<div ng-switch on="question.type">
-
-
 		<div ng-switch-when="text">
-			<input class="input-block-level" type="text" placeholder="{{ question.label }}" ng-model="question.answer"/>
+			<form class="question" ng-show="survey.questions.length" ng-submit="answerQuestion(answer)">
+				<input class="input-block-level" type="text" placeholder="{{ question.label }}" ng-model="answer"/>
+				<button class="btn btn-primary btn-block">continue</button>
+			</form>
 		</div>
-
-
 		<div ng-switch-when="single-select">
-
 			<label class="radio" ng-repeat="option in question.options">
 			  <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">
 			  {{ option }}
 			</label>
 		</div>
-
-
 	</div>
-	<button class="btn btn-primary btn-block" ng-click="answerQuestion()">continue</button>
-</form>
+	
