@@ -1,7 +1,9 @@
 'use strict';
 
 angular.module('askApp', [])
-  .config(function ($routeProvider) {
+  .config(function ($routeProvider, $httpProvider) {
+
+    $httpProvider.defaults.headers.post = {'X-CSRFToken' : token };
     $routeProvider
       .when('/', {
         templateUrl: '/survey/views/main.html',

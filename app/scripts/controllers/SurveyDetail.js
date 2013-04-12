@@ -29,7 +29,7 @@ angular.module('askApp')
             $http({
                 url: url,
                 method: 'POST',
-                headers: {'X-CSRFToken' : token },
+                //headers: {'X-CSRFToken' : token },
                 data: {
                     'answer': $scope.answer
                 }
