@@ -18,26 +18,23 @@ angular.module('askApp')
         return nextQuestion ? nextQuestion.slug: null;
     };
 
-    $scope.answerQuestion = function() {
+    $scope.answerQuestion = function(answer) {
         var url = ['/respond/answer',$scope.survey.slug, $routeParams.questionSlug, $routeParams.uuidSlug].join('/'),
             nextQuestion = $scope.getNextQuestion(),
             nextUrl = ['survey', $scope.survey.slug, nextQuestion, $routeParams.uuidSlug].join('/');
-
+        debugger;
         if ($scope.survey.offline) {
             offlineSurvey.answerQuestion($scope.survey, $scope.question, $scope.answer);
         } else {
             $http({
                 url: url,
                 method: 'POST',
-                //headers: {'X-CSRFToken' : token },
-                data: {
-                    'answer': $scope.answer
-                }
+                data: {'answer': $scope.answer},
             }).success(function(data) {
-
+                $location.path(nextUrl);
             });
         }
-        $location.path(nextUrl);
+        
 
     };
 
