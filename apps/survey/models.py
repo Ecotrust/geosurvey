@@ -4,6 +4,7 @@ from django.db import models
 class Survey(models.Model):
     name = models.CharField(max_length=254)
     slug = models.SlugField(max_length=254, unique=True)
+    questions = models.ManyToManyField('Question', null=True)
 
     def __str__(self):
         return "%s" % self.name
@@ -25,7 +26,6 @@ class Option(models.Model):
         return "%s" % self.text
 
 class Question(models.Model):
-    survey = models.ForeignKey(Survey)
     title = models.TextField()
     label = models.CharField(max_length=254)
     slug = models.SlugField(max_length=64, unique=True)
