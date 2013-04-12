@@ -43,8 +43,8 @@ describe('Text Input Tests', function () {
 
 describe('Single Select Tests', function () {
 	beforeEach(function () {
-		browser().navigateTo('/survey/index.html#/survey/resource-origin/vendor-location');	
-		expect(browser().location().url()).toBe("/survey/resource-origin/vendor-location");
+		browser().navigateTo('/survey/index.html#/survey/resource-origin/vendor-location/uuid');	
+		expect(browser().location().url()).toBe("/survey/resource-origin/vendor-location/uuid");
 	});
 
 	it('should have single select question type (radio button)', function () {
