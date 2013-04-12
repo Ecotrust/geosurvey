@@ -4,6 +4,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from apps.tracker import urls as tracker_urls
+from apps.survey import urls as survey_urls
 
 from django.contrib import admin
 admin.autodiscover()
@@ -13,8 +14,9 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^grappelli/', include('grappelli.urls')),
     url(r'^tracker', include(tracker_urls)),
+    url(r'^survey', include(survey_urls)),
     (r'^survey/(?P<path>.*)$', 'django.views.static.serve',
-            {'document_root': settings.SURVEY_ROOT, 'show_indexes': True }),
+            {'document_root': settings.SURVEY_ROOT}),
 )
 
 urlpatterns += staticfiles_urlpatterns()
