@@ -132,7 +132,6 @@ INSTALLED_APPS = (
     'south',
     'django_extensions',
     'compressor',
-
     # Project specific apps go here
     # 'my_app',
     'apps.tracker',
