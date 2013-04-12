@@ -13,9 +13,9 @@
     <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
     <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-responsive.min.css" rel="stylesheet">
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css" rel="stylesheet">
-    <link rel="stylesheet" href="styles/flat-ui/css/flat-ui.css">
-    <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="styles/map.css">
+    <link rel="stylesheet" href="/survey/styles/flat-ui/css/flat-ui.css">
+    <link rel="stylesheet" href="/survey/styles/main.css">
+    <link rel="stylesheet" href="/survey/styles/map.css">
   </head>
   <body ng-app="askApp">
     <!--[if lt IE 7]>
@@ -23,8 +23,8 @@
     <![endif]-->
 
     <!--[if lt IE 9]>
-      <script src="components/es5-shim/es5-shim.js"></script>
-      <script src="components/json3/lib/json3.min.js"></script>
+      <script src="/survey/components/es5-shim/es5-shim.js"></script>
+      <script src="/survey/components/json3/lib/json3.min.js"></script>
     <![endif]-->
 
     <!-- Add your site or application content here -->
@@ -82,24 +82,28 @@
     </div>
     <div class="container-fluid" ng-view></div>
 
-    <script src="components/angular/angular.js"></script>
-    <script src="components/angular-resource/angular-resource.js"></script>
-    <script src="components/angular-cookies/angular-cookies.js"></script>
-    <script src="components/angular-sanitize/angular-sanitize.js"></script>
-    <script src="components/underscore/underscore.js"></script>
-    <script src="components/amplify/store/amplify.store.js"></script>
-    <script src="components/openlayers/lib/OpenLayers.js"></script>
+    <script src="/survey/components/angular/angular.js"></script>
+    <script src="/survey/components/angular-resource/angular-resource.js"></script>
+    <script src="/survey/components/angular-cookies/angular-cookies.js"></script>
+    <script src="/survey/components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="/survey/components/underscore/underscore.js"></script>
+    <script src="/survey/components/amplify/store/amplify.store.js"></script>
+    <script src="/survey/components/openlayers/lib/OpenLayers.js"></script>
     <!-- // <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script> -->
     <!-- build:js scripts/scripts.js -->
-    <script src="scripts/app.js"></script>
+    <script src="/survey/scripts/app.js"></script>
 
-    <script src="scripts/controllers/main.js"></script>
-    <script src="scripts/controllers/menu.js"></script>
-    <script src="scripts/controllers/SurveyList.js"></script>
-    <script src="scripts/controllers/SurveyDetail.js"></script>
-    <script src="scripts/services/offlineSurvey.js"></script>
-    <script src="scripts/controllers/mapView.js"></script>
+    <script src="/survey/scripts/controllers/main.js"></script>
+    <script src="/survey/scripts/controllers/menu.js"></script>
+    <script src="/survey/scripts/controllers/SurveyList.js"></script>
+    <script src="/survey/scripts/controllers/SurveyDetail.js"></script>
+    <script src="/survey/scripts/services/offlineSurvey.js"></script>
+    <script src="/survey/scripts/controllers/mapView.js"></script>
     <!-- endbuild -->
+
+    <script>
+    var token = "{{csrf_token}}";
+    </script>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
     <script>

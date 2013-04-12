@@ -51,7 +51,7 @@ autoWatch = true;
 browsers = ['Chrome'];
 
 // If browser does not capture in given timeout [ms], kill it
-captureTimeout = 5000;
+captureTimeout = 10000;
 
 // Continuous Integration mode
 // if true, it capture browsers, run tests and exit

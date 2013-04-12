@@ -136,6 +136,7 @@ INSTALLED_APPS = (
     # Project specific apps go here
     # 'my_app',
     'apps.tracker',
+    'apps.survey',
 )
 
 # A sample logging configuration. The only tangible logging
