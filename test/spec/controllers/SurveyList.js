@@ -10,7 +10,7 @@ describe('Controller: SurveyListCtrl', function () {
   // Initialize the controller and a mock scope
   beforeEach(inject(function(_$httpBackend_, $rootScope, $controller) {
     $httpBackend = _$httpBackend_;
-    $httpBackend.expectGET('surveys/all.json').respond(
+    $httpBackend.expectGET('/survey/surveys/all.json').respond(
       [
         {
           'name':'Cheese Survey',

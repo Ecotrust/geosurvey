@@ -45,7 +45,7 @@
                   </a>
                   <ul ng-controller="SurveyListCtrl"  class="survey-list"> 
                     <li ng-repeat="survey in surveys">
-                      <a href="#/survey/{{ survey.slug }}/{{ survey.firstQuestion }}">{{ survey.name }}</a>
+                      <a href="#/survey/{{ survey.slug }}/{{ survey.firstQuestion }}/uuid">{{ survey.name }}</a>
                     </li>  
                   </ul>
                 </li>
@@ -93,12 +93,15 @@
     <!-- build:js scripts/scripts.js -->
     <script src="/survey/scripts/app.js"></script>
 
+
     <script src="/survey/scripts/controllers/main.js"></script>
     <script src="/survey/scripts/controllers/menu.js"></script>
     <script src="/survey/scripts/controllers/SurveyList.js"></script>
     <script src="/survey/scripts/controllers/SurveyDetail.js"></script>
     <script src="/survey/scripts/services/offlineSurvey.js"></script>
     <script src="/survey/scripts/controllers/mapView.js"></script>
+    <script src="/survey/scripts/controllers/landing.js"></script>
+
     <!-- endbuild -->
 
     <script>

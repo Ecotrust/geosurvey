@@ -17,24 +17,31 @@
 
         body {
           background-image: url(/static/images/surf.jpeg);
-        }
-        .splash2 {
-          position: absolute;
-          top: 0;
-          left: 0;
-          z-index: 10;
+          background-repeat:no-repeat;
+          background-size: 600px auto;
+          background-position: 0px 20px;
         }
         .register-form {
-          position: relative;
+          width: 500px;
+          position: absolute;
+          top:25px;
+          left: 5px;
           z-index: 100;
-          margin-top: 30px;
         }
-        .well {
-/*          -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=85)";
-          filter: alpha(opacity=85);
-          opacity: 0.85;*/
+        .register-form p {
+          margin-bottom: 20px;
+        }
+        form {
+          width: 100%;
+          margin-left: auto;
+          margin-right: auto;
         }
 
+        .well {
+          background-color: rgba(0,0,0,0.75);
+          border: none;
+          color: #f5f5f5;
+        }
     </style>
   </head>
   <body>
@@ -46,26 +53,21 @@
       <script src="components/es5-shim/es5-shim.js"></script>
       <script src="components/json3/lib/json3.min.js"></script>
     <![endif]-->
-    <div class="container-fluid">
-    <!-- <div class="span12 splash2"> -->
-    <!-- <img class="splash2" src="/static/images/surf.jpeg"> -->
-    <!-- </div> -->
-
-      <div class="row-fluid">
-        <div class="span5 offset1 register-form">
-          <form class="well" method="POST">
-            <h4>2013 Survey of Coastal Recreational Activities</h4>
-            <p>Welcome!  We are conducting a survey of coastal recreation activities in the ocean and coastal waters of New York, New Jersey, Delaware, Maryland, and Virginia.  Please enter your email below and we will send you an individual link to fill out the survey--thank you!</p>
-            <input type="email" name="emailAddress" placeholder="Email address" required/> 
+    <div class="container">
+      <div class="row">
+        <div class="register-form well">
+        
+          <h4>Survey of Coastal Recreation</h4>
+          <p>Welcome!  We are conducting a survey of coastal recreation activities in the ocean and coastal waters of New York, New Jersey, Delaware, Maryland, and Virginia.  Please enter your email below and we will send you an individual link to fill out the survey – thank you!</p>
+          <form class="form-inline" method="POST">
+            <input type="email" name="emailAddress" placeholder="Email address" required/>
             {% csrf_token %}
             <button class="btn btn-primary" type="submit">Submit</button>
-
-            <ul class="unstyled">
-              <li><a href="">Frequently Asked Questions</a></li>
-              <li><a href="">Surfrider Foundation</a></li>
-            </ul>
-
           </form>            
+          <ul class="unstyled">
+            <li><a href="">Frequently Asked Questions</a></li>
+            <li><a href="">Surfrider Foundation</a></li>
+          </ul>
         </div>
 
       </div>

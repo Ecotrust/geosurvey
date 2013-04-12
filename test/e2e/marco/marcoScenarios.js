@@ -4,7 +4,7 @@
 describe('Geosurvey App', function() {
 
     beforeEach(function() {
-        browser().navigateTo('/survey/index.html#/survey/marco/a352a35e-89a2-43b9-894c-35927145f19e');
+        browser().navigateTo('/respond#/survey/marco/a352a35e-89a2-43b9-894c-35927145f19e');
     });
 
     it('should redirect index.html to index.html', function() {

@@ -15,9 +15,14 @@ angular.module('askApp', [])
         templateUrl: '/survey/views/mapView.html',
         controller: 'MapViewCtrl'
       })
-      .when('/survey/:surveySlug/:questionSlug', {
+
+      .when('/survey/:surveySlug/:questionSlug/:uuidSlug', {
         templateUrl: '/survey/views/SurveyDetail.html',
         controller: 'SurveyDetailCtrl'
+      })
+      .when('/survey/:surveySlug/:uuidSlug', {
+        templateUrl: '/survey/views/landing.html',
+        controller: 'LandingCtrl'
       })
       .otherwise({
         redirectTo: '/'

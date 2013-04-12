@@ -37,7 +37,7 @@ describe('Controller: SurveyDetailCtrl', function () {
 
   beforeEach(inject(function(_$httpBackend_, $rootScope,$routeParams, $controller) {
     $httpBackend = _$httpBackend_;
-    $httpBackend.expectGET('surveys/cheese-survey.json').respond(survey);
+    $httpBackend.expectGET('/survey/surveys/cheese-survey.json').respond(survey);
 
     $routeParams.surveySlug = "cheese-survey";
     $routeParams.questionSlug = 'favorite-cheese-color';
@@ -83,7 +83,7 @@ describe('Controller: SurveyDetailCtrl', function () {
       
       $httpBackend.flush();
       
-      $httpBackend.expectPOST('surveys/answer', {
+      $httpBackend.expectPOST('/respond/answer', {
         'survey': 'cheese-survey',
         'question': 'favorite-cheese-color',
         'answer': "Blue"
@@ -114,7 +114,7 @@ describe('Controller: SurveyDetailCtrl Offline', function () {
   beforeEach(inject(function(_$httpBackend_, $rootScope,$routeParams, $controller) {
     $httpBackend = _$httpBackend_;
     survey.offline = true;
-    $httpBackend.expectGET('surveys/cheese-survey-offline.json').respond(survey);
+    $httpBackend.expectGET('/survey/surveys/cheese-survey-offline.json').respond(survey);
 
 
     $routeParams.surveySlug = "cheese-survey-offline";
