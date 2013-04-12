@@ -2,66 +2,41 @@
 
 
 describe('Geosurvey App', function() {
-	
-	beforeEach(function () {
-		browser().navigateTo('/survey/index.html');	
-	});
+    
+    beforeEach(function () {
+        browser().navigateTo('/respond');
+    });
 
-	it('should redirect index.html to index.html', function() {
-		expect(browser().location().url()).toBe('/');
-		
-		expect(element('h2').text()).toBe('Please sign in');
-		expect(repeater('.survey-list li').count()).toBe(5);
-	});
+    it('should redirect index.html to index.html', function() {
+        expect(browser().location().url()).toBe('/');
+        
+        expect(element('h2').text()).toBe('Please sign in');
+        
+    });
 
-	it('should go to first question of the survey', function () {
-		element('.survey-list li:first-child a').click();
-		expect(browser().location().url()).toBe("/survey/resource-origin/first-name/uuid");
-		expect(element('h2').text()).toBe("What is the Vendor's first name?");
+    it('should go to landing page of the survey', function () {
+        // TODO: landing page
+    }); 
 
-		// expect a text question
-		expect(element('input').attr('type')).toBe('text');
-	});	
-
-	
-	
+    
+    
 });
 
 describe('Text Input Tests', function () {
 
-	beforeEach(function () {
-		browser().navigateTo('/survey/index.html#/survey/resource-origin/first-name/uuid');	
-	});
+    beforeEach(function () {
+        browser().navigateTo('/respond#/survey/test-survey/name/uuid');   
+    });
 
-	it('should advance to next question when clicking continue', function () {
-		expect(browser().location().url()).toBe("/survey/resource-origin/first-name/uuid");
-		element('button').click();
-		expect(browser().location().url()).toBe("/survey/resource-origin/vendor-location/uuid");
-	});
+    it('should display a question with a text input', function () {
+        expect(browser().location().url()).toBe("/survey/test-survey/name/uuid");
+        expect(element('h2').text()).toBe('What is your name?');
+    });
+
+    it("should allow the question to be answered and advance to the next question", function() {
+          input('question.answer').enter('Gerald');
+
+    });
 })
 
 
-describe('Single Select Tests', function () {
-	beforeEach(function () {
-		browser().navigateTo('/survey/index.html#/survey/resource-origin/vendor-location/uuid');	
-		expect(browser().location().url()).toBe("/survey/resource-origin/vendor-location/uuid");
-	});
-
-	it('should have single select question type (radio button)', function () {
-		
-
-		expect(element('h2').text()).toBe("Where does the vendor live?");
-		// expect a text question
-		expect(element('input').attr('type')).toBe('radio');
-
-		expect(repeater('input[type="radio"]').count()).toBe(3);
-
-		expect(element('label:nth-child(1)').text()).toContain("Florence");
-		expect(element('label:nth-child(2)').text()).toContain("Naples");
-		expect(element('label:nth-child(3)').text()).toContain("Rome");
-
-		expect(repeater('input:checked').count()).toBe(0);
-		
-
-	});
-})
