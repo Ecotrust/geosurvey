@@ -24,6 +24,8 @@ var survey = {
   "slug": "test-survey"
 };
 
+var token = "csrftoken";
+
 describe('Controller: SurveyDetailCtrl', function() {
 
   // load the controller's module
@@ -32,6 +34,7 @@ describe('Controller: SurveyDetailCtrl', function() {
 
   var SurveyDetailCtrl, $httpBackend, scope;
 
+
   beforeEach(inject(function(_$httpBackend_, $rootScope, $routeParams, $controller) {
     $httpBackend = _$httpBackend_;
     $httpBackend.expectGET('/api/v1/survey/test-survey/?format=json').respond(survey);
@@ -39,6 +42,8 @@ describe('Controller: SurveyDetailCtrl', function() {
     $routeParams.surveySlug = "test-survey";
     $routeParams.questionSlug = 'name';
     scope = $rootScope.$new();
+
+    scope.token = "csrftoken";
 
     SurveyDetailCtrl = $controller('SurveyDetailCtrl', {
       $scope: scope
@@ -80,8 +85,6 @@ describe('Controller: SurveyDetailCtrl', function() {
     $httpBackend.flush();
 
     $httpBackend.expectPOST('/respond/answer/test-survey/name/', {
-      'survey': 'test-survey',
-      'question': 'name',
       'answer': "Gerald"
     }).respond(201, '');
 
