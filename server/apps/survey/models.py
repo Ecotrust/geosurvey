@@ -1,4 +1,7 @@
 from django.db import models
+import datetime
+
+from tracker.models import Respondant
 
 
 class Survey(models.Model):
@@ -34,3 +37,14 @@ class Question(models.Model):
 
     def __str__(self):
         return "%s" % self.label
+
+
+class Response(models.Model):
+    question = models.ForeignKey(Question)
+    respondant = models.ForeignKey(Respondant)
+    answer = models.TextField() 
+    ts = models.DateTimeField(default=datetime.datetime.now())
+
+
+    def __str__(self):
+        return "%s/%s/%s" % (self.respondant.email, self.question.survey_set.all()[0].slug, self.question.slug)
