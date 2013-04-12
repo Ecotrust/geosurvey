@@ -5,7 +5,7 @@ angular.module('askApp')
 
     $http.get('/api/v1/survey/' + $routeParams.surveySlug + '/?format=json').success(function(data) {
         $scope.survey = data;
-        
+
         $scope.question = _.find($scope.survey.questions, function(question) {
             return question.slug === $routeParams.questionSlug;
         });
@@ -19,7 +19,7 @@ angular.module('askApp')
     };
 
     $scope.answerQuestion = function() {
-        var url = '/respond/answer',
+        var url = ['/respond/answer',$scope.survey.slug, $routeParams.questionSlug, $routeParams.uuidSlug].join('/'),
             nextUrl = ['survey', $scope.survey.slug, $scope.getNextQuestion(), $routeParams.uuidSlug].join('/');
 
         if ($scope.survey.offline) {

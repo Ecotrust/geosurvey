@@ -79,7 +79,7 @@ describe('Controller: SurveyDetailCtrl', function() {
 
     $httpBackend.flush();
 
-    $httpBackend.expectPOST('/respond/answer', {
+    $httpBackend.expectPOST('/respond/answer/test-survey/name/', {
       'survey': 'test-survey',
       'question': 'name',
       'answer': "Gerald"
