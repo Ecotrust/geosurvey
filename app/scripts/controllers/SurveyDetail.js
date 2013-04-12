@@ -19,7 +19,7 @@ angular.module('askApp')
 
   	$scope.answerQuestion = function () {
   		var url = 'surveys/answer',
-        nextUrl = ['survey', $scope.survey.slug, $scope.getNextQuestion()].join('/');
+        nextUrl = ['survey', $scope.survey.slug, $scope.getNextQuestion(), $routeParams.uuidSlug].join('/');
 
       if ($scope.survey.offline) {
         offlineSurvey.answerQuestion($scope.survey, $scope.question, $scope.answer);

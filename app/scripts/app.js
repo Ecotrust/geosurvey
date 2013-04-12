@@ -15,11 +15,11 @@ angular.module('askApp', [])
         templateUrl: 'views/mapView.html',
         controller: 'MapViewCtrl'
       })
-      .when('/survey/:surveySlug/:questionSlug', {
+      .when('/survey/:surveySlug/:questionSlug/:uuidSlug', {
         templateUrl: 'views/SurveyDetail.html',
         controller: 'SurveyDetailCtrl'
       })
-      .when('/landing', {
+      .when('/survey/:surveySlug/:uuidSlug', {
         templateUrl: 'views/landing.html',
         controller: 'LandingCtrl'
       })
