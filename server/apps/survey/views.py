@@ -15,13 +15,12 @@ def survey(request, template='survey/survey.html'):
 
 
 def answer(request, survey_slug, question_slug, uuid): #, survey_slug, question_slug, uuid):
-    if request.POST:
+    if request.method == 'POST':
         survey = get_object_or_404(Survey, slug=survey_slug)
         question = get_object_or_404(Question, slug=question_slug)
         respondant = get_object_or_404(Respondant, uuid=uuid)
-        print request.POST.keys()
         response, created = Response.objects.get_or_create(question=question,respondant=respondant)
-        response.answer = "test"
+        response.answer = simplejson.loads(request.POST.keys()[0]).get('answer', None)
         response.save()
 
         return HttpResponse(simplejson.dumps({'success': "%s/%s/%s" % (survey_slug, question_slug, uuid)}))

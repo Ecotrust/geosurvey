@@ -92,7 +92,7 @@ describe('Controller: SurveyDetailCtrl', function() {
 
     scope.answer = "Gerald";
 
-    scope.answerQuestion();
+    scope.answerQuestion(scope.answer);
     $httpBackend.flush();
 
   });
