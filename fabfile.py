@@ -20,18 +20,16 @@ def all():
    env.hosts = [dev_server, prod_server]
 
 
-def collectstatic():
-	run('cd /vagrant/server && /usr/local/venv/geosurvey/bin/python manage.py collectstatic')	
-
-
 def migrate():
   run('cd /vagrant/server && /usr/local/venv/geosurvey/bin/python manage.py migrate')
 
 def dumpdata():
   run('cd /vagrant/server && /usr/local/venv/geosurvey/bin/python manage.py dumpdata survey > apps/survey/fixtures/initial_data.json')
+  run('cd /vagrant/server && /usr/local/venv/geosurvey/bin/python manage.py dumpdata tracker > apps/tracker/fixtures/initial_data.json')
 
 def update():
-  run('/usr/local/venv/geosurvey/bin/pip install -r /vagrant/server/REQUIREMENTS')
+  run('/usr/local/venv/geosurvey/bin/pip install --upgrade -r /vagrant/server/REQUIREMENTS')
+  run('cd /vagrant/server && /usr/local/venv/geosurvey/bin/python manage.py collectstatic --noinput ') 
   run('cd /vagrant/server && /usr/local/venv/geosurvey/bin/python manage.py syncdb')
   run('cd /vagrant/server && /usr/local/venv/geosurvey/bin/python manage.py migrate')
 
