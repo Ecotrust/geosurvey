@@ -29,7 +29,8 @@ angular.module('askApp')
             $http({
                 url: url,
                 method: 'POST',
-                data: {'answer': $scope.answer},
+                data: {"answer": answer},
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             }).success(function(data) {
                 $location.path(nextUrl);
             });

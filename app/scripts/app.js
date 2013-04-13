@@ -5,8 +5,7 @@ angular.module('askApp', [])
 
     $httpProvider.defaults.headers.post = {
         'X-CSRFToken': token,
-        //'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
-         'Content-Type': 'Content-Type: application/json'
+        'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
     };
 
     $routeProvider.when('/', {
