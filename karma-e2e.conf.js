@@ -56,6 +56,6 @@ captureTimeout = 10000;
 singleRun = false;
 
 proxies = {
-  '/': 'http://localhost:8000'
+  '/': 'http://localhost:8000/'
 };
 

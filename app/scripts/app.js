@@ -27,12 +27,12 @@ angular.module('askApp', [])
     })
         .when('/survey/:surveySlug/:uuidSlug', {
         templateUrl: '/survey/views/landing.html',
-        controller: 'LandingCtrl'
+        controller: 'SurveyDetailCtrl'
     })
         .when('/RespondantList', {
-          templateUrl: '/survey/views/RespondantList.html',
-          controller: 'RespondantListCtrl'
-        })
+        templateUrl: '/survey/views/RespondantList.html',
+        controller: 'RespondantListCtrl'
+    })
         .otherwise({
         redirectTo: '/'
     });
