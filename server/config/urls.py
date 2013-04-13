@@ -8,14 +8,16 @@ from tastypie.api import Api
 
 from apps.tracker import urls as tracker_urls
 from apps.survey import urls as survey_urls
-from apps.survey.api import SurveyResource
 
+from apps.survey.api import SurveyResource
+from apps.tracker.api import RespondantResource
 
 
 
 v1_api = Api(api_name='v1')
-v1_api.register(SurveyResource())
 
+v1_api.register(SurveyResource())
+v1_api.register(RespondantResource())
 
 admin.autodiscover()
 

@@ -1,0 +1,13 @@
+<h1>Respondants</h1>
+<table class="table">
+    <thead>
+        <th>Timestamp</th>
+        <th>Email</th>
+    </thead>
+    <tbody>
+        <tr ng-repeat="respondant in respondants">
+            <td>{{ respondant.ts }}</td>
+            <td>{{ respondant.email }}</td>
+        </tr>
+    </tbody>
+</table>
