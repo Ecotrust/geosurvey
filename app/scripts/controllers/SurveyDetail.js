@@ -9,7 +9,11 @@ angular.module('askApp')
         $scope.question = _.find($scope.survey.questions, function(question) {
             return question.slug === $routeParams.questionSlug;
         });
+
+        $scope.nextQuestionPath = ['survey', $scope.survey.slug, $scope.getNextQuestion(), $routeParams.uuidSlug].join('/');
+
     });
+
 
     $scope.getNextQuestion = function() {
         // should return the slug of the next question
@@ -17,6 +21,8 @@ angular.module('askApp')
 
         return nextQuestion ? nextQuestion.slug: null;
     };
+
+
 
     $scope.answerQuestion = function(answer) {
         var url = ['/respond/answer',$scope.survey.slug, $routeParams.questionSlug, $routeParams.uuidSlug].join('/'),
