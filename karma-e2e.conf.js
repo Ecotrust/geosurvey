@@ -4,6 +4,8 @@
 basePath = '';
 // basePath = '../';
 
+urlRoot = "karma";
+
 // list of files / patterns to load in the browser
 files = [
   ANGULAR_SCENARIO,
