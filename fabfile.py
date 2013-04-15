@@ -24,8 +24,8 @@ def migrate():
   run('cd /vagrant/server && /usr/local/venv/geosurvey/bin/python manage.py migrate')
 
 def dumpdata():
-  run('cd /vagrant/server && /usr/local/venv/geosurvey/bin/python manage.py dumpdata survey > apps/survey/fixtures/initial_data.json')
-  run('cd /vagrant/server && /usr/local/venv/geosurvey/bin/python manage.py dumpdata tracker > apps/tracker/fixtures/initial_data.json')
+  run('cd /vagrant/server && /usr/local/venv/geosurvey/bin/python manage.py dumpdata survey --exclude survey.Response > apps/survey/fixtures/initial_data.json')
+  #run('cd /vagrant/server && /usr/local/venv/geosurvey/bin/python manage.py dumpdata tracker > apps/tracker/fixtures/initial_data.json')
 
 def update_requirements():
   run('/usr/local/venv/geosurvey/bin/pip install --upgrade -r /vagrant/server/REQUIREMENTS')
