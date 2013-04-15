@@ -45,8 +45,6 @@ USE_L10N = False
 # If you set this to False, Django will not use timezone-aware datetimes.
 USE_TZ = True
 
-SURVEY_ROOT = PROJECT_ROOT / '../app'
-
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
 MEDIA_ROOT = PROJECT_ROOT / 'public/media'
@@ -117,7 +115,6 @@ TEMPLATE_DIRS = (
 INSTALLED_APPS = (
     # 'grappelli.dashboard',
     'grappelli',
-
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -133,9 +130,8 @@ INSTALLED_APPS = (
     'django_extensions',
     'compressor',
     # Project specific apps go here
-    # 'my_app',
-    'apps.tracker',
-    'apps.survey',
+    'apps.survey'
+
 )
 
 # A sample logging configuration. The only tangible logging
