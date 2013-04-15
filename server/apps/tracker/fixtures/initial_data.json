@@ -1,8 +1,0 @@
-[{
-    "pk": "uuid",
-    "model": "tracker.respondant",
-    "fields": {
-        "ts": "2013-04-15T18:54:38.941Z",
-        "email": "eknuth@ecotrust.org"
-    }
-}]

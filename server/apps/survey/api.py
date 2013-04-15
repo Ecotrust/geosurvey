@@ -1,10 +1,17 @@
 from tastypie.resources import ModelResource, ALL, ALL_WITH_RELATIONS
 from tastypie import fields, utils
 
+from tastypie.authentication import SessionAuthentication
+from tastypie.authorization import DjangoAuthorization
 from django.conf.urls.defaults import url
 
-from survey.models import Survey, Question, Option
+from survey.models import Survey, Question, Option, Respondant
 
+class RespondantResource(ModelResource):
+    class Meta:
+        queryset = Respondant.objects.all()
+        authentication = SessionAuthentication()
+        authorization = DjangoAuthorization()
 class OptionResource(ModelResource):
     class Meta:
         queryset = Option.objects.all()
