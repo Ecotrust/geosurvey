@@ -1,5 +1,5 @@
 
-Please click on the link below to being the survey.
+Please click on the link below to begin the survey.
 
 http://{{ SITE_URL }}/respond#/survey/marco/{{ uuid }}
 
