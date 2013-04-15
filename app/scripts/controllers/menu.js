@@ -13,8 +13,8 @@ angular.module('askApp')
       	'path': '/'
       },
       { 
-        'name': 'Surveys',
-        'path': '/surveys'
+        'name': 'Survey',
+        'path': '/respond'
       }
      
     ];
