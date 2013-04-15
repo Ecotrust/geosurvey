@@ -3,7 +3,7 @@
 angular.module('askApp')
   .controller('RespondantDetailCtrl', function ($scope, $routeParams, $http) {
 
-    $http.get('/api/v1/respondant/?format=json').success(function(data) {
+    $http.get('/api/v1/respondant/' + $routeParams.uuidSlug + '/?format=json').success(function(data) {
         $scope.response = data;
     });
 

@@ -2,13 +2,20 @@
 
 var token = 'csrftoken';
 
+var response = {
+    "email": "eknuth@ecotrust.org",
+    "resource_uri": "/api/v1/respondant/uuid/",
+    "ts": "2013-04-11T17:32:15.290000",
+    "uuid": "uuid"
+};
+
 describe('Controller: RespondantDetailCtrl', function() {
 
     // load the controller's module
     beforeEach(module('askApp'));
 
     var RespondantDetailCtrl, $httpBackend, scope;
-    
+
 
     // Initialize the controller and a mock scope
     beforeEach(inject(function(_$httpBackend_, $rootScope, $routeParams, $controller) {
@@ -18,14 +25,14 @@ describe('Controller: RespondantDetailCtrl', function() {
         $routeParams.surveySlug = 'test-survey';
         $routeParams.uuidSlug = 'uuid-xxxxy';
 
-        $httpBackend.expectGET('/api/v1/respondant/?format=json').respond({});
+        $httpBackend.expectGET('/api/v1/respondant/uuid-xxxxy/?format=json').respond(response);
 
         RespondantDetailCtrl = $controller('RespondantDetailCtrl', {
             $scope: scope
         });
 
         $httpBackend.flush();
-        
+
     }));
 
 
@@ -35,7 +42,8 @@ describe('Controller: RespondantDetailCtrl', function() {
     });
 
     it('should attach a response to the scope', function() {
-        
-        expect(scope.awesomeThings.length).toBe(3);
+
+        expect(scope.response.email).toBe('eknuth@ecotrust.org');
+        expect(scope.response.uuid).toBe('uuid');
     });
 });
