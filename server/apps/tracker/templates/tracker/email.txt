@@ -1,3 +1,6 @@
-Here is the link:
+
+Please click on the link below to being the survey.
 
 http://{{ SITE_URL }}/survey/index.html#/survey/marco/{{ uuid }}
+
+Thank you!
