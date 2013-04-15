@@ -43,3 +43,12 @@ Add a new route, view, controller, unit test:
 ```bash
 yo angular:route myRoute
 ```
+
+Because the app is being served out of the django app we need to specify a path for the controls and templates.  Here is an axample route:
+
+```javascript
+.when('/RespondantDetail', {
+  templateUrl: '/survey/views/RespondantDetail.html',
+  controller: 'RespondantDetailCtrl'
+})
+```
