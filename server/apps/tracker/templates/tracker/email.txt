@@ -1,6 +1,6 @@
 
 Please click on the link below to being the survey.
 
-http://{{ SITE_URL }}/survey/index.html#/survey/marco/{{ uuid }}
+http://{{ SITE_URL }}/respond#/survey/marco/{{ uuid }}
 
 Thank you!
