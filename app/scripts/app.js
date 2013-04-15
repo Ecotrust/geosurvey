@@ -33,7 +33,7 @@ angular.module('askApp', [])
         templateUrl: '/static/survey/views/RespondantList.html',
         controller: 'RespondantListCtrl'
     })
-        .when('/RespondantDetail/:surveySlug/:uuidSlug', {
+        .when('/RespondantDetail/:uuidSlug', {
           templateUrl: '/static/survey/views/RespondantDetail.html',
           controller: 'RespondantDetailCtrl'
         })
