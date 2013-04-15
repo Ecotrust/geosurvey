@@ -1,1 +1,29 @@
-[{"pk": 1, "model": "survey.survey", "fields": {"name": "Test Survey", "questions": [1, 2], "slug": "test-survey"}}, {"pk": 1, "model": "survey.question", "fields": {"options": [], "label": "Name", "type": "text", "slug": "name", "title": "What is your name?"}}, {"pk": 2, "model": "survey.question", "fields": {"options": [], "label": "Age", "type": "text", "slug": "age", "title": "How old are you?"}}, {"pk": 1, "model": "survey.response", "fields": {"respondant": "7f04ded6-0f2e-4992-9d94-e8ea7d2a117a", "answer": "33", "question": 2, "ts": "2013-04-12T22:42:04.782Z"}}]
+[{
+    "pk": 1,
+    "model": "survey.survey",
+    "fields": {
+        "name": "Test Survey",
+        "questions": [1, 2],
+        "slug": "test-survey"
+    }
+}, {
+    "pk": 1,
+    "model": "survey.question",
+    "fields": {
+        "options": [],
+        "label": "Name",
+        "type": "text",
+        "slug": "name",
+        "title": "What is your name?"
+    }
+}, {
+    "pk": 2,
+    "model": "survey.question",
+    "fields": {
+        "options": [],
+        "label": "Age",
+        "type": "text",
+        "slug": "age",
+        "title": "How old are you?"
+    }
+}]

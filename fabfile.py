@@ -27,14 +27,17 @@ def dumpdata():
   run('cd /vagrant/server && /usr/local/venv/geosurvey/bin/python manage.py dumpdata survey > apps/survey/fixtures/initial_data.json')
   run('cd /vagrant/server && /usr/local/venv/geosurvey/bin/python manage.py dumpdata tracker > apps/tracker/fixtures/initial_data.json')
 
-def update():
+def update_requirements():
   run('/usr/local/venv/geosurvey/bin/pip install --upgrade -r /vagrant/server/REQUIREMENTS')
+
+def update():
   run('cd /vagrant/server && /usr/local/venv/geosurvey/bin/python manage.py collectstatic --noinput ') 
   run('cd /vagrant/server && /usr/local/venv/geosurvey/bin/python manage.py syncdb')
-  run('cd /vagrant/server && /usr/local/venv/geosurvey/bin/python manage.py migrate')
+ 
 
 def install():
-        run('cd /vagrant/server && /usr/local/venv/geosurvey/bin/python manage.py syncdb')
+  run('cd /vagrant/server && /usr/local/venv/geosurvey/bin/python manage.py syncdb')
+  run('cd /vagrant/server && /usr/local/venv/geosurvey/bin/python manage.py migrate')
 
 def run_server():
 	run('cd /vagrant/server && /usr/local/venv/geosurvey/bin/python manage.py runserver 0.0.0.0:8000')
