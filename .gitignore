@@ -11,3 +11,6 @@ server/config/environments/local.py
 server/media
 server/public/static
 .vagrant
+geosurvey_env
+logs
+
