@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('askApp', [])
+angular.module('askApp', ['ui'])
     .config(function($routeProvider, $httpProvider) {
 
     $httpProvider.defaults.headers.post = {

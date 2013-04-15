@@ -30,3 +30,7 @@ height: auto;
 margin-bottom: 15px;
 padding: 7px 9px;
 }
+
+.question input[type="number"] {
+    height: 40px;
+}
