@@ -1,19 +1,25 @@
 <p ng-hide="survey.questions.length">This survey has no questions.</p>
-<form class="question" name="questionForm" ng-show="survey.questions.length" ng-submit="answerQuestion(answer)">
+
 	<h2>{{ question.title }}</h2>
 	<span class="subtitle pull-right">{{ survey.questions.indexOf(question) + 1 }} of {{ survey.questions.length }}</span>
-
 	<div ng-switch on="question.type">
-		<div ng-switch-when="text">
-			<input class="input-block-level" type="text" placeholder="{{ question.label }}" ng-model="answer" autofocus/>
-		</div>
+			<div ng-switch-when="text">
+				<form class="question" name="questionForm" ng-show="survey.questions.length" ng-submit="answerQuestion(answer)">
+					<input class="input-block-level" type="text" placeholder="{{ question.label }}" ng-model="answer" autofocus/>
+					<button type="submit" class="btn btn-primary btn-block">continue</button>
+				</form>
+			</div>
 		<div ng-switch-when="single-select">
-			<label class="radio" ng-repeat="option in question.options">
-				<input type="radio">
-				{{ option }}
-			</label>
+			<form class="question" name="questionForm" ng-show="survey.questions.length" ng-submit="answerQuestion(answer)">
+				<label class="radio" ng-repeat="option in question.options">
+					<input type="radio">
+					{{ option }}
+				</label>
+				<button type="submit" class="btn btn-primary btn-block">continue</button>
+			</form>
 		</div>
 		<div ng-switch-when="integer">
+			<form class="question" name="questionForm" ng-show="survey.questions.length" ng-submit="answerQuestion(answer)">
 				<input
 					name="integerAnswer"
 					ng-model="answer"
@@ -22,12 +28,13 @@
 					type="number"
 					min="0"
 					max="150"
-					ui-event="{ keypress : 'onlyDigits($event)' }"
 					required/>
 				<span class="error" ng-show="question-form.answer.$valid">Required!</span>
 				<span class="error" ng-show="question-answer.$error">{{question.input.$error}} Not valid number!</span>
+				<button type="submit" class="btn btn-primary btn-block">continue</button>
+			</form>
 		</div>
 	</div>
+	
 
-	<button type="submit" class="btn btn-primary btn-block">continue</button>
-</form>
+	

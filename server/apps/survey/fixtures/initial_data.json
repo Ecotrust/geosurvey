@@ -1,10 +1,27 @@
 [{
+    "pk": "uuid",
+    "model": "survey.respondant",
+    "fields": {
+        "responses": [1, 2],
+        "survey": 1,
+        "ts": "2013-04-15T23:33:54Z",
+        "email": "eknuth@ecotrust.org"
+    }
+}, {
     "pk": 1,
     "model": "survey.survey",
     "fields": {
         "name": "Test Survey",
         "questions": [1, 2],
         "slug": "test-survey"
+    }
+}, {
+    "pk": 2,
+    "model": "survey.survey",
+    "fields": {
+        "name": "marco",
+        "questions": [],
+        "slug": "marco"
     }
 }, {
     "pk": 1,
