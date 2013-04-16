@@ -4,9 +4,38 @@ var token = 'csrftoken';
 
 var response = {
     "email": "eknuth@ecotrust.org",
-    "resource_uri": "/api/v1/respondant/uuid/",
-    "ts": "2013-04-11T17:32:15.290000",
-    "uuid": "uuid"
+    "resource_uri": "/api/v1/respondant/e60fcfd0-1213-4cbc-8cc6-add5352675bb/",
+    "responses": [{
+        "answer": "test",
+        "id": 1,
+        "question": {
+            "id": 1,
+            "label": "Name",
+            "options": [],
+            "resource_uri": "",
+            "slug": "name",
+            "title": "What is your name?",
+            "type": "text"
+        },
+        "resource_uri": "",
+        "ts": "2013-04-15T18:37:32.181676"
+    }, {
+        "answer": "33",
+        "id": 2,
+        "question": {
+            "id": 2,
+            "label": "Age",
+            "options": [],
+            "resource_uri": "",
+            "slug": "age",
+            "title": "How old are you?",
+            "type": "text"
+        },
+        "resource_uri": "",
+        "ts": "2013-04-15T18:37:32.181676"
+    }],
+    "ts": "2013-04-15T18:33:54",
+    "uuid": "e60fcfd0-1213-4cbc-8cc6-add5352675bb"
 };
 
 describe('Controller: RespondantDetailCtrl', function() {
@@ -44,6 +73,7 @@ describe('Controller: RespondantDetailCtrl', function() {
     it('should attach a response to the scope', function() {
 
         expect(scope.response.email).toBe('eknuth@ecotrust.org');
-        expect(scope.response.uuid).toBe('uuid');
+        expect(scope.response.uuid).toBe('e60fcfd0-1213-4cbc-8cc6-add5352675bb');
+        expect(scope.response.responses.length).toBe(2)
     });
 });
