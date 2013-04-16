@@ -1,6 +1,12 @@
+<h2>Respondant Info</h2>
 <dl>
     <dt>email</dt>
     <dd>{{ response.email }}</dd>
     <dt>timestamp</dt>
     <dd>{{ response.ts }}</dd>
+</dl>
+<h2>Responses</h2>
+<dl ng-repeat="answer in response.responses" class="{{ answer.question.slug }}">
+    <dt>{{ answer.question.title }}</dt>
+    <dd>{{ answer.answer }}</dd>
 </dl>
