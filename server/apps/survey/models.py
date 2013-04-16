@@ -20,6 +20,7 @@ QUESTION_TYPE_CHOICES = (
     ('multi-select', 'Multi Select'),
     ('location', 'Location'),
     ('integer', 'Integer'),
+    ('auto-single-select', 'Single Select with Autocomplete'),
 )
 
 class Option(models.Model):

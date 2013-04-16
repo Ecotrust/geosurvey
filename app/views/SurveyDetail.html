@@ -25,6 +25,22 @@
 					ui-event="{ keypress : 'onlyDigits($event)' }"
 					required/>
 		</div>
+		<div ng-switch-when="auto-single-select">
+				<select
+					ui-select2
+					ng-model="answer"
+					class="input-block-level"
+					placeholder="{{ question.label }}"
+					required>
+					<option value="">Pick a state</option>
+					<option value="NY">New York</option>
+					<option value="NJ">New Jersey</option>
+					<option value="DE">Delaware</option>
+					<option value="MD">Maryland</option>
+					<option value="VI">Virginia</option>
+					<option value="DC">District of Columbia</option>
+				</select>
+		</div>
 	</div>
 
 	<button type="submit" class="btn btn-primary btn-block">continue</button>
