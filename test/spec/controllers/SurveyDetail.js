@@ -107,4 +107,16 @@ describe('Controller: SurveyDetailCtrl', function() {
         expect(scope.nextQuestionPath).toBe('survey/test-survey/age/uuid-xxxxy')
     })
 
+    
+    it('should find the end of the survey', function() {
+
+        inject(function(_$httpBackend_, $rootScope, $routeParams, $controller) {
+            $routeParams.questionSlug = 'age';
+        });
+
+        $httpBackend.flush();
+
+        expect(scope.getNextQuestion()).toBe(null);
+    });
+
 });

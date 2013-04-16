@@ -5,15 +5,23 @@ from django.template import RequestContext, Context
 from django.shortcuts import get_object_or_404
 from django.template.loader import get_template
 from django.core.mail import EmailMultiAlternatives
+from django.contrib.auth.decorators import login_required
 
 import simplejson
 
 from apps.survey.models import Survey, Question, Response, Respondant
 
+@login_required
+def delete_responses(request, uuid, template='survey/delete.html'):
+    respondant = get_object_or_404(Respondant, uuid=uuid)
+    for response in respondant.responses.all():
+        response.delete()
+    respondant.responses.clear()
+    respondant.save()
+    return render_to_response(template, RequestContext(request, {}))
 
 def survey(request, template='survey/survey.html'):
     return render_to_response(template, RequestContext(request, {}))
-
 
 def answer(request, survey_slug, question_slug, uuid): #, survey_slug, question_slug, uuid):
     if request.method == 'POST':
@@ -29,9 +37,6 @@ def answer(request, survey_slug, question_slug, uuid): #, survey_slug, question_
 
         return HttpResponse(simplejson.dumps({'success': "%s/%s/%s" % (survey_slug, question_slug, uuid)}))
     return HttpResponse(simplejson.dumps({'success': False}))
-
-
-
 
 def send_email(email, uuid):
     from django.contrib.sites.models import Site
