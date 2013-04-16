@@ -1,5 +1,5 @@
 <p ng-hide="survey.questions.length">This survey has no questions.</p>
-<form class="question" name="questionForm" ng-show="survey.questions.length" ng-submit="answerQuestion(answer)">
+<form class="question" name="questionForm" ng-show="survey.questions.length" ng-submit="answerQuestion()">
 	<h2>{{ question.title }}</h2>
 	<span class="subtitle pull-right">{{ survey.questions.indexOf(question) + 1 }} of {{ survey.questions.length }}</span>
 
@@ -24,8 +24,22 @@
 					max="150"
 					ui-event="{ keypress : 'onlyDigits($event)' }"
 					required/>
-				<span class="error" ng-show="question-form.answer.$valid">Required!</span>
-				<span class="error" ng-show="question-answer.$error">{{question.input.$error}} Not valid number!</span>
+		</div>
+		<div ng-switch-when="auto-single-select">
+				<select
+					ui-select2
+					ng-model="answer"
+					class="input-block-level"
+					placeholder="{{ question.label }}"
+					required>
+					<option value="">Pick a state</option>
+					<option value="NY">New York</option>
+					<option value="NJ">New Jersey</option>
+					<option value="DE">Delaware</option>
+					<option value="MD">Maryland</option>
+					<option value="VI">Virginia</option>
+					<option value="DC">District of Columbia</option>
+				</select>
 		</div>
 	</div>
 
