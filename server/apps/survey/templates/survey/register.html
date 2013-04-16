@@ -11,8 +11,6 @@
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
-    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-responsive.min.css" rel="stylesheet">
-    <link href="//netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css" rel="stylesheet">
     <style type="text/css">
 
         body {
@@ -88,26 +86,21 @@
           </form>
 
           <ul class="unstyled">
-            <li><a href="#faq">Frequently Asked Questions</a></li>
+            <li><a href="#faq" data-toggle="modal">Frequently Asked Questions</a></li>
             <li><a href="http://www.surfrider.org">Surfrider Foundation</a></li>
           </ul>
         </div>
 
       </div>
 
-      <div id="faq" class="row">
-        <div class="span12">
-          <h2>Frequently Asked Questions</h2>
-          
-<!--           <ul>
-            <li><a href="#who-conducting">Who is conducting this study?</a></li>
-            <li><a href="#who-should-fill"></a></li>
-            <li><a href="#how-to-participate"></a></li>
-            <li><a href="#why-participate"></a></li>
-            <li><a href="#ocean-planning"></a></li> 
-            <li><a href="#reveal"></a></li>
-            <li><a href="#marco"></a></li>
-          </ul> -->
+    </div>
+
+    <div id="faq" class="modal hide fade">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>Frequently Asked Questions</h3>
+      </div>
+      <div class="modal-body">
 
           <h4 id="who-conducting">Who is conducting this study?</h4>
           <p>The <a href="http://www.surfrider.org">Surfrider Foundation</a> is conducting the study in partnership with <a href="http://www.ecotrust.org">Ecotrust</a>, <a href="http://www.monmouth.edu/urban_coast_institute/default.asp">Monmouth University’s Urban Coast Institute</a>, and <a href="http://www.nature.org">The Nature Conservancy</a>.</p>
@@ -129,12 +122,22 @@
            
           <h4 id="marco">What is MARCO and how does it relate to this study?</h4>
           <p>The Mid-Atlantic Regional Council on the Ocean, or MARCO, is an arrangement by the Governors of New York, New Jersey, Delaware, Maryland, and Virginia to collaborate in advancing goals to protect our ocean and coast. To further these goals, MARCO created the Ocean Data Portal, an online tool to organize available data from the region. The data from this study will be placed on the Ocean Data Portal. MARCO is also organizing a similar study to this one, focused solely on recreational boating.</p>
-        </div>
 
+      </div>
+      <div class="modal-footer">
+        <a href="#" class="btn" data-dismiss="modal">Close</a>
       </div>
     </div>
 
+
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+      // $(document).ready(function () {
+      //   $('#faq').modal();
+      // });
+    </script>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
     <script>
