@@ -6,12 +6,9 @@ from django.contrib import admin
 
 from tastypie.api import Api
 
-from apps.tracker import urls as tracker_urls
 from apps.survey import urls as survey_urls
 
-from apps.survey.api import SurveyResource
-from apps.tracker.api import RespondantResource
-
+from apps.survey.api import SurveyResource, RespondantResource
 
 
 v1_api = Api(api_name='v1')
@@ -21,16 +18,14 @@ v1_api.register(RespondantResource())
 
 admin.autodiscover()
 
-
 urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^grappelli/', include('grappelli.urls')),
     (r'^api/', include(v1_api.urls)),
-    url(r'^tracker/', include(tracker_urls)),
     url(r'^respond$', 'apps.survey.views.survey'),
     url(r'^respond', include(survey_urls)),
-    (r'^survey/(?P<path>.*)$', 'django.views.static.serve',
-            {'document_root': settings.SURVEY_ROOT}),
+    (r'register', survey_urls.register),
+    #(r'^survey/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.SURVEY_ROOT}),
 )
 
 urlpatterns += staticfiles_urlpatterns()
