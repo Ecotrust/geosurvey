@@ -1,44 +1,75 @@
-from fabric.api import * 
+from fabric.api import *
 
-dev_server =  'vagrant@127.0.0.1:2222'
-prod_server = []
+vars = {
+    'app_dir': '/usr/local/apps/geosurvey/server',
+    'venv': '/usr/local/apps/geosurvey/geosurvey_env'
+}
 
 env.forward_agent = True
-env.key_filename = '~/.vagrant.d/insecure_private_key'
 
-def dev(): 
-   """ Use development server settings """
-   env.hosts = [dev_server]
-   
+
+
+def dev():
+    """ Use development server settings """
+    servers = ['vagrant@127.0.0.1:2222']
+    env.hosts = servers
+    env.key_filename = '~/.vagrant.d/insecure_private_key'
+    vars['app_dir'] = '/vagrant/server'
+    vars['venv'] = '/usr/local/venv/geosurvey'
+    return servers
+
+
 def prod():
-   """ Use production server settings """ 
-   env.hosts = [prod_server] 
-   
-   
-def all(): 
-   """ Use all serves """
-   env.hosts = [dev_server, prod_server]
+    """ Use production server settings """
+    servers = []
+    env.hosts = servers
+    return servers
 
 
-def migrate():
-  run('cd /vagrant/server && /usr/local/venv/geosurvey/bin/python manage.py migrate')
+def test():
+    """ Use test server settings """
+    servers = ['dionysus']
+    env.hosts = servers
+    return servers
+
+
+def all():
+    """ Use all servers """
+    env.hosts = dev() + prod() + test()
+
+
+def _install_requirements():
+    run('cd %(app_dir)s && %(venv)s/bin/pip install -r REQUIREMENTS' % vars)
+
+#%(venv)s/bin/python manage.py site localhost:8080 && \
+def _install_django():
+    run('cd %(app_dir)s && %(venv)s/bin/python manage.py syncdb --noinput && \
+                           %(venv)s/bin/python manage.py migrate --noinput && \
+                           %(venv)s/bin/python manage.py collectstatic --noinput' % vars)
+
+
+def create_superuser():
+    """ Create the django superuser (interactive!) """
+    run('cd %(app_dir)s && %(venv)s/bin/python manage.py createsuperuser' % vars)
+
+
+
+def init():
+    """ Initialize the forest planner application """
+    _install_requirements()
+    _install_django()
+
+
+def update():
+    """ Sync with master git repo """
+    run('cd %(app_dir)s && git fetch && git merge origin/master' % vars)
+    init()
+
+
 
 def dumpdata():
   run('cd /vagrant/server && /usr/local/venv/geosurvey/bin/python manage.py dumpdata survey --exclude survey.Response > apps/survey/fixtures/initial_data.json')
   #run('cd /vagrant/server && /usr/local/venv/geosurvey/bin/python manage.py dumpdata tracker > apps/tracker/fixtures/initial_data.json')
-
-def update_requirements():
-  run('/usr/local/venv/geosurvey/bin/pip install --upgrade -r /vagrant/server/REQUIREMENTS')
-
-def update():
-  run('cd /vagrant/server && /usr/local/venv/geosurvey/bin/python manage.py collectstatic --noinput ') 
-  run('cd /vagrant/server && /usr/local/venv/geosurvey/bin/python manage.py syncdb')
-  run('cd /vagrant/server && /usr/local/venv/geosurvey/bin/python manage.py migrate')
- 
-
-def install():
-  run('cd /vagrant/server && /usr/local/venv/geosurvey/bin/python manage.py syncdb')
-  run('cd /vagrant/server && /usr/local/venv/geosurvey/bin/python manage.py migrate')
 
 def run_server():
 	run('cd /vagrant/server && /usr/local/venv/geosurvey/bin/python manage.py runserver 0.0.0.0:8000')
