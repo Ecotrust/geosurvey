@@ -45,7 +45,8 @@ def _install_requirements():
 def _install_django():
     run('cd %(app_dir)s && %(venv)s/bin/python manage.py syncdb --noinput && \
                            %(venv)s/bin/python manage.py migrate --noinput && \
-                           %(venv)s/bin/python manage.py collectstatic --noinput' % vars)
+                           %(venv)s/bin/python manage.py collectstatic --noinput && \
+                           /usr/bin/touch wsgi.py' % vars)
 
 
 def create_superuser():
