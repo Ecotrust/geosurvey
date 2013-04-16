@@ -48,7 +48,7 @@ Because the app is being served out of the django app we need to specify a path 
 
 ```javascript
 .when('/RespondantDetail', {
-  templateUrl: '/survey/views/RespondantDetail.html',
+  templateUrl: '/static/survey/views/RespondantDetail.html',
   controller: 'RespondantDetailCtrl'
 })
 ```

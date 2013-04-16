@@ -82,6 +82,7 @@
           <p>Welcome!  We are conducting a survey of coastal recreation activities in the ocean and coastal waters of New York, New Jersey, Delaware, Maryland, and Virginia.  Please enter your email below and we will send you an individual link to fill out the survey – thank you!</p>
           <form class="form-inline" method="POST">
             <input type="email" name="emailAddress" placeholder="Email address" required/>
+            <input type="hidden" name="survey" value="marco"/>
             {% csrf_token %}
             <button class="btn btn-primary" type="submit">Submit</button>
           </form>

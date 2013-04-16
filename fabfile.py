@@ -33,6 +33,7 @@ def update_requirements():
 def update():
   run('cd /vagrant/server && /usr/local/venv/geosurvey/bin/python manage.py collectstatic --noinput ') 
   run('cd /vagrant/server && /usr/local/venv/geosurvey/bin/python manage.py syncdb')
+  run('cd /vagrant/server && /usr/local/venv/geosurvey/bin/python manage.py migrate')
  
 
 def install():
