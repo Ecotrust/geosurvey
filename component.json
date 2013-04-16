@@ -11,7 +11,8 @@
     "underscore": "~1.4.4",
     "amplify": "~1.1.0",
     "openlayers": "latest",
-    "angular-ui": "~0.4.0"
+    "angular-ui": "~0.4.0",
+    "select2": "~3.3.2"
   },
   "devDependencies": {
     "angular-mocks": "~1.0.5",

@@ -20,7 +20,7 @@
     "model": "survey.survey",
     "fields": {
         "name": "marco",
-        "questions": [],
+        "questions": [3, 4],
         "slug": "marco"
     }
 }, {
@@ -42,5 +42,26 @@
         "type": "text",
         "slug": "age",
         "title": "How old are you?"
+    }
+},{
+    "pk": 3,
+    "model": "survey.question",
+    "fields": {
+        "options": [],
+        "label": "Your age",
+        "type": "integer",
+        "slug": "marco-age",
+        "title": "Please enter your age:"
+    }
+},
+{
+    "pk": 4,
+    "model": "survey.question",
+    "fields": {
+        "options": [],
+        "label": "State",
+        "type": "auto-single-select",
+        "slug": "state",
+        "title": "What state do you live in?"
     }
 }]
