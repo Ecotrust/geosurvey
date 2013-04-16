@@ -22,7 +22,7 @@ angular.module('askApp')
         return nextQuestion ? nextQuestion.slug: null;
     };
 
-    $scope.answerQuestion = function (answer) {
+    $scope.answerQuestion = function(answer) {
         var url = ['/respond/answer',$scope.survey.slug, $routeParams.questionSlug, $routeParams.uuidSlug].join('/'),
             nextQuestion = $scope.getNextQuestion(), nextUrl;
 
@@ -44,6 +44,7 @@ angular.module('askApp')
                 $location.path(nextUrl);
             });
         }
+
     };
 
 });
