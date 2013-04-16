@@ -23,8 +23,9 @@ angular.module('askApp')
     };
 
 
+    $scope.answer = "";
 
-    $scope.answerQuestion = function(answer) {
+    $scope.answerQuestion = function() {
         var valid = $scope.validate();
         if (!valid) {
             return;
@@ -40,7 +41,7 @@ angular.module('askApp')
             $http({
                 url: url,
                 method: 'POST',
-                data: {"answer": answer},
+                data: {"answer": $scope.answer},
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             }).success(function(data) {
                 $location.path(nextUrl);
