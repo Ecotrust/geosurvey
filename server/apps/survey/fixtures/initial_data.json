@@ -2,7 +2,6 @@
     "pk": "uuid",
     "model": "survey.respondant",
     "fields": {
-        "responses": [1, 2],
         "survey": 1,
         "ts": "2013-04-15T23:33:54Z",
         "email": "eknuth@ecotrust.org"

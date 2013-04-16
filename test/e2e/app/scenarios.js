@@ -48,7 +48,6 @@ describe('Text Input Tests', function() {
         // must be logged in to go to the respondant view
         browser().navigateTo('/respond#/RespondantDetail/uuid');
         expect(browser().location().url()).toBe('/RespondantDetail/uuid');
-
         expect(element('.name dt').text()).toBe("What is your name?");
         expect(element('.name dd').text()).toBe(name);
 
