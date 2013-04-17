@@ -17,12 +17,12 @@ angular.module('askApp')
                 center: { lat: 42.505, lng: -122.59 },
                 zoom: 6,
                 mark: {
-                       visibility: false,
+                       visibility: true,
                        lat: 42.505,
                        lng: -122.59,
-                       
+
                     },
-                msg: "Drag this point to place where your activity occured."
+                msg: null
             }
 
         }
