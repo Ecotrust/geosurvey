@@ -1,66 +1,114 @@
-[{
+[
+  {
+    "pk": "e1891cc6-0733-4bb1-a362-a05d076b0434",
+    "model": "survey.respondant",
+    "fields": {
+      "responses": [],
+      "survey": 2,
+      "ts": "2013-04-16T21:38:40.606Z",
+      "email": "tglaser@gmail.com"
+    }
+  },
+  {
     "pk": "uuid",
     "model": "survey.respondant",
     "fields": {
-        "survey": 1,
-        "ts": "2013-04-15T23:33:54Z",
-        "email": "eknuth@ecotrust.org"
+      "responses": [],
+      "survey": 1,
+      "ts": "2013-04-15T23:33:54Z",
+      "email": "eknuth@ecotrust.org"
     }
-}, {
+  },
+  {
     "pk": 1,
     "model": "survey.survey",
     "fields": {
-        "name": "Test Survey",
-        "questions": [1, 2],
-        "slug": "test-survey"
+      "name": "Test Survey",
+      "questions": [
+        1,
+        2,
+        6
+      ],
+      "slug": "test-survey"
     }
-}, {
+  },
+  {
     "pk": 2,
     "model": "survey.survey",
     "fields": {
-        "name": "marco",
-        "questions": [3, 4],
-        "slug": "marco"
+      "name": "marco",
+      "questions": [
+        3,
+        4,
+        5
+      ],
+      "slug": "marco"
     }
-}, {
+  },
+  {
     "pk": 1,
     "model": "survey.question",
     "fields": {
-        "options": [],
-        "label": "Name",
-        "type": "text",
-        "slug": "name",
-        "title": "What is your name?"
+      "options": [],
+      "label": "Name",
+      "type": "text",
+      "slug": "name",
+      "title": "What is your name?"
     }
-}, {
+  },
+  {
     "pk": 2,
     "model": "survey.question",
     "fields": {
-        "options": [],
-        "label": "Age",
-        "type": "text",
-        "slug": "age",
-        "title": "How old are you?"
+      "options": [],
+      "label": "Age",
+      "type": "text",
+      "slug": "age",
+      "title": "How old are you?"
     }
-},{
+  },
+  {
     "pk": 3,
     "model": "survey.question",
     "fields": {
-        "options": [],
-        "label": "Your age",
-        "type": "integer",
-        "slug": "marco-age",
-        "title": "Please enter your age:"
+      "options": [],
+      "label": "Enter your age",
+      "type": "integer",
+      "slug": "marco-age",
+      "title": "Please enter your age:"
     }
-},
-{
+  },
+  {
     "pk": 4,
     "model": "survey.question",
     "fields": {
-        "options": [],
-        "label": "State",
-        "type": "auto-single-select",
-        "slug": "state",
-        "title": "What state do you live in?"
+      "options": [],
+      "label": "Pick a state",
+      "type": "auto-single-select",
+      "slug": "state",
+      "title": "What state do you live in?"
     }
-}]
+  },
+  {
+    "pk": 5,
+    "model": "survey.question",
+    "fields": {
+      "options": [],
+      "label": "Pick a county",
+      "type": "auto-single-select",
+      "slug": "county",
+      "title": "What county do you live in?"
+    }
+  },
+  {
+    "pk": 6,
+    "model": "survey.question",
+    "fields": {
+      "options": [],
+      "label": "Activity Locations",
+      "type": "map-multipoint",
+      "slug": "activity-locations",
+      "title": "Move and zoom the map to precisely focus the crosshair at each of your activity locations."
+    }
+  }
+]
