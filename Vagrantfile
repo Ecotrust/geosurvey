@@ -35,9 +35,10 @@ Vagrant::Config.run do |config|
   # an identifier, the second is the path on the guest to mount the
   # folder, and the third is the path on the host to the actual folder.
   # config.vm.share_folder "v-data", "/vagrant_data", "../data"
-  config.vm.share_folder "v-data", "/usr/local/apps/geosurvey", "./server
-  config.vm.share_folder("v-root", "/vagrant", ".", :nfs => true)
-  
+  config.vm.share_folder "v-data", "/usr/local/apps/geosurvey", "./server"
+  Vagrant::Config.run do |config|
+    config.vm.share_folder("v-root", "/vagrant", ".", :nfs => true)
+  end
   # Enable provisioning with Puppet stand alone.  Puppet manifests
   # are contained in a directory path relative to this Vagrantfile.
   # You will need to create the manifests directory and a manifest in
