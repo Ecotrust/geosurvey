@@ -1,10 +1,14 @@
 'use strict';
 
+
 function TestDialogController($scope, dialog){
   $scope.close = function(result){
     dialog.close(result);
   };
 }
+
+var stateAbrv = "NO_STATE";
+
 
 angular.module('askApp')
     .controller('SurveyDetailCtrl', function($scope, $routeParams, $http, $location, $dialog, offlineSurvey) {
@@ -17,6 +21,30 @@ angular.module('askApp')
         });
 
         $scope.nextQuestionPath = ['survey', $scope.survey.slug, $scope.getNextQuestion(), $routeParams.uuidSlug].join('/');
+
+        if ($scope.question.slug == 'state') {
+            // Grab options list.
+            $http.get('/static/survey/surveys/states.json').success(function(data) {
+                $scope.question.options = data;
+            });        
+        } else if ($scope.question.slug == 'county') {
+            // Grab options list. Dependent on state answer.
+            // todo: get the state answer from the server rather than client.
+            if (!stateAbrv) {
+                stateAbrv = "NO_STATE";
+            }
+            //$http.get('http://api.sba.gov/geodata/county_links_for_state_of/'+ stateAbrv +'.json').success(function(data, status, headers, config) {
+            $http.get('/static/survey/surveys/counties/'+ stateAbrv +'.json').success(function(data, status, headers, config) {
+                if( Object.prototype.toString.call( data ) === '[object Array]' && data.length > 0) {
+                    $scope.question.options = data;
+                } else {
+                    $scope.question.options = [ {label:"NO_COUNTY", text:"No counties found. Please select this option and continue."} ];
+                }
+
+            }).error(function (data, status, headers, config) {
+                $scope.question.options = [ {label:"NO_COUNTY", text:"No counties found. Please select this option and continue."} ];
+            });
+        }
 
         if ($scope.question.type === 'map-multipoint') {
             $scope.map = {
@@ -113,6 +141,10 @@ angular.module('askApp')
             }).success(function(data) {
                 $location.path(nextUrl);
             });
+        }
+
+        if ($scope.question.slug == 'state') {
+            stateAbrv = answer;
         }
 
     };
