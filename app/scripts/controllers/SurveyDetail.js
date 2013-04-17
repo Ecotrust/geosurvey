@@ -14,11 +14,13 @@ angular.module('askApp')
 
         if ($scope.question.type === 'map-multipoint') {
             $scope.map = {
-                center:{ lat: 42.505, lng: -122.59 },
+                center: { lat: 42.505, lng: -122.59 },
                 zoom: 6,
                 mark: {
-                       lat: 51.505,
-                        lng: -0.09,
+                       visibility: false,
+                       lat: 42.505,
+                       lng: -122.59,
+                       
                     },
                 msg: "Drag this point to place where your activity occured."
             }
@@ -27,7 +29,9 @@ angular.module('askApp')
 
     });
 
-
+    $scope.addMarker = function () {
+        $scope.map.mark.visibility = true;
+    }
 
     $scope.getNextQuestion = function() {
         // should return the slug of the next question

@@ -1,27 +1,35 @@
 'use strict';
 
 var survey = {
-    'id': 1,
-    'name': 'Test Survey',
-    'questions': [{
-        'id': 1,
-        'label': 'Name',
-        'options': [],
-        'resource_uri': '',
-        'slug': 'name',
-        'title': 'What is your name?',
-        'type': 'text'
+    "id": 1,
+    "name": "Test Survey",
+    "questions": [{
+        "id": 1,
+        "label": "Name",
+        "options": [],
+        "resource_uri": "",
+        "slug": "name",
+        "title": "What is your name?",
+        "type": "text"
     }, {
-        'id': 2,
-        'label': 'Age',
-        'options': [],
-        'resource_uri': '',
-        'slug': 'age',
-        'title': 'How old are you?',
-        'type': 'text'
+        "id": 2,
+        "label": "Age",
+        "options": [],
+        "resource_uri": "",
+        "slug": "age",
+        "title": "How old are you?",
+        "type": "text"
+    }, {
+        "id": 5,
+        "label": "Activity Locations",
+        "options": [],
+        "resource_uri": "",
+        "slug": "activity-locations",
+        "title": "Activity Locations",
+        "type": "map-multipoint"
     }],
-    'resource_uri': '/api/v1/survey/1/',
-    'slug': 'test-survey'
+    "resource_uri": "/api/v1/survey/1/",
+    "slug": "test-survey"
 };
 
 var token = 'csrftoken';
@@ -107,16 +115,32 @@ describe('Controller: SurveyDetailCtrl', function() {
         expect(scope.nextQuestionPath).toBe('survey/test-survey/age/uuid-xxxxy')
     })
 
-    
+
     it('should find the end of the survey', function() {
 
         inject(function(_$httpBackend_, $rootScope, $routeParams, $controller) {
-            $routeParams.questionSlug = 'age';
+            $routeParams.questionSlug = 'activity-locations';
         });
 
         $httpBackend.flush();
 
         expect(scope.getNextQuestion()).toBe(null);
     });
+
+    it('should attach a map-multipoint question', function() {
+
+        inject(function(_$httpBackend_, $rootScope, $routeParams, $controller) {
+            $routeParams.questionSlug = 'activity-locations';
+        });
+
+        $httpBackend.flush();
+
+        expect(scope.map.center.lat).toBe(42.505);
+        expect(scope.map.center.lng).toBe(-122.59);
+        expect(scope.map.zoom).toBe(6);
+        expect(scope.map.mark.visibility).toBeFalsy();
+        
+    });
+
 
 });
