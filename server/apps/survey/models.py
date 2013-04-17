@@ -39,6 +39,7 @@ QUESTION_TYPE_CHOICES = (
     ('location', 'Location'),
     ('integer', 'Integer'),
     ('auto-single-select', 'Single Select with Autocomplete'),
+    ('map-multipoint', 'Map with Multiple Points'),
 )
 
 class Option(models.Model):

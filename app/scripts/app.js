@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('askApp', ['ui'])
+angular.module('askApp', ['ui', 'leaflet-directive'])
     .config(function($routeProvider, $httpProvider) {
 
     $httpProvider.defaults.headers.post = {
@@ -15,10 +15,6 @@ angular.module('askApp', ['ui'])
     .when('/surveys', {
         templateUrl: '/static/survey/views/SurveyList.html',
         controller: 'SurveyListCtrl'
-    })
-    .when('/survey/activity-locations/:questionSlug', {
-        templateUrl: '/static/survey/views/mapView.html',
-        controller: 'MapViewCtrl'
     })
     .when('/survey/:surveySlug/complete/:uuidSlug', {
       templateUrl: '/static/survey/views/complete.html',

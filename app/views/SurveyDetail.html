@@ -67,6 +67,17 @@
 			<button type="submit" class="btn btn-primary btn-block">continue</button>
 		</form>
 	</div>
+	<div ng-switch-when="map-multipoint">
+		<div class="row-fluid">
+			<div class="span12">
+				<leaflet center="map.center" zoom="map.zoom" marker="map.mark" message="map.msg"></leaflet>
+			</div>
+		</div>
+		<div class="row-fluid user-controls">
+			<button class="btn btn-primary pull-right" ng-click="answerQuestion()"><i class="icon-plus"></i> Add Location</button>
+			<button class="btn pull-left" ng-click="answerQuestion()"><i class="icon-list"></i> My Activities</button>
+		</div>
+	</div>
 </div>
 	
 
