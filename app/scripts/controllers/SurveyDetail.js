@@ -12,8 +12,21 @@ angular.module('askApp')
 
         $scope.nextQuestionPath = ['survey', $scope.survey.slug, $scope.getNextQuestion(), $routeParams.uuidSlug].join('/');
 
-    });
+        if ($scope.question.slug == 'state') {
+            // Grab the options list.
+            $http.get('/static/survey/surveys/states.json').success(function(data) {
+                $scope.question.options = data;
+            });        
+        } else if ($scope.question.slug == 'county') {
+            // Prep a list of counties specific to the state the user lives in.
+            // todo: get the state from the previous answer. for now we'll use Oregon.
+            var stateAbrv = "OR";
+            $http.get('/static/survey/surveys/counties/'+ stateAbrv +'.json').success(function(data) {
+                $scope.question.options = data;
+            });
+        }
 
+    });
 
     $scope.getNextQuestion = function() {
         // should return the slug of the next question
