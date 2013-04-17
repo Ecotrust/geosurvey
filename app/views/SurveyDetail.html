@@ -25,13 +25,12 @@
 					class="input-block-level"
 					placeholder="{{ question.label }}"
 					required>
-					<option value="">Pick a state</option>
-					<option value="NY">New York</option>
-					<option value="NJ">New Jersey</option>
-					<option value="DE">Delaware</option>
-					<option value="MD">Maryland</option>
-					<option value="VI">Virginia</option>
-					<option value="DC">District of Columbia</option>
+					<option value="">{{ question.label }}</option>
+					<option 
+						ng-repeat="option in question.options" 
+						value="{{ option.label || option.name }}">
+							{{ option.text || option.name }}
+					</option>
 				</select>
 				<button type="submit" class="btn btn-primary btn-block">continue</button>
 			</form>
@@ -42,31 +41,15 @@
 				<button type="submit" class="btn btn-primary btn-block">continue</button>
 			</form>
 		</div>
-	<div ng-switch-when="single-select">
-		<form class="question" name="questionForm" ng-show="survey.questions.length" ng-submit="answerQuestion(answer)">
-			<label class="radio" ng-repeat="option in question.options">
-				<input type="radio">
-				{{ option }}
-			</label>
-			<button type="submit" class="btn btn-primary btn-block">continue</button>
-		</form>
-	</div>
-	<div ng-switch-when="integer">
-		<form class="question" name="questionForm" ng-show="survey.questions.length" ng-submit="answerQuestion(answer)">
-			<input
-				name="integerAnswer"
-				ng-model="answer"
-				class="input-block-level"
-				placeholder="{{ question.label }}"
-				type="number"
-				min="0"
-				max="150"
-				required/>
-			<span class="error" ng-show="question-form.answer.$valid">Required!</span>
-			<span class="error" ng-show="question-answer.$error">{{question.input.$error}} Not valid number!</span>
-			<button type="submit" class="btn btn-primary btn-block">continue</button>
-		</form>
-	</div>
+		<div ng-switch-when="single-select">
+			<form class="question" name="questionForm" ng-show="survey.questions.length" ng-submit="answerQuestion(answer)">
+				<label class="radio" ng-repeat="option in question.options">
+					<input type="radio">
+					{{ option }}
+				</label>
+				<button type="submit" class="btn btn-primary btn-block">continue</button>
+			</form>
+		</div>
 </div>
 	
 
