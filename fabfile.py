@@ -41,7 +41,9 @@ def all():
 def _install_requirements():
     run('cd %(app_dir)s && %(venv)s/bin/pip install -r REQUIREMENTS' % vars)
 
+
 #%(venv)s/bin/python manage.py site localhost:8080 && \
+#/usr/local/bin/node-v0.8.23/bin/bower install --dev && \
 def _install_django():
     run('cd %(app_dir)s && %(venv)s/bin/python manage.py syncdb --noinput && \
                            %(venv)s/bin/python manage.py migrate --noinput && \
@@ -52,7 +54,6 @@ def _install_django():
 def create_superuser():
     """ Create the django superuser (interactive!) """
     run('cd %(app_dir)s && %(venv)s/bin/python manage.py createsuperuser' % vars)
-
 
 
 def init():

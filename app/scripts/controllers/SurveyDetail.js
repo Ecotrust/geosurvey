@@ -15,13 +15,13 @@ angular.module('askApp')
         $scope.nextQuestionPath = ['survey', $scope.survey.slug, $scope.getNextQuestion(), $routeParams.uuidSlug].join('/');
 
         if ($scope.question.slug == 'state') {
-            // Grab the options list.
+            // Grab options list.
             $http.get('/static/survey/surveys/states.json').success(function(data) {
                 $scope.question.options = data;
             });        
         } else if ($scope.question.slug == 'county') {
-            // Prep a list of counties specific to the state the user lives in.
-            // todo: get the state from the previous answer. for now we'll use Oregon.
+            // Grab options list. Dependent on state answer.
+            // todo: get the state answer from the server rather than client.
             if (!stateAbrv) {
                 stateAbrv = "NO_STATE";
             }
@@ -38,7 +38,26 @@ angular.module('askApp')
             });
         }
 
+        if ($scope.question.type === 'map-multipoint') {
+            $scope.map = {
+                center: { lat: 42.505, lng: -122.59 },
+                zoom: 6,
+                mark: {
+                       visibility: true,
+                       lat: 42.505,
+                       lng: -122.59,
+
+                    },
+                msg: null
+            }
+
+        }
+
     });
+
+    $scope.addMarker = function () {
+        $scope.map.mark.visibility = true;
+    }
 
     $scope.getNextQuestion = function() {
         // should return the slug of the next question

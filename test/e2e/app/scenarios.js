@@ -43,7 +43,9 @@ describe('Text Input Tests', function() {
         expect(browser().location().url()).toBe('/survey/test-survey/age/uuid');
         input('answer').enter(age);
         element('button').click();
-        expect(browser().location().url()).toBe('/survey/test-survey/complete/uuid');
+        expect(browser().location().url()).toBe('/survey/test-survey/activity-locations/uuid');
+        expect(element('button.pull-left').text()).toBe(" My Activities");
+        expect(element('button.pull-right').text()).toBe(" Add Location");
 
         // must be logged in to go to the respondant view
         browser().navigateTo('/respond#/RespondantDetail/uuid');
