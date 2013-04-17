@@ -8,18 +8,24 @@ class RespondantAdmin(admin.ModelAdmin):
 
 
 
+class QuestionInline(admin.TabularInline):
+    model = Survey.questions.through
+
 
 class SurveyAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug':('name',),}
+    inlines = [
+        QuestionInline,
+    ]
+
 
 
 class QuestionAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug':('label',),}
-    class ArticleAdmin(admin.ModelAdmin):
-        class Media:
-            js = [
-     		   '/static/grappelli/tinymce/jscripts/tiny_mce/tiny_mce.js'
-    		]
+    class Media:
+        js = [
+           '/static/grappelli/tinymce/jscripts/tiny_mce/tiny_mce.js'
+        ]
 
 class OptionAdmin(admin.ModelAdmin):
     prepopulated_fields = {'label':('text',),}
