@@ -29,8 +29,17 @@
                 map.setView(point, 5);
 
                 if (attrs.marker) {
+                    var crosshairIcon = L.icon({
+                        iconUrl: '/static/survey/img/crosshair.png',
+                        shadowUrl: false,
 
-                    var marker = new L.marker([scope.center.lat, scope.center.lng]);
+                        iconSize:     [50, 50], // size of the icon
+                        shadowSize:   [50, 64], // size of the shadow
+                        iconAnchor:   [25, 25], // point of the icon which will correspond to marker's location
+                        shadowAnchor: [4, 62],  // the same for the shadow
+                        popupAnchor:  [0,-25] // point from which the popup should open relative to the iconAnchor
+                    });
+                    var marker = new L.marker([scope.center.lat, scope.center.lng], { icon: crosshairIcon });
                     var dragging_marker = false;
                     
                     
@@ -56,14 +65,14 @@
                             dragging_marker = false;
                         });
 
-                        map.on("click", function(e) {
-                            marker.setLatLng(e.latlng);
-                            marker.openPopup();
-                            scope.$apply(function (s) {
-                                s.marker.lat = marker.getLatLng().lat;
-                                s.marker.lng = marker.getLatLng().lng;
-                            });
-                        });
+                        // map.on("click", function(e) {
+                        //     marker.setLatLng(e.latlng);
+                        //     marker.openPopup();
+                        //     scope.$apply(function (s) {
+                        //         s.marker.lat = marker.getLatLng().lat;
+                        //         s.marker.lng = marker.getLatLng().lng;
+                        //     });
+                        // });
 
                         scope.$watch("marker.visibility", function (newValue, oldValue) {
                             
@@ -74,9 +83,9 @@
                                 
                                 map.addLayer(marker);
                                 marker.dragging.enable();
-                                marker.bindPopup("<strong>" + scope.message + "</strong>",
-                                    { closeButton: false });
-                                marker.openPopup();
+                                //marker.bindPopup("<strong>" + scope.message + "</strong>",
+                                //    { closeButton: false });
+                                //marker.openPopup();
                                 
                             }
                             
@@ -93,6 +102,7 @@
                         });
 
                         scope.$watch("marker.lat", function (newValue, oldValue) {
+                            console.log('updating lat for marker');
                             if (dragging_marker) return;
                             if (marker.lat) {
                                 marker.setLatLng(new L.LatLng(marker.getLatLng().lat, newValue));    
@@ -120,11 +130,11 @@
                         //     scope.marker.lng = marker.getLatLng().lng;
                         // }
 
-                        scope.$watch("message", function(newValue) {
-                            marker.bindPopup("<strong>" + newValue + "</strong>",
-                                { closeButton: false });
-                            marker.openPopup();
-                        });
+                        // scope.$watch("message", function(newValue) {
+                        //     marker.bindPopup("<strong>" + newValue + "</strong>",
+                        //         { closeButton: false });
+                        //     marker.openPopup();
+                        // });
                     }
 
                     // Listen for map drags
@@ -137,7 +147,8 @@
 
                         scope.$apply(function (s) {
                             s.center.lat = map.getCenter().lat;
-                            s.center.lng = map.getCenter().lng;
+                            s.center.lng = map.getCenter().lng; 
+                            marker.setLatLng(new L.LatLng(map.getCenter().lat, map.getCenter().lng));    
                         });
                     });
 
