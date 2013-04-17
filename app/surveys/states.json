@@ -56,14 +56,6 @@
         "label": "CT"
     },
     {
-        "text": "Delaware",
-        "label": "DE"
-    },
-    {
-        "text": "District Of Columbia",
-        "label": "DC"
-    },
-    {
         "text": "Federated States Of Micronesia",
         "label": "FM"
     },
@@ -118,10 +110,6 @@
     {
         "text": "Marshall Islands",
         "label": "MH"
-    },
-    {
-        "text": "Maryland",
-        "label": "MD"
     },
     {
         "text": "Massachusetts",
@@ -230,10 +218,6 @@
     {
         "text": "Virgin Islands",
         "label": "VI"
-    },
-    {
-        "text": "Virginia",
-        "label": "VA"
     },
     {
         "text": "Washington",
