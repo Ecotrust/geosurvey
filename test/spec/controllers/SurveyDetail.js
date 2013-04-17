@@ -20,7 +20,25 @@ var survey = {
         "title": "How old are you?",
         "type": "text"
     }, {
+        "id": 4,
+        "info": "",
+        "label": "Pick a state",
+        "options": [],
+        "resource_uri": "",
+        "slug": "state",
+        "title": "What state do you live in?",
+        "type": "auto-single-select"
+    }, {
         "id": 5,
+        "info": "",
+        "label": "Pick a county",
+        "options": [],
+        "resource_uri": "",
+        "slug": "county",
+        "title": "What county do you live in?",
+        "type": "auto-single-select"
+    }, {
+        "id": 6,
         "label": "Activity Locations",
         "options": [],
         "resource_uri": "",
@@ -33,6 +51,7 @@ var survey = {
 };
 
 var token = 'csrftoken';
+var stateAbrv = "NO_STATE";
 
 describe('Controller: SurveyDetailCtrl', function() {
 
@@ -75,7 +94,6 @@ describe('Controller: SurveyDetailCtrl', function() {
 
         expect(scope.question.slug).toBe('name');
     });
-
 
 
     it('should attach a survey with a different question', function() {
@@ -163,5 +181,79 @@ describe('Controller: SurveyDetailCtrl', function() {
     });
 
 
+    it('should load states json', function() {
+
+        inject(function(_$httpBackend_, $rootScope, $routeParams, $controller) {
+            $routeParams.questionSlug = 'state';
+            $httpBackend.expectGET('/static/survey/surveys/states.json').respond([{
+                "text": "New York",
+                "label": "NY"
+            }, {
+                "text": "New Jersey",
+                "label": "NJ"
+            }]);
+        });
+
+        $httpBackend.flush();
+
+        expect(scope.question.options.length).toBe(2);
+        expect(scope.question.options[0].text).toBe('New York');
+        expect(scope.question.options[0].label).toBe('NY');
+    });
+
+    it('should request no_state json', function() {
+
+        inject(function(_$httpBackend_, $rootScope, $routeParams, $controller) {
+            $routeParams.questionSlug = 'county';
+            $httpBackend.expectGET('/static/survey/surveys/counties/NO_STATE.json').respond(201);
+        });
+
+        $httpBackend.flush();
+    });
+
+    it('should load counties json', function() {
+
+        inject(function(_$httpBackend_, $rootScope, $routeParams, $controller) {
+            $routeParams.questionSlug = 'county';
+            stateAbrv = "OR"
+            $httpBackend.expectGET('/static/survey/surveys/counties/OR.json').respond([{
+                "county_name": null,
+                "description": null,
+                "feat_class": "Civil",
+                "feature_id": "38750",
+                "fips_class": "H1",
+                "fips_county_cd": "1",
+                "full_county_name": null,
+                "link_title": null,
+                "url": "http://www.bakercounty.org/",
+                "name": "Baker County",
+                "primary_latitude": "44.75",
+                "primary_longitude": "-117.66",
+                "state_abbreviation": "OR",
+                "state_name": "Oregon"
+            }, {
+                "county_name": null,
+                "description": null,
+                "feat_class": "Civil",
+                "feature_id": "38751",
+                "fips_class": "H1",
+                "fips_county_cd": "3",
+                "full_county_name": null,
+                "link_title": null,
+                "url": "http://www.co.benton.or.us/",
+                "name": "Benton County",
+                "primary_latitude": "44.49",
+                "primary_longitude": "-123.41",
+                "state_abbreviation": "OR",
+                "state_name": "Oregon"
+            }]);
+        });
+
+        $httpBackend.flush();
+
+        expect(scope.question.options.length).toBe(2);
+        expect(scope.question.options[0].name).toBe('Baker County');
+
+    });
 
 });
