@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('askApp', ['ui', 'leaflet-directive'])
+angular.module('askApp', ['ui', 'leaflet-directive', 'ui.bootstrap'])
     .config(function($routeProvider, $httpProvider) {
 
     $httpProvider.defaults.headers.post = {
