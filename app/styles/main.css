@@ -34,3 +34,7 @@ padding: 7px 9px;
 .question input[type="number"] {
     height: 40px;
 }
+
+.map {
+    height: 500px;
+}

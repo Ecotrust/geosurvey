@@ -12,7 +12,21 @@ angular.module('askApp')
 
         $scope.nextQuestionPath = ['survey', $scope.survey.slug, $scope.getNextQuestion(), $routeParams.uuidSlug].join('/');
 
+        if ($scope.question.type === 'map-multipoint') {
+            $scope.map = {
+                center:{ lat: 42.505, lng: -122.59 },
+                zoom: 6,
+                mark: {
+                       lat: 51.505,
+                        lng: -0.09,
+                    },
+                msg: "Drag this point to place where your activity occured."
+            }
+
+        }
+
     });
+
 
 
     $scope.getNextQuestion = function() {
