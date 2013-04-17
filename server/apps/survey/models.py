@@ -32,6 +32,7 @@ class Survey(models.Model):
 
 
 QUESTION_TYPE_CHOICES = (
+    ('info', 'Info Page'),
     ('text', 'Text'),
     ('textarea', 'Text Area'),
     ('single-select', 'Single Select'),
@@ -55,6 +56,7 @@ class Question(models.Model):
     slug = models.SlugField(max_length=64)
     type = models.CharField(max_length=20,choices=QUESTION_TYPE_CHOICES,default='text')
     options = models.ManyToManyField(Option, null=True, blank=True)
+    info = models.TextField(null=True);
 
     def __str__(self):
         return "%s" % self.label
