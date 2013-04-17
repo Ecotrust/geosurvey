@@ -16,7 +16,7 @@ angular.module('askApp')
             $scope.map = {
                 center: { lat: 42.505, lng: -122.59 },
                 zoom: 6,
-                mark: {
+                marker: {
                        visibility: true,
                        lat: 42.505,
                        lng: -122.59,
@@ -24,13 +24,24 @@ angular.module('askApp')
                     },
                 msg: null
             }
-
+            $scope.locations = [];
+            $scope.activeMarker = false;
         }
 
     });
 
+    $scope.confirmLocation = function () {
+        $scope.locations.push($scope.activeMarker);
+        $scope.activeMarker = false;
+    }
+
+    $scope.cancelConfirmation = function () {
+        $scope.activeMarker = false;
+    }
+
     $scope.addMarker = function () {
-        $scope.map.mark.visibility = true;
+        $scope.map.marker.visibility = true;
+        $scope.activeMarker = {lat: $scope.map.marker.lat, lng: $scope.map.marker.lng};
     }
 
     $scope.getNextQuestion = function() {

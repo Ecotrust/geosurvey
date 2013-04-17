@@ -33,9 +33,9 @@
                         iconUrl: '/static/survey/img/crosshair.png',
                         shadowUrl: false,
 
-                        iconSize:     [50, 50], // size of the icon
+                        iconSize:     [90, 90], // size of the icon
                         shadowSize:   [50, 64], // size of the shadow
-                        iconAnchor:   [25, 25], // point of the icon which will correspond to marker's location
+                        iconAnchor:   [45, 45], // point of the icon which will correspond to marker's location
                         shadowAnchor: [4, 62],  // the same for the shadow
                         popupAnchor:  [0,-25] // point from which the popup should open relative to the iconAnchor
                     });
@@ -77,12 +77,12 @@
                         scope.$watch("marker.visibility", function (newValue, oldValue) {
                             
                             if (newValue) {
-                                marker.draggable = true;
-                                //marker.dragging.enable();
+                                // marker.draggable = true;
+                                
                                 marker.setLatLng(new L.LatLng(scope.center.lat, scope.center.lng));
                                 
                                 map.addLayer(marker);
-                                marker.dragging.enable();
+                                // marker.dragging.enable();
                                 //marker.bindPopup("<strong>" + scope.message + "</strong>",
                                 //    { closeButton: false });
                                 //marker.openPopup();
@@ -148,7 +148,9 @@
                         scope.$apply(function (s) {
                             s.center.lat = map.getCenter().lat;
                             s.center.lng = map.getCenter().lng; 
-                            marker.setLatLng(new L.LatLng(map.getCenter().lat, map.getCenter().lng));    
+                            marker.setLatLng(new L.LatLng(map.getCenter().lat, map.getCenter().lng));
+                            scope.marker.lat = map.getCenter().lat;
+                            scope.marker.lng = map.getCenter().lng;
                         });
                     });
 
@@ -171,11 +173,12 @@
                     //     map.setZoom(newValue);
                     // });
 
-                    // map.on("zoomend", function (e) {
-                    //     scope.$apply(function (s) {
-                    //         s.zoom = map.getZoom();
-                    //     });
-                    // });
+                    map.on("zoomend", function (e) {
+                        scope.$apply(function (s) {
+                            s.zoom = map.getZoom();
+                            marker.setLatLng(new L.LatLng(map.getCenter().lat, map.getCenter().lng));
+                        });
+                    });
 
                 });
 

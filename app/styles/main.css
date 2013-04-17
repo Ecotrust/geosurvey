@@ -38,3 +38,7 @@ padding: 7px 9px;
 .map {
     height: 500px;
 }
+
+.confirmation .btn {
+    margin: 0 5px;
+}

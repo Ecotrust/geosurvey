@@ -44,8 +44,19 @@ describe('Text Input Tests', function() {
         input('answer').enter(age);
         element('button').click();
         expect(browser().location().url()).toBe('/survey/test-survey/activity-locations/uuid');
-        expect(element('button.pull-left').text()).toBe(" My Activities");
-        expect(element('button.pull-right').text()).toBe(" Add Location");
+        expect(element('button.pull-left:visible').text()).toBe(" My Activities");
+        expect(element('button.pull-right:visible').text()).toBe(" Add Location");
+
+        element('button.pull-right:visible').click();
+        expect(element('button.confirm:visible').text()).toBe("Yes");
+        expect(element('button.cancel:visible').text()).toBe("No, let's try again");
+        element('button.cancel:visible').click();
+        expect(element('button.pull-right:visible').text()).toBe(" Add Location");
+
+        // confirm the location and open a modal
+        element('button.pull-right:visible').click();
+        element('button.confirm:visible').click();
+
 
         // must be logged in to go to the respondant view
         browser().navigateTo('/respond#/RespondantDetail/uuid');

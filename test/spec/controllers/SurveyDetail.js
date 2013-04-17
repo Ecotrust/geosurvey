@@ -138,22 +138,28 @@ describe('Controller: SurveyDetailCtrl', function() {
         expect(scope.map.center.lat).toBe(42.505);
         expect(scope.map.center.lng).toBe(-122.59);
         expect(scope.map.zoom).toBe(6);
-        expect(scope.map.mark.visibility).toBeTruthy();
-
+        expect(scope.map.marker.visibility).toBeTruthy();
+        expect(scope.locations.length).toBe(0);
+        expect(scope.activeMarker).toBeFalsy();
     });
 
 
-    it('should add a marker to the map', function() {
+    it('should add a markerer to the map', function() {
 
         inject(function(_$httpBackend_, $rootScope, $routeParams, $controller) {
             $routeParams.questionSlug = 'activity-locations';
         });
 
         $httpBackend.flush();
-
+        expect(scope.activeMarker).toBeFalsy();
         scope.addMarker();
-        expect(scope.map.mark.visibility).toBeTruthy();
+        expect(scope.activeMarker.lat).toBe(42.505);
+        expect(scope.activeMarker.lng).toBe(-122.59);
 
+        //confirm the location
+        scope.confirmLocation();
+        expect(scope.activeMarker).toBeFalsy();
+        expect(scope.locations.length).toBe(1);
     });
 
 
