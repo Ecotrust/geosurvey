@@ -20,14 +20,14 @@ angular.module('askApp')
         }
         
 
-        $scope.nextQuestionPath = ['survey', $scope.survey.slug, $scope.getNextQuestion(), $routeParams.uuidSlug].join('/');
+        $scope.nextQuestionPath = $scope.getNextQuestionPath();
 
-        if ($scope.question.slug == 'state') {
+        if ($scope.question && $scope.question.slug == 'state') {
             // Grab options list.
             $http.get('/static/survey/surveys/states.json').success(function(data) {
                 $scope.question.options = data;
             });        
-        } else if ($scope.question.slug == 'county') {
+        } else if ($scope.question && $scope.question.slug == 'county') {
             // Grab options list. Dependent on state answer.
             // todo: get the state answer from the server rather than client.
             if (!stateAbrv) {
@@ -46,7 +46,7 @@ angular.module('askApp')
             });
         }
 
-        if ($scope.question.type === 'map-multipoint') {
+        if ($scope.question && $scope.question.type === 'map-multipoint') {
             $scope.map = {
                 center: {
                     lat: 42.505,
@@ -108,9 +108,8 @@ angular.module('askApp')
         return nextQuestion ? nextQuestion.slug : null;
     };
 
-    $scope.answerQuestion = function(answer) {
-        var url = ['/respond/answer', $scope.survey.slug, $routeParams.questionSlug, $routeParams.uuidSlug].join('/'),
-            nextQuestion = $scope.getNextQuestion(),
+    $scope.getNextQuestionPath = function () {
+        var nextQuestion = $scope.getNextQuestion(),
             nextUrl;
 
         if (nextQuestion) {
@@ -119,6 +118,19 @@ angular.module('askApp')
             nextUrl = ['survey', $scope.survey.slug, 'complete', $routeParams.uuidSlug].join('/');
         }
 
+        return nextUrl;
+    };
+
+    $scope.gotoNextQuestion = function () {
+        var nextUrl = $scope.getNextQuestionPath();
+        if (nextUrl) {
+            $location.path(nextUrl);
+        }
+    };
+
+    $scope.answerQuestion = function(answer) {
+        var url = ['/respond/answer', $scope.survey.slug, $routeParams.questionSlug, $routeParams.uuidSlug].join('/');
+            
         if ($scope.survey.offline) {
             offlineSurvey.answerQuestion($scope.survey, $scope.question, $scope.answer);
         } else {
@@ -132,6 +144,7 @@ angular.module('askApp')
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
             }).success(function(data) {
+<<<<<<< HEAD
                 if ($scope.dialog) {
                     // we are in a dialog and need to handle it
                     $scope.dialog.close();
@@ -140,6 +153,9 @@ angular.module('askApp')
                     $location.path(nextUrl);
                 }
                 
+=======
+                $scope.gotoNextQuestion();
+>>>>>>> affa13e678fcb3ba09551c29d42947c87aa0c267
             });
         }
 
