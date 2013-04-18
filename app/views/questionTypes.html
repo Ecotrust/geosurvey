@@ -1,4 +1,10 @@
 <div ng-switch on="question.type">
+    <div ng-switch-when="info">
+        <div class="info-content">
+            {{ question.info }}
+        </div>
+        <button class="btn btn-primary btn-block" ng-click="gotoNextQuestion()">continue</button>
+    </div>
     <div ng-switch-when="integer">
         <form class="question" name="questionForm" ng-show="survey.questions.length" ng-submit="answerQuestion(answer)">
             <input

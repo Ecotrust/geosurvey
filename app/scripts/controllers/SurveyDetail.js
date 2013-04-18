@@ -69,6 +69,8 @@ angular.module('askApp')
 
 
     $scope.addLocation = function (location) {
+        var locations = _.without($scope.locations, $scope.activeMarker);
+        $scope.locations = locations;
         $scope.locations.push(location);
         $scope.activeMarker = false;
     };
@@ -101,7 +103,10 @@ angular.module('askApp')
         $scope.dialog.open();
     }
 
+
     $scope.cancelConfirmation = function() {
+        var locations = _.without($scope.locations, $scope.activeMarker);
+        $scope.locations = locations;
         $scope.activeMarker = false;
     }
 
@@ -111,6 +116,7 @@ angular.module('askApp')
             lat: $scope.map.marker.lat,
             lng: $scope.map.marker.lng
         };
+        $scope.locations.push($scope.activeMarker);
     }
 
     $scope.getNextQuestion = function() {
@@ -143,9 +149,14 @@ angular.module('askApp')
 
     $scope.answerQuestion = function(answer) {
         var url = ['/respond/answer', $scope.survey.slug, $routeParams.questionSlug, $routeParams.uuidSlug].join('/');
+
         if ($scope.dialog) {
             $scope.dialog.options.success($scope.question, answer);
         } else {
+
+            if ($scope.locations.length) {
+                answer = angular.toJson($scope.locations);
+            }
             $http({
                 url: url,
                 method: 'POST',
