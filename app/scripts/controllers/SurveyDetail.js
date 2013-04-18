@@ -1,11 +1,6 @@
 'use strict';
 
 
-function TestDialogController($scope, dialog){
-  $scope.close = function(result){
-    dialog.close(result);
-  };
-}
 
 var stateAbrv = "NO_STATE";
 
@@ -16,9 +11,14 @@ angular.module('askApp')
     $http.get('/api/v1/survey/' + $routeParams.surveySlug + '/?format=json').success(function(data) {
         $scope.survey = data;
 
-        $scope.question = _.find($scope.survey.questions, function(question) {
-            return question.slug === $routeParams.questionSlug;
-        });
+
+        // we may inject a question into the scope
+        if (! $scope.question) {
+            $scope.question = _.find($scope.survey.questions, function(question) {
+                return question.slug === $routeParams.questionSlug;
+            });    
+        }
+        
 
         $scope.nextQuestionPath = ['survey', $scope.survey.slug, $scope.getNextQuestion(), $routeParams.uuidSlug].join('/');
 
@@ -67,33 +67,25 @@ angular.module('askApp')
 
     });
 
-    $scope.confirmLocation = function() {
+
+    $scope.addLocation = function () {
         $scope.locations.push($scope.activeMarker);
         $scope.activeMarker = false;
-        var t = '<div class="modal-header">' +
-            '<h1>This is the title</h1>' +
-            '</div>' +
-            '<div class="modal-body">' +
-            '<p>Enter a value to pass to <code>close</code> as the result: <input ng-model="result" /></p>' +
-            '</div>' +
-            '<div class="modal-footer">' +
-            '<button ng-click="close(result)" class="btn btn-primary" >Close</button>' +
-            '</div>';
+    };
 
-
-
-        var d = $dialog.dialog({
+    $scope.confirmLocation = function() {
+        $scope.dialog = $dialog.dialog({
             backdrop: true,
             keyboard: true,
             backdropClick: false,
-            template: t, // OR: templateUrl: 'path/to/view.html',
-            controller: 'TestDialogController'
-        });
-        d.open().then(function(result) {
-            if (result) {
-                alert('dialog closed with result: ' + result);
+            templateUrl: '/static/survey/views/questionModal.html', // OR: templateUrl: 'path/to/view.html',
+            controller: 'SurveyDetailCtrl',
+            scope: {
+                question: $scope.question.modalQuestion
             }
         });
+        $scope.dialog.options.scope.dialog = $scope.dialog;
+        $scope.dialog.open();
     }
 
     $scope.cancelConfirmation = function() {
@@ -111,6 +103,7 @@ angular.module('askApp')
     $scope.getNextQuestion = function() {
         // should return the slug of the next question
         var nextQuestion = $scope.survey.questions[_.indexOf($scope.survey.questions, $scope.question) + 1];
+
 
         return nextQuestion ? nextQuestion.slug : null;
     };
@@ -139,7 +132,14 @@ angular.module('askApp')
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
             }).success(function(data) {
-                $location.path(nextUrl);
+                if ($scope.dialog) {
+                    // we are in a dialog and need to handle it
+                    $scope.dialog.close();
+                    $scope.addLocation();
+                } else {
+                    $location.path(nextUrl);
+                }
+                
             });
         }
 

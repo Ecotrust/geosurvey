@@ -26,7 +26,18 @@ var survey = {
         "resource_uri": "",
         "slug": "activity-locations",
         "title": "Activity Locations",
-        "type": "map-multipoint"
+        "type": "map-multipoint",
+        "subQuestion": {
+            "id": 6,
+            "label": "Activity at Location",
+            "options": ["dancing", "sailing"],
+            "resource_uri": "",
+            "slug": "activities",
+            "title": "Activity Locations",
+            "type": "single-select",
+            "inflow": false,
+            "subQuestionSlug": "activities"
+        }
     }],
     "resource_uri": "/api/v1/survey/1/",
     "slug": "test-survey"
@@ -46,7 +57,6 @@ describe('Controller: SurveyDetailCtrl', function() {
     beforeEach(inject(function(_$httpBackend_, $rootScope, $routeParams, $controller) {
         $httpBackend = _$httpBackend_;
         $httpBackend.expectGET('/api/v1/survey/test-survey/?format=json').respond(survey);
-
         $routeParams.surveySlug = 'test-survey';
         $routeParams.questionSlug = 'name';
         $routeParams.uuidSlug = 'uuid-xxxxy'
@@ -144,10 +154,23 @@ describe('Controller: SurveyDetailCtrl', function() {
     });
 
 
-    it('should add a markerer to the map', function() {
+    it('should add a marker to the map', function() {
 
-        inject(function(_$httpBackend_, $rootScope, $routeParams, $controller) {
+        inject(function(_$httpBackend_, $rootScope, $routeParams, $controller, $dialog) {
+
             $routeParams.questionSlug = 'activity-locations';
+
+            $dialog.dialog = function(title, msg, btns) {
+                return {
+                    open: function() {
+                        return {
+                            then: function(callback) {
+                                callback('ok'); // 'ok' will be set to param result
+                            }
+                        }
+                    }
+                }
+            };
         });
 
         $httpBackend.flush();
@@ -156,12 +179,33 @@ describe('Controller: SurveyDetailCtrl', function() {
         expect(scope.activeMarker.lat).toBe(42.505);
         expect(scope.activeMarker.lng).toBe(-122.59);
 
-        //confirm the location
+        //confirm the location 
         scope.confirmLocation();
+
         expect(scope.activeMarker).toBeFalsy();
         expect(scope.locations.length).toBe(1);
+
     });
 
+    it('should attach a subquestion if injected into the scope', function() {
+        inject(function(_$httpBackend_, $rootScope, $routeParams, $controller, $dialog) {
+            var question = {
+                "id": 6,
+                "label": "Activity at Location",
+                "options": ["dancing", "sailing"],
+                "resource_uri": "",
+                "slug": "activities",
+                "title": "Activity Locations",
+                "type": "single-select",
+                "inflow": false,
+                "subQuestionSlug": "activities"
+            }
+            $rootScope.question = question;
+        });
+        $httpBackend.flush();
+        expect(scope.question.slug).toBe('activities');
+
+    })
 
 
 });
