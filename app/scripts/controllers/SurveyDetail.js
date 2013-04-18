@@ -153,7 +153,7 @@ angular.module('askApp')
             $scope.dialog.options.success($scope.question, answer);
         } else {
 
-            if ($scope.locations.length) {
+            if ($scope.locations && $scope.locations.length) {
                 answer = angular.toJson($scope.locations);
             }
             $http({
@@ -178,7 +178,7 @@ angular.module('askApp')
             });
         }
 
-        if ($scope.question.slug == 'state') {
+        if ($scope.question.slug === 'state') {
             stateAbrv = answer;
         }
 
