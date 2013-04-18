@@ -4,7 +4,7 @@
             </div>
         </div>
         <ul>
-            <li ng-repeat="location in locations">{{ location.lat}}, {{ location.lng }}</li>
+            <li ng-repeat="location in locations">{{ location.lat}}, {{ location.lng }}: {{ location.answer }}</li>
         </ul>
         <div class="row-fluid user-controls confirmation" ng-hide="activeMarker == false">
             <h2 class="pull-left">Is this location correct?</h2>

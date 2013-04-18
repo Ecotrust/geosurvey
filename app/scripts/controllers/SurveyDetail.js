@@ -68,8 +68,8 @@ angular.module('askApp')
     });
 
 
-    $scope.addLocation = function () {
-        $scope.locations.push($scope.activeMarker);
+    $scope.addLocation = function (location) {
+        $scope.locations.push(location);
         $scope.activeMarker = false;
     };
 
@@ -82,6 +82,19 @@ angular.module('askApp')
             controller: 'SurveyDetailCtrl',
             scope: {
                 question: $scope.question.modalQuestion
+            },
+            success: function (question, answer) {
+                $scope.addLocation({
+                    lat: $scope.map.marker.lat,
+                    lng: $scope.map.marker.lng,
+                    question: question,
+                    answer: answer
+                });
+                $scope.dialog.close();
+                $scope.dialog = null;
+            },
+            error: function (arg1, arg2) {
+                debugger;
             }
         });
         $scope.dialog.options.scope.dialog = $scope.dialog;
@@ -130,9 +143,8 @@ angular.module('askApp')
 
     $scope.answerQuestion = function(answer) {
         var url = ['/respond/answer', $scope.survey.slug, $routeParams.questionSlug, $routeParams.uuidSlug].join('/');
-            
-        if ($scope.survey.offline) {
-            offlineSurvey.answerQuestion($scope.survey, $scope.question, $scope.answer);
+        if ($scope.dialog) {
+            $scope.dialog.options.success($scope.question, answer);
         } else {
             $http({
                 url: url,
@@ -144,18 +156,7 @@ angular.module('askApp')
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
             }).success(function(data) {
-<<<<<<< HEAD
-                if ($scope.dialog) {
-                    // we are in a dialog and need to handle it
-                    $scope.dialog.close();
-                    $scope.addLocation();
-                } else {
-                    $location.path(nextUrl);
-                }
-                
-=======
                 $scope.gotoNextQuestion();
->>>>>>> affa13e678fcb3ba09551c29d42947c87aa0c267
             });
         }
 
