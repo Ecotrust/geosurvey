@@ -154,7 +154,7 @@ angular.module('askApp')
             $scope.dialog.options.success($scope.question, answer);
         } else {
 
-            if ($scope.locations.length) {
+            if ($scope.location && $scope.locations.length) {
                 answer = angular.toJson($scope.locations);
             }
             $http({
