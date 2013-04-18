@@ -67,8 +67,10 @@ angular.module('askApp')
     });
 
 
-    $scope.addLocation = function () {
-        $scope.locations.push($scope.activeMarker);
+    $scope.addLocation = function (location) {
+        var locations = _.without($scope.locations, $scope.activeMarker);
+        $scope.locations = locations;
+        $scope.locations.push(location);
         $scope.activeMarker = false;
     };
 
@@ -81,13 +83,29 @@ angular.module('askApp')
             controller: 'SurveyDetailCtrl',
             scope: {
                 question: $scope.question.modalQuestion
+            },
+            success: function (question, answer) {
+                $scope.addLocation({
+                    lat: $scope.map.marker.lat,
+                    lng: $scope.map.marker.lng,
+                    question: question,
+                    answer: answer
+                });
+                $scope.dialog.close();
+                $scope.dialog = null;
+            },
+            error: function (arg1, arg2) {
+                debugger;
             }
         });
         $scope.dialog.options.scope.dialog = $scope.dialog;
         $scope.dialog.open();
     }
 
+
     $scope.cancelConfirmation = function() {
+        var locations = _.without($scope.locations, $scope.activeMarker);
+        $scope.locations = locations;
         $scope.activeMarker = false;
     }
 
@@ -97,6 +115,7 @@ angular.module('askApp')
             lat: $scope.map.marker.lat,
             lng: $scope.map.marker.lng
         };
+        $scope.locations.push($scope.activeMarker);
     }
 
     $scope.getNextQuestion = function() {
@@ -129,10 +148,14 @@ angular.module('askApp')
 
     $scope.answerQuestion = function(answer) {
         var url = ['/respond/answer', $scope.survey.slug, $routeParams.questionSlug, $routeParams.uuidSlug].join('/');
-            
-        if ($scope.survey.offline) {
-            offlineSurvey.answerQuestion($scope.survey, $scope.question, $scope.answer);
+
+        if ($scope.dialog) {
+            $scope.dialog.options.success($scope.question, answer);
         } else {
+
+            if ($scope.locations.length) {
+                answer = angular.toJson($scope.locations);
+            }
             $http({
                 url: url,
                 method: 'POST',
@@ -143,6 +166,7 @@ angular.module('askApp')
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
             }).success(function(data) {
+
                 if ($scope.dialog) {
                     // we are in a dialog and need to handle it
                     $scope.dialog.close();
@@ -150,6 +174,7 @@ angular.module('askApp')
                 } else {
                     $scope.gotoNextQuestion();
                 }
+
             });
         }
 
