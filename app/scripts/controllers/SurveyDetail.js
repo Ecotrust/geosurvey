@@ -167,7 +167,15 @@ angular.module('askApp')
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
             }).success(function(data) {
-                $scope.gotoNextQuestion();
+
+                if ($scope.dialog) {
+                    // we are in a dialog and need to handle it
+                    $scope.dialog.close();
+                    $scope.addLocation();
+                } else {
+                    $scope.gotoNextQuestion();
+                }
+
             });
         }
 
