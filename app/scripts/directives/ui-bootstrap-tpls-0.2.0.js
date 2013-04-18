@@ -643,10 +643,14 @@ dialogModule.provider("$dialog", function(){
       }
 
       this._loadResolves().then(function(locals) {
+
         var $scope = locals.$scope = self.$scope = locals.$scope ? locals.$scope : $rootScope.$new();
 
+        if (self.options.scope) {
+          _.extend($scope, self.options.scope);
+        }
+        
         self.modalEl.html(locals.$template);
-
         if (self.options.controller) {
           var ctrl = $controller(self.options.controller, locals);
           self.modalEl.contents().data('ngControllerController', ctrl);
