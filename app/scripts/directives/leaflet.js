@@ -14,7 +14,7 @@
                 marker: "=marker",
                 message: "=message",
                 zoom: "=zoom",
-                multiMarkers: "=multimarkers",
+                multimarkers: "=multimarkers",
             },
             template: '<div class="map"></div>',
             link: function (scope, element, attrs, ctrl) {
@@ -41,10 +41,6 @@
                     });
                     var marker = new L.marker([scope.center.lat, scope.center.lng], { icon: crosshairIcon });
                     var dragging_marker = false;
-                    
-                    
-                    
-                    
 
                     // Listen for marker drags
                     (function () {
@@ -184,12 +180,12 @@
 
                 if (attrs.multimarkers) {
                     var markers_dict = [];
-                    scope.$watch("multiMarkers", function(newMarkerList) {
-                        for (var mkey in scope.multiMarkers) {
+                    scope.$watch("multimarkers.length", function (newMarkerList) {
+                        for (var mkey in scope.multimarkers) {
                             (function(mkey) {
-                                var mark_dat = scope.multiMarkers[mkey];
+                                var mark_dat = scope.multimarkers[mkey];
                                 var marker = new L.marker(
-                                    scope.multiMarkers[mkey],
+                                    scope.multimarkers[mkey],
                                     {
                                         draggable: mark_dat.draggable ? true:false
                                     }
@@ -210,16 +206,29 @@
                                     dragging_marker = false;
                                 });
 
-                                scope.$watch('multiMarkers.'+mkey, function() {
-                                    marker.setLatLng(scope.multiMarkers[mkey]);
+                                scope.$watch('multimarkers.'+mkey, function() {
+                                    if (scope.multimarkers[mkey]) {
+                                        marker.setLatLng(scope.multimarkers[mkey]);    
+                                    } else {
+                                        map.removeLayer(marker);
+                                    }
+                                    
+                                }, true);
+
+                                scope.$watch('multimarkers.'+mkey+'.answer', function(newValue) {
+                                    if (newValue) {
+                                        markers_dict[mkey].bindPopup("<strong>" + newValue + "</strong>",
+                                           { closeButton: false });
+                                        //markers_dict[mkey].openPopup();    
+                                    }
                                 }, true);
 
                                 map.addLayer(marker);
                                 markers_dict[mkey] = marker;
                             })(mkey);
-                        } // for mkey in multiMarkers
-                    }); // watch multiMarkers
-                } // if attrs.multiMarkers
+                        } // for mkey in multimarkers
+                    }); // watch multimarkers
+                } // if attrs.multimarkers
             } // end of link function
         };
     });
