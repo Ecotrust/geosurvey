@@ -144,18 +144,13 @@ angular.module('askApp')
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
             }).success(function(data) {
-<<<<<<< HEAD
                 if ($scope.dialog) {
                     // we are in a dialog and need to handle it
                     $scope.dialog.close();
                     $scope.addLocation();
                 } else {
-                    $location.path(nextUrl);
+                    $scope.gotoNextQuestion();
                 }
-                
-=======
-                $scope.gotoNextQuestion();
->>>>>>> affa13e678fcb3ba09551c29d42947c87aa0c267
             });
         }
 
