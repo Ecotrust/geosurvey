@@ -22,18 +22,17 @@ angular.module('askApp')
 
         $scope.nextQuestionPath = $scope.getNextQuestionPath();
 
-        if ($scope.question && $scope.question.slug == 'state') {
-            // Grab options list.
-            $http.get('/static/survey/surveys/states.json').success(function(data) {
+        // Fill options list.
+        if ($scope.question && $scope.question.options_json && $scope.question.options_json.length > 0) {
+            $http.get($scope.question.options_json).success(function(data) {
                 $scope.question.options = data;
-            });        
+            });
         } else if ($scope.question && $scope.question.slug == 'county') {
-            // Grab options list. Dependent on state answer.
+            // Dependent on state answer.
             // todo: get the state answer from the server rather than client.
             if (!stateAbrv) {
                 stateAbrv = "NO_STATE";
             }
-            //$http.get('http://api.sba.gov/geodata/county_links_for_state_of/'+ stateAbrv +'.json').success(function(data, status, headers, config) {
             $http.get('/static/survey/surveys/counties/'+ stateAbrv +'.json').success(function(data, status, headers, config) {
                 if( Object.prototype.toString.call( data ) === '[object Array]' && data.length > 0) {
                     $scope.question.options = data;
