@@ -7,6 +7,7 @@ basePath = '';
 files = [
   JASMINE,
   JASMINE_ADAPTER,
+  '/app/components/flatui/js/jquery-1.8.2.min.js',
   'app/components/angular/angular.js',
   'app/components/angular-ui/build/angular-ui.js',
   'app/components/underscore/underscore.js',
@@ -51,7 +52,7 @@ autoWatch = true;
 // - Safari (only Mac)
 // - PhantomJS
 // - IE (only Windows)
-browsers = ['Chrome'];
+browsers = ['Firefox'];
 
 // If browser does not capture in given timeout [ms], kill it
 captureTimeout = 10000;

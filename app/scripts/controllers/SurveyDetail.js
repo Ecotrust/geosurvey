@@ -79,7 +79,7 @@ angular.module('askApp')
             backdrop: true,
             keyboard: true,
             backdropClick: false,
-            templateUrl: '/static/survey/views/questionModal.html', // OR: templateUrl: 'path/to/view.html',
+            templateUrl: '/static/survey/views/locationActivitiesModal.html',
             controller: 'SurveyDetailCtrl',
             scope: {
                 question: $scope.question.modalQuestion
@@ -154,7 +154,7 @@ angular.module('askApp')
         } else {
 
 
-            if ($scope.location && $scope.locations.length) {
+            if ($scope.locations && $scope.locations.length) {
                 answer = angular.toJson($scope.locations);
             }
             $http({
@@ -185,4 +185,21 @@ angular.module('askApp')
 
     };
 
+    /**
+     * Filters out unselected items and submits an array of the text portion of the 
+     * selected options.
+     * @param  {array} options An array of all options regardless of which options the 
+     * user selected.
+     */
+    $scope.answerMultiSelect = function () {
+        var answers = _.filter($scope.question.options, function (option) {
+            return option.checked;
+        });
+        answers = _.pluck(answers, 'text');
+        $scope.answerQuestion(answers);
+    };
+
+    $scope.removeLocation = function () {
+        alert("not yet implemented");
+    };
 });
