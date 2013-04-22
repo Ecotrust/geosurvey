@@ -186,6 +186,9 @@ describe('Controller: SurveyDetailCtrl', function() {
                                 callback('ok'); // 'ok' will be set to param result
                             }
                         }
+                    },
+                    options: {
+                        scope: {}
                     }
                 }
             };
@@ -193,14 +196,15 @@ describe('Controller: SurveyDetailCtrl', function() {
 
         $httpBackend.flush();
         expect(scope.activeMarker).toBeFalsy();
-        scope.addMarker();
-        expect(scope.activeMarker.lat).toBe(42.505);
-        expect(scope.activeMarker.lng).toBe(-122.59);
+        expect(scope.locations.length).toBe(0);
+        // expect(scope.activeMarker.lat).toBe(42.505);
+        // expect(scope.activeMarker.lng).toBe(-122.59);
 
-        //confirm the location 
-        scope.confirmLocation();
-
-        expect(scope.activeMarker).toBeFalsy();
+        scope.activeMarker = scope.map.marker;
+        scope.addLocation(scope.activeMarker);
+        
+        expect(scope.locations[0].lat).toBe(42.505);
+        expect(scope.locations[0].lng).toBe(-122.59);
         expect(scope.locations.length).toBe(1);
 
     });
@@ -225,25 +229,28 @@ describe('Controller: SurveyDetailCtrl', function() {
 
     })
 
-    it('should load states json', function() {
+    // it('should load states json', function() {
 
-        inject(function(_$httpBackend_, $rootScope, $routeParams, $controller) {
-            $routeParams.questionSlug = 'state';
-            $httpBackend.expectGET('/static/survey/surveys/states.json').respond([{
-                "text": "New York",
-                "label": "NY"
-            }, {
-                "text": "New Jersey",
-                "label": "NJ"
-            }]);
-        });
+    //     inject(function(_$httpBackend_, $rootScope, $routeParams, $controller) {
+    //         $routeParams.questionSlug = 'county';
 
-        $httpBackend.flush();
+    //         $httpBackend.expectGET('/static/survey/surveys/states.json').respond([{
+    //             "text": "New York",
+    //             "label": "NY"
+    //         }, {
+    //             "text": "New Jersey",
+    //             "label": "NJ"
+    //         }]);
 
-        expect(scope.question.options.length).toBe(2);
-        expect(scope.question.options[0].text).toBe('New York');
-        expect(scope.question.options[0].label).toBe('NY');
-    });
+
+    //     });
+
+    //     $httpBackend.flush();
+
+    //     expect(scope.question.options.length).toBe(2);
+    //     expect(scope.question.options[0].text).toBe('New York');
+    //     expect(scope.question.options[0].label).toBe('NY');
+    // });
 
     it('should request no_state json', function() {
 

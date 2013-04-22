@@ -42,11 +42,15 @@ def _install_requirements():
     run('cd %(app_dir)s && %(venv)s/bin/pip install -r REQUIREMENTS' % vars)
 
 
+def _install_bowerdeps():
+    run('cd /vagrant && /usr/bin/bower install --dev')
+
 #%(venv)s/bin/python manage.py site localhost:8080 && \
 #/usr/local/bin/node-v0.8.23/bin/bower install --dev && \
 def _install_django():
     run('cd %(app_dir)s && %(venv)s/bin/python manage.py syncdb --noinput && \
                            %(venv)s/bin/python manage.py migrate --noinput && \
+                           /usr/bin/bower install --dev && \
                            %(venv)s/bin/python manage.py collectstatic --noinput && \
                            /usr/bin/touch wsgi.py' % vars)
 
@@ -59,6 +63,7 @@ def create_superuser():
 def init():
     """ Initialize the forest planner application """
     _install_requirements()
+    _install_bowerdeps()
     _install_django()
 
 
