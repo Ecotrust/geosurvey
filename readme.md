@@ -7,7 +7,7 @@ fab dev run_server
 # Install Requirements
 From the geosurvey project directory
 ```bash
-npm install -g yo grunt-cli bower
+sudo npm install -g yo grunt-cli bower
 npm install && bower install --dev
 npm install generator-angular generator-karma
 ```

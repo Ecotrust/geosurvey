@@ -13,12 +13,12 @@ angular.module('askApp')
 
 
         // we may inject a question into the scope
-        if (! $scope.question) {
+        if (!$scope.question) {
             $scope.question = _.find($scope.survey.questions, function(question) {
                 return question.slug === $routeParams.questionSlug;
-            });    
+            });
         }
-        
+
 
         $scope.nextQuestionPath = $scope.getNextQuestionPath();
 
@@ -33,15 +33,21 @@ angular.module('askApp')
             if (!stateAbrv) {
                 stateAbrv = "NO_STATE";
             }
-            $http.get('/static/survey/surveys/counties/'+ stateAbrv +'.json').success(function(data, status, headers, config) {
-                if( Object.prototype.toString.call( data ) === '[object Array]' && data.length > 0) {
+            $http.get('/static/survey/surveys/counties/' + stateAbrv + '.json').success(function(data, status, headers, config) {
+                if (Object.prototype.toString.call(data) === '[object Array]' && data.length > 0) {
                     $scope.question.options = data;
                 } else {
-                    $scope.question.options = [ {label:"NO_COUNTY", text:"No counties found. Please select this option and continue."} ];
+                    $scope.question.options = [{
+                        label: "NO_COUNTY",
+                        text: "No counties found. Please select this option and continue."
+                    }];
                 }
 
-            }).error(function (data, status, headers, config) {
-                $scope.question.options = [ {label:"NO_COUNTY", text:"No counties found. Please select this option and continue."} ];
+            }).error(function(data, status, headers, config) {
+                $scope.question.options = [{
+                    label: "NO_COUNTY",
+                    text: "No counties found. Please select this option and continue."
+                }];
             });
         }
 
@@ -67,7 +73,16 @@ angular.module('askApp')
     });
 
 
-    $scope.addLocation = function (location) {
+    $scope.addMarker = function() {
+        $scope.map.marker.visibility = true;
+        $scope.activeMarker = {
+            lat: $scope.map.marker.lat,
+            lng: $scope.map.marker.lng
+        };
+        $scope.locations.push($scope.activeMarker);
+    }
+
+    $scope.addLocation = function(location) {
         var locations = _.without($scope.locations, $scope.activeMarker);
         $scope.locations = locations;
         $scope.locations.push(location);
@@ -84,7 +99,7 @@ angular.module('askApp')
             scope: {
                 question: $scope.question.modalQuestion
             },
-            success: function (question, answer) {
+            success: function(question, answer) {
                 $scope.addLocation({
                     lat: $scope.map.marker.lat,
                     lng: $scope.map.marker.lng,
@@ -94,7 +109,7 @@ angular.module('askApp')
                 $scope.dialog.close();
                 $scope.dialog = null;
             },
-            error: function (arg1, arg2) {
+            error: function(arg1, arg2) {
                 debugger;
             }
         });
@@ -109,15 +124,6 @@ angular.module('askApp')
         $scope.activeMarker = false;
     }
 
-    $scope.addMarker = function() {
-        $scope.map.marker.visibility = true;
-        $scope.activeMarker = {
-            lat: $scope.map.marker.lat,
-            lng: $scope.map.marker.lng
-        };
-        $scope.locations.push($scope.activeMarker);
-    }
-
     $scope.getNextQuestion = function() {
         // should return the slug of the next question
         var nextQuestion = $scope.survey.questions[_.indexOf($scope.survey.questions, $scope.question) + 1];
@@ -126,7 +132,7 @@ angular.module('askApp')
         return nextQuestion ? nextQuestion.slug : null;
     };
 
-    $scope.getNextQuestionPath = function () {
+    $scope.getNextQuestionPath = function() {
         var nextQuestion = $scope.getNextQuestion(),
             nextUrl;
 
@@ -139,7 +145,7 @@ angular.module('askApp')
         return nextUrl;
     };
 
-    $scope.gotoNextQuestion = function () {
+    $scope.gotoNextQuestion = function() {
         var nextUrl = $scope.getNextQuestionPath();
         if (nextUrl) {
             $location.path(nextUrl);
@@ -186,20 +192,20 @@ angular.module('askApp')
     };
 
     /**
-     * Filters out unselected items and submits an array of the text portion of the 
+     * Filters out unselected items and submits an array of the text portion of the
      * selected options.
-     * @param  {array} options An array of all options regardless of which options the 
+     * @param  {array} options An array of all options regardless of which options the
      * user selected.
      */
-    $scope.answerMultiSelect = function () {
-        var answers = _.filter($scope.question.options, function (option) {
+    $scope.answerMultiSelect = function() {
+        var answers = _.filter($scope.question.options, function(option) {
             return option.checked;
         });
         answers = _.pluck(answers, 'text');
         $scope.answerQuestion(answers);
     };
 
-    $scope.removeLocation = function () {
+    $scope.removeLocation = function() {
         alert("not yet implemented");
     };
 });

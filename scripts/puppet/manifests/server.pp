@@ -13,9 +13,26 @@ class apt {
 
 include apt
 
+package { "python-software-properties":
+    ensure => "installed"
+}
+
+
+exec { "add-apt":
+  command => "/usr/bin/add-apt-repository -y ppa:chris-lea/node.js && /usr/bin/apt-get update",
+  subscribe => Package["python-software-properties"],
+  unless => '/usr/bin/test -x /etc/apt/sources.list.d/chris-lea-node_js-precise.list',
+}
+
+
 package { "build-essential":
     ensure => "installed"
 
+}
+
+package { "nodejs":
+    ensure => "latest",
+    subscribe => Exec['add-apt'],
 }
 
 
@@ -81,4 +98,18 @@ package { "python-dev":
 python::venv::isolate { "/usr/local/venv/geosurvey":
   requirements => "/vagrant/server/REQUIREMENTS",
   subscribe => [Package['build-essential']],
+}
+
+exec { "Install Bower":
+  subscribe => [ Package["nodejs"] ],
+  command => "/usr/bin/npm install -g yo grunt-cli bower",
+  unless => "/usr/bin/test -x /usr/bin/yo"
+}
+
+exec { "Install Deps":
+  subscribe => [ Exec["Install Bower"] ],
+  user => 'vagrant',
+  command => "/usr/bin/npm install && /usr/bin/bower install --dev",
+  cwd => '/vagrant'
+
 }
