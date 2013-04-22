@@ -14,10 +14,6 @@ class QuestionInline(admin.TabularInline):
 
 class SurveyAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug':('name',),}
-    inlines = [
-        QuestionInline,
-    ]
-
 
 
 class QuestionAdmin(admin.ModelAdmin):
