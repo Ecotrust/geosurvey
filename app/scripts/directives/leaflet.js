@@ -22,7 +22,7 @@
                     map = new L.Map($el);
 
 
-                L.tileLayer("http://services.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer/tile/{z}/{y}/{x}", { maxZoom: 12 }).addTo(map);
+                L.tileLayer("http://services.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer/tile/{z}/{y}/{x}", { maxZoom: 13 }).addTo(map);
 
                 // Default center of the map
                 var point = new L.LatLng(40.094882122321145, -3.8232421874999996);
