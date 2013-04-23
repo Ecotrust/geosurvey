@@ -27,38 +27,48 @@
     "pk": 4,
     "model": "survey.option",
     "fields": {
-        "text": "Virgiania",
-        "label": "VA"
-    }
-}, {
-    "pk": 5,
-    "model": "survey.option",
-    "fields": {
-        "text": "Delaware",
-        "label": "DE"
-    }
-}, {
-    "pk": 6,
-    "model": "survey.option",
-    "fields": {
-        "text": "Maryland",
-        "label": "MD"
-    }
-}, {
-    "pk": 7,
-    "model": "survey.option",
-    "fields": {
         "text": "New York",
         "label": "NY"
     }
 }, {
-    "pk": 8,
+    "pk": 5,
     "model": "survey.option",
     "fields": {
         "text": "New Jersey",
         "label": "NJ"
     }
 }, {
+    "pk": 6,
+    "model": "survey.option",
+    "fields": {
+        "text": "Delaware",
+        "label": "DE"
+    }
+}, {
+    "pk": 7,
+    "model": "survey.option",
+    "fields": {
+        "text": "Maryland",
+        "label": "MD"
+    }
+}, {
+    "pk": 8,
+    "model": "survey.option",
+    "fields": {
+        "text": "Virgina",
+        "label": "VA"
+    }
+},
+{
+    "pk": 9,
+    "model": "survey.option",
+    "fields": {
+        "text": "District of Columbia",
+        "label": "DC"
+    }
+}
+
+ {
     "pk": 1,
     "model": "survey.question",
     "fields": {
