@@ -15,6 +15,7 @@
                 message: "=message",
                 zoom: "=zoom",
                 multimarkers: "=multimarkers",
+                popupField: "=popupfield"
             },
             template: '<div class="map"></div>',
             link: function(scope, element, attrs, ctrl) {
@@ -28,13 +29,6 @@
                 // Default center of the map
                 var point = new L.LatLng(40.094882122321145, -3.8232421874999996);
                 map.setView(point, 5);
-
-                var popup = "<ul><li ng-repeat='message in popupMessage'>{{message}}</li></ul><br/><br/>";
-                popup += "<div>";
-                popup += "<button class='btn pull-right'>edit</button>";
-                popup += "<button class='btn btn-danger pull-right' ng-click='delete()'>delete</button>";
-                popup += "</div>";
-                popup += "<div class='clearfix'></div>";
 
                 scope.activeMarker = null;
 
@@ -59,6 +53,7 @@
 
                         marker.on("dragstart", function(e) {
                             dragging_marker = true;
+                            map.closePopup();
                         });
 
                         marker.on("drag", function(e) {
@@ -101,7 +96,6 @@
                         });
 
                         scope.$watch("marker.lng", function(newValue, oldValue) {
-                            console.log('updating lng ' + newValue);
                             if (dragging_marker) return;
                             if (marker.lng) {
                                 marker.setLatLng(new L.LatLng(marker.getLatLng().lng, newValue));
@@ -110,7 +104,6 @@
                         });
 
                         scope.$watch("marker.lat", function(newValue, oldValue) {
-                            console.log('updating lat for marker');
                             if (dragging_marker) return;
                             if (marker.lat) {
                                 marker.setLatLng(new L.LatLng(marker.getLatLng().lat, newValue));
@@ -192,12 +185,19 @@
                 });
 
                 scope.delete = function() {
-                    scope.multimarkers = _.without(scope.multimarkers, scope.activeMarker);
+                    if (scope.multimarkers.length === 1) {
+                        scope.multimarkers = [];
+                    } else {
+                        scope.multimarkers = _.without(scope.multimarkers, scope.activeMarker);    
+                    }
+                    
                 };
 
                 if (attrs.multimarkers) {
                     var markers_dict = [];
                     scope.$watch("multimarkers.length", function(newMarkerList) {
+                        console.log(newMarkerList);
+                        
                         for (var mkey in scope.multimarkers) {
                             (function(mkey) {
                                 var mark_dat = scope.multimarkers[mkey];
@@ -206,6 +206,7 @@
                                     draggable: mark_dat.draggable ? true : false
                                 });
 
+                                marker.closePopup();
                                 marker.on("dragstart", function(e) {
                                     dragging_marker = true;
                                 });
@@ -230,17 +231,36 @@
 
                                 }, true);
 
-                                scope.$watch('multimarkers.' + mkey + '.answer', function(newValue) {
-                                    scope.popupMessage = newValue;
-                                    if (newValue) {
-                                        markers_dict[mkey].bindPopup(popup, {
-                                            closeButton: true
-                                        });
-                                         markers_dict[mkey].openPopup();
-                                        $compile(angular.element(map._popup._contentNode))(scope);
-                                        scope.activeMarker = scope.multimarkers[mkey];
-                                    }
-                                }, true);
+                                marker.on('click', function (e) {
+                                    var popup = scope.multimarkers[mkey][scope.popupField];
+                                    popup += "<div class='clearfix'></div>";
+
+                                    scope.popupMessage = scope.multimarkers[mkey][scope.popupField];
+                                    markers_dict[mkey].bindPopup(popup, {
+                                        closeButton: true
+                                    });
+                                     markers_dict[mkey].openPopup();
+                                    $compile(angular.element(map._popup._contentNode.childNodes))(scope);
+                                });
+
+                                // scope.$watch('multimarkers.' + mkey + '.answer', function(newValue) {
+                                    
+                                //     var popup = "<ul><li ng-repeat='messageLine in message'>{{messageLine}}</li></ul><br/><br/>";
+                                //     popup += "<div>";
+                                //     popup += "<button class='btn pull-right'>edit</button>";
+                                //     popup += "<button class='btn btn-danger pull-right' ng-click='delete()'>delete</button>";
+                                //     popup += "</div>";
+                                //     popup += "<div class='clearfix'></div>";
+                                //     if (newValue) {
+                                //         scope.message = newValue;
+                                //         markers_dict[mkey].bindPopup(popup, {
+                                //             closeButton: true
+                                //         });
+                                //          markers_dict[mkey].openPopup();
+                                //         $compile(angular.element(map._popup._contentNode))(scope);
+                                //         scope.activeMarker = scope.multimarkers[mkey];
+                                //     }
+                                // }, true);
 
                                 map.addLayer(marker);
                                 markers_dict[mkey] = marker;

@@ -42,3 +42,7 @@ padding: 7px 9px;
 .pull-right + .pull-right {
     margin: 0 5px;
 }
+
+.leaflet-popup-content {
+    width: 225px;
+}
