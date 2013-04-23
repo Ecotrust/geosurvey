@@ -39,6 +39,6 @@ padding: 7px 9px;
     height: 500px;
 }
 
-.confirmation .btn {
+.pull-right + .pull-right {
     margin: 0 5px;
 }
