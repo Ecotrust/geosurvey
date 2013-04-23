@@ -54,14 +54,14 @@ angular.module('askApp')
         if ($scope.question && $scope.question.type === 'map-multipoint') {
             $scope.map = {
                 center: {
-                    lat: 42.505,
-                    lng: -122.59
+                    lat: 38.75,
+                    lng: -72.59
                 },
                 zoom: 6,
                 marker: {
                     visibility: true,
-                    lat: 42.505,
-                    lng: -122.59,
+                    lat: 38.75,
+                    lng: -72.59,
 
                 },
                 msg: null
@@ -161,7 +161,13 @@ angular.module('askApp')
 
 
             if ($scope.locations && $scope.locations.length) {
-                answer = angular.toJson($scope.locations);
+                answer = angular.toJson(_.map($scope.locations, 
+                    function (location) { 
+                        return {
+                            lat: location.lat,
+                            lng: location.lng,
+                            answers: location.answer 
+                        }}));
             }
             $http({
                 url: url,
@@ -201,6 +207,7 @@ angular.module('askApp')
         var answers = _.filter($scope.question.options, function(option) {
             return option.checked;
         });
+        
         answers = _.pluck(answers, 'text');
         $scope.answerQuestion(answers);
     };

@@ -163,8 +163,8 @@ describe('Controller: SurveyDetailCtrl', function() {
 
         $httpBackend.flush();
 
-        expect(scope.map.center.lat).toBe(42.505);
-        expect(scope.map.center.lng).toBe(-122.59);
+        expect(scope.map.center.lat).toBe(38.75);
+        expect(scope.map.center.lng).toBe(-72.59);
         expect(scope.map.zoom).toBe(6);
         expect(scope.map.marker.visibility).toBeTruthy();
         expect(scope.locations.length).toBe(0);
@@ -197,14 +197,12 @@ describe('Controller: SurveyDetailCtrl', function() {
         $httpBackend.flush();
         expect(scope.activeMarker).toBeFalsy();
         expect(scope.locations.length).toBe(0);
-        // expect(scope.activeMarker.lat).toBe(42.505);
-        // expect(scope.activeMarker.lng).toBe(-122.59);
-
+        
         scope.activeMarker = scope.map.marker;
         scope.addLocation(scope.activeMarker);
         
-        expect(scope.locations[0].lat).toBe(42.505);
-        expect(scope.locations[0].lng).toBe(-122.59);
+        expect(scope.locations[0].lat).toBe(38.75);
+        expect(scope.locations[0].lng).toBe(-72.59);
         expect(scope.locations.length).toBe(1);
 
     });

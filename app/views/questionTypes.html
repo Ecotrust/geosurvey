@@ -16,6 +16,7 @@
                 min="0"
                 max="150"
                 ui-event="{ keypress : 'onlyDigits($event)' }"
+                autofocus
                 required/>
             <button type="submit" class="btn btn-primary btn-block">continue</button>
         </form>
@@ -27,6 +28,7 @@
                 ng-model="answer"
                 class="input-block-level"
                 placeholder="{{ question.label }}"
+                autofocus
                 required>
                 <option value="">{{ question.label }}</option>
                 <option 
