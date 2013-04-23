@@ -26,6 +26,9 @@
                     maxZoom: 13
                 }).addTo(map);
 
+
+                // var googleLayer = new L.Google('ROADMAP');
+                // map.addLayer(googleLayer);
                 // Default center of the map
                 var point = new L.LatLng(40.094882122321145, -3.8232421874999996);
                 map.setView(point, 5);
