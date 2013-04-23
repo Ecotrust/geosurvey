@@ -18,7 +18,7 @@
                 ui-event="{ keypress : 'onlyDigits($event)' }"
                 autofocus
                 required/>
-            <button type="submit" class="btn btn-primary btn-block">continue</button>
+            <button type="submit" class="btn btn-primary btn-large btn-block">continue</button>
         </form>
     </div>
     <div ng-switch-when="auto-single-select">
@@ -37,13 +37,13 @@
                         {{ option.text || option.name }}
                 </option>
             </select>
-            <button type="submit" class="btn btn-primary btn-block">continue</button>
+            <button type="submit" class="btn btn-primary btn-large btn-block">continue</button>
         </form>
     </div>
     <div ng-switch-when="text">
         <form class="question" ng-show="survey.questions.length" ng-submit="answerQuestion(answer)">
             <input class="input-block-level" type="text" placeholder="{{ question.label }}" ng-model="answer" autofocus/>
-            <button type="submit" class="btn btn-primary btn-block">continue</button>
+            <button type="submit" class="btn btn-primary btn-large btn-block">continue</button>
         </form>
     </div>
     <div ng-switch-when="single-select">
@@ -52,7 +52,7 @@
                 <input type="radio">
                 {{ option }}
             </label>
-            <button type="submit" class="btn btn-primary btn-block">continue</button>
+            <button type="submit" class="btn btn-primary btn-large btn-block">continue</button>
         </form>
     </div>
     <div ng-switch-when="multi-select">
@@ -71,7 +71,7 @@
                     value="{{option.label}}"> 
                     {{option.text}}
             </label>
-            <button type="submit" class="btn btn-primary btn-block" ng-hide="dialog">continue</button>
+            <button type="submit" class="btn btn-primary btn-large btn-block" ng-hide="dialog">continue</button>
         </form>
     </div>
     <div ng-switch-when="map-multipoint">
