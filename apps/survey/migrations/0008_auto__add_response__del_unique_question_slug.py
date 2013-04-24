@@ -48,7 +48,7 @@ class Migration(SchemaMigration):
             'Meta': {'object_name': 'Response'},
             'answer': ('django.db.models.fields.TextField', [], {}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'question': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['survey.Question']"})
+            'question': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['survey.Question']"}),
         },
         u'survey.survey': {
             'Meta': {'object_name': 'Survey'},

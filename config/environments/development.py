@@ -4,8 +4,11 @@ from config.settings import *
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': PROJECT_ROOT / 'db/development.sqlite3',
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'NAME': 'geosurvey',
+        'USER': 'vagrant',
+        'HOST': 'localhost',
+        'PORT': '5432'
     }
 }
 
