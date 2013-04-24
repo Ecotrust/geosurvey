@@ -39,6 +39,13 @@ padding: 7px 9px;
     height: 500px;
 }
 
+.map_wrapper .btn-zoom {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    z-index: 1500;
+}
+
 .pull-right + .pull-right {
     margin: 0 5px;
 }

@@ -1,0 +1,23 @@
+<div class="modal-header">
+    <h1>
+        <img ng-show="showSpinner" class="pull-right" src="/static/survey/img/ajax-loader.gif"/>
+        Zoom to Location...
+    </h1>
+</div>
+<div class="modal-body">
+    <p>
+      <form class="form-search">
+        
+        <input type="text" class="span7 search-query" placeholder="Search..." ng-model="searchTerm" autofocus>
+      </form>
+    </p>
+    <ul class="unstyled">
+        <li ng-show="results.length == 0">No Results</li>
+        <li ng-click="zoomTo(result)" ng-show="searchTerm && results.length > 0" ng-repeat="result in results">{{ result.name }}, {{ result.type }}</li>
+    </ul>
+</div>
+<div class="modal-footer">
+    <button ng-click="close()" class="btn btn-primary">
+        Close
+    </button>
+</div>

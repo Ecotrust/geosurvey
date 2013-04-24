@@ -18,7 +18,7 @@
                 popupField: "=popupfield",
                 deletemarker: '&'
             },
-            template: '<div class="map"></div>',
+            templateUrl: '/static/survey/views/leaflet.html',
             link: function(scope, element, attrs, ctrl) {
                 var $el = element[0],
                     map = new L.Map($el);
@@ -99,8 +99,6 @@
                                 //marker.openPopup();
 
                             }
-
-
                         });
 
                         scope.$watch("marker.lng", function(newValue, oldValue) {
@@ -121,6 +119,11 @@
                     }());
 
                 }
+
+                scope.zoomTo = function (location) {
+                    map.setView({lat: location.lat, lng: location.lng}, map.getZoom());
+                    map.setZoom(location.zoom);
+                };
 
                 scope.$watch("center", function(center) {
                     if (center === undefined) return;
@@ -182,11 +185,14 @@
                     scope.$watch("center.lng", function(newValue, oldValue) {
                         if (dragging_map) return;
                         map.setView(new L.LatLng(map.getCenter().lat, newValue), map.getZoom());
+                        marker.setLatLng(new L.LatLng(map.getCenter().lat, map.getCenter().lng));
+
                     });
 
                     scope.$watch("center.lat", function(newValue, oldValue) {
                         if (dragging_map) return;
                         map.setView(new L.LatLng(newValue, map.getCenter().lng), map.getZoom());
+                        marker.setLatLng(new L.LatLng(map.getCenter().lat, map.getCenter().lng));
                     });
 
                     // Listen for zoom
