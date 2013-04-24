@@ -11,7 +11,6 @@ angular.module('askApp')
     $http.get('/api/v1/survey/' + $routeParams.surveySlug + '/?format=json').success(function(data) {
         $scope.survey = data;
 
-
         // we may inject a question into the scope
         if (!$scope.question) {
             $scope.question = _.find($scope.survey.questions, function(question) {
@@ -72,20 +71,20 @@ angular.module('askApp')
 
     });
 
-
     $scope.addMarker = function() {
-        $scope.map.marker.visibility = true;
         $scope.activeMarker = {
-            lat: $scope.map.marker.lat,
-            lng: $scope.map.marker.lng
+            lat: $scope.map.center.lat,
+            lng: $scope.map.center.lng
         };
+
         $scope.locations.push($scope.activeMarker);
     }
 
     $scope.addLocation = function(location) {
-        var locations = _.without($scope.locations, $scope.activeMarker);
-        $scope.locations = locations;
-        $scope.locations.push(location);
+        // var locations = _.without($scope.locations, $scope.activeMarker);
+        $scope.locations[_.indexOf($scope.locations, $scope.activeMarker)] = location;
+        // $scope.locations = locations;
+        // $scope.locations.push(location);
         $scope.activeMarker = false;
     };
 
