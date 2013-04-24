@@ -25,6 +25,9 @@ class Command(BaseCommand):
                 'lng': row['PRIM_LONG_DEC']
             }
             if kwargs['state'] in ['WA']:
-                place, created = Place.objects.get_or_create(**kwargs)
-                print place
+                place, created = Place.objects.get_or_create(type=kwargs['type'], name=kwargs['name'], state=kwargs['state'], county=kwargs['county'])
+                place.lat = kwargs['lat']
+                place.lng = kwargs['lng']
                 place.save()
+                print rows, place
+        print Place.objects.all().count()

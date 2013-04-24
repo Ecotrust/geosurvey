@@ -43,7 +43,7 @@ padding: 7px 9px;
     position: absolute;
     right: 15px;
     top: 15px;
-    z-index: 1500;
+    z-index: 900;
 }
 
 .pull-right + .pull-right {
