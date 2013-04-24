@@ -7,7 +7,7 @@ from places.models import *
 class PlaceResource(ModelResource):
 
     class Meta:
-        queryset = Place.objects.all()
+        queryset = Place.objects.all().order_by("name");
         filtering = {
             'name': ['exact', 'startswith', 'endswith', 'contains']
         }
