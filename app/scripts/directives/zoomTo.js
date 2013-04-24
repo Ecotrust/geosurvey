@@ -49,7 +49,7 @@ angular.module('askApp')
                     scope.zoomTo({
                         lat: place.lat,
                         lng: place.lng,
-                        zoom: 8
+                        zoom: 9
                     });
                 });
             };
