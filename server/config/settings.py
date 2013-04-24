@@ -130,7 +130,8 @@ INSTALLED_APPS = (
     'django_extensions',
     'compressor',
     # Project specific apps go here
-    'apps.survey'
+    'apps.places',
+    'apps.survey',
 
 )
 

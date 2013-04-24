@@ -46,3 +46,11 @@ padding: 7px 9px;
 .leaflet-popup-content {
     width: 225px;
 }
+
+button[type='submit'] {
+    margin-top: 15px;
+    margin-bottom: 0px;
+}
+form {
+    margin-bottom: 10px;
+}
