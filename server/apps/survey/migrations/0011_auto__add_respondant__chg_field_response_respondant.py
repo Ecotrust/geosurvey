@@ -25,9 +25,17 @@ class Migration(SchemaMigration):
         ))
         db.create_unique(u'survey_respondant_responses', ['respondant_id', 'response_id'])
 
+        # Changing field 'Response.respondant'
+        db.add_column(u'survey_response', 'respondant', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['survey.Respondant']))
+
 
         # Changing field 'Response.respondant'
-        db.alter_column(u'survey_response', 'respondant_id', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['survey.Respondant']))
+        # db.alter_column(u'survey_response', 'respondant_id', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['survey.Respondant']))
+
+        # db.add_column(u'survey_response', 'respondant_id',
+        #     self.gf('django.db.models.fields.related.ForeignKey')(to=orm['survey.Respondant']), keep_default=False)
+        # db.add_column(u'survey_response', 'question_id',
+        #     self.gf('django.db.models.fields.related.ForeignKey')(to=orm['survey.Question']), keep_default=False)
 
     def backwards(self, orm):
         # Deleting model 'Respondant'
@@ -37,8 +45,6 @@ class Migration(SchemaMigration):
         db.delete_table('survey_respondant_responses')
 
 
-        # Changing field 'Response.respondant'
-        db.alter_column(u'survey_response', 'respondant_id', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['tracker.Respondant']))
 
     models = {
         u'survey.option': {

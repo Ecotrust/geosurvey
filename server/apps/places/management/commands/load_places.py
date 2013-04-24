@@ -18,16 +18,16 @@ class Command(BaseCommand):
             rows += 1
             kwargs = {
                 'type': row['FEATURE_CLASS'],
-                'name': row['MAP_NAME'],
+                'name': row['FEATURE_NAME'],
                 'state': row['STATE_ALPHA'],
                 'county': row['COUNTY_NAME'],
                 'lat': row['PRIM_LAT_DEC'],
                 'lng': row['PRIM_LONG_DEC']
             }
-            if kwargs['state'] in ['WA']:
-                place, created = Place.objects.get_or_create(type=kwargs['type'], name=kwargs['name'], state=kwargs['state'], county=kwargs['county'])
-                place.lat = kwargs['lat']
-                place.lng = kwargs['lng']
-                place.save()
-                print rows, place
-        print Place.objects.all().count()
+
+            place, created = Place.objects.get_or_create(type=kwargs['type'], name=kwargs['name'], state=kwargs['state'], county=kwargs['county'])
+            place.lat = kwargs['lat']
+            place.lng = kwargs['lng']
+            place.save()
+            print rows, place
+    print Place.objects.all().count()
