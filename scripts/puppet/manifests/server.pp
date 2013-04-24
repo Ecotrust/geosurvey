@@ -84,15 +84,15 @@ package { "python-dev":
 }
 
 
-# class { "postgresql::server": version => "9.1",
-#     listen_addresses => 'localhost',
-#     max_connections => 100,
-#     shared_buffers => '24MB',
-# }
+class { "postgresql::server": version => "9.1",
+    listen_addresses => 'localhost',
+    max_connections => 100,
+    shared_buffers => '24MB',
+}
 
-# postgresql::database { "geosurvey":
-#   owner => "vagrant",
-# }
+postgresql::database { "geosurvey":
+  owner => "vagrant",
+}
 
 
 python::venv::isolate { "/usr/local/venv/geosurvey":

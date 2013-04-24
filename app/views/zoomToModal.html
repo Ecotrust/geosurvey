@@ -11,9 +11,9 @@
         <input type="text" class="span7 search-query" placeholder="Search..." ng-model="searchTerm" autofocus>
       </form>
     </p>
-    <ul class="unstyled">
+    <ul class="nav nav-tabs nav-stacked">
         <li ng-show="results.length == 0">No Results</li>
-        <li ng-click="zoomTo(result)" ng-show="searchTerm && results.length > 0" ng-repeat="result in results">{{ result.name }}, {{ result.type }}</li>
+        <li ng-click="zoomTo(result)" ng-show="searchTerm && results.length > 0" ng-repeat="result in results"><a>{{ result.name }}, {{ result.type }}, {{ result.county }} County</a></li>
     </ul>
 </div>
 <div class="modal-footer">

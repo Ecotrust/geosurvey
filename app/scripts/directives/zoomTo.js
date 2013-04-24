@@ -1,21 +1,31 @@
 'use strict';
 
 
-function ZoomToCtrl($scope, dialog, $http) {
+function ZoomToCtrl($scope, dialog, $http, $timeout) {
+    var stop;
 
     $scope.results = [];
     $scope.showSpinner = false;
 
     $scope.$watch('searchTerm', function (newValue) {
         
+        if (stop) {
+            console.log('cancel');
+            $timeout.cancel(stop);
+        }
+
         if (newValue && newValue.length > 2) {
             $scope.showSpinner = true;
-            $http.get('/api/v1/place/?format=json&name__contains=' + $scope.searchTerm).success(function(data) {
-                $scope.results = data.objects;
-                $scope.showSpinner = false;
-            });
+            stop = $timeout(function() {
+                console.log('firing');
+                $http.get('/api/v1/place/?format=json&name__contains=' + $scope.searchTerm).success(function(data) {
+                    $scope.results = data.objects;
+                    $scope.showSpinner = false;
+                });
+            }, 1000);
         } else {
             $scope.results = [];
+            $scope.showSpinner = false;
         }
     });
 
@@ -49,7 +59,7 @@ angular.module('askApp')
                     scope.zoomTo({
                         lat: place.lat,
                         lng: place.lng,
-                        zoom: 9
+                        zoom: 10
                     });
                 });
             };
