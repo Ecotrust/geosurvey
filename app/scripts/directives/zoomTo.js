@@ -18,7 +18,7 @@ function ZoomToCtrl($scope, dialog, $http, $timeout) {
             $scope.showSpinner = true;
             stop = $timeout(function() {
                 console.log('firing');
-                $http.get('/api/v1/place/?format=json&name__contains=' + $scope.searchTerm).success(function(data) {
+                $http.get('/api/v1/place/?format=json&name__icontains=' + $scope.searchTerm).success(function(data) {
                     $scope.results = data.objects;
                     $scope.showSpinner = false;
                 });
@@ -59,11 +59,8 @@ angular.module('askApp')
                     scope.zoomTo({
                         lat: place.lat,
                         lng: place.lng,
-<<<<<<< HEAD
                         zoom: 10
-=======
-                        zoom: 8
->>>>>>> parent of 36f9671... zoomto working with crosshairs
+
                     });
                 });
             };
