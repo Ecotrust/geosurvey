@@ -10,16 +10,15 @@ function ZoomToCtrl($scope, dialog, $http, $timeout) {
     $scope.$watch('searchTerm', function (newValue) {
         
         if (stop) {
-            console.log('cancel');
             $timeout.cancel(stop);
         }
 
         if (newValue && newValue.length > 2) {
             $scope.showSpinner = true;
             stop = $timeout(function() {
-                console.log('firing');
-                $http.get('/api/v1/place/?format=json&name__icontains=' + $scope.searchTerm).success(function(data) {
+                $http.get('/api/v1/place/?format=json&limit=30&name__icontains=' + $scope.searchTerm).success(function(data) {
                     $scope.results = data.objects;
+                    $scope.meta = data.meta;
                     $scope.showSpinner = false;
                 });
             }, 1000);
