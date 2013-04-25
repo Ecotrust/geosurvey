@@ -1,5 +1,8 @@
 from django.core.management.base import BaseCommand, CommandError
-from places.models import Place
+from django.contrib.gis.geos import Point
+from django.contrib.gis.measure import Distance
+
+from places.models import Place, ShoreLine
 
 
 import csv
@@ -28,6 +31,15 @@ class Command(BaseCommand):
             place, created = Place.objects.get_or_create(type=kwargs['type'], name=kwargs['name'], state=kwargs['state'], county=kwargs['county'])
             place.lat = kwargs['lat']
             place.lng = kwargs['lng']
-            place.save()
+            place.location = Point(float(place.lat), float(place.lng))
+            #place.save()
+            # shoreline = ShoreLine.objects.filter(geom__distance_lt=(place.location, Distance(m=5000)))
+            # if shoreline.count() > 0:
+            #     place.save()
+            #     print rows, place
+            # else:
+            #     print rows, place, " not near shore"
             print rows, place
-    print Place.objects.all().count()
+            place.save()
+
+        print Place.objects.all().count()
