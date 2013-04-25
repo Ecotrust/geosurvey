@@ -59,7 +59,11 @@ angular.module('askApp')
                     scope.zoomTo({
                         lat: place.lat,
                         lng: place.lng,
+<<<<<<< HEAD
                         zoom: 10
+=======
+                        zoom: 8
+>>>>>>> parent of 36f9671... zoomto working with crosshairs
                     });
                 });
             };
