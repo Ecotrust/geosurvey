@@ -8,14 +8,13 @@ from places.models import Place, ShoreLine
 import csv
 
 excluded_types = ["Airport", "Building", "Cemetary",
-                    "Census", "Church", "Military", "Mine", "School", "Post Office", "Tunnel", "Well"]
+                    "Census", "Church", "Civil", "Hospital", "Summit", "Tower", "Military", "Mine", "School", "Post Office", "Tunnel", "Well"]
 
 class Command(BaseCommand):
     args = '<gnis text file>'
     help = 'Load places data'
 
     def handle(self, *args, **options):
-        print args[0]
         reader = csv.DictReader(open(args[0]),delimiter='|')
         rows = 0
         for row in reader:
