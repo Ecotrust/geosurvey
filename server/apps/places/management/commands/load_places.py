@@ -27,6 +27,7 @@ class Command(BaseCommand):
                 'lat': row['PRIM_LAT_DEC'],
                 'lng': row['PRIM_LONG_DEC']
             }
+<<<<<<< HEAD
 
             place, created = Place.objects.get_or_create(type=kwargs['type'], name=kwargs['name'], state=kwargs['state'], county=kwargs['county'])
             place.lat = kwargs['lat']
@@ -43,3 +44,9 @@ class Command(BaseCommand):
             place.save()
 
         print Place.objects.all().count()
+=======
+            if kwargs['state'] in ['WA']:
+                place, created = Place.objects.get_or_create(**kwargs)
+                print place
+                place.save()
+>>>>>>> parent of 36f9671... zoomto working with crosshairs

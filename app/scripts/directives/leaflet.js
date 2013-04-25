@@ -115,19 +115,16 @@
                                 marker.setLatLng(new L.LatLng(marker.getLatLng().lat, newValue));
                             }
                         });
-                        scope.zoomTo = function (location) {
-                            map.setView({lat: location.lat, lng: location.lng}, map.getZoom());
-                            map.setZoom(location.zoom);
-                            marker.setLatLng(new L.LatLng(location.lat, location.lng));
-
-                        };
-
 
                     }());
 
                 }
 
-      
+                scope.zoomTo = function (location) {
+                    map.setView({lat: location.lat, lng: location.lng}, map.getZoom());
+                    map.setZoom(location.zoom);
+                };
+
                 scope.$watch("center", function(center) {
                     if (center === undefined) return;
 
@@ -201,7 +198,9 @@
                     // Listen for zoom
                     scope.$watch("zoom", function (newValue, oldValue) {
                         map.setZoom(newValue);
-                    });             
+                    });
+
+                    
                 });
 
                 scope.delete = function() {
@@ -214,6 +213,10 @@
                 if (attrs.multimarkers) {
                     var markers_dict = [];
                     scope.$watch("multiMarkers.length", function(newMarkerList) {
+                        console.log(newMarkerList);
+                        _.each(markers_dict, function (item) {
+                            debugger;
+                        })
                         for (var mkey in scope.multiMarkers) {
                             (function(mkey) {
                                 var mark_dat = scope.multiMarkers[mkey];
