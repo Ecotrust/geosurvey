@@ -52,6 +52,7 @@ def _install_django():
                            %(venv)s/bin/python manage.py migrate --noinput && \
                            /usr/bin/bower install --dev && \
                            %(venv)s/bin/python manage.py collectstatic --noinput && \
+                           chgrp -R www-data . &&\
                            /usr/bin/touch wsgi.py' % vars)
 
 
@@ -63,7 +64,7 @@ def create_superuser():
 def init():
     """ Initialize the forest planner application """
     _install_requirements()
-    _install_bowerdeps()
+    #_install_bowerdeps()
     _install_django()
 
 
