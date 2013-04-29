@@ -18,6 +18,7 @@ class SurveyAdmin(admin.ModelAdmin):
 
 class QuestionAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug':('label',),}
+    prepopulated_fields = {'info':('label',),}
     class Media:
         js = [
            '/static/grappelli/tinymce/jscripts/tiny_mce/tiny_mce.js'

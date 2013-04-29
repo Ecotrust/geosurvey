@@ -24,14 +24,26 @@ angular.module('askApp')
         if ($scope.question && $scope.question.title) {
             $scope.question.displayTitle = $interpolate($scope.question.title)($scope);
         }
-        
+      
+        if ($scope.question && $scope.question.type === 'info') {
+            $scope.infoView = '/static/survey/survey-pages/' + $routeParams.surveySlug + '/' +  $scope.question.info + '.html';
+
+        }  
 
         $scope.nextQuestionPath = $scope.getNextQuestionPath();
 
         // Fill options list.
         if ($scope.question && $scope.question.options_json && $scope.question.options_json.length > 0) {
             $http.get($scope.question.options_json).success(function(data) {
-                $scope.question.options = data;
+                var groups = _.groupBy(data, function (item) {
+                    return item.group;
+                })
+                if ($scope.question.randomize_groups) {
+                    $scope.question.options = _.flatten(_.shuffle(_.toArray(groups)))
+                } else {
+                    $scope.question.options = data;
+                }
+                
             });
         } else if ($scope.question && $scope.question.slug == 'county') {
             // Dependent on state answer.
@@ -179,8 +191,8 @@ angular.module('askApp')
         if ($scope.dialog) {
             $scope.dialog.options.success($scope.question, answer);
         } else {
-            console.log(answer);
-            debugger;
+
+            // sometimes we'll have an other field with option text box
             if (answer === "other" && otherAnswer) {
                 answer = otherAnswer;
             }
