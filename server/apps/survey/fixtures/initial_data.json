@@ -28,7 +28,7 @@
     "model": "survey.survey",
     "fields": {
         "name": "Washington",
-        "questions": [9, 10, 11, 12, 13, 14, 15],
+        "questions": [9, 10, 11, 12, 14, 15, 13],
         "slug": "washington"
     }
 }, {
@@ -272,7 +272,7 @@
         "title": "Which of the following recreational activities have you participated in during the last 12 months in the  Pacific coast of Washington?  ",
         "label": "activities",
         "options": [],
-        "options_json": "/static/survey/surveys/activities.json",
+        "options_json": "/static/survey/surveys/activities_wa.json",
         "type": "multi-select",
         "slug": "activities"
     }
@@ -314,7 +314,7 @@
         "title": "Which of the following recreational activities did you participate in at this location?",
         "label": "Location of Activities",
         "options": [],
-        "options_json": "/static/survey/surveys/activities.json",
+        "options_json": "/static/survey/surveys/activities_wa.json",
         "type": "multi-select",
         "slug": "activity-locations"
     }
