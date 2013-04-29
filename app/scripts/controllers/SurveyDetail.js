@@ -8,8 +8,11 @@ var stateAbrv = "NO_STATE";
 angular.module('askApp')
     .controller('SurveyDetailCtrl', function($scope, $routeParams, $http, $location, $dialog, offlineSurvey) {
 
+
     $http.get('/api/v1/survey/' + $routeParams.surveySlug + '/?format=json').success(function(data) {
         $scope.survey = data;
+
+
 
         // we may inject a question into the scope
         if (!$scope.question) {
@@ -70,6 +73,11 @@ angular.module('askApp')
         }
 
     });
+
+    
+    // landing page view
+    $scope.landingView = '/static/survey/survey-pages/' + $routeParams.surveySlug + '/landing.html';
+
 
     $scope.addMarker = function() {
         $scope.activeMarker = {

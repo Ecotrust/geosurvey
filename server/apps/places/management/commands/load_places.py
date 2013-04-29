@@ -8,7 +8,8 @@ from places.models import Place, ShoreLine
 import csv
 
 excluded_types = ["Airport", "Building", "Cemetary",
-                    "Census", "Church", "Civil", "Hospital", "Summit", "Tower", "Military", "Mine", "School", "Post Office", "Tunnel", "Well"]
+                    "Census", "Church", "Civil", "Hospital", "Summit", "Tower",
+                    "Military", "Mine", "School", "Post Office", "Tunnel", "Well"]
 
 class Command(BaseCommand):
     args = '<gnis text file>'

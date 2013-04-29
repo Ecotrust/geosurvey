@@ -305,4 +305,11 @@ describe('Controller: SurveyDetailCtrl', function() {
 
     });
 
+    
+    it('should attach a landing page view to the scope', function () {
+        $httpBackend.flush();
+
+        expect(scope.landingView).toBe('/static/survey/survey-pages/test-survey/landing.html');
+    });
+
 });
