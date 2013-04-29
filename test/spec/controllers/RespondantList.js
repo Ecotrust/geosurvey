@@ -8,8 +8,10 @@ describe('Controller: RespondantListCtrl', function() {
   var RespondantListCtrl, $httpBackend, scope;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function(_$httpBackend_, $rootScope, $controller) {
+  beforeEach(inject(function(_$httpBackend_, $rootScope, $routeParams, $controller) {
     $httpBackend = _$httpBackend_;
+
+    
 
     $httpBackend.expectGET('/api/v1/respondant/?format=json').respond({
       "meta": {

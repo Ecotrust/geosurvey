@@ -4,23 +4,27 @@
 
 var stateAbrv = "NO_STATE";
 
+var answers = {};
 
 angular.module('askApp')
-    .controller('SurveyDetailCtrl', function($scope, $routeParams, $http, $location, $dialog, offlineSurvey) {
+    .controller('SurveyDetailCtrl', function($scope, $routeParams, $http, $location, $dialog, $interpolate, offlineSurvey) {
 
 
     $http.get('/api/v1/survey/' + $routeParams.surveySlug + '/?format=json').success(function(data) {
         $scope.survey = data;
 
 
-
         // we may inject a question into the scope
         if (!$scope.question) {
             $scope.question = _.find($scope.survey.questions, function(question) {
-                return question.slug === $routeParams.questionSlug;
+                    return question.slug === $routeParams.questionSlug;
             });
+            
         }
-
+        if ($scope.question && $scope.question.title) {
+            $scope.question.displayTitle = $interpolate($scope.question.title)($scope);
+        }
+        
 
         $scope.nextQuestionPath = $scope.getNextQuestionPath();
 
@@ -74,10 +78,20 @@ angular.module('askApp')
 
     });
 
+
     
     // landing page view
     $scope.landingView = '/static/survey/survey-pages/' + $routeParams.surveySlug + '/landing.html';
 
+
+    $scope.getAnswer = function (questionSlug) {
+
+        if (answers[questionSlug]) {
+            return answers[questionSlug]
+        } else {
+            return "unknown";
+        }
+    };
 
     $scope.addMarker = function() {
         $scope.activeMarker = {
@@ -166,7 +180,7 @@ angular.module('askApp')
             $scope.dialog.options.success($scope.question, answer);
         } else {
 
-
+            
             if ($scope.locations && $scope.locations.length) {
                 answer = angular.toJson(_.map($scope.locations, 
                     function (location) { 
@@ -192,6 +206,8 @@ angular.module('askApp')
                     $scope.dialog.close();
                     $scope.addLocation();
                 } else {
+
+                    answers[$routeParams.questionSlug] = answer;
                     $scope.gotoNextQuestion();
                 }
 
@@ -215,7 +231,7 @@ angular.module('askApp')
             return option.checked;
         });
         
-        answers = _.pluck(answers, 'text');
+        answers = _.pluck(answers, 'label');
         $scope.answerQuestion(answers);
     };
 

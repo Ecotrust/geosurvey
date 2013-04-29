@@ -33,7 +33,7 @@
                 <option value="">{{ question.label }}</option>
                 <option 
                     ng-repeat="option in question.options" 
-                    value="{{ option.label || option.name }}">
+                    value="{{ option.text }}">
                         {{ option.text || option.name }}
                 </option>
             </select>
