@@ -22,7 +22,7 @@
         </form>
     </div>
     <div ng-switch-when="auto-single-select">
-        <form class="question" ng-show="survey.questions.length" ng-submit="answerQuestion(answer)">
+        <form class="question" ng-show="survey.questions.length" ng-submit="answerQuestion(answer, otherAnswer)">
             <select
                 ui-select2
                 ng-model="answer"
@@ -36,7 +36,10 @@
                     value="{{ option.text }}">
                         {{ option.text || option.name }}
                 </option>
+                <option value="other">Other</option>
+
             </select>
+            <input class="input-block-level" type="text" placeholder="{{ question.label }}" ng-show="answer == 'other'" ng-model="otherAnswer" autofocus/>   
             <button type="submit" class="btn btn-primary btn-large btn-block">continue</button>
         </form>
     </div>

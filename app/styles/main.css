@@ -61,3 +61,7 @@ button[type='submit'] {
 form {
     margin-bottom: 10px;
 }
+
+select + input {
+    margin-top: 10px;
+}

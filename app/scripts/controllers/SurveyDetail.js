@@ -173,13 +173,17 @@ angular.module('askApp')
         }
     };
 
-    $scope.answerQuestion = function(answer) {
+    $scope.answerQuestion = function(answer, otherAnswer) {
         var url = ['/respond/answer', $scope.survey.slug, $routeParams.questionSlug, $routeParams.uuidSlug].join('/');
 
         if ($scope.dialog) {
             $scope.dialog.options.success($scope.question, answer);
         } else {
-
+            console.log(answer);
+            debugger;
+            if (answer === "other" && otherAnswer) {
+                answer = otherAnswer;
+            }
             
             if ($scope.locations && $scope.locations.length) {
                 answer = angular.toJson(_.map($scope.locations, 
