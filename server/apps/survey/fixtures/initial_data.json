@@ -1,1 +1,321 @@
-[{"pk": "uuid", "model": "survey.respondant", "fields": {"responses": [5, 6, 7, 8, 9], "survey": 1, "ts": "2013-04-15T23:33:54Z", "email": "eknuth@ecotrust.org"}}, {"pk": 1, "model": "survey.survey", "fields": {"name": "Test Survey", "questions": [1, 2, 6], "slug": "test-survey"}}, {"pk": 2, "model": "survey.survey", "fields": {"name": "marco", "questions": [3, 4, 5, 6], "slug": "marco"}}, {"pk": 3, "model": "survey.survey", "fields": {"name": "Washington", "questions": [9, 10, 11, 12, 13, 14], "slug": "washington"}}, {"pk": 4, "model": "survey.option", "fields": {"text": "New York", "label": "NY"}}, {"pk": 5, "model": "survey.option", "fields": {"text": "New Jersey", "label": "NJ"}}, {"pk": 6, "model": "survey.option", "fields": {"text": "Delaware", "label": "DE"}}, {"pk": 7, "model": "survey.option", "fields": {"text": "Maryland", "label": "MD"}}, {"pk": 8, "model": "survey.option", "fields": {"text": "Virgina", "label": "VA"}}, {"pk": 9, "model": "survey.option", "fields": {"text": "District of Columbia", "label": "DC"}}, {"pk": 10, "model": "survey.option", "fields": {"text": "Washington", "label": "washington"}}, {"pk": 11, "model": "survey.option", "fields": {"text": "Oregon", "label": "oregon"}}, {"pk": 12, "model": "survey.option", "fields": {"text": "British Columbia", "label": "british-columbia"}}, {"pk": 1, "model": "survey.question", "fields": {"info": null, "randomize_groups": false, "modalQuestion": null, "title": "What is your name?", "label": "Name", "options": [], "options_json": null, "type": "text", "slug": "name"}}, {"pk": 2, "model": "survey.question", "fields": {"info": null, "randomize_groups": false, "modalQuestion": null, "title": "How old are you?", "label": "Age", "options": [], "options_json": null, "type": "text", "slug": "age"}}, {"pk": 3, "model": "survey.question", "fields": {"info": null, "randomize_groups": false, "modalQuestion": null, "title": "Please enter your age:", "label": "Enter your age", "options": [], "options_json": null, "type": "integer", "slug": "marco-age"}}, {"pk": 4, "model": "survey.question", "fields": {"info": "", "randomize_groups": false, "modalQuestion": null, "title": "What state do you live in?", "label": "Pick a state", "options": [4, 5, 6, 7, 8], "options_json": "", "type": "auto-single-select", "slug": "state"}}, {"pk": 5, "model": "survey.question", "fields": {"info": null, "randomize_groups": false, "modalQuestion": null, "title": "What county do you live in?", "label": "Pick a county", "options": [], "options_json": null, "type": "auto-single-select", "slug": "county"}}, {"pk": 6, "model": "survey.question", "fields": {"info": "", "randomize_groups": false, "modalQuestion": 8, "title": "Move and zoom the map to precisely focus the crosshair at each of your activity locations.", "label": "Activity Locations", "options": [], "options_json": "/static/survey/surveys/activities.json", "type": "map-multipoint", "slug": "activity-locations"}}, {"pk": 7, "model": "survey.question", "fields": {"info": "true", "randomize_groups": false, "modalQuestion": null, "title": "Activities", "label": "Activities Info Page", "options": [], "options_json": "", "type": "info", "slug": "info-activities"}}, {"pk": 8, "model": "survey.question", "fields": {"info": "", "randomize_groups": false, "modalQuestion": null, "title": "Which activities did you conduct at this location?", "label": "Location Activities", "options": [], "options_json": "/static/survey/surveys/activities.json", "type": "multi-select", "slug": "location-activities"}}, {"pk": 9, "model": "survey.question", "fields": {"info": "", "randomize_groups": false, "modalQuestion": null, "title": "Please enter your age", "label": "age", "options": [], "options_json": "", "type": "integer", "slug": "age"}}, {"pk": 10, "model": "survey.question", "fields": {"info": "", "randomize_groups": false, "modalQuestion": null, "title": "What state/province do you live in?", "label": "State or Province", "options": [10, 11, 12], "options_json": "", "type": "auto-single-select", "slug": "state-or-province"}}, {"pk": 11, "model": "survey.question", "fields": {"info": "", "randomize_groups": false, "modalQuestion": null, "title": "You indicated you live in {{ getAnswer('state-or-province') }}. What county/municipality do you live in?", "label": "county", "options": [], "options_json": "", "type": "text", "slug": "county"}}, {"pk": 12, "model": "survey.question", "fields": {"info": "recreate-info", "randomize_groups": false, "modalQuestion": null, "title": "Where did you recreate?", "label": "recreate-info", "options": [], "options_json": "", "type": "info", "slug": "recreate-info"}}, {"pk": 13, "model": "survey.question", "fields": {"info": "activities", "randomize_groups": true, "modalQuestion": null, "title": "Which of the following recreational activities have you participated in during the last 12 months in the  Pacific coast of Washington?  ", "label": "activities", "options": [], "options_json": "/static/survey/surveys/activities.json", "type": "multi-select", "slug": "activities"}}, {"pk": 14, "model": "survey.question", "fields": {"info": "number-trips", "randomize_groups": false, "modalQuestion": null, "title": "Please estimate how many trips you have made to Pacific coast of Washington in the last 12 months primarily for recreation purposes (e.g., beach going, wildlife viewing, surfing, kayaking, etc.). A trip is defined as an intentional trip outside of daily routine. ", "label": "Number of Trips", "options": [], "options_json": "", "type": "integer", "slug": "number-of-trips"}}]
+[{
+    "pk": "uuid",
+    "model": "survey.respondant",
+    "fields": {
+        "responses": [],
+        "survey": 1,
+        "ts": "2013-04-15T23:33:54Z",
+        "email": "eknuth@ecotrust.org"
+    }
+}, {
+    "pk": 1,
+    "model": "survey.survey",
+    "fields": {
+        "name": "Test Survey",
+        "questions": [1, 2, 6],
+        "slug": "test-survey"
+    }
+}, {
+    "pk": 2,
+    "model": "survey.survey",
+    "fields": {
+        "name": "marco",
+        "questions": [3, 4, 5, 6],
+        "slug": "marco"
+    }
+}, {
+    "pk": 3,
+    "model": "survey.survey",
+    "fields": {
+        "name": "Washington",
+        "questions": [9, 10, 11, 12, 13, 14, 15],
+        "slug": "washington"
+    }
+}, {
+    "pk": 4,
+    "model": "survey.option",
+    "fields": {
+        "text": "New York",
+        "label": "NY"
+    }
+}, {
+    "pk": 5,
+    "model": "survey.option",
+    "fields": {
+        "text": "New Jersey",
+        "label": "NJ"
+    }
+}, {
+    "pk": 6,
+    "model": "survey.option",
+    "fields": {
+        "text": "Delaware",
+        "label": "DE"
+    }
+}, {
+    "pk": 7,
+    "model": "survey.option",
+    "fields": {
+        "text": "Maryland",
+        "label": "MD"
+    }
+}, {
+    "pk": 8,
+    "model": "survey.option",
+    "fields": {
+        "text": "Virgina",
+        "label": "VA"
+    }
+}, {
+    "pk": 9,
+    "model": "survey.option",
+    "fields": {
+        "text": "District of Columbia",
+        "label": "DC"
+    }
+}, {
+    "pk": 10,
+    "model": "survey.option",
+    "fields": {
+        "text": "Washington",
+        "label": "washington"
+    }
+}, {
+    "pk": 11,
+    "model": "survey.option",
+    "fields": {
+        "text": "Oregon",
+        "label": "oregon"
+    }
+}, {
+    "pk": 12,
+    "model": "survey.option",
+    "fields": {
+        "text": "British Columbia",
+        "label": "british-columbia"
+    }
+}, {
+    "pk": 1,
+    "model": "survey.question",
+    "fields": {
+        "info": null,
+        "randomize_groups": false,
+        "modalQuestion": null,
+        "title": "What is your name?",
+        "label": "Name",
+        "options": [],
+        "options_json": null,
+        "type": "text",
+        "slug": "name"
+    }
+}, {
+    "pk": 2,
+    "model": "survey.question",
+    "fields": {
+        "info": null,
+        "randomize_groups": false,
+        "modalQuestion": null,
+        "title": "How old are you?",
+        "label": "Age",
+        "options": [],
+        "options_json": null,
+        "type": "text",
+        "slug": "age"
+    }
+}, {
+    "pk": 3,
+    "model": "survey.question",
+    "fields": {
+        "info": null,
+        "randomize_groups": false,
+        "modalQuestion": null,
+        "title": "Please enter your age:",
+        "label": "Enter your age",
+        "options": [],
+        "options_json": null,
+        "type": "integer",
+        "slug": "marco-age"
+    }
+}, {
+    "pk": 4,
+    "model": "survey.question",
+    "fields": {
+        "info": "",
+        "randomize_groups": false,
+        "modalQuestion": null,
+        "title": "What state do you live in?",
+        "label": "Pick a state",
+        "options": [4, 5, 6, 7, 8],
+        "options_json": "",
+        "type": "auto-single-select",
+        "slug": "state"
+    }
+}, {
+    "pk": 5,
+    "model": "survey.question",
+    "fields": {
+        "info": null,
+        "randomize_groups": false,
+        "modalQuestion": null,
+        "title": "What county do you live in?",
+        "label": "Pick a county",
+        "options": [],
+        "options_json": null,
+        "type": "auto-single-select",
+        "slug": "county"
+    }
+}, {
+    "pk": 6,
+    "model": "survey.question",
+    "fields": {
+        "info": "",
+        "randomize_groups": false,
+        "modalQuestion": 8,
+        "title": "Move and zoom the map to precisely focus the crosshair at each of your activity locations.",
+        "label": "Activity Locations",
+        "options": [],
+        "options_json": "/static/survey/surveys/activities.json",
+        "type": "map-multipoint",
+        "slug": "activity-locations"
+    }
+}, {
+    "pk": 7,
+    "model": "survey.question",
+    "fields": {
+        "info": "true",
+        "randomize_groups": false,
+        "modalQuestion": null,
+        "title": "Activities",
+        "label": "Activities Info Page",
+        "options": [],
+        "options_json": "",
+        "type": "info",
+        "slug": "info-activities"
+    }
+}, {
+    "pk": 8,
+    "model": "survey.question",
+    "fields": {
+        "info": "",
+        "randomize_groups": false,
+        "modalQuestion": null,
+        "title": "Which activities did you conduct at this location?",
+        "label": "Location Activities",
+        "options": [],
+        "options_json": "/static/survey/surveys/activities.json",
+        "type": "multi-select",
+        "slug": "location-activities"
+    }
+}, {
+    "pk": 9,
+    "model": "survey.question",
+    "fields": {
+        "info": "",
+        "randomize_groups": false,
+        "modalQuestion": null,
+        "title": "Please enter your age",
+        "label": "age",
+        "options": [],
+        "options_json": "",
+        "type": "integer",
+        "slug": "age"
+    }
+}, {
+    "pk": 10,
+    "model": "survey.question",
+    "fields": {
+        "info": "",
+        "randomize_groups": false,
+        "modalQuestion": null,
+        "title": "What state/province do you live in?",
+        "label": "State or Province",
+        "options": [10, 11, 12],
+        "options_json": "",
+        "type": "auto-single-select",
+        "slug": "state-or-province"
+    }
+}, {
+    "pk": 11,
+    "model": "survey.question",
+    "fields": {
+        "info": "",
+        "randomize_groups": false,
+        "modalQuestion": null,
+        "title": "You indicated you live in {{ getAnswer('state-or-province') }}. What county/municipality do you live in?",
+        "label": "county",
+        "options": [],
+        "options_json": "",
+        "type": "text",
+        "slug": "county"
+    }
+}, {
+    "pk": 12,
+    "model": "survey.question",
+    "fields": {
+        "info": "recreate-info",
+        "randomize_groups": false,
+        "modalQuestion": null,
+        "title": "Where did you recreate?",
+        "label": "recreate-info",
+        "options": [],
+        "options_json": "",
+        "type": "info",
+        "slug": "recreate-info"
+    }
+}, {
+    "pk": 13,
+    "model": "survey.question",
+    "fields": {
+        "info": "activities",
+        "randomize_groups": true,
+        "modalQuestion": null,
+        "title": "Which of the following recreational activities have you participated in during the last 12 months in the  Pacific coast of Washington?  ",
+        "label": "activities",
+        "options": [],
+        "options_json": "/static/survey/surveys/activities.json",
+        "type": "multi-select",
+        "slug": "activities"
+    }
+}, {
+    "pk": 14,
+    "model": "survey.question",
+    "fields": {
+        "info": "number-trips",
+        "randomize_groups": false,
+        "modalQuestion": null,
+        "title": "Please estimate how many trips you have made to Pacific coast of Washington in the last 12 months primarily for recreation purposes (e.g., beach going, wildlife viewing, surfing, kayaking, etc.). A trip is defined as an intentional trip outside of daily routine. ",
+        "label": "Number of Trips",
+        "options": [],
+        "options_json": "",
+        "type": "integer",
+        "slug": "number-of-trips"
+    }
+}, {
+    "pk": 15,
+    "model": "survey.question",
+    "fields": {
+        "info": "location-activities",
+        "randomize_groups": false,
+        "modalQuestion": 16,
+        "title": "Navigate the map or use search function to zoom to the areas which they conducted ocean and coastal recreation activities in last 12 months.",
+        "label": "Location of Activities",
+        "options": [],
+        "options_json": "",
+        "type": "map-multipoint",
+        "slug": "activity-locations"
+    }
+}, {
+    "pk": 16,
+    "model": "survey.question",
+    "fields": {
+        "info": "location-activities",
+        "randomize_groups": true,
+        "modalQuestion": null,
+        "title": "Which of the following recreational activities did you participate in at this location?",
+        "label": "Location of Activities",
+        "options": [],
+        "options_json": "/static/survey/surveys/activities.json",
+        "type": "multi-select",
+        "slug": "activity-locations"
+    }
+}]
