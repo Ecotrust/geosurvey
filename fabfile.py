@@ -50,9 +50,8 @@ def _install_bowerdeps():
 def _install_django():
     run('cd %(app_dir)s && %(venv)s/bin/python manage.py syncdb --noinput && \
                            %(venv)s/bin/python manage.py migrate --noinput && \
-                           /usr/bin/bower install --dev && \
                            %(venv)s/bin/python manage.py collectstatic --noinput && \
-                           chgrp -R www-data . &&\
+                           sudo chgrp -R www-data . &&\
                            /usr/bin/touch wsgi.py' % vars)
 
 

@@ -40,6 +40,16 @@
                 });
                 
 
+                scope.zoomTo = function (location) {
+                    map.setView({lat: location.lat, lng: location.lng}, map.getZoom());
+                    map.setZoom(location.zoom);
+                    if (marker) {
+                        marker.setLatLng(new L.LatLng(location.lat, location.lng));    
+                    }
+                    
+                };
+
+
                 if (attrs.marker) {
                     var crosshairIcon = L.icon({
                         iconUrl: '/static/survey/img/crosshair.png',
@@ -56,8 +66,12 @@
                     });
                     var dragging_marker = false;
 
+
+                    
+
                     // Listen for marker drags
                     (function() {
+
 
                         marker.on("dragstart", function(e) {
                             dragging_marker = true;
@@ -120,11 +134,6 @@
 
                 }
 
-                scope.zoomTo = function (location) {
-                    map.setView({lat: location.lat, lng: location.lng}, map.getZoom());
-                    map.setZoom(location.zoom);
-                };
-
                 scope.$watch("center", function(center) {
                     if (center === undefined) return;
 
@@ -161,9 +170,12 @@
                             s.zoom = map.getZoom();
                             s.center.lat = map.getCenter().lat;
                             s.center.lng = map.getCenter().lng;
-                            marker.setLatLng(new L.LatLng(map.getCenter().lat, map.getCenter().lng));
-                            s.marker.lat = map.getCenter().lat;
-                            s.marker.lng = map.getCenter().lng;
+                            
+                            if (marker) {
+                                s.marker.lat = map.getCenter().lat;
+                                s.marker.lng = map.getCenter().lng;
+                                marker.setLatLng(new L.LatLng(map.getCenter().lat, map.getCenter().lng));
+                            }
                         });
                     });
 
@@ -172,9 +184,12 @@
                         scope.$apply(function(s) {
                             s.center.lat = map.getCenter().lat;
                             s.center.lng = map.getCenter().lng;
-                            marker.setLatLng(new L.LatLng(map.getCenter().lat, map.getCenter().lng));
-                            s.marker.lat = map.getCenter().lat;
-                            s.marker.lng = map.getCenter().lng;
+                            
+                            if (marker) {
+                                s.marker.lat = map.getCenter().lat;
+                                s.marker.lng = map.getCenter().lng;
+                                marker.setLatLng(new L.LatLng(map.getCenter().lat, map.getCenter().lng));
+                            }
                         });
                     });
 
@@ -185,14 +200,21 @@
                     scope.$watch("center.lng", function(newValue, oldValue) {
                         if (dragging_map) return;
                         map.setView(new L.LatLng(map.getCenter().lat, newValue), map.getZoom());
-                        marker.setLatLng(new L.LatLng(map.getCenter().lat, map.getCenter().lng));
+                        if (marker) {
+                            marker.setLatLng(new L.LatLng(map.getCenter().lat, map.getCenter().lng));    
+                        }
+                        
 
                     });
 
                     scope.$watch("center.lat", function(newValue, oldValue) {
                         if (dragging_map) return;
                         map.setView(new L.LatLng(newValue, map.getCenter().lng), map.getZoom());
-                        marker.setLatLng(new L.LatLng(map.getCenter().lat, map.getCenter().lng));
+
+                        if (marker) {
+                            marker.setLatLng(new L.LatLng(map.getCenter().lat, map.getCenter().lng));    
+                        }
+                        
                     });
 
                     // Listen for zoom
@@ -213,10 +235,6 @@
                 if (attrs.multimarkers) {
                     var markers_dict = [];
                     scope.$watch("multiMarkers.length", function(newMarkerList) {
-                        console.log(newMarkerList);
-                        _.each(markers_dict, function (item) {
-                            debugger;
-                        })
                         for (var mkey in scope.multiMarkers) {
                             (function(mkey) {
                                 var mark_dat = scope.multiMarkers[mkey];
