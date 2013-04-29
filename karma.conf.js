@@ -7,6 +7,7 @@ basePath = '';
 files = [
   JASMINE,
   JASMINE_ADAPTER,
+  'app/components/jquery/jquery.js',
   'app/components/angular/angular.js',
   'app/components/underscore/underscore.js',
   'app/components/amplify/store/amplify.store.js',

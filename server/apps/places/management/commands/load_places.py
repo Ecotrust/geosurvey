@@ -1,13 +1,11 @@
 from django.core.management.base import BaseCommand, CommandError
-from django.contrib.gis.geos import Point
-from django.contrib.gis.measure import Distance
 
-from places.models import Place, ShoreLine
+from places.models import Place
 
 
 import csv
 
-excluded_types = ["Airport", "Building", "Cemetary",
+excluded_types = ["Airport", "Building", "Cemetary", "Crossing",
                     "Census", "Church", "Civil", "Hospital", "Summit", "Tower",
                     "Military", "Mine", "School", "Post Office", "Tunnel", "Well"]
 
@@ -35,14 +33,7 @@ class Command(BaseCommand):
                 place, created = Place.objects.get_or_create(type=kwargs['type'], name=kwargs['name'], state=kwargs['state'], county=kwargs['county'])
                 place.lat = kwargs['lat']
                 place.lng = kwargs['lng']
-                place.location = Point(float(place.lat), float(place.lng))
-                #place.save()
-                # shoreline = ShoreLine.objects.filter(geom__distance_lt=(place.location, Distance(m=5000)))
-                # if shoreline.count() > 0:
-                #     place.save()
-                #     print rows, place
-                # else:
-                #     print rows, place, " not near shore"
+        
                 print rows, place
                 place.save()
 

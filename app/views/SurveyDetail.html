@@ -1,4 +1,4 @@
 <p ng-hide="survey.questions.length">This survey has no questions.</p>
-<h2>{{ question.title }}</h2>
+<h2>{{ question.displayTitle }}</h2>
 <span class="subtitle pull-right">{{ survey.questions.indexOf(question) + 1 }} of {{ survey.questions.length }}</span>
 <div ng-include="'/static/survey/views/questionTypes.html'"></div>
