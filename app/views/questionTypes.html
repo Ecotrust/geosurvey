@@ -59,7 +59,7 @@
         </form>
     </div>
     <div ng-switch-when="multi-select">
-        <form class="question" ng-submit="answerMultiSelect()">
+        <form class="question" ng-submit="answerMultiSelect(question.options, otherAnswer)">
             <label 
                 ng-repeat="option in question.options"
                 class="checkbox" 
@@ -74,6 +74,20 @@
                     value="{{option.label}}"> 
                     {{option.text}}
             </label>
+            <label 
+                class="checkbox" 
+                ng-class="{checked: otherOption.checked, disabled: otherOption.disabled }" 
+                for="checkbox_other">
+                <span class='icon'></span>
+                <span class='icon-to-fade'></span>
+                <input 
+                    type="checkbox" 
+                    id="checkbox_other" 
+                    ng-model="otherOption.checked"
+                    value="Other"> 
+                    Other
+            </label>
+            <input class="input-block-level" type="text" placeholder="Other Activity" ng-show="otherOption.checked" ng-model="otherAnswer" autofocus/> 
             <button type="submit" class="btn btn-primary btn-large btn-block" ng-hide="dialog">continue</button>
         </form>
     </div>

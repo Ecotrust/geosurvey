@@ -43,7 +43,10 @@ angular.module('askApp')
                 } else {
                     $scope.question.options = data;
                 }
-                
+                $scope.otherOption = {
+                    'checked': false
+                }
+                $scope.otherAnswer = null;
             });
         } else if ($scope.question && $scope.question.slug == 'county') {
             // Dependent on state answer.
@@ -187,7 +190,6 @@ angular.module('askApp')
 
     $scope.answerQuestion = function(answer, otherAnswer) {
         var url = ['/respond/answer', $scope.survey.slug, $routeParams.questionSlug, $routeParams.uuidSlug].join('/');
-
         if ($scope.dialog) {
             $scope.dialog.options.success($scope.question, answer);
         } else {
@@ -242,11 +244,19 @@ angular.module('askApp')
      * @param  {array} options An array of all options regardless of which options the
      * user selected.
      */
-    $scope.answerMultiSelect = function() {
-        var answers = _.filter($scope.question.options, function(option) {
+    $scope.answerMultiSelect = function(options, otherAnswer) {
+        var answers = _.filter(options, function(option) {
             return option.checked;
         });
-        
+
+        if (otherAnswer) {
+            answers.push({
+                text: otherAnswer,
+                label: otherAnswer,
+                checked: true,
+                other: true
+            });
+        }
         //answers = _.pluck(answers, 'label');
         $scope.answerQuestion(answers);
     };
