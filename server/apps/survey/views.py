@@ -26,7 +26,7 @@ def survey(request, template='survey/survey.html'):
 def answer(request, survey_slug, question_slug, uuid): #, survey_slug, question_slug, uuid):
     if request.method == 'POST':
         survey = get_object_or_404(Survey, slug=survey_slug)
-        question = get_object_or_404(Question, slug=question_slug)
+        question = get_object_or_404(Question, slug=question_slug, survey=survey)
         respondant = get_object_or_404(Respondant, uuid=uuid)
         response, created = Response.objects.get_or_create(question=question,respondant=respondant)
 
