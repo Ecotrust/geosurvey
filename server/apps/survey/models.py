@@ -57,7 +57,9 @@ class Question(models.Model):
     type = models.CharField(max_length=20,choices=QUESTION_TYPE_CHOICES,default='text')
     options = models.ManyToManyField(Option, null=True, blank=True)
     options_json = models.CharField(max_length=254, null=True, blank=True)
-    info = models.TextField(null=True, blank=True);
+    info = models.CharField(max_length=254, null=True, blank=True);
+
+    randomize_groups = models.BooleanField(default=False)
 
     modalQuestion = models.ForeignKey('self', null=True, blank=True)
 
@@ -69,7 +71,7 @@ class Question(models.Model):
             return "NA"
 
     def __str__(self):
-        return "%s/%s" % (self.survey_slug, self.label)
+        return "%s/%s (%s)" % (self.survey_slug, self.label, self.type)
         #return "%s/%s" % (self.survey_set.all()[0].slug, self.label)
 
 class Response(models.Model):

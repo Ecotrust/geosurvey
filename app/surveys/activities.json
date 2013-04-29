@@ -1,96 +1,92 @@
 [
     {
         "text": "Beach going (sitting, walking, running, dog walking, kite flying, etc.)",
-        "label": "NY",
+        "label": "beach-going",
         "group": "1"
     },
     {
         "text": "Biking or hiking",
-        "label": "NJ",
+        "label": "biking-hiking",
         "group": "1"
     },
     {
         "text": "Collection of non-living resources/beachcombing (agates, fossils, driftwood)",
-        "label": "DE",
+        "label": "beachcombing",
         "group": "1"
     },
     {
         "text": "Camping",
-        "label": "MD",
+        "label": "camping",
         "group": "1"
     },
     {
         "text": "Photography",
-        "label": "VA",
+        "label": "photography",
         "group": "1"
     },
     {
         "text": "Scenic enjoyment/sightseeing",
-        "label": "DC",
+        "label": "sightseeing",
         "group": "1"
     },
     {
         "text": "Sitting in your car watching the scene",
-        "label": "AL",
+        "label": "sitting-car",
         "group": "1"
     },
     {
         "text": "Watching birds and/or other marine life from shore (e.g. whale or seal watching)",
-        "label": "AK",
+        "label": "birdwatching",
         "group": "1"
     },
     {
         "text": "Hang gliding/parasailing",
-        "label": "AS",
+        "label": "hanggliding",
         "group": "2"
     },
     {
         "text": "Kite boarding",
-        "label": "AS",
+        "label": "kiteboarding",
         "group": "2"
     },
     {
         "text": "Skim boarding",
-        "label": "AL",
+        "label": "skimboarding",
         "group": "2"
     },
     {
         "text": "Surfing (from board or kayak)",
-        "label": "AS",
+        "label": "surfing",
         "group": "2"
     },
     {
         "text": "Swimming or body surfing",
-        "label": "AL",
+        "label": "swimming",
         "group": "2"
     },
     {
         "text": "Windsurfing",
-        "label": "AS",
+        "label": "windsurfing",
         "group": "2"
     },
     {
         "text": "Tide pooling",
-        "label": "AL",
+        "label": "tide-pooling",
         "group": "3"
     },
     {
         "text": "Free diving/snorkeling (from shore, from boat)",
-        "label": "AS",
+        "label": "free-diving-snorkeling",
         "group": "3"
     },
     {
         "text": "Kayaking or other paddling activity (canoe, stand up paddle board)",
-        "label": "AL",
+        "label": "kayaking",
         "group": "3"
     },
     {
         "text": "SCUBA diving (from shore, from boat)",
-        "label": "AS",
+        "label": "scuba-diving",
         "group": "3"
-    },
-    {
-        "text": "Other, please list: [TEXTBOX]",
-        "label": "AL"
     }
 ]
