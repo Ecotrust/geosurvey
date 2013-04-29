@@ -61,9 +61,16 @@ class Question(models.Model):
 
     modalQuestion = models.ForeignKey('self', null=True, blank=True)
 
-    def __str__(self):
-        return "%s" % self.label
+    @property
+    def survey_slug(self):
+        try:
+            return self.survey_set.all()[0].slug
+        except:
+            return "NA"
 
+    def __str__(self):
+        return "%s/%s" % (self.survey_slug, self.label)
+        #return "%s/%s" % (self.survey_set.all()[0].slug, self.label)
 
 class Response(models.Model):
     question = models.ForeignKey(Question)
