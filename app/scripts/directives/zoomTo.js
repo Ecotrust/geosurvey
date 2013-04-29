@@ -58,7 +58,7 @@ angular.module('askApp')
                     scope.zoomTo({
                         lat: place.lat,
                         lng: place.lng,
-                        zoom: 10
+                        zoom: 13
 
                     });
                 });
