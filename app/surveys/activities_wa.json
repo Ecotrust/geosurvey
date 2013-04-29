@@ -1,0 +1,101 @@
+[
+    {
+        "text": "Beach going (sitting, walking, running, dog walking, kite flying, etc.)",
+        "label": "beach-going",
+        "group": "1"
+    },
+    {
+        "text": "Biking or hiking",
+        "label": "biking-hiking",
+        "group": "1"
+    },
+    {
+        "text": "Collection of non-living resources/beachcombing (agates, fossils, driftwood)",
+        "label": "beachcombing",
+        "group": "1"
+    },
+    {
+        "text": "Camping",
+        "label": "camping",
+        "group": "1"
+    },
+    {
+        "text": "Photography",
+        "label": "photography",
+        "group": "1"
+    },
+    {
+        "text": "Scenic enjoyment/sightseeing",
+        "label": "sightseeing",
+        "group": "1"
+    },
+    {
+        "text": "Sitting in your car watching the scene",
+        "label": "sitting-car",
+        "group": "1"
+    },
+    {
+        "text": "Watching birds and/or other marine life from shore (e.g. whale or seal watching)",
+        "label": "birdwatching",
+        "group": "1"
+    },{
+        "text": "Boating/sailing",
+        "label": "boating-sailing",
+        "group": "2"
+    },
+    {
+        "text": "Hang gliding/parasailing",
+        "label": "hang-gliding",
+        "group": "2"
+    },
+    {
+        "text": "Kite boarding",
+        "label": "kiteboarding",
+        "group": "2"
+    },
+    {
+        "text": "Skim boarding",
+        "label": "skimboarding",
+        "group": "2"
+    },
+    {
+        "text": "Surfing (from board or kayak)",
+        "label": "surfing",
+        "group": "2"
+    },
+    {
+        "text": "Swimming or body surfing",
+        "label": "swimming",
+        "group": "2"
+    },
+    {
+        "text": "Windsurfing",
+        "label": "windsurfing",
+        "group": "2"
+    },
+    {
+        "text": "Tide pooling",
+        "label": "tide-pooling",
+        "group": "3"
+    },
+    {
+        "text": "Free diving/snorkeling (from shore, from boat)",
+        "label": "free-diving-snorkeling",
+        "group": "3"
+    },
+    {
+        "text": "Kayaking or other paddling activity (canoe, stand up paddle board, Tribal canoe journey)",
+        "label": "kayaking",
+        "group": "3"
+    },
+    {
+        "text": "SCUBA diving (from shore, from boat)",
+        "label": "scuba-diving",
+        "group": "3"
+    },
+    {
+        "text": "Coastal tribal event (e.g., attendance at annual tribal celebrations)",
+        "label": "tribal-event",
+        "group": "3"
+    }
+]
