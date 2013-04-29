@@ -247,7 +247,7 @@ angular.module('askApp')
             return option.checked;
         });
         
-        answers = _.pluck(answers, 'label');
+        //answers = _.pluck(answers, 'label');
         $scope.answerQuestion(answers);
     };
 
