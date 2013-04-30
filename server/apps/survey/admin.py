@@ -10,8 +10,8 @@ class RespondantAdmin(admin.ModelAdmin):
 
 
 
-# class QuestionInline(admin.TabularInline):
-#     model = Survey.questions.through
+class PageInline(admin.TabularInline):
+    model = Page
 
 
 class SurveyAdmin(admin.ModelAdmin):
@@ -21,6 +21,9 @@ class SurveyAdmin(admin.ModelAdmin):
 class QuestionAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug':('label',),}
     prepopulated_fields = {'info':('label',),}
+    inlines = [
+        PageInline,
+    ]
     class Media:
         js = [
            '/static/grappelli/tinymce/jscripts/tiny_mce/tiny_mce.js'
