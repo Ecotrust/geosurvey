@@ -33,7 +33,7 @@ angular.module('askApp')
         $scope.nextQuestionPath = $scope.getNextQuestionPath();
 
         // Fill options list.
-        if ($scope.question && $scope.question.options_json && $scope.question.options_json.length > 0) {
+        if ($scope.question && $scope.question.options_json && $scope.question.options_json.length > 0 && ! $scope.question.options_from_previous_answer) {
             $http.get($scope.question.options_json).success(function(data) {
                 var groups = _.groupBy(data, function (item) {
                     return item.group;
@@ -71,6 +71,13 @@ angular.module('askApp')
                 }];
             });
         }
+
+        if ($scope.question && $scope.question.options_from_previous_answer) {
+            $scope.question.options = $scope.getAnswer($scope.question.options_from_previous_answer);
+            _.each($scope.question.options, function (item) {
+                item.checked = false;
+            });
+        };
 
         if ($scope.question && $scope.question.type === 'map-multipoint') {
             $scope.map = {

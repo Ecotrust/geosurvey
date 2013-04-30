@@ -55,6 +55,12 @@ def _install_django():
                            /usr/bin/touch wsgi.py' % vars)
 
 
+
+def migrate():
+    """ Create the django superuser (interactive!) """
+    run('cd %(app_dir)s && %(venv)s/bin/python manage.py migrate' % vars)
+
+
 def create_superuser():
     """ Create the django superuser (interactive!) """
     run('cd %(app_dir)s && %(venv)s/bin/python manage.py createsuperuser' % vars)
