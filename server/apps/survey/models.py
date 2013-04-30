@@ -84,9 +84,11 @@ class Question(models.Model):
 
     @property
     def survey_slug(self):
-        try:
+        if self.survey_set.all():
             return self.survey_set.all()[0].slug
-        except:
+        elif self.question_set.all():
+            return self.question_set.all()[0].slug
+        else:
             return "NA"
 
     def __str__(self):

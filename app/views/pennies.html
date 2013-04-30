@@ -1,0 +1,11 @@
+<div class="row-fluid">
+    <div class="span4">
+        <ul class="unstyled">
+            <li ng-repeat="location in locations">location</li>
+        </ul>
+    </div>
+    <div class="span8">
+        <leaflet center="map.center" zoom="map.zoom" multimarkers="locations" popupfield="'answer'"></leaflet>
+    </div>
+</div>
+<button class="btn btn-primary btn-block btn-large" ng-click="gotoNextQuestion()">continue</button>

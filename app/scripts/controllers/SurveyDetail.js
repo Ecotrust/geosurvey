@@ -79,6 +79,24 @@ angular.module('askApp')
             });
         };
 
+        if ($scope.question && $scope.question.type === 'pennies') {
+            $scope.map = {
+                center: {
+                    lat: 38.75,
+                    lng: -72.59
+                },
+                zoom: 6,
+                
+                msg: null
+            }
+            if ($scope.getAnswer($scope.question.options_from_previous_answer)) {
+                //$scope.locations = JSON.parse($scope.getAnswer($scope.question.options_from_previous_answer));
+                $scope.locations = JSON.parse('[{"lat":38.75,"lng":-72.59,"answers":[{"text":"Camping","label":"camping","group":"1","checked":true},{"text":"Photography","label":"photography","group":"1","checked":true}]},{"lat":38.1172716583054,"lng":-73.65234375,"answers":[{"text":"Scenic enjoyment/sightseeing","label":"sightseeing","group":"1","checked":true},{"text":"Sitting in your car watching the scene","label":"sitting-car","group":"1","checked":true}]}]');    
+            }
+            
+            
+        }
+
         if ($scope.question && $scope.question.type === 'map-multipoint') {
             $scope.map = {
                 center: {
