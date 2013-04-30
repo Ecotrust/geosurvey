@@ -148,6 +148,125 @@
         "question": 30
     }
 }, {
+    "pk": 26,
+    "model": "survey.page",
+    "fields": {
+        "survey": 4,
+        "question": 31
+    }
+}, {
+    "pk": 27,
+    "model": "survey.page",
+    "fields": {
+        "survey": 4,
+        "question": 32
+    }
+}, {
+    "pk": 28,
+    "model": "survey.page",
+    "fields": {
+        "survey": 4,
+        "question": 33
+    }
+}, {
+    "pk": 29,
+    "model": "survey.page",
+    "fields": {
+        "survey": 4,
+        "question": 40
+    }
+}, {
+    "pk": 30,
+    "model": "survey.page",
+    "fields": {
+        "survey": 4,
+        "question": 41
+    }
+}, {
+    "pk": 31,
+    "model": "survey.page",
+    "fields": {
+        "survey": 4,
+        "question": 42
+    }
+}, {
+    "pk": 32,
+    "model": "survey.page",
+    "fields": {
+        "survey": 4,
+        "question": 45
+    }
+}, {
+    "pk": 33,
+    "model": "survey.page",
+    "fields": {
+        "survey": 4,
+        "question": 46
+    }
+}, {
+    "pk": 34,
+    "model": "survey.page",
+    "fields": {
+        "survey": 4,
+        "question": 47
+    }
+}, {
+    "pk": 35,
+    "model": "survey.page",
+    "fields": {
+        "survey": 4,
+        "question": 48
+    }
+}, {
+    "pk": 36,
+    "model": "survey.page",
+    "fields": {
+        "survey": 4,
+        "question": 49
+    }
+}, {
+    "pk": 37,
+    "model": "survey.page",
+    "fields": {
+        "survey": 4,
+        "question": 50
+    }
+}, {
+    "pk": 38,
+    "model": "survey.page",
+    "fields": {
+        "survey": 4,
+        "question": 51
+    }
+}, {
+    "pk": 39,
+    "model": "survey.page",
+    "fields": {
+        "survey": 4,
+        "question": 52
+    }
+}, {
+    "pk": 40,
+    "model": "survey.page",
+    "fields": {
+        "survey": 4,
+        "question": 53
+    }
+}, {
+    "pk": 41,
+    "model": "survey.page",
+    "fields": {
+        "survey": 4,
+        "question": 54
+    }
+}, {
+    "pk": 42,
+    "model": "survey.page",
+    "fields": {
+        "survey": 4,
+        "question": 56
+    }
+}, {
     "pk": 1,
     "model": "survey.survey",
     "fields": {
@@ -167,6 +286,13 @@
     "fields": {
         "name": "Washington Opt In",
         "slug": "washington-opt-in"
+    }
+}, {
+    "pk": 4,
+    "model": "survey.survey",
+    "fields": {
+        "name": "Washington Panel",
+        "slug": "washington-panel"
     }
 }, {
     "pk": 4,
@@ -519,21 +645,102 @@
         "label": "strongly-disagree"
     }
 }, {
-    "pk": 1,
-    "model": "survey.question",
+    "pk": 54,
+    "model": "survey.option",
     "fields": {
-        "info": null,
-        "randomize_groups": false,
-        "options_from_previous_answer": null,
-        "modalQuestion": null,
-        "title": "What is your name?",
-        "allow_other": false,
-        "label": "Name",
-        "options": [],
-        "options_json": null,
-        "order": 0,
-        "type": "text",
-        "slug": "name"
+        "text": "Yes",
+        "label": "yes"
+    }
+}, {
+    "pk": 55,
+    "model": "survey.option",
+    "fields": {
+        "text": "No",
+        "label": "no"
+    }
+}, {
+    "pk": 56,
+    "model": "survey.option",
+    "fields": {
+        "text": "Just the last year",
+        "label": "just-last-year"
+    }
+}, {
+    "pk": 57,
+    "model": "survey.option",
+    "fields": {
+        "text": "One to three years",
+        "label": "one-three-years"
+    }
+}, {
+    "pk": 58,
+    "model": "survey.option",
+    "fields": {
+        "text": "About four to ten years",
+        "label": "about-four-ten-years"
+    }
+}, {
+    "pk": 59,
+    "model": "survey.option",
+    "fields": {
+        "text": "More than ten years",
+        "label": "more-ten-years"
+    }
+}, {
+    "pk": 60,
+    "model": "survey.option",
+    "fields": {
+        "text": "All my life",
+        "label": "all-my-life"
+    }
+}, {
+    "pk": 61,
+    "model": "survey.option",
+    "fields": {
+        "text": "Bus",
+        "label": "bus"
+    }
+}, {
+    "pk": 62,
+    "model": "survey.option",
+    "fields": {
+        "text": "Bike",
+        "label": "bike"
+    }
+}, {
+    "pk": 63,
+    "model": "survey.option",
+    "fields": {
+        "text": "Fly",
+        "label": "fly"
+    }
+}, {
+    "pk": 64,
+    "model": "survey.option",
+    "fields": {
+        "text": "Walking",
+        "label": "walking"
+    }
+}, {
+    "pk": 65,
+    "model": "survey.option",
+    "fields": {
+        "text": "Drove a personal car",
+        "label": "drove-personal-car"
+    }
+}, {
+    "pk": 66,
+    "model": "survey.option",
+    "fields": {
+        "text": "Drove a rented car",
+        "label": "drove-rented-car"
+    }
+}, {
+    "pk": 67,
+    "model": "survey.option",
+    "fields": {
+        "text": "Rode with someone else -- carpooled",
+        "label": "rode-someone-else-carpooled"
     }
 }, {
     "pk": 2,
@@ -553,57 +760,6 @@
         "slug": "age"
     }
 }, {
-    "pk": 3,
-    "model": "survey.question",
-    "fields": {
-        "info": null,
-        "randomize_groups": false,
-        "options_from_previous_answer": null,
-        "modalQuestion": null,
-        "title": "Please enter your age:",
-        "allow_other": false,
-        "label": "Enter your age",
-        "options": [],
-        "options_json": null,
-        "order": 0,
-        "type": "integer",
-        "slug": "marco-age"
-    }
-}, {
-    "pk": 4,
-    "model": "survey.question",
-    "fields": {
-        "info": "",
-        "randomize_groups": false,
-        "options_from_previous_answer": null,
-        "modalQuestion": null,
-        "title": "What state do you live in?",
-        "allow_other": false,
-        "label": "Pick a state",
-        "options": [4, 5, 6, 7, 8],
-        "options_json": "",
-        "order": 0,
-        "type": "auto-single-select",
-        "slug": "state"
-    }
-}, {
-    "pk": 5,
-    "model": "survey.question",
-    "fields": {
-        "info": null,
-        "randomize_groups": false,
-        "options_from_previous_answer": null,
-        "modalQuestion": null,
-        "title": "What county do you live in?",
-        "allow_other": false,
-        "label": "Pick a county",
-        "options": [],
-        "options_json": null,
-        "order": 0,
-        "type": "auto-single-select",
-        "slug": "county"
-    }
-}, {
     "pk": 6,
     "model": "survey.question",
     "fields": {
@@ -619,23 +775,6 @@
         "order": 0,
         "type": "map-multipoint",
         "slug": "activity-locations"
-    }
-}, {
-    "pk": 7,
-    "model": "survey.question",
-    "fields": {
-        "info": "true",
-        "randomize_groups": false,
-        "options_from_previous_answer": null,
-        "modalQuestion": null,
-        "title": "Activities",
-        "allow_other": false,
-        "label": "Activities Info Page",
-        "options": [],
-        "options_json": "",
-        "order": 0,
-        "type": "info",
-        "slug": "info-activities"
     }
 }, {
     "pk": 8,
@@ -789,23 +928,6 @@
         "order": 0,
         "type": "multi-select",
         "slug": "activity-locations"
-    }
-}, {
-    "pk": 17,
-    "model": "survey.question",
-    "fields": {
-        "info": "primary-activity",
-        "randomize_groups": false,
-        "options_from_previous_answer": "activities",
-        "modalQuestion": null,
-        "title": "Of the coastal and ocean recreation activities you just selected, what was your <strong>primary</strong> recreational activity during your last trip to Pacific coast of Washington? The primary activity is typically the main activity that brought you to the coast on your trip.  ",
-        "allow_other": false,
-        "label": "Primary Activity",
-        "options": [],
-        "options_json": "",
-        "order": 0,
-        "type": "single-select",
-        "slug": "primary-activity"
     }
 }, {
     "pk": 18,
@@ -1027,5 +1149,328 @@
         "order": 18,
         "type": "text",
         "slug": "feedback"
+    }
+}, {
+    "pk": 31,
+    "model": "survey.question",
+    "fields": {
+        "info": "",
+        "randomize_groups": false,
+        "options_from_previous_answer": "",
+        "modalQuestion": null,
+        "title": "We are interested in knowing about your coastal and ocean recreation activity on the Pacific coast of Washington.  Have you been to the Pacific coast of Washington (dark blue area) at least once in the last 12 months?",
+        "allow_other": false,
+        "label": "Been to the Area?",
+        "options": [54, 55],
+        "options_json": "",
+        "order": 0,
+        "type": "auto-single-select",
+        "slug": "study-area"
+    }
+}, {
+    "pk": 32,
+    "model": "survey.question",
+    "fields": {
+        "info": "",
+        "randomize_groups": false,
+        "options_from_previous_answer": "",
+        "modalQuestion": null,
+        "title": "Please estimate how many trips you have made to the Pacific coast of Washington in the last 12 months for primarily recreation purposes (e.g., beach going, bird watching, fishing, surfing, boating, etc.). A trip is defined as an intentional trip to the Pacific coast of Washington separate from your daily routine.",
+        "allow_other": false,
+        "label": "Number of Trips",
+        "options": [],
+        "options_json": "",
+        "order": 1,
+        "type": "integer",
+        "slug": "number-of-trips"
+    }
+}, {
+    "pk": 33,
+    "model": "survey.question",
+    "fields": {
+        "info": "",
+        "randomize_groups": true,
+        "options_from_previous_answer": "",
+        "modalQuestion": null,
+        "title": "We are interested in knowing what types of coastal and ocean recreational activities you do when you go to the Pacific coast of Washington. Which of the following activities have you participated in during the last 12 months on the Pacific coast of Washington?  ",
+        "allow_other": false,
+        "label": "Types of Activities",
+        "options": [],
+        "options_json": "/static/survey/surveys/activities_wa_panel.json",
+        "order": 2,
+        "type": "multi-select",
+        "slug": "activities"
+    }
+}, {
+    "pk": 40,
+    "model": "survey.question",
+    "fields": {
+        "info": "",
+        "randomize_groups": false,
+        "options_from_previous_answer": "",
+        "modalQuestion": null,
+        "title": "Below is a map of the coastal counties within the Pacific coast of Washington. You previously responded that you visited this area {{ getAnswer('number-of-trips') }} time(s) to recreate in the last 12 months. Please indicate how many times you visited each of these coastal counties to recreate in the last 12 months on the map below. If you did not visit a particular coastal county, please choose \"zero\". Your best estimate of the county is fine.",
+        "allow_other": false,
+        "label": "Number of Visits to Each County",
+        "options": [],
+        "options_json": "",
+        "order": 3,
+        "type": "text",
+        "slug": "county-visits"
+    }
+}, {
+    "pk": 41,
+    "model": "survey.question",
+    "fields": {
+        "info": "",
+        "randomize_groups": false,
+        "options_from_previous_answer": "",
+        "modalQuestion": null,
+        "title": " For how long have you been visiting the Pacific coast of Washington and enjoying one or more of the activities you identified?",
+        "allow_other": false,
+        "label": "How long have you been visiting the coast?",
+        "options": [56, 57, 58, 59, 60],
+        "options_json": "",
+        "order": 4,
+        "type": "auto-single-select",
+        "slug": "how-long"
+    }
+}, {
+    "pk": 42,
+    "model": "survey.question",
+    "fields": {
+        "info": "last-trip",
+        "randomize_groups": false,
+        "options_from_previous_answer": "",
+        "modalQuestion": null,
+        "title": "Last Trip",
+        "allow_other": false,
+        "label": "Last Trip",
+        "options": [],
+        "options_json": "",
+        "order": 5,
+        "type": "info",
+        "slug": "last-trip"
+    }
+}, {
+    "pk": 44,
+    "model": "survey.question",
+    "fields": {
+        "info": "",
+        "randomize_groups": false,
+        "options_from_previous_answer": "",
+        "modalQuestion": null,
+        "title": "The following questions are about your last trip for primarily recreation purposes (e.g., beach going, bird watching, surfing, boating, etc) to the coastal and ocean areas of the Pacific coast of Washington. Again, a visit is defined as an intentional trip --separate from your daily routine.",
+        "allow_other": false,
+        "label": "Date of last visit",
+        "options": [],
+        "options_json": "",
+        "order": 6,
+        "type": "text",
+        "slug": "date-last-visit"
+    }
+}, {
+    "pk": 45,
+    "model": "survey.question",
+    "fields": {
+        "info": "",
+        "randomize_groups": false,
+        "options_from_previous_answer": "",
+        "modalQuestion": null,
+        "title": "When was your last coastal recreation trip to the Pacific coast of Washington --defined as the area shown in this map. Your best estimate is fine. [SHOW STUDY REGION MAP]\r\n[INSERT CALENDAR FOR RESPONDENT TO INDICATE DATE]\r\n",
+        "allow_other": false,
+        "label": "Date of last visit",
+        "options": [],
+        "options_json": "",
+        "order": 7,
+        "type": "text",
+        "slug": "date-last-visit"
+    }
+}, {
+    "pk": 46,
+    "model": "survey.question",
+    "fields": {
+        "info": "",
+        "randomize_groups": false,
+        "options_from_previous_answer": "",
+        "modalQuestion": null,
+        "title": "On your last coastal recreation trip, did you start your trip from your home?  ",
+        "allow_other": false,
+        "label": "Did you start your last trip from home",
+        "options": [54, 55],
+        "options_json": "",
+        "order": 8,
+        "type": "auto-single-select",
+        "slug": "last-trip-origin"
+    }
+}, {
+    "pk": 47,
+    "model": "survey.question",
+    "fields": {
+        "info": "",
+        "randomize_groups": false,
+        "options_from_previous_answer": "",
+        "modalQuestion": null,
+        "title": "What was the primary mode(s) of transportation you used to get to the Pacific coast of Washington on your last coastal recreation trip?",
+        "allow_other": true,
+        "label": "Primary Mode of Transportation",
+        "options": [61, 62, 63, 64, 65, 66, 67],
+        "options_json": "",
+        "order": 9,
+        "type": "multi-select",
+        "slug": "primary-mode-transportation"
+    }
+}, {
+    "pk": 48,
+    "model": "survey.question",
+    "fields": {
+        "info": "",
+        "randomize_groups": false,
+        "options_from_previous_answer": "",
+        "modalQuestion": null,
+        "title": "What was the primary mode(s) of transportation you used to travel around the Pacific coast of Washington on your last coastal recreation trip?",
+        "allow_other": true,
+        "label": "Primary Mode of Transportation Around Coast",
+        "options": [61, 62, 64, 65, 66, 67],
+        "options_json": "",
+        "order": 10,
+        "type": "multi-select",
+        "slug": "primary-mode-transportation-on-coast"
+    }
+}, {
+    "pk": 49,
+    "model": "survey.question",
+    "fields": {
+        "info": "",
+        "randomize_groups": false,
+        "options_from_previous_answer": "",
+        "modalQuestion": null,
+        "title": "Approximately how many people (including yourself) went on your last coastal recreation trip to the Pacific coast of Washington?  ",
+        "allow_other": false,
+        "label": "How many people went on your last trip",
+        "options": [],
+        "options_json": "",
+        "order": 11,
+        "type": "integer",
+        "slug": "how-many-people"
+    }
+}, {
+    "pk": 50,
+    "model": "survey.question",
+    "fields": {
+        "info": "",
+        "randomize_groups": true,
+        "options_from_previous_answer": "",
+        "modalQuestion": null,
+        "title": "What coastal and ocean recreation activities did you participate in during your last coastal recreation trip to the Pacific coast of Washington?",
+        "allow_other": true,
+        "label": "What activities did you participate in on your last trip",
+        "options": [],
+        "options_json": "/static/survey/surveys/activities_wa_panel.json",
+        "order": 12,
+        "type": "multi-select",
+        "slug": "activities-last-trip"
+    }
+}, {
+    "pk": 51,
+    "model": "survey.question",
+    "fields": {
+        "info": "",
+        "randomize_groups": false,
+        "options_from_previous_answer": "activities-last-trip",
+        "modalQuestion": null,
+        "title": "Of the following coastal and ocean recreation activities you selected what was your primary activity during your last coastal recreation trip to the Pacific coast of Washington? (please select only one)",
+        "allow_other": false,
+        "label": "Primary Activity of Last trip",
+        "options": [],
+        "options_json": "",
+        "order": 13,
+        "type": "auto-single-select",
+        "slug": "last-trip-primary"
+    }
+}, {
+    "pk": 52,
+    "model": "survey.question",
+    "fields": {
+        "info": "",
+        "randomize_groups": false,
+        "options_from_previous_answer": "",
+        "modalQuestion": null,
+        "title": "How many nights did you spend at the coast during your last coastal recreation trip to the Pacific coast of Washington?",
+        "allow_other": false,
+        "label": "Number of Nights",
+        "options": [13, 14, 15, 16, 17, 18],
+        "options_json": "",
+        "order": 14,
+        "type": "auto-single-select",
+        "slug": "number-of-nights"
+    }
+}, {
+    "pk": 53,
+    "model": "survey.question",
+    "fields": {
+        "info": "",
+        "randomize_groups": false,
+        "options_from_previous_answer": "",
+        "modalQuestion": null,
+        "title": "During your last coastal recreation trip to the Pacific coast of Washington, please indicate if your party spent money on the following items.",
+        "allow_other": false,
+        "label": "Last Trip Amount Spent",
+        "options": [],
+        "options_json": "",
+        "order": 15,
+        "type": "text",
+        "slug": "last-trip-amount-spent"
+    }
+}, {
+    "pk": 54,
+    "model": "survey.question",
+    "fields": {
+        "info": "",
+        "randomize_groups": false,
+        "options_from_previous_answer": "",
+        "modalQuestion": null,
+        "title": "During your last coastal recreation trip to the Pacific coast of Washington, please estimate how much your party spent on the following items and the number of people it covered.",
+        "allow_other": false,
+        "label": "How much was spent",
+        "options": [],
+        "options_json": "",
+        "order": 16,
+        "type": "multi-select",
+        "slug": "how-much"
+    }
+}, {
+    "pk": 55,
+    "model": "survey.question",
+    "fields": {
+        "info": "",
+        "randomize_groups": false,
+        "options_from_previous_answer": "",
+        "modalQuestion": null,
+        "title": "Which activities did you participate in at this location?",
+        "allow_other": false,
+        "label": "Activity at Location",
+        "options": [],
+        "options_json": "/static/survey/surveys/activities_wa_panel.json",
+        "order": 0,
+        "type": "multi-select",
+        "slug": "activity-locations-wa-panel"
+    }
+}, {
+    "pk": 56,
+    "model": "survey.question",
+    "fields": {
+        "info": "",
+        "randomize_groups": false,
+        "options_from_previous_answer": "",
+        "modalQuestion": 55,
+        "title": "Navigate the map or use search function to zoom to the areas which you conducted ocean and coastal recreation activities in last 12 months.",
+        "allow_other": false,
+        "label": "Activity Locations",
+        "options": [],
+        "options_json": "",
+        "order": 17,
+        "type": "map-multipoint",
+        "slug": "activity-locations"
     }
 }]

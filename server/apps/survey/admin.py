@@ -19,8 +19,7 @@ class SurveyAdmin(admin.ModelAdmin):
 
 
 class QuestionAdmin(admin.ModelAdmin):
-    prepopulated_fields = {'slug':('label',),}
-    prepopulated_fields = {'info':('label',),}
+    prepopulated_fields = {'slug':('label',),'info':('label',),}
     inlines = [
         PageInline,
     ]
