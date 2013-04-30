@@ -10,8 +10,8 @@ class RespondantAdmin(admin.ModelAdmin):
 
 
 
-class QuestionInline(admin.TabularInline):
-    model = Survey.questions.through
+# class QuestionInline(admin.TabularInline):
+#     model = Survey.questions.through
 
 
 class SurveyAdmin(admin.ModelAdmin):
@@ -31,7 +31,7 @@ class OptionAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Respondant, RespondantAdmin)
-admin.site.register(Question, QuestionAdmin)
+admin.site.register(Question)
 admin.site.register(Survey, SurveyAdmin)
 admin.site.register(Option, OptionAdmin)
 admin.site.register(Response)

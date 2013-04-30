@@ -85,6 +85,13 @@
         "question": 21
     }
 }, {
+    "pk": 17,
+    "model": "survey.page",
+    "fields": {
+        "survey": 3,
+        "question": 22
+    }
+}, {
     "pk": 1,
     "model": "survey.survey",
     "fields": {
@@ -209,6 +216,104 @@
     "fields": {
         "text": "5+",
         "label": "5"
+    }
+}, {
+    "pk": 19,
+    "model": "survey.option",
+    "fields": {
+        "text": "Parking",
+        "label": "parking"
+    }
+}, {
+    "pk": 20,
+    "model": "survey.option",
+    "fields": {
+        "text": "Car Fuel",
+        "label": "car-fuel"
+    }
+}, {
+    "pk": 21,
+    "model": "survey.option",
+    "fields": {
+        "text": "Airline Flight",
+        "label": "airline-flight"
+    }
+}, {
+    "pk": 22,
+    "model": "survey.option",
+    "fields": {
+        "text": "Food and beverages from a store",
+        "label": "food-and-beverages-store"
+    }
+}, {
+    "pk": 23,
+    "model": "survey.option",
+    "fields": {
+        "text": "Food and beverages at a restaurant or bar",
+        "label": "food-and-beverages-restaurant-or-bar"
+    }
+}, {
+    "pk": 24,
+    "model": "survey.option",
+    "fields": {
+        "text": "Souvenirs (t-shirts, posters, gifts, etc.)",
+        "label": "souvenirs-t-shirts-posters-gifts-etc"
+    }
+}, {
+    "pk": 25,
+    "model": "survey.option",
+    "fields": {
+        "text": "Sundries (sunscreen, surf wax, motion sickness pills, batteries, film and processing etc.)",
+        "label": "sundries-sunscreen-surf-wax-motion-sickness-pills-batteries-film"
+    }
+}, {
+    "pk": 26,
+    "model": "survey.option",
+    "fields": {
+        "text": "Car rental",
+        "label": "car-rental"
+    }
+}, {
+    "pk": 27,
+    "model": "survey.option",
+    "fields": {
+        "text": "Dive equiment rental and airfills",
+        "label": "dive-equiment-rental-and-airfills"
+    }
+}, {
+    "pk": 28,
+    "model": "survey.option",
+    "fields": {
+        "text": "Equipment rental (Surfboard, bike, kayak, stand up paddle,etc)",
+        "label": "equipment-rental-surfboard-bike-kayak-stand-paddleetc"
+    }
+}, {
+    "pk": 29,
+    "model": "survey.option",
+    "fields": {
+        "text": "Lodging (if you stayed overnight)",
+        "label": "lodging-if-you-stayed-overnight"
+    }
+}, {
+    "pk": 30,
+    "model": "survey.option",
+    "fields": {
+        "text": "Charter fee (whale watching, etc.)",
+        "label": "charter-fee-whale-watching-etc"
+    }
+}, {
+    "pk": 31,
+    "model": "survey.option",
+    "fields": {
+        "text": "Museum, aquarium, or other entrance fee",
+        "label": "museum-aquarium-or-other-entrance-fee"
+    }
+}, {
+    "pk": 32,
+    "model": "survey.option",
+    "fields": {
+        "text": "Lessons, clinics, camps",
+        "label": "lessons-clinics-camps"
     }
 }, {
     "pk": 1,
@@ -352,7 +457,7 @@
     "fields": {
         "info": "",
         "randomize_groups": false,
-        "options_from_previous_answer": null,
+        "options_from_previous_answer": "",
         "modalQuestion": null,
         "title": "Please enter your age",
         "allow_other": false,
@@ -564,7 +669,24 @@
         "options": [13, 14, 15, 16, 17, 18],
         "options_json": "",
         "order": 10,
-        "type": "single-select",
+        "type": "auto-single-select",
         "slug": "number-of-nights"
+    }
+}, {
+    "pk": 22,
+    "model": "survey.question",
+    "fields": {
+        "info": "",
+        "randomize_groups": false,
+        "options_from_previous_answer": "",
+        "modalQuestion": null,
+        "title": "During your last trip to the Pacific coast of Washington, please indicate if your party spent money on the following items.",
+        "allow_other": true,
+        "label": "Spent money on items",
+        "options": [20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 19],
+        "options_json": "",
+        "order": 11,
+        "type": "multi-select",
+        "slug": "items-spent"
     }
 }]
