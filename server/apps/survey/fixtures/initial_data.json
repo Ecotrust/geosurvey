@@ -92,6 +92,13 @@
         "question": 22
     }
 }, {
+    "pk": 18,
+    "model": "survey.page",
+    "fields": {
+        "survey": 3,
+        "question": 23
+    }
+}, {
     "pk": 1,
     "model": "survey.survey",
     "fields": {
@@ -688,5 +695,22 @@
         "order": 11,
         "type": "multi-select",
         "slug": "items-spent"
+    }
+}, {
+    "pk": 23,
+    "model": "survey.question",
+    "fields": {
+        "info": "",
+        "randomize_groups": false,
+        "options_from_previous_answer": "",
+        "modalQuestion": null,
+        "title": "During your last trip to the Pacific coast of Washington, please estimate how much your party spent on the following items and the number of people it covered.",
+        "allow_other": false,
+        "label": "Itemized Expenditures",
+        "options": [],
+        "options_json": "",
+        "order": 12,
+        "type": "text",
+        "slug": "itemized-expenditures"
     }
 }]
