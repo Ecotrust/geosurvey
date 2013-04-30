@@ -22,10 +22,18 @@ class Respondant(models.Model):
 
 
 
+class Page(models.Model):
+    question = models.ForeignKey('Question')
+    survey = models.ForeignKey('Survey')
+    
+    def __str__(self):
+        return "%s/%s" % (self.survey.name, self.question.slug)
+
+
 class Survey(models.Model):
     name = models.CharField(max_length=254)
     slug = models.SlugField(max_length=254, unique=True)
-    questions = models.ManyToManyField('Question', null=True, blank=True)
+    questions = models.ManyToManyField('Question', null=True, blank=True, through="Page")
 
     def __str__(self):
         return "%s" % self.name
@@ -53,6 +61,7 @@ class Option(models.Model):
 class Question(models.Model):
     title = models.TextField()
     label = models.CharField(max_length=254)
+    order = models.IntegerField(default=0)
     slug = models.SlugField(max_length=64)
     type = models.CharField(max_length=20,choices=QUESTION_TYPE_CHOICES,default='text')
     options = models.ManyToManyField(Option, null=True, blank=True)
@@ -60,8 +69,12 @@ class Question(models.Model):
     info = models.CharField(max_length=254, null=True, blank=True);
 
     randomize_groups = models.BooleanField(default=False)
-
+    options_from_previous_answer = models.CharField(max_length=254, null=True, blank=True)
+    allow_other = models.BooleanField(default=False)
     modalQuestion = models.ForeignKey('self', null=True, blank=True)
+
+    class Meta:
+        ordering = ['order']
 
     @property
     def survey_slug(self):
@@ -71,7 +84,7 @@ class Question(models.Model):
             return "NA"
 
     def __str__(self):
-        return "%s/%s (%s)" % (self.survey_slug, self.label, self.type)
+        return "%s/%s/%s (%d)" % (self.survey_slug, self.title, self.type, self.order)
         #return "%s/%s" % (self.survey_set.all()[0].slug, self.label)
 
 class Response(models.Model):

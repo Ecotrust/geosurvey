@@ -36,8 +36,7 @@
                     value="{{ option.text }}">
                         {{ option.text || option.name }}
                 </option>
-                <option value="other">Other</option>
-
+                <option value="other" ng-show="question.allow_other">Other</option>
             </select>
             <input class="input-block-level" type="text" placeholder="{{ question.label }}" ng-show="answer == 'other'" ng-model="otherAnswer" autofocus/>   
             <button type="submit" class="btn btn-primary btn-large btn-block">continue</button>
@@ -84,6 +83,7 @@
                     type="checkbox" 
                     id="checkbox_other" 
                     ng-model="otherOption.checked"
+                    ng-show="question.allow_other"
                     value="Other"> 
                     Other
             </label>
