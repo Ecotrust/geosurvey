@@ -39,7 +39,7 @@ class QuestionResource(ModelResource):
     modalQuestion = fields.ToOneField('self', 'modalQuestion', full=True, null=True, blank=True)
 
     class Meta:
-        queryset = Question.objects.all().order_by('order')
+        queryset = Question.objects.all().order_by('order');
 
 
 
