@@ -99,6 +99,27 @@
         "question": 23
     }
 }, {
+    "pk": 19,
+    "model": "survey.page",
+    "fields": {
+        "survey": 3,
+        "question": 24
+    }
+}, {
+    "pk": 20,
+    "model": "survey.page",
+    "fields": {
+        "survey": 3,
+        "question": 25
+    }
+}, {
+    "pk": 21,
+    "model": "survey.page",
+    "fields": {
+        "survey": 3,
+        "question": 26
+    }
+}, {
     "pk": 1,
     "model": "survey.survey",
     "fields": {
@@ -321,6 +342,41 @@
     "fields": {
         "text": "Lessons, clinics, camps",
         "label": "lessons-clinics-camps"
+    }
+}, {
+    "pk": 33,
+    "model": "survey.option",
+    "fields": {
+        "text": "Below $35,000",
+        "label": "below-35000"
+    }
+}, {
+    "pk": 34,
+    "model": "survey.option",
+    "fields": {
+        "text": "$35,000 or more",
+        "label": "35000-or-more"
+    }
+}, {
+    "pk": 35,
+    "model": "survey.option",
+    "fields": {
+        "text": "Don't Know",
+        "label": "dont-know"
+    }
+}, {
+    "pk": 36,
+    "model": "survey.option",
+    "fields": {
+        "text": "Male",
+        "label": "male"
+    }
+}, {
+    "pk": 37,
+    "model": "survey.option",
+    "fields": {
+        "text": "Female",
+        "label": "female"
     }
 }, {
     "pk": 1,
@@ -712,5 +768,56 @@
         "order": 12,
         "type": "text",
         "slug": "itemized-expenditures"
+    }
+}, {
+    "pk": 24,
+    "model": "survey.question",
+    "fields": {
+        "info": "demo-info",
+        "randomize_groups": false,
+        "options_from_previous_answer": "",
+        "modalQuestion": null,
+        "title": "Demographic Info",
+        "allow_other": false,
+        "label": "Demographic Info",
+        "options": [],
+        "options_json": "",
+        "order": 13,
+        "type": "info",
+        "slug": "demo-info"
+    }
+}, {
+    "pk": 25,
+    "model": "survey.question",
+    "fields": {
+        "info": "",
+        "randomize_groups": false,
+        "options_from_previous_answer": "",
+        "modalQuestion": null,
+        "title": "Was your total HOUSEHOLD income in the past 12 months?",
+        "allow_other": false,
+        "label": "household-income",
+        "options": [33, 34, 35],
+        "options_json": "",
+        "order": 14,
+        "type": "multi-select",
+        "slug": "household-income"
+    }
+}, {
+    "pk": 26,
+    "model": "survey.question",
+    "fields": {
+        "info": "",
+        "randomize_groups": false,
+        "options_from_previous_answer": "",
+        "modalQuestion": null,
+        "title": "What is your gender?",
+        "allow_other": false,
+        "label": "gender",
+        "options": [36, 37],
+        "options_json": "",
+        "order": 15,
+        "type": "auto-single-select",
+        "slug": "gender"
     }
 }]
