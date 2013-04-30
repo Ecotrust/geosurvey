@@ -38,15 +38,18 @@
                 element.bind('$destroy', function() {
                     //$timeout.cancel(timeoutId);
                 });
-                
 
-                scope.zoomTo = function (location) {
-                    map.setView({lat: location.lat, lng: location.lng}, map.getZoom());
+
+                scope.zoomTo = function(location) {
+                    map.setView({
+                        lat: location.lat,
+                        lng: location.lng
+                    }, map.getZoom());
                     map.setZoom(location.zoom);
                     if (marker) {
-                        marker.setLatLng(new L.LatLng(location.lat, location.lng));    
+                        marker.setLatLng(new L.LatLng(location.lat, location.lng));
                     }
-                    
+
                 };
 
 
@@ -67,7 +70,6 @@
                     var dragging_marker = false;
 
 
-                    
 
                     // Listen for marker drags
                     (function() {
@@ -170,7 +172,7 @@
                             s.zoom = map.getZoom();
                             s.center.lat = map.getCenter().lat;
                             s.center.lng = map.getCenter().lng;
-                            
+
                             if (marker) {
                                 s.marker.lat = map.getCenter().lat;
                                 s.marker.lng = map.getCenter().lng;
@@ -184,7 +186,7 @@
                         scope.$apply(function(s) {
                             s.center.lat = map.getCenter().lat;
                             s.center.lng = map.getCenter().lng;
-                            
+
                             if (marker) {
                                 s.marker.lat = map.getCenter().lat;
                                 s.marker.lng = map.getCenter().lng;
@@ -201,9 +203,9 @@
                         if (dragging_map) return;
                         map.setView(new L.LatLng(map.getCenter().lat, newValue), map.getZoom());
                         if (marker) {
-                            marker.setLatLng(new L.LatLng(map.getCenter().lat, map.getCenter().lng));    
+                            marker.setLatLng(new L.LatLng(map.getCenter().lat, map.getCenter().lng));
                         }
-                        
+
 
                     });
 
@@ -212,17 +214,17 @@
                         map.setView(new L.LatLng(newValue, map.getCenter().lng), map.getZoom());
 
                         if (marker) {
-                            marker.setLatLng(new L.LatLng(map.getCenter().lat, map.getCenter().lng));    
+                            marker.setLatLng(new L.LatLng(map.getCenter().lat, map.getCenter().lng));
                         }
-                        
+
                     });
 
                     // Listen for zoom
-                    scope.$watch("zoom", function (newValue, oldValue) {
+                    scope.$watch("zoom", function(newValue, oldValue) {
                         map.setZoom(newValue);
                     });
 
-                    
+
                 });
 
                 scope.delete = function() {
@@ -235,14 +237,29 @@
                 if (attrs.multimarkers) {
                     var markers_dict = [];
                     scope.$watch("multiMarkers.length", function(newMarkerList) {
+                        var colors = [
+                            'red',
+                            'orange',
+                            'green',
+                            'darkgreen',
+                            'darkred',
+                            'blue',
+                            'darkblue',
+                            'purple',
+                            'darkpurple',
+                            'cadetblue']
                         for (var mkey in scope.multiMarkers) {
                             (function(mkey) {
                                 var mark_dat = scope.multiMarkers[mkey];
                                 var marker = new L.marker(
                                 scope.multiMarkers[mkey], {
-                                    draggable: mark_dat.draggable ? true : false
+                                    draggable: mark_dat.draggable ? true : false,
+                                    icon: L.AwesomeMarkers.icon({
+                                        icon: 'icon-circle',
+                                        color: colors.shift()
+                                    })
                                 });
-
+                                debugger;
                                 marker.closePopup();
                                 marker.on("dragstart", function(e) {
                                     dragging_marker = true;
@@ -268,7 +285,7 @@
 
                                 }, true);
 
-                                marker.on('click', function (e) {
+                                marker.on('click', function(e) {
                                     var popup = scope.multiMarkers[mkey][scope.popupField];
                                     if (popup) {
                                         popup += "<div>";
@@ -283,19 +300,19 @@
                                         });
 
                                         markers_dict[mkey].openPopup();
-                                         
+
                                         scope.activeMarker = {
                                             data: scope.multiMarkers[mkey],
                                             marker: marker
                                         };
                                         $compile(angular.element(map._popup._contentNode))(scope);
-                                        $compile(angular.element(map._popup._contentNode.childNodes))(scope);    
+                                        $compile(angular.element(map._popup._contentNode.childNodes))(scope);
                                     }
-                                    
+
                                 });
 
                                 // scope.$watch('multiMarkers.' + mkey + '.answer', function(newValue) {
-                                    
+
                                 //     var popup = "<ul><li ng-repeat='messageLine in message'>{{messageLine}}</li></ul><br/><br/>";
                                 //     popup += "<div>";
                                 //     popup += "<button class='btn pull-right'>edit</button>";

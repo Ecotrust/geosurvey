@@ -267,6 +267,27 @@
         "question": 56
     }
 }, {
+    "pk": 43,
+    "model": "survey.page",
+    "fields": {
+        "survey": 1,
+        "question": 57
+    }
+}, {
+    "pk": 44,
+    "model": "survey.page",
+    "fields": {
+        "survey": 1,
+        "question": 2
+    }
+}, {
+    "pk": 45,
+    "model": "survey.page",
+    "fields": {
+        "survey": 1,
+        "question": 6
+    }
+}, {
     "pk": 1,
     "model": "survey.survey",
     "fields": {
@@ -765,14 +786,14 @@
     "fields": {
         "info": "",
         "randomize_groups": false,
-        "options_from_previous_answer": null,
+        "options_from_previous_answer": "",
         "modalQuestion": 8,
         "title": "Move and zoom the map to precisely focus the crosshair at each of your activity locations.",
         "allow_other": false,
         "label": "Activity Locations",
         "options": [],
         "options_json": "/static/survey/surveys/activities.json",
-        "order": 0,
+        "order": 2,
         "type": "map-multipoint",
         "slug": "activity-locations"
     }
@@ -1472,5 +1493,22 @@
         "order": 17,
         "type": "map-multipoint",
         "slug": "activity-locations"
+    }
+}, {
+    "pk": 57,
+    "model": "survey.question",
+    "fields": {
+        "info": "",
+        "randomize_groups": false,
+        "options_from_previous_answer": "",
+        "modalQuestion": null,
+        "title": "What is your name?",
+        "allow_other": false,
+        "label": "Your Name?",
+        "options": [],
+        "options_json": "",
+        "order": 1,
+        "type": "text",
+        "slug": "name"
     }
 }]

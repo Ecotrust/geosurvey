@@ -1,4 +1,7 @@
 <div ng-switch on="question.type">
+    <div ng-switch-when="pennies">
+        <div ng-include="'/static/survey/views/pennies.html'"></div>
+    </div>
     <div ng-switch-when="info">
         
         <div class="info-content" ng-include="infoView"></div>
