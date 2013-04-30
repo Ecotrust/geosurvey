@@ -5,7 +5,15 @@ from tastypie.authentication import SessionAuthentication
 from tastypie.authorization import DjangoAuthorization
 from django.conf.urls.defaults import url
 
-from survey.models import Survey, Question, Option, Respondant, Response
+from survey.models import Survey, Question, Option, Respondant, Response #, Page
+
+# class PageResource(ModelResource):
+#     question = fields.ToOneField('apps.survey.api.QuestionResource', 'question', full=True)
+#     survey = fields.ToOneField('apps.survey.api.SurveyResource', 'question')
+#     class Meta:
+#         queryset = Page.objects.all()
+#         ordering = ['order']
+
 
 class ResponseResource(ModelResource):
     question = fields.ToOneField('apps.survey.api.QuestionResource', 'question', full=True)
@@ -29,8 +37,10 @@ class OptionResource(ModelResource):
 class QuestionResource(ModelResource):
     options = fields.ToManyField(OptionResource, 'options', full=True)
     modalQuestion = fields.ToOneField('self', 'modalQuestion', full=True, null=True, blank=True)
+
     class Meta:
-        queryset = Question.objects.all()
+        queryset = Question.objects.all().order_by('order')
+
 
 
 class SurveyResource(ModelResource):

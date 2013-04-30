@@ -1,10 +1,12 @@
 from django.contrib import admin
-from survey.models import Survey, Question, Option, Response, Respondant
+from survey.models import Survey, Question, Option, Response, Respondant, Page
 
 
 
 class RespondantAdmin(admin.ModelAdmin):
     readonly_fields=('uuid',)
+
+
 
 
 
@@ -33,3 +35,4 @@ admin.site.register(Question, QuestionAdmin)
 admin.site.register(Survey, SurveyAdmin)
 admin.site.register(Option, OptionAdmin)
 admin.site.register(Response)
+admin.site.register(Page)
