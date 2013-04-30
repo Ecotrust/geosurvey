@@ -45,6 +45,8 @@ class Survey(models.Model):
 QUESTION_TYPE_CHOICES = (
     ('info', 'Info Page'),
     ('datepicker', 'Date Picker'),
+    ('grid', 'Grid'),
+    ('pennies', 'Pennies'),
     ('text', 'Text'),
     ('textarea', 'Text Area'),
     ('single-select', 'Single Select'),
