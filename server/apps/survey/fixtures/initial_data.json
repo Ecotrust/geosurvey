@@ -120,6 +120,34 @@
         "question": 26
     }
 }, {
+    "pk": 22,
+    "model": "survey.page",
+    "fields": {
+        "survey": 3,
+        "question": 27
+    }
+}, {
+    "pk": 23,
+    "model": "survey.page",
+    "fields": {
+        "survey": 3,
+        "question": 28
+    }
+}, {
+    "pk": 24,
+    "model": "survey.page",
+    "fields": {
+        "survey": 3,
+        "question": 29
+    }
+}, {
+    "pk": 25,
+    "model": "survey.page",
+    "fields": {
+        "survey": 3,
+        "question": 30
+    }
+}, {
     "pk": 1,
     "model": "survey.survey",
     "fields": {
@@ -377,6 +405,118 @@
     "fields": {
         "text": "Female",
         "label": "female"
+    }
+}, {
+    "pk": 38,
+    "model": "survey.option",
+    "fields": {
+        "text": "White",
+        "label": "white"
+    }
+}, {
+    "pk": 39,
+    "model": "survey.option",
+    "fields": {
+        "text": "Black or African American",
+        "label": "black-or-african-american"
+    }
+}, {
+    "pk": 40,
+    "model": "survey.option",
+    "fields": {
+        "text": "Hispanic, Spanish or Latino",
+        "label": "hispanic-spanish-or-latino"
+    }
+}, {
+    "pk": 41,
+    "model": "survey.option",
+    "fields": {
+        "text": "American Indian or Alaska Native",
+        "label": "american-indian-or-alaska-native"
+    }
+}, {
+    "pk": 42,
+    "model": "survey.option",
+    "fields": {
+        "text": "Asian/Pacific Islander",
+        "label": "asianpacific-islander"
+    }
+}, {
+    "pk": 43,
+    "model": "survey.option",
+    "fields": {
+        "text": "Other",
+        "label": "other"
+    }
+}, {
+    "pk": 44,
+    "model": "survey.option",
+    "fields": {
+        "text": "No formal education",
+        "label": "no-formal-education"
+    }
+}, {
+    "pk": 45,
+    "model": "survey.option",
+    "fields": {
+        "text": "Less than high school",
+        "label": "less-high-school"
+    }
+}, {
+    "pk": 46,
+    "model": "survey.option",
+    "fields": {
+        "text": "High School",
+        "label": "high-school"
+    }
+}, {
+    "pk": 47,
+    "model": "survey.option",
+    "fields": {
+        "text": "Some college",
+        "label": "some-college"
+    }
+}, {
+    "pk": 48,
+    "model": "survey.option",
+    "fields": {
+        "text": "Bachelor's degree or higher",
+        "label": "bachelors-degree-or-higher"
+    }
+}, {
+    "pk": 49,
+    "model": "survey.option",
+    "fields": {
+        "text": "Strongly Agree",
+        "label": "strongly-agree"
+    }
+}, {
+    "pk": 50,
+    "model": "survey.option",
+    "fields": {
+        "text": "Somewhat Agree",
+        "label": "somewhat-agree"
+    }
+}, {
+    "pk": 51,
+    "model": "survey.option",
+    "fields": {
+        "text": "Neither Agree nor Disagree",
+        "label": "neither-agree-nor-disagree"
+    }
+}, {
+    "pk": 52,
+    "model": "survey.option",
+    "fields": {
+        "text": "Somewhat Disagree",
+        "label": "somewhat-disagree"
+    }
+}, {
+    "pk": 53,
+    "model": "survey.option",
+    "fields": {
+        "text": "Strongly Disagree",
+        "label": "strongly-disagree"
     }
 }, {
     "pk": 1,
@@ -819,5 +959,73 @@
         "order": 15,
         "type": "auto-single-select",
         "slug": "gender"
+    }
+}, {
+    "pk": 27,
+    "model": "survey.question",
+    "fields": {
+        "info": "",
+        "randomize_groups": false,
+        "options_from_previous_answer": "",
+        "modalQuestion": null,
+        "title": "Please indicate what you consider your racial background to be.  We greatly appreciate your effort to describe your background using the standard categories provided.  These race categories may not fully describe you, but they do match those used by the Census Bureau.  It helps us compare our survey respondents to the U.S. population. \r\n\r\nPlease check one or more categories below to indicate what race(s) you consider yourself to be. \r\n\r\n",
+        "allow_other": false,
+        "label": "Racial Background",
+        "options": [38, 39, 40, 41, 42, 43],
+        "options_json": "",
+        "order": 16,
+        "type": "auto-single-select",
+        "slug": "racial-background"
+    }
+}, {
+    "pk": 28,
+    "model": "survey.question",
+    "fields": {
+        "info": "",
+        "randomize_groups": false,
+        "options_from_previous_answer": "",
+        "modalQuestion": null,
+        "title": "What is the highest level of school you have completed?",
+        "allow_other": false,
+        "label": "Highest Level of Education",
+        "options": [44, 45, 46, 47, 48],
+        "options_json": "",
+        "order": 17,
+        "type": "auto-single-select",
+        "slug": "education"
+    }
+}, {
+    "pk": 29,
+    "model": "survey.question",
+    "fields": {
+        "info": "",
+        "randomize_groups": false,
+        "options_from_previous_answer": "",
+        "modalQuestion": null,
+        "title": "To help us improve future surveys, was the mapping portion of this survey easy to understand and use?",
+        "allow_other": false,
+        "label": "Mapping Feedback",
+        "options": [49, 50, 51, 52, 53],
+        "options_json": "",
+        "order": 18,
+        "type": "auto-single-select",
+        "slug": "mapping-feedback"
+    }
+}, {
+    "pk": 30,
+    "model": "survey.question",
+    "fields": {
+        "info": "",
+        "randomize_groups": false,
+        "options_from_previous_answer": "",
+        "modalQuestion": null,
+        "title": "To help us improve future surveys, please provide any comments or feedback you may have that will help us improve this survey.  Was there a specific section of the survey that you had trouble understanding? What would make it easier?  ",
+        "allow_other": false,
+        "label": "Feedback",
+        "options": [],
+        "options_json": "",
+        "order": 18,
+        "type": "text",
+        "slug": "feedback"
     }
 }]
