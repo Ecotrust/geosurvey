@@ -27,7 +27,10 @@ class Page(models.Model):
     survey = models.ForeignKey('Survey')
     
     def __str__(self):
-        return "%s/%s" % (self.survey.name, self.question.slug)
+        return "%s/%s (%d)" % (self.survey.name, self.question.slug, self.question.order)
+
+    class Meta:
+        ordering = ['survey', 'question__order']
 
 
 class Survey(models.Model):
@@ -81,6 +84,10 @@ class Question(models.Model):
         try:
             return self.survey_set.all()[0].slug
         except:
+            try:
+                return self.question_set.all()[0].survey_slug
+            except:
+                return "NA"
             return "NA"
 
     def __str__(self):
@@ -95,4 +102,4 @@ class Response(models.Model):
 
 
     def __str__(self):
-        return "%s/%s/%s" % (self.respondant.email, self.question.survey_set.all()[0].slug, self.question.slug)
+        return "%s/%s/%s" % (self.respondant.email, self.question.survey_slug, self.question.slug)
