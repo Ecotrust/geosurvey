@@ -44,6 +44,7 @@ class Survey(models.Model):
 
 QUESTION_TYPE_CHOICES = (
     ('info', 'Info Page'),
+    ('datepicker', 'Date Picker'),
     ('text', 'Text'),
     ('textarea', 'Text Area'),
     ('single-select', 'Single Select'),
@@ -84,10 +85,6 @@ class Question(models.Model):
         try:
             return self.survey_set.all()[0].slug
         except:
-            try:
-                return self.question_set.all()[0].survey_slug
-            except:
-                return "NA"
             return "NA"
 
     def __str__(self):
