@@ -38,8 +38,8 @@ def all():
     env.hosts = dev() + prod() + test()
 
 
-def _install_requirements():
-    run('cd %(app_dir)s && %(venv)s/bin/pip install -r REQUIREMENTS' % vars)
+def _install_pirements():
+    run('cd %(app_dir)s && %(venv)s/bin/pip install -r requirements.txt' % vars)
 
 
 def install_bowerdeps():
