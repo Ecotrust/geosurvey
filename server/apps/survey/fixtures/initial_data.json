@@ -288,6 +288,34 @@
         "question": 6
     }
 }, {
+    "pk": 46,
+    "model": "survey.page",
+    "fields": {
+        "survey": 1,
+        "question": 58
+    }
+}, {
+    "pk": 47,
+    "model": "survey.page",
+    "fields": {
+        "survey": 1,
+        "question": 59
+    }
+}, {
+    "pk": 48,
+    "model": "survey.page",
+    "fields": {
+        "survey": 4,
+        "question": 60
+    }
+}, {
+    "pk": 49,
+    "model": "survey.page",
+    "fields": {
+        "survey": 1,
+        "question": 61
+    }
+}, {
     "pk": 1,
     "model": "survey.survey",
     "fields": {
@@ -764,6 +792,27 @@
         "label": "rode-someone-else-carpooled"
     }
 }, {
+    "pk": 68,
+    "model": "survey.option",
+    "fields": {
+        "text": "First Option",
+        "label": "first-option"
+    }
+}, {
+    "pk": 69,
+    "model": "survey.option",
+    "fields": {
+        "text": "Second Option",
+        "label": "second-option"
+    }
+}, {
+    "pk": 70,
+    "model": "survey.option",
+    "fields": {
+        "text": "Third Option",
+        "label": "third-option"
+    }
+}, {
     "pk": 2,
     "model": "survey.question",
     "fields": {
@@ -1185,7 +1234,7 @@
         "options": [54, 55],
         "options_json": "",
         "order": 0,
-        "type": "auto-single-select",
+        "type": "single-select",
         "slug": "study-area"
     }
 }, {
@@ -1236,7 +1285,7 @@
         "options": [],
         "options_json": "",
         "order": 3,
-        "type": "text",
+        "type": "integer",
         "slug": "county-visits"
     }
 }, {
@@ -1253,7 +1302,7 @@
         "options": [56, 57, 58, 59, 60],
         "options_json": "",
         "order": 4,
-        "type": "auto-single-select",
+        "type": "single-select",
         "slug": "how-long"
     }
 }, {
@@ -1321,7 +1370,7 @@
         "options": [54, 55],
         "options_json": "",
         "order": 8,
-        "type": "auto-single-select",
+        "type": "single-select",
         "slug": "last-trip-origin"
     }
 }, {
@@ -1355,7 +1404,7 @@
         "options": [61, 62, 64, 65, 66, 67],
         "options_json": "",
         "order": 10,
-        "type": "multi-select",
+        "type": "single-select",
         "slug": "primary-mode-transportation-on-coast"
     }
 }, {
@@ -1406,7 +1455,7 @@
         "options": [],
         "options_json": "",
         "order": 13,
-        "type": "auto-single-select",
+        "type": "single-select",
         "slug": "last-trip-primary"
     }
 }, {
@@ -1423,7 +1472,7 @@
         "options": [13, 14, 15, 16, 17, 18],
         "options_json": "",
         "order": 14,
-        "type": "auto-single-select",
+        "type": "single-select",
         "slug": "number-of-nights"
     }
 }, {
@@ -1434,7 +1483,7 @@
         "randomize_groups": false,
         "options_from_previous_answer": "",
         "modalQuestion": null,
-        "title": "During your last coastal recreation trip to the Pacific coast of Washington, please indicate if your party spent money on the following items.",
+        "title": "During your last coastal recreation trip to the Pacific coast of Washington, please indicate if your party spent money on the following items.\r\n\r\nTODO: Need grid question.",
         "allow_other": false,
         "label": "Last Trip Amount Spent",
         "options": [],
@@ -1510,5 +1559,73 @@
         "order": 1,
         "type": "text",
         "slug": "name"
+    }
+}, {
+    "pk": 58,
+    "model": "survey.question",
+    "fields": {
+        "info": "",
+        "randomize_groups": false,
+        "options_from_previous_answer": "",
+        "modalQuestion": null,
+        "title": "What are some activities?",
+        "allow_other": false,
+        "label": "Some Activities?",
+        "options": [68, 69, 70],
+        "options_json": "",
+        "order": 4,
+        "type": "multi-select",
+        "slug": "some-activities"
+    }
+}, {
+    "pk": 59,
+    "model": "survey.question",
+    "fields": {
+        "info": "",
+        "randomize_groups": false,
+        "options_from_previous_answer": "activity-locations",
+        "modalQuestion": null,
+        "title": "Assign some pennies to the locations.",
+        "allow_other": false,
+        "label": "pennies",
+        "options": [],
+        "options_json": "",
+        "order": 6,
+        "type": "pennies",
+        "slug": "pennies"
+    }
+}, {
+    "pk": 60,
+    "model": "survey.question",
+    "fields": {
+        "info": "",
+        "randomize_groups": false,
+        "options_from_previous_answer": "activity-locations",
+        "modalQuestion": null,
+        "title": "Please allocate pennies to each location you selected.",
+        "allow_other": false,
+        "label": "Allocate Pennies",
+        "options": [],
+        "options_json": "",
+        "order": 18,
+        "type": "pennies",
+        "slug": "pennies"
+    }
+}, {
+    "pk": 61,
+    "model": "survey.question",
+    "fields": {
+        "info": "",
+        "randomize_groups": false,
+        "options_from_previous_answer": "some-activities",
+        "modalQuestion": null,
+        "title": "This is our test grid question",
+        "allow_other": false,
+        "label": "Grid Question",
+        "options": [],
+        "options_json": "",
+        "order": 5,
+        "type": "grid",
+        "slug": "grid-question"
     }
 }]
