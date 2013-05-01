@@ -42,7 +42,7 @@ def _install_requirements():
     run('cd %(app_dir)s && %(venv)s/bin/pip install -r REQUIREMENTS' % vars)
 
 
-def _install_bowerdeps():
+def install_bowerdeps():
     run('cd /vagrant && /usr/bin/bower install --dev')
 
 #%(venv)s/bin/python manage.py site localhost:8080 && \

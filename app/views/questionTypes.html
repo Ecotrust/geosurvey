@@ -52,12 +52,24 @@
         </form>
     </div>
     <div ng-switch-when="single-select">
-        <form class="question" ng-show="survey.questions.length" ng-submit="answerQuestion(answer)">
-            <label class="radio" ng-repeat="option in question.options">
-                <input type="radio">
-                {{ option }}
+        <form class="question" ng-show="survey.questions.length" ng-submit="answerSingleSelect(question.options)">
+            <label 
+                ng-repeat="option in question.options"
+                class="radio" 
+                ng-class="{checked: option.checked, disabled: option.disabled }" 
+                for="optionsRadios{{$index + 1}}">
+                <span class='icon'></span>
+                <span class='icon-to-fade'></span>
+                <input 
+                    type="radio" 
+                    name="optionsRadios"
+                    id="optionsRadios{{$index + 1}}" 
+                    ng-model="option.checked"
+                    ng-click="onSingleSelectClicked($index);"
+                    value="{{option.label}}"> 
+                    {{option.text}}
             </label>
-            <button type="submit" class="btn btn-primary btn-large btn-block">continue</button>
+            <button type="submit" class="btn btn-large btn-block" ng-class="{'btn-primary': isAnswerValid, disabled: !isAnswerValid }">continue</button>
         </form>
     </div>
     <div ng-switch-when="multi-select">
