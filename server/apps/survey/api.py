@@ -19,7 +19,7 @@ class ResponseResource(ModelResource):
     question = fields.ToOneField('apps.survey.api.QuestionResource', 'question', full=True)
 
     class Meta:
-        queryset = Response.objects.all()
+        queryset = Response.objects.all().order_by('question__order');
 
 class RespondantResource(ModelResource):
     responses = fields.ToManyField(ResponseResource, 'responses', full=True)
