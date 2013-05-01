@@ -30,7 +30,7 @@
                 // var googleLayer = new L.Google('ROADMAP');
                 // map.addLayer(googleLayer);
                 // Default center of the map
-                var point = new L.LatLng(40.094882122321145, -3.8232421874999996);
+                var point = new L.LatLng(45, -122);
                 map.setView(point, 5);
 
                 scope.activeMarker = null;
@@ -247,18 +247,40 @@
                             'darkblue',
                             'purple',
                             'darkpurple',
+                            'cadetblue',
+                            'red',
+                            'orange',
+                            'green',
+                            'darkgreen',
+                            'darkred',
+                            'blue',
+                            'darkblue',
+                            'purple',
+                            'darkpurple',
+                            'cadetblue',
+                            'red',
+                            'orange',
+                            'green',
+                            'darkgreen',
+                            'darkred',
+                            'blue',
+                            'darkblue',
+                            'purple',
+                            'darkpurple',
                             'cadetblue']
                         for (var mkey in scope.multiMarkers) {
                             (function(mkey) {
                                 var mark_dat = scope.multiMarkers[mkey];
+                                var color = colors.shift();
                                 var marker = new L.marker(
                                 scope.multiMarkers[mkey], {
                                     draggable: mark_dat.draggable ? true : false,
                                     icon: L.AwesomeMarkers.icon({
                                         icon: 'icon-circle',
-                                        color: colors.shift()
+                                        color: color
                                     })
                                 });
+                                mark_dat.color = color;
                                 marker.closePopup();
                                 marker.on("dragstart", function(e) {
                                     dragging_marker = true;

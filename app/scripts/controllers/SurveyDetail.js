@@ -1,13 +1,25 @@
 'use strict';
 
+var map = {
+    center: {
+        lat: 47,
+        lng: -124
+    },
+    zoom: 7,
+    marker: {
+        visibility: true,
+        lat: 47,
+        lng: -124,
 
-
+    },
+    msg: null
+}
 var stateAbrv = "NO_STATE";
 
 var answers = {};
 
 angular.module('askApp')
-    .controller('SurveyDetailCtrl', function($scope, $routeParams, $http, $location, $dialog, $interpolate, offlineSurvey) {
+    .controller('SurveyDetailCtrl', function($scope, $routeParams, $http, $location, $dialog, $interpolate, $timeout, offlineSurvey) {
 
 
     $http.get('/api/v1/survey/' + $routeParams.surveySlug + '/?format=json').success(function(data) {
@@ -17,25 +29,25 @@ angular.module('askApp')
         // we may inject a question into the scope
         if (!$scope.question) {
             $scope.question = _.find($scope.survey.questions, function(question) {
-                    return question.slug === $routeParams.questionSlug;
+                return question.slug === $routeParams.questionSlug;
             });
-            
+
         }
         if ($scope.question && $scope.question.title) {
             $scope.question.displayTitle = $interpolate($scope.question.title)($scope);
         }
-      
-        if ($scope.question && $scope.question.type === 'info') {
-            $scope.infoView = '/static/survey/survey-pages/' + $routeParams.surveySlug + '/' +  $scope.question.info + '.html';
 
-        }  
+        if ($scope.question && $scope.question.type === 'info') {
+            $scope.infoView = '/static/survey/survey-pages/' + $routeParams.surveySlug + '/' + $scope.question.info + '.html';
+
+        }
 
         $scope.nextQuestionPath = $scope.getNextQuestionPath();
 
         // Fill options list.
-        if ($scope.question && $scope.question.options_json && $scope.question.options_json.length > 0 && ! $scope.question.options_from_previous_answer) {
+        if ($scope.question && $scope.question.options_json && $scope.question.options_json.length > 0 && !$scope.question.options_from_previous_answer) {
             $http.get($scope.question.options_json).success(function(data) {
-                var groups = _.groupBy(data, function (item) {
+                var groups = _.groupBy(data, function(item) {
                     return item.group;
                 })
                 if ($scope.question.randomize_groups) {
@@ -74,63 +86,48 @@ angular.module('askApp')
 
         if ($scope.question && $scope.question.options_from_previous_answer) {
             $scope.question.options = $scope.getAnswer($scope.question.options_from_previous_answer);
-            _.each($scope.question.options, function (item) {
+            _.each($scope.question.options, function(item) {
                 item.checked = false;
             });
         };
 
         if ($scope.question && $scope.question.type === 'pennies') {
-            $scope.map = {
-                center: {
-                    lat: 38.75,
-                    lng: -72.59
-                },
-                zoom: 6,
-                
-                msg: null
-            }
+            $scope.map = map;
             if ($scope.getAnswer($scope.question.options_from_previous_answer)) {
-                //$scope.locations = JSON.parse($scope.getAnswer($scope.question.options_from_previous_answer));
-                $scope.locations = JSON.parse('[{"lat":38.75,"lng":-72.59,"answers":[{"text":"Camping","label":"camping","group":"1","checked":true},{"text":"Photography","label":"photography","group":"1","checked":true}]},{"lat":38.1172716583054,"lng":-73.65234375,"answers":[{"text":"Scenic enjoyment/sightseeing","label":"sightseeing","group":"1","checked":true},{"text":"Sitting in your car watching the scene","label":"sitting-car","group":"1","checked":true}]}]');    
+                $scope.locations = JSON.parse($scope.getAnswer($scope.question.options_from_previous_answer));
             }
-            
+
             $scope.question.total = 100;
-            
-            _.each($scope.locations, function (location) {
-                location.pennies = 0;
-                $scope.$watch(function () { return location.pennies }, 
-                    function (newValue) {
-                        if (newValue) {
-                            var total = _.pluck($scope.locations, 'pennies');
-                            var sum = _.reduce(total, function(memo, num){ return parseInt(memo, 10) + parseInt(num, 10); }, 0);
-                            $scope.question.total = 100 - sum;    
+
+            _.each($scope.locations, function(location) {
+                location.pennies = null;
+                $scope.$watch(function() {
+                    return location.pennies
+                },
+
+                function(newValue) {
+                    var timer;
+                    if (newValue) {
+                        if (timer) {
+                            timer.cancel();
+                        } else {
+                            timer = $timeout(function() {
+                                var total = _.pluck($scope.locations, 'pennies');
+                                var sum = _.reduce(total, function(memo, num) {
+                                    return parseInt(memo, 10) + parseInt(num ? num : 0, 10);
+                                }, 0);
+                                $scope.question.total = 100 - sum;
+                            }, 300);
                         }
-                        
+
                     }
-                );
+
+                });
             });
-
-            $scope.focusCallback = function (location, event) {
-                $(event.target).select();
-            };
-
         }
 
         if ($scope.question && $scope.question.type === 'map-multipoint') {
-            $scope.map = {
-                center: {
-                    lat: 38.75,
-                    lng: -72.59
-                },
-                zoom: 6,
-                marker: {
-                    visibility: true,
-                    lat: 38.75,
-                    lng: -72.59,
-
-                },
-                msg: null
-            }
+            $scope.map = map;
             $scope.locations = [];
             $scope.activeMarker = false;
         }
@@ -138,12 +135,12 @@ angular.module('askApp')
     });
 
 
-    
+
     // landing page view
     $scope.landingView = '/static/survey/survey-pages/' + $routeParams.surveySlug + '/landing.html';
 
 
-    $scope.getAnswer = function (questionSlug) {
+    $scope.getAnswer = function(questionSlug) {
 
         if (answers[questionSlug]) {
             return answers[questionSlug]
@@ -184,7 +181,7 @@ angular.module('askApp')
                     lat: $scope.map.marker.lat,
                     lng: $scope.map.marker.lng,
                     question: question,
-                    answer: answer
+                    answers: answer
                 });
                 $scope.dialog.close();
                 $scope.dialog = null;
@@ -242,17 +239,18 @@ angular.module('askApp')
             if (answer === "other" && otherAnswer) {
                 answer = otherAnswer;
             }
-            
-            
+
+
             if ($scope.locations && $scope.locations.length) {
                 answer = angular.toJson(_.map($scope.locations,
-                
+
                 function(location) {
                     var returnValue = {
-                            lat: location.lat,
-                            lng: location.lng,
-                            answers: location.answer
-                        }
+                        lat: location.lat,
+                        lng: location.lng,
+                        answers: location.answers
+                    }
+
                     if (location.pennies) {
                         returnValue.pennies = parseInt(location.pennies, 10);
                     }
