@@ -1,5 +1,6 @@
 <p ng-hide="survey.questions.length">This survey has no questions.</p>
 <span class="pull-right">{{ survey.questions.indexOf(question) + 1 }} of {{ survey.questions.length }}</span>
+<a href="/admin/survey/question/{{question.id}}/">edit</a>
 <h2>
     {{ question.displayTitle }}
     
