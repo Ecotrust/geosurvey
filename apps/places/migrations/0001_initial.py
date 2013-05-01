@@ -15,8 +15,8 @@ class Migration(SchemaMigration):
             ('state', self.gf('django.db.models.fields.CharField')(max_length=2)),
             ('county', self.gf('django.db.models.fields.CharField')(max_length=254)),
             ('type', self.gf('django.db.models.fields.CharField')(max_length=254)),
-            ('lat', self.gf('django.db.models.fields.DecimalField')(max_digits=10, decimal_places=7)),
-            ('lng', self.gf('django.db.models.fields.DecimalField')(max_digits=10, decimal_places=7)),
+            ('lat', self.gf('django.db.models.fields.DecimalField')(null=True, max_digits=10, decimal_places=7, blank=True)),
+            ('lng', self.gf('django.db.models.fields.DecimalField')(null=True, max_digits=10, decimal_places=7, blank=True)),
         ))
         db.send_create_signal(u'places', ['Place'])
 
@@ -31,8 +31,8 @@ class Migration(SchemaMigration):
             'Meta': {'object_name': 'Place'},
             'county': ('django.db.models.fields.CharField', [], {'max_length': '254'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'lat': ('django.db.models.fields.DecimalField', [], {'max_digits': '10', 'decimal_places': '7'}),
-            'lng': ('django.db.models.fields.DecimalField', [], {'max_digits': '10', 'decimal_places': '7'}),
+            'lat': ('django.db.models.fields.DecimalField', [], {'null': 'True', 'max_digits': '10', 'decimal_places': '7', 'blank': 'True'}),
+            'lng': ('django.db.models.fields.DecimalField', [], {'null': 'True', 'max_digits': '10', 'decimal_places': '7', 'blank': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '254'}),
             'state': ('django.db.models.fields.CharField', [], {'max_length': '2'}),
             'type': ('django.db.models.fields.CharField', [], {'max_length': '254'})
