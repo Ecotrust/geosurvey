@@ -7,3 +7,5 @@ django-extensions
 simplejson
 django-tastypie
 django-compressor
+psycopg2
+dj-database-url
