@@ -31,7 +31,7 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    {% if request.user.is_authenticated %}
+    {% if user.is_authenticated %}
     <div class="container-fluid">
       <div class="navbar navbar-inverse">
         <div class="navbar-inner">
@@ -123,7 +123,7 @@
 
     <script>
     var token = "{{csrf_token}}";
-    {% if request.user.is_authenticated %}
+    {% if user.is_authenticated %}
     var isAuthenticated = true;
     {% else %}
     var isAuthenticated = false;
