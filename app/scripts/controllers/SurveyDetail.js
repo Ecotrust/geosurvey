@@ -313,4 +313,25 @@ angular.module('askApp')
     $scope.removeLocation = function() {
         alert("not yet implemented");
     };
+
+
+    /* Specific to single select for now. */
+    $scope.isAnswerValid = false;
+
+    $scope.onSingleSelectClicked = function (selectedIndex) {
+        _.each($scope.question.options, function (option, index, list) {
+            if (index !== selectedIndex) {
+                option.checked = false;
+            }
+        });
+        $scope.isAnswerValid = true;
+    };
+
+    $scope.answerSingleSelect = function(options) {
+        var answers = _.filter(options, function(option) {
+            return option.checked;
+        });
+        $scope.answerQuestion(answers[0]);
+    };
+
 });
