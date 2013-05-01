@@ -259,7 +259,6 @@
                                         color: colors.shift()
                                     })
                                 });
-                                debugger;
                                 marker.closePopup();
                                 marker.on("dragstart", function(e) {
                                     dragging_marker = true;

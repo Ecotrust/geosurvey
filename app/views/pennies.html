@@ -1,11 +1,23 @@
 <div class="row-fluid">
     <div class="span4">
         <ul class="unstyled">
-            <li ng-repeat="location in locations">location</li>
+            <li ng-repeat="location in locations">
+                <h3>Location</h3>
+                <div class="pull-right">
+                    <input class="span8" type="text" 
+                        ng-model="location.pennies" 
+                        ui-event="{ focus : 'focusCallback(location, $event)' }"/>
+                    <span><i class="icon-circle"></i></span>
+                </div>
+                <ul class="unstyled">
+                    <li ng-repeat="answer in location.answers">{{answer.text}}</li>
+                </ul>
+            </li>
         </ul>
+        <h3>{{ question.total }} Pennies Remain</h3>
     </div>
     <div class="span8">
         <leaflet center="map.center" zoom="map.zoom" multimarkers="locations" popupfield="'answer'"></leaflet>
     </div>
 </div>
-<button class="btn btn-primary btn-block btn-large" ng-click="gotoNextQuestion()">continue</button>
+<button class="btn btn-primary btn-block btn-large" ng-disabled="question.total > 0" ng-click="answerQuestion(answer)">continue</button>
