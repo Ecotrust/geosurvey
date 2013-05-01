@@ -100,16 +100,16 @@ python::venv::isolate { "/usr/local/venv/geosurvey":
   subscribe => [Package['build-essential']],
 }
 
-exec { "Install Bower":
-  subscribe => [ Package["nodejs"] ],
-  command => "/usr/bin/npm install -g yo grunt-cli bower",
-  unless => "/usr/bin/test -x /usr/bin/yo"
-}
+# exec { "Install Bower":
+#   subscribe => [ Package["nodejs"] ],
+#   command => "/usr/bin/npm install -g yo grunt-cli bower",
+#   unless => "/usr/bin/test -x /usr/bin/yo"
+# }
 
-exec { "Install Deps":
-  subscribe => [ Exec["Install Bower"] ],
-  user => 'vagrant',
-  command => "/usr/bin/npm install && /usr/bin/bower install --dev",
-  cwd => '/vagrant'
+# exec { "Install Deps":
+#   subscribe => [ Exec["Install Bower"] ],
+#   user => 'vagrant',
+#   command => "/usr/bin/npm install && /usr/bin/bower install --dev",
+#   cwd => '/vagrant'
 
-}
+# }
