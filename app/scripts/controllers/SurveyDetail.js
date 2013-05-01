@@ -94,7 +94,26 @@ angular.module('askApp')
                 $scope.locations = JSON.parse('[{"lat":38.75,"lng":-72.59,"answers":[{"text":"Camping","label":"camping","group":"1","checked":true},{"text":"Photography","label":"photography","group":"1","checked":true}]},{"lat":38.1172716583054,"lng":-73.65234375,"answers":[{"text":"Scenic enjoyment/sightseeing","label":"sightseeing","group":"1","checked":true},{"text":"Sitting in your car watching the scene","label":"sitting-car","group":"1","checked":true}]}]');    
             }
             
+            $scope.question.total = 100;
             
+            _.each($scope.locations, function (location) {
+                location.pennies = 0;
+                $scope.$watch(function () { return location.pennies }, 
+                    function (newValue) {
+                        if (newValue) {
+                            var total = _.pluck($scope.locations, 'pennies');
+                            var sum = _.reduce(total, function(memo, num){ return parseInt(memo, 10) + parseInt(num, 10); }, 0);
+                            $scope.question.total = 100 - sum;    
+                        }
+                        
+                    }
+                );
+            });
+
+            $scope.focusCallback = function (location, event) {
+                $(event.target).select();
+            };
+
         }
 
         if ($scope.question && $scope.question.type === 'map-multipoint') {
@@ -224,14 +243,21 @@ angular.module('askApp')
                 answer = otherAnswer;
             }
             
+            
             if ($scope.locations && $scope.locations.length) {
-                answer = angular.toJson(_.map($scope.locations, 
-                    function (location) { 
-                        return {
+                answer = angular.toJson(_.map($scope.locations,
+                
+                function(location) {
+                    var returnValue = {
                             lat: location.lat,
                             lng: location.lng,
-                            answers: location.answer 
-                        }}));
+                            answers: location.answer
+                        }
+                    if (location.pennies) {
+                        returnValue.pennies = parseInt(location.pennies, 10);
+                    }
+                    return returnValue;
+                }));
             }
             $http({
                 url: url,
