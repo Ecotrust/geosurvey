@@ -65,3 +65,11 @@ form {
 select + input {
     margin-top: 10px;
 }
+input {
+    height: 44px !important;
+    font-size: 20px !important;
+    line-height: 1 !important;
+}
+.pennies .icon-circle {
+    font-size: 24px;
+}
