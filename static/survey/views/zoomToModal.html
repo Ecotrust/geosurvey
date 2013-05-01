@@ -1,0 +1,26 @@
+<div class="modal-header">
+    <h1>
+        <img ng-show="showSpinner" class="pull-right" src="/static/survey/img/ajax-loader.gif"/>
+        Zoom to Location...
+    </h1>
+    <p>
+      <form class="form-search">
+        
+        <input type="text" class="span7 search-query" placeholder="Search..." ng-model="searchTerm" autofocus>
+      </form>
+    </p>
+</div>
+<div class="modal-body">
+    
+    <ul class="nav nav-tabs nav-stacked">
+        <li ng-show="results.length == 0">No Results</li>
+        <li ng-click="zoomTo(result)" ng-show="searchTerm && results.length > 0" ng-repeat="result in results"><a>{{ result.name }}, {{ result.type }}, {{ result.county }} County</a></li>
+    </ul>
+</div>
+<div class="modal-footer">
+    <p ng-show="results.length > 0">Showing {{ results.length }} of {{ meta.total_count }} results</p>
+    <br ng-hide="results == 0">
+    <button ng-click="close()" class="btn btn-primary">
+        Close
+    </button>
+</div>

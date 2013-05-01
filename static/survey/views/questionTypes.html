@@ -1,0 +1,112 @@
+<div ng-switch on="question.type">
+    <div ng-switch-when="pennies">
+        <div ng-include="'/static/survey/views/pennies.html'"></div>
+    </div>
+    <div ng-switch-when="info">
+        
+        <div class="info-content" ng-include="infoView"></div>
+        
+        <button class="btn btn-primary btn-block btn-large" ng-click="gotoNextQuestion()">continue</button>
+    </div>
+    <div ng-switch-when="integer">
+        <form class="question" ng-show="survey.questions.length" ng-submit="answerQuestion(answer)">
+            <input
+                name="integerAnswer"
+                ng-model="answer"
+                class="input-block-level"
+                placeholder="{{ question.label }}"
+                type="number"
+                min="0"
+                max="150"
+                ui-event="{ keypress : 'onlyDigits($event)' }"
+                autofocus
+                required/>
+            <button type="submit" class="btn btn-primary btn-large btn-block">continue</button>
+        </form>
+    </div>
+    <div ng-switch-when="auto-single-select">
+        <form class="question" ng-show="survey.questions.length" ng-submit="answerQuestion(answer, otherAnswer)">
+            <select
+                ui-select2
+                ng-model="answer"
+                class="input-block-level"
+                placeholder="{{ question.label }}"
+                autofocus
+                required>
+                <option value="">{{ question.label }}</option>
+                <option 
+                    ng-repeat="option in question.options" 
+                    value="{{ option.text }}">
+                        {{ option.text || option.name }}
+                </option>
+                <option value="other">Other</option>
+            </select>
+            <input class="input-block-level" type="text" placeholder="{{ question.label }}" ng-show="answer == 'other'" ng-model="otherAnswer" autofocus/>   
+            <button type="submit" class="btn btn-primary btn-large btn-block">continue</button>
+        </form>
+    </div>
+    <div ng-switch-when="text">
+        <form class="question" ng-show="survey.questions.length" ng-submit="answerQuestion(answer)">
+            <input class="input-block-level" type="text" placeholder="{{ question.label }}" ng-model="answer" autofocus/>
+            <button type="submit" class="btn btn-primary btn-large btn-block">continue</button>
+        </form>
+    </div>
+    <div ng-switch-when="single-select">
+        <form class="question" ng-show="survey.questions.length" ng-submit="answerSingleSelect(question.options)">
+            <label 
+                ng-repeat="option in question.options"
+                class="radio" 
+                ng-class="{checked: option.checked, disabled: option.disabled }" 
+                for="optionsRadios{{$index + 1}}">
+                <span class='icon'></span>
+                <span class='icon-to-fade'></span>
+                <input 
+                    type="radio" 
+                    name="optionsRadios"
+                    id="optionsRadios{{$index + 1}}" 
+                    ng-model="option.checked"
+                    ng-click="onSingleSelectClicked($index);"
+                    value="{{option.label}}"> 
+                    {{option.text}}
+            </label>
+            <button type="submit" class="btn btn-large btn-block" ng-class="{'btn-primary': isAnswerValid, disabled: !isAnswerValid }">continue</button>
+        </form>
+    </div>
+    <div ng-switch-when="multi-select">
+        <form class="question" ng-submit="answerMultiSelect(question.options, otherAnswer)">
+            <label 
+                ng-repeat="option in question.options"
+                class="checkbox" 
+                ng-class="{checked: option.checked, disabled: option.disabled }" 
+                for="checkbox{{$index + 1}}">
+                <span class='icon'></span>
+                <span class='icon-to-fade'></span>
+                <input 
+                    type="checkbox" 
+                    id="checkbox{{$index + 1}}" 
+                    ng-model="option.checked"
+                    value="{{option.label}}"> 
+                    {{option.text}}
+            </label>
+            <label 
+                class="checkbox" 
+                ng-class="{checked: otherOption.checked, disabled: otherOption.disabled }" 
+                for="checkbox_other">
+                <span class='icon'></span>
+                <span class='icon-to-fade'></span>
+                <input 
+                    type="checkbox" 
+                    id="checkbox_other" 
+                    ng-model="otherOption.checked"
+                    value="Other"> 
+                    Other
+            </label>
+            <input class="input-block-level" type="text" placeholder="Other Activity" ng-show="otherOption.checked" ng-model="otherAnswer" autofocus/> 
+            <button type="submit" class="btn btn-primary btn-large btn-block" ng-hide="dialog">continue</button>
+        </form>
+    </div>
+    <div ng-switch-when="map-multipoint">
+        <div ng-include="'/static/survey/views/mapQuestion.html'"></div>
+    </div>
+</div>
+
