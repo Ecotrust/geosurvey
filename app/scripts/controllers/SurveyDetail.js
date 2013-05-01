@@ -91,6 +91,7 @@ angular.module('askApp')
             });
         };
 
+        // penny question controller
         if ($scope.question && $scope.question.type === 'pennies') {
             $scope.map = map;
             if ($scope.getAnswer($scope.question.options_from_previous_answer)) {
@@ -125,7 +126,7 @@ angular.module('askApp')
                 });
             });
         }
-
+        // map 
         if ($scope.question && $scope.question.type === 'map-multipoint') {
             $scope.map = map;
             $scope.locations = [];
