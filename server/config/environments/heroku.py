@@ -1,23 +1,17 @@
 from path import path
 from config.settings import *
-
+import dj_database_url
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.contrib.gis.db.backends.postgis',
-    #     'NAME': 'geosurvey',
-    #     'USER': 'vagrant',
-    #     'HOST': 'localhost',
-    #     'PORT': '5432'
-    # }
+    'default': dj_database_url.config()
+    
 }
 
-DEBUG = True
+DEBUG = False
+HEROKU = True
 
 # Parse database configuration from $DATABASE_URL
-import dj_database_url
-DATABASES['default'] =  dj_database_url.config()
-
+  
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
