@@ -132,14 +132,12 @@ angular.module('askApp')
             $scope.activeMarker = false;
         }
 
-
-
         // grid question controller
         if ($scope.question && $scope.question.type === 'grid') {
-            // Prep row initial row data, each row containing values 
+            // Prep row initial row data, each row containing values.
             // for activityLabel, activityText, cost and numPeople.
-            $scope.gridData = $scope.getAnswer($scope.question.options_from_previous_answer);
-            _.each($scope.gridData, function (value, key, list) {
+            $scope.question.options = $scope.getAnswer($scope.question.options_from_previous_answer);
+            _.each($scope.question.options, function (value, key, list) {
                 list[key] = { 
                     activitySlug: value.label,
                     activityText: value.text,
@@ -147,27 +145,32 @@ angular.module('askApp')
                     numPeople: undefined };
             });
 
-            // todo: Fill columns with persisted data if available
+            // todo: Fill columns with persisted data if available.
             
-
             // Hard coding values for now.
-            $scope.question.options = [
-                {activitySlug: 'camping', activityText: 'Camping', cost: undefined, numPeople: undefined},
-                {activitySlug: 'eating', activityText: 'Eating', cost: undefined, numPeople: undefined},
-                {activitySlug: 'surfing', activityText: 'Surfing', cost: undefined, numPeople: undefined}
-            ];
+            // $scope.question.options = [
+            //     {activitySlug: 'camping', activityText: 'Camping', cost: undefined, numPeople: undefined},
+            //     {activitySlug: 'eating', activityText: 'Eating', cost: undefined, numPeople: undefined},
+            //     {activitySlug: 'surfing', activityText: 'Surfing', cost: undefined, numPeople: undefined}
+            // ];
 
-            // configure grid
-            var gridCellTemplateInt = '<input class="colt{{$index}} input-block-level" ng-model="row.entity[col.field]" style="height: 100%; background-color: transparent;" type="number" min="0" max="1000" value="{{row.getProperty(col.field)}}" ui-event="{ keypress : \'onlyDigits($event)\' }" required/>'
-            var gridCellTemplate = '<input style="height: 100%" class="colt{{$index}}" ng-model="row.entity[col.field]" />';
-            //'<input ng-model="row.entity.numPeople" class="input-block-level" style="background-color: transparent;" type="number" min="1" max="1000" value="{{row.getProperty(col.field)}}" ui-event="{ keypress : \'onlyDigits($event)\' }" autofocus required/>'
+            // Configure grid.
+            var gridCellTemplateDefault = '<div class="ngCellText" ng-class="col.colIndex()"><span ng-cell-text>{{COL_FIELD CUSTOM_FILTERS}}</span></div>';
+            var costCellTemplate = '<input class="colt{{$index}} input-block-level" ng-model="row.entity[col.field]" style="height: 100%;" type="number" min="0" max="10000" value="{{row.getProperty(col.field)}}" ui-event="{ keypress : \'onlyDigits($event)\' }" required/>';
+            var numPeopleCellTemplate = '<input class="colt{{$index}} input-block-level" ng-model="row.entity[col.field]" style="height: 100%;" type="number" min="0" max="1000" value="{{row.getProperty(col.field)}}" ui-event="{ keypress : \'onlyDigits($event)\' }" required/>';
             $scope.gridOptions = {
                 data: 'question.options',
                 enableSorting: false,
+                enableCellSelection: true,
+                canSelectRows: false,
+                multiSelect: false,
+                rowHeight: 50,
+                plugins: [new ngGridFlexibleHeightPlugin()],
+                rowTemplate: '<div ng-style="{\'z-index\': col.zIndex() }" ng-repeat="col in renderedColumns" ng-class="col.colIndex()" class="ngCell {{col.cellClass}}" ng-cell></div>',
                 columnDefs: [
                     {field: 'activityText', displayName: 'Expense Item'},
-                    {field:'cost', displayName:'Cost ($0 - $1,000)', cellTemplate: gridCellTemplateInt },
-                    {field:'numPeople', displayName:'# of People Covered', cellTemplate: gridCellTemplateInt }]
+                    {field:'cost', displayName:'Cost ($0 - $10,000)', cellTemplate: costCellTemplate },
+                    {field:'numPeople', displayName:'# of People Covered', cellTemplate: numPeopleCellTemplate }]
             };
         }
     });
@@ -331,7 +334,7 @@ angular.module('askApp')
      * @param  {array} options An array of all options regardless of which options the
      * user selected.
      */
-    $scope.answerMultiSelect = function(options, otherAnswer) {
+    $scope.answerMultiSelect = function (options, otherAnswer) {
         var answers = _.filter(options, function(option) {
             return option.checked;
         });
@@ -365,7 +368,7 @@ angular.module('askApp')
         $scope.isAnswerValid = true;
     };
 
-    $scope.answerSingleSelect = function(options) {
+    $scope.answerSingleSelect = function (options) {
         var answers = _.filter(options, function(option) {
             return option.checked;
         });
