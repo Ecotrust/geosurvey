@@ -7,7 +7,7 @@ DATABASES = {
     
 }
 
-DEBUG = False
+DEBUG = True
 HEROKU = True
 
 # Parse database configuration from $DATABASE_URL
