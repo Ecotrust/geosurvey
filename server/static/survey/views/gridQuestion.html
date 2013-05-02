@@ -1,14 +1,16 @@
-<div class="row-fluid">
-    <div class="span12">
-        
-		<div class="gridStyle" ng-grid="gridOptions"></div>
+<!-- This question type binds cell values to the question.options object. -->
+<form id="gridQuestion" class="question" ng-submit="answerQuestion(question.options)">
+	<div class="row-fluid">
+	    <div class="span12">
+	        
+			<div class="gridStyle" ng-grid="gridOptions"></div>
 
-    </div>
-</div>
-<div class="row-fluid user-controls">
-    <button 
-    	type="submit"
-    	ng-class="{'btn-primary': isAnswerValid, disabled: !isAnswerValid }"
-    	class="btn btn-block btn-large"
-    	ng-click="answerQuestion(locations)">continue</button>
-</div>
+	    </div>
+	</div>
+	<div class="row-fluid user-controls">
+	    <button 
+	    	type="submit"
+			ng-class="{'btn-primary': isAnswerValid, disabled: !isAnswerValid }"
+	    	class="btn btn-block btn-large btn-primary">continue</button>
+	</div>
+</form>
