@@ -318,7 +318,9 @@ angular.module('askApp')
     $scope.isAnswerValid = false;
 
     $scope.onSingleSelectClicked = function (selectedIndex) {
+        console.log(selectedIndex);
         _.each($scope.question.options, function (option, index, list) {
+
             if (index !== selectedIndex) {
                 option.checked = false;
             }

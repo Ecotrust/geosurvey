@@ -72,7 +72,7 @@ DATABASES = {
     'default': dj_database_url.config()  
 }
 DEBUG = False
-
+```
 Create the heroku app
 heroku create appname
 
@@ -88,4 +88,3 @@ heroku run python manage.py migrate --settings=config.environments.heroku
 
 Open the app
 heroku open
-```

@@ -74,20 +74,22 @@
     </div>
     <div ng-switch-when="multi-select">
         <form class="question" ng-submit="answerMultiSelect(question.options, otherAnswer)">
-            <label 
-                ng-repeat="option in question.options"
-                class="checkbox" 
-                ng-class="{checked: option.checked, disabled: option.disabled }" 
-                for="checkbox{{$index + 1}}">
-                <span class='icon'></span>
-                <span class='icon-to-fade'></span>
-                <input 
-                    type="checkbox" 
-                    id="checkbox{{$index + 1}}" 
-                    ng-model="option.checked"
-                    value="{{option.label}}"> 
-                    {{option.text}}
-            </label>
+            <div ng-repeat="option in question.options" class="row-fluid">
+                <label 
+                    class="checkbox" 
+                    ng-class="{checked: option.checked, disabled: option.disabled }" 
+                    for="checkbox{{$index + 1}}">
+                    <span class='icon'></span>
+                    <span class='icon-to-fade'></span>
+                    <input 
+                        type="checkbox" 
+                        id="checkbox{{$index + 1}}"
+                        name="checkbox{{$index + 1}}" 
+                        ng-checked="option.checked"
+                        ng-model="option.checked"> 
+                        {{option.text}}
+                </label>
+            </div>
             <label 
                 class="checkbox" 
                 ng-class="{checked: otherOption.checked, disabled: otherOption.disabled }" 
