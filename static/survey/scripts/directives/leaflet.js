@@ -1,14 +1,14 @@
 /* adapted from https://github.com/tombatossals/angular-leaflet-directive */
 
 'use strict';
-
+console.log('loaded');
 (function() {
 
-    var leafletDirective = angular.module('leaflet-directive', []);
+    var leafletDirective = angular.module('leaflet.directive', []);
 
     leafletDirective.directive('leaflet', function($http, $log, $compile) {
         return {
-            restrict: 'E',
+            restrict: 'EA',
             replace: true,
             transclude: true,
             scope: {
