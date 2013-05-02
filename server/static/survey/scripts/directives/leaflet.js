@@ -1,21 +1,23 @@
 /* adapted from https://github.com/tombatossals/angular-leaflet-directive */
 
+'use strict';
+
 (function() {
 
-    var leafletDirective = angular.module("leaflet-directive", []);
+    var leafletDirective = angular.module('leaflet-directive', []);
 
-    leafletDirective.directive("leaflet", function($http, $log, $compile) {
+    leafletDirective.directive('leaflet', function($http, $log, $compile) {
         return {
-            restrict: "E",
+            restrict: 'E',
             replace: true,
             transclude: true,
             scope: {
-                center: "=center",
-                marker: "=marker",
-                message: "=message",
-                zoom: "=zoom",
-                multiMarkers: "=multimarkers",
-                popupField: "=popupfield",
+                center: '=center',
+                marker: '=marker',
+                message: '=message',
+                zoom: '=zoom',
+                multiMarkers: '=multimarkers',
+                popupField: '=popupfield',
                 deletemarker: '&'
             },
             templateUrl: '/static/survey/views/leaflet.html',
@@ -23,7 +25,7 @@
                 var $el = element[0],
                     map = new L.Map($el);
 
-                L.tileLayer("http://services.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer/tile/{z}/{y}/{x}", {
+                L.tileLayer('http://services.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer/tile/{z}/{y}/{x}', {
                     maxZoom: 13
                 }).addTo(map);
 
@@ -67,7 +69,7 @@
                     var marker = new L.marker([scope.center.lat, scope.center.lng], {
                         icon: crosshairIcon
                     });
-                    var dragging_marker = false;
+                    var draggingMarker = false;
 
 
 
@@ -75,24 +77,24 @@
                     (function() {
 
 
-                        marker.on("dragstart", function(e) {
-                            dragging_marker = true;
+                        marker.on('dragstart', function(e) {
+                            draggingMarker = true;
                             map.closePopup();
                         });
 
-                        marker.on("drag", function(e) {
+                        marker.on('drag', function(e) {
                             scope.$apply(function(s) {
                                 s.marker.lat = marker.getLatLng().lat;
                                 s.marker.lng = marker.getLatLng().lng;
                             });
                         });
 
-                        marker.on("dragend", function(e) {
+                        marker.on('dragend', function(e) {
                             marker.openPopup();
-                            dragging_marker = false;
+                            draggingMarker = false;
                         });
 
-                        // map.on("click", function(e) {
+                        // map.on('click', function(e) {
                         //     marker.setLatLng(e.latlng);
                         //     marker.openPopup();
                         //     scope.$apply(function (s) {
@@ -101,7 +103,7 @@
                         //     });
                         // });
 
-                        scope.$watch("marker.visibility", function(newValue, oldValue) {
+                        scope.$watch('marker.visibility', function(newValue, oldValue) {
 
                             if (newValue) {
                                 // marker.draggable = true;
@@ -110,23 +112,28 @@
 
                                 map.addLayer(marker);
                                 // marker.dragging.enable();
-                                //marker.bindPopup("<strong>" + scope.message + "</strong>",
+                                //marker.bindPopup('<strong>' + scope.message + '</strong>',
                                 //    { closeButton: false });
                                 //marker.openPopup();
 
                             }
                         });
 
-                        scope.$watch("marker.lng", function(newValue, oldValue) {
-                            if (dragging_marker) return;
+                        scope.$watch('marker.lng', function(newValue, oldValue) {
+                            if (draggingMarker) {
+                                return;
+                            }
+
                             if (marker.lng) {
                                 marker.setLatLng(new L.LatLng(marker.getLatLng().lng, newValue));
                             }
 
                         });
 
-                        scope.$watch("marker.lat", function(newValue, oldValue) {
-                            if (dragging_marker) return;
+                        scope.$watch('marker.lat', function(newValue, oldValue) {
+                            if (draggingMarker) {
+                                return;
+                            }
                             if (marker.lat) {
                                 marker.setLatLng(new L.LatLng(marker.getLatLng().lat, newValue));
                             }
@@ -136,8 +143,10 @@
 
                 }
 
-                scope.$watch("center", function(center) {
-                    if (center === undefined) return;
+                scope.$watch('center', function(center) {
+                    if (center === undefined) {
+                        return;
+                    }
 
                     // Center of the map
                     center = new L.LatLng(scope.center.lat, scope.center.lng);
@@ -154,20 +163,20 @@
                         //     scope.marker.lng = marker.getLatLng().lng;
                         // }
 
-                        // scope.$watch("message", function(newValue) {
-                        //     marker.bindPopup("<strong>" + newValue + "</strong>",
+                        // scope.$watch('message', function(newValue) {
+                        //     marker.bindPopup('<strong>' + newValue + '</strong>',
                         //         { closeButton: false });
                         //     marker.openPopup();
                         // });
                     }
 
                     // Listen for map drags
-                    var dragging_map = false;
-                    map.on("dragstart", function(e) {
-                        dragging_map = true;
+                    var draggingMap = false;
+                    map.on('dragstart', function(e) {
+                        draggingMap = true;
                     });
 
-                    map.on("zoomend", function(e) {
+                    map.on('zoomend', function(e) {
                         scope.$apply(function(s) {
                             s.zoom = map.getZoom();
                             s.center.lat = map.getCenter().lat;
@@ -182,7 +191,7 @@
                     });
 
 
-                    map.on("drag", function(e) {
+                    map.on('drag', function(e) {
                         scope.$apply(function(s) {
                             s.center.lat = map.getCenter().lat;
                             s.center.lng = map.getCenter().lng;
@@ -195,12 +204,15 @@
                         });
                     });
 
-                    map.on("dragend", function(e) {
-                        dragging_map = false;
+                    map.on('dragend', function(e) {
+                        draggingMap = false;
                     });
 
-                    scope.$watch("center.lng", function(newValue, oldValue) {
-                        if (dragging_map) return;
+                    scope.$watch('center.lng', function(newValue, oldValue) {
+                        if (draggingMap) {
+                            return;
+                        }
+
                         map.setView(new L.LatLng(map.getCenter().lat, newValue), map.getZoom());
                         if (marker) {
                             marker.setLatLng(new L.LatLng(map.getCenter().lat, map.getCenter().lng));
@@ -209,8 +221,10 @@
 
                     });
 
-                    scope.$watch("center.lat", function(newValue, oldValue) {
-                        if (dragging_map) return;
+                    scope.$watch('center.lat', function(newValue, oldValue) {
+                        if (draggingMap) {
+                            return;
+                        }
                         map.setView(new L.LatLng(newValue, map.getCenter().lng), map.getZoom());
 
                         if (marker) {
@@ -220,23 +234,22 @@
                     });
 
                     // Listen for zoom
-                    scope.$watch("zoom", function(newValue, oldValue) {
+                    scope.$watch('zoom', function(newValue, oldValue) {
                         map.setZoom(newValue);
                     });
 
 
                 });
 
-                scope.delete = function() {
-                    var index = _.indexOf(scope.multiMarkers, scope.activeMarker.data);
+                scope.deleteMarker = function () {
+                    var i = _.indexOf(scope.multiMarkers, scope.activeMarker.data);
                     scope.activeMarker.marker.closePopup();
-                    scope.multiMarkers.splice(index, 1);
-                    //scope.activeMarker = null;
+                    scope.multiMarkers.splice(i, 1);
                 };
 
                 if (attrs.multimarkers) {
-                    var markers_dict = [];
-                    scope.$watch("multiMarkers.length", function(newMarkerList) {
+                    var markersDict = [];
+                    scope.$watch('multiMarkers.length', function(newMarkerList) {
                         var colors = [
                             'red',
                             'orange',
@@ -267,34 +280,34 @@
                             'darkblue',
                             'purple',
                             'darkpurple',
-                            'cadetblue']
+                            'cadetblue'];
                         for (var mkey in scope.multiMarkers) {
                             (function(mkey) {
-                                var mark_dat = scope.multiMarkers[mkey];
+                                var markDat = scope.multiMarkers[mkey];
                                 var color = colors.shift();
                                 var marker = new L.marker(
                                 scope.multiMarkers[mkey], {
-                                    draggable: mark_dat.draggable ? true : false,
+                                    draggable: markDat.draggable ? true : false,
                                     icon: L.AwesomeMarkers.icon({
                                         icon: 'icon-circle',
                                         color: color
                                     })
                                 });
-                                mark_dat.color = color;
+                                markDat.color = color;
                                 marker.closePopup();
-                                marker.on("dragstart", function(e) {
-                                    dragging_marker = true;
+                                marker.on('dragstart', function(e) {
+                                    draggingMarker = true;
                                 });
 
-                                marker.on("drag", function(e) {
+                                marker.on('drag', function(e) {
                                     scope.$apply(function(s) {
-                                        mark_dat.lat = marker.getLatLng().lat;
-                                        mark_dat.lng = marker.getLatLng().lng;
+                                        markDat.lat = marker.getLatLng().lat;
+                                        markDat.lng = marker.getLatLng().lng;
                                     });
                                 });
 
-                                marker.on("dragend", function(e) {
-                                    dragging_marker = false;
+                                marker.on('dragend', function(e) {
+                                    draggingMarker = false;
                                 });
 
                                 scope.$watch('multiMarkers.' + mkey, function() {
@@ -309,18 +322,18 @@
                                 marker.on('click', function(e) {
                                     var popup = scope.multiMarkers[mkey][scope.popupField];
                                     if (popup) {
-                                        popup += "<div>";
-                                        popup += "<button class='btn pull-right'>edit</button>";
-                                        popup += "<button class='btn btn-danger pull-right' ng-click='delete()'>delete</button>";
-                                        popup += "</div>";
-                                        popup += "<div class='clearfix'></div>";
+                                        popup += '<div>';
+                                        popup += '<button class="btn pull-right">edit</button>';
+                                        popup += '<button class="btn btn-danger pull-right" ng-click="deleteMarker()">delete</button>';
+                                        popup += '</div>';
+                                        popup += '<div class="clearfix"></div>';
 
                                         scope.popupMessage = scope.multiMarkers[mkey][scope.popupField];
-                                        markers_dict[mkey].bindPopup(popup, {
+                                        markersDict[mkey].bindPopup(popup, {
                                             closeButton: true
                                         });
 
-                                        markers_dict[mkey].openPopup();
+                                        markersDict[mkey].openPopup();
 
                                         scope.activeMarker = {
                                             data: scope.multiMarkers[mkey],
@@ -334,25 +347,25 @@
 
                                 // scope.$watch('multiMarkers.' + mkey + '.answer', function(newValue) {
 
-                                //     var popup = "<ul><li ng-repeat='messageLine in message'>{{messageLine}}</li></ul><br/><br/>";
-                                //     popup += "<div>";
-                                //     popup += "<button class='btn pull-right'>edit</button>";
-                                //     popup += "<button class='btn btn-danger pull-right' ng-click='delete()'>delete</button>";
-                                //     popup += "</div>";
-                                //     popup += "<div class='clearfix'></div>";
+                                //     var popup = '<ul><li ng-repeat='messageLine in message'>{{messageLine}}</li></ul><br/><br/>';
+                                //     popup += '<div>';
+                                //     popup += '<button class='btn pull-right'>edit</button>';
+                                //     popup += '<button class='btn btn-danger pull-right' ng-click='delete()'>delete</button>';
+                                //     popup += '</div>';
+                                //     popup += '<div class='clearfix'></div>';
                                 //     if (newValue) {
                                 //         scope.message = newValue;
-                                //         markers_dict[mkey].bindPopup(popup, {
+                                //         markersDict[mkey].bindPopup(popup, {
                                 //             closeButton: true
                                 //         });
-                                //          markers_dict[mkey].openPopup();
+                                //          markersDict[mkey].openPopup();
                                 //         $compile(angular.element(map._popup._contentNode))(scope);
                                 //         scope.activeMarker = scope.multiMarkers[mkey];
                                 //     }
                                 // }, true);
 
                                 map.addLayer(marker);
-                                markers_dict[mkey] = marker;
+                                markersDict[mkey] = marker;
                             })(mkey);
                         } // for mkey in multiMarkers
                     }); // watch multiMarkers

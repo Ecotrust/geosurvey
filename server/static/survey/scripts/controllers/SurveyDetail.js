@@ -9,7 +9,7 @@ var map = {
     marker: {
         visibility: true,
         lat: 47,
-        lng: -124,
+        lng: -124
 
     },
     msg: null
@@ -20,7 +20,6 @@ var answers = {};
 
 angular.module('askApp')
     .controller('SurveyDetailCtrl', function($scope, $routeParams, $http, $location, $dialog, $interpolate, $timeout, offlineSurvey) {
-
 
     $http.get('/api/v1/survey/' + $routeParams.surveySlug + '/?format=json').success(function(data) {
         $scope.survey = data;
@@ -360,7 +359,9 @@ angular.module('askApp')
     $scope.isAnswerValid = false;
 
     $scope.onSingleSelectClicked = function (selectedIndex) {
+        console.log(selectedIndex);
         _.each($scope.question.options, function (option, index, list) {
+
             if (index !== selectedIndex) {
                 option.checked = false;
             }
