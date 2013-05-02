@@ -132,6 +132,28 @@ angular.module('askApp')
             $scope.activeMarker = false;
         }
 
+
+        // grid question controller
+        var gridCellTemplateInt = '<input style="height: 100%" class="colt{{$index}} input-block-level" ng-model="row.entity[col.field]" style="background-color: transparent;" type="number" min="0" max="1000" value="{{row.getProperty(col.field)}}" ui-event="{ keypress : \'onlyDigits($event)\' }" autofocus required/>'
+        var gridCellTemplate = '<input style="height: 100%" class="colt{{$index}}" ng-model="row.entity[col.field]" />';
+        //'<input ng-model="row.entity.numPeople" class="input-block-level" style="background-color: transparent;" type="number" min="1" max="1000" value="{{row.getProperty(col.field)}}" ui-event="{ keypress : \'onlyDigits($event)\' }" autofocus required/>'
+
+        /* Grid specific */
+        $scope.myData =  [{item: "Moroni", "cost": 50, "numPeople": 0 },
+                     {item: "Tiancum", "cost": 43, "numPeople": 0 },
+                     {item: "Jacob", "cost": 27, "numPeople": 0 },
+                     {item: "Nephi", "cost": 29, "numPeople": 0 },
+                     {item: "Enos", "cost": 34, "numPeople": 0 }];
+        $scope.gridOptions = { 
+            data: 'myData',
+            enableSorting: false,
+            columnDefs: [{field: 'item', displayName: 'Expense item'},
+                         {field:'cost', displayName:'Cost (0 - 1000)', enableCellEdit: true, editableCellTemplate: gridCellTemplateInt },
+                         {field:'numPeople', displayName:'# people covered', cellTemplate: gridCellTemplateInt }]
+
+        };
+            
+
     });
 
     $scope.isAuthenticated = isAuthenticated;
