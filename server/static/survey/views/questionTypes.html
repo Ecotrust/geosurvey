@@ -84,7 +84,8 @@
                     <input 
                         type="checkbox" 
                         id="checkbox{{$index + 1}}"
-                        name="checkbox{{$index + 1}}" 
+                        name="question"
+                        value="checkbox{{$index + 1}}" 
                         ng-checked="option.checked"
                         ng-model="option.checked"> 
                         {{option.text}}
@@ -103,6 +104,7 @@
                     value="Other"> 
                     Other
             </label>
+
             <input class="input-block-level" type="text" placeholder="Other Activity" ng-show="otherOption.checked" ng-model="otherAnswer" autofocus/> 
             <button type="submit" class="btn btn-primary btn-large btn-block" ng-hide="dialog">continue</button>
         </form>
