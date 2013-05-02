@@ -52,7 +52,7 @@ angular.module('askApp')
                     keyboard: true,
                     backdropClick: false,
                     templateUrl: '/static/survey/views/zoomToModal.html',
-                    controller: 'ZoomToCtrl',
+                    controller: 'ZoomToCtrl'
                 });
                 dialog.open().then(function (place) {
                     scope.zoomTo({

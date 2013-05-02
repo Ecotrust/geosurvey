@@ -10,7 +10,7 @@ angular.module('askApp', ['ui', 'leaflet-directive', 'ui.bootstrap'])
 
     $routeProvider.when('/', {
         templateUrl: '/static/survey/views/main.html',
-        controller: 'MainCtrl',
+        controller: 'MainCtrl'
     })
     .when('/surveys', {
         templateUrl: '/static/survey/views/SurveyList.html',
