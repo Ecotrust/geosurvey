@@ -43,6 +43,7 @@ angular.module('askApp')
 
         // Fill options list.
         if ($scope.question && $scope.question.options_json && $scope.question.options_json.length > 0 && !$scope.question.options_from_previous_answer) {
+            // Using the provided json file to set options.
             $http.get($scope.question.options_json).success(function(data) {
                 var groups = _.groupBy(data, function(item) {
                     return item.group;
@@ -329,7 +330,6 @@ angular.module('askApp')
         var answers = _.filter(options, function(option) {
             return option.checked;
         });
-
         if (otherAnswer) {
             answers.push({
                 text: otherAnswer,
@@ -338,7 +338,6 @@ angular.module('askApp')
                 other: true
             });
         }
-        //answers = _.pluck(answers, 'label');
         $scope.answerQuestion(answers);
     };
 
