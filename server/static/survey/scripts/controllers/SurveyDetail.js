@@ -53,10 +53,7 @@ angular.module('askApp')
                 } else {
                     $scope.question.options = data;
                 }
-                $scope.otherOption = {
-                    'checked': false
-                }
-                $scope.otherAnswer = null;
+                
             });
         } else if ($scope.question && $scope.question.slug == 'county') {
             // Dependent on state answer.
@@ -81,6 +78,14 @@ angular.module('askApp')
                 }];
             });
         }
+
+        if ($scope.question.allow_other) {
+            $scope.question.otherOption = {
+                'checked': false
+            }
+            $scope.question.otherAnswer = null;    
+        }
+        
 
         if ($scope.question && $scope.question.options_from_previous_answer) {
             $scope.question.options = $scope.getAnswer($scope.question.options_from_previous_answer);
@@ -317,22 +322,43 @@ angular.module('askApp')
     /* Specific to single select for now. */
     $scope.isAnswerValid = false;
 
-    $scope.onSingleSelectClicked = function (selectedIndex) {
-        console.log(selectedIndex);
-        _.each($scope.question.options, function (option, index, list) {
-
-            if (index !== selectedIndex) {
-                option.checked = false;
-            }
+    $scope.onSingleSelectClicked = function (option, question) {
+        
+        // turn of all other options
+        _.each(_.without(question.options, option), function (option) {
+            option.checked = false;
         });
-        $scope.isAnswerValid = true;
+
+        if (question.otherOption && option === question.otherOption) {
+            question.otherOption.checked = ! question.otherOption.checked;
+        } else {
+
+            option.checked = ! option.checked;
+            if (question.otherOption) {
+                question.otherOption.checked = false;
+            }
+        }
+
+        // enable continue
+        if (option.checked && option !== question.otherOption) {
+            $scope.isAnswerValid = true;    
+        } else {
+            $scope.isAnswerValid = false;
+        }
+
     };
 
-    $scope.answerSingleSelect = function(options) {
-        var answers = _.filter(options, function(option) {
+
+    $scope.answerSingleSelect = function(options, otherAnswer) {
+        var answer = _.first(options, function(option) {
             return option.checked;
         });
-        $scope.answerQuestion(answers[0]);
+        if (answer) {
+            $scope.answerQuestion(answer);    
+        } else if (otherAnswer) {
+            $scope.answerQuestion(otherAnswer);    
+        }
+        
     };
 
 });

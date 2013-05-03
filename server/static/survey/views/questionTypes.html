@@ -52,60 +52,70 @@
         </form>
     </div>
     <div ng-switch-when="single-select">
-        <form class="question" ng-show="survey.questions.length" ng-submit="answerSingleSelect(question.options)">
-            <label 
-                ng-repeat="option in question.options"
-                class="radio" 
-                ng-class="{checked: option.checked, disabled: option.disabled }" 
-                for="optionsRadios{{$index + 1}}">
-                <span class='icon'></span>
-                <span class='icon-to-fade'></span>
-                <input 
-                    type="radio" 
-                    name="optionsRadios"
-                    id="optionsRadios{{$index + 1}}" 
-                    ng-model="option.checked"
-                    ng-click="onSingleSelectClicked($index);"
-                    value="{{option.label}}"> 
-                    {{option.text}}
-            </label>
+        <form class="question" ng-show="survey.questions.length" ng-submit="answerSingleSelect(question.options, question.otherAnswer)">
+            <div class="todo mrm">
+                <ul>
+                  <li 
+                    ng-click="$parent.onSingleSelectClicked(option, $parent.question)"
+                    ng-repeat="option in question.options"
+                    ng-class="{'todo-done': option.checked }">
+                    <!-- <div class="todo-icon fui-man-24"></div> -->
+                    <div class="todo-content">
+                      <h4 class="todo-name">
+                        {{option.text}}
+                      </h4>
+                      
+                    </div>
+                  </li>
+                  <li 
+                    ng-show="question.allow_other"
+                    ng-click="$parent.onSingleSelectClicked($parent.question.otherOption, $parent.question)"
+                    ng-class="{'todo-done': $parent.question.otherOption.checked }">
+                    <!-- <div class="todo-icon fui-man-24"></div> -->
+                    <div class="todo-content">
+                      <h4 class="todo-name">
+                        Other
+                      </h4>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            <input class="input-block-level" type="text" placeholder="Other Option" ng-show="question.otherOption.checked" ng-model="otherAnswer" autofocus/>             
             <button type="submit" class="btn btn-large btn-block" ng-class="{'btn-primary': isAnswerValid, disabled: !isAnswerValid }">continue</button>
         </form>
     </div>
     <div ng-switch-when="multi-select">
         <form class="question" ng-submit="answerMultiSelect(question.options, otherAnswer)">
-            <div ng-repeat="option in question.options" class="row-fluid">
-                <label 
-                    class="checkbox" 
-                    ng-class="{checked: option.checked, disabled: option.disabled }" 
-                    for="checkbox{{$index + 1}}">
-                    <span class='icon'></span>
-                    <span class='icon-to-fade'></span>
-                    <input 
-                        type="checkbox" 
-                        id="checkbox{{$index + 1}}"
-                        name="question"
-                        value="checkbox{{$index + 1}}" 
-                        ng-checked="option.checked"
-                        ng-model="option.checked"> 
+            <div class="todo mrm">
+                <ul>
+                  <li 
+                    ng-click="option.checked = ! option.checked"
+                    ng-repeat="option in question.options"
+                    ng-class="{'todo-done': option.checked }">
+                    <!-- <div class="todo-icon fui-man-24"></div> -->
+                    <div class="todo-content">
+                      <h4 class="todo-name">
                         {{option.text}}
-                </label>
-            </div>
-            <label 
-                class="checkbox" 
-                ng-class="{checked: otherOption.checked, disabled: otherOption.disabled }" 
-                for="checkbox_other">
-                <span class='icon'></span>
-                <span class='icon-to-fade'></span>
-                <input 
-                    type="checkbox" 
-                    id="checkbox_other" 
-                    ng-model="otherOption.checked"
-                    value="Other"> 
-                    Other
-            </label>
+                      </h4>
+                      
+                    </div>
+                  </li>
+                  <li 
+                    ng-show="question.allow_other"
+                    ng-click="otherOption.checked = ! otherOption.checked"
+                    ng-class="{'todo-done': otherOption.checked }">
+                    <!-- <div class="todo-icon fui-man-24"></div> -->
+                    <div class="todo-content">
+                      <h4 class="todo-name">
+                        Other
+                      </h4>
+                      
+                    </div>
+                  </li>
+                </ul>
+              </div>
 
-            <input class="input-block-level" type="text" placeholder="Other Activity" ng-show="otherOption.checked" ng-model="otherAnswer" autofocus/> 
+            <input class="input-block-level" type="text" placeholder="Other Option" ng-show="otherOption.checked" ng-model="otherAnswer" autofocus/> 
             <button type="submit" class="btn btn-primary btn-large btn-block" ng-hide="dialog">continue</button>
         </form>
     </div>
