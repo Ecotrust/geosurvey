@@ -1,13 +1,4 @@
 [{
-    "pk": "uuid",
-    "model": "survey.respondant",
-    "fields": {
-        "responses": [],
-        "survey": 1,
-        "ts": "2013-04-15T23:33:54Z",
-        "email": "eknuth@ecotrust.org"
-    }
-}, {
     "pk": 1,
     "model": "survey.page",
     "fields": {
@@ -891,8 +882,8 @@
         "title": "What state/province do you live in?",
         "allow_other": false,
         "label": "State or Province",
-        "options": [],
-        "options_json": "/static/survey/surveys/states-for-wa-opt-in.json",
+        "options": [10, 11, 12],
+        "options_json": "",
         "order": 1,
         "type": "auto-single-select",
         "slug": "state-or-province"
@@ -903,15 +894,15 @@
     "fields": {
         "info": "",
         "randomize_groups": false,
-        "options_from_previous_answer": "state-or-province",
+        "options_from_previous_answer": "",
         "modalQuestion": null,
-        "title": "You indicated you live in {{ getAnswer('state-or-province').text }}. What county/municipality do you live in?",
+        "title": "You indicated you live in {{ getAnswer('state-or-province') }}. What county/municipality do you live in?",
         "allow_other": false,
         "label": "county",
         "options": [],
         "options_json": "",
         "order": 2,
-        "type": "auto-single-select",
+        "type": "text",
         "slug": "county"
     }
 }, {
@@ -1090,7 +1081,7 @@
     "fields": {
         "info": "",
         "randomize_groups": false,
-        "options_from_previous_answer": "items-spent",
+        "options_from_previous_answer": "",
         "modalQuestion": null,
         "title": "During your last trip to the Pacific coast of Washington, please estimate how much your party spent on the following items and the number of people it covered.",
         "allow_other": false,
@@ -1098,7 +1089,7 @@
         "options": [],
         "options_json": "",
         "order": 12,
-        "type": "grid",
+        "type": "text",
         "slug": "itemized-expenditures"
     }
 }, {
@@ -1483,13 +1474,13 @@
         "randomize_groups": false,
         "options_from_previous_answer": "",
         "modalQuestion": null,
-        "title": "During your last coastal recreation trip to the Pacific coast of Washington, please indicate if your party spent money on the following items.",
-        "allow_other": true,
+        "title": "During your last coastal recreation trip to the Pacific coast of Washington, please indicate if your party spent money on the following items.\r\n\r\nTODO: Need grid question.",
+        "allow_other": false,
         "label": "Last Trip Amount Spent",
-        "options": [19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32],
+        "options": [],
         "options_json": "",
         "order": 15,
-        "type": "multi-select",
+        "type": "text",
         "slug": "last-trip-amount-spent"
     }
 }, {
@@ -1498,7 +1489,7 @@
     "fields": {
         "info": "",
         "randomize_groups": false,
-        "options_from_previous_answer": "last-trip-amount-spent",
+        "options_from_previous_answer": "",
         "modalQuestion": null,
         "title": "During your last coastal recreation trip to the Pacific coast of Washington, please estimate how much your party spent on the following items and the number of people it covered.",
         "allow_other": false,
@@ -1506,7 +1497,7 @@
         "options": [],
         "options_json": "",
         "order": 16,
-        "type": "grid",
+        "type": "multi-select",
         "slug": "how-much"
     }
 }, {
@@ -1574,7 +1565,7 @@
         "options": [68, 69, 70],
         "options_json": "",
         "order": 4,
-        "type": "multi-select",
+        "type": "single-select",
         "slug": "some-activities"
     }
 }, {
