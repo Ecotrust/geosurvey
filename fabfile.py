@@ -81,7 +81,7 @@ def update():
 
 
 def dumpdata():
-  run('cd /vagrant/server && /usr/local/venv/geosurvey/bin/python manage.py dumpdata survey --exclude survey.Response > apps/survey/fixtures/initial_data.json')
+  run('cd /vagrant/server && /usr/local/venv/geosurvey/bin/python manage.py dumpdata survey --exclude survey.Response --exclude survey.Respondant  > apps/survey/fixtures/surveys.json')
   #run('cd /vagrant/server && /usr/local/venv/geosurvey/bin/python manage.py dumpdata places --exclude places.ShoreLine |gzip > apps/places/fixtures/initial_data.json.gz')
 
 def run_server():
