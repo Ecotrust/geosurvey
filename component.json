@@ -13,7 +13,8 @@
     "angular-ui": "~0.4.0",
     "select2": "~3.3.2",
     "leaflet": "~0.5.1",
-    "flatui": "latest"
+    "flatui": "latest",
+    "angular-grid": "~2.0.5"
   },
   "devDependencies": {
     "angular-mocks": "~1.0.5",

@@ -38,7 +38,7 @@ def all():
     env.hosts = dev() + prod() + test()
 
 
-def _install_pirements():
+def _install_requirements():
     run('cd %(app_dir)s && %(venv)s/bin/pip install -r requirements.txt' % vars)
 
 
