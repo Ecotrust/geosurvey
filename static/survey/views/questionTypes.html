@@ -25,7 +25,7 @@
         </form>
     </div>
     <div ng-switch-when="auto-single-select">
-        <form class="question" ng-show="survey.questions.length" ng-submit="answerQuestion(answer, otherAnswer)">
+        <form class="question" ng-show="survey.questions.length" ng-submit="answerAutoSingleSelect(answer, otherAnswer)">
             <select
                 ui-select2
                 ng-model="answer"
@@ -36,7 +36,7 @@
                 <option value="">{{ question.label }}</option>
                 <option 
                     ng-repeat="option in question.options" 
-                    value="{{ option.text }}">
+                    value="{{ $index }}">
                         {{ option.text || option.name }}
                 </option>
                 <option value="other">Other</option>

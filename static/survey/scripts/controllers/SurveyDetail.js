@@ -14,7 +14,6 @@ var map = {
     },
     msg: null
 }
-var stateAbrv = "NO_STATE";
 
 var answers = {};
 
@@ -58,12 +57,12 @@ angular.module('askApp')
                 }
                 $scope.otherAnswer = null;
             });
-        } else if ($scope.question && $scope.question.slug == 'county') {
-            // Dependent on state answer.
-            // todo: get the state answer from the server rather than client.
-            if (!stateAbrv) {
-                stateAbrv = "NO_STATE";
-            }
+
+        } else if ($scope.question && $scope.question.options_from_previous_answer && $scope.question.slug == 'county') {
+            // County question is dependent on state answer to retrieve a 
+            // json file of counties for the selected state.
+            var stateAnswer = $scope.getAnswer($scope.question.options_from_previous_answer),
+                stateAbrv = stateAnswer.label || "NO_STATE";
             $http.get('/static/survey/surveys/counties/' + stateAbrv + '.json').success(function(data, status, headers, config) {
                 if (Object.prototype.toString.call(data) === '[object Array]' && data.length > 0) {
                     $scope.question.options = data;
@@ -73,16 +72,14 @@ angular.module('askApp')
                         text: "No counties found. Please select this option and continue."
                     }];
                 }
-
             }).error(function(data, status, headers, config) {
                 $scope.question.options = [{
                     label: "NO_COUNTY",
                     text: "No counties found. Please select this option and continue."
                 }];
             });
-        }
 
-        if ($scope.question && $scope.question.options_from_previous_answer) {
+        } else if ($scope.question && $scope.question.options_from_previous_answer) {
             $scope.question.options = $scope.getAnswer($scope.question.options_from_previous_answer);
             _.each($scope.question.options, function(item) {
                 item.checked = false;
@@ -320,11 +317,6 @@ angular.module('askApp')
 
             });
         }
-
-        if ($scope.question.slug === 'state') {
-            stateAbrv = answer;
-        }
-
     };
 
     /**
@@ -374,6 +366,15 @@ angular.module('askApp')
             return option.checked;
         });
         $scope.answerQuestion(answers[0]);
+    };
+
+    $scope.answerAutoSingleSelect = function (answer, otherAnswer) {
+        var selectedOption;
+        if (answer === "other") {
+            $scope.answerQuestion({text: otherAnswer, label: answer});
+        } else {
+            $scope.answerQuestion($scope.question.options[answer]);
+        }
     };
 
 });
