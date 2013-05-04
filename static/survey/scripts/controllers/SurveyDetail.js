@@ -95,9 +95,17 @@ angular.module('askApp')
         // penny question controller
         if ($scope.question && $scope.question.type === 'pennies') {
             $scope.map = map;
-            if ($scope.getAnswer($scope.question.options_from_previous_answer)) {
-                $scope.locations = JSON.parse($scope.getAnswer($scope.question.options_from_previous_answer));
+            
+
+            if ($scope.question.options_from_previous_answer) {
+                $scope.primaryActivity = $scope.getAnswer($scope.question.options_from_previous_answer.split(',')[1]);
+                $scope.locations = _.filter(JSON.parse($scope.getAnswer($scope.question.options_from_previous_answer.split(',')[0])), function (location) {
+                    return _.some(location.answers, function (item) {
+                        return item.label === $scope.primaryActivity.label;
+                    });
+                });
             }
+
 
             $scope.question.total = 100;
 
@@ -325,7 +333,6 @@ $scope.answerQuestion = function(answer, otherAnswer) {
                 $scope.dialog.close();
                 $scope.addLocation();
             } else {
-
                 answers[$routeParams.questionSlug] = answer;
                 $scope.gotoNextQuestion();
             }
@@ -391,10 +398,11 @@ $scope.onSingleSelectClicked = function(option, question) {
 
 
 $scope.answerSingleSelect = function(options, otherAnswer) {
-    var answer = _.first(options, function(option) {
+    var answer = _.find(options, function(option) {
 
         return option.checked;
     });
+
     if (answer) {
         $scope.answerQuestion(answer);
     } else if (otherAnswer) {
