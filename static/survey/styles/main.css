@@ -98,15 +98,6 @@ input {
     background-color: green;
     color: white;
 }
-/*.gridStyle .ngTopPanel {
-    border: 1px solid rgb(212,212,212);
-    border-bottom: none;
-}
-.gridStyle .ngCanvas {
-    border: 1px solid rgb(212,212,212);
-    border-top: none;
-}
-*/
 .gridStyle .ngCellElement:focus {
     background-color: inherit;
 }
@@ -123,3 +114,22 @@ input {
     /*background-color: rgb(201, 221, 225);*/
 }
 
+p.landing, p.info {
+    /*max-width: 500px;*/
+    margin-top: 30px;
+    margin-bottom: 55px;
+    font-size: 18px;
+}
+.question-title {
+    font-size: 20px;
+    font-weight: normal;
+    line-height: 26px;
+    margin-bottom: 25px;
+}
+.modal-header .question-title {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.user-controls {
+}
