@@ -38,35 +38,76 @@
         "text": "Watching birds and/or other marine life from shore (e.g. whale or seal watching)",
         "label": "birdwatching",
         "group": "1"
-    },{
-        "text": "Boating/sailing",
-        "label": "boating-sailing",
+    },
+    {
+        "text": "Tide pooling",
+        "label": "tide-pooling",
+        "group": "2"
+    },
+    {
+        "text": "Fishing (hook and line) from pier/shore",
+        "label": "fishing-from-pier",
+        "group": "2"
+    },
+    {
+        "text": "Fishing (hook and line) from boat/kayak",
+        "label": "fishing-from-boat",
+        "group": "2"
+    },
+    {
+        "text": "Diving (picking or spear fishing) from a boat/kayak",
+        "label": "diving-from-boat",
+        "group": "2"
+    },
+    {
+        "text": "Diving (picking or speark fishing) from a shore",
+        "label": "diving-from-shore",
+        "group": "2"
+    },
+    {
+        "text": "Trap/net from pier or shore (lobster/crab)",
+        "label": "trap-net-from-shore",
+        "group": "2"
+    },
+    {
+        "text": "Trap/net from boat/kayak (lobster/crabbing)",
+        "label": "trap-net-from-boat",
+        "group": "2"
+    },
+    {
+        "text": "Collecting/picking/harvesting sea life from shore (clamming, seaweed, mussles, etc.)",
+        "label": "collecting-sea-life",
         "group": "2"
     },
     {
         "text": "Hang gliding/parasailing",
         "label": "hang-gliding",
-        "group": "2"
+        "group": "3"
     },
     {
         "text": "Kite boarding",
         "label": "kiteboarding",
-        "group": "2"
+        "group": "3"
     },
     {
         "text": "Skim boarding",
         "label": "skimboarding",
-        "group": "2"
+        "group": "3"
     },
     {
-        "text": "Surfing (from board or kayak)",
+        "text": "Surfing (board, boogie, stand up paddle, kayak)",
         "label": "surfing",
-        "group": "2"
+        "group": "3"
     },
     {
-        "text": "Swimming or body surfing",
+        "text": "Surfing (tow-in)",
+        "label": "surfing-tow-in",
+        "group": "3"
+    },
+    {
+        "text": "Swimming or body surfing in the ocean",
         "label": "swimming",
-        "group": "2"
+        "group": "3"
     },
     {
         "text": "Windsurfing",
@@ -74,28 +115,33 @@
         "group": "2"
     },
     {
-        "text": "Tide pooling",
-        "label": "tide-pooling",
-        "group": "3"
-    },
-    {
         "text": "Free diving/snorkeling (from shore, from boat)",
         "label": "free-diving-snorkeling",
-        "group": "3"
+        "group": "4"
     },
     {
         "text": "Kayaking or other paddling activity (canoe, stand up paddle board, Tribal canoe journey)",
         "label": "kayaking",
-        "group": "3"
+        "group": "4"
+    },
+    {
+        "text": "Boating/sailing",
+        "label": "boating-sailing",
+        "group": "4"
     },
     {
         "text": "SCUBA diving (from shore, from boat)",
         "label": "scuba-diving",
-        "group": "3"
+        "group": "4"
     },
     {
         "text": "Coastal tribal event (e.g., attendance at annual tribal celebrations)",
         "label": "tribal-event",
-        "group": "3"
+        "group": "4"
+    },
+    {
+        "text": "Using a personal water craft (jet skis)",
+        "label": "scuba-diving",
+        "group": "4"
     }
 ]
