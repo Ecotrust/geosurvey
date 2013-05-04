@@ -23,14 +23,18 @@ console.log('loaded');
             templateUrl: '/static/survey/views/leaflet.html',
             link: function(scope, element, attrs, ctrl) {
                 var $el = element[0],
-                    map = new L.Map($el);
+                    map = new L.Map($el, {
+                        fadeAnimation: false,
+                        zoomAnimation: false,
+                        markerZoomAnimation: false
+                    });
 
-                L.tileLayer('http://services.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer/tile/{z}/{y}/{x}', {
-                    maxZoom: 13
-                }).addTo(map);
+                // L.tileLayer('http://services.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer/tile/{z}/{y}/{x}', {
+                //     maxZoom: 13
+                // }).addTo(map);
 
-                // var googleLayer = new L.Google('ROADMAP');
-                // map.addLayer(googleLayer);
+                var ggl = new L.Google();
+                map.addLayer(ggl);
                 // Default center of the map
                 var point = new L.LatLng(45, -122);
                 map.setView(point, 5);

@@ -2,7 +2,6 @@
     <div class="span4">
         <ul class="unstyled pennies">
             <li ng-repeat="location in locations">
-                <h3>Location</h3>
                 <div class="pull-right">
                     <span><i class="icon-circle" ng-style="{ color: location.color }"></i></span>
                     <input class="span8" type="text" 
@@ -12,7 +11,7 @@
                 </div>
             </li>
         </ul>
-        <h3 ng-show="question.total => 0">{{ question.total }} Pennies Remain</h3>
+        <h3 ng-show="question.total >= 0">{{ question.total }} Pennies Remain</h3>
         <h3 ng-show="question.total < 0">You have allocated too many pennies</h3>
     </div>
     <div class="span8">
