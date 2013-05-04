@@ -25,7 +25,7 @@ L.Google = L.Class.extend({
 		this._ready = google.maps.Map != undefined;
 		if (!this._ready) L.Google.asyncWait.push(this);
 
-		this._type = type || 'SATELLITE';
+		this._type = type || 'HYBRID';
 	},
 
 	onAdd: function(map, insertAtTheBottom) {
