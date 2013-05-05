@@ -60,8 +60,10 @@ angular.module('askApp')
         } else if ($scope.question && $scope.question.options_from_previous_answer && $scope.question.slug == 'county') {
             // County question is dependent on state answer to retrieve a 
             // json file of counties for the selected state.
+            
             var stateAnswer = $scope.getAnswer($scope.question.options_from_previous_answer),
                 stateAbrv = stateAnswer.label || "NO_STATE";
+            
             $http.get('/static/survey/surveys/counties/' + stateAbrv + '.json').success(function(data, status, headers, config) {
                 if (Object.prototype.toString.call(data) === '[object Array]' && data.length > 0) {
                     $scope.question.options = data;
