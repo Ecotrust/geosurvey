@@ -1,5 +1,6 @@
 'use strict';
 
+var isAuthenticated = false;
 var survey = {
     "id": 1,
     "name": "Test Survey",
@@ -36,7 +37,8 @@ var survey = {
         "resource_uri": "",
         "slug": "county",
         "title": "What county do you live in?",
-        "type": "auto-single-select"
+        "type": "auto-single-select",
+        "options_from_previous_answer": "state"
     }, {
         "id": 6,
         "label": "Activity Locations",
@@ -176,9 +178,9 @@ describe('Controller: SurveyDetailCtrl', function() {
 
         $httpBackend.flush();
 
-        expect(scope.map.center.lat).toBe(38.75);
-        expect(scope.map.center.lng).toBe(-72.59);
-        expect(scope.map.zoom).toBe(6);
+        expect(scope.map.center.lat).toBe(47);
+        expect(scope.map.center.lng).toBe(-124);
+        expect(scope.map.zoom).toBe(7);
         expect(scope.map.marker.visibility).toBeTruthy();
         expect(scope.locations.length).toBe(0);
         expect(scope.activeMarker).toBeFalsy();
@@ -269,7 +271,6 @@ describe('Controller: SurveyDetailCtrl', function() {
             $routeParams.questionSlug = 'county';
             $httpBackend.expectGET('/static/survey/surveys/counties/NO_STATE.json').respond(201);
         });
-
         $httpBackend.flush();
     });
 
@@ -277,7 +278,9 @@ describe('Controller: SurveyDetailCtrl', function() {
 
         inject(function(_$httpBackend_, $rootScope, $routeParams, $controller) {
             $routeParams.questionSlug = 'county';
-            stateAbrv = "OR"
+
+            answers['state'] = {text: "Oregon", label: "OR"};
+            
             $httpBackend.expectGET('/static/survey/surveys/counties/OR.json').respond([{
                 "county_name": null,
                 "description": null,
@@ -312,7 +315,6 @@ describe('Controller: SurveyDetailCtrl', function() {
         });
 
         $httpBackend.flush();
-
         expect(scope.question.options.length).toBe(2);
         expect(scope.question.options[0].name).toBe('Baker County');
 
