@@ -14,6 +14,7 @@ files = [
   'app/components/amplify/store/amplify.store.js',
   'app/components/angular-mocks/angular-mocks.js',
   'app/components/angular-ui/build/angular-ui.js',
+  'test/fixtures/*.js',
   'app/scripts/*.js',
   'app/scripts/**/*.js',
   'test/mock/**/*.js',
