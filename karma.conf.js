@@ -9,6 +9,7 @@ files = [
   JASMINE_ADAPTER,
   'app/components/jquery/jquery.js',
   'app/components/angular/angular.js',
+  'app/components/angular-grid/ng-grid-2.0.5.min.js',
   'app/components/underscore/underscore.js',
   'app/components/amplify/store/amplify.store.js',
   'app/components/angular-mocks/angular-mocks.js',
@@ -50,7 +51,7 @@ autoWatch = true;
 // - Safari (only Mac)
 // - PhantomJS
 // - IE (only Windows)
-browsers = ['Firefox'];
+browsers = ['PhantomJS'];
 
 // If browser does not capture in given timeout [ms], kill it
 captureTimeout = 10000;
