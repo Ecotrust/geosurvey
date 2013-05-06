@@ -8,7 +8,10 @@
     <a class="btn btn-large btn-primary pull-right confirm" ng-click="confirmLocation()">Yes</a>
     <a class="btn btn-large pull-right cancel" ng-click="cancelConfirmation()">No, let's try again</a>
 </div>
-<div class="row-fluid user-controls" ng-show="activeMarker == false">
+<div class="row-fluid user-controls" ng-show="activeMarker == false && $parent.map.zoom < question.min_zoom">
+    <h2>Please zoom in to ensure accurate placement.</h2>
+</div>
+<div class="row-fluid user-controls" ng-show="activeMarker == false && $parent.map.zoom >= question.min_zoom">
     <button class="btn btn-large btn-primary pull-right" ng-click="addMarker()"><i class="icon-plus"></i> Add Location</button>
     <button class="btn btn-large pull-left" ng-click="showActivities()"><i class="icon-list"></i> My Activities</button>
 </div>
