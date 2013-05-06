@@ -1,11 +1,41 @@
 from tastypie.resources import ModelResource, ALL, ALL_WITH_RELATIONS
 from tastypie import fields, utils
 
-from tastypie.authentication import SessionAuthentication
-from tastypie.authorization import DjangoAuthorization
+from tastypie.authentication import SessionAuthentication, Authentication
+from tastypie.authorization import DjangoAuthorization, Authorization
 from django.conf.urls.defaults import url
 
 from survey.models import Survey, Question, Option, Respondant, Response #, Page
+
+class StaffUserOnlyAuthorization(Authorization):
+    def read_list(self, object_list, bundle):
+        # This assumes a ``QuerySet`` from ``ModelResource``.
+        return True
+
+    def read_detail(self, object_list, bundle):
+        # Is the requested object owned by the user?
+        return True
+
+    def create_list(self, object_list, bundle):
+        # Assuming their auto-assigned to ``user``.
+        return bundle.request.user.is_staff
+
+    def create_detail(self, object_list, bundle):
+        return bundle.request.user.is_staff
+
+    def update_list(self, object_list, bundle):
+        return bundle.request.user.is_staff
+
+    def update_detail(self, object_list, bundle):
+        return bundle.request.user.is_staff
+
+    def delete_list(self, object_list, bundle):
+        # Sorry user, no deletes for you!
+        return bundle.request.user.is_staff
+
+    def delete_detail(self, object_list, bundle):
+        return bundle.request.user.is_staff
+
 
 # class PageResource(ModelResource):
 #     question = fields.ToOneField('apps.survey.api.QuestionResource', 'question', full=True)
@@ -37,10 +67,13 @@ class OptionResource(ModelResource):
 class QuestionResource(ModelResource):
     options = fields.ToManyField(OptionResource, 'options', full=True)
     modalQuestion = fields.ToOneField('self', 'modalQuestion', full=True, null=True, blank=True)
+    question_types = fields.DictField(attribute='question_types', readonly=True)
 
     class Meta:
-        queryset = Question.objects.all().order_by('order');
-
+        queryset = Question.objects.all().order_by('order')
+        always_return_data = True
+        authorization = StaffUserOnlyAuthorization()
+        authentication = Authentication()
 
 
 class SurveyResource(ModelResource):
