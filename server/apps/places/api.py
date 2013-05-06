@@ -9,5 +9,6 @@ class PlaceResource(ModelResource):
     class Meta:
         queryset = Place.objects.all().order_by("name");
         filtering = {
-            'name': ['exact', 'startswith', 'endswith', 'icontains']
+            'name': ['exact', 'startswith', 'endswith', 'icontains'],
+            'state': ALL
         }
