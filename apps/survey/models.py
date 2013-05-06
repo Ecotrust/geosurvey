@@ -37,7 +37,7 @@ class Survey(models.Model):
     name = models.CharField(max_length=254)
     slug = models.SlugField(max_length=254, unique=True)
     questions = models.ManyToManyField('Question', null=True, blank=True, through="Page")
-
+    
     def __str__(self):
         return "%s" % self.name
 
@@ -74,10 +74,18 @@ class Question(models.Model):
     options_json = models.CharField(max_length=254, null=True, blank=True)
     info = models.CharField(max_length=254, null=True, blank=True);
 
+    zoom = models.IntegerField(null=True, blank=True)
+    min_zoom = models.IntegerField(null=True, blank=True, default=10)
+    lat = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
+    lng = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
+
+
+
     randomize_groups = models.BooleanField(default=False)
     options_from_previous_answer = models.CharField(max_length=254, null=True, blank=True)
     allow_other = models.BooleanField(default=False)
-    modalQuestion = models.ForeignKey('self', null=True, blank=True)
+    modalQuestion = models.ForeignKey('self', null=True, blank=True, related_name="modal_question")
+    hoist_answers = models.ForeignKey('self', null=True, blank=True, related_name="hoisted")
 
     class Meta:
         ordering = ['order']
@@ -86,8 +94,8 @@ class Question(models.Model):
     def survey_slug(self):
         if self.survey_set.all():
             return self.survey_set.all()[0].slug
-        elif self.question_set.all():
-            return self.question_set.all()[0].slug
+        elif self.modal_question.all():
+            return self.modal_question.all()[0].survey_set.all()[0].slug
         else:
             return "NA"
 
