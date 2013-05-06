@@ -71,6 +71,10 @@ form {
     margin-bottom: 10px;
 }
 
+form input {
+    margin-bottom: 20px;
+}
+
 select + input {
     margin-top: 10px;
 }
