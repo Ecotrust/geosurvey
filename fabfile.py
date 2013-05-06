@@ -57,7 +57,6 @@ def _install_django():
 
 
 def migrate():
-    """ Create the django superuser (interactive!) """
     run('cd %(app_dir)s && %(venv)s/bin/python manage.py migrate' % vars)
 
 
@@ -67,7 +66,6 @@ def create_superuser():
 
 
 def init():
-    """ Initialize the forest planner application """
     _install_requirements()
     #_install_bowerdeps()
     _install_django()
@@ -79,9 +77,13 @@ def update():
     init()
 
 
+def loaddata():
+    run("cd %s && %s/bin/python manage.py loaddata apps/survey/fixtures/surveys.json" % (vars['app_dir'], vars['venv']))
 
 def dumpdata():
-  run('cd /vagrant/server && /usr/local/venv/geosurvey/bin/python manage.py dumpdata survey --exclude survey.Response --exclude survey.Respondant  > apps/survey/fixtures/surveys.json')
+    survey_json = "%s/apps/survey/fixtures/surveys.json" % vars['app_dir']
+    run("cd %s && %s/bin/python manage.py dumpdata survey --exclude survey.Response --exclude survey.Respondant  | python -mjson.tool > ~/surveys.json" % (vars['app_dir'], vars['venv']))
+    get("~/surveys.json", 'server/apps/survey/fixtures/')
   #run('cd /vagrant/server && /usr/local/venv/geosurvey/bin/python manage.py dumpdata places --exclude places.ShoreLine |gzip > apps/places/fixtures/initial_data.json.gz')
 
 def run_server():

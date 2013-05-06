@@ -17,6 +17,12 @@ var map = {
 
 var answers = {};
 
+function ActivitiesCtrl($scope, dialog) {
+    $scope.close = function(result){
+      dialog.close(result);
+    };
+};
+
 angular.module('askApp')
     .controller('SurveyDetailCtrl', function($scope, $routeParams, $http, $location, $dialog, $interpolate, $timeout, offlineSurvey) {
 
@@ -55,6 +61,15 @@ angular.module('askApp')
                     $scope.question.options = data;
                 }
 
+
+                if ($scope.question && $scope.question.hoist_answers) {
+                    $scope.question.hoisted_options = [];
+                    _.each($scope.getAnswer($scope.question.hoist_answers.slug), function (option) {
+                        $scope.question.options.unshift(option);
+                        $scope.question.hoisted_options.unshift(option);
+                    });
+
+                }
             });
 
         } else if ($scope.question && $scope.question.options_from_previous_answer && $scope.question.slug == 'county') {
@@ -91,6 +106,8 @@ angular.module('askApp')
                 item.checked = false;
             });
         }
+
+
 
         // penny question controller
         if ($scope.question && $scope.question.type === 'pennies') {
@@ -141,7 +158,22 @@ angular.module('askApp')
             $scope.map = map;
             $scope.locations = [];
             $scope.activeMarker = false;
+
+            $scope.showActivities = function () {
+                $dialog.dialog({
+                    backdrop: true,
+                    keyboard: true,
+                    backdropClick: false,
+                    templateUrl: '/static/survey/views/activitiesModal.html',
+                    scope: {
+                        hoisted_options: $scope.getAnswer($scope.question.modalQuestion.hoist_answers.slug)
+                    },
+                    controller: "ActivitiesCtrl"
+                }).open()
+            }
+
         }
+
         // grid question controller
         if ($scope.question && $scope.question.type === 'grid') {
             // Prep row initial row data, each row containing values.

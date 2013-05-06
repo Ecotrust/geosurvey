@@ -10,7 +10,7 @@
 </div>
 <div class="row-fluid user-controls" ng-show="activeMarker == false">
     <button class="btn btn-large btn-primary pull-right" ng-click="addMarker()"><i class="icon-plus"></i> Add Location</button>
-    <button class="btn btn-large pull-left" ng-click="answerQuestion()"><i class="icon-list"></i> My Activities</button>
+    <button class="btn btn-large pull-left" ng-click="showActivities()"><i class="icon-list"></i> My Activities</button>
 </div>
 <div class="row-fluid user-controls" ng-show="activeMarker == false && locations.length > 0">
     <button type="submit" class="btn btn-primary btn-block btn-large" ng-click="answerQuestion(locations)">continue</button>
