@@ -17,9 +17,9 @@
     <div class="span10">
         <div class="well">
             <form ng-submit="saveQuestion(activeQuestion)">
-                <h3>
-                    <input class="span12" ng-model="activeQuestion.title" />
-                </h3>
+                <label>Title</label>
+                <input class="span12" ng-model="activeQuestion.title" />
+                
                 <label>Label</label>
                 <input class="span12" ng-model="activeQuestion.label" />
                 <label>Slug</label>
