@@ -24,6 +24,10 @@
                 <input class="span12" ng-model="activeQuestion.label" />
                 <label>Slug</label>
                 <input class="span12" ng-model="activeQuestion.slug" />
+                <select ng-model="activeQuestion.type">
+                    <option ng-repeat="(key, val) in activeQuestion.question_types" value="{{key}}" ng-selected="activeQuestion.type == key">{{val}}</option>
+                </select>
+                {{ activeQuestion.type }}
             </form>
             <div ng-show="activeQuestion.updated_at" class="pull-left">
                 Updated at {{ activeQuestion.updated_at | date:'MM/dd/yyyy @ h:mma'}}
