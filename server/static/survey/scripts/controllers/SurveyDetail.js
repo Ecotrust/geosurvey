@@ -110,11 +110,11 @@ angular.module('askApp')
             });
         }
 
-        if ($scope.question && $scope.question.lat && $scope.question.lat && $scope.question.zoom) {
+        if ($scope.question) {
             $scope.map = map;
-            $scope.map.lat = $scope.question.lat;
-            $scope.map.lng = $scope.question.lng;
-            $scope.map.zoom = $scope.question.zoom;
+            $scope.map.center.lat = $scope.question.lat || map.center.lat;
+            $scope.map.center.lng = $scope.question.lng || map.center.lng;
+            $scope.map.zoom = $scope.question.zoom || map.zoom;
         }
 
         // penny question controller
