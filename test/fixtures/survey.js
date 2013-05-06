@@ -13,7 +13,7 @@ var survey = {
         "id": 2,
         "label": "Age",
         "options": [],
-        "resource_uri": "",
+        "resource_uri": "/api/v1/question/2",
         "slug": "age",
         "title": "How old are you?",
         "type": "text"
