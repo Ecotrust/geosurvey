@@ -30,9 +30,11 @@ angular.module('askApp')
                 var index;
                 if (status === 202) {
                     index = _.indexOf($scope.survey.questions, $scope.questionBeingEdited);
+                    console.log(index);
                     $scope.survey.questions[index] = result;
+                    $scope.questionBeingEdited = result;
+                    $scope.startEditingQuestion($scope.questionBeingEdited);
                     $scope.activeQuestion.updated_at = new Date();
-
                 }
             });
         };

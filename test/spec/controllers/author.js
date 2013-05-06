@@ -67,8 +67,11 @@ describe('Controller: AuthorCtrl', function() {
         
         scope.startEditingQuestion(question);
         scope.activeQuestion.title = "This is an edit.";
-        $httpBackend.expectPUT('/api/v1/question/2').respond(204, scope.activeQuestion);
+        $httpBackend.expectPUT('/api/v1/question/2').respond(202, scope.activeQuestion);
         scope.saveQuestion(scope.activeQuestion);
         $httpBackend.flush();
+        expect(scope.survey.questions[1].title).toBe("This is an edit.");
+
+
     });
 });
