@@ -75,6 +75,7 @@ class Question(models.Model):
     info = models.CharField(max_length=254, null=True, blank=True);
 
     zoom = models.IntegerField(null=True, blank=True)
+    min_zoom = models.IntegerField(null=True, blank=True, default=10)
     lat = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
     lng = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
 
