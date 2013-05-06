@@ -37,6 +37,7 @@ class OptionResource(ModelResource):
 class QuestionResource(ModelResource):
     options = fields.ToManyField(OptionResource, 'options', full=True)
     modalQuestion = fields.ToOneField('self', 'modalQuestion', full=True, null=True, blank=True)
+    hoist_answers = fields.ToOneField('self', 'hoist_answers', full=True, null=True, blank=True)
 
     class Meta:
         queryset = Question.objects.all().order_by('order');
