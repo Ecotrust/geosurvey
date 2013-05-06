@@ -93,7 +93,7 @@ angular.module('askApp')
         }
 
         // penny question controller
-        if ($scope.question && $scope.question.type === 'pennies') {
+        if ($scope.question && ($scope.question.type === 'pennies' || $scope.question.slug === 'pennies-intro' )) {
             $scope.map = map;
             
 
