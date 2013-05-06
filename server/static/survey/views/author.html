@@ -5,8 +5,10 @@
     <div class="span2">
         
         <ul class="nav nav-pills nav-stacked">
-            <li title="{{question.title}}" ng-click="$parent.startEditingQuestion(question)"
-            ng-class="{'active': question == activeQuestion }" ng-repeat="question in survey.questions">
+            <li title="{{question.title}}"
+                ng-click="$parent.startEditingQuestion(question)"
+                ng-class="{'active': question == questionBeingEdited }"
+                ng-repeat="question in survey.questions">
                 <a>{{question.label}} ({{question.order}})</a>
             </li>
         </ul>
@@ -18,7 +20,10 @@
                 <h3>
                     <input class="span12" ng-model="activeQuestion.title" />
                 </h3>
-                
+                <label>Label</label>
+                <input class="span12" ng-model="activeQuestion.label" />
+                <label>Slug</label>
+                <input class="span12" ng-model="activeQuestion.slug" />
             </form>
             <div ng-show="activeQuestion.updated_at" class="pull-left">
                 Updated at {{ activeQuestion.updated_at | date:'MM/dd/yyyy @ h:mma'}}
