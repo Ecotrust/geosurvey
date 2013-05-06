@@ -129,6 +129,10 @@ p.landing, p.info {
     margin-bottom: 55px;
     font-size: 18px;
 }
+.acitivty-locations-intro p.info,
+.pennies-intro p.info { 
+    margin-bottom: 30px;
+}
 .question-title {
     font-size: 20px;
     font-weight: normal;
@@ -138,8 +142,4 @@ p.landing, p.info {
 .modal-header .question-title {
     font-size: 22px;
     font-weight: bold;
-}
-
-.acitivty-locations-intro p.info { 
-    margin-bottom: 30px;
 }
