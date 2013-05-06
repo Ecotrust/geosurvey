@@ -65,8 +65,10 @@ angular.module('askApp')
                 if ($scope.question && $scope.question.hoist_answers) {
                     $scope.question.hoisted_options = [];
                     _.each($scope.getAnswer($scope.question.hoist_answers.slug), function (option) {
-                        $scope.question.options.unshift(option);
-                        $scope.question.hoisted_options.unshift(option);
+                        var newOption = {};
+                        angular.extend(newOption, option);
+                        $scope.question.options.unshift(newOption);
+                        $scope.question.hoisted_options.unshift(newOption);
                     });
 
                 }
