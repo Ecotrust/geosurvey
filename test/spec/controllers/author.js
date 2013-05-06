@@ -30,7 +30,45 @@ describe('Controller: AuthorCtrl', function() {
         $httpBackend.verifyNoOutstandingRequest();
     });
 
-    it('should attach a list of awesomeThings to the scope', function() {
+    it('should attach a survey to the scope', function() {
         expect(scope.survey.slug).toBe('test-survey');
+        expect(scope.survey.questions.length).toBe(5);
+        expect(scope.activeQuestion.title).toBe(survey.questions[0].title);
+    });
+
+    it('should have a method to start editing a question', function () {
+        var question = scope.survey.questions[2];
+
+        scope.startEditingQuestion(question);
+        
+        // should make a copy of question
+        expect(_.isEqual(scope.activeQuestion, question)).toBeTruthy();
+        // should be a different object
+        expect(scope.activeQuestion).not.toBe(question);
+        // but we should have a reference to the original question
+        expect(scope.questionBeingEdited).toBe(question);
+    });
+
+    it('should have a method to test if a question has changed', function () {
+        var question = scope.survey.questions[2];
+
+        scope.startEditingQuestion(question);
+
+        expect(scope.questionIsDirty(scope.activeQuestion)).toBeFalsy();
+        scope.activeQuestion.title = 'Change the title';
+        expect(scope.questionIsDirty(scope.activeQuestion)).toBeTruthy();
+
+        scope.activeQuestion.title = question.title;
+        expect(scope.questionIsDirty(scope.activeQuestion)).toBeFalsy();
+    });
+
+    it('should have a method to save the question', function () {
+        var question = scope.survey.questions[1];
+        
+        scope.startEditingQuestion(question);
+        scope.activeQuestion.title = "This is an edit.";
+        $httpBackend.expectPUT('/api/v1/question/2').respond(204, scope.activeQuestion);
+        scope.saveQuestion(scope.activeQuestion);
+        $httpBackend.flush();
     });
 });
