@@ -4,7 +4,7 @@
 <div class="row-fluid">
     <div class="span2">
         
-        <ul class="nav nav-pills nav-stacked">
+        <ul class="nav nav-pills nav-stacked" ng-model="survey.questions" ui-sortable>
             <li title="{{question.title}}"
                 ng-click="$parent.startEditingQuestion(question)"
                 ng-class="{'active': question == questionBeingEdited }"
