@@ -1186,7 +1186,7 @@ angular.module('ui.directives').directive('uiSortable', [
         // Create sortable
 
         element.sortable(opts);
-        debugger;
+        
       }
     };
   }
