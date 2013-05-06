@@ -140,5 +140,6 @@ p.landing, p.info {
     font-weight: bold;
 }
 
-.user-controls {
+.acitivty-locations-intro p.info { 
+    margin-bottom: 30px;
 }

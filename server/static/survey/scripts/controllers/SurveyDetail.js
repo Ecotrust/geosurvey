@@ -183,7 +183,7 @@ angular.module('askApp')
                     displayName: 'Expense Item'
                 }, {
                     field: 'cost',
-                    displayName: 'Cost ($0 - $10,000)',
+                    displayName: 'Cost',
                     cellTemplate: costCellTemplate
                 }, {
                     field: 'numPeople',
