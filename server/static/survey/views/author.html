@@ -1,1 +1,38 @@
-<p>This is the author view.</p>
+<h1>
+    {{survey.name}}
+</h1>
+<div class="row-fluid">
+    <div class="span2">
+        
+        <ul class="nav nav-pills nav-stacked">
+            <li title="{{question.title}}" ng-click="$parent.startEditingQuestion(question)"
+            ng-class="{'active': question == activeQuestion }" ng-repeat="question in survey.questions">
+                <a>{{question.label}} ({{question.order}})</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="span10">
+        <div class="well">
+            <form ng-submit="saveQuestion(activeQuestion)">
+                <h3>
+                    <input class="span12" ng-model="activeQuestion.title" />
+                </h3>
+                
+            </form>
+            <div ng-show="activeQuestion.updated_at" class="pull-left">
+                Updated at {{ activeQuestion.updated_at | date:'MM/dd/yyyy @ h:mma'}}
+            </div>
+            <div class="buttons pull-right">
+                <button class="btn btn-danger btn-large" ng-click="startEditingQuestion(questionBeingEdited)">
+                    reset
+                </button>
+                <button class="btn btn-primary btn-large" ng-click="saveQuestion(activeQuestion)">
+                    save
+                </button>
+            </div>
+            <div class="clearfix">
+            </div>
+        </div>
+    </div>
+</div>

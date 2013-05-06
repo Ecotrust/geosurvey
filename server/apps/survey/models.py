@@ -91,6 +91,10 @@ class Question(models.Model):
         else:
             return "NA"
 
+    @property
+    def question_types(self):
+        return QUESTION_TYPE_CHOICES
+
     def __str__(self):
         return "%s/%s/%s (%d)" % (self.survey_slug, self.title, self.type, self.order)
         #return "%s/%s" % (self.survey_set.all()[0].slug, self.label)
