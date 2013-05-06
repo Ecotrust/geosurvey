@@ -110,13 +110,16 @@ angular.module('askApp')
             });
         }
 
-
+        if ($scope.question && $scope.question.lat && $scope.question.lat && $scope.question.zoom) {
+            $scope.map = map;
+            $scope.map.lat = $scope.question.lat;
+            $scope.map.lng = $scope.question.lng;
+            $scope.map.zoom = $scope.question.zoom;
+        }
 
         // penny question controller
         if ($scope.question && $scope.question.type === 'pennies') {
-            $scope.map = map;
             
-
             if ($scope.question.options_from_previous_answer) {
                 $scope.primaryActivity = $scope.getAnswer($scope.question.options_from_previous_answer.split(',')[1]);
                 $scope.locations = _.filter(JSON.parse($scope.getAnswer($scope.question.options_from_previous_answer.split(',')[0])), function (location) {
@@ -157,8 +160,7 @@ angular.module('askApp')
         }
         // map 
         if ($scope.question && $scope.question.type === 'map-multipoint') {
-
-            $scope.map = map;
+            
             $scope.locations = [];
             $scope.activeMarker = false;
 
