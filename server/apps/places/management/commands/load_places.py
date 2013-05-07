@@ -5,7 +5,7 @@ from places.models import Place
 
 import csv
 
-excluded_types = ["Airport", "Building", "Cemetery", "Crossing", "Locale", 
+excluded_types = ["Airport", "Building", "Cemetery", "Crossing", "Locale",
                     "Census", "Church", "Civil", "Hospital", "Summit", "Tower",
                     "Military", "Mine", "School", "Post Office", "Tunnel", "Well"]
 

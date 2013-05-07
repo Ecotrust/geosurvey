@@ -50,7 +50,7 @@ angular.module('askApp')
 
 
     return {
-        template: '<button class="btn btn-zoom btn-large" ng-click="openModal()">Zoom To...</button>',
+        template: '<button class="btn btn-zoom btn-large" ng-click="openModal()">Search...</button>',
         restrict: 'EA',
         replace: true,
         link: function postLink(scope, element, attrs) {
