@@ -68,10 +68,11 @@ angular.module('askApp')
                         var newOption = {};
                         angular.extend(newOption, option);
                         newOption.checked = false;
-                        $scope.question.options.unshift(newOption);
                         $scope.question.hoisted_options.unshift(newOption);
+                        _.each($scope.question.options, function (item) {
+                            return item.label !== option.label;
+                        });
                     });
-
                 }
             });
 
@@ -119,16 +120,16 @@ angular.module('askApp')
 
         // penny question controller
         if ($scope.question && ($scope.question.type === 'pennies' || $scope.question.slug === 'pennies-intro' )) {
-            
             if ($scope.question.options_from_previous_answer) {
                 $scope.primaryActivity = $scope.getAnswer($scope.question.options_from_previous_answer.split(',')[1]);
+                console.log($scope.primaryActivity);
+                console.log(JSON.parse($scope.getAnswer($scope.question.options_from_previous_answer.split(',')[0])));
                 $scope.locations = _.filter(JSON.parse($scope.getAnswer($scope.question.options_from_previous_answer.split(',')[0])), function (location) {
                     return _.some(location.answers, function (item) {
                         return item.label === $scope.primaryActivity.label;
                     });
                 });
             }
-
 
             $scope.question.total = 100;
 
@@ -384,18 +385,25 @@ $scope.answerQuestion = function(answer, otherAnswer) {
  * @param  {array} options An array of all options regardless of which options the
  * user selected.
  */
-$scope.answerMultiSelect = function(options, otherAnswer) {
-    var answers = _.filter(options, function(option) {
+$scope.answerMultiSelect = function(question) {
+    var answers;
+    
+    if (question.hoisted_options) {
+        question.options = question.options.concat(question.hoisted_options);
+    }
+    answers = _.filter(question.options, function(option) {
         return option.checked;
     });
-    if (otherAnswer) {
+    
+    if (question.otherAnswer) {
         answers.push({
-            text: otherAnswer,
-            label: otherAnswer,
+            text: question.otherAnswer,
+            label: question.otherAnswer,
             checked: true,
             other: true
         });
     }
+    
     $scope.answerQuestion(answers);
 };
 

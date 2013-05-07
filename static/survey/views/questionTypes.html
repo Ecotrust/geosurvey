@@ -85,8 +85,25 @@
         </form>
     </div>
     <div ng-switch-when="multi-select">
-        <form class="question" ng-submit="answerMultiSelect(question.options, otherAnswer)">
+        <form class="question" ng-submit="answerMultiSelect(question)">
             <div class="todo mrm">
+                <div ng-show="question.hoisted_options.length">
+                    <h3>Activities You Selected</h3>
+                    <ul>
+                        <li 
+                          ng-click="option.checked = ! option.checked"
+                          ng-repeat="option in question.hoisted_options"
+                          ng-class="{'todo-done': option.checked }">
+                          <!-- <div class="todo-icon fui-man-24"></div> -->
+                          <div class="todo-content">
+                            <h4 class="todo-name">
+                              {{option.text}}
+                            </h4>      
+                          </div>
+                        </li>
+                    </ul>
+                </div>
+                <h3 ng-show="question.hoisted_options.length > 0">Other Activities</h3>
                 <ul>
                   <li 
                     ng-click="option.checked = ! option.checked"
@@ -115,7 +132,7 @@
                 </ul>
               </div>
 
-            <input class="input-block-level" type="text" placeholder="Other Option" ng-show="otherOption.checked" ng-model="otherAnswer" autofocus/> 
+            <input class="input-block-level" type="text" placeholder="Other Option" ng-show="otherOption.checked" ng-model="question.otherAnswer" autofocus/> 
             <button type="submit" class="btn btn-primary btn-large btn-block" ng-hide="dialog">continue</button>
         </form>
     </div>
