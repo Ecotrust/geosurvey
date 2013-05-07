@@ -149,3 +149,12 @@ ul + ul {
 .todo h3 {
     padding-left: 15px;
 }
+.modal .question {
+    max-width: 100%;
+}
+.question .form {
+    width: 100%;
+}
+.progress .bar {
+    -webkit-transition: none;
+}
