@@ -53,6 +53,7 @@ def _install_django():
                            sudo chmod -R g+w . && \
                            sudo chmod -R g+w ../.git && \
                            sudo chgrp -R www-data ../.git && \
+                           %(venv)s/bin/python manage.py migrate && \
                            /usr/bin/touch wsgi.py' % vars)
 
 
