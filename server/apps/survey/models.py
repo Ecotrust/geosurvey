@@ -95,7 +95,7 @@ class Question(models.Model):
         if self.survey_set.all():
             return self.survey_set.all()[0].slug
         elif self.modal_question.all():
-            return self.modal_question.all()[0].survey_set.all()[0].slug
+            return self.modal_question.all()[0].survey_set.all()[0].slug + " (modal)"
         else:
             return "NA"
 
