@@ -51,8 +51,8 @@ def _install_django():
     run('cd %(app_dir)s && %(venv)s/bin/python manage.py collectstatic --noinput && \
                            sudo chgrp -R www-data . && \
                            sudo chmod -R g+w . && \
-                           sudo chmod -R g+w .git && \
-                           sudo chgrp -R www-data .git && \
+                           sudo chmod -R g+w ../.git && \
+                           sudo chgrp -R www-data ../.git && \
                            /usr/bin/touch wsgi.py' % vars)
 
 
