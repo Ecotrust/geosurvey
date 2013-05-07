@@ -80,6 +80,7 @@ class Question(models.Model):
     lng = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
 
 
+    term_condition = models.CharField(max_length=254, null=True, blank=True)
 
     randomize_groups = models.BooleanField(default=False)
     options_from_previous_answer = models.CharField(max_length=254, null=True, blank=True)
