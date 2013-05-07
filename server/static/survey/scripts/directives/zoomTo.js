@@ -7,16 +7,24 @@ function ZoomToCtrl($scope, dialog, $http, $timeout) {
     $scope.results = [];
     $scope.showSpinner = false;
 
-    $scope.$watch('searchTerm', function (newValue) {
-        
+    if ($scope.states) {
+        $scope.stateParam = '&state__in=' + $scope.states.split(',').join('&state__in=')
+    }
+    console.log($scope.stateParam);
+
+    $scope.$watch('searchTerm', function (newValue) {    
         if (stop) {
             $timeout.cancel(stop);
         }
-
         if (newValue && newValue.length > 2) {
             $scope.showSpinner = true;
             stop = $timeout(function() {
-                $http.get('/api/v1/place/?format=json&limit=30&name__icontains=' + $scope.searchTerm).success(function(data) {
+                var url = '/api/v1/place/?format=json&limit=30';
+                if ($scope.states) {
+                    url = url + '&state__in=' + $scope.states;
+                }
+                console.log(url);
+                $http.get(url  + '&name__icontains='+ $scope.searchTerm).success(function(data) {
                     $scope.results = data.objects;
                     $scope.meta = data.meta;
                     $scope.showSpinner = false;
@@ -42,8 +50,8 @@ angular.module('askApp')
 
 
     return {
-        template: '<button class="btn btn-zoom btn-large" ng-click="openModal()">Zoom To...</button>',
-        restrict: 'E',
+        template: '<button class="btn btn-zoom btn-large" ng-click="openModal()">Search...</button>',
+        restrict: 'EA',
         replace: true,
         link: function postLink(scope, element, attrs) {
             scope.openModal = function () {
@@ -51,6 +59,9 @@ angular.module('askApp')
                     backdrop: true,
                     keyboard: true,
                     backdropClick: false,
+                    scope: {
+                        states: scope.states
+                    },
                     templateUrl: '/static/survey/views/zoomToModal.html',
                     controller: 'ZoomToCtrl'
                 });
@@ -58,7 +69,7 @@ angular.module('askApp')
                     scope.zoomTo({
                         lat: place.lat,
                         lng: place.lng,
-                        zoom: 13
+                        zoom: 15
 
                     });
                 });

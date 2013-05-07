@@ -14,7 +14,7 @@
     
     <ul class="nav nav-tabs nav-stacked">
         <li ng-show="results.length == 0">No Results</li>
-        <li ng-click="zoomTo(result)" ng-show="searchTerm && results.length > 0" ng-repeat="result in results"><a>{{ result.name }}, {{ result.type }}, {{ result.county }} County</a></li>
+        <li ng-click="zoomTo(result)" ng-show="searchTerm && results.length > 0" ng-repeat="result in results"><a><strong>{{ result.name }}</strong> ({{ result.county }} County)</a></li>
     </ul>
 </div>
 <div class="modal-footer">
