@@ -1,13 +1,13 @@
 <div class="modal-header">
     <h1>
-       My Activities 
+       Activities you selected
     </h1>
 </div>
 <div class="modal-body">
     
     <ul class="nav nav-tabs nav-stacked">
         <li ng-show="hoisted_options.length == 0">No Results</li>
-        <li ng-show="hoisted_options.length > 0" ng-repeat="option in hoisted_options"><a>{{ option.text }}</a></li>
+        <li ng-show="hoisted_options.length > 0" ng-repeat="option in hoisted_options">{{ option.text }}</li>
     </ul>
 </div>
 <div class="modal-footer">
