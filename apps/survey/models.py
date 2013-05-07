@@ -25,7 +25,7 @@ class Respondant(models.Model):
 class Page(models.Model):
     question = models.ForeignKey('Question')
     survey = models.ForeignKey('Survey')
-    
+
     def __str__(self):
         return "%s/%s (%d)" % (self.survey.name, self.question.slug, self.question.order)
 
@@ -37,7 +37,7 @@ class Survey(models.Model):
     name = models.CharField(max_length=254)
     slug = models.SlugField(max_length=254, unique=True)
     questions = models.ManyToManyField('Question', null=True, blank=True, through="Page")
-    
+    states = models.CharField(max_length=200, null=True, blank=True)
     def __str__(self):
         return "%s" % self.name
 

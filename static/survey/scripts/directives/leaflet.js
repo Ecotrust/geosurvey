@@ -18,6 +18,7 @@ console.log('loaded');
                 zoom: '=zoom',
                 multiMarkers: '=multimarkers',
                 popupField: '=popupfield',
+                states: "=states",
                 deletemarker: '&'
             },
             templateUrl: '/static/survey/views/leaflet.html',
@@ -32,7 +33,7 @@ console.log('loaded');
                 // L.tileLayer('http://services.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer/tile/{z}/{y}/{x}', {
                 //     maxZoom: 13
                 // }).addTo(map);
-
+                
                 var ggl = new L.Google();
                 map.addLayer(ggl);
                 // Default center of the map
