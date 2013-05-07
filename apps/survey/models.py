@@ -38,6 +38,8 @@ class Survey(models.Model):
     slug = models.SlugField(max_length=254, unique=True)
     questions = models.ManyToManyField('Question', null=True, blank=True, through="Page")
     states = models.CharField(max_length=200, null=True, blank=True)
+    anon = models.BooleanField(default=True)
+    
     def __str__(self):
         return "%s" % self.name
 
