@@ -1,32 +1,32 @@
 [
     {
-        "text": "I do not live on the coast",
-        "label": "not-living-on-coast",
+        "text": "White",
+        "label": "white",
         "group": "1"
     },
     {
-        "text": "Not at all",
-        "label": "not-at-all",
+        "text": "Black or African American",
+        "label": "black-african-american",
         "group": "1"
     },
     {
-        "text": "A little",
-        "label": "a-little",
+        "text": "Hispanic, Spanish or Latino",
+        "label": "hispanic-spanish-or-latino",
         "group": "1"
     },
     {
-        "text": "Not sure",
-        "label": "not-sure",
+        "text": "American Indian or Alaska Native",
+        "label": "american-indian-or-alaska-native",
         "group": "1"
     },
     {
-        "text": "A lot",
-        "label": "a-lot",
+        "text": "Asian/Pacific Islander",
+        "label": "asian-pacific-islander",
         "group": "1"
     },
     {
-        "text": "Main reason I live on the coast",
-        "label": "main-reason",
+        "text": "Other",
+        "label": "other",
         "group": "1"
     }
 ]
