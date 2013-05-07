@@ -6,9 +6,11 @@
   <head>
     <!--[if lt IE 9]>
      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+     <script>var L_DISABLE_3D=true;</script>
     <![endif]-->
     <!--[if lt IE 8]>
       <script src="/static/survey/lib/js/json3.min.js"></script>
+
     <![endif]-->
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
@@ -25,9 +27,12 @@
     <link rel="stylesheet" href="/static/survey/styles/map.css">
     <link rel="stylesheet" href="/static/survey/components/leaflet/dist/leaflet.css">
     <link rel="stylesheet" href="/static/survey/lib/css/leaflet.awesome-markers.css">
-
+    <!--[if IE ]>
+    <link rel="stylesheet" href="/static/survey/components/leaflet/dist/leaflet.css">
+    <![endif]-->
   </head>
   <body xmlns:ng="http://angularjs.org" id="ng-app" ng-app="askApp">
+
     <!--[if lt IE 7]>
       <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
     <![endif]-->
@@ -105,7 +110,7 @@
     <script src="/static/survey/components/angular-ui/build/angular-ui.js"></script>
     <script src="/static/survey/components/select2/select2.js"></script>
     <script src="/static/survey/components/underscore/underscore.js"></script>
-    <script src="/static/survey/components/leaflet/dist/leaflet.js"></script>
+    <script src="/static/survey/components/leaflet/dist/leaflet-src.js"></script>
     <script src="http://maps.google.com/maps/api/js?v=3.2&sensor=false"></script>
     <script src="/static/survey/lib/js/Google.js"></script>
     <script src="/static/survey/lib/js/leaflet.awesome-markers.min.js"></script>
