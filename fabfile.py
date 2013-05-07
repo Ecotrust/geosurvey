@@ -48,9 +48,7 @@ def install_bowerdeps():
 #%(venv)s/bin/python manage.py site localhost:8080 && \
 #/usr/local/bin/node-v0.8.23/bin/bower install --dev && \
 def _install_django():
-    run('cd %(app_dir)s && %(venv)s/bin/python manage.py syncdb --noinput && \
-                           %(venv)s/bin/python manage.py migrate --noinput && \
-                           %(venv)s/bin/python manage.py collectstatic --noinput && \
+    run('cd %(app_dir)s && %(venv)s/bin/python manage.py collectstatic --noinput && \
                            sudo chgrp -R www-data . &&\
                            /usr/bin/touch wsgi.py' % vars)
 
@@ -66,7 +64,7 @@ def create_superuser():
 
 
 def init():
-    _install_requirements()
+    
     #_install_bowerdeps()
     _install_django()
 
