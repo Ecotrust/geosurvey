@@ -1,5 +1,12 @@
 <div class="pennies-intro">
-	<p class="info">Great! You provided <strong>{{ locations.length || '0' }} locations</strong> the following primary activity: </p>
+	<p class="info">Great! You provided 
+		<ng-pluralize count="locations.length"
+                 when="{'0': '0 locations',
+                     'one': '1 location',
+                     'other': '{} locations'}">
+		</ng-pluralize>
+		</strong> the following primary activity: 
+	</p>
 	<p class="info" style="margin-left: 20px;"><strong>{{ primaryActivity.text || 'No primary activity provided' }}</strong></p>
 
 	<p class="info">
