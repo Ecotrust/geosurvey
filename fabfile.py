@@ -49,7 +49,10 @@ def install_bowerdeps():
 #/usr/local/bin/node-v0.8.23/bin/bower install --dev && \
 def _install_django():
     run('cd %(app_dir)s && %(venv)s/bin/python manage.py collectstatic --noinput && \
-                           sudo chgrp -R www-data . &&\
+                           sudo chgrp -R www-data . && \
+                           sudo chmod -R g+w . && \
+                           sudo chmod -R g+w .git && \
+                           sudo chgrp -R www-data .git && \
                            /usr/bin/touch wsgi.py' % vars)
 
 
