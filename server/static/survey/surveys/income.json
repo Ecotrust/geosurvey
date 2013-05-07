@@ -1,0 +1,27 @@
+[
+    {
+        "text": "Below $30,000",
+        "label": "below-30k",
+        "group": "1"
+    },
+    {
+        "text": "$30,000 to $54,999",
+        "label": "30k-54999",
+        "group": "1"
+    },
+    {
+        "text": "$55,000 to $94,999",
+        "label": "55k-94999",
+        "group": "1"
+    },
+    {
+        "text": "$95,000 and over",
+        "label": "95k-and-over",
+        "group": "1"
+    },
+    {
+        "text": "Don't know",
+        "label": "dont-know",
+        "group": "1"
+    }
+]
