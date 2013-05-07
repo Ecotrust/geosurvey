@@ -387,7 +387,7 @@ $scope.answerQuestion = function(answer, otherAnswer) {
                 $scope.dialog.close();
                 $scope.addLocation();
             } else {
-                if ($scope.terminateIf(answer, $scope.question.term_condition)) {
+                if ($scope.question.term_condition && $scope.terminateIf(answer, $scope.question.term_condition)) {
                     $location.path(['survey', $scope.survey.slug, 'complete', $routeParams.uuidSlug].join('/'));
                 } else {
                     answers[$routeParams.questionSlug] = answer;
