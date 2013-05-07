@@ -143,3 +143,9 @@ p.landing, p.info {
     font-size: 22px;
     font-weight: bold;
 }
+ul + ul {
+    margin-top: 10px;
+}
+.todo h3 {
+    padding-left: 15px;
+}
