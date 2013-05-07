@@ -23,10 +23,5 @@
         "text": "Asian/Pacific Islander",
         "label": "asian-pacific-islander",
         "group": "1"
-    },
-    {
-        "text": "Other",
-        "label": "other",
-        "group": "1"
     }
 ]
