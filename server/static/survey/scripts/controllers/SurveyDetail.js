@@ -122,8 +122,6 @@ angular.module('askApp')
         if ($scope.question && ($scope.question.type === 'pennies' || $scope.question.slug === 'pennies-intro' )) {
             if ($scope.question.options_from_previous_answer) {
                 $scope.primaryActivity = $scope.getAnswer($scope.question.options_from_previous_answer.split(',')[1]);
-                console.log($scope.primaryActivity);
-                console.log(JSON.parse($scope.getAnswer($scope.question.options_from_previous_answer.split(',')[0])));
                 $scope.locations = _.filter(JSON.parse($scope.getAnswer($scope.question.options_from_previous_answer.split(',')[0])), function (location) {
                     return _.some(location.answers, function (item) {
                         return item.label === $scope.primaryActivity.label;
@@ -327,12 +325,30 @@ $scope.gotoNextQuestion = function() {
     }
 };
 
+$scope.terminateIf = function (answer, condition) {
+    var op = condition[0],
+        testCriteria = condition.slice(1),
+        terminate=false;
+
+    if (op === '<') {
+        terminate = answer < testCriteria;
+    } else if (op === '>') {
+        terminate = answer > testCriteria;
+    } else if (op === '=') {
+        terminate = answer === testCriteria;
+    }
+    return terminate;
+    if (terminate) {
+        $location.path(['survey', $scope.survey.slug, 'complete', $routeParams.uuidSlug].join('/'));
+    }
+};
+
 $scope.answerQuestion = function(answer, otherAnswer) {
     var url = ['/respond/answer', $scope.survey.slug, $routeParams.questionSlug, $routeParams.uuidSlug].join('/');
     if ($scope.dialog) {
         $scope.dialog.options.success($scope.question, answer);
     } else {
-
+        
         // sometimes we'll have an other field with option text box
         if (answer === "other" && otherAnswer) {
             answer = otherAnswer;
@@ -371,10 +387,13 @@ $scope.answerQuestion = function(answer, otherAnswer) {
                 $scope.dialog.close();
                 $scope.addLocation();
             } else {
-                answers[$routeParams.questionSlug] = answer;
-                $scope.gotoNextQuestion();
+                if ($scope.question.term_condition && $scope.terminateIf(answer, $scope.question.term_condition)) {
+                    $location.path(['survey', $scope.survey.slug, 'complete', $routeParams.uuidSlug].join('/'));
+                } else {
+                    answers[$routeParams.questionSlug] = answer;
+                    $scope.gotoNextQuestion();
+                }
             }
-
         });
     }
 };
