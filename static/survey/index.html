@@ -48,7 +48,8 @@
       <div class="navbar navbar-inverse">
         <div class="navbar-inner">
           <div class="container"> 
-            <div class="">
+            <div ng-controller="SurveyListCtrl">
+              {% verbatim %}
               <ul class="nav">
                 <li>
                   <a href="#/">
@@ -57,21 +58,26 @@
                 </li>
                 <li>
                   <a>
-                    Survey
+                    Take Survey
                   </a>
-                  {% verbatim %}
-                  <ul ng-controller="SurveyListCtrl"  class="survey-list"> 
+                  
+                  <ul class="survey-list"> 
                     <li ng-repeat="survey in surveys">
                       <a href="#/survey/{{ survey.slug }}/uuid">{{ survey.name }}</a>
                     </li>  
                   </ul>
-                  {% endverbatim %}
+                  
                 </li>
                 <li>
-                  <a href="#/RespondantList">
+                  <a>
                     Completed Surveys
                     <!--<span class="navbar-unread">1</span>-->
                   </a>
+                  <ul class="survey-list"> 
+                    <li ng-repeat="survey in surveys">
+                      <a href="#/RespondantList/{{ survey.slug }}">{{ survey.name }}</a>
+                    </li>  
+                  </ul>
                 </li>
               </ul>
              <!-- <ul class="nav pull-right">
@@ -93,6 +99,7 @@
                   </ul> 
                 </li>
               </ul>-->
+              {% endverbatim %}
             </div><!--/.nav-collapse -->
           </div>
         </div>

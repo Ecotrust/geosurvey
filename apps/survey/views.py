@@ -25,7 +25,7 @@ def delete_responses(request, uuid, template='survey/delete.html'):
 def survey(request, survey_slug=None, template='survey/survey.html'):
     if survey_slug is not None:
         survey = get_object_or_404(Survey, slug=survey_slug, anon=True)
-        respondant = Respondant(survey=survey, email="anon@example.com")
+        respondant = Respondant(survey=survey)
         respondant.save()
         return redirect("/respond#/survey/%s/%s" % (survey.slug, respondant.uuid))
     return render_to_response(template, RequestContext(request, {}))

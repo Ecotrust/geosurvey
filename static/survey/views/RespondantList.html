@@ -1,13 +1,26 @@
-<h1>Respondants</h1>
-<table class="table">
-    <thead>
-        <th>Email</th>
-        <th>Timestamp</th>
-    </thead>
-    <tbody>
-        <tr ng-repeat="respondant in respondants">
-            <td><a href="#/RespondantDetail/{{respondant.uuid}}">{{ respondant.email }}</a></td>
-            <td>{{ respondant.ts }}</td>
-        </tr>
-    </tbody>
-</table>
+<h1>Respondants for {{ survey.name }}</h1>
+<div class="row-fluid">
+    <div class="span4">
+        <div class="well">
+            <h2>Overview</h2>
+            <ul class="unstyled">
+                <li>{{ meta.total_count }} surveys taken</li>
+            </ul>
+        </div>
+    </div>
+    <div class="span8">
+        <h2>Responses</h2>
+        <table class="table">
+            <thead>
+                <th>Email</th>
+                <th>Timestamp</th>
+            </thead>
+            <tbody>
+                <tr ng-repeat="respondant in respondants">
+                    <td><a href="#/RespondantDetail/{{respondant.uuid}}">{{ respondant.email }}</a></td>
+                    <td>{{ respondant.ts }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

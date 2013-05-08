@@ -5,8 +5,10 @@ angular.module('askApp')
 
     $http.get('/api/v1/respondant/' + $routeParams.uuidSlug + '/?format=json').success(function(data) {
         $scope.response = data;
-
-        $scope.mapResponse = JSON.parse($scope.getResponseBySlug('activity-locations').answer);
+        if ($scope.getResponseBySlug('activity-locations')) {
+            $scope.mapResponse = JSON.parse($scope.getResponseBySlug('activity-locations').answer);
+        }
+        
 
     });
 
