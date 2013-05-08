@@ -87,8 +87,10 @@ class Question(models.Model):
     randomize_groups = models.BooleanField(default=False)
     options_from_previous_answer = models.CharField(max_length=254, null=True, blank=True)
     allow_other = models.BooleanField(default=False)
+    required = models.BooleanField(default=True)
     modalQuestion = models.ForeignKey('self', null=True, blank=True, related_name="modal_question")
     hoist_answers = models.ForeignKey('self', null=True, blank=True, related_name="hoisted")
+
 
     class Meta:
         ordering = ['order']
