@@ -82,7 +82,9 @@
                     // Listen for marker drags
                     (function() {
 
-
+                        marker.on('dblclick', function (e) {
+                            map.setZoom(map.getZoom() + 1);
+                        });
                         marker.on('dragstart', function(e) {
                             draggingMarker = true;
                             map.closePopup();
