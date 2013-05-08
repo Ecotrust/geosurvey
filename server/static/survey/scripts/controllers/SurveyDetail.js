@@ -69,7 +69,7 @@ angular.module('askApp')
                         angular.extend(newOption, option);
                         newOption.checked = false;
                         $scope.question.hoisted_options.unshift(newOption);
-                        _.each($scope.question.options, function (item) {
+                        $scope.question.options = _.filter($scope.question.options, function (item) {
                             return item.label !== option.label;
                         });
                     });

@@ -164,3 +164,10 @@ ul + ul {
 form .btn-block {
     width: 100%;
 }
+.todo-name {
+    width: 90%;
+}
+.leaflet-container .leaflet-control-attribution {
+    font-size: 9px;
+    bottom: 7px;
+}
