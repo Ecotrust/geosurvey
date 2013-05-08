@@ -155,6 +155,12 @@ ul + ul {
 .question .form {
     width: 100%;
 }
+.question textarea {
+    width: 100%;
+}
 .progress .bar {
     -webkit-transition: none;
+}
+form .btn-block {
+    width: 100%;
 }

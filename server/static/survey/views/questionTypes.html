@@ -51,6 +51,12 @@
             <button type="submit" class="btn btn-primary btn-large btn-block">continue</button>
         </form>
     </div>
+    <div ng-switch-when="textarea">
+        <form class="question" ng-show="survey.questions.length" ng-submit="answerQuestion(answer)">
+            <textarea rows="5" placeholder="{{ question.label }}" ng-model="answer" autofocus></textarea>
+            <button type="submit" class="btn btn-primary btn-large btn-block">continue</button>
+        </form>
+    </div>
     <div ng-switch-when="single-select">
         <form class="question" ng-show="survey.questions.length" ng-submit="answerSingleSelect(question.options, question.otherAnswer)">
             <div class="todo mrm">
