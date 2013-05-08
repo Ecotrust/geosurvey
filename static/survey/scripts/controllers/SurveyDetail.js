@@ -17,6 +17,12 @@ var map = {
 
 var answers = {};
 
+function ActivitiesCtrl($scope, dialog) {
+    $scope.close = function(result){
+      dialog.close(result);
+    };
+};
+
 angular.module('askApp')
     .controller('SurveyDetailCtrl', function($scope, $routeParams, $http, $location, $dialog, $interpolate, $timeout, offlineSurvey) {
 
@@ -55,6 +61,19 @@ angular.module('askApp')
                     $scope.question.options = data;
                 }
 
+
+                if ($scope.question && $scope.question.hoist_answers) {
+                    $scope.question.hoisted_options = [];
+                    _.each($scope.getAnswer($scope.question.hoist_answers.slug), function (option) {
+                        var newOption = {};
+                        angular.extend(newOption, option);
+                        newOption.checked = false;
+                        $scope.question.hoisted_options.unshift(newOption);
+                        _.each($scope.question.options, function (item) {
+                            return item.label !== option.label;
+                        });
+                    });
+                }
             });
 
         } else if ($scope.question && $scope.question.options_from_previous_answer && $scope.question.slug == 'county') {
@@ -94,11 +113,15 @@ angular.module('askApp')
             });
         }
 
-        // penny question controller
-        if ($scope.question && $scope.question.type === 'pennies') {
+        if ($scope.question) {
             $scope.map = map;
-            
+            $scope.map.center.lat = $scope.question.lat || map.center.lat;
+            $scope.map.center.lng = $scope.question.lng || map.center.lng;
+            $scope.map.zoom = $scope.question.zoom || map.zoom;
+        }
 
+        // penny question controller
+        if ($scope.question && ($scope.question.type === 'pennies' || $scope.question.slug === 'pennies-intro' )) {
             if ($scope.question.options_from_previous_answer) {
                 $scope.primaryActivity = $scope.getAnswer($scope.question.options_from_previous_answer.split(',')[1]);
                 $scope.locations = _.filter(JSON.parse($scope.getAnswer($scope.question.options_from_previous_answer.split(',')[0])), function (location) {
@@ -107,7 +130,6 @@ angular.module('askApp')
                     });
                 });
             }
-
 
             $scope.question.total = 100;
 
@@ -139,11 +161,25 @@ angular.module('askApp')
         }
         // map 
         if ($scope.question && $scope.question.type === 'map-multipoint') {
-
-            $scope.map = map;
+            
             $scope.locations = [];
             $scope.activeMarker = false;
+
+            $scope.showActivities = function () {
+                $dialog.dialog({
+                    backdrop: true,
+                    keyboard: true,
+                    backdropClick: false,
+                    templateUrl: '/static/survey/views/activitiesModal.html',
+                    scope: {
+                        hoisted_options: $scope.getAnswer($scope.question.modalQuestion.hoist_answers.slug)
+                    },
+                    controller: "ActivitiesCtrl"
+                }).open()
+            }
+
         }
+
         // grid question controller
         if ($scope.question && $scope.question.type === 'grid') {
             // Prep row initial row data, each row containing values.
@@ -185,7 +221,7 @@ angular.module('askApp')
                     displayName: 'Expense Item'
                 }, {
                     field: 'cost',
-                    displayName: 'Cost ($0 - $10,000)',
+                    displayName: 'Cost',
                     cellTemplate: costCellTemplate
                 }, {
                     field: 'numPeople',
@@ -291,12 +327,30 @@ $scope.gotoNextQuestion = function() {
     }
 };
 
+$scope.terminateIf = function (answer, condition) {
+    var op = condition[0],
+        testCriteria = condition.slice(1),
+        terminate=false;
+
+    if (op === '<') {
+        terminate = answer < testCriteria;
+    } else if (op === '>') {
+        terminate = answer > testCriteria;
+    } else if (op === '=') {
+        terminate = answer === testCriteria;
+    }
+    return terminate;
+    if (terminate) {
+        $location.path(['survey', $scope.survey.slug, 'complete', $routeParams.uuidSlug].join('/'));
+    }
+};
+
 $scope.answerQuestion = function(answer, otherAnswer) {
     var url = ['/respond/answer', $scope.survey.slug, $routeParams.questionSlug, $routeParams.uuidSlug].join('/');
     if ($scope.dialog) {
         $scope.dialog.options.success($scope.question, answer);
     } else {
-
+        
         // sometimes we'll have an other field with option text box
         if (answer === "other" && otherAnswer) {
             answer = otherAnswer;
@@ -335,10 +389,13 @@ $scope.answerQuestion = function(answer, otherAnswer) {
                 $scope.dialog.close();
                 $scope.addLocation();
             } else {
-                answers[$routeParams.questionSlug] = answer;
-                $scope.gotoNextQuestion();
+                if ($scope.question.term_condition && $scope.terminateIf(answer, $scope.question.term_condition)) {
+                    $location.path(['survey', $scope.survey.slug, 'complete', $routeParams.uuidSlug].join('/'));
+                } else {
+                    answers[$routeParams.questionSlug] = answer;
+                    $scope.gotoNextQuestion();
+                }
             }
-
         });
     }
 };
@@ -349,18 +406,25 @@ $scope.answerQuestion = function(answer, otherAnswer) {
  * @param  {array} options An array of all options regardless of which options the
  * user selected.
  */
-$scope.answerMultiSelect = function(options, otherAnswer) {
-    var answers = _.filter(options, function(option) {
+$scope.answerMultiSelect = function(question) {
+    var answers;
+    
+    if (question.hoisted_options) {
+        question.options = question.options.concat(question.hoisted_options);
+    }
+    answers = _.filter(question.options, function(option) {
         return option.checked;
     });
-    if (otherAnswer) {
+    
+    if (question.otherAnswer) {
         answers.push({
-            text: otherAnswer,
-            label: otherAnswer,
+            text: question.otherAnswer,
+            label: question.otherAnswer,
             checked: true,
             other: true
         });
     }
+    
     $scope.answerQuestion(answers);
 };
 

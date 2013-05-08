@@ -52,12 +52,15 @@ class ResponseResource(ModelResource):
         queryset = Response.objects.all().order_by('question__order');
 
 class RespondantResource(ModelResource):
-    responses = fields.ToManyField(ResponseResource, 'responses', full=True)
-
+    responses = fields.ToManyField(ResponseResource, 'responses')
+    survey = fields.ToOneField('apps.survey.api.SurveyResource', 'survey', null=True, blank=True)
     class Meta:
         queryset = Respondant.objects.all()
         authentication = SessionAuthentication()
         authorization = DjangoAuthorization()
+        filtering = {
+            'survey': ALL_WITH_RELATIONS
+        }
 
 class OptionResource(ModelResource):
     class Meta:
@@ -67,7 +70,10 @@ class OptionResource(ModelResource):
 class QuestionResource(ModelResource):
     options = fields.ToManyField(OptionResource, 'options', full=True)
     modalQuestion = fields.ToOneField('self', 'modalQuestion', full=True, null=True, blank=True)
+    hoist_answers = fields.ToOneField('self', 'hoist_answers', full=True, null=True, blank=True)
     question_types = fields.DictField(attribute='question_types', readonly=True)
+
+
 
     class Meta:
         queryset = Question.objects.all().order_by('order')
@@ -81,7 +87,9 @@ class SurveyResource(ModelResource):
 
     class Meta:
         queryset = Survey.objects.all()
-
+        filtering = {
+            'slug': ['exact']
+        }
     def prepend_urls(self):
         return [
             url(r"^(?P<resource_name>%s)/(?P<slug>[\w\d_.-]+)/$" % self._meta.resource_name, self.wrap_view('dispatch_detail'), name="api_dispatch_detail"),

@@ -15,7 +15,7 @@ class Respondant(models.Model):
     responses = models.ManyToManyField('Response', related_name='responses')
 
     ts = models.DateTimeField(default=datetime.datetime.now())
-    email = models.EmailField(max_length=254)
+    email = models.EmailField(max_length=254, null=True, blank=True, default=None)
 
     def __str__(self):
         return "%s" % self.email
@@ -25,7 +25,7 @@ class Respondant(models.Model):
 class Page(models.Model):
     question = models.ForeignKey('Question')
     survey = models.ForeignKey('Survey')
-    
+
     def __str__(self):
         return "%s/%s (%d)" % (self.survey.name, self.question.slug, self.question.order)
 
@@ -37,6 +37,8 @@ class Survey(models.Model):
     name = models.CharField(max_length=254)
     slug = models.SlugField(max_length=254, unique=True)
     questions = models.ManyToManyField('Question', null=True, blank=True, through="Page")
+    states = models.CharField(max_length=200, null=True, blank=True)
+    anon = models.BooleanField(default=True)
 
     def __str__(self):
         return "%s" % self.name
@@ -74,10 +76,19 @@ class Question(models.Model):
     options_json = models.CharField(max_length=254, null=True, blank=True)
     info = models.CharField(max_length=254, null=True, blank=True);
 
+    zoom = models.IntegerField(null=True, blank=True)
+    min_zoom = models.IntegerField(null=True, blank=True, default=10)
+    lat = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
+    lng = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
+
+
+    term_condition = models.CharField(max_length=254, null=True, blank=True)
+
     randomize_groups = models.BooleanField(default=False)
     options_from_previous_answer = models.CharField(max_length=254, null=True, blank=True)
     allow_other = models.BooleanField(default=False)
-    modalQuestion = models.ForeignKey('self', null=True, blank=True)
+    modalQuestion = models.ForeignKey('self', null=True, blank=True, related_name="modal_question")
+    hoist_answers = models.ForeignKey('self', null=True, blank=True, related_name="hoisted")
 
     class Meta:
         ordering = ['order']
@@ -86,8 +97,8 @@ class Question(models.Model):
     def survey_slug(self):
         if self.survey_set.all():
             return self.survey_set.all()[0].slug
-        elif self.question_set.all():
-            return self.question_set.all()[0].slug
+        elif self.modal_question.all():
+            return self.modal_question.all()[0].survey_set.all()[0].slug + " (modal)"
         else:
             return "NA"
 
