@@ -16,8 +16,8 @@
                 class="input-block-level"
                 placeholder="{{ question.label }}"
                 type="number"
-                min="0"
-                max="150"
+                min="{{question.integer_min}}"
+                max="{{question.integer_max}}"
                 ui-event="{ keypress : 'onlyDigits($event)' }"
                 autofocus
                 required/>
