@@ -353,6 +353,9 @@ $scope.answerQuestion = function(answer, otherAnswer) {
         if (answer === "other" && otherAnswer) {
             answer = otherAnswer;
         }
+        if ($scope.question.required && ! answer) {
+            return false;
+        }
 
 
         if ($scope.locations && $scope.locations.length) {
