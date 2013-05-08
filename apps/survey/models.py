@@ -38,6 +38,8 @@ class Survey(models.Model):
     slug = models.SlugField(max_length=254, unique=True)
     questions = models.ManyToManyField('Question', null=True, blank=True, through="Page")
     states = models.CharField(max_length=200, null=True, blank=True)
+    anon = models.BooleanField(default=True)
+    
     def __str__(self):
         return "%s" % self.name
 
@@ -80,6 +82,7 @@ class Question(models.Model):
     lng = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
 
 
+    term_condition = models.CharField(max_length=254, null=True, blank=True)
 
     randomize_groups = models.BooleanField(default=False)
     options_from_previous_answer = models.CharField(max_length=254, null=True, blank=True)
