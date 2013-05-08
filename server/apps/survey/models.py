@@ -15,7 +15,7 @@ class Respondant(models.Model):
     responses = models.ManyToManyField('Response', related_name='responses')
 
     ts = models.DateTimeField(default=datetime.datetime.now())
-    email = models.EmailField(max_length=254)
+    email = models.EmailField(max_length=254, null=True, blank=True, default=None)
 
     def __str__(self):
         return "%s" % self.email
@@ -39,7 +39,7 @@ class Survey(models.Model):
     questions = models.ManyToManyField('Question', null=True, blank=True, through="Page")
     states = models.CharField(max_length=200, null=True, blank=True)
     anon = models.BooleanField(default=True)
-    
+
     def __str__(self):
         return "%s" % self.name
 
