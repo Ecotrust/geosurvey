@@ -53,18 +53,20 @@ Because the app is being served out of the django app we need to specify a path 
 })
 ```
 
+#Heroku
+##requirements
 1. Install the heroku toolbelt.
 2. Install git > 1.8
 
-#Create the heroku app
+##create the heroku app
 heroku create appname
 
-#Push the app if it is in a directory
+##push the app if it is in a directory
 git subtree push --prefix server/ heroku master
 
-#Django install
+##django install
 heroku run python manage.py syncdb --settings=config.environments.heroku
 heroku run python manage.py migrate --settings=config.environments.heroku
 
-#Open the app
+##open the app
 heroku open
