@@ -449,6 +449,15 @@
     }, 
     {
         "fields": {
+            "question": 88, 
+            "survey": 2
+        }, 
+        "model": "survey.page", 
+        "pk": 77
+    }, 
+    {
+        "fields": {
+            "anon": true, 
             "name": "Test Survey", 
             "slug": "test-survey", 
             "states": null
@@ -458,6 +467,7 @@
     }, 
     {
         "fields": {
+            "anon": false, 
             "name": "marco", 
             "slug": "marco", 
             "states": "MD,DE,NJ,NY,VA,DC"
@@ -467,6 +477,7 @@
     }, 
     {
         "fields": {
+            "anon": true, 
             "name": "Washington Opt In", 
             "slug": "washington-opt-in", 
             "states": "WA"
@@ -476,6 +487,7 @@
     }, 
     {
         "fields": {
+            "anon": true, 
             "name": "Washington Panel", 
             "slug": "washington-panel", 
             "states": "WA"
@@ -1131,6 +1143,7 @@
             "order": 0, 
             "randomize_groups": false, 
             "slug": "name", 
+            "term_condition": null, 
             "title": "What is your name?", 
             "type": "text", 
             "zoom": null
@@ -1154,6 +1167,7 @@
             "order": 0, 
             "randomize_groups": false, 
             "slug": "age", 
+            "term_condition": null, 
             "title": "How old are you?", 
             "type": "text", 
             "zoom": null
@@ -1177,6 +1191,7 @@
             "order": 0, 
             "randomize_groups": false, 
             "slug": "marco-age", 
+            "term_condition": null, 
             "title": "Please enter your age:", 
             "type": "integer", 
             "zoom": null
@@ -1206,6 +1221,7 @@
             "order": 0, 
             "randomize_groups": false, 
             "slug": "state", 
+            "term_condition": null, 
             "title": "What state do you live in?", 
             "type": "auto-single-select", 
             "zoom": null
@@ -1229,6 +1245,7 @@
             "order": 0, 
             "randomize_groups": false, 
             "slug": "county", 
+            "term_condition": null, 
             "title": "What county do you live in?", 
             "type": "auto-single-select", 
             "zoom": null
@@ -1252,6 +1269,7 @@
             "order": 2, 
             "randomize_groups": false, 
             "slug": "activity-locations", 
+            "term_condition": null, 
             "title": "Move and zoom the map to precisely focus the crosshair at each of your activity locations.", 
             "type": "map-multipoint", 
             "zoom": null
@@ -1275,6 +1293,7 @@
             "order": 0, 
             "randomize_groups": false, 
             "slug": "info-activities", 
+            "term_condition": null, 
             "title": "Activities", 
             "type": "info", 
             "zoom": null
@@ -1298,6 +1317,7 @@
             "order": 0, 
             "randomize_groups": false, 
             "slug": "location-activities", 
+            "term_condition": null, 
             "title": "Which activities did you conduct at this location?", 
             "type": "multi-select", 
             "zoom": null
@@ -1321,6 +1341,7 @@
             "order": 0, 
             "randomize_groups": false, 
             "slug": "age", 
+            "term_condition": "<18", 
             "title": "Please enter your age", 
             "type": "integer", 
             "zoom": null
@@ -1344,6 +1365,7 @@
             "order": 1, 
             "randomize_groups": false, 
             "slug": "state-or-province", 
+            "term_condition": null, 
             "title": "What state/province do you live in?", 
             "type": "auto-single-select", 
             "zoom": null
@@ -1367,6 +1389,7 @@
             "order": 2, 
             "randomize_groups": false, 
             "slug": "county", 
+            "term_condition": null, 
             "title": "You indicated you live in {{ getAnswer('state-or-province').text }}. What county/municipality do you live in?", 
             "type": "auto-single-select", 
             "zoom": null
@@ -1390,6 +1413,7 @@
             "order": 3, 
             "randomize_groups": false, 
             "slug": "recreate-info", 
+            "term_condition": null, 
             "title": " ", 
             "type": "info", 
             "zoom": null
@@ -1413,7 +1437,8 @@
             "order": 4, 
             "randomize_groups": true, 
             "slug": "activities", 
-            "title": "Which of the following recreational activities have you participated in during the last 12 months in the  Pacific coast of Washington?  ", 
+            "term_condition": null, 
+            "title": "Which of the following recreation activities have you participated in during the last 12 months in the  Pacific coast of Washington?  ", 
             "type": "multi-select", 
             "zoom": null
         }, 
@@ -1436,7 +1461,8 @@
             "order": 5, 
             "randomize_groups": false, 
             "slug": "number-of-trips", 
-            "title": "Please estimate how many trips you have made to Pacific coast of Washington in the last 12 months primarily for recreation purposes (e.g., beach going, wildlife viewing, surfing, kayaking, etc.). A trip is defined as an intentional trip outside of daily routine. ", 
+            "term_condition": null, 
+            "title": "Please estimate how many trips you have made to the Pacific coast of Washington in the last 12 months primarily for recreation purposes (e.g., beach going, wildlife viewing, surfing, kayaking, etc.). A trip is defined as an intentional trip outside of daily routine. ", 
             "type": "integer", 
             "zoom": null
         }, 
@@ -1459,6 +1485,7 @@
             "order": 8, 
             "randomize_groups": false, 
             "slug": "activity-locations", 
+            "term_condition": null, 
             "title": "Navigate the map or use the search function to zoom to the areas which you conducted ocean and coastal recreation activities in last 12 months.", 
             "type": "map-multipoint", 
             "zoom": 7
@@ -1482,6 +1509,7 @@
             "order": 0, 
             "randomize_groups": true, 
             "slug": "activity-locations", 
+            "term_condition": null, 
             "title": "Which of the following recreational activities did you participate in at this location?", 
             "type": "multi-select", 
             "zoom": null
@@ -1505,6 +1533,7 @@
             "order": 0, 
             "randomize_groups": false, 
             "slug": "primary-activity", 
+            "term_condition": null, 
             "title": "Of the coastal and ocean recreation activities you just selected, what was your <strong>primary</strong> recreational activity during your last trip to Pacific coast of Washington? The primary activity is typically the main activity that brought you to the coast on your trip.  ", 
             "type": "single-select", 
             "zoom": null
@@ -1528,6 +1557,7 @@
             "order": 9, 
             "randomize_groups": false, 
             "slug": "last-trip", 
+            "term_condition": null, 
             "title": "Last Trip", 
             "type": "info", 
             "zoom": null
@@ -1551,6 +1581,7 @@
             "order": 10, 
             "randomize_groups": true, 
             "slug": "last-trip-activities", 
+            "term_condition": null, 
             "title": "Which of the following recreation activities did you participated in during your last trip  to the Pacific coast of Washington that was primary for recreation purposes?", 
             "type": "multi-select", 
             "zoom": null
@@ -1574,6 +1605,7 @@
             "order": 11, 
             "randomize_groups": false, 
             "slug": "last-trip-primary", 
+            "term_condition": null, 
             "title": "Of the coastal and ocean recreation activities you just selected, what was your primary recreational activity during your last trip to Pacific coast of Washington? The primary activity is typically the main activity that brought you to the coast on your trip.  ", 
             "type": "single-select", 
             "zoom": null
@@ -1604,6 +1636,7 @@
             "order": 12, 
             "randomize_groups": false, 
             "slug": "number-of-nights", 
+            "term_condition": null, 
             "title": "How many nights did you spend at the coast during your last trip to Pacific coast of Washington?", 
             "type": "single-select", 
             "zoom": null
@@ -1642,6 +1675,7 @@
             "order": 13, 
             "randomize_groups": false, 
             "slug": "items-spent", 
+            "term_condition": null, 
             "title": "During your last trip to the Pacific coast of Washington, please indicate if your party spent money on the following items.", 
             "type": "multi-select", 
             "zoom": null
@@ -1665,6 +1699,7 @@
             "order": 14, 
             "randomize_groups": false, 
             "slug": "itemized-expenditures", 
+            "term_condition": null, 
             "title": "During your last trip to the Pacific coast of Washington, please estimate how much your party spent on the following items and the number of people it covered.", 
             "type": "grid", 
             "zoom": null
@@ -1688,6 +1723,7 @@
             "order": 15, 
             "randomize_groups": false, 
             "slug": "demo-info", 
+            "term_condition": null, 
             "title": "Demographic Info", 
             "type": "info", 
             "zoom": null
@@ -1705,19 +1741,14 @@
             "lng": null, 
             "min_zoom": null, 
             "modalQuestion": null, 
-            "options": [
-                77, 
-                79, 
-                76, 
-                78, 
-                80
-            ], 
+            "options": [], 
             "options_from_previous_answer": "", 
-            "options_json": "", 
+            "options_json": "/static/survey/surveys/income.json", 
             "order": 16, 
             "randomize_groups": false, 
             "slug": "household-income", 
-            "title": "Was your total HOUSEHOLD income in the past 12 months?", 
+            "term_condition": null, 
+            "title": "What was your total HOUSEHOLD income in the past 12 months?", 
             "type": "multi-select", 
             "zoom": null
         }, 
@@ -1743,6 +1774,7 @@
             "order": 17, 
             "randomize_groups": false, 
             "slug": "gender", 
+            "term_condition": null, 
             "title": "What is your gender?", 
             "type": "single-select", 
             "zoom": null
@@ -1752,7 +1784,7 @@
     }, 
     {
         "fields": {
-            "allow_other": false, 
+            "allow_other": true, 
             "hoist_answers": null, 
             "info": "", 
             "label": "Racial Background", 
@@ -1760,19 +1792,13 @@
             "lng": null, 
             "min_zoom": null, 
             "modalQuestion": null, 
-            "options": [
-                38, 
-                39, 
-                40, 
-                41, 
-                42, 
-                43
-            ], 
+            "options": [], 
             "options_from_previous_answer": "", 
-            "options_json": "", 
+            "options_json": "/static/survey/surveys/racial-background.json", 
             "order": 18, 
             "randomize_groups": false, 
             "slug": "racial-background", 
+            "term_condition": null, 
             "title": "Please indicate what you consider your racial background to be.  We greatly appreciate your effort to describe your background using the standard categories provided.  These race categories may not fully describe you, but they do match those used by the Census Bureau.  It helps us compare our survey respondents to the U.S. population. \r\n\r\nPlease check one or more categories below to indicate what race(s) you consider yourself to be. \r\n\r\n", 
             "type": "single-select", 
             "zoom": null
@@ -1802,6 +1828,7 @@
             "order": 19, 
             "randomize_groups": false, 
             "slug": "education", 
+            "term_condition": null, 
             "title": "What is the highest level of school you have completed?", 
             "type": "single-select", 
             "zoom": null
@@ -1831,6 +1858,7 @@
             "order": 21, 
             "randomize_groups": false, 
             "slug": "mapping-feedback", 
+            "term_condition": null, 
             "title": "To help us improve future surveys, was the mapping portion of this survey easy to understand and use?", 
             "type": "single-select", 
             "zoom": null
@@ -1854,6 +1882,7 @@
             "order": 20, 
             "randomize_groups": false, 
             "slug": "feedback", 
+            "term_condition": null, 
             "title": "To help us improve future surveys, please provide any comments or feedback you may have that will help us improve this survey.  Was there a specific section of the survey that you had trouble understanding? What would make it easier?  ", 
             "type": "text", 
             "zoom": null
@@ -1880,6 +1909,7 @@
             "order": 0, 
             "randomize_groups": false, 
             "slug": "study-area", 
+            "term_condition": null, 
             "title": "We are interested in knowing about your coastal and ocean recreation activity on the Pacific coast of Washington.  Have you been to the Pacific coast of Washington (dark blue area) at least once in the last 12 months?", 
             "type": "single-select", 
             "zoom": null
@@ -1903,6 +1933,7 @@
             "order": 1, 
             "randomize_groups": false, 
             "slug": "number-of-trips", 
+            "term_condition": null, 
             "title": "Please estimate how many trips you have made to the Pacific coast of Washington in the last 12 months for primarily recreation purposes (e.g., beach going, bird watching, fishing, surfing, boating, etc.). A trip is defined as an intentional trip to the Pacific coast of Washington separate from your daily routine.", 
             "type": "integer", 
             "zoom": null
@@ -1926,6 +1957,7 @@
             "order": 2, 
             "randomize_groups": true, 
             "slug": "activities", 
+            "term_condition": null, 
             "title": "We are interested in knowing what types of coastal and ocean recreational activities you do when you go to the Pacific coast of Washington. Which of the following activities have you participated in during the last 12 months on the Pacific coast of Washington?  ", 
             "type": "multi-select", 
             "zoom": null
@@ -1949,6 +1981,7 @@
             "order": 3, 
             "randomize_groups": false, 
             "slug": "county-visits", 
+            "term_condition": null, 
             "title": "Below is a map of the coastal counties within the Pacific coast of Washington. You previously responded that you visited this area {{ getAnswer('number-of-trips') }} time(s) to recreate in the last 12 months. Please indicate how many times you visited each of these coastal counties to recreate in the last 12 months on the map below. If you did not visit a particular coastal county, please choose \"zero\". Your best estimate of the county is fine.", 
             "type": "integer", 
             "zoom": null
@@ -1978,6 +2011,7 @@
             "order": 4, 
             "randomize_groups": false, 
             "slug": "how-long", 
+            "term_condition": null, 
             "title": " For how long have you been visiting the Pacific coast of Washington and enjoying one or more of the activities you identified?", 
             "type": "single-select", 
             "zoom": null
@@ -2001,6 +2035,7 @@
             "order": 5, 
             "randomize_groups": false, 
             "slug": "last-trip", 
+            "term_condition": null, 
             "title": "Last Trip", 
             "type": "info", 
             "zoom": null
@@ -2024,6 +2059,7 @@
             "order": 6, 
             "randomize_groups": false, 
             "slug": "date-last-visit", 
+            "term_condition": null, 
             "title": "The following questions are about your last trip for primarily recreation purposes (e.g., beach going, bird watching, surfing, boating, etc) to the coastal and ocean areas of the Pacific coast of Washington. Again, a visit is defined as an intentional trip --separate from your daily routine.", 
             "type": "text", 
             "zoom": null
@@ -2047,6 +2083,7 @@
             "order": 7, 
             "randomize_groups": false, 
             "slug": "date-last-visit", 
+            "term_condition": null, 
             "title": "When was your last coastal recreation trip to the Pacific coast of Washington --defined as the area shown in this map. Your best estimate is fine. [SHOW STUDY REGION MAP]\r\n[INSERT CALENDAR FOR RESPONDENT TO INDICATE DATE]\r\n", 
             "type": "text", 
             "zoom": null
@@ -2073,6 +2110,7 @@
             "order": 8, 
             "randomize_groups": false, 
             "slug": "last-trip-origin", 
+            "term_condition": null, 
             "title": "On your last coastal recreation trip, did you start your trip from your home?  ", 
             "type": "single-select", 
             "zoom": null
@@ -2104,6 +2142,7 @@
             "order": 9, 
             "randomize_groups": false, 
             "slug": "primary-mode-transportation", 
+            "term_condition": null, 
             "title": "What was the primary mode(s) of transportation you used to get to the Pacific coast of Washington on your last coastal recreation trip?", 
             "type": "multi-select", 
             "zoom": null
@@ -2134,6 +2173,7 @@
             "order": 10, 
             "randomize_groups": false, 
             "slug": "primary-mode-transportation-on-coast", 
+            "term_condition": null, 
             "title": "What was the primary mode(s) of transportation you used to travel around the Pacific coast of Washington on your last coastal recreation trip?", 
             "type": "single-select", 
             "zoom": null
@@ -2157,6 +2197,7 @@
             "order": 11, 
             "randomize_groups": false, 
             "slug": "how-many-people", 
+            "term_condition": null, 
             "title": "Approximately how many people (including yourself) went on your last coastal recreation trip to the Pacific coast of Washington?  ", 
             "type": "integer", 
             "zoom": null
@@ -2180,6 +2221,7 @@
             "order": 12, 
             "randomize_groups": true, 
             "slug": "activities-last-trip", 
+            "term_condition": null, 
             "title": "What coastal and ocean recreation activities did you participate in during your last coastal recreation trip to the Pacific coast of Washington?", 
             "type": "multi-select", 
             "zoom": null
@@ -2203,6 +2245,7 @@
             "order": 14, 
             "randomize_groups": false, 
             "slug": "last-trip-primary", 
+            "term_condition": null, 
             "title": "Of the following coastal and ocean recreation activities you selected what was your primary activity during your last coastal recreation trip to the Pacific coast of Washington? (please select only one)", 
             "type": "single-select", 
             "zoom": null
@@ -2233,6 +2276,7 @@
             "order": 14, 
             "randomize_groups": false, 
             "slug": "number-of-nights", 
+            "term_condition": null, 
             "title": "How many nights did you spend at the coast during your last coastal recreation trip to the Pacific coast of Washington?", 
             "type": "single-select", 
             "zoom": null
@@ -2271,6 +2315,7 @@
             "order": 15, 
             "randomize_groups": false, 
             "slug": "last-trip-amount-spent", 
+            "term_condition": null, 
             "title": "During your last coastal recreation trip to the Pacific coast of Washington, please indicate if your party spent money on the following items.", 
             "type": "multi-select", 
             "zoom": null
@@ -2294,6 +2339,7 @@
             "order": 16, 
             "randomize_groups": false, 
             "slug": "how-much", 
+            "term_condition": null, 
             "title": "During your last coastal recreation trip to the Pacific coast of Washington, please estimate how much your party spent on the following items and the number of people it covered.", 
             "type": "grid", 
             "zoom": null
@@ -2317,6 +2363,7 @@
             "order": 0, 
             "randomize_groups": false, 
             "slug": "activity-locations-wa-panel", 
+            "term_condition": null, 
             "title": "Which activities did you participate in at this location?", 
             "type": "multi-select", 
             "zoom": null
@@ -2340,6 +2387,7 @@
             "order": 17, 
             "randomize_groups": false, 
             "slug": "activity-locations", 
+            "term_condition": null, 
             "title": "Navigate the map or use the search function to zoom to the areas which you conducted ocean and coastal recreation activities in last 12 months.", 
             "type": "map-multipoint", 
             "zoom": 7
@@ -2363,6 +2411,7 @@
             "order": 1, 
             "randomize_groups": false, 
             "slug": "name", 
+            "term_condition": null, 
             "title": "What is your name?", 
             "type": "text", 
             "zoom": null
@@ -2390,6 +2439,7 @@
             "order": 4, 
             "randomize_groups": false, 
             "slug": "some-activities", 
+            "term_condition": null, 
             "title": "What are some activities?", 
             "type": "multi-select", 
             "zoom": null
@@ -2413,6 +2463,7 @@
             "order": 6, 
             "randomize_groups": false, 
             "slug": "pennies", 
+            "term_condition": null, 
             "title": "Allocate 100 pennies across your locations to indicate how important each area is to your primary activity.", 
             "type": "info", 
             "zoom": null
@@ -2436,6 +2487,7 @@
             "order": 19, 
             "randomize_groups": false, 
             "slug": "pennies", 
+            "term_condition": null, 
             "title": "Allocate 100 pennies across your locations to indicate how important each area is to your primary activity.", 
             "type": "pennies", 
             "zoom": null
@@ -2459,6 +2511,7 @@
             "order": 5, 
             "randomize_groups": false, 
             "slug": "grid-question", 
+            "term_condition": null, 
             "title": "This is our test grid question", 
             "type": "grid", 
             "zoom": null
@@ -2482,6 +2535,7 @@
             "order": 0, 
             "randomize_groups": false, 
             "slug": "age", 
+            "term_condition": null, 
             "title": "Please enter your age:", 
             "type": "integer", 
             "zoom": null
@@ -2512,6 +2566,7 @@
             "order": 1, 
             "randomize_groups": false, 
             "slug": "state", 
+            "term_condition": null, 
             "title": "What state do you live in?", 
             "type": "single-select", 
             "zoom": null
@@ -2535,6 +2590,7 @@
             "order": 2, 
             "randomize_groups": false, 
             "slug": "county", 
+            "term_condition": null, 
             "title": "You indicated you live in {{ getAnswer('state').text }}.  What county do you live in?", 
             "type": "auto-single-select", 
             "zoom": null
@@ -2558,6 +2614,7 @@
             "order": 3, 
             "randomize_groups": false, 
             "slug": "study-area", 
+            "term_condition": null, 
             "title": "Coastal and Ocean Recreation in the Last 12 Months", 
             "type": "info", 
             "zoom": null
@@ -2581,6 +2638,7 @@
             "order": 4, 
             "randomize_groups": true, 
             "slug": "activities", 
+            "term_condition": null, 
             "title": "Which of the following recreational activities have you participated in during the last 12 months in Mid-Atlantic coastal and ocean areas?  ", 
             "type": "multi-select", 
             "zoom": null
@@ -2604,6 +2662,7 @@
             "order": 6, 
             "randomize_groups": false, 
             "slug": "how-many-days", 
+            "term_condition": null, 
             "title": "Please estimate how many days you have been to Mid-Atlantic coastal and ocean areas in the last 12 months primarily for recreational purposes (e.g., beach going, wildlife viewing, surfing, kayaking, etc.). ", 
             "type": "integer", 
             "zoom": null
@@ -2627,6 +2686,7 @@
             "order": 0, 
             "randomize_groups": true, 
             "slug": "activity-locations", 
+            "term_condition": null, 
             "title": "What activity did you engage in at this location?", 
             "type": "multi-select", 
             "zoom": null
@@ -2650,6 +2710,7 @@
             "order": 6, 
             "randomize_groups": false, 
             "slug": "activity-locations", 
+            "term_condition": null, 
             "title": "Navigate the map or use the search function to zoom to the areas which you conducted ocean and coastal recreation activities in last 12 months.", 
             "type": "map-multipoint", 
             "zoom": 6
@@ -2673,6 +2734,7 @@
             "order": 15, 
             "randomize_groups": false, 
             "slug": "activity-locations-intro", 
+            "term_condition": null, 
             "title": "Activity Locations", 
             "type": "info", 
             "zoom": null
@@ -2696,6 +2758,7 @@
             "order": 7, 
             "randomize_groups": false, 
             "slug": "activity-locations-intro", 
+            "term_condition": null, 
             "title": "Activity Locations", 
             "type": "info", 
             "zoom": null
@@ -2719,6 +2782,7 @@
             "order": 5, 
             "randomize_groups": false, 
             "slug": "mapping-intro", 
+            "term_condition": null, 
             "title": "Activity Locations", 
             "type": "info", 
             "zoom": null
@@ -2742,6 +2806,7 @@
             "order": 18, 
             "randomize_groups": false, 
             "slug": "pennies-intro", 
+            "term_condition": null, 
             "title": "Location Priorities", 
             "type": "info", 
             "zoom": null
@@ -2762,10 +2827,11 @@
             "options": [], 
             "options_from_previous_answer": "", 
             "options_json": "", 
-            "order": 8, 
+            "order": 7, 
             "randomize_groups": false, 
             "slug": "last-time-info", 
-            "title": "The following questions are solely about the last time you went to the Mid-Atlantic coastal and ocean areas primarily for recreation purposes. ", 
+            "term_condition": null, 
+            "title": " ", 
             "type": "info", 
             "zoom": null
         }, 
@@ -2783,12 +2849,13 @@
             "min_zoom": 10, 
             "modalQuestion": null, 
             "options": [], 
-            "options_from_previous_answer": "activities", 
+            "options_from_previous_answer": "activities-last-trip", 
             "options_json": "", 
             "order": 9, 
             "randomize_groups": false, 
             "slug": "primary-activity", 
-            "title": "Of the recreational activities you just selected, what was your primary recreational activity during the last time you went to Mid-Atlantic coastal and ocean areas?", 
+            "term_condition": "", 
+            "title": "Of the recreation activities you just selected, what was your primary recreation activity during the last time you went to Mid-Atlantic coastal and ocean areas?", 
             "type": "single-select", 
             "zoom": null
         }, 
@@ -2818,6 +2885,7 @@
             "order": 10, 
             "randomize_groups": false, 
             "slug": "nights-spent", 
+            "term_condition": null, 
             "title": "How many nights did you spend at the coast the last time you went to the Mid-Atlantic coastal and ocean areas primarily for recreation?", 
             "type": "single-select", 
             "zoom": null
@@ -2856,7 +2924,8 @@
             "order": 11, 
             "randomize_groups": false, 
             "slug": "expenses", 
-            "title": "During this last time you went Mid-Atlantic coastal and ocean areas primarily for recreation please indicate if your party spent money on the following items.", 
+            "term_condition": "", 
+            "title": "During this last time you went to Mid-Atlantic coastal and ocean areas primarily for recreation purposes, please indicate if your party spent money on the following items.", 
             "type": "multi-select", 
             "zoom": null
         }, 
@@ -2879,7 +2948,8 @@
             "order": 12, 
             "randomize_groups": false, 
             "slug": "itemized-expenditure", 
-            "title": "During this last time you went to the Mid-Atlantic coastal and ocean areas primarily for recreation, please estimate how much your party spent on the following items and the number of people it covered.", 
+            "term_condition": "", 
+            "title": "During this last time you went to the Mid-Atlantic coastal and ocean areas primarily for recreation purposes, please estimate how much your party spent on the following items and the number of people it covered.", 
             "type": "grid", 
             "zoom": null
         }, 
@@ -2896,17 +2966,13 @@
             "lng": null, 
             "min_zoom": 10, 
             "modalQuestion": null, 
-            "options": [
-                83, 
-                81, 
-                82, 
-                84
-            ], 
+            "options": [], 
             "options_from_previous_answer": "", 
-            "options_json": "", 
+            "options_json": "/static/survey/surveys/miles-from-coast.json", 
             "order": 13, 
             "randomize_groups": false, 
             "slug": "miles-from-coast", 
+            "term_condition": null, 
             "title": "Please estimate approximately how many miles (driving miles one way) do you live from the coast?", 
             "type": "single-select", 
             "zoom": null
@@ -2924,21 +2990,15 @@
             "lng": null, 
             "min_zoom": 10, 
             "modalQuestion": null, 
-            "options": [
-                85, 
-                87, 
-                89, 
-                86, 
-                88, 
-                90
-            ], 
+            "options": [], 
             "options_from_previous_answer": "", 
-            "options_json": "", 
+            "options_json": "/static/survey/surveys/live-at-coast-because-recreate.json", 
             "order": 14, 
             "randomize_groups": false, 
             "slug": "factors", 
+            "term_condition": null, 
             "title": "If you live on the coast, please tell us how much nearby coastal and ocean recreation opportunities played into your decision to live on the coast: ", 
-            "type": "multi-select", 
+            "type": "single-select", 
             "zoom": null
         }, 
         "model": "survey.question", 
@@ -2960,6 +3020,7 @@
             "order": 15, 
             "randomize_groups": false, 
             "slug": "demo-info", 
+            "term_condition": null, 
             "title": "We have just a few more questions for you.  Please keep in mind that your answers are confidential and your personal information will also be kept private.", 
             "type": "info", 
             "zoom": null
@@ -2977,17 +3038,13 @@
             "lng": null, 
             "min_zoom": 10, 
             "modalQuestion": null, 
-            "options": [
-                77, 
-                79, 
-                76, 
-                78
-            ], 
+            "options": [], 
             "options_from_previous_answer": "", 
-            "options_json": "", 
+            "options_json": "/static/survey/surveys/income.json", 
             "order": 16, 
             "randomize_groups": false, 
             "slug": "household-income", 
+            "term_condition": null, 
             "title": "What was your total HOUSEHOLD income in the past 12 months?", 
             "type": "single-select", 
             "zoom": null
@@ -3014,6 +3071,7 @@
             "order": 17, 
             "randomize_groups": false, 
             "slug": "gender", 
+            "term_condition": null, 
             "title": "What is your gender?", 
             "type": "single-select", 
             "zoom": null
@@ -3031,17 +3089,13 @@
             "lng": null, 
             "min_zoom": 10, 
             "modalQuestion": null, 
-            "options": [
-                39, 
-                40, 
-                41, 
-                42
-            ], 
+            "options": [], 
             "options_from_previous_answer": "", 
-            "options_json": "", 
+            "options_json": "/static/survey/surveys/racial-background.json", 
             "order": 18, 
             "randomize_groups": false, 
             "slug": "racial-background", 
+            "term_condition": null, 
             "title": "Please indicate what you consider your racial background to be.  We greatly appreciate your effort to describe your background using the standard categories provided.  These race categories may not fully describe you, but they do match those used by the Census Bureau.  It helps us compare our survey respondents to the U.S. population. \r\n\r\nPlease check one or more categories below to indicate what race(s) you consider yourself to be. ", 
             "type": "multi-select", 
             "zoom": null
@@ -3071,6 +3125,7 @@
             "order": 19, 
             "randomize_groups": false, 
             "slug": "school", 
+            "term_condition": null, 
             "title": "What is the highest level of school you have completed?", 
             "type": "single-select", 
             "zoom": null
@@ -3100,6 +3155,7 @@
             "order": 20, 
             "randomize_groups": false, 
             "slug": "mapping-feedback", 
+            "term_condition": "", 
             "title": "To help us improve future surveys, was the mapping portion of this survey easy to understand and use?", 
             "type": "single-select", 
             "zoom": null
@@ -3123,11 +3179,36 @@
             "order": 21, 
             "randomize_groups": false, 
             "slug": "feedback", 
+            "term_condition": null, 
             "title": "To help us improve future surveys, please provide any comments or feedback you may have that will help us improve this survey.  Was there a specific section of the survey that you had trouble understanding? What would make it easier?  ", 
             "type": "text", 
             "zoom": null
         }, 
         "model": "survey.question", 
         "pk": 87
+    }, 
+    {
+        "fields": {
+            "allow_other": true, 
+            "hoist_answers": null, 
+            "info": "", 
+            "label": "Activities Last Trip", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "", 
+            "options_json": "/static/survey/surveys/activities_marco.json", 
+            "order": 8, 
+            "randomize_groups": false, 
+            "slug": "activities-last-trip", 
+            "term_condition": null, 
+            "title": "During the last time you went to the Mid-Atlantic coastal and ocean areas primarily for recreation purposes, what recreational activities did you participate in?", 
+            "type": "multi-select", 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 88
     }
 ]
