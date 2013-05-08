@@ -25,7 +25,12 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^grappelli/', include('grappelli.urls')),
     (r'^api/', include(v1_api.urls)),
+
+    #anon survey user for specific survey
+    url(r'^respond/(?P<survey_slug>[\w\d-]+)$', 'apps.survey.views.survey'),
+    #survey responder with preassigned uuid
     url(r'^respond$', 'apps.survey.views.survey'),
+    #other survey urls
     url(r'^respond', include(survey_urls)),
     (r'register', survey_urls.register),
     #(r'^survey/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.SURVEY_ROOT}),

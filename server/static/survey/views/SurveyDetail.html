@@ -1,6 +1,11 @@
 <div class="respondant">
-    
-    <span class="pull-right">{{ survey.questions.indexOf(question) + 1 }} of {{ survey.questions.length }}</span>
+    <div class="row-fluid">
+        <div class="offset9 span3">
+            <div class="progress">
+              <div class="bar" style="width: {{ ((survey.questions.indexOf(question) + 1) / survey.questions.length) * 100 }}%;"></div>
+            </div>
+        </div>
+    </div>
     <a href="/admin/survey/question/{{question.id}}/" ng-show="isAuthenticated">edit</a>
     <h2 class="question-title">
         {{ question.displayTitle }}

@@ -1,0 +1,22 @@
+[
+    {
+        "text": "0-60 miles",
+        "label": "0-60",
+        "group": "1"
+    },
+    {
+        "text": "61-120 miles",
+        "label": "61-120",
+        "group": "1"
+    },
+    {
+        "text": "121-180 miles",
+        "label": "121-180",
+        "group": "1"
+    },
+    {
+        "text": "180+ miles",
+        "label": "180-and-over",
+        "group": "1"
+    }
+]
