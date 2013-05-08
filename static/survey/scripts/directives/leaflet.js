@@ -27,7 +27,8 @@
                     map = new L.Map($el, {
                         fadeAnimation: false,
                         zoomAnimation: false,
-                        markerZoomAnimation: false
+                        markerZoomAnimation: false,
+                        inertia: false
                     });
 
                 // L.tileLayer('http://services.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer/tile/{z}/{y}/{x}', {
@@ -81,7 +82,9 @@
                     // Listen for marker drags
                     (function() {
 
-
+                        marker.on('dblclick', function (e) {
+                            map.setZoom(map.getZoom() + 1);
+                        });
                         marker.on('dragstart', function(e) {
                             draggingMarker = true;
                             map.closePopup();
