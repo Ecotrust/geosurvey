@@ -27,7 +27,8 @@
                     map = new L.Map($el, {
                         fadeAnimation: false,
                         zoomAnimation: false,
-                        markerZoomAnimation: false
+                        markerZoomAnimation: false,
+                        inertia: false
                     });
 
                 // L.tileLayer('http://services.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer/tile/{z}/{y}/{x}', {
