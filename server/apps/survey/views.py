@@ -6,6 +6,8 @@ from django.shortcuts import get_object_or_404
 from django.template.loader import get_template
 from django.core.mail import EmailMultiAlternatives
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import redirect
+
 
 import simplejson
 
@@ -20,7 +22,12 @@ def delete_responses(request, uuid, template='survey/delete.html'):
     respondant.save()
     return render_to_response(template, RequestContext(request, {}))
 
-def survey(request, template='survey/survey.html'):
+def survey(request, survey_slug=None, template='survey/survey.html'):
+    if survey_slug is not None:
+        survey = get_object_or_404(Survey, slug=survey_slug, anon=True)
+        respondant = Respondant(survey=survey, email="anon@example.com")
+        respondant.save()
+        return redirect("/respond#/survey/%s/%s" % (survey.slug, respondant.uuid))
     return render_to_response(template, RequestContext(request, {}))
 
 def answer(request, survey_slug, question_slug, uuid): #, survey_slug, question_slug, uuid):
