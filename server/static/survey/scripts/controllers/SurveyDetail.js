@@ -355,6 +355,8 @@ $scope.answerQuestion = function(answer, otherAnswer) {
         }
         if ($scope.question.required && ! answer) {
             return false;
+        } else if (! $scope.question.required && answer === undefined) {
+            answer = "";
         }
 
 
