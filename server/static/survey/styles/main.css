@@ -138,6 +138,10 @@ p.landing, p.info {
     margin-bottom: 55px;
     font-size: 18px;
 }
+.acitivty-locations-intro p.info,
+.pennies-intro p.info { 
+    margin-bottom: 30px;
+}
 .question-title {
     font-size: 20px;
     font-weight: normal;
@@ -148,6 +152,18 @@ p.landing, p.info {
     font-size: 22px;
     font-weight: bold;
 }
-
-.user-controls {
+ul + ul {
+    margin-top: 10px;
+}
+.todo h3 {
+    padding-left: 15px;
+}
+.modal .question {
+    max-width: 100%;
+}
+.question .form {
+    width: 100%;
+}
+.progress .bar {
+    -webkit-transition: none;
 }
