@@ -1,7 +1,12 @@
 # Server
-```base
+```bash
 vagrant up
 fab dev run_server
+```
+
+## to update
+```bash
+fab dev update
 ```
 
 # Install Requirements
