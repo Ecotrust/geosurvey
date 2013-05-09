@@ -69,7 +69,7 @@ angular.module('askApp')
                         angular.extend(newOption, option);
                         newOption.checked = false;
                         $scope.question.hoisted_options.unshift(newOption);
-                        _.each($scope.question.options, function (item) {
+                        $scope.question.options = _.filter($scope.question.options, function (item) {
                             return item.label !== option.label;
                         });
                     });
@@ -354,6 +354,11 @@ $scope.answerQuestion = function(answer, otherAnswer) {
         // sometimes we'll have an other field with option text box
         if (answer === "other" && otherAnswer) {
             answer = otherAnswer;
+        }
+        if ($scope.question.required && ! answer) {
+            return false;
+        } else if (! $scope.question.required && answer === undefined) {
+            answer = "";
         }
 
 

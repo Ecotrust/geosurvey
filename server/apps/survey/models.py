@@ -80,15 +80,17 @@ class Question(models.Model):
     min_zoom = models.IntegerField(null=True, blank=True, default=10)
     lat = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
     lng = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
-
-
+    integer_min = models.IntegerField(default=0, null=True, blank=True)
+    integer_max = models.IntegerField(default=365, null=True, blank=True)
     term_condition = models.CharField(max_length=254, null=True, blank=True)
 
     randomize_groups = models.BooleanField(default=False)
     options_from_previous_answer = models.CharField(max_length=254, null=True, blank=True)
     allow_other = models.BooleanField(default=False)
+    required = models.BooleanField(default=True)
     modalQuestion = models.ForeignKey('self', null=True, blank=True, related_name="modal_question")
     hoist_answers = models.ForeignKey('self', null=True, blank=True, related_name="hoisted")
+
 
     class Meta:
         ordering = ['order']
