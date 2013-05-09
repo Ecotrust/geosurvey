@@ -45,5 +45,6 @@ describe('Text Input Tests', function() {
     });
     it("should continue to the county question", function () {
         expect(browser().location().url()).toBe("/survey/washington-opt-in/county/uuid");
+        expect(repeater('option').count()).toBe(5);
     });
 });
