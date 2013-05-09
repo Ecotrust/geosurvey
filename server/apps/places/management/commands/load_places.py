@@ -21,20 +21,19 @@ class Command(BaseCommand):
             #    break
             rows += 1
             kwargs = {
-                'type': row['FEATURE_CLASS'],
-                'name': row['FEATURE_NAME'],
-                'state': row['STATE_ALPHA'],
-                'county': row['COUNTY_NAME'],
-                'lat': row['PRIM_LAT_DEC'],
-                'lng': row['PRIM_LONG_DEC']
+                'type': row['FEATURE_CLASS'].decode("utf-8").encode('utf8'),
+                'name': row['FEATURE_NAME'].decode("utf-8").encode('utf8'),
+                'state': row['STATE_ALPHA'].decode("utf-8").encode('utf8'),
+                'county': row['COUNTY_NAME'].decode("utf-8").encode('utf8'),
+                'lat': row['PRIM_LAT_DEC'].decode("utf-8").encode('utf8'),
+                'lng': row['PRIM_LONG_DEC'].decode("utf-8").encode('utf8')
             }
 
             if kwargs['type'] not in excluded_types:
                 place, created = Place.objects.get_or_create(type=kwargs['type'], name=kwargs['name'], state=kwargs['state'], county=kwargs['county'])
                 place.lat = kwargs['lat']
                 place.lng = kwargs['lng']
-        
-                print rows, place
                 place.save()
+                
 
         print Place.objects.all().count()
