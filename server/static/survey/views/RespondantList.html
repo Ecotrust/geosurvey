@@ -17,7 +17,7 @@
             </thead>
             <tbody>
                 <tr ng-repeat="respondant in respondants">
-                    <td><a href="#/RespondantDetail/{{respondant.uuid}}">{{ respondant.email }}</a></td>
+                    <td><a href="#/RespondantDetail/{{survey.slug}}/{{respondant.uuid}}">{{ respondant.email || respondant.uuid}}</a></td>
                     <td>{{ respondant.ts }}</td>
                 </tr>
             </tbody>

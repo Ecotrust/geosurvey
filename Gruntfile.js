@@ -96,6 +96,10 @@ module.exports = function (grunt) {
       e2e: {
         configFile: 'karma-e2e.conf.js',
         singleRun: false
+      },
+      washingtonoptin: {
+        configFile: 'karma-washington-opt-in.conf.js',
+        singleRun: true
       }
     },
     coffee: {
@@ -260,6 +264,11 @@ module.exports = function (grunt) {
     'clean:server',
     // 'connect:test',
     'karma:e2e'
+  ]);
+  grunt.registerTask('c-washingtonoptin', [
+    'clean:server',
+    // 'connect:test',
+    'karma:washingtonoptin'
   ]);
 
   grunt.registerTask('test', [
