@@ -12,8 +12,9 @@ describe('Controller: RespondantListCtrl', function() {
     $httpBackend = _$httpBackend_;
 
     
-
-    $httpBackend.expectGET('/api/v1/respondant/?format=json').respond({
+    $routeParams.surveySlug = 'test-survey';
+    $httpBackend.expectGET('/api/v1/survey/test-survey/?format=json').respond(survey);
+    $httpBackend.expectGET('api/v1/respondant/?format=json&survey__slug__exact=test-survey').respond({
       "meta": {
         "limit": 20,
         "next": null,
@@ -43,7 +44,8 @@ describe('Controller: RespondantListCtrl', function() {
         "uuid": "7f04ded6-0f2e-4992-9d94-e8ea7d2a117a"
       }]
     });
-
+    
+    
     scope = $rootScope.$new();
     RespondantListCtrl = $controller('RespondantListCtrl', {
       $scope: scope
@@ -51,7 +53,7 @@ describe('Controller: RespondantListCtrl', function() {
   }));
 
   it('should attach a list of respondants to the scope', function() {
-    $httpBackend.flush()
+    $httpBackend.flush();
     expect(scope.respondants.length).toBe(4);
   });
 });

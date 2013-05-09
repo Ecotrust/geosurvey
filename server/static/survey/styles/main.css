@@ -164,6 +164,19 @@ ul + ul {
 .question .form {
     width: 100%;
 }
+.question textarea {
+    width: 100%;
+}
 .progress .bar {
     -webkit-transition: none;
+}
+form .btn-block {
+    width: 100%;
+}
+.todo-name {
+    width: 90%;
+}
+.leaflet-container .leaflet-control-attribution {
+    font-size: 9px;
+    bottom: 7px;
 }
