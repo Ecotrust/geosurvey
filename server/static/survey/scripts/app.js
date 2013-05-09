@@ -36,7 +36,7 @@ angular.module('askApp', ['ui', 'leaflet.directive', 'ui.bootstrap', 'ngGrid'])
         templateUrl: '/static/survey/views/RespondantList.html',
         controller: 'RespondantListCtrl'
     })
-    .when('/RespondantDetail/:uuidSlug', {
+    .when('/RespondantDetail/:surveySlug/:uuidSlug', {
       templateUrl: '/static/survey/views/RespondantDetail.html',
       controller: 'RespondantDetailCtrl'
     })

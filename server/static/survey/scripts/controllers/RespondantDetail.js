@@ -3,11 +3,11 @@
 angular.module('askApp')
     .controller('RespondantDetailCtrl', function($scope, $routeParams, $http) {
 
-    $http.get('/api/v1/respondant/' + $routeParams.uuidSlug + '/?format=json').success(function(data) {
+    $http.get('/api/v1/respondant/'  + $routeParams.uuidSlug + '/?format=json&survey__slug=' + $routeParams.surveySlug).success(function(data) {
         $scope.response = data;
-        if ($scope.getResponseBySlug('activity-locations')) {
-            $scope.mapResponse = JSON.parse($scope.getResponseBySlug('activity-locations').answer);
-        }
+        // if ($scope.getResponseBySlug('activity-locations')) {
+        //     $scope.mapResponse = JSON.parse($scope.getResponseBySlug('activity-locations').answer);
+        // }
         
 
     });
