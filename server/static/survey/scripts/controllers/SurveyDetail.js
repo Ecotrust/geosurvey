@@ -41,7 +41,7 @@ angular.module('askApp')
             $scope.question.displayTitle = $interpolate($scope.question.title)($scope);
         }
 
-        if ($scope.question && $scope.question.type === 'info') {
+        if ($scope.question && $scope.question.type === 'info' && $scope.question.info) {
             $scope.infoView = '/static/survey/survey-pages/' + $routeParams.surveySlug + '/' + $scope.question.info + '.html';
 
         }
@@ -157,6 +157,7 @@ angular.module('askApp')
                 });
             });
         }
+
         // map 
         if ($scope.question && $scope.question.type === 'map-multipoint') {
             
@@ -173,11 +174,11 @@ angular.module('askApp')
                         hoisted_options: $scope.getAnswer($scope.question.modalQuestion.hoist_answers.slug)
                     },
                     controller: "ActivitiesCtrl"
-                }).open()
+                }).open();
             }
 
         }
-
+      
         // grid question controller
         if ($scope.question && $scope.question.type === 'grid') {
             // Prep row initial row data, each row containing values.
@@ -262,7 +263,7 @@ $scope.addLocation = function(location) {
     $scope.activeMarker = false;
 };
 
-$scope.confirmLocation = function() {
+$scope.confirmLocation = function(question) {
     $scope.dialog = $dialog.dialog({
         backdrop: true,
         keyboard: true,
@@ -270,9 +271,12 @@ $scope.confirmLocation = function() {
         templateUrl: '/static/survey/views/locationActivitiesModal.html',
         controller: 'SurveyDetailCtrl',
         scope: {
-            question: $scope.question.modalQuestion
+            question: question? question: $scope.question.modalQuestion
         },
         success: function(question, answer) {
+            if (question.update) {
+                debugger;
+            }
             $scope.addLocation({
                 lat: $scope.map.marker.lat,
                 lng: $scope.map.marker.lng,
@@ -430,6 +434,11 @@ $scope.answerMultiSelect = function(question) {
     
     $scope.answerQuestion(answers);
 };
+
+$scope.editMarker = function (location) {
+    location.question.update=true;
+    $scope.confirmLocation(location.question);
+}
 
 $scope.removeLocation = function() {
     alert("not yet implemented");

@@ -1,7 +1,12 @@
 # Server
-```base
+```bash
 vagrant up
 fab dev run_server
+```
+
+## to update
+```bash
+fab dev update
 ```
 
 # Install Requirements
@@ -53,38 +58,20 @@ Because the app is being served out of the django app we need to specify a path 
 })
 ```
 
-# Install the heroku toolbelt.
-# Install git > 1.8
+#Heroku
+##requirements
+1. Install the heroku toolbelt.
+2. Install git > 1.8
 
-# Specify Requirements
-must have a requirements.txt file in the django project root
-
-# Create a Procfile in django project root to run dev server
-web: python manage.py runserver 0:$PORT --settings=config.environments.heroku
-
-# Create an environment (config/environment/heroku.py):
-```python
-from path import path
-from config.settings import *
-import dj_database_url
-
-DATABASES = {
-    'default': dj_database_url.config()  
-}
-DEBUG = False
-```
-Create the heroku app
+##create the heroku app
 heroku create appname
 
-Push the app if it is in a directory
+##push the app if it is in a directory
 git subtree push --prefix server/ heroku master
 
-Push the app if at project root
-git push heroku master
-
-Django install
+##django install
 heroku run python manage.py syncdb --settings=config.environments.heroku
 heroku run python manage.py migrate --settings=config.environments.heroku
 
-Open the app
+##open the app
 heroku open
