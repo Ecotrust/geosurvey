@@ -99,7 +99,7 @@ module.exports = function (grunt) {
       },
       washingtonoptin: {
         configFile: 'karma-washington-opt-in.conf.js',
-        singleRun: true
+        singleRun: false
       }
     },
     coffee: {
