@@ -10,6 +10,8 @@ urlRoot = "karma";
 files = [
   ANGULAR_SCENARIO,
   ANGULAR_SCENARIO_ADAPTER,
+  'app/components/jquery/jquery.js',
+  'app/components/underscore/underscore.js',
   'test/e2e/washington-opt-in/*.js',
 	// {pattern: 'app/index.html', watched: true, included: false, served: false},
 	// {pattern: 'app/index.html', watched: true, included: false, served: false},

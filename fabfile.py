@@ -13,7 +13,7 @@ def dev():
     """ Use development server settings """
     servers = ['vagrant@127.0.0.1:2222']
     env.hosts = servers
-    env.key_filename = '~/.vagrant.d/insecure_private_key'
+    env.key_filename = '/Users/eknuth/.vagrant.d/insecure_private_key'
     vars['app_dir'] = '/vagrant/server'
     vars['venv'] = '/usr/local/venv/geosurvey'
     return servers
@@ -47,6 +47,9 @@ def install_bowerdeps():
 
 #%(venv)s/bin/python manage.py site localhost:8080 && \
 #/usr/local/bin/node-v0.8.23/bin/bower install --dev && \
+def _sync_django():
+    run('cd %(app_dir)s && %(venv)s/bin/python manage.py syncdb --noinput' %vars)
+
 def _install_django():
     run('cd %(app_dir)s && %(venv)s/bin/python manage.py collectstatic --noinput && \
                            sudo chgrp -R www-data . && \
@@ -68,8 +71,9 @@ def create_superuser():
 
 
 def init():
-    
     #_install_bowerdeps()
+    _install_requirements()
+    _sync_django()
     _install_django()
 
 

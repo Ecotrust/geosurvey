@@ -1,6 +1,5 @@
 'use strict';
 
-
 describe('Geosurvey App', function() {
     beforeEach(function() {
         browser().navigateTo('/respond');
@@ -24,7 +23,6 @@ describe('Text Input Tests', function() {
     beforeEach(function() {
         browser().navigateTo('/respond#/survey/test-survey/name/uuid');
     });
-
 
     
     it('should display a question with a text input', function() {

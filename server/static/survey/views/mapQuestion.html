@@ -19,3 +19,9 @@
 <div class="row-fluid user-controls" ng-show="activeMarker == false && locations.length > 0">
     <button type="submit" class="btn btn-primary btn-block btn-large" ng-click="answerQuestion(locations)">continue</button>
 </div>
+<div style="display:none">
+    <!-- testing controls -->
+    <input ng-model="map.zoom"/>
+    <input ng-model="map.lat"/>
+    <input ng-model="map.lng"/>
+</div>

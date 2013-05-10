@@ -95,7 +95,7 @@
             <div class="todo mrm">
                 <div ng-show="question.hoisted_options.length">
                     <h3>Activities You Selected</h3>
-                    <ul>
+                    <ul class="hoisted">
                         <li 
                           ng-click="option.checked = ! option.checked"
                           ng-repeat="option in question.hoisted_options"
@@ -110,7 +110,7 @@
                     </ul>
                 </div>
                 <h3 ng-show="question.hoisted_options.length > 0">Other Activities</h3>
-                <ul>
+                <ul class="choices">
                   <li 
                     ng-click="option.checked = ! option.checked"
                     ng-repeat="option in question.options"
