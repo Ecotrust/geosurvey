@@ -34,6 +34,4 @@ class Command(BaseCommand):
                 place.lat = kwargs['lat']
                 place.lng = kwargs['lng']
                 place.save()
-                
-
         print Place.objects.all().count()
