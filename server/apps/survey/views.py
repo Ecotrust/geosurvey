@@ -27,6 +27,8 @@ def survey(request, survey_slug=None, template='survey/survey.html'):
         survey = get_object_or_404(Survey, slug=survey_slug, anon=True)
         respondant = Respondant(survey=survey)
         respondant.save()
+        if request.GET.get('get-uid', None) is not None:
+            return HttpResponse(simplejson.dumps({'success': "true", "uuid": respondant.uuid}))
         return redirect("/respond#/survey/%s/%s" % (survey.slug, respondant.uuid))
     return render_to_response(template, RequestContext(request, {}))
 

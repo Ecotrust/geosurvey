@@ -1091,6 +1091,7 @@ angular.module('ui.directives').directive('uiSortable', [
         var onReceive, onRemove, onStart, onUpdate, opts, _receive, _remove, _start, _update;
 
         opts = angular.extend({}, uiConfig.sortable, scope.$eval(attrs.uiSortable));
+
         if (ngModel) {
 
           ngModel.$render = function() {
@@ -1184,9 +1185,7 @@ angular.module('ui.directives').directive('uiSortable', [
         }
 
         // Create sortable
-
         element.sortable(opts);
-        
       }
     };
   }
