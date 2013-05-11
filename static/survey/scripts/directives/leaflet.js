@@ -12,7 +12,8 @@
             replace: true,
             transclude: true,
             scope: {
-                center: '=center',
+                center_lng: '=center_lng',
+                center_lat: '=center_lat',
                 marker: '=marker',
                 message: '=message',
                 zoom: '=zoom',
@@ -73,7 +74,7 @@
                         shadowAnchor: [4, 62], // the same for the shadow
                         popupAnchor: [0, -25] // point from which the popup should open relative to the iconAnchor
                     });
-                    var marker = new L.marker([scope.center.lat, scope.center.lng], {
+                    var marker = new L.marker([scope.center_lat, scope.center_lng], {
                         icon: crosshairIcon
                     });
                     var draggingMarker = false;
@@ -117,7 +118,7 @@
                             if (newValue) {
                                 // marker.draggable = true;
 
-                                marker.setLatLng(new L.LatLng(scope.center.lat, scope.center.lng));
+                                marker.setLatLng(new L.LatLng(scope.center_lat, scope.center_lng));
 
                                 map.addLayer(marker);
                                 // marker.dragging.enable();
