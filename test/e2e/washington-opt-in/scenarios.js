@@ -151,13 +151,15 @@ describe('Washington Panel Tests', function() {
         expect(element('.btn:contains(Yes):visible').count()).toBe(0);
         expect(element('.btn:contains(No):visible').count()).toBe(0);
 
+        input('map.marker.lat').enter(places[0].lat);
+        input('map.marker.lng').enter(places[0].lng);
+
         expect(element('h2').text()).toContain("Please zoom in to ensure accurate placement.");
         expect(element('button:contains(Add Location):visible').count()).toBe(0);
         input('map.zoom').enter('15');
         expect(element('button:contains(Add Location):visible').count()).toBe(1);
 
-        input('map.lat').enter(places[0].lat);
-        input('map.lng').enter(places[0].lng);
+
         element('button:contains(Add Location)').click();
         expect(element('h2:visible').text()).toContain("Is this location correct?");
         expect(element('.btn:contains(Yes):visible').count()).toBe(1);

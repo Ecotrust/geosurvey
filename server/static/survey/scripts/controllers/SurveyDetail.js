@@ -250,8 +250,8 @@ $scope.getAnswer = function(questionSlug) {
 
 $scope.addMarker = function() {
     $scope.activeMarker = {
-        lat: $scope.map.center.lat,
-        lng: $scope.map.center.lng
+        lat: $scope.map.marker.lat,
+        lng: $scope.map.marker.lng
     };
 
     $scope.locations.push($scope.activeMarker);
