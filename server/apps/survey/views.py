@@ -40,7 +40,7 @@ def answer(request, survey_slug, question_slug, uuid): #, survey_slug, question_
         response, created = Response.objects.get_or_create(question=question,respondant=respondant)
 
         response.answer = simplejson.loads(request.POST.keys()[0]).get('answer', None)
-
+        print response.answer
         response.save()
         respondant.responses.add(response)
 
