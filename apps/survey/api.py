@@ -61,6 +61,7 @@ class RespondantResource(ModelResource):
         filtering = {
             'survey': ALL_WITH_RELATIONS
         }
+        ordering = ['-ts']
 
 class OptionResource(ModelResource):
     class Meta:
@@ -84,6 +85,7 @@ class QuestionResource(ModelResource):
 
 class SurveyResource(ModelResource):
     questions = fields.ToManyField(QuestionResource, 'questions', full=True)
+    completes = fields.IntegerField(attribute='completes', readonly=True)
 
     class Meta:
         queryset = Survey.objects.all()

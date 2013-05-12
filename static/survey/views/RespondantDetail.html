@@ -1,12 +1,12 @@
 <div class="row-fluid">
     <div class="span6">
 
-        <h2>Respondant Info</h2>
+        <h2>Respondent Info</h2>
         <dl>
-            <dt>email</dt>
-            <dd>{{ response.email }}</dd>
+            <dt>identity</dt>
+            <dd>{{ response.email || response.uuid}}</dd>
             <dt>timestamp</dt>
-            <dd>{{ response.ts }}</dd>
+            <dd>{{ response.ts  | date:'MM/dd/yyyy @ h:mma'}}</dd>
         </dl>
         <h2>Responses</h2>
         <div ng-repeat="answer in response.responses">
@@ -14,6 +14,7 @@
                 <div ng-switch-default>
                     <dl class="{{ answer.question.slug }}">
                         <dt>{{ answer.question.title }}</dt>
+                        <dd>{{ answer.ts  | date:'MM/dd/yyyy @ h:mma'}}</dd>
                         <dd>{{ answer.answer }}</dd>
                     </dl>
                 </div>
