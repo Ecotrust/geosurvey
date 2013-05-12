@@ -2,10 +2,10 @@
 <div class="row-fluid">
     <div class="span4">
         <div class="well">
-            <h2>Overview</h2>
+            <h2>{{ survey.survey_responses |number}} surveys taken</h2>
             <ul class="unstyled">
-                <li>{{ meta.total_count }} surveys taken</li>
-                <li>{{ survey.completes }} complete</li>
+                <li><strong>{{ survey.completes |number}}</strong> complete ({{(survey.completes/survey.survey_responses)*100 |number:2}}%)</li>
+                <li><strong>{{ survey.survey_responses - survey.completes | number}}</strong> incomplete ({{((survey.survey_responses - survey.completes)/survey.survey_responses) * 100|number:2}}%)</li>
             </ul>
         </div>
     </div>

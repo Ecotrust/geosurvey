@@ -86,6 +86,7 @@ class QuestionResource(ModelResource):
 class SurveyResource(ModelResource):
     questions = fields.ToManyField(QuestionResource, 'questions', full=True)
     completes = fields.IntegerField(attribute='completes', readonly=True)
+    survey_responses = fields.IntegerField(attribute='survey_responses', readonly=True)
 
     class Meta:
         queryset = Survey.objects.all()
