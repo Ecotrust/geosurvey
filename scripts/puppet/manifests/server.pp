@@ -83,6 +83,11 @@ package { "python-dev":
     ensure => "latest"
 }
 
+package { "redis-server":
+    ensure => "latest"
+}
+
+
 
 class { "postgresql::server": version => "9.1",
     listen_addresses => 'localhost',
