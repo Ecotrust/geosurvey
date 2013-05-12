@@ -56,12 +56,17 @@ class Survey(caching.base.CachingMixin, models.Model):
         return "%s" % self.name
 
     @property
+    def survey_responses(self):
+        return self.respondant_set.all().count()
+
+    @property
     def completes(self):
-        completes = 0
-        for respondant in self.respondant_set.all():
-            if respondant.complete:
-                completes += 1
-        return completes
+        return self.respondant_set.filter(complete=True).count()
+        # completes = 0
+        # for respondant in self.respondant_set.all():
+        #     if respondant.complete:
+        #         completes += 1
+        # return completes
 
 
 
