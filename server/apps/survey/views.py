@@ -38,12 +38,10 @@ def answer(request, survey_slug, question_slug, uuid): #, survey_slug, question_
         question = get_object_or_404(Question, slug=question_slug, survey=survey)
         respondant = get_object_or_404(Respondant, uuid=uuid)
         response, created = Response.objects.get_or_create(question=question,respondant=respondant)
-
-        response.answer = simplejson.loads(request.POST.keys()[0]).get('answer', None)
-        print response.answer
+        response.answer_raw = simplejson.loads(request.POST.keys()[0]).get('answer', None)
         response.save()
         respondant.responses.add(response)
-
+        respondant.save()
         return HttpResponse(simplejson.dumps({'success': "%s/%s/%s" % (survey_slug, question_slug, uuid)}))
     return HttpResponse(simplejson.dumps({'success': False}))
 

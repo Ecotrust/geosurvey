@@ -1,10 +1,11 @@
-<h1>Respondants for {{ survey.name }}</h1>
+<h1>Respondents for {{ survey.name }}</h1>
 <div class="row-fluid">
     <div class="span4">
         <div class="well">
             <h2>Overview</h2>
             <ul class="unstyled">
                 <li>{{ meta.total_count }} surveys taken</li>
+                <li>{{ survey.completes }} complete</li>
             </ul>
         </div>
     </div>
@@ -18,7 +19,7 @@
             <tbody>
                 <tr ng-repeat="respondant in respondants">
                     <td><a href="#/RespondantDetail/{{survey.slug}}/{{respondant.uuid}}">{{ respondant.email || respondant.uuid}}</a></td>
-                    <td>{{ respondant.ts }}</td>
+                    <td>{{ respondant.ts | date:'MM/dd/yyyy @ h:mma' }}</td>
                 </tr>
             </tbody>
         </table>

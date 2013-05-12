@@ -3,28 +3,39 @@ import datetime
 
 import datetime
 import uuid
-
-
+import simplejson
+import caching.base
+import ast
 def make_uuid():
     return str(uuid.uuid4())
 
 
-class Respondant(models.Model):
+class Respondant(caching.base.CachingMixin, models.Model):
     uuid = models.CharField(max_length=36, primary_key=True, default=make_uuid, editable=False)
     survey = models.ForeignKey('Survey')
     responses = models.ManyToManyField('Response', related_name='responses')
+    complete = models.BooleanField(default=False)
 
     ts = models.DateTimeField(default=datetime.datetime.now())
     email = models.EmailField(max_length=254, null=True, blank=True, default=None)
+    objects = caching.base.CachingManager()
+
+
 
     def __str__(self):
         return "%s" % self.email
 
+    def save(self, *args, **kwargs):
+        ''' On save, update timestamps '''
+        if not self.uuid:
+            self.ts = datetime.datetime.now()
+        super(Respondant, self).save(*args, **kwargs)
 
 
-class Page(models.Model):
+class Page(caching.base.CachingMixin, models.Model):
     question = models.ForeignKey('Question')
     survey = models.ForeignKey('Survey')
+    objects = caching.base.CachingManager()
 
     def __str__(self):
         return "%s/%s (%d)" % (self.survey.name, self.question.slug, self.question.order)
@@ -33,15 +44,25 @@ class Page(models.Model):
         ordering = ['survey', 'question__order']
 
 
-class Survey(models.Model):
+class Survey(caching.base.CachingMixin, models.Model):
     name = models.CharField(max_length=254)
     slug = models.SlugField(max_length=254, unique=True)
     questions = models.ManyToManyField('Question', null=True, blank=True, through="Page")
     states = models.CharField(max_length=200, null=True, blank=True)
     anon = models.BooleanField(default=True)
 
+    objects = caching.base.CachingManager()
     def __str__(self):
         return "%s" % self.name
+
+    @property
+    def completes(self):
+        completes = 0
+        for respondant in self.respondant_set.all():
+            if respondant.complete:
+                completes += 1
+        return completes
+
 
 
 QUESTION_TYPE_CHOICES = (
@@ -59,14 +80,15 @@ QUESTION_TYPE_CHOICES = (
     ('map-multipoint', 'Map with Multiple Points'),
 )
 
-class Option(models.Model):
+class Option(caching.base.CachingMixin, models.Model):
     text = models.CharField(max_length=254)
     label = models.SlugField(max_length=64) 
+    objects = caching.base.CachingManager()
    
     def __str__(self):
         return "%s" % self.text
 
-class Question(models.Model):
+class Question(caching.base.CachingMixin, models.Model):
     title = models.TextField()
     label = models.CharField(max_length=254)
     order = models.IntegerField(default=0)
@@ -90,6 +112,7 @@ class Question(models.Model):
     required = models.BooleanField(default=True)
     modalQuestion = models.ForeignKey('self', null=True, blank=True, related_name="modal_question")
     hoist_answers = models.ForeignKey('self', null=True, blank=True, related_name="hoisted")
+    objects = caching.base.CachingManager()
 
 
     class Meta:
@@ -112,12 +135,55 @@ class Question(models.Model):
         return "%s/%s/%s (%d)" % (self.survey_slug, self.title, self.type, self.order)
         #return "%s/%s" % (self.survey_set.all()[0].slug, self.label)
 
-class Response(models.Model):
+class Response(caching.base.CachingMixin, models.Model):
     question = models.ForeignKey(Question)
     respondant = models.ForeignKey(Respondant)
-    answer = models.TextField() 
+    answer = models.TextField()
+    answer_raw = models.TextField()
     ts = models.DateTimeField(default=datetime.datetime.now())
+    objects = caching.base.CachingManager()
 
 
     def __str__(self):
         return "%s/%s/%s" % (self.respondant.email, self.question.survey_slug, self.question.slug)
+
+    def save(self, *args, **kwargs):
+        ''' On save, update timestamps '''
+        if not self.id:
+            self.ts = datetime.datetime.now()
+        self.answer = self.answer_raw
+        if self.question.type in ['auto-single-select', 'single-select']:
+            try:
+                self.answer = self.answer_raw['text']
+            except:
+                pass
+            try:
+                self.answer = self.answer_raw['name']
+            except:
+                pass
+        if self.question.type in ['auto-multi-select', 'multi-select']:
+            answers = []
+            try:
+                for answer in self.answer_raw:
+                    try:
+                        answers.append(answer['text'])
+                    except:
+                        pass
+                    try:
+                        answers.append(answer['name'])
+                    except:
+                        pass
+            except:
+                pass
+            self.answer = ", ".join(answers)
+        if self.question.type in ['map-multipoint'] and self.id:
+            answers = []
+            for point in simplejson.loads(self.answer_raw):
+                for answer in point['answers']:
+                    try:
+                        answers.append("%s,%s: %s" % (point['lat'], point['lng'] , answer['text']))
+                    except:
+                        print "Couldn't do it"
+            self.answer = ", ".join(answers)
+        print self.answer
+        super(Response, self).save(*args, **kwargs)

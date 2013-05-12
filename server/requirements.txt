@@ -9,3 +9,8 @@ django-tastypie
 django-compressor
 psycopg2
 dj-database-url
+django-cache-machine
+django-redis-cache
+redis
+hiredis
+gunicorn

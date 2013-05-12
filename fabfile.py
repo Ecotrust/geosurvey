@@ -95,6 +95,13 @@ def dumpdata():
 def run_server():
 	run('cd /vagrant/server && /usr/local/venv/geosurvey/bin/python manage.py runserver 0.0.0.0:8000')
 
+def run_gunicorn():
+    run('killall python')
+    run('cd /vagrant/server && /usr/local/venv/geosurvey/bin/python manage.py run_gunicorn 0.0.0.0:8000')
+
+def restart_gunicorn():
+        run('killall python')
+
 def kill_server():
         run('killall python')
 # def update(): 
