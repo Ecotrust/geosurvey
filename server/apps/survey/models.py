@@ -52,8 +52,6 @@ class Survey(caching.base.CachingMixin, models.Model):
     anon = models.BooleanField(default=True)
 
     objects = caching.base.CachingManager()
-    def __str__(self):
-        return "%s" % self.name
 
     @property
     def survey_responses(self):
@@ -62,12 +60,9 @@ class Survey(caching.base.CachingMixin, models.Model):
     @property
     def completes(self):
         return self.respondant_set.filter(complete=True).count()
-        # completes = 0
-        # for respondant in self.respondant_set.all():
-        #     if respondant.complete:
-        #         completes += 1
-        # return completes
 
+    def __str__(self):
+        return "%s" % self.name
 
 
 QUESTION_TYPE_CHOICES = (
@@ -93,6 +88,8 @@ class Option(caching.base.CachingMixin, models.Model):
     def __str__(self):
         return "%s" % self.text
 
+
+
 class Question(caching.base.CachingMixin, models.Model):
     title = models.TextField()
     label = models.CharField(max_length=254)
@@ -117,6 +114,11 @@ class Question(caching.base.CachingMixin, models.Model):
     required = models.BooleanField(default=True)
     modalQuestion = models.ForeignKey('self', null=True, blank=True, related_name="modal_question")
     hoist_answers = models.ForeignKey('self', null=True, blank=True, related_name="hoisted")
+
+    filterBy = models.BooleanField(default=False)
+    visualize = models.BooleanField(default=False)
+
+
     objects = caching.base.CachingManager()
 
 
@@ -139,6 +141,7 @@ class Question(caching.base.CachingMixin, models.Model):
     def __str__(self):
         return "%s/%s/%s (%d)" % (self.survey_slug, self.title, self.type, self.order)
         #return "%s/%s" % (self.survey_set.all()[0].slug, self.label)
+
 
 class Response(caching.base.CachingMixin, models.Model):
     question = models.ForeignKey(Question)

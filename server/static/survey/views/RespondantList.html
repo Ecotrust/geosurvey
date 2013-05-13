@@ -1,4 +1,4 @@
-<h1>Respondents for {{ survey.name }}</h1>
+<h1>{{ survey.name }}</h1>
 <div class="row-fluid">
     <div class="span4">
         <div class="well">
@@ -10,18 +10,12 @@
         </div>
     </div>
     <div class="span8">
-        <h2>Responses</h2>
-        <table class="table">
-            <thead>
-                <th>Email</th>
-                <th>Timestamp</th>
-            </thead>
-            <tbody>
-                <tr ng-repeat="respondant in respondants">
-                    <td><a href="#/RespondantDetail/{{survey.slug}}/{{respondant.uuid}}">{{ respondant.email || respondant.uuid}}</a></td>
-                    <td>{{ respondant.ts | date:'MM/dd/yyyy @ h:mma' }}</td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="row-fluid" ng-repeat="question in survey.questions">
+            <div  ui-if="question.visualize">
+                <h3>{{ question.label }}</h3>
+                <table class="table">
+                </table>
+            </div>
+        </div>
     </div>
 </div>

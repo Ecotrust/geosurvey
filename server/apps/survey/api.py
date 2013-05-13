@@ -74,19 +74,16 @@ class QuestionResource(ModelResource):
     hoist_answers = fields.ToOneField('self', 'hoist_answers', full=True, null=True, blank=True)
     question_types = fields.DictField(attribute='question_types', readonly=True)
 
-
-
     class Meta:
         queryset = Question.objects.all().order_by('order')
         always_return_data = True
         authorization = StaffUserOnlyAuthorization()
         authentication = Authentication()
+        excludes = ['']
 
 
 class SurveyResource(ModelResource):
     questions = fields.ToManyField(QuestionResource, 'questions', full=True)
-    completes = fields.IntegerField(attribute='completes', readonly=True)
-    survey_responses = fields.IntegerField(attribute='survey_responses', readonly=True)
 
     class Meta:
         queryset = Survey.objects.all()
@@ -97,3 +94,6 @@ class SurveyResource(ModelResource):
         return [
             url(r"^(?P<resource_name>%s)/(?P<slug>[\w\d_.-]+)/$" % self._meta.resource_name, self.wrap_view('dispatch_detail'), name="api_dispatch_detail"),
         ]
+class SurveyReportResource(SurveyResource):
+    completes = fields.IntegerField(attribute='completes', readonly=True)
+    survey_responses = fields.IntegerField(attribute='survey_responses', readonly=True)
