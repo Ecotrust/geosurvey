@@ -8,8 +8,8 @@ from tastypie.api import Api
 
 from apps.survey import urls as survey_urls
 
-from apps.survey.api import SurveyResource, RespondantResource, QuestionResource#,  PageResource
-from apps.places.api import PlaceResource
+from apps.survey.api import *
+from apps.places.api import *
 
 v1_api = Api(api_name='v1')
 
@@ -17,7 +17,8 @@ v1_api.register(SurveyResource())
 v1_api.register(RespondantResource())
 v1_api.register(PlaceResource())
 v1_api.register(QuestionResource())
-#v1_api.register(PageResource())
+
+v1_api.register(SurveyReportResource())
 
 admin.autodiscover()
 

@@ -11,7 +11,6 @@ angular.module('askApp')
         $scope.questionBeingEdited = null;
 
         $scope.startEditingQuestion = function (question) {
-            
             $scope.activeQuestion = {};
             $scope.questionBeingEdited = question;
             angular.extend($scope.activeQuestion, question);
