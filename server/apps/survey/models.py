@@ -124,7 +124,7 @@ class Question(caching.base.CachingMixin, models.Model):
 
     @property
     def answer_domain(self):
-        if self.visualize:
+        if self.visualize or self.filterBy:
             return self.response_set.all().order_by('answer').values('answer').annotate(count=Count('answer')).order_by('-count')
         else:
             return None
