@@ -17,6 +17,7 @@ v1_api.register(SurveyResource())
 v1_api.register(RespondantResource())
 v1_api.register(PlaceResource())
 v1_api.register(QuestionResource())
+v1_api.register(ResponseResource())
 
 v1_api.register(SurveyReportResource())
 

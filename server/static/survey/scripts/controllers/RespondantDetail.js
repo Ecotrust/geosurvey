@@ -8,8 +8,6 @@ angular.module('askApp')
         // if ($scope.getResponseBySlug('activity-locations')) {
         //     $scope.mapResponse = JSON.parse($scope.getResponseBySlug('activity-locations').answer);
         // }
-        
-
     });
 
     $scope.map = {

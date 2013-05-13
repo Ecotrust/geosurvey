@@ -4,6 +4,7 @@ from tastypie import fields, utils
 from tastypie.authentication import SessionAuthentication, Authentication
 from tastypie.authorization import DjangoAuthorization, Authorization
 from django.conf.urls.defaults import url
+from django.db.models import Avg, Max, Min, Count
 
 from survey.models import Survey, Question, Option, Respondant, Response #, Page
 
@@ -47,9 +48,14 @@ class StaffUserOnlyAuthorization(Authorization):
 
 class ResponseResource(ModelResource):
     question = fields.ToOneField('apps.survey.api.QuestionResource', 'question', full=True)
+    answer_count = fields.IntegerField(readonly=True)
 
     class Meta:
         queryset = Response.objects.all().order_by('question__order');
+        filtering = {
+            'answer': ALL,
+            'question': ALL_WITH_RELATIONS
+        }
 
 class RespondantResource(ModelResource):
     responses = fields.ToManyField(ResponseResource, 'responses', full=True)
@@ -59,7 +65,8 @@ class RespondantResource(ModelResource):
         authentication = SessionAuthentication()
         authorization = DjangoAuthorization()
         filtering = {
-            'survey': ALL_WITH_RELATIONS
+            'survey': ALL_WITH_RELATIONS,
+            'responses': ALL_WITH_RELATIONS
         }
         ordering = ['-ts']
 
@@ -76,12 +83,14 @@ class QuestionResource(ModelResource):
     answer_domain = fields.ListField(attribute='answer_domain', readonly=True, null=True)
 
     class Meta:
-        queryset = Question.objects.all().order_by('order')
+        queryset = Question.objects.all()
         always_return_data = True
         authorization = StaffUserOnlyAuthorization()
-        authentication = Authentication()
-        excludes = ['']
-
+        authentication = SessionAuthentication()
+        filtering = {
+            'slug': ALL,
+            'surveys': ALL_WITH_RELATIONS
+        }
 
 class SurveyResource(ModelResource):
     questions = fields.ToManyField(QuestionResource, 'questions', full=True)
@@ -91,10 +100,13 @@ class SurveyResource(ModelResource):
         filtering = {
             'slug': ['exact']
         }
+    
     def prepend_urls(self):
         return [
             url(r"^(?P<resource_name>%s)/(?P<slug>[\w\d_.-]+)/$" % self._meta.resource_name, self.wrap_view('dispatch_detail'), name="api_dispatch_detail"),
         ]
+
 class SurveyReportResource(SurveyResource):
     completes = fields.IntegerField(attribute='completes', readonly=True)
     survey_responses = fields.IntegerField(attribute='survey_responses', readonly=True)
+    
