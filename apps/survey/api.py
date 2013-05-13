@@ -73,6 +73,7 @@ class QuestionResource(ModelResource):
     modalQuestion = fields.ToOneField('self', 'modalQuestion', full=True, null=True, blank=True)
     hoist_answers = fields.ToOneField('self', 'hoist_answers', full=True, null=True, blank=True)
     question_types = fields.DictField(attribute='question_types', readonly=True)
+    answer_domain = fields.ListField(attribute='answer_domain', readonly=True, null=True)
 
     class Meta:
         queryset = Question.objects.all().order_by('order')

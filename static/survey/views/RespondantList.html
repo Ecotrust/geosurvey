@@ -12,8 +12,11 @@
     <div class="span8">
         <div class="row-fluid" ng-repeat="question in survey.questions">
             <div  ui-if="question.visualize">
-                <h3>{{ question.label }}</h3>
+                <h3>Distribution by {{ question.label }}</h3>
                 <table class="table">
+                    <tr ng-repeat="answer in question.answer_domain">
+                        <td>{{ answer.answer}} ({{ answer.count}})</td>
+                    </tr>
                 </table>
             </div>
         </div>
