@@ -78,6 +78,17 @@
                 </li>
                 <li>
                   <a>
+                    Edit Survey
+                    <!--<span class="navbar-unread">1</span>-->
+                  </a>
+                  <ul class="survey-list"> 
+                    <li ng-repeat="survey in surveys">
+                      <a href="#/author/{{ survey.slug }}">{{ survey.name }}</a>
+                    </li>  
+                  </ul>
+                </li>
+                <li>
+                  <a>
                     Completed Surveys
                     <!--<span class="navbar-unread">1</span>-->
                   </a>
