@@ -24,7 +24,7 @@ CACHES = {
         },
     },
 }
-COMPRESS_ENABLED = True
+COMPRESS_ENABLED = False
 
 # config/environments/local.py is ignored to allow for easy settings
 # overrides without affecting others environments / developers
