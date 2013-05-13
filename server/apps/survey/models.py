@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models import Avg, Max, Min, Count
+
 import datetime
 
 import datetime
@@ -98,7 +100,7 @@ class Question(caching.base.CachingMixin, models.Model):
     type = models.CharField(max_length=20,choices=QUESTION_TYPE_CHOICES,default='text')
     options = models.ManyToManyField(Option, null=True, blank=True)
     options_json = models.CharField(max_length=254, null=True, blank=True)
-    info = models.CharField(max_length=254, null=True, blank=True);
+    info = models.CharField(max_length=254, null=True, blank=True);1
 
     zoom = models.IntegerField(null=True, blank=True)
     min_zoom = models.IntegerField(null=True, blank=True, default=10)
@@ -115,9 +117,17 @@ class Question(caching.base.CachingMixin, models.Model):
     modalQuestion = models.ForeignKey('self', null=True, blank=True, related_name="modal_question")
     hoist_answers = models.ForeignKey('self', null=True, blank=True, related_name="hoisted")
 
+
+    # backend stuff
     filterBy = models.BooleanField(default=False)
     visualize = models.BooleanField(default=False)
 
+    @property
+    def answer_domain(self):
+        if self.visualize:
+            return self.response_set.all().order_by('answer').values('answer').annotate(count=Count('answer')).order_by('-count')
+        else:
+            return None
 
     objects = caching.base.CachingManager()
 
