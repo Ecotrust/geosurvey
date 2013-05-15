@@ -64,7 +64,7 @@
 
                 if (attrs.marker) {
                     var crosshairIcon = L.icon({
-                        iconUrl: '/static/survey/img/crosshair.png',
+                        iconUrl: '/static/survey/img/' + scope.marker.icon,
                         shadowUrl: false,
 
                         iconSize: [90, 90], // size of the icon
@@ -83,7 +83,7 @@
                     // Listen for marker drags
                     (function() {
 
-                        marker.on('dblclick', function (e) {
+                        marker.on('dblclick', function(e) {
                             map.setZoom(map.getZoom() + 1);
                         });
                         marker.on('dragstart', function(e) {
@@ -112,6 +112,13 @@
                         //     });
                         // });
 
+
+                        scope.$watch('marker.icon', function(newValue) {
+                            if (marker) {
+                                marker._icon.src = '/static/survey/img/' + newValue;    
+                            }
+                            
+                        });
                         scope.$watch('marker.visibility', function(newValue, oldValue) {
 
                             if (newValue) {
@@ -250,13 +257,13 @@
 
                 });
 
-                scope.deleteMarker = function () {
+                scope.deleteMarker = function() {
                     var i = _.indexOf(scope.multiMarkers, scope.activeMarker.data);
                     scope.activeMarker.marker.closePopup();
                     scope.multiMarkers.splice(i, 1);
                 };
 
-                scope.editMarkerWrapper = function (marker) {
+                scope.editMarkerWrapper = function(marker) {
                     marker.marker.closePopup();
                     scope.editMarker(marker.data);
                 }
@@ -339,13 +346,13 @@
                                         scope.popupText = scope.multiMarkers[mkey][scope.popupField];
                                         popup = '<ul class="unstyled"><li ng-repeat="item in popupText">{{ item.text }}</li></ul>';
                                     }
-                
+
 
                                     if (scope.multiMarkersEdit) {
                                         popup += '<button class="btn pull-right" ng-click="editMarkerWrapper(activeMarker)">edit</button>';
                                         popup += '<div class="clearfix"></div>';
-                                    
-                                    }    
+
+                                    }
 
                                     markersDict[mkey].bindPopup(popup, {
                                         closeButton: true
@@ -357,7 +364,7 @@
                                         data: scope.multiMarkers[mkey],
                                         marker: marker
                                     };
-                                    
+
                                     $compile(angular.element(map._popup._contentNode))(scope);
                                     //$compile(angular.element(map._popup._contentNode.childNodes))(scope);
                                     scope.$digest();

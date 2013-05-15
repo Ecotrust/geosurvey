@@ -66,12 +66,15 @@ angular.module('askApp')
                     controller: 'ZoomToCtrl'
                 });
                 dialog.open().then(function (place) {
-                    scope.zoomTo({
-                        lat: place.lat,
-                        lng: place.lng,
-                        zoom: 15
+                    if (place) {
+                        scope.zoomTo({
+                            lat: place.lat,
+                            lng: place.lng,
+                            zoom: 15
 
-                    });
+                        });    
+                    }
+                    
                 });
             };
         }
