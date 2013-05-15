@@ -16,12 +16,12 @@
                 marker: '=marker',
                 message: '=message',
                 zoom: '=zoom',
+                requiredzoom: '=requiredzoom',
                 multiMarkers: '=multimarkers',
                 multiMarkersEdit: '=multimarkersedit',
                 popupField: '=popupfield',
                 states: "=states",
                 editMarker: '=editmarker',
-
             },
             templateUrl: '/static/survey/views/leaflet.html',
             link: function(scope, element, attrs, ctrl) {

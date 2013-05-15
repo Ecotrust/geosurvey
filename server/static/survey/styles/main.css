@@ -39,21 +39,6 @@ padding: 7px 9px;
     height: 40px;
 }
 
-.map {
-    height: 500px;
-
-}
-
-.map_wrapper {
-    margin-bottom: 20px;
-}
-.map_wrapper .btn-zoom {
-    position: absolute;
-    right: 15px;
-    top: 15px;
-    z-index: 1000;
-}
-
 .pull-right + .pull-right {
     margin: 0 5px;
 }
@@ -73,11 +58,55 @@ form {
 select + input {
     margin-top: 10px;
 }
-input {
+input, .btn {
     height: 44px !important;
     font-size: 20px !important;
     line-height: 1 !important;
 }
+
+.map {
+    height: 500px;
+}
+.map_wrapper {
+    position: relative;
+    margin-bottom: 20px;
+}
+.map-multipoint .question-title {
+    margin-bottom: 5px;
+}
+.map-multipoint .question-sub-text {
+    margin-bottom: 15px;
+}
+/*div[zoomto] {
+    position: absolute;
+    right: 200px;
+    top: 15px;
+    z-index: 1000;
+}
+div[zoomto] {
+    -webkit-box-shadow: 0 2px 2px rgba(0,0,0,.5);
+       -moz-box-shadow: 0 2px 2px rgba(0,0,0,.5);
+            box-shadow: 0 2px 2px rgba(0,0,0,.5);
+}*/
+div[zoomto] input {
+    height: auto !important;
+    font-size: 18px !important;
+    line-height: 1 !important;
+    width: 300px;
+    margin-left: 20%;
+}
+div[zoomto] .btn {
+    width: 60px;
+    margin-bottom: 10px;
+}
+.map_wrapper .alert {
+    position: absolute;
+    left: 50px;
+    top: 15px;
+    z-index: 1000;
+}
+
+
 .pennies .icon-circle {
     font-size: 24px;
 }

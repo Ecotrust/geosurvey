@@ -50,13 +50,15 @@ angular.module('askApp')
 
 
     return {
-        template: '<button class="btn btn-zoom btn-large" ng-click="openModal()">Search...</button>',
+        template: '<div class="row-fluid"> <input type="text" placeholder="Search for a location to zoom to" ng-click="openModal()"> <button class="btn" ng-click="openModal()"><i class="icon-search"></i></button> </div>',
         restrict: 'EA',
         replace: true,
         link: function postLink(scope, element, attrs) {
             scope.openModal = function () {
                 var dialog = $dialog.dialog({
                     backdrop: true,
+                    backdropFade: true,
+                    transitionClass: 'fade',
                     keyboard: true,
                     backdropClick: false,
                     scope: {
