@@ -10,7 +10,6 @@ function ZoomToCtrl($scope, dialog, $http, $timeout) {
     if ($scope.states) {
         $scope.stateParam = '&state__in=' + $scope.states.split(',').join('&state__in=')
     }
-    console.log($scope.stateParam);
 
     $scope.$watch('searchTerm', function (newValue) {    
         if (stop) {
