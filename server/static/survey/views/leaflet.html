@@ -1,4 +1,9 @@
 <div class="map_wrapper">
+    <div class="alert alert-error" ng-show="zoom < requiredzoom">
+	    Zoom in to ensure accuracy.
+	</div>
+    <div class="alert alert-success" ng-hide="zoom < requiredzoom">
+	    You can now add locations.
+	</div>
     <div class="map"></div>
-    <div zoomto></div>
 </div>
