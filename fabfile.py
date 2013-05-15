@@ -13,7 +13,7 @@ def dev():
     """ Use development server settings """
     servers = ['vagrant@127.0.0.1:2222']
     env.hosts = servers
-    env.key_filename = '/Users/eknuth/.vagrant.d/insecure_private_key'
+    env.key_filename = '~/.vagrant.d/insecure_private_key'
     vars['app_dir'] = '/vagrant/server'
     vars['venv'] = '/usr/local/venv/geosurvey'
     return servers
