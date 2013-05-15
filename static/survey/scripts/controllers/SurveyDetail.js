@@ -9,7 +9,8 @@ var map = {
     marker: {
         visibility: true,
         lat: 47,
-        lng: -124
+        lng: -124,
+        icon: "crosshair_red.png"
 
     },
     msg: null
@@ -171,6 +172,14 @@ angular.module('askApp')
             
             $scope.locations = [];
             $scope.activeMarker = false;
+
+            $scope.$watch('map.zoom', function (newZoom) {
+                if (newZoom >= $scope.question.min_zoom) {
+                    $scope.map.marker.icon = "crosshair_green.png";
+                } else {
+                    $scope.map.marker.icon = "crosshair_red.png";
+                }
+            })
 
             $scope.showActivities = function () {
                 $dialog.dialog({
