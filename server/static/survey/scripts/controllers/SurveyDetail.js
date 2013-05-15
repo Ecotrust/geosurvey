@@ -29,7 +29,6 @@ angular.module('askApp')
 
     $http.get('/api/v1/survey/' + $routeParams.surveySlug + '/?format=json').success(function(data) {
         $scope.survey = data;
-
         // we may inject a question into the scope
         if (!$scope.question) {
             $scope.question = _.find($scope.survey.questions, function(question) {
