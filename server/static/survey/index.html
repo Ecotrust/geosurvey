@@ -61,6 +61,18 @@
                 </li>
                 <li>
                   <a>
+                    Edit Surveys
+                  </a>
+                  
+                  <ul class="survey-list"> 
+                    <li ng-repeat="survey in surveys">
+                      <a href="#/author/{{ survey.slug }}">{{ survey.name }}</a>
+                    </li>  
+                  </ul>
+                  
+                </li>
+                <li>
+                  <a>
                     Take Survey
                   </a>
                   
