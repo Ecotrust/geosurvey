@@ -35,6 +35,12 @@ angular.module('askApp')
                 return question.slug === $routeParams.questionSlug;
             });
 
+        } else {
+            console.log('load question');
+            console.log(_.filter($scope.question.options, function (option) {
+                return option.checked;
+            }));
+            window.options = $scope.question.options;
         }
 
         if ($scope.question && $scope.question.title) {
