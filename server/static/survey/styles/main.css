@@ -108,6 +108,18 @@ span[zoomto] input {
     width: 300px;
     margin-top: 10px;
 }
+@media (max-width: 700px) {
+    span[zoomto] input {
+        width: 200px;
+    }
+}
+@media (max-width: 565px) {
+    span[zoomto] input {
+        font-size: 14px !important;
+        width: 100px;
+    }
+}
+
 span[zoomto] .btn {
     width: 60px;
 }
