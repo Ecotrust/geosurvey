@@ -1,8 +1,10 @@
 <div class="map_wrapper">
     <div class="alert alert-error" ng-show="!isZoomedIn() && showZoomAlert">
+	    <!-- <button type="button" class="close" data-dismiss="alert">&times;</button> -->
 	    Zoom in closely to ensure accuracy
 	</div>
     <div class="alert alert-success" ng-show="isZoomedIn()  && showZoomAlert">
+	    <!-- <button type="button" class="close" data-dismiss="alert">&times;</button> -->
 	    You can now add locations
 	</div>
 	<button class="btn btn-large btn-primary btn-add-marker" ng-show="!confirmingLocation" ng-click="addMarkerWrapper()"><i class="icon-plus"></i> Add Location</button>

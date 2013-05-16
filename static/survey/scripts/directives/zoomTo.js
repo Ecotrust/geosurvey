@@ -52,6 +52,11 @@ angular.module('askApp')
         template: '<span><input type="text" placeholder="Search locations" ng-click="openModal()"> <button class="btn btn-large" ng-click="openModal()"><i class="icon-search"></i></button></span>',
         restrict: 'EA',
         replace: true,
+        transclude: true,
+        scope: {
+            states: "=states",
+            zoomToResult: "=zoomtoresult",
+        },
         link: function postLink(scope, element, attrs) {
             scope.openModal = function () {
                 var dialog = $dialog.dialog({
@@ -68,16 +73,17 @@ angular.module('askApp')
                 });
                 dialog.open().then(function (place) {
                     if (place) {
-                        scope.zoomTo({
+                        scope.zoomToResult = {
                             lat: place.lat,
                             lng: place.lng,
                             zoom: 15
-
-                        });    
+                        };
                     }
                     
                 });
             };
+
+            scope.$eval(attrs.onload);
         }
     };
 });
