@@ -234,14 +234,25 @@ form .btn-block {
     min-height: 25px; /* instead of 30px */
 }
 
-@media (max-width: 700px) {
+@media (max-width: 600px) {
     span[zoomto] input {
         width: 200px;
     }
 }
-@media (max-width: 565px) {
+@media (max-width: 480px) {
     span[zoomto] input {
         font-size: 14px !important;
         width: 100px;
+    }
+}
+
+@media (max-width: 767px) {
+    .container-fluid {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .respondant {
+        padding-left: 4px;
+        padding-right: 4px;
     }
 }
