@@ -190,6 +190,7 @@ p.landing, p.info {
     font-size: 22px;
     font-weight: bold;
 }
+
 ul + ul {
     margin-top: 10px;
 }

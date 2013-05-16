@@ -18,15 +18,16 @@
         <div class="span12">
             <div leaflet 
                 center="map.center" 
-                conflocation="activeMarker != false" 
                 zoom="map.zoom" 
                 requiredzoom="question.min_zoom" 
+                conflocation="activeMarker != false" 
                 marker="map.marker" 
                 multimarkers="locations" 
                 popupfield="'answers'" 
                 addmarker="addMarker" 
                 multimarkersedit="activeMarker == false"
-                editmarker="editMarker"></leaflet>
+                editmarker="editMarker"
+                states="survey.states"></leaflet>
         </div>
     </div>
     <div class="row-fluid user-controls" ng-show="activeMarker == false && locations.length > 0">
