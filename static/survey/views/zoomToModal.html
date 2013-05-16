@@ -1,8 +1,13 @@
-<div class="modal-header">
+<div class="modal-header modal-zoomto">
+    <p class="question-title">Start by searching for a place at or near one of your activity locations.</p>
+    <!-- <p><strong>Note:</strong>To ensure accuracy, you must zoom in closely when placing activity markers.</p> -->
     <p>
       <form class="form-search">
-        <input type="text" class="search-query" placeholder="Search..." ng-model="searchTerm" autofocus>
-        <img ng-show="showSpinner" class="spinner pull-right" src="/static/survey/img/ajax-loader.gif"/>
+        <div class="control-group">
+            <label ng-show="!showSpinner" for="search-query"><i class='icon-search icon-2x'></i></label>
+            <label ng-show="showSpinner" for="search-query"><i class='icon-spinner icon-spin icon-2x'></i></label>
+            <input type="text" id="search-query" class="search-query" placeholder="Search..." ng-model="searchTerm" autofocus>
+        </div>
       </form>
     </p>
 </div>
