@@ -2,8 +2,6 @@ from django.db import models
 from django.db.models import Avg, Max, Min, Count
 
 import datetime
-
-import datetime
 import uuid
 import simplejson
 import caching.base

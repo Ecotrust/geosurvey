@@ -7,6 +7,7 @@ from django.contrib import admin
 from tastypie.api import Api
 
 from apps.survey import urls as survey_urls
+from apps.reports import urls as report_urls
 
 from apps.survey.api import *
 from apps.places.api import *
@@ -28,6 +29,8 @@ urlpatterns = patterns('',
     url(r'^grappelli/', include('grappelli.urls')),
     (r'^api/', include(v1_api.urls)),
 
+
+    url(r'^report', include(report_urls)),
     #anon survey user for specific survey
     url(r'^respond/(?P<survey_slug>[\w\d-]+)$', 'apps.survey.views.survey'),
     #survey responder with preassigned uuid
