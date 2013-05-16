@@ -13,7 +13,13 @@
         <div class="row-fluid" ng-repeat="question in survey.questions">
             <div  ui-if="question.visualize">
                 <h4>Distribution by {{ question.label }}</h4>
-                <div class="gridStyle" ng-grid="question.gridOptions"></div>
+                <div class="pull-right">
+                    <select>
+                        <option value="">Filter by</option>
+                    </select>
+                </div>
+                <distribution></distribution>
+                <!-- <div class="gridStyle" ng-grid="question.gridOptions"></div> -->
             </div>
         </div>
     </div>
