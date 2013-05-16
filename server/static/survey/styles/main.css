@@ -130,26 +130,6 @@ span[zoomto] .btn {
     font-size: 24px;
 }
 
-.modal {
-    width: 750px;
-    margin-left: -350px;
-}
-
-@media (max-width: 480px) {
-    .respondant {
-        max-width: 100%;
-    }
-    .map {
-        height: 100%;
-    }
-    .modal {
-        width: 100%;
-        margin-left: 0;
-    }
-
-}
-
-
 .gridStyle {
     border: 1px solid rgb(212,212,212);
     width: 100%; 
@@ -234,17 +214,6 @@ form .btn-block {
     min-height: 25px; /* instead of 30px */
 }
 
-@media (max-width: 600px) {
-    span[zoomto] input {
-        width: 200px;
-    }
-}
-@media (max-width: 480px) {
-    span[zoomto] input {
-        font-size: 14px !important;
-        width: 100px;
-    }
-}
 
 @media (max-width: 767px) {
     .container-fluid {
@@ -254,5 +223,40 @@ form .btn-block {
     .respondant {
         padding-left: 4px;
         padding-right: 4px;
+    }
+}
+
+
+@media (max-width: 600px) {
+    span[zoomto] input {
+        width: 200px;
+    }
+}
+
+
+@media (max-width: 600px) {
+    .modal {
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: 0;
+        -webkit-border-radius: 0;
+           -moz-border-radius: 0;
+                border-radius: 0;
+    }
+
+    .modal-footer {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+
+    span[zoomto] input {
+        font-size: 14px !important;
+        width: 100px;
     }
 }
