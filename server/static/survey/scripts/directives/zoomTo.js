@@ -78,6 +78,8 @@ angular.module('askApp')
                     
                 });
             };
+
+            scope.$eval(attrs.onload);
         }
     };
 });
