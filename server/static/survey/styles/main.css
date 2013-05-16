@@ -105,7 +105,10 @@ input, .btn {
     font-size: 18px !important;
     line-height: 1 !important;
 }
-span[zoomto] input {
+div[zoomto] {
+    display: inline;
+}
+div[zoomto] input {
     height: auto !important;
     font-size: 18px !important;
     line-height: 1 !important;
@@ -113,7 +116,7 @@ span[zoomto] input {
     margin-top: 10px;
 }
 
-span[zoomto] .btn {
+div[zoomto] .btn {
     width: 60px;
 }
 .map_wrapper .alert {
@@ -225,13 +228,18 @@ form .btn-block {
 }
 .form-search .spinner {
     position: absolute;
-    top: 15px;
+    top: 5px;
     right: 8px;
-
 }
 .form-search .search-query {
-    width: 97%;
-    margin-right: 10px;
+    height: 24px !important; 
+    width: 82%; 
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+#search-query-facade {
+    margin-left: 10px;
 }
 
 
@@ -272,14 +280,14 @@ form .btn-block {
         right: 0;
     }
 
-    span[zoomto] input {
+    div[zoomto] input {
         width: 200px;
     }
 }
 
 
 @media (max-width: 480px) {
-    span[zoomto] input {
+    div[zoomto] input {
         font-size: 14px !important;
         width: 120px;
     }

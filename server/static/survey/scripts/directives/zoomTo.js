@@ -47,9 +47,8 @@ function ZoomToCtrl($scope, dialog, $http, $timeout) {
 angular.module('askApp')
     .directive('zoomto', function($dialog) {
 
-
     return {
-        template: '<span><input type="text" placeholder="Search locations" ng-click="openModal()"> <button class="btn btn-large" ng-click="openModal()"><i class="icon-search"></i></button></span>',
+        template: '<div class="control-group"><i class="icon-search icon-2x"></i><input type="text" id="search-query-facade" placeholder="Search locations" ng-click="openModal()"></div>',
         restrict: 'EA',
         replace: true,
         transclude: true,
