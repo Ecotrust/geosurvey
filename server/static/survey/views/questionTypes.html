@@ -93,7 +93,7 @@
     <div ng-switch-when="multi-select">
         <form class="question" ng-submit="answerMultiSelect(question)">
             <div class="todo mrm">
-                <div ng-show="question.hoisted_options.length">
+                <div ng-show="question.hoisted_options.length"  class="hoisted-activities">
                     <h3>Activities You Selected</h3>
                     <ul class="hoisted">
                         <li 
@@ -109,6 +109,8 @@
                         </li>
                     </ul>
                 </div>
+            </div>
+            <div class="todo mrm">
                 <h3 ng-show="question.hoisted_options.length > 0">Other Activities</h3>
                 <ul class="choices">
                   <li 
