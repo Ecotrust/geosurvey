@@ -10,6 +10,7 @@ app/components
 server/config/environments/local.py
 server/media
 server/public/static
+server/static/survey/components/
 .vagrant
 geosurvey_env
 logs
