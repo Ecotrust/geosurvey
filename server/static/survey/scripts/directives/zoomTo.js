@@ -50,7 +50,7 @@ angular.module('askApp')
 
 
     return {
-        template: '<div class="row-fluid"> <input type="text" placeholder="Search for a location to zoom to" ng-click="openModal()"> <button class="btn" ng-click="openModal()"><i class="icon-search"></i></button> </div>',
+        template: '<span><input type="text" placeholder="Search locations" ng-click="openModal()"> <button class="btn btn-large" ng-click="openModal()"><i class="icon-search"></i></button></span>',
         restrict: 'EA',
         replace: true,
         link: function postLink(scope, element, attrs) {

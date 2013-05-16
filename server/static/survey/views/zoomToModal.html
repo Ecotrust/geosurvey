@@ -1,12 +1,8 @@
 <div class="modal-header">
-    <h1>
-        <img ng-show="showSpinner" class="pull-right" src="/static/survey/img/ajax-loader.gif"/>
-        Zoom the map in closely before adding locations.
-    </h1>
     <p>
       <form class="form-search">
         
-        <input type="text" class="span7 search-query" placeholder="Search..." ng-model="searchTerm" autofocus>
+        <input type="text" class="span7 search-query" placeholder="Search..." ng-model="searchTerm" autofocus><img ng-show="showSpinner" class="pull-right" src="/static/survey/img/ajax-loader.gif"/>
       </form>
     </p>
 </div>
