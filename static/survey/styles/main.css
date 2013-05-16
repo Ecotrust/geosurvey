@@ -86,35 +86,40 @@ input, .btn {
 .map-multipoint .question-sub-text {
     margin-bottom: 15px;
 }
-/*div[zoomto] {
+.map_wrapper .btn-add-marker {
     position: absolute;
-    right: 200px;
+    right: 20px;
     top: 15px;
     z-index: 1000;
-}
-div[zoomto] {
+
     -webkit-box-shadow: 0 2px 2px rgba(0,0,0,.5);
        -moz-box-shadow: 0 2px 2px rgba(0,0,0,.5);
             box-shadow: 0 2px 2px rgba(0,0,0,.5);
-}*/
-div[zoomto] input {
+}
+.map-multipoint .btn {
+    height: auto !important;
+    font-size: 18px !important;
+    line-height: 1 !important;
+}
+span[zoomto] input {
     height: auto !important;
     font-size: 18px !important;
     line-height: 1 !important;
     width: 300px;
-    margin-left: 20%;
+    margin-top: 10px;
 }
-div[zoomto] .btn {
+span[zoomto] .btn {
     width: 60px;
-    margin-bottom: 10px;
 }
 .map_wrapper .alert {
     position: absolute;
-    left: 50px;
-    top: 15px;
+    right: 20px;
+    top: 70px;
     z-index: 1000;
 }
-
+.hiddenbutspaced {
+    visibility: hidden;
+}
 
 .pennies .icon-circle {
     font-size: 24px;

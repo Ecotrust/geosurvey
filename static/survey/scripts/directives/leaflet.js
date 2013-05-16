@@ -22,6 +22,8 @@
                 popupField: '=popupfield',
                 states: "=states",
                 editMarker: '=editmarker',
+                addMarker: '=addmarker',
+                confirmingLocation: '=conflocation',
             },
             templateUrl: '/static/survey/views/leaflet.html',
             link: function(scope, element, attrs, ctrl) {
@@ -67,10 +69,10 @@
                         iconUrl: '/static/survey/img/' + scope.marker.icon,
                         shadowUrl: false,
 
-                        iconSize: [90, 90], // size of the icon
-                        shadowSize: [50, 64], // size of the shadow
-                        iconAnchor: [45, 45], // point of the icon which will correspond to marker's location
-                        shadowAnchor: [4, 62], // the same for the shadow
+                        iconSize: [40, 40], // size of the icon
+                        shadowSize: [40, 40], // size of the shadow
+                        iconAnchor: [20, 20], // point of the icon which will correspond to marker's location
+                        shadowAnchor: [4, 4], // the same for the shadow
                         popupAnchor: [0, -25] // point from which the popup should open relative to the iconAnchor
                     });
                     var marker = new L.marker([scope.center.lat, scope.center.lng], {
@@ -203,6 +205,8 @@
                                 s.marker.lng = map.getCenter().lng;
                                 marker.setLatLng(new L.LatLng(map.getCenter().lat, map.getCenter().lng));
                             }
+
+                            s.updateCrosshair();
                         });
                     });
 
@@ -257,16 +261,56 @@
 
                 });
 
+                scope.$watch('confirmingLocation', function () {
+                    scope.updateCrosshair();
+                });
+
+                scope.updateCrosshair = function() {
+                    if (scope.confirmingLocation) {
+                        scope.marker.icon = "crosshair_blank.png";
+
+                    } else if (scope.showZoomAlert && !scope.isZoomedIn()) {
+                        scope.marker.icon = "crosshair_red.png";
+
+                    } else if (scope.showZoomAlert && scope.isZoomedIn()) {
+                        scope.marker.icon = "crosshair_green.png";
+
+                    } else {
+                        scope.marker.icon = "crosshair_white.png";
+                    }
+                };
+
+
                 scope.deleteMarker = function() {
                     var i = _.indexOf(scope.multiMarkers, scope.activeMarker.data);
                     scope.activeMarker.marker.closePopup();
                     scope.multiMarkers.splice(i, 1);
                 };
 
+                scope.isZoomedIn = function () {
+                    return scope.zoom >= scope.requiredzoom;
+                };
+
+                scope.showZoomAlert = false;
+
+                scope.addMarkerWrapper = function() {
+                    if (scope.activeMarker) {
+                        scope.activeMarker.marker.closePopup();
+                    }
+                    if (!scope.isZoomedIn()) {
+                        scope.showZoomAlert = true;
+                    } else {
+                        scope.addMarker(marker.data);
+                        scope.showZoomAlert = false;
+                    }
+                    scope.updateCrosshair();
+                };
+
                 scope.editMarkerWrapper = function(marker) {
                     marker.marker.closePopup();
                     scope.editMarker(marker.data);
                 }
+
 
                 if (attrs.multimarkers) {
                     var markersDict = [];
