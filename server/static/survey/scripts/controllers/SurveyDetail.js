@@ -172,13 +172,6 @@ angular.module('askApp')
             $scope.locations = [];
             $scope.activeMarker = false;
 
-            $scope.$watch('map.zoom', function (newZoom) {
-                $scope.updateCrosshair();
-            })
-            $scope.$watch('activeMarker', function () {
-                $scope.updateCrosshair();
-            });
-
             $scope.showActivities = function () {
                 $dialog.dialog({
                     backdrop: true,
@@ -251,6 +244,7 @@ $scope.isAuthenticated = isAuthenticated;
 // landing page view
 $scope.landingView = '/static/survey/survey-pages/' + $routeParams.surveySlug + '/landing.html';
 
+$scope.zoomToResult = undefined;
 
 $scope.getAnswer = function(questionSlug) {
 
