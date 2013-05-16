@@ -10,7 +10,7 @@ var map = {
         visibility: true,
         lat: 47,
         lng: -124,
-        icon: "crosshair_red.png"
+        icon: "crosshair_white.png"
 
     },
     msg: null
@@ -173,12 +173,11 @@ angular.module('askApp')
             $scope.activeMarker = false;
 
             $scope.$watch('map.zoom', function (newZoom) {
-                if (newZoom >= $scope.question.min_zoom) {
-                    $scope.map.marker.icon = "crosshair_green.png";
-                } else {
-                    $scope.map.marker.icon = "crosshair_red.png";
-                }
+                $scope.updateCrosshair();
             })
+            $scope.$watch('activeMarker', function () {
+                $scope.updateCrosshair();
+            });
 
             $scope.showActivities = function () {
                 $dialog.dialog({
@@ -315,6 +314,7 @@ $scope.cancelConfirmation = function() {
     var locations = _.without($scope.locations, $scope.activeMarker);
     $scope.locations = locations;
     $scope.activeMarker = false;
+    $scope.map.marker.visibility = true;
 }
 
 $scope.getNextQuestion = function() {
