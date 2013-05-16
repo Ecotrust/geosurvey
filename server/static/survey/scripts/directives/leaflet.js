@@ -116,8 +116,8 @@
 
 
                         scope.$watch('marker.icon', function(newValue) {
-                            if (marker) {
-                                marker._icon.src = '/static/survey/img/' + newValue;    
+                            if (marker && marker._icon && marker._icon.src) {
+                                marker._icon.src = '/static/survey/img/' + newValue;
                             }
                             
                         });
