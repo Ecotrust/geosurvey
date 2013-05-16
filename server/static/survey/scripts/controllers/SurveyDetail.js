@@ -244,6 +244,7 @@ $scope.isAuthenticated = isAuthenticated;
 // landing page view
 $scope.landingView = '/static/survey/survey-pages/' + $routeParams.surveySlug + '/landing.html';
 
+$scope.zoomToResult = undefined;
 
 $scope.getAnswer = function(questionSlug) {
 

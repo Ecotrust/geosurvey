@@ -6,7 +6,7 @@
         <!-- <p class="question-sub-text">Zoom in closely before adding locations.</p> -->
     </div>
     <div class="row-fluid" ng-show="activeMarker == false">
-        <span zoomto onload="openModal()"></span>
+        <span zoomto onload="openModal()" states="survey.states" zoomtoresult="zoomToResult"></span>
         <button class="btn btn-large" style="margin-left:20px;" ng-click="showActivities()"><i class="icon-list"></i> My Activities</button>
     </div>
     <div class="row-fluid confirmation" style="margin-bottom:10px;" ng-hide="activeMarker == false">
@@ -27,7 +27,7 @@
                 addmarker="addMarker" 
                 multimarkersedit="activeMarker == false"
                 editmarker="editMarker"
-                states="survey.states"></div>
+                zoomtoresult="zoomToResult"></div>
         </div>
     </div>
     <div class="row-fluid" ng-show="activeMarker == false && locations.length > 0">

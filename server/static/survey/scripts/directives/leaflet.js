@@ -24,6 +24,7 @@
                 editMarker: '=editmarker',
                 addMarker: '=addmarker',
                 confirmingLocation: '=conflocation',
+                zoomToResult: '=zoomtoresult',
             },
             templateUrl: '/static/survey/views/leaflet.html',
             link: function(scope, element, attrs, ctrl) {
@@ -50,17 +51,20 @@
                     //$timeout.cancel(timeoutId);
                 });
 
+                scope.$watch('zoomToResult', function (place) {
+                    if (place) {
+                        scope.zoomTo(place); 
+                    }
+                });
 
                 scope.zoomTo = function(location) {
                     map.setView({
                         lat: location.lat,
                         lng: location.lng
-                    }, map.getZoom());
-                    map.setZoom(location.zoom);
+                    }, location.zoom);
                     if (marker) {
-                        marker.setLatLng(new L.LatLng(location.lat, location.lng));
+                        marker.setLatLng(new L.LatLng(map.getCenter().lat, map.getCenter().lng));
                     }
-
                 };
 
 
