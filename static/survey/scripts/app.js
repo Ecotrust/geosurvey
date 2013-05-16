@@ -8,6 +8,7 @@ angular.module('askApp', ['ui', 'leaflet.directive', 'ui.bootstrap', 'ngGrid'])
         'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
     };
 
+
     $routeProvider.when('/', {
         templateUrl: '/static/survey/views/main.html',
         controller: 'MainCtrl'

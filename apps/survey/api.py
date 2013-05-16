@@ -88,7 +88,7 @@ class QuestionResource(ModelResource):
         queryset = Question.objects.all()
         always_return_data = True
         authorization = StaffUserOnlyAuthorization()
-        authentication = SessionAuthentication()
+        authentication = Authentication()
         filtering = {
             'slug': ALL,
             'surveys': ALL_WITH_RELATIONS
