@@ -10,7 +10,6 @@
         </div>
     </div>
     <div class="span8">
-        <h3>Show Responses for {{$root.filterBy || 'all'}}</h3>
         <div class="row-fluid" ng-repeat="question in survey.questions">
             <div  ui-if="question.visualize">
                 <h4>Distribution by {{ question.label }}</h4>

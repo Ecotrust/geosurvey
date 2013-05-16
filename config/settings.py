@@ -132,10 +132,11 @@ INSTALLED_APPS = (
     'south',
     'django_extensions',
     'compressor',
+
     # Project specific apps go here
     'apps.places',
     'apps.survey',
-
+    'apps.reports'
 )
 
 # A sample logging configuration. The only tangible logging
