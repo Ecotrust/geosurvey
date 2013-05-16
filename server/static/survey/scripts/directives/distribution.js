@@ -5,12 +5,19 @@ angular.module('askApp')
     return {
       templateUrl: '/static/survey/views/distributionView.html',
       restrict: 'EA',
+      replace: true,
+      transclude: true,
       scope: {
-          filter: '=filter'
+          filter: '=filter',
+          question: "=question"
       },
 
       link: function postLink(scope, element, attrs) {
-        //scope.filter.answer_domain = ['a','b'];
+        scope.gridOptions = { data: 'question.answer_domain' };
+        
+        scope.$watch('filter', function (newFilter) {
+          console.log(newF)
+        });
       }
     };
   });
