@@ -12,7 +12,7 @@ background-color: #f5f5f5;
 
 .respondant {
 max-width: 800px;
-padding: 19px 29px 29px;
+padding: 9px 29px 29px;
 margin: 0 auto;
 background-color: #fff;
 border: 1px solid #e5e5e5;
@@ -225,6 +225,14 @@ form .btn-block {
     bottom: 7px;
 }
 
+
+/* Bootstrap override */
+.progress {
+    margin-bottom: 0px;
+}
+.row-progress-bar, .row-progress-bar [class*="offset"],  .row-progress-bar [class*="span"] {
+    min-height: 25px; /* instead of 30px */
+}
 
 @media (max-width: 700px) {
     span[zoomto] input {
