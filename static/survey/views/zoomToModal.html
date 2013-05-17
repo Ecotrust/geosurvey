@@ -1,6 +1,7 @@
 <div class="modal-header modal-zoomto">
-    <p class="question-title">Start by searching for a place at or near one of your activity locations.</p>
-    <!-- <p><strong>Note:</strong>To ensure accuracy, you must zoom in closely when placing activity markers.</p> -->
+    <p class="question-title" ng-show="isInitialView">Start by searching for a place at or near one of your activity locations.</p>
+    <p class="question-title" ng-show="!isInitialView">Search for a place at or near one of your activity locations.</p>
+    <!-- <p><strong>Note:</strong>To ensure accuracy, you will be required to zoom in closely when placing activity markers.</p> -->
     <p>
       <form class="form-search">
         <div class="control-group">
@@ -13,15 +14,15 @@
 </div>
 <div class="modal-body">
     
-    <ul class="nav nav-tabs nav-stacked">
-        <li ng-show="results.length == 0">No Results</li>
+    <h4 ng-show="showNoResults" style="margin-left: 20px; color: #bbb;">No Results</h4>
+
+    <ul class="nav nav-tabs nav-stacked" ng-show="results.length > 0">    
         <li ng-click="zoomTo(result)" ng-show="searchTerm && results.length > 0" ng-repeat="result in results"><a><strong>{{ result.name }}</strong> ({{ result.county }} County)</a></li>
     </ul>
 </div>
 <div class="modal-footer">
     <p ng-show="results.length > 0">Showing {{ results.length }} of {{ meta.total_count }} results</p>
     <br ng-hide="results == 0">
-    <button ng-click="close()" class="btn btn-primary">
-        Close
-    </button>
+    <button ng-click="close()" ng-show="isInitialView" class="btn btn-primary">No thanks, I'll find it myself</button>
+    <button ng-click="close()" ng-show="!isInitialView" class="btn btn-primary">Cancel</button>
 </div>
