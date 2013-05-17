@@ -22,5 +22,10 @@ class QuestionReport(Question):
         answers = self.response_set.all()
 
         if filter_question is not None and filter_value is not None:
-            answers = answers.filter(respondant__responses__in=filter_question.response_set.filter(answer=filter_value)).values('answer').annotate(count=Count('answer'))
+            answers = answers.filter(respondant__responses__in=filter_question.response_set.filter(answer=filter_value))
+
+        if self.type == 'map-multipoint':
+            answers = answers.filter(answer="Hey")
+        else:
+            answers = answers.values('answer').annotate(count=Count('answer'))
         return answers.values('answer').annotate(count=Count('answer'))
