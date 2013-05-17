@@ -12,8 +12,17 @@
     <div class="span8">
         <div class="row-fluid" ng-repeat="question in survey.questions">
             <div  ui-if="question.visualize">
-                <h4>Distribution by {{ question.label }}</h4>
-                <div class="gridStyle" ng-grid="question.gridOptions"></div>
+                <h4>
+                    <div class="pull-right">
+                        <select ng-model="question.filterAnswer">
+                            <option value="">all</option>
+                            <option value="{{answer.answer}}" ng-repeat="answer in getQuestionBySlug('state-or-province').answer_domain">{{answer.answer}} ({{answer.count}})</option>
+                        </select>
+                    </div>
+                    Distribution by {{ question.label }} for {{ question.filterAnswer || 'all' }}
+                </h4>
+
+                <distribution filter="question.filterAnswer" question="question"></distribution>
             </div>
         </div>
     </div>
