@@ -28,6 +28,7 @@ class StaffUserOnlyAuthorization(Authorization):
         return bundle.request.user.is_staff
 
     def update_detail(self, object_list, bundle):
+        print "updating question"
         return bundle.request.user.is_staff
 
     def delete_list(self, object_list, bundle):
@@ -80,13 +81,14 @@ class QuestionResource(ModelResource):
     modalQuestion = fields.ToOneField('self', 'modalQuestion', full=True, null=True, blank=True)
     hoist_answers = fields.ToOneField('self', 'hoist_answers', full=True, null=True, blank=True)
     question_types = fields.DictField(attribute='question_types', readonly=True)
+    report_types = fields.DictField(attribute='report_types', readonly=True)
     answer_domain = fields.ListField(attribute='answer_domain', readonly=True, null=True)
 
     class Meta:
         queryset = Question.objects.all()
         always_return_data = True
         authorization = StaffUserOnlyAuthorization()
-        authentication = SessionAuthentication()
+        authentication = Authentication()
         filtering = {
             'slug': ALL,
             'surveys': ALL_WITH_RELATIONS
@@ -100,7 +102,7 @@ class SurveyResource(ModelResource):
         filtering = {
             'slug': ['exact']
         }
-    
+
     def prepend_urls(self):
         return [
             url(r"^(?P<resource_name>%s)/(?P<slug>[\w\d_.-]+)/$" % self._meta.resource_name, self.wrap_view('dispatch_detail'), name="api_dispatch_detail"),
@@ -109,4 +111,4 @@ class SurveyResource(ModelResource):
 class SurveyReportResource(SurveyResource):
     completes = fields.IntegerField(attribute='completes', readonly=True)
     survey_responses = fields.IntegerField(attribute='survey_responses', readonly=True)
-    
+

@@ -88,7 +88,10 @@ class Option(caching.base.CachingMixin, models.Model):
     def __str__(self):
         return "%s" % self.text
 
-
+REPORT_TYPE_CHOICES = (
+        ('distribution', 'Distribution'),
+        ('heatmap', 'Heatmap'),
+    )
 
 class Question(caching.base.CachingMixin, models.Model):
     title = models.TextField()
@@ -119,6 +122,8 @@ class Question(caching.base.CachingMixin, models.Model):
     # backend stuff
     filterBy = models.BooleanField(default=False)
     visualize = models.BooleanField(default=False)
+    report_type = models.CharField(max_length=20,choices=REPORT_TYPE_CHOICES,null=True, default=None)
+
 
     @property
     def answer_domain(self):
@@ -145,6 +150,10 @@ class Question(caching.base.CachingMixin, models.Model):
     @property
     def question_types(self):
         return QUESTION_TYPE_CHOICES
+
+    @property
+    def report_types(self):
+        return REPORT_TYPE_CHOICES
 
     def __str__(self):
         return "%s/%s/%s (%d)" % (self.survey_slug, self.title, self.type, self.order)
