@@ -270,7 +270,21 @@ $scope.addLocation = function(location) {
     // $scope.locations = locations;
     // $scope.locations.push(location);
     $scope.activeMarker = false;
+
+    $scope.showMyActivitesPopover();
 };
+
+$scope.myActivitiesPopoverShown = false;
+$scope.showMyActivitesPopover = function () {
+    // Only showing this popover once
+    if (!$scope.myActivitiesPopoverShown) {
+        setTimeout(function () {
+            jQuery('.btn-my-activities').popover({trigger: 'manual', placement: 'bottom'});
+            jQuery('.btn-my-activities').popover('show');
+            $scope.myActivitiesPopoverShown = true;
+        }, 500);
+    }
+}
 
 $scope.confirmLocation = function(question) {
     $scope.dialog = $dialog.dialog({
