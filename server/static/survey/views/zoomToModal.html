@@ -1,7 +1,6 @@
 <div class="modal-header modal-zoomto">
     <p class="question-title" ng-show="isInitialView">Start by searching for a place at or near one of your activity locations.</p>
     <p class="question-title" ng-show="!isInitialView">Search for a place at or near one of your activity locations.</p>
-    <!-- <p><strong>Note:</strong>To ensure accuracy, you will be required to zoom in closely when placing activity markers.</p> -->
     <p>
       <form class="form-search">
         <div class="control-group">
@@ -14,7 +13,9 @@
 </div>
 <div class="modal-body">
     
-    <h4 ng-show="showNoResults" style="margin-left: 20px; color: #bbb;">No Results</h4>
+    <h4 ng-show="showNoResults" style="text-align: center; color: #888;">No Results</h4>
+
+    <p ng-show="!showNoResults && results.length == 0" style="color: #888; width: 300px; text-align: center; margin: 20px auto;">To ensure accuracy, you will be required to zoom in closely when placing activity markers. </p>
 
     <ul class="nav nav-tabs nav-stacked" ng-show="results.length > 0">    
         <li ng-click="zoomTo(result)" ng-show="searchTerm && results.length > 0" ng-repeat="result in results"><a><strong>{{ result.name }}</strong> ({{ result.county }} County)</a></li>
