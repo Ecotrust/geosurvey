@@ -12,4 +12,9 @@ angular.module('askApp')
             $scope.meta = data.meta;
         });
     });
+
+
+    $scope.getQuestionBySlug = function (slug) {
+		return _.findWhere($scope.survey.questions, {'slug': slug});
+    };
 });
