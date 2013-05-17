@@ -185,6 +185,7 @@ p.landing, p.info {
 .modal-header .question-title {
     font-size: 22px;
     font-weight: bold;
+    margin-top: 10px;
 }
 
 ul + ul {
@@ -246,14 +247,18 @@ form .btn-block {
 .form-search {
     position: relative;
 }
-.form-search .spinner {
+/*.form-search .spinner {
     position: absolute;
     top: 5px;
     right: 8px;
 }
+*/
+.form-search .control-group {
+    padding-left: 20px;
+}
 .form-search .search-query {
     height: 24px !important; 
-    width: 82%; 
+    width: 76%; 
     margin-left: 5px;
     margin-right: 5px;
 }
