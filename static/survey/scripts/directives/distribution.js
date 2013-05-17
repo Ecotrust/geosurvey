@@ -9,7 +9,8 @@ angular.module('askApp')
         transclude: true,
         scope: {
             filter: '=filter',
-            question: "=question"
+            question: "=question",
+            surveySlug: "=surveySlug"
         },
 
         link: function postLink(scope, element, attrs) {
@@ -18,23 +19,21 @@ angular.module('askApp')
                 data: 'distributionData'
             };
 
-            //angular.extend(scope.distributionData, scope.question.answer_domain);
-            console.log(scope.question);
-            scope.$watch('filter', function(newFilter) {
-                var url = '/reports/distribution/washington-opt-in/' + scope.question.slug;
-                if (newFilter) {
-                    url += '?filter_question=' + scope.question.options_from_previous_answer;
-                    url += '&filter_value=' + newFilter;
+            scope.$watch('filter', function (newFilter) {
+                scope.getData(scope.question.slug, scope.question.options_from_previous_answer, newFilter);
+            });
+
+
+            scope.getData = function (questionSlug, filterQuestionSlug, filterValue) {
+                var url = '/reports/distribution/washington-opt-in/' + questionSlug;
+                if (filterQuestionSlug && filterValue) {
+                    url += '?filter_question=' + filterQuestionSlug;
+                    url += '&filter_value=' + filterValue;
                 }
                 $http.get(url)
                     .success(function(data) {
                     scope.distributionData = data.answer_domain;
                 });
-            });
-
-
-            function getData() {
-
             };
         }
     };

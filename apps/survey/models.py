@@ -84,7 +84,7 @@ class Option(caching.base.CachingMixin, models.Model):
     text = models.CharField(max_length=254)
     label = models.SlugField(max_length=64) 
     objects = caching.base.CachingManager()
-   
+
     def __str__(self):
         return "%s" % self.text
 
@@ -159,6 +159,11 @@ class Question(caching.base.CachingMixin, models.Model):
         return "%s/%s/%s (%d)" % (self.survey_slug, self.title, self.type, self.order)
         #return "%s/%s" % (self.survey_set.all()[0].slug, self.label)
 
+class Location(caching.base.CachingMixin, models.Model):
+    answer = models.TextField()
+    response = models.ForeignKey('Response')
+    lat = models.DecimalField(max_digits=10, decimal_places=7)
+    lng = models.DecimalField(max_digits=10, decimal_places=7)
 
 class Response(caching.base.CachingMixin, models.Model):
     question = models.ForeignKey(Question)
