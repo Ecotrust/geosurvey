@@ -6,6 +6,7 @@ function ZoomToCtrl($scope, dialog, $http, $timeout) {
 
     $scope.results = [];
     $scope.showSpinner = false;
+    $scope.showNoResults = false;
 
     if ($scope.states) {
         $scope.stateParam = '&state__in=' + $scope.states.split(',').join('&state__in=')
@@ -27,11 +28,13 @@ function ZoomToCtrl($scope, dialog, $http, $timeout) {
                     $scope.results = data.objects;
                     $scope.meta = data.meta;
                     $scope.showSpinner = false;
+                    $scope.showNoResults = $scope.results.length == 0 && $scope.searchTerm && $scope.searchTerm.length > 0;
                 });
             }, 1000);
         } else {
             $scope.results = [];
             $scope.showSpinner = false;
+            $scope.showNoResults = false
         }
     });
 
@@ -47,17 +50,18 @@ function ZoomToCtrl($scope, dialog, $http, $timeout) {
 angular.module('askApp')
     .directive('zoomto', function($dialog) {
 
-
     return {
-        template: '<span><input type="text" placeholder="Search locations" ng-click="openModal()"> <button class="btn btn-large" ng-click="openModal()"><i class="icon-search"></i></button></span>',
+        template: '<div class="control-group"><i class="icon-search icon-2x"></i><input type="text" id="search-query-facade" placeholder="Search locations" ng-click="openModal()"></div>',
         restrict: 'EA',
         replace: true,
         transclude: true,
         scope: {
             states: "=states",
             zoomToResult: "=zoomtoresult",
+            
         },
         link: function postLink(scope, element, attrs) {
+            scope.isInitialView = true;
             scope.openModal = function () {
                 var dialog = $dialog.dialog({
                     backdrop: true,
@@ -66,12 +70,14 @@ angular.module('askApp')
                     keyboard: true,
                     backdropClick: false,
                     scope: {
-                        states: scope.states
+                        states: scope.states,
+                        isInitialView: scope.isInitialView,
                     },
                     templateUrl: '/static/survey/views/zoomToModal.html',
                     controller: 'ZoomToCtrl'
                 });
                 dialog.open().then(function (place) {
+                    scope.isInitialView = false;
                     if (place) {
                         scope.zoomToResult = {
                             lat: place.lat,

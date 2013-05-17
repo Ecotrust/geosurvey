@@ -1,22 +1,29 @@
-<div class="modal-header">
+<div class="modal-header modal-zoomto">
+    <p class="question-title" ng-show="isInitialView">Start by searching for a place at or near one of your activity locations.</p>
+    <p class="question-title" ng-show="!isInitialView">Search for a place at or near one of your activity locations.</p>
     <p>
       <form class="form-search">
-        <input type="text" class="search-query" placeholder="Search..." ng-model="searchTerm" autofocus>
-        <img ng-show="showSpinner" class="spinner pull-right" src="/static/survey/img/ajax-loader.gif"/>
+        <div class="control-group">
+            <label ng-show="!showSpinner" for="search-query"><i class='icon-search icon-2x'></i></label>
+            <label ng-show="showSpinner" for="search-query"><i class='icon-spinner icon-spin icon-2x'></i></label>
+            <input type="text" id="search-query" class="search-query" placeholder="Search..." ng-model="searchTerm" autofocus>
+        </div>
       </form>
     </p>
 </div>
 <div class="modal-body">
     
-    <ul class="nav nav-tabs nav-stacked">
-        <li ng-show="results.length == 0">No Results</li>
+    <h4 ng-show="showNoResults" style="text-align: center; color: #888;">No Results</h4>
+
+    <p ng-show="!showNoResults && results.length == 0" style="color: #888; width: 300px; text-align: center; margin: 20px auto;">To ensure accuracy, you will be required to zoom in closely when placing activity markers. </p>
+
+    <ul class="nav nav-tabs nav-stacked" ng-show="results.length > 0">    
         <li ng-click="zoomTo(result)" ng-show="searchTerm && results.length > 0" ng-repeat="result in results"><a><strong>{{ result.name }}</strong> ({{ result.county }} County)</a></li>
     </ul>
 </div>
 <div class="modal-footer">
     <p ng-show="results.length > 0">Showing {{ results.length }} of {{ meta.total_count }} results</p>
     <br ng-hide="results == 0">
-    <button ng-click="close()" class="btn btn-primary">
-        Close
-    </button>
+    <button ng-click="close()" ng-show="isInitialView" class="btn btn-primary">No thanks, I'll find it myself</button>
+    <button ng-click="close()" ng-show="!isInitialView" class="btn btn-primary">Cancel</button>
 </div>
