@@ -218,7 +218,21 @@ form .btn-block {
 .row-progress-bar, .row-progress-bar [class*="offset"],  .row-progress-bar [class*="span"] {
     min-height: 25px; /* instead of 30px */
 }
-
+.modal {
+    max-height: 500px;
+    overflow:hidden;
+}
+.modal-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+.modal-body {
+    padding-bottom: 57px;
+    height: 400px;
+    overflow:scroll;
+}
 
 /**
  * Search Modal
@@ -261,6 +275,7 @@ form .btn-block {
 
 @media (max-width: 600px) {
     .modal {
+        max-height: none;
         width: 100%;
         position: absolute;
         top: 0;
