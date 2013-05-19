@@ -181,39 +181,31 @@ class Response(caching.base.CachingMixin, models.Model):
         ''' On save, update timestamps '''
         if not self.id:
             self.ts = datetime.datetime.now()
-        self.answer = self.answer_raw
-        if self.question.type in ['auto-single-select', 'single-select']:
-            try:
-                self.answer = self.answer_raw['text']
-            except:
-                pass
-            try:
-                self.answer = self.answer_raw['name']
-            except:
-                pass
-        if self.question.type in ['auto-multi-select', 'multi-select']:
-            answers = []
-            try:
+        else:
+            self.answer = self.answer_raw
+            if self.question.type in ['auto-single-select', 'single-select']:
+                answer = self.answer_raw
+                print answer
+                if answer.get('text'):
+                    self.answer = answer['text']
+                if answer.get('name'):
+                    self.answer = answer['name']
+                #self.answer = self.answer_raw['name']
+            if self.question.type in ['auto-multi-select', 'multi-select']:
+                answers = []
                 for answer in self.answer_raw:
-                    try:
+                    if answer.get('text'):
                         answers.append(answer['text'])
-                    except:
-                        pass
-                    try:
+                    if answer.get('name'):
                         answers.append(answer['name'])
-                    except:
-                        pass
-            except:
-                pass
-            self.answer = ", ".join(answers)
-        if self.question.type in ['map-multipoint'] and self.id:
-            answers = []
-            for point in simplejson.loads(self.answer_raw):
-                for answer in point['answers']:
-                    try:
+                self.answer = ", ".join(answers)
+            if self.question.type in ['map-multipoint'] and self.id:
+                answers = []
+                for point in simplejson.loads(self.answer_raw):
+                    for answer in point['answers']:
                         answers.append("%s,%s: %s" % (point['lat'], point['lng'] , answer['text']))
-                    except:
-                        print "Couldn't do it"
-            self.answer = ", ".join(answers)
+                        location = Location(answer=answer['text'], lat=point['lat'], lng=point['lng'], response=self)
+                        location.save()
+                self.answer = ", ".join(answers)
         print self.answer
         super(Response, self).save(*args, **kwargs)
