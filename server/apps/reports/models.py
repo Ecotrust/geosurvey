@@ -3,7 +3,7 @@ from django.db.models import Avg, Max, Min, Count
 
 import caching.base
 
-from apps.survey.models import Survey, Question, Response, Respondant
+from apps.survey.models import Survey, Question, Response, Respondant, Location
 
 # REPORT_TYPE_CHOICES = (
 #     ('distribution', 'Distribution'),
@@ -25,7 +25,7 @@ class QuestionReport(Question):
             answers = answers.filter(respondant__responses__in=filter_question.response_set.filter(answer=filter_value))
 
         if self.type == 'map-multipoint':
-            answers = answers.filter(answer="Hey")
+            answers = Location.objects.filter()
         else:
             answers = answers.values('answer').annotate(count=Count('answer'))
         return answers.values('answer').annotate(count=Count('answer'))
