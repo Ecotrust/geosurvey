@@ -10,7 +10,7 @@
         "group": "1"
     },
     {
-        "text": "Collection of non-living resources/beachcombing (agates, fossils, driftwood)",
+        "text": "Collection of non-living resources/beachcombing (beach glass, shells, fossils, driftwood)",
         "label": "beachcombing",
         "group": "1"
     },
@@ -35,7 +35,12 @@
         "group": "1"
     },
     {
-        "text": "Watching birds, whales, seals and/or other marine life (from shore or  boat)",
+        "text": "Watching birds, whales, seals and/or other marine life (from shore or boat)",
+        "label": "birdwatching",
+        "group": "1"
+    },
+    {
+        "text": "Watching birds, whales, seals and/or other marine life (from a charter vessel)",
         "label": "birdwatching",
         "group": "1"
     },
@@ -75,7 +80,7 @@
         "group": "3"
     },
     {
-        "text": "Free diving/snorkeling (from shore, from boat)",
+        "text": "Free diving/snorkeling (from shore or boat)",
         "label": "free-diving-snorkeling",
         "group": "3"
     },
@@ -85,8 +90,13 @@
         "group": "3"
     },
     {
-        "text": "SCUBA diving (from shore, from boat)",
-        "label": "scuba-diving",
+        "text": "SCUBA diving (from a charter vessel)",
+        "label": "scuba-diving-charter",
+        "group": "3"
+    },
+    {
+        "text": "SCUBA diving (from a boat)",
+        "label": "scuba-diving-boat",
         "group": "3"
     }
 ]
