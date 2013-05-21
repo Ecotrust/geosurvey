@@ -30,8 +30,7 @@ angular.module('askApp')
                     url += '?filter_question=' + filterQuestionSlug;
                     url += '&filter_value=' + filterValue;
                 }
-                $http.get(url)
-                    .success(function(data) {
+                $http.get(url).success(function(data) {
                     scope.distributionData = data.answer_domain;
                 });
             };

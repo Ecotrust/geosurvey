@@ -24,7 +24,7 @@
                 editMarker: '=editmarker',
                 addMarker: '=addmarker',
                 confirmingLocation: '=conflocation',
-                zoomToResult: '=zoomtoresult',
+                zoomToResult: '=zoomtoresult'
             },
             templateUrl: '/static/survey/views/leaflet.html',
             link: function(scope, element, attrs, ctrl) {
@@ -53,7 +53,7 @@
 
                 scope.$watch('zoomToResult', function (place) {
                     if (place) {
-                        scope.zoomTo(place); 
+                        scope.zoomTo(place);
                         scope.zoomToResult = undefined;
                     }
                 });
@@ -126,7 +126,6 @@
                             if (marker && marker._icon && marker._icon.src) {
                                 marker._icon.src = '/static/survey/img/' + newValue;
                             }
-                            
                         });
                         scope.$watch('marker.visibility', function(newValue, oldValue) {
 

@@ -204,8 +204,8 @@ class Response(caching.base.CachingMixin, models.Model):
                 for point in simplejson.loads(self.answer_raw):
                     for answer in point['answers']:
                         answers.append("%s,%s: %s" % (point['lat'], point['lng'] , answer['text']))
-                        location = Location(answer=answer['text'], lat=point['lat'], lng=point['lng'], response=self)
-                        location.save()
+                        #location = Location(answer=answer['text'], lat=point['lat'], lng=point['lng'], response=self)
+                        #location.save()
                 self.answer = ", ".join(answers)
         print self.answer
         super(Response, self).save(*args, **kwargs)
