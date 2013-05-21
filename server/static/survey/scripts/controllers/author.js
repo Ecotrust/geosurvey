@@ -18,7 +18,7 @@ angular.module('askApp')
 
         $scope.questionIsDirty = function(question) {
             return ! _.isEqual(question, $scope.questionBeingEdited);
-        }
+        };
 
         $scope.saveQuestion = function (question) {
             $http({
