@@ -10,11 +10,11 @@ var map = {
         visibility: true,
         lat: 47,
         lng: -124,
-        icon: "crosshair_white.png"
+        icon: 'crosshair_white.png'
 
     },
     msg: null
-}
+};
 
 var answers = {};
 
@@ -22,7 +22,7 @@ function ActivitiesCtrl($scope, dialog) {
     $scope.close = function(result){
       dialog.close(result);
     };
-};
+}
 
 angular.module('askApp')
     .controller('SurveyDetailCtrl', function($scope, $routeParams, $http, $location, $dialog, $interpolate, $timeout, offlineSurvey) {
@@ -35,14 +35,7 @@ angular.module('askApp')
                 return question.slug === $routeParams.questionSlug;
             });
 
-        } else {
-            console.log('load question');
-            console.log(_.filter($scope.question.options, function (option) {
-                return option.checked;
-            }));
-            window.options = $scope.question.options;
         }
-
         if ($scope.question && $scope.question.title) {
             $scope.question.displayTitle = $interpolate($scope.question.title)($scope);
         }
@@ -60,9 +53,9 @@ angular.module('askApp')
             $http.get($scope.question.options_json).success(function(data) {
                 var groups = _.groupBy(data, function(item) {
                     return item.group;
-                })
+                });
                 if ($scope.question.randomize_groups) {
-                    $scope.question.options = _.flatten(_.shuffle(_.toArray(groups)))
+                    $scope.question.options = _.flatten(_.shuffle(_.toArray(groups)));
                 } else {
                     $scope.question.options = data;
                 }
@@ -82,12 +75,12 @@ angular.module('askApp')
                 }
             });
 
-        } else if ($scope.question && $scope.question.options_from_previous_answer && $scope.question.slug == 'county') {
-            // County question is dependent on state answer to retrieve a 
+        } else if ($scope.question && $scope.question.options_from_previous_answer && $scope.question.slug === 'county') {
+            // County question is dependent on state answer to retrieve a
             // json file of counties for the selected state.
-            
+
             var stateAnswer = $scope.getAnswer($scope.question.options_from_previous_answer),
-                stateAbrv = stateAnswer.label || "NO_STATE";
+                stateAbrv = stateAnswer.label || 'NO_STATE';
             
             $http.get('/static/survey/surveys/counties/' + stateAbrv + '.json').success(function(data, status, headers, config) {
                 if (Object.prototype.toString.call(data) === '[object Array]' && data.length > 0) {
@@ -95,20 +88,20 @@ angular.module('askApp')
                 } else {
                     $scope.question.options = [{
                         label: "NO_COUNTY",
-                        text: "No counties found. Please select this option and continue."
+                        text: 'No counties found. Please select this option and continue.'
                     }];
                 }
             }).error(function(data, status, headers, config) {
                 $scope.question.options = [{
-                    label: "NO_COUNTY",
-                    text: "No counties found. Please select this option and continue."
+                    label: 'NO_COUNTY',
+                    text: 'No counties found. Please select this option and continue.'
                 }];
             });
         }
         if ($scope.question && $scope.question.allow_other) {
             $scope.question.otherOption = {
                 'checked': false
-            }
+            };
             $scope.question.otherAnswer = null;
         }
 
@@ -142,7 +135,7 @@ angular.module('askApp')
             _.each($scope.locations, function(location) {
                 location.pennies = null;
                 $scope.$watch(function() {
-                    return location.pennies
+                    return location.pennies;
                 },
 
                 function(newValue) {
@@ -168,7 +161,6 @@ angular.module('askApp')
 
         // map 
         if ($scope.question && $scope.question.type === 'map-multipoint') {
-            
             $scope.locations = [];
             $scope.activeMarker = false;
 
@@ -183,11 +175,11 @@ angular.module('askApp')
                         locations: $scope.locations,
                         editLocation: $scope.editMarker,
                         removeLocation: $scope.removeLocation,
-                        showLocation: $scope.showLocation,
+                        showLocation: $scope.showLocation
                     },
-                    controller: "ActivitiesCtrl"
+                    controller: 'ActivitiesCtrl'
                 }).open();
-            }
+            };
 
         }
       
@@ -256,7 +248,7 @@ $scope.getAnswer = function(questionSlug) {
     if (answers[questionSlug]) {
         return answers[questionSlug]
     } else {
-        return "unknown";
+        return 'unknown';
     }
 };
 
@@ -384,13 +376,13 @@ $scope.answerQuestion = function(answer, otherAnswer) {
     } else {
         
         // sometimes we'll have an other field with option text box
-        if (answer === "other" && otherAnswer) {
+        if (answer === 'other' && otherAnswer) {
             answer = otherAnswer;
         }
         if ($scope.question.required && ! answer) {
             return false;
         } else if (! $scope.question.required && answer === undefined) {
-            answer = "";
+            answer = '';
         }
 
 
@@ -414,7 +406,7 @@ $scope.answerQuestion = function(answer, otherAnswer) {
             url: url,
             method: 'POST',
             data: {
-                "answer": answer
+                'answer': answer
             },
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
@@ -470,13 +462,13 @@ $scope.answerMultiSelect = function(question) {
 };
 
 $scope.editMarker = function (location) {
-    alert("not yet implemented");
+    alert('not yet implemented');
     // location.question.update=true;
     // $scope.confirmLocation(location.question);
-}
+};
 
 $scope.removeLocation = function (location) {
-    alert("not yet implemented");
+    alert('not yet implemented');
 };
 
 $scope.showLocation = function (location) {
@@ -544,7 +536,7 @@ $scope.answerSingleSelect = function(options, otherAnswer) {
 
 $scope.answerAutoSingleSelect = function(answer, otherAnswer) {
     var selectedOption;
-    if (answer === "other") {
+    if (answer === 'other') {
         $scope.answerQuestion({
             text: otherAnswer,
             label: answer
