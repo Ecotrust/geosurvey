@@ -67,12 +67,12 @@ form input {
 select + input {
     margin-top: 10px;
 }
-input, .btn {
+/*input, .btn {
     height: 44px !important;
     font-size: 20px !important;
     line-height: 1 !important;
 }
-
+*/
 .map {
     height: 450px;
 }
@@ -236,7 +236,7 @@ form .btn-block {
     right: 0;
 }
 .modal-body {
-    padding-bottom: 57px;
+    padding-bottom: 73px;
     height: 400px;
     overflow:scroll;
 }
@@ -266,6 +266,12 @@ form .btn-block {
 #search-query-facade {
     margin-left: 10px;
 }
+
+
+/**
+ * My Activities modal
+ */
+
 
 
 @media (max-width: 767px) {

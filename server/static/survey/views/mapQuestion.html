@@ -1,13 +1,13 @@
 <div class="map-multipoint">
     <div class="row-fluid" ng-class="{hiddenbutspaced: activeMarker != false}">
         <p class="question-title" style="font-size: 24px;">
-            Add each of your activity locations to the map.
+            Please click "<i class="icon-plus"></i>&nbsp;Add Location" to add each of your activity locations to the map.
         </p>
         <!-- <p class="question-sub-text">Zoom in closely before adding locations.</p> -->
     </div>
     <div class="row-fluid" ng-show="activeMarker == false">
         
-        <span zoomto onload="openModal()" states="survey.states" zoomtoresult="zoomToResult"></span>
+        <span zoomto onload="openModal()" states="survey.states" zoomtoresult="zoomModel.zoomToResult"></span>
         
         <button 
             class="btn btn-large btn-my-activities" 
@@ -15,15 +15,15 @@
             ng-click="showActivities()"
             data-html="true"
             data-title="<b>Location Added</b>"
-            data-content="<script type='text/javascript'>function hideMe() {jQuery('.btn-my-activities').popover('hide');} </script><p>Go here at any time to edit your locations or review the list of activities you specified.</p><p>&nbsp;<a class='btn btn-block' onclick='hideMe()'>Got it!</a></p>">
+            data-content="<script type='text/javascript'>function hideMe() {jQuery('.btn-my-activities').popover('hide');} </script><p>Go here at any time to edit your locations or review the list of activities you specified.</p><p>&nbsp;<a class='btn btn-block' onclick='hideMe()'>OK</a></p>">
             <i class="icon-list"></i> My Activities
         </button>
         
     </div>
     <div class="row-fluid confirmation" style="margin-bottom:10px;" ng-hide="activeMarker == false">
         <h2 class="pull-left" style="margin-right: 20px; line-height: 20px;">Is this location correct?</h2>
-        <a class="btn btn-large btn-primary confirm" ng-click="confirmLocation()">Yes</a>
         <a class="btn btn-large cancel" ng-click="cancelConfirmation()">No, let's try again</a>
+        <a class="btn btn-large btn-primary confirm" ng-click="confirmLocation()">Yes</a>
     </div>
     <div class="row-fluid">
         <div class="span12">
@@ -38,7 +38,7 @@
                 addmarker="addMarker" 
                 multimarkersedit="activeMarker == false"
                 editmarker="editMarker"
-                zoomtoresult="zoomToResult"></div>
+                zoomtoresult="zoomModel.zoomToResult"></div>
         </div>
     </div>
     <div class="row-fluid" ng-show="activeMarker == false && locations.length > 0">
