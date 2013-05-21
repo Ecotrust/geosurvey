@@ -433,6 +433,10 @@ $scope.answerQuestion = function(answer, otherAnswer) {
                     $scope.gotoNextQuestion();
                 }
             }
+        }).error(function(data, status, headers, config) {
+            if (console) { 
+                console.log('error');
+            }
         });
     }
 };
