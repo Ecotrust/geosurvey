@@ -513,6 +513,15 @@ $scope.onSingleSelectClicked = function(option, question) {
 
 };
 
+$scope.$watch('question.otherAnswer', function (newValue) {
+    if ($scope.question && $scope.question.otherOption && $scope.question.otherOption.checked && $scope.question.otherAnswer && $scope.question.otherAnswer.length > 0) {
+        $scope.isAnswerValid = true;
+    
+    } else {
+        $scope.isAnswerValid = false;
+    }
+});
+
 
 $scope.answerSingleSelect = function(options, otherAnswer) {
     var answer = _.find(options, function(option) {
@@ -523,7 +532,12 @@ $scope.answerSingleSelect = function(options, otherAnswer) {
     if (answer) {
         $scope.answerQuestion(answer);
     } else if (otherAnswer) {
-        $scope.answerQuestion(otherAnswer);
+        answer = {
+            checked: true,
+            label: otherAnswer,
+            text: otherAnswer
+        };
+        $scope.answerQuestion(answer);
     }
 
 };
