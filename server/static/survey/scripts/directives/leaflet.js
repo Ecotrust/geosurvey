@@ -19,7 +19,7 @@
                 requiredzoom: '=requiredzoom',
                 multiMarkers: '=multimarkers',
                 multiMarkersEdit: '=multimarkersedit',
-                popupField: '=popupfield',
+                //popupField: '=popupfield',
                 states: "=states",
                 editMarker: '=editmarker',
                 addMarker: '=addmarker',
@@ -390,37 +390,37 @@
                                     }
 
                                 }, true);
-                                marker.on('click', function(e) {
-                                    var popup;
+                                // marker.on('click', function(e) {
+                                //     var popup;
 
-                                    if (scope.popupField) {
-                                        scope.popupText = scope.multiMarkers[mkey][scope.popupField];
-                                        popup = '<ul class="unstyled"><li ng-repeat="item in popupText">{{ item.text }}</li></ul>';
-                                    }
+                                //     if (scope.popupField) {
+                                //         scope.popupText = scope.multiMarkers[mkey][scope.popupField];
+                                //         popup = '<ul class="unstyled"><li ng-repeat="item in popupText">{{ item.text }}</li></ul>';
+                                //     }
 
 
-                                    if (scope.multiMarkersEdit) {
-                                        popup += '<button class="btn pull-right" ng-click="editMarkerWrapper(activeMarker)">edit</button>';
-                                        popup += '<div class="clearfix"></div>';
+                                //     if (scope.multiMarkersEdit) {
+                                //         popup += '<button class="btn pull-right" ng-click="editMarkerWrapper(activeMarker)">edit</button>';
+                                //         popup += '<div class="clearfix"></div>';
 
-                                    }
+                                //     }
 
-                                    markersDict[mkey].bindPopup(popup, {
-                                        closeButton: true
-                                    });
+                                //     markersDict[mkey].bindPopup(popup, {
+                                //         closeButton: true
+                                //     });
 
-                                    markersDict[mkey].openPopup();
+                                //     markersDict[mkey].openPopup();
 
-                                    scope.activeMarker = {
-                                        data: scope.multiMarkers[mkey],
-                                        marker: marker
-                                    };
+                                //     scope.activeMarker = {
+                                //         data: scope.multiMarkers[mkey],
+                                //         marker: marker
+                                //     };
 
-                                    $compile(angular.element(map._popup._contentNode))(scope);
-                                    //$compile(angular.element(map._popup._contentNode.childNodes))(scope);
-                                    scope.$digest();
+                                //     $compile(angular.element(map._popup._contentNode))(scope);
+                                //     //$compile(angular.element(map._popup._contentNode.childNodes))(scope);
+                                //     scope.$digest();
 
-                                });
+                                // });
 
                                 // scope.$watch('multiMarkers.' + mkey + '.answer', function(newValue) {
 

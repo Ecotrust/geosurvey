@@ -466,8 +466,9 @@ $scope.answerMultiSelect = function(question) {
 };
 
 $scope.editMarker = function (location) {
-    location.question.update=true;
-    $scope.confirmLocation(location.question);
+    alert("not yet implemented");
+    // location.question.update=true;
+    // $scope.confirmLocation(location.question);
 }
 
 $scope.removeLocation = function (location) {
