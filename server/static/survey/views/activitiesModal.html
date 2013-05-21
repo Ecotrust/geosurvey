@@ -1,17 +1,39 @@
-<div class="modal-header">
+<!-- <div class="modal-header">
     <h1>
-       Activities you selected
+       My Activites
     </h1>
-</div>
+</div> -->
 <div class="modal-body">
-    
-    <ul class="nav nav-tabs nav-stacked">
-        <li ng-show="hoisted_options.length == 0">No Results</li>
-        <li ng-show="hoisted_options.length > 0" ng-repeat="option in hoisted_options">{{ option.text }}</li>
+    <h2>My Activities</h2>
+    <ul class="unstyled">
+        <li ng-show="hoisted_options == 'unknown' || hoisted_options.length == 0">No Activities</li>
+        <li ng-hide="hoisted_options == 'unknown' || hoisted_options.length == 0" ng-repeat="option in hoisted_options">{{ option.text }}</li>
+    </ul>
+    <hr>
+    <h2>My Activity Locations</h2>
+    <ul class="unstyled" style="margin-left: 20px; margin-bottom:20px;">
+        <li ng-show="locations.length == 0">No Locations Mapped</li>
+        <li ng-show="locations.length > 0" ng-repeat="location in locations">
+            <i class="icon-map-marker icon-2x" style="color: {{ location.color }}; vertical-align: middle;"></i>
+            <div class="btn-toolbar" style="display: inline-block;">
+                <div class="btn-group">
+                    <a class="btn" ng-click="showLocation(location); close();"><i class="icon-search"></i>&nbsp; &nbsp;View</a>
+                    <a class="btn" ng-click="editLocation(location); close();"><i class="icon-edit"></i>&nbsp;&nbsp;Edit</a>
+                    <a class="btn" ng-click="removeLocation(location); close();"><i class="icon-trash"></i>&nbsp;&nbsp;Delete</a>
+                </div>
+            </div>
+            <ul style="margin-left: 55px;">
+                <li ng-show="location.answers.length == 0">No Activities</li>
+                <li ng-show="location.answers.length > 0" ng-repeat="answer in location.answers">
+                    {{ answer.text }}
+                </li>
+            </ul>
+            
+        </li>
     </ul>
 </div>
 <div class="modal-footer">
-    <button ng-click="close()" class="btn btn-primary">
+    <button ng-click="close()" class="btn btn-large btn-primary">
         Close
     </button>
 </div>

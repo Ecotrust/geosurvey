@@ -6,7 +6,7 @@
 
     var leafletDirective = angular.module('leaflet.directive', []);
 
-    leafletDirective.directive('leaflet', function($http, $log, $compile) {
+    leafletDirective.directive('leaflet', function($http, $log, $compile, $timeout) {
         return {
             restrict: 'EA',
             replace: true,
@@ -54,17 +54,20 @@
                 scope.$watch('zoomToResult', function (place) {
                     if (place) {
                         scope.zoomTo(place); 
+                        scope.zoomToResult = undefined;
                     }
                 });
 
                 scope.zoomTo = function(location) {
-                    map.setView({
-                        lat: location.lat,
-                        lng: location.lng
-                    }, location.zoom);
-                    if (marker) {
-                        marker.setLatLng(new L.LatLng(map.getCenter().lat, map.getCenter().lng));
-                    }
+                    $timeout(function () {
+                        map.setView({
+                            lat: location.lat,
+                            lng: location.lng
+                        }, location.zoom || 15);
+                        if (marker) {
+                            marker.setLatLng(new L.LatLng(map.getCenter().lat, map.getCenter().lng));
+                        }
+                    });
                 };
 
 
