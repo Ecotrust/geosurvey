@@ -1,6 +1,6 @@
 <div class="modal-header modal-zoomto">
-    <p class="question-title" ng-show="isInitialView || results.length == 0">Start by searching for a place at or near one of your activity locations.</p>
-    <p class="question-title" ng-show="!isInitialView && results.length > 0">Search for a place at or near your next activity location.</p>
+    <p class="question-title" ng-show="isInitialView || results.length == 0">Search for a location at or near your first activity.</p>
+    <p class="question-title" ng-show="!isInitialView && results.length > 0">Search for a location at or near your next activity.</p>
     <p>
       <form class="form-search">
         <div class="control-group">
@@ -24,6 +24,6 @@
 <div class="modal-footer">
     <p ng-show="results.length > 0">Showing {{ results.length }} of {{ meta.total_count }} results</p>
     <br ng-hide="results == 0">
-    <button ng-click="close()" ng-show="isInitialView" class="btn btn-primary">No thanks, I'll find it using the map</button>
-    <button ng-click="close()" ng-show="!isInitialView" class="btn btn-primary">Cancel</button>
+    <button ng-click="close()" ng-show="isInitialView" class="btn btn-large btn-primary">No thanks, I'll find it using the map</button>
+    <button ng-click="close()" ng-show="!isInitialView" class="btn btn-large btn-primary">Cancel</button>
 </div>

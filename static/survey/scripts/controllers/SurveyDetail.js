@@ -179,7 +179,11 @@ angular.module('askApp')
                     backdropClick: false,
                     templateUrl: '/static/survey/views/activitiesModal.html',
                     scope: {
-                        hoisted_options: $scope.getAnswer($scope.question.modalQuestion.hoist_answers.slug)
+                        hoisted_options: $scope.getAnswer($scope.question.modalQuestion.hoist_answers.slug),
+                        locations: $scope.locations,
+                        editLocation: $scope.editMarker,
+                        removeLocation: $scope.removeLocation,
+                        showLocation: $scope.showLocation,
                     },
                     controller: "ActivitiesCtrl"
                 }).open();
@@ -244,7 +248,8 @@ $scope.isAuthenticated = isAuthenticated;
 // landing page view
 $scope.landingView = '/static/survey/survey-pages/' + $routeParams.surveySlug + '/landing.html';
 
-$scope.zoomToResult = undefined;
+$scope.zoomModel = { zoomToResult: undefined };
+
 
 $scope.getAnswer = function(questionSlug) {
 
@@ -266,6 +271,7 @@ $scope.addMarker = function() {
 
 $scope.addLocation = function(location) {
     // var locations = _.without($scope.locations, $scope.activeMarker);
+    location.color = $scope.activeMarker.color;
     $scope.locations[_.indexOf($scope.locations, $scope.activeMarker)] = location;
     // $scope.locations = locations;
     // $scope.locations.push(location);
@@ -464,8 +470,12 @@ $scope.editMarker = function (location) {
     $scope.confirmLocation(location.question);
 }
 
-$scope.removeLocation = function() {
+$scope.removeLocation = function (location) {
     alert("not yet implemented");
+};
+
+$scope.showLocation = function (location) {
+    $scope.zoomModel.zoomToResult = location;
 };
 
 
