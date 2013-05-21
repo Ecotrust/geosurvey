@@ -16,13 +16,15 @@
                     <div class="pull-right">
                         <select ng-model="question.filterAnswer">
                             <option value="">all</option>
-                            <option value="{{answer.answer}}" ng-repeat="answer in getQuestionBySlug('state-or-province').answer_domain">{{answer.answer}} ({{answer.count}})</option>
+                            <option value="{{answer.answer}}" ng-repeat="answer in getQuestionBySlug('state-or-province').answer_domain">
+                                <strong>{{answer.answer}}</strong> ({{answer.count}})
+                            </option>
                         </select>
                     </div>
                     Distribution by {{ question.label }} for {{ question.filterAnswer || 'all' }}
                 </h4>
 
-                <distribution filter="question.filterAnswer" question="question"></distribution>
+                <distribution filter="question.filterAnswer" question="question" survey-slug="survey.slug"></distribution>
             </div>
         </div>
     </div>
