@@ -41,11 +41,14 @@
                 // }).addTo(map);
                 var ggl = new L.Google();
                 map.addLayer(ggl);
+                scope.basemap = ggl;
                 // Default center of the map
                 var point = new L.LatLng(45, -122);
                 map.setView(point, 5);
 
                 scope.activeMarker = null;
+
+
 
                 element.bind('$destroy', function() {
                     //$timeout.cancel(timeoutId);
@@ -53,7 +56,7 @@
 
                 scope.$watch('zoomToResult', function (place) {
                     if (place) {
-                        scope.zoomTo(place);
+                        scope.zoomTo(place); 
                         scope.zoomToResult = undefined;
                     }
                 });
@@ -126,6 +129,7 @@
                             if (marker && marker._icon && marker._icon.src) {
                                 marker._icon.src = '/static/survey/img/' + newValue;
                             }
+                            
                         });
                         scope.$watch('marker.visibility', function(newValue, oldValue) {
 
@@ -201,6 +205,7 @@
                     });
 
                     map.on('zoomend', function(e) {
+                        scope.basemap._reset()
                         scope.$apply(function(s) {
                             s.zoom = map.getZoom();
                             s.center.lat = map.getCenter().lat;

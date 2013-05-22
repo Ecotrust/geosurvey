@@ -80,10 +80,12 @@ L.Google = L.Class.extend({
 		var tilePane = this._map._container,
 			first = tilePane.firstChild;
 
+		
+
 		if (!this._container) {
 			this._container = L.DomUtil.create('div', 'leaflet-google-layer leaflet-top leaflet-left');
 			this._container.id = "_GMapContainer_" + L.Util.stamp(this);
-			this._container.style.zIndex = "auto";
+			// this._container.style.zIndex = "auto";
 		}
 
 		if (true) {
