@@ -269,7 +269,7 @@ form .btn-block {
 
 
 
-.leaflet-top {
+.map_wrapper .leaflet-top {
     z-index: 0 !important;
 }
 /**
