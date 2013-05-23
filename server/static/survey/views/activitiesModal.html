@@ -3,23 +3,27 @@
        My Activites
     </h1>
 </div> -->
-<div class="modal-body">
+<div class="modal-body activities-modal">
     <h2>My Activities</h2>
-    <ul class="unstyled">
+    <ul class="unstyled my-activities">
         <li ng-show="hoisted_options == 'unknown' || hoisted_options.length == 0">No Activities</li>
         <li ng-hide="hoisted_options == 'unknown' || hoisted_options.length == 0" ng-repeat="option in hoisted_options">{{ option.text }}</li>
     </ul>
     <hr>
     <h2>My Activity Locations</h2>
-    <ul class="unstyled" style="margin-left: 20px; margin-bottom:20px;">
+    <ul class="unstyled my-locations" style="margin-left: 20px; margin-bottom:20px;">
         <li ng-show="locations.length == 0">No Locations Mapped</li>
         <li ng-show="locations.length > 0" ng-repeat="location in locations">
-            <i class="icon-map-marker icon-2x" style="color: {{ location.color }}; vertical-align: middle;"></i>
-            <div class="btn-toolbar" style="display: inline-block;">
-                <div class="btn-group">
-                    <a class="btn" ng-click="showLocation(location); close();"><i class="icon-search"></i>&nbsp; &nbsp;View</a>
-                    <a class="btn" ng-click="editLocation(location); close();"><i class="icon-edit"></i>&nbsp;&nbsp;Edit</a>
-                    <a class="btn" ng-click="removeLocation(location); close();"><i class="icon-trash"></i>&nbsp;&nbsp;Delete</a>
+            <div class="row-fluid">
+                <div class="span1">
+                    <i class="icon-map-marker icon-2x" ng-style="{ color: location.color }" style="vertical-align: middle;"></i>
+                </div>
+                <div class="span11">    
+                    <div class="btn-group">
+                        <a class="btn" ng-click="showLocation(location); close();"><i class="icon-search"></i>&nbsp; &nbsp;View</a>
+                        <a class="btn" ng-click="editLocation(location); close();"><i class="icon-edit"></i>&nbsp;&nbsp;Edit</a>
+                        <a class="btn" ng-click="removeLocation(location); close();"><i class="icon-trash"></i>&nbsp;&nbsp;Delete</a>
+                    </div>
                 </div>
             </div>
             <ul style="margin-left: 55px;">
@@ -28,7 +32,6 @@
                     {{ answer.text }}
                 </li>
             </ul>
-            
         </li>
     </ul>
 </div>
