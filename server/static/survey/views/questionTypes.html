@@ -97,7 +97,7 @@
                     <h3>Activities You Selected</h3>
                     <ul class="hoisted">
                         <li 
-                          ng-click="option.checked = ! option.checked"
+                          ng-click="$parent.onMultiSelectClicked(option, $parent.question)"
                           ng-repeat="option in question.hoisted_options"
                           ng-class="{'todo-done': option.checked }">
                           <!-- <div class="todo-icon fui-man-24"></div> -->
@@ -114,7 +114,7 @@
                 <h3 ng-show="question.hoisted_options.length > 0">Other Activities</h3>
                 <ul class="choices">
                   <li 
-                    ng-click="option.checked = ! option.checked"
+                    ng-click="$parent.onMultiSelectClicked(option, $parent.question)"
                     ng-repeat="option in question.options"
                     ng-class="{'todo-done': option.checked }">
                     <!-- <div class="todo-icon fui-man-24"></div> -->
@@ -127,8 +127,9 @@
                   </li>
                   <li 
                     ng-show="question.allow_other"
-                    ng-click="otherOption.checked = ! otherOption.checked"
-                    ng-class="{'todo-done': otherOption.checked }">
+                    ng-click="onMultiSelectClicked(question.otherOption, question)"
+                    ng-class="{'todo-done': question.otherOption.checked }"
+                    ng-model="question.otherAnswer.text">
                     <!-- <div class="todo-icon fui-man-24"></div> -->
                     <div class="todo-content">
                       <h4 class="todo-name">
@@ -140,8 +141,8 @@
                 </ul>
               </div>
 
-            <input class="input-block-level" type="text" placeholder="Other Option" ng-show="otherOption.checked" ng-model="question.otherAnswer" autofocus/> 
-            <button type="submit" class="btn btn-primary btn-large btn-block" ng-hide="dialog">continue</button>
+            <input class="input-block-level" type="text" placeholder="Other Option" ng-show="question.otherOption.checked" ng-model="question.otherAnswer" autofocus/> 
+            <button type="submit" class="btn btn-large btn-block" ng-hide="dialog" ng-class="{'btn-primary': isAnswerValid, 'disabled': !isAnswerValid }">continue</button>
         </form>
     </div>
     <div ng-switch-when="map-multipoint">
