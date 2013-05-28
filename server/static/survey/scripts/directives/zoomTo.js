@@ -12,7 +12,7 @@ function ZoomToCtrl($scope, dialog, $http, $timeout) {
         $scope.stateParam = '&state__in=' + $scope.states.split(',').join('&state__in=')
     }
 
-    $scope.$watch('searchTerm', function (newValue) {    
+    $scope.$watch('searchTerm', function (newValue) {
         if (stop) {
             $timeout.cancel(stop);
         }
@@ -23,7 +23,6 @@ function ZoomToCtrl($scope, dialog, $http, $timeout) {
                 if ($scope.states) {
                     url = url + '&state__in=' + $scope.states;
                 }
-                console.log(url);
                 $http.get(url  + '&name__icontains='+ $scope.searchTerm).success(function(data) {
                     $scope.results = data.objects;
                     $scope.meta = data.meta;
