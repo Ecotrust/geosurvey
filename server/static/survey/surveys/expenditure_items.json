@@ -1,0 +1,58 @@
+[
+    {
+        "text": "Parking",
+        "label": "parking"
+    },
+    {
+        "text": "Car fuel",
+        "label": "car-fuel"
+    },
+    {
+        "text": "Airline flight",
+        "label": "airline-flight"
+    },
+    {
+        "text": "Food and beverages from a store",
+        "label": "food-and-beverages-from-a-store"
+    },
+    {
+        "text": "Food and beverages at a restaurant or bar",
+        "label": "food-and-beverages-at-a-restaurant-or-bar"
+    },
+    {
+        "text": "Shopping and souvenirs (t-shirts, posters, gifts, etc.)",
+        "label": "shopping-and-souvenirs"
+    },
+    {
+        "text": "Sundries (sunscreen, surf wax, motion sickness pills, batteries, camera data cards, etc.)",
+        "label": "sundries"
+    },
+    {
+        "text": "Car rental",
+        "label": "car-rental"
+    },
+    {
+        "text": "Dive equipment purchase/rental and airfills",
+        "label": "dive-equipment-purchase-rental-airfills"
+    },
+    {
+        "text": "Equipment purchase/rental (surfboard, bike, kayak, stand up paddle, etc.)",
+        "label": "other-equipment-purchase-rental"
+    },
+    {
+        "text": "Lodging (if you stayed overnight)",
+        "label": "lodging"
+    },
+    {
+        "text": "Charter fee (whale watching, etc.)",
+        "label": "charter-fee"
+    },
+    {
+        "text": "Museum, aquarium, or other entrance fee",
+        "label": "entrance-fees-museum-aquarium-or-other"
+    },
+    {
+        "text": "Lessons, clinics, camps",
+        "label": "lessons-clinics-camps"
+    }
+]
