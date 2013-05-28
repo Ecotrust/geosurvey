@@ -7,8 +7,7 @@
         </div>
     </div>
     <a href="/admin/survey/question/{{question.id}}/" ng-show="isAuthenticated">edit</a>
-    <h2 class="question-title" ng-hide="question.type == 'info' || question.type == 'map-multipoint'" >
-        {{ question.displayTitle }}
+    <h2 class="question-title" ng-bind-html-unsafe="question.displayTitle" ng-hide="question.type == 'info' || question.type == 'map-multipoint'" >
         
     </h2>
 
