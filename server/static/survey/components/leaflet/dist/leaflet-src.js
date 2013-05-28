@@ -942,8 +942,8 @@ L.DomUtil = {
 				el.style.WebkitBackfaceVisibility = 'hidden';
 			}
 		} else {
-			el.style.left = point.x + 'px';
-			el.style.top = point.y + 'px';
+			el.style.left = point.x ? point.x: 0 + 'px';
+			el.style.top = point.y ? point.y: 0 + 'px';
 		}
 	},
 
@@ -3228,7 +3228,12 @@ L.Marker = L.Class.extend({
 	},
 
 	_updateZIndex: function (offset) {
-		this._icon.style.zIndex = this._zIndex + offset;
+		if (this._zIndex) {
+			this._icon.style.zIndex = this._zIndex + offset;	
+		} else {
+			this._icon.style.zIndex = 0 + offset;
+		}
+		
 	},
 
 	_animateZoom: function (opt) {
