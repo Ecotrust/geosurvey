@@ -47,6 +47,9 @@ angular.module('askApp')
 
         $scope.nextQuestionPath = $scope.getNextQuestionPath();
 
+        /* Specific to single and multi select for now. */
+        $scope.isAnswerValid = $scope.question && !$scope.question.required;
+
         // Fill options list.
         if ($scope.question && $scope.question.options_json && $scope.question.options_json.length > 0 && !$scope.question.options_from_previous_answer) {
             // Using the provided json file to set options.
@@ -309,6 +312,13 @@ $scope.confirmLocation = function(question) {
         },
         error: function(arg1, arg2) {
             debugger;
+        },
+        cancel: function () {
+            var locations = _.without($scope.locations, $scope.activeMarker);
+            $scope.locations = locations;
+            $scope.activeMarker = false;
+            $scope.map.marker.visibility = true;
+            $scope.dialog.close();
         }
     });
     $scope.dialog.options.scope.dialog = $scope.dialog;
@@ -317,10 +327,9 @@ $scope.confirmLocation = function(question) {
 
 
 $scope.cancelConfirmation = function() {
-    var locations = _.without($scope.locations, $scope.activeMarker);
-    $scope.locations = locations;
-    $scope.activeMarker = false;
-    $scope.map.marker.visibility = true;
+    if ($scope.dialog) {
+        $scope.dialog.options.cancel();
+    }
 }
 
 $scope.getNextQuestion = function() {
@@ -433,6 +442,46 @@ $scope.answerQuestion = function(answer, otherAnswer) {
     }
 };
 
+$scope.onMultiSelectClicked = function(option, question) {
+    var hoistedAnswers,
+        answers, 
+        isOtherAnswerValid = true;
+
+    option.checked = !option.checked;
+
+    if (!question.required) {
+        return;
+    }
+
+    answers = _.filter(question.options, function(option) {
+        return option.checked;
+    });
+
+    if (question.hoisted_options) {
+        hoistedAnswers = _.filter(question.hoisted_options, function(option) {
+            return option.checked;
+        });
+        answers = answers.concat(hoistedAnswers);
+    }
+
+    if (question.allow_other && question.otherOption && question.otherOption.checked) {
+        // let's make sure the other answer isn't blank
+        if (question.otherAnswer === null || question.otherAnswer.length < 1) {
+            isOtherAnswerValid = false;
+        } else {
+            answers.push(question.otherAnswer);
+        }
+    }
+
+    // enable/disable continue button
+    if (answers.length > 0 && isOtherAnswerValid) {
+        $scope.isAnswerValid = true;
+    } else {
+        $scope.isAnswerValid = false;
+    }
+};
+
+
 /**
  * Filters out unselected items and submits an array of the text portion of the
  * selected options.
@@ -441,6 +490,10 @@ $scope.answerQuestion = function(answer, otherAnswer) {
  */
 $scope.answerMultiSelect = function(question) {
     var answers;
+
+    if (!$scope.isAnswerValid) {
+        return;
+    }
     
     if (question.hoisted_options) {
         question.options = question.options.concat(question.hoisted_options);
@@ -475,13 +528,9 @@ $scope.showLocation = function (location) {
     $scope.zoomModel.zoomToResult = location;
 };
 
-
-/* Specific to single select for now. */
-$scope.isAnswerValid = false;
-
 $scope.onSingleSelectClicked = function(option, question) {
 
-    // turn of all other options
+    // turn off all other options
     _.each(_.without(question.options, option), function(option) {
         option.checked = false;
     });
@@ -506,11 +555,19 @@ $scope.onSingleSelectClicked = function(option, question) {
 };
 
 $scope.$watch('question.otherAnswer', function (newValue) {
-    if ($scope.question && $scope.question.otherOption && $scope.question.otherOption.checked && $scope.question.otherAnswer && $scope.question.otherAnswer.length > 0) {
-        $scope.isAnswerValid = true;
     
+    if ($scope.question && $scope.question.required) {
+
+        if ($scope.question.allow_other && $scope.question.otherOption && $scope.question.otherOption.checked && 
+            $scope.question.otherAnswer && $scope.question.otherAnswer.length > 0) {
+            
+            $scope.isAnswerValid = true;
+        }
+        else {
+            $scope.isAnswerValid = false;
+        }
     } else {
-        $scope.isAnswerValid = false;
+        $scope.isAnswerValid = true;
     }
 });
 
