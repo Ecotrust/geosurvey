@@ -94,7 +94,21 @@ angular.module('askApp')
                 var groups = _.groupBy(data, function(item) {
                     return item.group;
                 }),
-                    previousAnswers = _.pluck($scope.answer, 'text');
+                    previousAnswers = [];
+                //     debugger;
+                // if (_.isArray($scope.answer)) {
+                //     previousAnswers = _.pluck($scope.answer, 'text');
+                // } else {
+                //     _.each(JSON.parse($scope.answer), function (location) {
+                //         if ($scope.activeMarker.lat === location.lat && $scope.activeMarker.lng === location.lng) {
+                //             _.each(location.answers, function (answer) {
+                //                 previousAnswers.push(answer.text);
+                //             });                            
+                //         }
+                //     });
+                // }
+
+                previousAnswers = _.pluck($scope.activeMarker.answers, 'text');
 
                 if ($scope.question.randomize_groups) {
                     $scope.question.options = _.flatten(_.shuffle(_.toArray(groups)));
@@ -109,17 +123,27 @@ angular.module('askApp')
                         var result = _.find($scope.activeMarker.answers, function(answer) {
                             return option.label === answer.label;
                         });
-                        option.checked = !_.isUndefined(result);
+                        option.checked = !_.isUndefined(result);            
                     });
                 }
-
+                
                 // Hoist options.
                 if ($scope.question && $scope.question.hoist_answers) {
                     $scope.question.hoisted_options = [];
+
                     _.each($scope.getAnswer($scope.question.hoist_answers.slug), function(option) {
                         var newOption = {};
+
                         angular.extend(newOption, option);
-                        newOption.checked =  _.contains(previousAnswers, option.text);;
+                        
+                        if (_.contains(previousAnswers, option.text)) {
+                            newOption.checked = true;
+                        } else {
+                            newOption.checked = false;
+                        }
+                    
+                        
+
                         $scope.question.hoisted_options.unshift(newOption);
                         $scope.question.options = _.filter($scope.question.options, function(item) {
                             return item.label !== option.label;
@@ -128,7 +152,14 @@ angular.module('askApp')
                 }
 
                 _.each($scope.question.options, function (option) {
-                    option.checked = _.contains(previousAnswers, option.text);
+                    
+                    if (_.contains(previousAnswers, option.text)) {
+                        option.checked = true;
+                    } else {
+                        option.checked = false;
+                    }
+
+
                 });
 
 
@@ -228,8 +259,13 @@ angular.module('askApp')
 
         // map 
         if ($scope.question && $scope.question.type === 'map-multipoint') {
-            $scope.locations = [];
             $scope.activeMarker = false;
+
+            if ($scope.answer === 'unknown') {
+                $scope.locations = [];
+            } else {
+                $scope.locations = JSON.parse($scope.answer);
+            }
 
             $scope.showActivities = function() {
                 $dialog.dialog({
@@ -368,6 +404,7 @@ angular.module('askApp')
                 removeLocation: $scope.removeLocation
             },
             success: function(question, answer) {
+                debugger;
                 if (question.update) {
                     $scope.locations[_.indexOf($scope.locations, $scope.activeMarker)].answers = answer;
                 } else {
@@ -407,7 +444,11 @@ angular.module('askApp')
     }
 
     $scope.editMarker = function(location) {
-        location.question.update = true;
+        if (!location.question) {
+            location.question = {};
+            angular.extend(location.question, $scope.question.modalQuestion);
+        }
+        location.question.update = true;    
         $scope.activeMarker = location;
         $scope.confirmLocation(location.question);
     };

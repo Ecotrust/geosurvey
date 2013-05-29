@@ -201,9 +201,8 @@ class Response(caching.base.CachingMixin, models.Model):
                 self.answer = ", ".join(answers)
             if self.question.type in ['map-multipoint'] and self.id:
                 answers = []
-                for point in simplejson.loads(self.answer_raw):
-                    for answer in point['answers']:
-                        answers.append("%s,%s: %s" % (point['lat'], point['lng'] , answer['text']))
+                for point in simplejson.loads(simplejson.loads(self.answer_raw)):
+                        answers.append("%s,%s: %s" % (point['lat'], point['lng'] , point['answers']))
                         #location = Location(answer=answer['text'], lat=point['lat'], lng=point['lng'], response=self)
                         #location.save()
                 self.answer = ", ".join(answers)
