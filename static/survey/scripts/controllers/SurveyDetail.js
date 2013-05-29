@@ -64,6 +64,17 @@ angular.module('askApp')
                 }
 
 
+                // Set answers for editing a marker.
+                if ($scope.activeMarker && $scope.activeMarker.answers) {
+                    _.each($scope.question.options, function (option, index, list) {
+                        var result = _.find($scope.activeMarker.answers, function (answer) {
+                            return option.label === answer.label;
+                        });
+                        option.checked = !_.isUndefined(result);
+                    });
+                }
+
+                // Hoist options.
                 if ($scope.question && $scope.question.hoist_answers) {
                     $scope.question.hoisted_options = [];
                     _.each($scope.getAnswer($scope.question.hoist_answers.slug), function (option) {
@@ -75,6 +86,10 @@ angular.module('askApp')
                             return item.label !== option.label;
                         });
                     });
+                }
+
+                if ($scope.question.type === "multi-select") {
+                    $scope.isAnswerValid = $scope.validateMultiSelect($scope.question);
                 }
             });
 
@@ -295,18 +310,23 @@ $scope.confirmLocation = function(question) {
         templateUrl: '/static/survey/views/locationActivitiesModal.html',
         controller: 'SurveyDetailCtrl',
         scope: {
-            question: question? question: $scope.question.modalQuestion
+            question: question? question: $scope.question.modalQuestion,
+            activeMarker: $scope.activeMarker,
+            removeLocation: $scope.removeLocation
         },
         success: function(question, answer) {
             if (question.update) {
-                debugger;
+                $scope.locations[_.indexOf($scope.locations, $scope.activeMarker)].answers = answer;
+            } else {
+                $scope.addLocation({
+                    lat: $scope.map.marker.lat,
+                    lng: $scope.map.marker.lng,
+                    question: question,
+                    answers: answer
+                });
             }
-            $scope.addLocation({
-                lat: $scope.map.marker.lat,
-                lng: $scope.map.marker.lng,
-                question: question,
-                answers: answer
-            });
+            $scope.activeMarker = false;
+            question.update = false;
             $scope.dialog.close();
             $scope.dialog = null;
         },
@@ -314,23 +334,43 @@ $scope.confirmLocation = function(question) {
             debugger;
         },
         cancel: function () {
-            var locations = _.without($scope.locations, $scope.activeMarker);
-            $scope.locations = locations;
+            $scope.removeLocation($scope.activeMarker);
             $scope.activeMarker = false;
-            $scope.map.marker.visibility = true;
+            if (question) {
+                question.update = false;
+            }
             $scope.dialog.close();
+            $scope.dialog = null;
         }
     });
     $scope.dialog.options.scope.dialog = $scope.dialog;
     $scope.dialog.open();
 }
 
-
 $scope.cancelConfirmation = function() {
     if ($scope.dialog) {
         $scope.dialog.options.cancel();
     }
 }
+
+$scope.editMarker = function (location) {
+    location.question.update = true;
+    $scope.activeMarker = location;
+    $scope.confirmLocation(location.question);
+};
+
+$scope.removeLocation = function (location) {
+    // This is used for both canceling a new location and deleting an 
+    // existing location when in edit mode.
+    var locations = _.without($scope.locations, location);
+    $scope.locations = locations;
+};
+
+$scope.showLocation = function (location) {
+    $scope.zoomModel.zoomToResult = location;
+};
+
+
 
 $scope.getNextQuestion = function() {
     // should return the slug of the next question
@@ -443,14 +483,17 @@ $scope.answerQuestion = function(answer, otherAnswer) {
 };
 
 $scope.onMultiSelectClicked = function(option, question) {
+    option.checked = !option.checked;
+    $scope.isAnswerValid = $scope.validateMultiSelect(question);
+};
+
+$scope.validateMultiSelect = function (question) {
     var hoistedAnswers,
-        answers, 
+        answers,
         isOtherAnswerValid = true;
 
-    option.checked = !option.checked;
-
     if (!question.required) {
-        return;
+        return true;
     }
 
     answers = _.filter(question.options, function(option) {
@@ -465,8 +508,8 @@ $scope.onMultiSelectClicked = function(option, question) {
     }
 
     if (question.allow_other && question.otherOption && question.otherOption.checked) {
-        // let's make sure the other answer isn't blank
         if (question.otherAnswer === null || question.otherAnswer.length < 1) {
+            // other answer is blank, report back as invalid
             isOtherAnswerValid = false;
         } else {
             answers.push(question.otherAnswer);
@@ -474,13 +517,8 @@ $scope.onMultiSelectClicked = function(option, question) {
     }
 
     // enable/disable continue button
-    if (answers.length > 0 && isOtherAnswerValid) {
-        $scope.isAnswerValid = true;
-    } else {
-        $scope.isAnswerValid = false;
-    }
+    return answers.length > 0 && isOtherAnswerValid;
 };
-
 
 /**
  * Filters out unselected items and submits an array of the text portion of the
@@ -512,20 +550,6 @@ $scope.answerMultiSelect = function(question) {
     }
     
     $scope.answerQuestion(answers);
-};
-
-$scope.editMarker = function (location) {
-    alert('not yet implemented');
-    // location.question.update=true;
-    // $scope.confirmLocation(location.question);
-};
-
-$scope.removeLocation = function (location) {
-    alert('not yet implemented');
-};
-
-$scope.showLocation = function (location) {
-    $scope.zoomModel.zoomToResult = location;
 };
 
 $scope.onSingleSelectClicked = function(option, question) {
