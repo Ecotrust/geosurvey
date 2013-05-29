@@ -237,7 +237,7 @@ form .btn-block {
 }
 .modal-body {
     padding-bottom: 73px;
-    height: 400px;
+    max-height: 400px;
     overflow:scroll;
 }
 
