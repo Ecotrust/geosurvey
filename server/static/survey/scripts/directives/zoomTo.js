@@ -56,7 +56,8 @@ angular.module('askApp')
         transclude: true,
         scope: {
             states: "=states",
-            zoomToResult: "=zoomtoresult"
+            zoomToResult: "=zoomtoresult",
+            numLocations: "=numlocations"
             
         },
         link: function postLink(scope, element, attrs) {
@@ -70,7 +71,8 @@ angular.module('askApp')
                     backdropClick: false,
                     scope: {
                         states: scope.states,
-                        isInitialView: scope.isInitialView
+                        isInitialView: scope.isInitialView,
+                        numLocations: scope.numLocations
                     },
                     templateUrl: '/static/survey/views/zoomToModal.html',
                     controller: 'ZoomToCtrl'

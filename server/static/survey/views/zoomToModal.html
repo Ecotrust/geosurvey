@@ -1,6 +1,6 @@
 <div class="modal-header modal-zoomto">
-    <p class="question-title" ng-show="isInitialView || results.length == 0">Search for a location at or near your first activity.</p>
-    <p class="question-title" ng-show="!isInitialView && results.length > 0">Search for a location at or near your next activity.</p>
+    <p class="question-title" ng-show="numLocations == 0">Search for a location at or near your first activity.</p>
+    <p class="question-title" ng-hide="numLocations == 0">Search for a location at or near your next activity.</p>
       <form class="form-search">
         <div class="control-group">
             <label ng-show="!showSpinner" for="search-query"><i class='icon-search icon-2x'></i></label>
