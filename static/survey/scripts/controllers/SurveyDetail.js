@@ -24,6 +24,13 @@ function ActivitiesCtrl($scope, dialog) {
     };
 }
 
+function MapContinueDialogCtrl($scope, dialog, remainingActivities){
+    $scope.remainingActivities = remainingActivities;
+    $scope.close = function(result){
+        dialog.close(result);
+    };
+}
+
 angular.module('askApp')
     .controller('SurveyDetailCtrl', function($scope, $routeParams, $http, $location, $dialog, $interpolate, $timeout, offlineSurvey) {
 
@@ -627,11 +634,27 @@ $scope.answerAutoSingleSelect = function(answer, otherAnswer) {
     }
 };
 
-$scope.answerMapQuestion = function(locations) {
+$scope.answerMapQuestion = function (locations) {
 
-    var msgbox = $dialog.messageBox('Are you done mapping your activity locations?', 'HTML <strong>styling?</strong>', [{label:'Yes', result: 'yes'},{label:'No', result: 'no'}]);
-    msgbox.open().then(function(result){
-        if(result === 'yes') {
+    // Get a list of the activities that have not yet been mapped.
+    var selectedActivities = $scope.getAnswer($scope.question.modalQuestion.hoist_answers.slug);
+    // todo: filter out activities that have already been mapped.
+    remainingActivities = selectedActivities;
+
+    var d = $dialog.dialog({
+        backdrop: true,
+        keyboard: true,
+        backdropClick: false,
+        templateUrl: '/static/survey/views/mapContinueModal.html',
+        controller: 'MapContinueDialogCtrl',
+        resolve: { remainingActivities: function () {
+                return angular.copy(remainingActivities); 
+            }
+        }
+    });
+    
+    d.open().then(function (result) {
+        if (result == 'yes') {
             $scope.answerQuestion(locations);
         }
     });
