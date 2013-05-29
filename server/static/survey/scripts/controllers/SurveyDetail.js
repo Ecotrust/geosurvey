@@ -627,4 +627,14 @@ $scope.answerAutoSingleSelect = function(answer, otherAnswer) {
     }
 };
 
+$scope.answerMapQuestion = function(locations) {
+
+    var msgbox = $dialog.messageBox('Are you done mapping your activity locations?', 'HTML <strong>styling?</strong>', [{label:'Yes', result: 'yes'},{label:'No', result: 'no'}]);
+    msgbox.open().then(function(result){
+        if(result === 'yes') {
+            $scope.answerQuestion(locations);
+        }
+    });
+};
+
 });
