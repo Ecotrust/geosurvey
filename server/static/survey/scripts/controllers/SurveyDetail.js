@@ -277,10 +277,11 @@ $scope.getAnswer = function(questionSlug) {
     }
 };
 
-$scope.addMarker = function() {
+$scope.addMarker = function(color) {
     $scope.activeMarker = {
         lat: $scope.map.marker.lat,
-        lng: $scope.map.marker.lng
+        lng: $scope.map.marker.lng,
+        color: color
     };
 
     $scope.locations.push($scope.activeMarker);
