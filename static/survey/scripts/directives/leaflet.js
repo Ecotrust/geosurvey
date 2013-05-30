@@ -347,7 +347,7 @@
                             availableColors = angular.copy(colorPalette);
                         }                        
                     });
-
+                    debugger;
                     return _.first(availableColors);
                 };
 

@@ -74,9 +74,10 @@ angular.module('askApp')
         } else if ($scope.question.options.length) {
             $scope.answer = $scope.getAnswer($routeParams.questionSlug);
             // check to make sure answer is in options
-            if (! _.isArray($scope.answer)) {
+            if ($scope.answer !== 'unknown' && ! _.isArray($scope.answer)) {
                 $scope.answer = [$scope.answer];
             }
+            debugger;
             _.each($scope.answer, function (answer) {
                 if (! answer.other) {
 
@@ -111,8 +112,13 @@ angular.module('askApp')
                 
                 if ($scope.question.update && $scope.activeMarker) {
                     previousAnswers = _.pluck($scope.activeMarker.answers, 'text');    
-                } else {
-                    previousAnswers = _.pluck($scope.answer, 'text');    
+                } else if ($scope.answers !== 'unknown') {
+                    if (_.isArray($scope.answers)) {
+                        previousAnswers = _.pluck($scope.answer, 'text');        
+                    } else {
+                        previousAnswers = [$scope.answer.text];
+                    }
+                    
                 }
                 
                 if ($scope.question.randomize_groups) {
@@ -318,12 +324,16 @@ angular.module('askApp')
             // Prep row initial row data, each row containing values.
             // for activityLabel, activityText, cost and numPeople.
             $scope.question.options = $scope.getAnswer($scope.question.options_from_previous_answer);
+            if ($scope.answer !== 'unknown') {
+                $scope.answer = _.groupBy($scope.answer, 'activityText')
+            }
+            
             _.each($scope.question.options, function(value, key, list) {
                 list[key] = {
                     activitySlug: value.label,
                     activityText: value.text,
-                    cost: undefined,
-                    numPeople: undefined
+                    cost: $scope.answer[value.text] ? $scope.answer[value.text][0].cost: undefined,
+                    numPeople: $scope.answer[value.text] ? $scope.answer[value.text][0].numPeople: undefined
                 };
             });
 
@@ -438,6 +448,7 @@ angular.module('askApp')
                     $scope.addLocation({
                         lat: $scope.map.marker.lat,
                         lng: $scope.map.marker.lng,
+                        color: $scope.map.marker.color,
                         question: question,
                         answers: answer
                     });
