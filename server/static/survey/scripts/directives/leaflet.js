@@ -354,7 +354,7 @@
                 if (attrs.multimarkers) {
                     var markersDict = [];
                     scope.$watch('multiMarkers.length', function(newMarkerList) {
-
+  
                         for (var mkey in scope.multiMarkers) {
                             (function(mkey) {
                                 var markDat = scope.multiMarkers[mkey];
