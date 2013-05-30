@@ -311,7 +311,7 @@
                     if (!scope.isZoomedIn()) {
                         scope.showZoomAlert = true;
                     } else {
-                        scope.addMarker(marker.data);
+                        scope.addMarker(scope.getNextColor());
                         scope.showZoomAlert = false;
                     }
                     scope.updateCrosshair();
@@ -320,49 +320,48 @@
                 scope.editMarkerWrapper = function(marker) {
                     marker.marker.closePopup();
                     scope.editMarker(marker.data);
-                }
+                };
 
+                scope.getNextColor = function () {
+                    var availableColors = [],
+                        colorPalette = [
+                        'red',
+                        'orange',
+                        'green',
+                        'darkgreen',
+                        'darkred',
+                        'blue',
+                        'darkblue',
+                        'purple',
+                        'darkpurple',
+                        'cadetblue'
+                    ];
+
+                    availableColors = angular.copy(colorPalette);
+                    _.each(scope.multiMarkers, function (marker) {
+                        if (_.has(marker, 'color')) {
+                            availableColors = _.without(availableColors, marker.color);
+                        }
+                        if (availableColors.length == 0) {
+                            // Recyle the colors if we run out.
+                            availableColors = angular.copy(colorPalette);
+                        }                        
+                    });
+
+                    return _.first(availableColors);
+                };
 
                 if (attrs.multimarkers) {
                     var markersDict = [];
                     scope.$watch('multiMarkers.length', function(newMarkerList) {
-                        var colors = [
-                            'red',
-                            'orange',
-                            'green',
-                            'darkred',
-                            'blue',
-                            'darkblue',
-                            'darkgreen',
-                            'purple',
-                            'darkpurple',
-                            'cadetblue',
-                            'red',
-                            'orange',
-                            'green',
-                            'darkred',
-                            'blue',
-                            'darkblue',
-                            'purple',
-                            'darkgreen',
-                            'darkpurple',
-                            'cadetblue',
-                            'red',
-                            'orange',
-                            'green',
-                            'darkgreen',
-                            'darkred',
-                            'blue',
-                            'darkblue',
-                            'purple',
-                            'darkpurple',
-                            'cadetblue'];
-
+  
                         for (var mkey in scope.multiMarkers) {
                             (function(mkey) {
                                 var markDat = scope.multiMarkers[mkey];
                                 if (markDat.lat && markDat.lat) {
-                                    var color = colors.shift();
+
+                                    var color = markDat.color;
+
                                     var marker = new L.marker(
                                     scope.multiMarkers[mkey], {
                                         draggable: markDat.draggable ? true : false,
@@ -371,7 +370,7 @@
                                             color: color
                                         })
                                     });
-                                    markDat.color = color;
+                                    markDat.color = color;    
                                     marker.closePopup();
                                     marker.on('dragstart', function(e) {
                                         draggingMarker = true;

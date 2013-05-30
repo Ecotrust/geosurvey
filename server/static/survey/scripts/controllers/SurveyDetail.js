@@ -74,7 +74,7 @@ angular.module('askApp')
         } else if ($scope.question.options.length) {
             $scope.answer = $scope.getAnswer($routeParams.questionSlug);
             // check to make sure answer is in options
-            if ($scope.answer && $scope.answer !== 'unknown' && _.contains(_.pluck($scope.question.options, 'text'), $scope.answer.text)) {
+            if ($scope.answer && _.contains(_.pluck($scope.question.options, 'text'), $scope.answer.text)) {
 
                 _.each($scope.question.options, function(option) {
                     if ($scope.answer.text === option.text || $scope.answer.text === option.name ) {
@@ -82,6 +82,8 @@ angular.module('askApp')
                         $scope.isAnswerValid = true;
                     }
                 });
+            } else if ($scope.answer == 'unknown') {
+                // do nothing
             } else {
                 // otherwise assume it is other
                 $scope.question.otherOption = {
@@ -370,10 +372,11 @@ angular.module('askApp')
         }
     };
 
-    $scope.addMarker = function() {
+    $scope.addMarker = function(color) {
         $scope.activeMarker = {
             lat: $scope.map.marker.lat,
-            lng: $scope.map.marker.lng
+            lng: $scope.map.marker.lng,
+            color: color
         };
 
         $scope.locations.push($scope.activeMarker);
@@ -418,7 +421,6 @@ angular.module('askApp')
                 removeLocation: $scope.removeLocation
             },
             success: function(question, answer) {
-                debugger;
                 if (question.update) {
                     $scope.locations[_.indexOf($scope.locations, $scope.activeMarker)].answers = answer;
                 } else {
@@ -435,7 +437,7 @@ angular.module('askApp')
                 $scope.dialog = null;
             },
             error: function(arg1, arg2) {
-                debugger;
+                alert('error confirming');
             },
             cancel: function() {
                 $scope.removeLocation($scope.activeMarker);
@@ -735,7 +737,13 @@ $scope.answerMapQuestion = function (locations) {
     // Get a list of the activities that have not yet been mapped.
     var selectedActivities = $scope.getAnswer($scope.question.modalQuestion.hoist_answers.slug);
     // todo: filter out activities that have already been mapped.
-    remainingActivities = selectedActivities;
+    
+
+    var remainingActivities = _.difference(
+        _.pluck(selectedActivities, 'text'),
+        _.flatten(_.map(locations, function (location) {
+            return _.pluck(location.answers, 'text') 
+        })));;
 
     var d = $dialog.dialog({
         backdrop: true,
