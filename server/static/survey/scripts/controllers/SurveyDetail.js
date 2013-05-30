@@ -74,7 +74,7 @@ angular.module('askApp')
         } else if ($scope.question.options.length) {
             $scope.answer = $scope.getAnswer($routeParams.questionSlug);
             // check to make sure answer is in options
-            if ($scope.answer && _.contains(_.pluck($scope.question.options, 'text'), $scope.answer.text)) {
+            if ($scope.answer && $scope.answer !== 'unknown' && _.contains(_.pluck($scope.question.options, 'text'), $scope.answer.text)) {
 
                 _.each($scope.question.options, function(option) {
                     if ($scope.answer.text === option.text || $scope.answer.text === option.name ) {
@@ -102,21 +102,13 @@ angular.module('askApp')
                     return item.group;
                 }),
                     previousAnswers = [];
-                //     debugger;
-                // if (_.isArray($scope.answer)) {
-                //     previousAnswers = _.pluck($scope.answer, 'text');
-                // } else {
-                //     _.each(JSON.parse($scope.answer), function (location) {
-                //         if ($scope.activeMarker.lat === location.lat && $scope.activeMarker.lng === location.lng) {
-                //             _.each(location.answers, function (answer) {
-                //                 previousAnswers.push(answer.text);
-                //             });                            
-                //         }
-                //     });
-                // }
-
-                previousAnswers = _.pluck($scope.activeMarker.answers, 'text');
-
+                
+                if ($scope.question.update && $scope.activeMarker) {
+                    previousAnswers = _.pluck($scope.activeMarker.answers, 'text');    
+                } else {
+                    previousAnswers = _.pluck($scope.answer, 'text');    
+                }
+                
                 if ($scope.question.randomize_groups) {
                     $scope.question.options = _.flatten(_.shuffle(_.toArray(groups)));
                 } else {
@@ -212,9 +204,24 @@ angular.module('askApp')
 
         if ($scope.question && $scope.question.options_from_previous_answer) {
             $scope.question.options = $scope.getAnswer($scope.question.options_from_previous_answer);
+
             _.each($scope.question.options, function(item) {
-                item.checked = false;
+                if ($scope.answer) {
+                    if (_.isArray($scope.answer)) {
+                        
+                    } else {
+                        if (item.text === $scope.answer.text) {
+                            item.checked = true;
+                            $scope.isAnswerValid = true;
+                        } else {
+                            item.checked = false;
+                        }
+                    }
+                } else {
+                    item.checked = false;
+                }
             });
+
         }
 
         if ($scope.question) {
@@ -681,7 +688,8 @@ angular.module('askApp')
     };
 
     $scope.$watch('question.otherAnswer', function(newValue) {
-        if ($scope.question && $scope.question.required && !$scope.answer) {
+
+        if ($scope.question && $scope.question.required && ! $scope.answer) {
             if ($scope.question.allow_other && $scope.question.otherOption && $scope.question.otherOption.checked && $scope.question.otherAnswer && $scope.question.otherAnswer.length > 0) {
                 $scope.isAnswerValid = true;
             } else {
