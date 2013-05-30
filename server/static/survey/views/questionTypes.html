@@ -35,11 +35,11 @@
                 required>
                 <option value="">{{ question.label }}</option>
                 <option 
-                    ng-repeat="option in question.options" 
+                    ng-repeat="option in question.options"
                     value="{{ $index }}">
                         {{ option.text || option.name }}
                 </option>
-                <option value="other">Other</option>
+                <option selected value="other">Other</option>
             </select>
             <input class="input-block-level" type="text" placeholder="{{ question.label }}" ng-show="answer == 'other'" ng-model="otherAnswer" autofocus/>   
             <button type="submit" class="btn btn-primary btn-large btn-block">continue</button>
@@ -68,7 +68,7 @@
                     <!-- <div class="todo-icon fui-man-24"></div> -->
                     <div class="todo-content">
                       <h4 class="todo-name">
-                        {{option.text}}
+                        {{ option.text || option.name }}
                       </h4>
                       
                     </div>

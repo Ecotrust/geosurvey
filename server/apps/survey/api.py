@@ -60,7 +60,7 @@ class ResponseResource(ModelResource):
 
 class RespondantResource(ModelResource):
     responses = fields.ToManyField(ResponseResource, 'responses', full=True)
-    survey = fields.ToOneField('apps.survey.api.SurveyResource', 'survey', null=True, blank=True)
+    survey = fields.ToOneField('apps.survey.api.SurveyResource', 'survey', null=True, blank=True, full=True)
     class Meta:
         queryset = Respondant.objects.all()
         authentication = SessionAuthentication()
