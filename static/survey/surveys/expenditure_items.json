@@ -32,12 +32,12 @@
         "label": "car-rental"
     },
     {
-        "text": "Dive equipment purchase/rental and airfills",
-        "label": "dive-equipment-purchase-rental-airfills"
+        "text": "Dive equipment rental and airfills",
+        "label": "dive-equipment-rental-airfills"
     },
     {
-        "text": "Equipment purchase/rental (surfboard, bike, kayak, stand up paddle, etc.)",
-        "label": "other-equipment-purchase-rental"
+        "text": "Equipment rental (surfboard, bike, kayak, stand up paddle, etc.)",
+        "label": "other-equipment-rental"
     },
     {
         "text": "Lodging (if you stayed overnight)",
@@ -48,8 +48,8 @@
         "label": "charter-fee"
     },
     {
-        "text": "Museum, aquarium, or other entrance fee",
-        "label": "entrance-fees-museum-aquarium-or-other"
+        "text": "Park, museum, aquarium, or other entrance fee",
+        "label": "entrance-fees"
     },
     {
         "text": "Lessons, clinics, camps",
