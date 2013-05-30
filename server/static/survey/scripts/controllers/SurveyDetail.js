@@ -74,23 +74,27 @@ angular.module('askApp')
         } else if ($scope.question.options.length) {
             $scope.answer = $scope.getAnswer($routeParams.questionSlug);
             // check to make sure answer is in options
-            if ($scope.answer && _.contains(_.pluck($scope.question.options, 'text'), $scope.answer.text)) {
-
-                _.each($scope.question.options, function(option) {
-                    if ($scope.answer.text === option.text || $scope.answer.text === option.name ) {
-                        option.checked = true;
-                        $scope.isAnswerValid = true;
-                    }
-                });
-            } else if ($scope.answer == 'unknown') {
-                // do nothing
-            } else {
-                // otherwise assume it is other
-                $scope.question.otherOption = {
-                    checked: true
-                };
-                $scope.question.otherAnswer = $scope.answer;
+            if (! _.isArray($scope.answer)) {
+                $scope.answer = [$scope.answer];
             }
+            _.each($scope.answer, function (answer) {
+                if (! answer.other) {
+
+                    _.each($scope.question.options, function(option) {
+                        if (answer.text === option.text || answer.text === option.name ) {
+                            option.checked = true;
+                            $scope.isAnswerValid = true;
+                        }
+                    });
+                } else {
+                    // otherwise assume it is other
+                    $scope.question.otherOption = {
+                        checked: true,
+                        'other': true
+                    };
+                    $scope.question.otherAnswer = answer;
+                }
+            });
         } else {
             $scope.answer = $scope.getAnswer($routeParams.questionSlug);
         }
@@ -197,9 +201,16 @@ angular.module('askApp')
                 }];
             });
         }
-        if ($scope.question && $scope.question.allow_other && !$scope.answer) {
+        if ($scope.answer !== 'unknown' &&  $scope.question.allow_other && $scope.answer.other || _.findWhere($scope.answer, { other: true })) {
             $scope.question.otherOption = {
-                'checked': false
+                'checked': true,
+                'other': true
+            };
+            $scope.question.otherAnswer = $scope.answer.text || _.findWhere($scope.answer, { other: true }).text;
+        } else {
+            $scope.question.otherOption = {
+                'checked': false,
+                'other': true
             };
             $scope.question.otherAnswer = null;
         }
@@ -595,6 +606,9 @@ angular.module('askApp')
 
     $scope.onMultiSelectClicked = function(option, question) {
         option.checked = !option.checked;
+        if (! option.checked && option.other) {
+            $scope.question.otherAnswer = null;
+        }
         $scope.isAnswerValid = $scope.validateMultiSelect(question);
     };
 
@@ -714,7 +728,8 @@ angular.module('askApp')
             answer = {
                 checked: true,
                 label: otherAnswer,
-                text: otherAnswer
+                text: otherAnswer,
+                other: true
             };
             $scope.answerQuestion(answer);
         }
