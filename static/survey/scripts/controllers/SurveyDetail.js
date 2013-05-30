@@ -77,7 +77,6 @@ angular.module('askApp')
             if ($scope.answer !== 'unknown' && ! _.isArray($scope.answer)) {
                 $scope.answer = [$scope.answer];
             }
-            debugger;
             _.each($scope.answer, function (answer) {
                 if (! answer.other) {
 
@@ -446,9 +445,9 @@ angular.module('askApp')
                     $scope.locations[_.indexOf($scope.locations, $scope.activeMarker)].answers = answer;
                 } else {
                     $scope.addLocation({
-                        lat: $scope.map.marker.lat,
-                        lng: $scope.map.marker.lng,
-                        color: $scope.map.marker.color,
+                        lat: $scope.activeMarker.lat,
+                        lng: $scope.activeMarker.lng,
+                        color: $scope.activeMarker.color,
                         question: question,
                         answers: answer
                     });
@@ -575,6 +574,7 @@ angular.module('askApp')
                     var returnValue = {
                         lat: location.lat,
                         lng: location.lng,
+                        color: location.color,
                         answers: location.answers
                     }
 
