@@ -23,6 +23,7 @@ def delete_responses(request, uuid, template='survey/delete.html'):
     return render_to_response(template, RequestContext(request, {}))
 
 def survey(request, survey_slug=None, template='survey/survey.html'):
+
     if survey_slug is not None:
         survey = get_object_or_404(Survey, slug=survey_slug, anon=True)
         respondant = Respondant(survey=survey)
@@ -39,7 +40,7 @@ def answer(request, survey_slug, question_slug, uuid): #, survey_slug, question_
         question = get_object_or_404(Question, slug=question_slug, survey=survey)
         respondant = get_object_or_404(Respondant, uuid=uuid)
         response, created = Response.objects.get_or_create(question=question,respondant=respondant)
-        response.answer_raw = simplejson.loads(request.POST.keys()[0]).get('answer', None)
+        response.answer_raw = simplejson.dumps(simplejson.loads(request.POST.keys()[0]).get('answer', None))
         response.save()
         respondant.responses.add(response)
         respondant.save()
