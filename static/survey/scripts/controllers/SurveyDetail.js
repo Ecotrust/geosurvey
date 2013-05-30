@@ -478,6 +478,9 @@ angular.module('askApp')
     $scope.cancelConfirmation = function() {
         if ($scope.dialog) {
             $scope.dialog.options.cancel();
+        } else {
+            $scope.removeLocation($scope.activeMarker);
+            $scope.activeMarker = false;
         }
     }
 
