@@ -25,7 +25,7 @@ angular.module('askApp')
 
 
             scope.getData = function (questionSlug, filterQuestionSlug, filterValue) {
-                var url = '/reports/distribution/washington-opt-in/' + questionSlug;
+                var url = '/reports/distribution/' + scope.surveySlug + '/' + questionSlug;
                 if (filterQuestionSlug && filterValue) {
                     url += '?filter_question=' + filterQuestionSlug;
                     url += '&filter_value=' + filterValue;
