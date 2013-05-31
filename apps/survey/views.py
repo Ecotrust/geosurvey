@@ -44,6 +44,7 @@ def answer(request, survey_slug, question_slug, uuid): #, survey_slug, question_
         response.answer_raw = simplejson.dumps(simplejson.loads(request.POST.keys()[0]).get('answer', None))
         response.save()
         respondant.responses.add(response)
+        respondant.last_question = question_slug
         respondant.save()
         return HttpResponse(simplejson.dumps({'success': "%s/%s/%s" % (survey_slug, question_slug, uuid)}))
     return HttpResponse(simplejson.dumps({'success': False}))
@@ -62,7 +63,7 @@ def complete(request, survey_slug, uuid, action=None, question_slug=None):
         elif action == 'terminate' and question_slug is not None:
             respondant.complete = False
             respondant.state = 'terminate'
-            respondant.term_question = question_slug
+            respondant.last_question = question_slug
         respondant.save()
         return HttpResponse(simplejson.dumps({'success': True}))
     return HttpResponse(simplejson.dumps({'success': False}))
