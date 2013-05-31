@@ -1,4 +1,8 @@
 <div class="respondant">
     <div ng-include src="landingView"></div>
+    <div class="resume" ng-show="resumeQuestionPath">
+        <p><strong>You have already begun the survey.  You may resume where you left off.</strong></p>
+        <a class="btn btn-large btn-block" href="#/{{ resumeQuestionPath }}">Resume Survey.</a>
+    </div>
     <a class="btn btn-primary btn-large btn-block" href="#/{{ nextQuestionPath }}">Go to first question.</a>
 </div>
