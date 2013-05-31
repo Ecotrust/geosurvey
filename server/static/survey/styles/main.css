@@ -226,7 +226,7 @@ form .btn-block {
     min-height: 25px; /* instead of 30px */
 }
 .modal {
-    max-height: 500px;
+    max-height: 600px;
     overflow:hidden;
 }
 .modal-footer {
@@ -236,7 +236,7 @@ form .btn-block {
     right: 0;
 }
 .modal-body {
-    padding-bottom: 73px;
+    margin-bottom: 73px;
     max-height: 400px;
     overflow:scroll;
 }
