@@ -20,7 +20,7 @@ class Respondant(caching.base.CachingMixin, models.Model):
     responses = models.ManyToManyField('Response', related_name='responses', null=True, blank=True)
     complete = models.BooleanField(default=False)
     state = models.CharField(max_length=20, choices=STATE_CHOICES, default=None, null=True, blank=True)
-    term_question = models.CharField(max_length=240, null=True, blank=True)
+    last_question = models.CharField(max_length=240, null=True, blank=True)
 
 
     ts = models.DateTimeField(default=datetime.datetime.now())
