@@ -1,7 +1,17 @@
 [
+      {
+        "text": "0-10 miles",
+        "label": "0-10",
+        "group": "1"
+    },
+        {
+        "text": "11-30 miles",
+        "label": "11-30",
+        "group": "1"
+    },
     {
-        "text": "0-60 miles",
-        "label": "0-60",
+        "text": "31-60 miles",
+        "label": "31-60",
         "group": "1"
     },
     {
