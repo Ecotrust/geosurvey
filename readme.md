@@ -4,9 +4,9 @@ vagrant up
 fab dev run_server
 ```
 
-## to update
+## to update test server
 ```bash
-fab dev update
+fab test update
 ```
 
 # Install Requirements
@@ -70,8 +70,10 @@ heroku create appname
 git subtree push --prefix server/ heroku master
 
 ##django install
+```bash
 heroku run python manage.py syncdb --settings=config.environments.heroku
 heroku run python manage.py migrate --settings=config.environments.heroku
+```
 
 ##open the app
 heroku open
