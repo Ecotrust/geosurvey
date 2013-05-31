@@ -352,6 +352,12 @@ angular.module('askApp')
             // Prep row initial row data, each row containing values.
             // for activityLabel, activityText, cost and numPeople.
             $scope.question.options = $scope.getAnswer($scope.question.options_from_previous_answer);
+
+            if ($scope.question.options.length < 1) {
+                // Skip this question since we have no items to list.
+                $scope.gotoNextQuestion();
+            }
+
             if ($scope.answer) {
                 $scope.answer = _.groupBy($scope.answer, 'activityText')
             }
