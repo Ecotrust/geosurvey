@@ -4,9 +4,9 @@ vagrant up
 fab dev run_server
 ```
 
-## to update
+## to update test server
 ```bash
-fab dev update
+fab test update
 ```
 
 # Install Requirements
