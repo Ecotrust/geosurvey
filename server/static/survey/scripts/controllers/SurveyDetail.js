@@ -216,10 +216,7 @@ angular.module('askApp')
                 if (Object.prototype.toString.call(data) === '[object Array]' && data.length > 0) {
                     $scope.question.options = data;
                 } else {
-                    $scope.question.options = [{
-                        label: "NO_COUNTY",
-                        text: 'No counties found. Please select this option and continue.'
-                    }];
+                    $scope.gotoNextQuestion();
                 }
                 _.each($scope.question.options, function (option, index) {
                     if (option.name === $scope.answer.name) {
@@ -228,10 +225,7 @@ angular.module('askApp')
                     }
                 });
             }).error(function(data, status, headers, config) {
-                $scope.question.options = [{
-                    label: 'NO_COUNTY',
-                    text: 'No counties found. Please select this option and continue.'
-                }];
+                $scope.gotoNextQuestion();
             });
         }
 
