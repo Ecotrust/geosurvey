@@ -598,19 +598,23 @@ angular.module('askApp')
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
             }).success(function(data) {
-
-                if ($scope.dialog) {
-                    // we are in a dialog and need to handle it
-                    $scope.dialog.close();
-                    $scope.addLocation();
+                if (data.complete) {
+                    $location.path(['survey', $scope.survey.slug, 'complete', $routeParams.uuidSlug].join('/'));
                 } else {
-                    if ($scope.question.term_condition && $scope.terminateIf(answer, $scope.question.term_condition)) {
-                        $location.path(['survey', $scope.survey.slug, 'complete', $routeParams.uuidSlug, 'terminate', $routeParams.questionSlug].join('/'));
+                    if ($scope.dialog) {
+                        // we are in a dialog and need to handle it
+                        $scope.dialog.close();
+                        $scope.addLocation();
                     } else {
-                        $scope.answers[$routeParams.questionSlug] = answer;
-                        $scope.gotoNextQuestion();
-                    }
+                        if ($scope.question.term_condition && $scope.terminateIf(answer, $scope.question.term_condition)) {
+                            $location.path(['survey', $scope.survey.slug, 'complete', $routeParams.uuidSlug, 'terminate', $routeParams.questionSlug].join('/'));
+                        } else {
+                            $scope.answers[$routeParams.questionSlug] = answer;
+                            $scope.gotoNextQuestion();
+                        }
+                    }    
                 }
+                
             }).error(function(data, status, headers, config) {
                 if (console) {
                     console.log('error');
