@@ -36,12 +36,12 @@
     },
     {
         "text": "Watching birds, whales, seals and/or other marine life (from shore or boat)",
-        "label": "birdwatching",
+        "label": "wildlife-viewing-shore-boat",
         "group": "1"
     },
     {
-        "text": "Watching birds, whales, seals and/or other marine life (from a charter vessel)",
-        "label": "birdwatching",
+        "text": "Watching birds, whales, seals and/or other marine life (from a charter boat)",
+        "label": "wildlife-viewing-charter",
         "group": "1"
     },
     {
@@ -75,11 +75,6 @@
         "group": "2"
     },
     {
-        "text": "Tide pooling",
-        "label": "tide-pooling",
-        "group": "3"
-    },
-    {
         "text": "Free diving/snorkeling (from shore or boat)",
         "label": "free-diving-snorkeling",
         "group": "3"
@@ -90,13 +85,13 @@
         "group": "3"
     },
     {
-        "text": "SCUBA diving (from a charter vessel)",
+        "text": "SCUBA diving (from a charter boat)",
         "label": "scuba-diving-charter",
         "group": "3"
     },
     {
-        "text": "SCUBA diving (from a boat)",
-        "label": "scuba-diving-boat",
+        "text": "SCUBA diving (from shore or boat)",
+        "label": "scuba-diving-shore-boat",
         "group": "3"
     }
 ]
