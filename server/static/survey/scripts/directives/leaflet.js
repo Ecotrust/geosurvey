@@ -347,7 +347,6 @@
                             availableColors = angular.copy(colorPalette);
                         }                        
                     });
-                    debugger;
                     return _.first(availableColors);
                 };
 
@@ -361,7 +360,6 @@
                                 if (markDat.lat && markDat.lat) {
 
                                     var color = markDat.color;
-
                                     var marker = new L.marker(
                                     scope.multiMarkers[mkey], {
                                         draggable: markDat.draggable ? true : false,
