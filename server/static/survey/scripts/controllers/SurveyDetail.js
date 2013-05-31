@@ -222,10 +222,7 @@ angular.module('askApp')
                 if (Object.prototype.toString.call(data) === '[object Array]' && data.length > 0) {
                     $scope.question.options = data;
                 } else {
-                    $scope.question.options = [{
-                        label: "NO_COUNTY",
-                        text: 'No counties found. Please select this option and continue.'
-                    }];
+                    $scope.gotoNextQuestion();
                 }
                 _.each($scope.question.options, function (option, index) {
                     if (option.name === $scope.answer.name) {
@@ -234,10 +231,7 @@ angular.module('askApp')
                     }
                 });
             }).error(function(data, status, headers, config) {
-                $scope.question.options = [{
-                    label: 'NO_COUNTY',
-                    text: 'No counties found. Please select this option and continue.'
-                }];
+                $scope.gotoNextQuestion();
             });
         }
 
@@ -361,6 +355,12 @@ angular.module('askApp')
             // Prep row initial row data, each row containing values.
             // for activityLabel, activityText, cost and numPeople.
             $scope.question.options = $scope.getAnswer($scope.question.options_from_previous_answer);
+
+            if ($scope.question.options.length < 1) {
+                // Skip this question since we have no items to list.
+                $scope.gotoNextQuestion();
+            }
+
             if ($scope.answer) {
                 $scope.answer = _.groupBy($scope.answer, 'activityText')
             }
