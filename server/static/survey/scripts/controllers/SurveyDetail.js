@@ -605,7 +605,7 @@ angular.module('askApp')
             }
             if ($scope.question.required && !answer) {
                 return false;
-            } else if (!$scope.question.required && answer === undefined) {
+            } else if (!$scope.question.required && _.isUndefined(answer) || _.isNull(answer)) {
                 answer = '';
             }
 
