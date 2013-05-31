@@ -70,8 +70,10 @@ heroku create appname
 git subtree push --prefix server/ heroku master
 
 ##django install
-1. heroku run python manage.py syncdb --settings=config.environments.heroku
-1. heroku run python manage.py migrate --settings=config.environments.heroku
+```bash
+heroku run python manage.py syncdb --settings=config.environments.heroku
+heroku run python manage.py migrate --settings=config.environments.heroku
+```
 
 ##open the app
 heroku open
