@@ -551,9 +551,6 @@ angular.module('askApp')
             terminate = answer === testCriteria;
         }
         return terminate;
-        if (terminate) {
-            $location.path(['survey', $scope.survey.slug, 'complete', $routeParams.uuidSlug].join('/'));
-        }
     };
 
     $scope.answerQuestion = function(answer, otherAnswer) {
@@ -608,7 +605,7 @@ angular.module('askApp')
                     $scope.addLocation();
                 } else {
                     if ($scope.question.term_condition && $scope.terminateIf(answer, $scope.question.term_condition)) {
-                        $location.path(['survey', $scope.survey.slug, 'complete', $routeParams.uuidSlug].join('/'));
+                        $location.path(['survey', $scope.survey.slug, 'complete', $routeParams.uuidSlug, 'terminate', $routeParams.questionSlug].join('/'));
                     } else {
                         $scope.answers[$routeParams.questionSlug] = answer;
                         $scope.gotoNextQuestion();
