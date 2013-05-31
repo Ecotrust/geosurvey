@@ -25,6 +25,10 @@ angular.module('askApp', ['ui', 'leaflet.directive', 'ui.bootstrap', 'ngGrid'])
       templateUrl: '/static/survey/views/complete.html',
       controller: 'CompleteCtrl'
     })
+    .when('/survey/:surveySlug/complete/:uuidSlug/:action/:questionSlug', {
+      templateUrl: '/static/survey/views/complete.html',
+      controller: 'CompleteCtrl'
+    })
     .when('/survey/:surveySlug/:questionSlug/:uuidSlug', {
         templateUrl: '/static/survey/views/SurveyDetail.html',
         controller: 'SurveyDetailCtrl'
