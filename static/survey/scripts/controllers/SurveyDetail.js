@@ -59,6 +59,7 @@ angular.module('askApp')
 
     $http.get('/api/v1/respondant/' + $routeParams.uuidSlug + '/?format=json').success(function(data) {
         $scope.survey = data.survey;
+
         _.each(data.responses, function(response) {
             try {
                 $scope.answers[response.question.slug] = JSON.parse(response.answer_raw);
@@ -66,8 +67,13 @@ angular.module('askApp')
                 $scope.answers[response.question.slug] = response.answer;
             }
         });
-
-        console.log($scope.answers);
+        
+        if (data.last_question && ! data.complete) {
+            $scope.resumeQuestionPath = $scope.getResumeQuestionPath(data.last_question);
+        }
+        // if (data.complete) {
+        //     $location.path(['survey', $scope.survey.slug, 'complete', $routeParams.uuidSlug].join('/'));
+        // }
         // we may inject a question into the scope
         if (!$scope.question) {
             $scope.question = _.find($scope.survey.questions, function(question) {
@@ -91,9 +97,9 @@ angular.module('askApp')
         /* Specific to single and multi select for now. */
         $scope.isAnswerValid = $scope.question && !$scope.question.required;
 
-        if ($scope.question.type === 'integer') {
+        if ($scope.question && $scope.question.type === 'integer') {
             $scope.answer = parseInt($scope.getAnswer($routeParams.questionSlug), 10);
-        } else if ($scope.question.options.length) {
+        } else if ($scope.question && $scope.question.options.length) {
             $scope.answer = $scope.getAnswer($routeParams.questionSlug);
             // check to make sure answer is in options
             if ($scope.answer && ! _.isArray($scope.answer)) {
@@ -229,19 +235,22 @@ angular.module('askApp')
             });
         }
 
-        if ($scope.answer &&  $scope.question.allow_other && $scope.answer.other || _.findWhere($scope.answer, { other: true })) {
-            $scope.question.otherOption = {
-                'checked': true,
-                'other': true
-            };
-            $scope.question.otherAnswer = $scope.answer.text || _.findWhere($scope.answer, { other: true }).text;
-        } else {
-            $scope.question.otherOption = {
-                'checked': false,
-                'other': true
-            };
-            $scope.question.otherAnswer = null;
+        if ($scope.question) {
+            if ($scope.answer &&  $scope.question.allow_other && $scope.answer.other || _.findWhere($scope.answer, { other: true })) {
+                $scope.question.otherOption = {
+                    'checked': true,
+                    'other': true
+                };
+                $scope.question.otherAnswer = $scope.answer.text || _.findWhere($scope.answer, { other: true }).text;
+            } else {
+                $scope.question.otherOption = {
+                    'checked': false,
+                    'other': true
+                };
+                $scope.question.otherAnswer = null;
+            }    
         }
+        
 
         if ($scope.question && $scope.question.options_from_previous_answer) {
             $scope.question.options = $scope.getAnswer($scope.question.options_from_previous_answer);
@@ -543,6 +552,11 @@ angular.module('askApp')
         return nextQuestion ? nextQuestion.slug : null;
     };
 
+
+    $scope.getResumeQuestionPath = function (lastQuestion) {
+        var resumeQuestion = $scope.survey.questions[_.indexOf($scope.survey.questions, _.findWhere($scope.survey.questions, {slug: lastQuestion})) + 1];
+        return ['survey', $scope.survey.slug, resumeQuestion.slug, $routeParams.uuidSlug].join('/');
+    }
     $scope.getNextQuestionPath = function() {
         var nextQuestion = $scope.getNextQuestion(),
             nextUrl;
@@ -576,9 +590,6 @@ angular.module('askApp')
             terminate = answer === testCriteria;
         }
         return terminate;
-        if (terminate) {
-            $location.path(['survey', $scope.survey.slug, 'complete', $routeParams.uuidSlug].join('/'));
-        }
     };
 
     $scope.answerQuestion = function(answer, otherAnswer) {
@@ -626,19 +637,23 @@ angular.module('askApp')
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
             }).success(function(data) {
-
-                if ($scope.dialog) {
-                    // we are in a dialog and need to handle it
-                    $scope.dialog.close();
-                    $scope.addLocation();
+                if (data.complete) {
+                    $location.path(['survey', $scope.survey.slug, 'complete', $routeParams.uuidSlug].join('/'));
                 } else {
-                    if ($scope.question.term_condition && $scope.terminateIf(answer, $scope.question.term_condition)) {
-                        $location.path(['survey', $scope.survey.slug, 'complete', $routeParams.uuidSlug].join('/'));
+                    if ($scope.dialog) {
+                        // we are in a dialog and need to handle it
+                        $scope.dialog.close();
+                        $scope.addLocation();
                     } else {
-                        $scope.answers[$routeParams.questionSlug] = answer;
-                        $scope.gotoNextQuestion();
-                    }
+                        if ($scope.question.term_condition && $scope.terminateIf(answer, $scope.question.term_condition)) {
+                            $location.path(['survey', $scope.survey.slug, 'complete', $routeParams.uuidSlug, 'terminate', $routeParams.questionSlug].join('/'));
+                        } else {
+                            $scope.answers[$routeParams.questionSlug] = answer;
+                            $scope.gotoNextQuestion();
+                        }
+                    }    
                 }
+                
             }).error(function(data, status, headers, config) {
                 if (console) {
                     console.log('error');

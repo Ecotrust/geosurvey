@@ -23,7 +23,6 @@ def delete_responses(request, uuid, template='survey/delete.html'):
     return render_to_response(template, RequestContext(request, {}))
 
 def survey(request, survey_slug=None, template='survey/survey.html'):
-
     if survey_slug is not None:
         survey = get_object_or_404(Survey, slug=survey_slug, anon=True)
         respondant = Respondant(survey=survey)
@@ -39,14 +38,35 @@ def answer(request, survey_slug, question_slug, uuid): #, survey_slug, question_
         survey = get_object_or_404(Survey, slug=survey_slug)
         question = get_object_or_404(Question, slug=question_slug, survey=survey)
         respondant = get_object_or_404(Respondant, uuid=uuid)
+        if respondant.complete is True and not request.user.is_staff:
+            return HttpResponse(simplejson.dumps({'success': False, 'complete': True}))
         response, created = Response.objects.get_or_create(question=question,respondant=respondant)
         response.answer_raw = simplejson.dumps(simplejson.loads(request.POST.keys()[0]).get('answer', None))
         response.save()
         respondant.responses.add(response)
+        respondant.last_question = question_slug
         respondant.save()
         return HttpResponse(simplejson.dumps({'success': "%s/%s/%s" % (survey_slug, question_slug, uuid)}))
     return HttpResponse(simplejson.dumps({'success': False}))
 
+
+def complete(request, survey_slug, uuid, action=None, question_slug=None):
+    if request.method == 'POST':
+        
+        survey = get_object_or_404(Survey, slug=survey_slug)
+        respondant = get_object_or_404(Respondant, uuid=uuid, survey=survey)
+        print action, question_slug
+
+        if action is None and question_slug is None:
+            respondant.complete = True
+            respondant.state = 'complete'
+        elif action == 'terminate' and question_slug is not None:
+            respondant.complete = False
+            respondant.state = 'terminate'
+            respondant.last_question = question_slug
+        respondant.save()
+        return HttpResponse(simplejson.dumps({'success': True}))
+    return HttpResponse(simplejson.dumps({'success': False}))
 def send_email(email, uuid):
     from django.contrib.sites.models import Site
 
