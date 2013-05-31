@@ -9,12 +9,19 @@ import ast
 def make_uuid():
     return str(uuid.uuid4())
 
+STATE_CHOICES = (
+    ('complete', 'Complete'),
+    ('terminate', 'Terminate'),
 
+)
 class Respondant(caching.base.CachingMixin, models.Model):
     uuid = models.CharField(max_length=36, primary_key=True, default=make_uuid, editable=False)
     survey = models.ForeignKey('Survey')
     responses = models.ManyToManyField('Response', related_name='responses', null=True, blank=True)
     complete = models.BooleanField(default=False)
+    state = models.CharField(max_length=20, choices=STATE_CHOICES, default=None, null=True, blank=True)
+    term_question = models.CharField(max_length=240, null=True, blank=True)
+
 
     ts = models.DateTimeField(default=datetime.datetime.now())
     email = models.EmailField(max_length=254, null=True, blank=True, default=None)

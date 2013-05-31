@@ -47,6 +47,24 @@ def answer(request, survey_slug, question_slug, uuid): #, survey_slug, question_
         return HttpResponse(simplejson.dumps({'success': "%s/%s/%s" % (survey_slug, question_slug, uuid)}))
     return HttpResponse(simplejson.dumps({'success': False}))
 
+
+def complete(request, survey_slug, uuid, action=None, question_slug=None):
+    if request.method == 'POST':
+        
+        survey = get_object_or_404(Survey, slug=survey_slug)
+        respondant = get_object_or_404(Respondant, uuid=uuid, survey=survey)
+        print action, question_slug
+
+        if action is None and question_slug is None:
+            respondant.complete = True
+            respondant.state = 'complete'
+        elif action == 'terminate' and question_slug is not None:
+            respondant.complete = False
+            respondant.state = 'terminate'
+            respondant.term_question = question_slug
+        respondant.save()
+        return HttpResponse(simplejson.dumps({'success': True}))
+    return HttpResponse(simplejson.dumps({'success': False}))
 def send_email(email, uuid):
     from django.contrib.sites.models import Site
 
