@@ -96,30 +96,35 @@ angular.module('askApp')
         } else if ($scope.question.options.length) {
             $scope.answer = $scope.getAnswer($routeParams.questionSlug);
             // check to make sure answer is in options
-            if ($scope.answer !== 'unknown' && ! _.isArray($scope.answer)) {
+            if ($scope.answer && ! _.isArray($scope.answer)) {
                 $scope.answer = [$scope.answer];
             }
-            debugger;
-            _.each($scope.answer, function (answer) {
-                if (! answer.other) {
+            if ($scope.answer) {
 
-                    _.each($scope.question.options, function(option) {
-                        if (answer.text === option.text || answer.text === option.name ) {
-                            option.checked = true;
-                            $scope.isAnswerValid = true;
-                        }
-                    });
-                } else {
-                    // otherwise assume it is other
-                    $scope.question.otherOption = {
-                        checked: true,
-                        'other': true
-                    };
-                    $scope.question.otherAnswer = answer;
-                }
-            });
+                _.each($scope.answer, function (answer) {
+                    if (! answer.other) {
+
+                        _.each($scope.question.options, function(option) {
+                            if (answer.text === option.text || answer.text === option.name ) {
+                                option.checked = true;
+                                $scope.isAnswerValid = true;
+                            }
+                        });
+                    } else {
+                        // otherwise assume it is other
+                        $scope.question.otherOption = {
+                            checked: true,
+                            'other': true
+                        };
+                        $scope.question.otherAnswer = answer;
+                    }
+                });    
+            }
         } else {
             $scope.answer = $scope.getAnswer($routeParams.questionSlug);
+            if (! $scope.answer) {
+                $scope.answer = null;
+            }
         }
 
 
@@ -134,8 +139,8 @@ angular.module('askApp')
                 
                 if ($scope.question.update && $scope.activeMarker) {
                     previousAnswers = _.pluck($scope.activeMarker.answers, 'text');    
-                } else if ($scope.answers !== 'unknown') {
-                    if (_.isArray($scope.answers)) {
+                } else if ($scope.answer) {
+                    if (_.isArray($scope.answer)) {
                         previousAnswers = _.pluck($scope.answer, 'text');        
                     } else {
                         previousAnswers = [$scope.answer.text];
@@ -229,7 +234,8 @@ angular.module('askApp')
                 }];
             });
         }
-        if ($scope.answer !== 'unknown' &&  $scope.question.allow_other && $scope.answer.other || _.findWhere($scope.answer, { other: true })) {
+
+        if ($scope.answer &&  $scope.question.allow_other && $scope.answer.other || _.findWhere($scope.answer, { other: true })) {
             $scope.question.otherOption = {
                 'checked': true,
                 'other': true
@@ -316,7 +322,7 @@ angular.module('askApp')
         if ($scope.question && $scope.question.type === 'map-multipoint') {
             $scope.activeMarker = false;
 
-            if ($scope.answer === 'unknown') {
+            if (! $scope.answer) {
                 $scope.locations = [];
             } else {
                 $scope.locations = JSON.parse($scope.answer);
@@ -346,7 +352,7 @@ angular.module('askApp')
             // Prep row initial row data, each row containing values.
             // for activityLabel, activityText, cost and numPeople.
             $scope.question.options = $scope.getAnswer($scope.question.options_from_previous_answer);
-            if ($scope.answer !== 'unknown') {
+            if ($scope.answer) {
                 $scope.answer = _.groupBy($scope.answer, 'activityText')
             }
             
@@ -411,7 +417,7 @@ angular.module('askApp')
         if ($scope.answers[questionSlug]) {
             return $scope.answers[questionSlug];
         } else {
-            return 'unknown';
+            return false;
         }
     };
 
@@ -468,9 +474,9 @@ angular.module('askApp')
                     $scope.locations[_.indexOf($scope.locations, $scope.activeMarker)].answers = answer;
                 } else {
                     $scope.addLocation({
-                        lat: $scope.map.marker.lat,
-                        lng: $scope.map.marker.lng,
-                        color: $scope.map.marker.color,
+                        lat: $scope.activeMarker.lat,
+                        lng: $scope.activeMarker.lng,
+                        color: $scope.activeMarker.color,
                         question: question,
                         answers: answer
                     });
@@ -600,6 +606,7 @@ angular.module('askApp')
                     var returnValue = {
                         lat: location.lat,
                         lng: location.lng,
+                        color: location.color,
                         answers: location.answers
                     }
 
