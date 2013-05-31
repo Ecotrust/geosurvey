@@ -63,8 +63,6 @@ class RespondantResource(ModelResource):
     survey = fields.ToOneField('apps.survey.api.SurveyResource', 'survey', null=True, blank=True, full=True)
     class Meta:
         queryset = Respondant.objects.all()
-        authentication = SessionAuthentication()
-        authorization = DjangoAuthorization()
         filtering = {
             'survey': ALL_WITH_RELATIONS,
             'responses': ALL_WITH_RELATIONS
