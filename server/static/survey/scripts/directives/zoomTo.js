@@ -1,7 +1,7 @@
 'use strict';
 
 
-function ZoomToCtrl($scope, dialog, $http, $timeout) {
+function ZoomToCtrl($scope, dialog, $http, $timeout, $location) {
     var stop;
 
     $scope.results = [];
@@ -44,6 +44,19 @@ function ZoomToCtrl($scope, dialog, $http, $timeout) {
     $scope.close = function(result) {
         dialog.close(result);
     };
+
+    // If user hits back button, close the modal.
+    $scope.loaded = false;
+    $scope.$watch(function() {
+        return $location.path();
+    }, function () {
+        if ($scope.loaded && dialog.isOpen()) {
+            console.log('close Zoom');
+            $scope.close();
+        }
+        $scope.loaded = true;
+    });
+
 }
 
 angular.module('askApp')

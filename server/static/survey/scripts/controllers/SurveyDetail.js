@@ -17,13 +17,35 @@ var map = {
 };
 
 
-function ActivitiesCtrl($scope, dialog) {
+function ActivitiesCtrl($scope, dialog, $location) {
+    $scope.loaded = false;
+    $scope.$watch(function() {
+        return $location.path();
+    }, function () {
+        if ($scope.loaded && dialog.isOpen()) {
+            console.log('close Activities');
+            $scope.close();
+        }
+        $scope.loaded = true;
+    });
+
     $scope.close = function(result) {
         dialog.close(result);
     };
 }
 
-function MapContinueDialogCtrl($scope, dialog, remainingActivities){
+function MapContinueDialogCtrl($scope, dialog, remainingActivities, $location){
+    $scope.loaded = false;
+    $scope.$watch(function() {
+        return $location.path();
+    }, function () {
+        if ($scope.loaded && dialog.isOpen()) {
+            console.log('close ContinueModal');
+            $scope.close();
+        }
+        $scope.loaded = true;
+    });
+
     $scope.remainingActivities = remainingActivities;
     $scope.close = function(result){
         dialog.close(result);
