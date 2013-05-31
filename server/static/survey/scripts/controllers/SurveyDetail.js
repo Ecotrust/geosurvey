@@ -656,7 +656,7 @@ angular.module('askApp')
                 
             }).error(function(data, status, headers, config) {
                 if (console) {
-                    console.log('error');
+                    console.log(data);
                 }
             });
         }
@@ -753,7 +753,7 @@ angular.module('askApp')
         }
 
         // enable continue
-        if (option.checked && option !== question.otherOption) {
+        if (!question.required || (option.checked && option !== question.otherOption)) {
             $scope.isAnswerValid = true;
         } else {
             $scope.isAnswerValid = false;
@@ -790,6 +790,9 @@ angular.module('askApp')
                 other: true
             };
             $scope.answerQuestion(answer);
+        } else if (!$scope.question.required) {
+            // No answer given. Submit empty.
+            $scope.answerQuestion({ text: 'NO_ANSWER' });
         }
 
     };
