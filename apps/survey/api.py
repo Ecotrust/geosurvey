@@ -81,6 +81,7 @@ class QuestionResource(ModelResource):
     question_types = fields.DictField(attribute='question_types', readonly=True)
     report_types = fields.DictField(attribute='report_types', readonly=True)
     answer_domain = fields.ListField(attribute='answer_domain', readonly=True, null=True)
+    filter_questions = fields.ToManyField('self', 'filter_questions', null=True, blank=True)
 
     class Meta:
         queryset = Question.objects.all()
