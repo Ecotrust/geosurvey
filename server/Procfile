@@ -1,1 +1,1 @@
-web: python manage.py runserver 0:$PORT --settings=config.environments.heroku
+web: python manage.py run_gunicorn 0:$PORT --settings=config.environments.heroku
