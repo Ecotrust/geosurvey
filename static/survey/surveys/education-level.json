@@ -1,0 +1,32 @@
+[
+    {
+        "text": "No formal education",
+        "label": "no-formal-education",
+        "group": "1"
+    },
+    {
+        "text": "Less than high school",
+        "label": "less-than-high-school",
+        "group": "1"
+    },
+    {
+        "text": "High School",
+        "label": "high-school",
+        "group": "1"
+    },
+    {
+        "text": "Some college",
+        "label": "some-college",
+        "group": "1"
+    },
+    {
+        "text": "Bachelor's degree",
+        "label": "bachelors-degree",
+        "group": "1"
+    },
+    {
+        "text": "Graduate or professional degree",
+        "label": "graduate-or-professional-degree",
+        "group": "1"
+    }
+]
