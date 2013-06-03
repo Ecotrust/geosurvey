@@ -130,6 +130,7 @@ class Question(caching.base.CachingMixin, models.Model):
     filterBy = models.BooleanField(default=False)
     visualize = models.BooleanField(default=False)
     report_type = models.CharField(max_length=20,choices=REPORT_TYPE_CHOICES,null=True, default=None)
+    filter_questions = models.ManyToManyField('self', null=True, blank=True)
 
 
     @property
