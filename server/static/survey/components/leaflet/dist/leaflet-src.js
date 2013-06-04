@@ -942,8 +942,8 @@ L.DomUtil = {
 				el.style.WebkitBackfaceVisibility = 'hidden';
 			}
 		} else {
-			el.style.left = point.x ? point.x: 0 + 'px';
-			el.style.top = point.y ? point.y: 0 + 'px';
+			el.style.left = point.x ? point.x + 'px' : 0 + 'px';
+			el.style.top = point.y ? point.y + 'px' : 0 + 'px';
 		}
 	},
 

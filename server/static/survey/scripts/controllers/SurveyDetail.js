@@ -216,8 +216,15 @@ angular.module('askApp')
             // County question is dependent on state answer to retrieve a
             // json file of counties for the selected state.
 
-            var stateAnswer = $scope.getAnswer($scope.question.options_from_previous_answer),
-                stateAbrv = stateAnswer.label || 'NO_STATE';
+            var stateAbrv = 'NO_STATE',
+                stateAnswer = $scope.getAnswer($scope.question.options_from_previous_answer);
+            if (stateAnswer.label && stateAnswer.label.length > 2) {
+                // submitted via other text box
+                stateAbrv = stateAnswer.label.toLowerCase().replace(/\s+/g, '');
+            } else if (stateAnswer.label) {
+                stateAbrv = stateAnswer.label;
+            }
+
             $http.get('/static/survey/surveys/counties/' + stateAbrv + '.json').success(function(data, status, headers, config) {
                 if (Object.prototype.toString.call(data) === '[object Array]' && data.length > 0) {
                     $scope.question.options = data;
