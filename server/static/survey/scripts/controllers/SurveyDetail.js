@@ -53,7 +53,7 @@ function MapContinueDialogCtrl($scope, dialog, remainingActivities, $location){
 }
 
 angular.module('askApp')
-    .controller('SurveyDetailCtrl', function($scope, $routeParams, $http, $location, $dialog, $interpolate, $timeout, offlineSurvey) {
+    .controller('SurveyDetailCtrl', function($scope, $routeParams, $http, $location, $dialog, $interpolate, $timeout) {
 
     $scope.answers = {};
 
@@ -231,12 +231,15 @@ angular.module('askApp')
                 } else {
                     $scope.gotoNextQuestion();
                 }
-                _.each($scope.question.options, function (option, index) {
-                    if (option.name === $scope.answer.name) {
-                        option.checked = true;
-                        $scope.isAnswerValid = true;
-                    }
-                });
+                if ($scope.answer) {
+                    _.each($scope.question.options, function (option, index) {
+                        if (option.name === $scope.answer.name) {
+                            option.checked = true;
+                            $scope.isAnswerValid = true;
+                        }
+                    });    
+                }
+                
             }).error(function(data, status, headers, config) {
                 $scope.gotoNextQuestion();
             });
@@ -370,6 +373,8 @@ angular.module('askApp')
 
             if ($scope.answer) {
                 $scope.answer = _.groupBy($scope.answer, 'activityText')
+            } else {
+                $scope.answer = {};
             }
             
             _.each($scope.question.options, function(value, key, list) {
