@@ -51,7 +51,6 @@ function ZoomToCtrl($scope, dialog, $http, $timeout, $location) {
         return $location.path();
     }, function () {
         if ($scope.loaded && dialog.isOpen()) {
-            console.log('close Zoom');
             $scope.close();
         }
         $scope.loaded = true;

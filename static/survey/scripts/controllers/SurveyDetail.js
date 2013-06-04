@@ -23,7 +23,6 @@ function ActivitiesCtrl($scope, dialog, $location) {
         return $location.path();
     }, function () {
         if ($scope.loaded && dialog.isOpen()) {
-            console.log('close Activities');
             $scope.close();
         }
         $scope.loaded = true;
@@ -40,7 +39,6 @@ function MapContinueDialogCtrl($scope, dialog, remainingActivities, $location){
         return $location.path();
     }, function () {
         if ($scope.loaded && dialog.isOpen()) {
-            console.log('close ContinueModal');
             $scope.close();
         }
         $scope.loaded = true;
@@ -85,7 +83,6 @@ function HelpDialogCtrl($scope, dialog, $location) {
         return $location.path();
     }, function () {
         if ($scope.loaded && dialog.isOpen()) {
-            console.log('close ContinueModal');
             $scope.close();
         }
         $scope.loaded = true;
