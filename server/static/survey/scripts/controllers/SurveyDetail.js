@@ -381,8 +381,8 @@ angular.module('askApp')
                 list[key] = {
                     activitySlug: value.label,
                     activityText: value.text,
-                    cost: $scope.answer[value.text] ? $scope.answer[value.text][0].cost: undefined,
-                    numPeople: $scope.answer[value.text] ? $scope.answer[value.text][0].numPeople: undefined
+                    cost: $scope.answer !== null && _.has($scope.answer, value.text) ? $scope.answer[value.text][0].cost: undefined,
+                    numPeople: $scope.answer !== null && _.has($scope.answer, value.text) ? $scope.answer[value.text][0].numPeople: undefined
                 };
             });
 
@@ -615,9 +615,9 @@ angular.module('askApp')
             if (answer === 'other' && otherAnswer) {
                 answer = otherAnswer;
             }
-            if ($scope.question.required && !answer) {
+            if ($scope.question.required && (answer === undefined || answer === null)) {
                 return false;
-            } else if (!$scope.question.required && _.isUndefined(answer) || _.isNull(answer)) {
+            } else if (!$scope.question.required && (answer === undefined || answer === null)) {
                 answer = '';
             }
 
