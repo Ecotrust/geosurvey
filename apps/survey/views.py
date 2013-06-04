@@ -94,7 +94,7 @@ def send_email(email, uuid):
         'SITE_URL': current_site.domain
         })
 
-    subject, from_email, to = 'Take The Survey', 'eknuth@ecotrust.org', email
+    subject, from_email, to = 'Take The Survey', 'tglaser@ecotrust.org', email
     text_content = plaintext.render(d)
     html_content = htmly.render(d)
 
