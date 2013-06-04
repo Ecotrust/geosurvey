@@ -1,5 +1,8 @@
 'use strict';
 
+var app = {};
+
+
 angular.module('askApp', ['ui', 'leaflet.directive', 'ui.bootstrap', 'ngGrid'])
     .config(function($routeProvider, $httpProvider) {
 
