@@ -52,7 +52,78 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-
+    {% if user.is_authenticated %}
+    <div class="navbar .navbar-static-top navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-inner">
+          <div class="container"> 
+            <div ng-controller="SurveyListCtrl">
+              {% verbatim %}
+              <ul class="nav">
+                <li>
+                  <a href="#/">
+                    Home
+                  </a>
+                </li>
+                <li>
+                  <a>
+                    Edit Surveys
+                  </a>
+                  <ul class="survey-list"> 
+                    <li ng-repeat="survey in surveys">
+                      <a href="#/author/{{ survey.slug }}">{{ survey.name }}</a>
+                    </li>  
+                  </ul>
+                </li>
+                <li>
+                  <a>
+                    Take Survey
+                  </a>
+                  <ul class="survey-list"> 
+                    <li ng-repeat="survey in surveys">
+                      <a ng-hide="survey.anon" href="#/survey/{{ survey.slug }}/uuid">{{ survey.name }}</a>
+                      <a ng-show="survey.anon" href="/respond/{{ survey.slug }}">{{ survey.name }}</a>
+                    </li>  
+                  </ul>
+                </li>
+                <li>
+                  <a>
+                    Completed Surveys
+                    <!--<span class="navbar-unread">1</span>-->
+                  </a>
+                  <ul class="survey-list"> 
+                    <li ng-repeat="survey in surveys">
+                      <a href="#/RespondantList/{{ survey.slug }}">{{ survey.name }}</a>
+                    </li>  
+                  </ul>
+                </li>
+              </ul>
+             <!-- <ul class="nav pull-right">
+                <li>
+                  <a href="#">
+                    User
+                  </a>
+                  <ul>
+                    <li><a href="#">Element One</a></li>
+                    <li>
+                      <a href="#">Sub menu</a>
+                      <ul>
+                        <li><a href="#">Element One</a></li>
+                        <li><a href="#">Element Two</a></li>
+                        <li><a href="#">Element Three</a></li>
+                      </ul> 
+                    </li>
+                    <li><a href="#">Element Three</a></li>
+                  </ul> 
+                </li>
+              </ul>-->
+              {% endverbatim %}
+            </div><!--/.nav-collapse -->
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
     <div class="container-fluid" ng-view></div>
     <script src="/static/survey/components/flatui/js/jquery-1.8.2.min.js"></script>
     <script src="/static/survey/components/jquery-ui/ui/jquery-ui.js"></script>
@@ -75,16 +146,23 @@
      <script src="https://raw.github.com/gist/2197042/2b90c41b39b7d5b3a851d8f256de2ebd3fe1fb74/leaflet-google.js"></script>-->
     <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.js"></script>
     <!-- build:js scripts/scripts.js -->
-    <script src="/static/survey/scripts/app.js"></script>
+    <script src="/static/survey/scripts/dash-app.js"></script>
 
 
-
+    <script src="/static/survey/scripts/controllers/main.js"></script>
+    <script src="/static/survey/scripts/controllers/menu.js"></script>
+    <script src="/static/survey/scripts/controllers/SurveyList.js"></script>
     <script src="/static/survey/scripts/controllers/SurveyDetail.js"></script>
+    <script src="/static/survey/scripts/services/offlineSurvey.js"></script>
+    <script src="/static/survey/scripts/controllers/mapView.js"></script>
 
+    <script src="/static/survey/scripts/controllers/RespondantList.js"></script>
+    <script src="/static/survey/scripts/controllers/RespondantDetail.js"></script>
     <script src="/static/survey/scripts/controllers/complete.js"></script>
     <script src="/static/survey/scripts/directives/leaflet.js"></script>
     <script src="/static/survey/scripts/directives/zoomTo.js"></script>
     <script src="/static/survey/scripts/controllers/author.js"></script>
+    <script src="/static/survey/scripts/directives/distribution.js"></script>
     <!-- endbuild -->
 
     <script>
