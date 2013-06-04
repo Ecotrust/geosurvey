@@ -22,10 +22,10 @@ except KeyError:
     pass
 
 
+redis = os.environ.get('REDISTOGO_URL', None)
 
-redis_url = urlparse.urlparse(os.environ.get('REDISTOGO_URL', None))
-
-if redis_url is not None:
+if redis is not None:
+    redis_url = urlparse.urlparse()
     CACHES = {
         'default': {
             'BACKEND': 'redis_cache.RedisCache',
