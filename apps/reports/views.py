@@ -17,14 +17,18 @@ def get_distribution(request, survey_slug, question_slug):
     filter_question_slug = None
     filter_value = None
 
+    filter_list = []
+
     if request.GET:
         filter_value = request.GET.get('filter_value')
         filter_question_slug = request.GET.get('filter_question')
+        filters = request.GET.get('filters', None)
 
-    if filter_question_slug is not None:
-        filter_question = get_object_or_404(QuestionReport, slug=filter_question_slug, survey=survey)
+    if filters is not None:
+        filter_list = simplejson.loads(filters)
+        
     else:
         filter_question = None
     print question.type
-    answer_domain = question.get_answer_domain(filter_question=filter_question, filter_value=filter_value)
+    answer_domain = question.get_answer_domain(survey, filter_list)
     return HttpResponse(simplejson.dumps({'success': "true", "answer_domain": list(answer_domain.order_by('-count'))}))
