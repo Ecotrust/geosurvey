@@ -52,6 +52,49 @@ function MapContinueDialogCtrl($scope, dialog, remainingActivities, $location){
     };
 }
 
+function HelpDialogCtrl($scope, dialog, $location) {
+    $scope.panes = {
+        pane1: {
+            title: "Help Topics"
+        },
+        pane2: {
+            title: "Topic 1"
+        },  
+        pane3: {
+            title: "Topic 2"
+        }
+    };
+    
+    $scope.currentPane = null;
+
+    $scope.show = function (paneName) {
+        if (_.has($scope.panes, paneName)) {
+            _.each($scope.panes, function (value, key, list) {
+                $scope.panes[key].showing = false;
+            });
+            $scope.panes[paneName].showing = true;
+            $scope.currentPane = $scope.panes[paneName];
+        }
+    };
+
+    $scope.show('pane1');
+
+
+    $scope.loaded = false;
+    $scope.$watch(function() {
+        return $location.path();
+    }, function () {
+        if ($scope.loaded && dialog.isOpen()) {
+            console.log('close ContinueModal');
+            $scope.close();
+        }
+        $scope.loaded = true;
+    });
+    $scope.close = function(result){
+        dialog.close(result);
+    };
+}
+
 angular.module('askApp')
     .controller('SurveyDetailCtrl', function($scope, $routeParams, $http, $location, $dialog, $interpolate, $timeout, offlineSurvey) {
 
@@ -427,7 +470,6 @@ angular.module('askApp')
     $scope.zoomModel = {
         zoomToResult: undefined
     };
-
 
     $scope.getAnswer = function(questionSlug) {
         if ($scope.answers[questionSlug]) {
@@ -845,6 +887,17 @@ $scope.answerMapQuestion = function (locations) {
             $scope.answerQuestion(locations);
         }
     });
+};
+
+$scope.showHelp = function () {
+    var d = $dialog.dialog({
+        backdrop: true,
+        keyboard: true,
+        backdropClick: false,
+        templateUrl: '/static/survey/views/helpModal.html',
+        controller: 'HelpDialogCtrl'
+    });
+    d.open();
 };
 
 });
