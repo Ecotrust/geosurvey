@@ -272,6 +272,10 @@ form .btn-block {
 .map_wrapper .leaflet-top {
     z-index: 0 !important;
 }
+
+.leaflet-control-container .leaflet-top.leaflet-right {
+    top: 60px;
+}
 /**
  * My Activities modal
  */
