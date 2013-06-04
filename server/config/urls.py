@@ -45,7 +45,7 @@ urlpatterns = patterns('',
     #other survey urls
     url(r'^dash', include(survey_urls)),
 
-    (r'register', survey_urls.register),
+    (r'^register', survey_urls.register),
     #(r'^survey/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.SURVEY_ROOT}),
 )
 

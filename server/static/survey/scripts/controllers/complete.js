@@ -9,7 +9,7 @@ angular.module('askApp')
     }
 
     $http.post(url).success(function (data) {
-        
+        app.data.state = $routeParams.acttion;
     });
 
     $scope.completeView = '/static/survey/survey-pages/' + $routeParams.surveySlug + '/complete.html';
