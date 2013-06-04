@@ -329,6 +329,21 @@ form .btn-block {
     margin-bottom: 20px;
 }
 
+.ngTopPanel {
+    height: auto !important;
+}
+
+.ngHeaderText {
+    padding: 0 5px;
+}
+
+
+.select2-search-choice > div {
+    white-space: nowrap;
+    width: 150px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
 
 @media (max-width: 480px) {
     div[zoomto] input {

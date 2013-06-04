@@ -14,21 +14,38 @@ angular.module('askApp')
         },
 
         link: function postLink(scope, element, attrs) {
+            scope.filterJSON;
             scope.distributionData = [];
             scope.gridOptions = {
                 data: 'distributionData'
             };
 
             scope.$watch('filter', function (newFilter) {
-                scope.getData(scope.question.slug, scope.question.options_from_previous_answer, newFilter);
-            });
+                var filter = [];
+                
+                _.each(newFilter, function (v, k) {
+                    var thisFilter = {};
+                    
+                    if (v.length) {    
+                        thisFilter[k] = v;
+                        filter.push(thisFilter);
+                    }
+                });
+                
+                scope.filterJSON = JSON.stringify(filter);
+            }, true);
 
 
-            scope.getData = function (questionSlug, filterQuestionSlug, filterValue) {
-                var url = '/reports/distribution/' + scope.surveySlug + '/' + questionSlug;
-                if (filterQuestionSlug && filterValue) {
-                    url += '?filter_question=' + filterQuestionSlug;
-                    url += '&filter_value=' + filterValue;
+            scope.$watch('filterJSON', function (newValue) {
+                scope.getData(scope.question.slug, scope.surveySlug, newValue);
+            }, true);
+
+            scope.getData = function (questionSlug, surveySlug, filters) {
+                var url = '/reports/distribution/' + surveySlug + '/' + questionSlug;
+
+                if (filters) {
+                    url += '?filters=' + filters;
+                    
                 }
                 $http.get(url).success(function(data) {
                     scope.distributionData = data.answer_domain;
