@@ -29,20 +29,32 @@
             templateUrl: '/static/survey/views/leaflet.html',
             link: function(scope, element, attrs, ctrl) {
                 var $el = element[0],
-                    map = new L.Map($el, {
-                        fadeAnimation: false,
-                        zoomAnimation: false,
-                        markerZoomAnimation: false,
-                        inertia: false
-                    });
+                    cloudmadeUrl = 'http://{s}.tile.cloudmade.com/API-key/{styleId}/256/{z}/{x}/{y}.png',
+                    cloudmadeAttribution = 'Map data &copy; 2011 OpenStreetMap contributors, Imagery &copy; 2011 CloudMade';
 
-                // L.tileLayer('http://services.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer/tile/{z}/{y}/{x}', {
-                //     maxZoom: 13
-                // }).addTo(map);
+                var nautical = L.tileLayer.wms("http://egisws02.nos.noaa.gov/ArcGIS/services/RNC/NOAA_RNC/ImageServer/WMSServer", {
+                    format: 'img/png',
+                    transparent: true,
+                    layers: null,
+                    attribution: "NOAA Nautical Charts"
+                });
+
                 var ggl = new L.Google();
-                map.addLayer(ggl);
-                scope.basemap = ggl;
-                // Default center of the map
+
+                var map = new L.Map($el, {
+                    fadeAnimation: false,
+                    zoomAnimation: false,
+                    markerZoomAnimation: false,
+                    inertia: false,
+                    layers: [ggl]
+                });
+            
+                var baseMaps = {
+                    "Google": ggl,
+                    "Nutical Charts": nautical
+                };
+                L.control.layers(baseMaps, null).addTo(map);
+
                 var point = new L.LatLng(45, -122);
                 map.setView(point, 5);
 
@@ -205,7 +217,6 @@
                     });
 
                     map.on('zoomend', function(e) {
-                        scope.basemap._reset()
                         scope.$apply(function(s) {
                             s.zoom = map.getZoom();
                             s.center.lat = map.getCenter().lat;
