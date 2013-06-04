@@ -246,7 +246,7 @@ angular.module('askApp')
         }
 
         if ($scope.question) {
-            if ($scope.answer &&  $scope.question.allow_other && $scope.answer.other || _.findWhere($scope.answer, { other: true })) {
+            if ($scope.answer &&  $scope.question.allow_other && $scope.answer.other || _.isArray($scope.answer) && _.findWhere($scope.answer, { other: true })) {
                 $scope.question.otherOption = {
                     'checked': true,
                     'other': true

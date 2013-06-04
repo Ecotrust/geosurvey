@@ -11,7 +11,7 @@ angular.module('askApp', ['ui', 'leaflet.directive', 'ui.bootstrap', 'ngGrid'])
 
     $routeProvider.when('/', {
         templateUrl: '/static/survey/views/main.html',
-        controller: 'MainCtrl'
+        controller: 'SurveyDetailCtrl'
     })
     .when('/author/:surveySlug', {
       templateUrl: 'static/survey/views/author.html',

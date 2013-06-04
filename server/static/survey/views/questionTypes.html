@@ -21,7 +21,7 @@
                 ui-event="{ keypress : 'onlyDigits($event)' }"
                 autofocus
                 required/>
-            <button type="submit" class="btn btn-primary btn-large btn-block" ng-disabled="question.required && (answer === undefined || answer === null)">continue</button>
+            <button type="submit" class="btn btn-primary btn-large btn-block" ng-disabled="question.required && (! answer)">continue</button>
         </form>
     </div>
     <div ng-switch-when="auto-single-select">
