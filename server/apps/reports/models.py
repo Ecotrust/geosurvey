@@ -15,14 +15,20 @@ from apps.survey.models import Survey, Question, Response, Respondant, Location
 #     question
 
 class QuestionReport(Question):
+
     class Meta:
         proxy = True
 
-    def get_answer_domain(self, filter_question=None, filter_value=None):
+    def get_answer_domain(self, survey, filters=None):
         answers = self.response_set.all()
 
-        if filter_question is not None and filter_value is not None:
-            answers = answers.filter(respondant__responses__in=filter_question.response_set.filter(answer=filter_value))
+        if filters is not None:    
+            for filter in filters:
+                slug = filter.keys()[0]
+                value = filter[slug]
+                filter_question = QuestionReport.objects.get(slug=slug, survey=survey)
+
+                answers = answers.filter(respondant__responses__in=filter_question.response_set.filter(answer__in=value))
 
         if self.type == 'map-multipoint':
             answers = Location.objects.filter()

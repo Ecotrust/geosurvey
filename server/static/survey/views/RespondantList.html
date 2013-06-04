@@ -13,18 +13,22 @@
         <div class="row-fluid" ng-repeat="question in survey.questions">
             <div  ui-if="question.visualize">
                 <h4>
-                    <div class="pull-right">
-                        <select ng-model="question.filterAnswer">
-                            <option value="">all</option>
-                            <option value="{{answer.answer}}" ng-repeat="answer in getQuestionBySlug(question.options_from_previous_answer).answer_domain">
-                                <strong>{{answer.answer}}</strong> ({{answer.count}})
+                    <div class="pull-right" ng-repeat="filterQuestion in question.filterQuestions">
+                        <select placeholder="filter by {{ filterQuestion.slug }}" multiple=true ng-model="question.filters[filterQuestion.slug]" ui-select2 style="width: 200px">
+                            <option value="{{answer.answer}}" ng-repeat="answer in filterQuestion.answer_domain">
+                                <strong>{{answer.answer}}</strong>
                             </option>
                         </select>
                     </div>
-                    Distribution by {{ question.slug }} for {{ question.filterAnswer || 'all' }}
+                    Distribution by {{ question.slug }}
+                    <dl ng-repeat="(slug, filter) in question.filters">
+                        <dt>{{ slug }}:</dt>                           
+                        <dd ng-show="filter.length" ng-repeat="filterItem in filter">{{filterItem}}</dd>
+                        <dd ng-hide="filter.length">all</dd>
+                    </dl>
                 </h4>
 
-                <distribution filter="question.filterAnswer" question="question" survey-slug="survey.slug"></distribution>
+                <distribution filter="question.filters" question="question" survey-slug="survey.slug"></distribution>
             </div>
         </div>
     </div>
