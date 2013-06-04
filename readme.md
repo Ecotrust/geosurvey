@@ -63,11 +63,20 @@ Because the app is being served out of the django app we need to specify a path 
 1. Install the heroku toolbelt.
 2. Install git > 1.8
 
-##create the heroku app
+##create the heroku app if it doesn't exist
+```bash
 heroku create appname
+```
 
-##push the app if it is in a directory
+##login to heroku
+```bash
+heroku login
+```
+
+##push the app from the project directory
+```bash
 git subtree push --prefix server/ heroku master
+```
 
 ##django install
 ```bash
@@ -75,5 +84,13 @@ heroku run python manage.py syncdb --settings=config.environments.heroku
 heroku run python manage.py migrate --settings=config.environments.heroku
 ```
 
+##load the places database for zoom to
+```bash
+heroku run python manage.py loaddata apps/places/fixtures/marco.json.gz --settings=config.environments.heroku
+```
+
 ##open the app
+```bash
 heroku open
+```
+
