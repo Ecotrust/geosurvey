@@ -56,6 +56,10 @@ function MapContinueDialogCtrl($scope, dialog, remainingActivities, $location){
 angular.module('askApp')
     .controller('SurveyDetailCtrl', function($scope, $routeParams, $http, $location, $dialog, $interpolate, $timeout) {
 
+    $scope.survey = {
+        state: 'loading'
+    };
+
     $scope.answers = {};
 
     $scope.isAuthenticated = isAuthenticated;
@@ -496,6 +500,11 @@ angular.module('askApp')
 
     $scope.loadSurvey = function (data) {
         $scope.survey = data.survey;
+        $scope.survey.state = data.state;
+
+        if (data.state === 'complete' || data.state === 'terminate') {
+            $location.path(['survey', $scope.survey.slug, 'complete', $routeParams.uuidSlug].join('/'));
+        }
 
         _.each(data.responses, function(response) {
             try {
