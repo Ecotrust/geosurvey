@@ -37,7 +37,15 @@ urlpatterns = patterns('',
     url(r'^respond$', 'apps.survey.views.survey'),
     #other survey urls
     url(r'^respond', include(survey_urls)),
-    (r'register', survey_urls.register),
+
+    # backend urls
+    url(r'^dash/(?P<survey_slug>[\w\d-]+)$', 'apps.survey.views.dash'),
+    #survey responder with preassigned uuid
+    url(r'^dash$', 'apps.survey.views.dash'),
+    #other survey urls
+    url(r'^dash', include(survey_urls)),
+
+    (r'^register', survey_urls.register),
     #(r'^survey/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.SURVEY_ROOT}),
 )
 
