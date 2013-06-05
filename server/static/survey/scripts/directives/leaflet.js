@@ -51,7 +51,7 @@
             
                 var baseMaps = {
                     "Google": ggl,
-                    "Nuatical Charts": nautical
+                    "Nautical Charts": nautical
                 };
                 L.control.layers(baseMaps, null).addTo(map);
 
