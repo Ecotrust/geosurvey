@@ -53,13 +53,7 @@ function MapContinueDialogCtrl($scope, dialog, remainingActivities, $location){
 function HelpDialogCtrl($scope, dialog, $location) {
     $scope.panes = {
         pane1: {
-            title: "Help Topics"
-        },
-        pane2: {
-            title: "Topic 1"
-        },  
-        pane3: {
-            title: "Topic 2"
+            title: "How to Map Your Activities"
         }
     };
     
