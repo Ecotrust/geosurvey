@@ -838,6 +838,17 @@ angular.module('askApp')
                 }).open();
             };
 
+            $scope.showHelp = function () {
+                var d = $dialog.dialog({
+                    backdrop: true,
+                    keyboard: true,
+                    backdropClick: false,
+                    templateUrl: '/static/survey/views/helpModal.html',
+                    controller: 'HelpDialogCtrl'
+                });
+                d.open();
+            };
+
         }
 
         // grid question controller
@@ -912,17 +923,5 @@ angular.module('askApp')
     } else {
         $scope.loadSurvey(app.data);
     }
-
-
-$scope.showHelp = function () {
-    var d = $dialog.dialog({
-        backdrop: true,
-        keyboard: true,
-        backdropClick: false,
-        templateUrl: '/static/survey/views/helpModal.html',
-        controller: 'HelpDialogCtrl'
-    });
-    d.open();
-};
 
 });
