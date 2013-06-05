@@ -170,7 +170,7 @@
 
 body {
   color: #34495e;
-  font: 14px/1.231 "Lato", sans-serif; }
+  font: 14px/1.231; }
 
 a {
   color: #1abc9c;
@@ -801,7 +801,6 @@ input[type="color"],
 .uneditable-input {
   border: 2px solid #dce4ec;
   color: #34495e;
-  font-family: "Lato", sans-serif;
   font-size: 14px;
   padding: 8px 0 9px 10px;
   text-indent: 1px;
@@ -1266,7 +1265,6 @@ textarea,
     background: transparent;
     border: none;
     color: #34495e;
-    font-family: "Lato", sans-serif;
     font-size: 14px;
     margin: 0px;
     padding: 0 0 0 5px;
@@ -1931,8 +1929,7 @@ body.vjs-full-window {
   position: absolute;
   bottom: 4em;
   left: 1em;
-  right: 1em;
-  font-family: "Lato", sans-serif; }
+  right: 1em; }
 .video-js .vjs-text-track {
   display: none;
   color: white;
@@ -2148,7 +2145,7 @@ body.vjs-full-window {
   height: 20px;
   width: 50px;
   top: 16px;
-  font: 300 13px "Lato", sans-serif; }
+  font: 300 13px; }
 
 .vjs-current-time {
   right: 128px;
