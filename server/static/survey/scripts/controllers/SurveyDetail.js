@@ -848,7 +848,6 @@ angular.module('askApp')
                 });
                 d.open();
             };
-
         }
 
         // grid question controller

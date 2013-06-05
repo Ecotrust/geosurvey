@@ -2,11 +2,27 @@
 
 'use strict';
 
+function ZoomAlertCtrl($scope, dialog, $location) {
+    $scope.loaded = false;
+    $scope.$watch(function() {
+        return $location.path();
+    }, function () {
+        if ($scope.loaded && dialog.isOpen()) {
+            $scope.close();
+        }
+        $scope.loaded = true;
+    });
+
+    $scope.close = function(result) {
+        dialog.close(result);
+    };
+}
+
 (function() {
 
     var leafletDirective = angular.module('leaflet.directive', []);
 
-    leafletDirective.directive('leaflet', function($http, $log, $compile, $timeout) {
+    leafletDirective.directive('leaflet', function($http, $log, $compile, $timeout, $dialog) {
         return {
             restrict: 'EA',
             replace: true,
@@ -291,10 +307,10 @@
                     if (scope.confirmingLocation) {
                         scope.marker.icon = "crosshair_blank.png";
 
-                    } else if (scope.showZoomAlert && !scope.isZoomedIn()) {
+                    } else if (scope.isCrosshairAlerting && !scope.isZoomedIn()) {
                         scope.marker.icon = "crosshair_red.png";
 
-                    } else if (scope.showZoomAlert && scope.isZoomedIn()) {
+                    } else if (scope.isCrosshairAlerting && scope.isZoomedIn()) {
                         scope.marker.icon = "crosshair_green.png";
 
                     } else {
@@ -313,17 +329,30 @@
                     return scope.zoom >= scope.requiredzoom;
                 };
 
-                scope.showZoomAlert = false;
+                scope.isCrosshairAlerting = false;
+
+                scope.showZoomAlert = function () {
+                    var d = $dialog.dialog({
+                        backdrop: true,
+                        keyboard: true,
+                        backdropClick: false,
+                        templateUrl: '/static/survey/views/zoomAlertModal.html',
+                        controller: 'ZoomAlertCtrl'
+                    });
+                    d.open();
+                }
+
 
                 scope.addMarkerWrapper = function() {
                     if (scope.activeMarker) {
                         scope.activeMarker.marker.closePopup();
                     }
                     if (!scope.isZoomedIn()) {
-                        scope.showZoomAlert = true;
+                        scope.isCrosshairAlerting = true;
+                        scope.showZoomAlert();
                     } else {
                         scope.addMarker(scope.getNextColor());
-                        scope.showZoomAlert = false;
+                        scope.isCrosshairAlerting = false;
                     }
                     scope.updateCrosshair();
                 };
