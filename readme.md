@@ -73,6 +73,11 @@ heroku create appname
 heroku login
 ```
 
+##set environment vars
+```bash
+heroku config:add DJANGO_SECRET_KEY=SECRET!
+```
+
 ##push the app from the project directory
 ```bash
 git subtree push --prefix server/ heroku master
