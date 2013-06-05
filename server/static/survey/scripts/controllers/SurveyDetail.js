@@ -23,7 +23,6 @@ function ActivitiesCtrl($scope, dialog, $location) {
         return $location.path();
     }, function () {
         if ($scope.loaded && dialog.isOpen()) {
-            console.log('close Activities');
             $scope.close();
         }
         $scope.loaded = true;
@@ -40,13 +39,48 @@ function MapContinueDialogCtrl($scope, dialog, remainingActivities, $location){
         return $location.path();
     }, function () {
         if ($scope.loaded && dialog.isOpen()) {
-            console.log('close ContinueModal');
             $scope.close();
         }
         $scope.loaded = true;
     });
 
     $scope.remainingActivities = remainingActivities;
+    $scope.close = function(result){
+        dialog.close(result);
+    };
+}
+
+function HelpDialogCtrl($scope, dialog, $location) {
+    $scope.panes = {
+        pane1: {
+            title: "How to Map Your Activities"
+        }
+    };
+    
+    $scope.currentPane = null;
+
+    $scope.show = function (paneName) {
+        if (_.has($scope.panes, paneName)) {
+            _.each($scope.panes, function (value, key, list) {
+                $scope.panes[key].showing = false;
+            });
+            $scope.panes[paneName].showing = true;
+            $scope.currentPane = $scope.panes[paneName];
+        }
+    };
+
+    $scope.show('pane1');
+
+
+    $scope.loaded = false;
+    $scope.$watch(function() {
+        return $location.path();
+    }, function () {
+        if ($scope.loaded && dialog.isOpen()) {
+            $scope.close();
+        }
+        $scope.loaded = true;
+    });
     $scope.close = function(result){
         dialog.close(result);
     };
@@ -879,5 +913,16 @@ angular.module('askApp')
         $scope.loadSurvey(app.data);
     }
 
+
+$scope.showHelp = function () {
+    var d = $dialog.dialog({
+        backdrop: true,
+        keyboard: true,
+        backdropClick: false,
+        templateUrl: '/static/survey/views/helpModal.html',
+        controller: 'HelpDialogCtrl'
+    });
+    d.open();
+};
 
 });
