@@ -1,7 +1,7 @@
 'use strict';
 
 var app = {};
-
+console.log(static_url);
 
 angular.module('askApp', ['ui', 'leaflet.directive', 'ui.bootstrap', 'ngGrid'])
     .config(function($routeProvider, $httpProvider) {
