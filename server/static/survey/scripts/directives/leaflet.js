@@ -26,7 +26,7 @@
                 confirmingLocation: '=conflocation',
                 zoomToResult: '=zoomtoresult'
             },
-            templateUrl: '/static/survey/views/leaflet.html',
+            templateUrl: static_url + 'survey/views/leaflet.html',
             link: function(scope, element, attrs, ctrl) {
                 var $el = element[0],
                     cloudmadeUrl = 'http://{s}.tile.cloudmade.com/API-key/{styleId}/256/{z}/{x}/{y}.png',
@@ -88,7 +88,7 @@
 
                 if (attrs.marker) {
                     var crosshairIcon = L.icon({
-                        iconUrl: '/static/survey/img/' + scope.marker.icon,
+                        iconUrl: static_url + 'survey/img/' + scope.marker.icon,
                         shadowUrl: false,
 
                         iconSize: [50, 50], // size of the icon
@@ -139,7 +139,7 @@
 
                         scope.$watch('marker.icon', function(newValue) {
                             if (marker && marker._icon && marker._icon.src) {
-                                marker._icon.src = '/static/survey/img/' + newValue;
+                                marker._icon.src = static_url + 'survey/img/' + newValue;
                             }
                             
                         });

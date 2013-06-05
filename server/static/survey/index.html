@@ -90,6 +90,7 @@
 
     <script>
     var token = "{{csrf_token}}";
+    var static_url = "{{STATIC_URL}}"
     {% if user.is_authenticated %}
     var isAuthenticated = true;
     {% else %}

@@ -86,7 +86,7 @@ angular.module('askApp')
                         isInitialView: scope.isInitialView,
                         numLocations: scope.numLocations
                     },
-                    templateUrl: '/static/survey/views/zoomToModal.html',
+                    templateUrl: static_url + 'survey/views/zoomToModal.html',
                     controller: 'ZoomToCtrl'
                 });
                 dialog.open().then(function (place) {
