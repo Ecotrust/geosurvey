@@ -3,7 +3,7 @@ You recently submitted your e-mail address to take a survey on ocean and coastal
 
 http://{{ SITE_URL }}/respond#/survey/marco/{{ uuid }}
 
-The survey should take approximately 10 to 15 minutes to complete. By clicking on this link you agree to participate in this survey and provide your information to Surfrider. If you need technical assistance please contact Tim Glaser at tglaser@ecotrust.org.
+The survey should take approximately 10 to 15 minutes to complete. By clicking on this link you verify that you are 18 years of age or older and agree to participate in this survey and provide your information to Surfrider. If you need technical assistance please contact Tim Glaser at tglaser@ecotrust.org.
 
 Thank you for participating!
 Surfrider Foundation
