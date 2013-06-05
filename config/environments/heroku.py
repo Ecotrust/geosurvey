@@ -24,17 +24,17 @@ except KeyError:
 
 redis_url = os.environ.get('REDISTOGO_URL', None)
 if redis_url:
-     redis = urlparse.urlparse(redis_url)
-CACHES = {
-    'default': {
-        'BACKEND': 'redis_cache.RedisCache',
-        'LOCATION': '%s:%s' % (redis.hostname, redis.port),
-        'OPTIONS': {
-            'DB': 0,
-            'PASSWORD': redis.password,
+    redis = urlparse.urlparse(redis_url)
+    CACHES = {
+        'default': {
+            'BACKEND': 'redis_cache.RedisCache',
+            'LOCATION': '%s:%s' % (redis.hostname, redis.port),
+            'OPTIONS': {
+                'DB': 0,
+                'PASSWORD': redis.password,
+            }
         }
     }
-}
 
 COMPRESS_ENABLED = False
   
