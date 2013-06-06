@@ -14,3 +14,6 @@ django-redis-cache
 redis
 hiredis
 gunicorn
+django-storages
+boto
+

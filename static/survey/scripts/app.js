@@ -2,7 +2,6 @@
 
 var app = {};
 
-
 angular.module('askApp', ['ui', 'leaflet.directive', 'ui.bootstrap', 'ngGrid'])
     .config(function($routeProvider, $httpProvider) {
 
@@ -17,7 +16,7 @@ angular.module('askApp', ['ui', 'leaflet.directive', 'ui.bootstrap', 'ngGrid'])
         controller: 'SurveyDetailCtrl'
     })
     .when('/author/:surveySlug', {
-      templateUrl: 'static/survey/views/author.html',
+      templateUrl: '/static/survey/views/author.html',
       controller: 'AuthorCtrl'
     })
     .when('/surveys', {
