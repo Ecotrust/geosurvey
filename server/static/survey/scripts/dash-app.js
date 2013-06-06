@@ -10,39 +10,39 @@ angular.module('askApp', ['ui', 'leaflet.directive', 'ui.bootstrap', 'ngGrid'])
 
 
     $routeProvider.when('/', {
-        templateUrl: static_url + 'survey/views/main.html',
+        templateUrl: '/static/survey/views/main.html',
         controller: 'MainCtrl'
     })
     .when('/author/:surveySlug', {
-      templateUrl: static_url + 'survey/views/author.html',
+      templateUrl: '/static/survey/views/author.html',
       controller: 'AuthorCtrl'
     })
     .when('/surveys', {
-        templateUrl: static_url + 'survey/views/SurveyList.html',
+        templateUrl: '/static/survey/views/SurveyList.html',
         controller: 'SurveyListCtrl'
     })
     .when('/survey/:surveySlug/complete/:uuidSlug', {
-      templateUrl: static_url + 'survey/views/complete.html',
+      templateUrl: '/static/survey/views/complete.html',
       controller: 'CompleteCtrl'
     })
     .when('/survey/:surveySlug/complete/:uuidSlug/:action/:questionSlug', {
-      templateUrl: static_url + 'survey/views/complete.html',
+      templateUrl: '/static/survey/views/complete.html',
       controller: 'CompleteCtrl'
     })
     .when('/survey/:surveySlug/:questionSlug/:uuidSlug', {
-        templateUrl: static_url + 'survey/views/SurveyDetail.html',
+        templateUrl: '/static/survey/views/SurveyDetail.html',
         controller: 'SurveyDetailCtrl'
     })
     .when('/survey/:surveySlug/:uuidSlug', {
-        templateUrl: static_url + 'survey/views/landing.html',
+        templateUrl: '/static/survey/views/landing.html',
         controller: 'SurveyDetailCtrl'
     })
     .when('/RespondantList/:surveySlug', {
-        templateUrl: static_url + 'survey/views/RespondantList.html',
+        templateUrl: '/static/survey/views/RespondantList.html',
         controller: 'RespondantListCtrl'
     })
     .when('/RespondantDetail/:surveySlug/:uuidSlug', {
-      templateUrl: static_url + 'survey/views/RespondantDetail.html',
+      templateUrl: '/static/survey/views/RespondantDetail.html',
       controller: 'RespondantDetailCtrl'
     })
     .otherwise({

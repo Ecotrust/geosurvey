@@ -114,7 +114,7 @@ angular.module('askApp')
     $scope.isAuthenticated = isAuthenticated;
 
     // landing page view
-    $scope.landingView = static_url + 'survey/survey-pages/' + $routeParams.surveySlug + '/landing.html';
+    $scope.landingView = '/static/survey/survey-pages/' + $routeParams.surveySlug + '/landing.html';
 
     $scope.zoomModel = {
         zoomToResult: undefined
@@ -170,7 +170,7 @@ angular.module('askApp')
             backdrop: true,
             keyboard: true,
             backdropClick: false,
-            templateUrl: static_url + 'survey/views/locationActivitiesModal.html',
+            templateUrl: '/static/survey/views/locationActivitiesModal.html',
             controller: 'SurveyDetailCtrl',
             scope: {
                 question: question ? question : $scope.question.modalQuestion,
@@ -532,7 +532,7 @@ angular.module('askApp')
             backdrop: true,
             keyboard: true,
             backdropClick: false,
-            templateUrl: static_url + 'survey/views/mapContinueModal.html',
+            templateUrl: '/static/survey/views/mapContinueModal.html',
             controller: 'MapContinueDialogCtrl',
             resolve: { remainingActivities: function () {
                     return angular.copy(remainingActivities); 
@@ -583,7 +583,7 @@ angular.module('askApp')
         }
 
         if ($scope.question && $scope.question.type === 'info' && $scope.question.info) {
-            $scope.infoView = static_url + 'survey/survey-pages/' + $routeParams.surveySlug + '/' + $scope.question.info + '.html';
+            $scope.infoView = '/static/survey/survey-pages/' + $routeParams.surveySlug + '/' + $scope.question.info + '.html';
 
         }
 
@@ -720,7 +720,7 @@ angular.module('askApp')
                 stateAbrv = stateAnswer.label;
             }
 
-            $http.get(static_url + 'survey/surveys/counties/' + stateAbrv + '.json').success(function(data, status, headers, config) {
+            $http.get('/static/survey/surveys/counties/' + stateAbrv + '.json').success(function(data, status, headers, config) {
                 if (Object.prototype.toString.call(data) === '[object Array]' && data.length > 0) {
                     $scope.question.options = data;
                 } else {
@@ -841,7 +841,7 @@ angular.module('askApp')
                     backdrop: true,
                     keyboard: true,
                     backdropClick: false,
-                    templateUrl: static_url + 'survey/views/activitiesModal.html',
+                    templateUrl: '/static/survey/views/activitiesModal.html',
                     scope: {
                         hoisted_options: $scope.getAnswer($scope.question.modalQuestion.hoist_answers.slug),
                         locations: $scope.locations,
