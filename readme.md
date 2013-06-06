@@ -73,6 +73,11 @@ heroku create appname
 heroku login
 ```
 
+##set environment vars
+```bash
+heroku config:add DJANGO_SECRET_KEY=SECRET!
+```
+
 ##push the app from the project directory
 ```bash
 git subtree push --prefix server/ heroku master
@@ -84,8 +89,9 @@ heroku run python manage.py syncdb --settings=config.environments.heroku
 heroku run python manage.py migrate --settings=config.environments.heroku
 ```
 
-##load the places database for zoom to
+##load some data
 ```bash
+heroku run python manage.py loaddata apps/survey/fixtures/surveys.json --settings=config.environments.heroku
 heroku run python manage.py loaddata apps/places/fixtures/marco.json.gz --settings=config.environments.heroku
 ```
 
