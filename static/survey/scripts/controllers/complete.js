@@ -12,5 +12,5 @@ angular.module('askApp')
         app.data.state = $routeParams.acttion;
     });
 
-    $scope.completeView = static_url + 'survey/survey-pages/' + $routeParams.surveySlug + '/complete.html';
+    $scope.completeView = '/static/survey/survey-pages/' + $routeParams.surveySlug + '/complete.html';
   });
