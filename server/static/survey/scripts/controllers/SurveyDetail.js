@@ -17,6 +17,21 @@ var map = {
 };
 
 
+function MapIntroDialogCtrl($scope, dialog, $location) {
+    $scope.loaded = false;
+    $scope.$watch(function() {
+        return $location.path();
+    }, function () {
+        if ($scope.loaded && dialog.isOpen()) {
+            $scope.close();
+        }
+        $scope.loaded = true;
+    });
+    $scope.close = function(result) {
+        dialog.close(result);
+    };
+}
+
 function ActivitiesCtrl($scope, dialog, $location) {
     $scope.loaded = false;
     $scope.$watch(function() {
@@ -180,7 +195,7 @@ angular.module('askApp')
                 $scope.dialog = null;
             },
             error: function(arg1, arg2) {
-                alert('error confirming');
+                //alert('error confirming');
             },
             cancel: function() {
                 $scope.removeLocation($scope.activeMarker);
@@ -847,6 +862,21 @@ angular.module('askApp')
                     controller: 'HelpDialogCtrl'
                 });
                 d.open();
+            };
+
+            $scope.showIntro = function () {
+                $timeout(function () {
+                    var d = $dialog.dialog({
+                        backdrop: true,
+                        keyboard: true,
+                        backdropFade: true,
+                        transitionClass: 'fade',
+                        backdropClick: false,
+                        templateUrl: '/static/survey/views/mapIntroModal.html',
+                        controller: 'MapIntroDialogCtrl'
+                    });
+                    d.open();
+                }, 300);
             };
         }
 
