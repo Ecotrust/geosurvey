@@ -69,7 +69,8 @@ angular.module('askApp')
         scope: {
             states: "=states",
             zoomToResult: "=zoomtoresult",
-            numLocations: "=numlocations"
+            numLocations: "=numlocations",
+            done: "&done"
             
         },
         link: function postLink(scope, element, attrs) {
@@ -98,7 +99,7 @@ angular.module('askApp')
                             zoom: 15
                         };
                     }
-                    
+                    scope.done();
                 });
             };
 

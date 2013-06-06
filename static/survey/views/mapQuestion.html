@@ -1,13 +1,7 @@
 <div class="map-multipoint">
-    <div class="row-fluid" ng-class="{hiddenbutspaced: activeMarker != false}">
-        <p class="question-title" style="font-size: 24px;">
-            Please click "<i class="icon-plus"></i>&nbsp;Add Location" to add each of your activity locations to the map.
-        </p>
-        <!-- <p class="question-sub-text">Zoom in closely before adding locations.</p> -->
-    </div>
     <div class="row-fluid" ng-show="activeMarker == false">
         
-        <span zoomto onload="openModal()" states="survey.states" zoomtoresult="zoomModel.zoomToResult" numlocations="locations.length"></span>
+        <span zoomto onload="openModal()" done="showIntro()" states="survey.states" zoomtoresult="zoomModel.zoomToResult" numlocations="locations.length"></span>
         
         <button 
             class="btn btn-large btn-my-activities" 

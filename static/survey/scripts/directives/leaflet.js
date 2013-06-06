@@ -336,6 +336,8 @@ function ZoomAlertCtrl($scope, dialog, $location) {
                         backdrop: true,
                         keyboard: true,
                         backdropClick: false,
+                        backdropFade: true,
+                        transitionClass: 'fade',
                         templateUrl: '/static/survey/views/zoomAlertModal.html',
                         controller: 'ZoomAlertCtrl'
                     });
