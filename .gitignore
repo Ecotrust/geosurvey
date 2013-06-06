@@ -14,4 +14,5 @@ server/static/survey/components/
 .vagrant
 geosurvey_env
 logs
+scripts/heroku-env.sh
 
