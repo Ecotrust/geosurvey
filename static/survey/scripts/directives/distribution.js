@@ -3,7 +3,7 @@
 angular.module('askApp')
     .directive('distribution', function($http) {
     return {
-        templateUrl: static_url + 'survey/views/distributionView.html',
+        templateUrl: '/static/survey/views/distributionView.html',
         restrict: 'EA',
         // replace: true,
         transclude: true,
