@@ -102,6 +102,24 @@ function HelpDialogCtrl($scope, dialog, $location) {
 }
 
 
+function ActivitySelectorDialogCtrl($scope, dialog, $location, ) {
+    $scope.loaded = false;
+    $scope.$watch(function() {
+        return $location.path();
+    }, function () {
+        if ($scope.loaded && dialog.isOpen()) {
+            $scope.close();
+        }
+        $scope.loaded = true;
+    });
+
+    $scope.remainingActivities = remainingActivities;
+    $scope.close = function(result){
+        dialog.close(result);
+    };
+}
+
+
 angular.module('askApp')
     .controller('SurveyDetailCtrl', function($scope, $routeParams, $http, $location, $dialog, $interpolate, $timeout) {
 
@@ -166,18 +184,22 @@ angular.module('askApp')
     }
 
     $scope.confirmLocation = function(question) {
-        $scope.dialog = $dialog.dialog({
+        var d = $dialog.dialog({
             backdrop: true,
             keyboard: true,
             backdropClick: false,
             templateUrl: '/static/survey/views/locationActivitiesModal.html',
-            controller: 'SurveyDetailCtrl',
-            scope: {
-                question: question ? question : $scope.question.modalQuestion,
-                activeMarker: $scope.activeMarker,
-                removeLocation: $scope.removeLocation
-            },
-            success: function(question, answer) {
+            controller: 'ActivitySelectorDialogCtrl',
+            resolve: { 
+                question: function () {
+                    return question ? question : $scope.question.modalQuestion; 
+                },
+
+            }
+        });
+        
+        d.open().then(function (result, data) {
+            if (result == 'success') {
                 if (question.update) {
                     $scope.locations[_.indexOf($scope.locations, $scope.activeMarker)].answers = answer;
                 } else {
@@ -191,9 +213,40 @@ angular.module('askApp')
                 }
                 $scope.activeMarker = false;
                 question.update = false;
-                $scope.dialog.close();
-                $scope.dialog = null;
-            },
+            }
+        });
+
+
+
+
+        // $scope.dialog = $dialog.dialog({
+        //     backdrop: true,
+        //     keyboard: true,
+        //     backdropClick: false,
+        //     templateUrl: '/static/survey/views/locationActivitiesModal.html',
+        //     controller: 'SurveyDetailCtrl',
+        //     scope: {
+                // question: question ? question : $scope.question.modalQuestion,
+            //     activeMarker: $scope.activeMarker,
+            //     removeLocation: $scope.removeLocation
+            // },
+            // success: function(question, answer) {
+            //     if (question.update) {
+            //         $scope.locations[_.indexOf($scope.locations, $scope.activeMarker)].answers = answer;
+            //     } else {
+            //         $scope.addLocation({
+            //             lat: $scope.activeMarker.lat,
+            //             lng: $scope.activeMarker.lng,
+            //             color: $scope.activeMarker.color,
+            //             question: question,
+            //             answers: answer
+            //         });
+            //     }
+            //     $scope.activeMarker = false;
+            //     question.update = false;
+            //     $scope.dialog.close();
+            //     $scope.dialog = null;
+            // },
             error: function(arg1, arg2) {
                 //alert('error confirming');
             },
@@ -207,8 +260,8 @@ angular.module('askApp')
                 $scope.dialog = null;
             }
         });
-        $scope.dialog.options.scope.dialog = $scope.dialog;
-        $scope.dialog.open();
+        // $scope.dialog.options.scope.dialog = $scope.dialog;
+        // $scope.dialog.open();
     }
 
     $scope.cancelConfirmation = function() {
