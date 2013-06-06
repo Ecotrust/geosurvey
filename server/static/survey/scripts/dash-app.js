@@ -14,7 +14,7 @@ angular.module('askApp', ['ui', 'leaflet.directive', 'ui.bootstrap', 'ngGrid'])
         controller: 'MainCtrl'
     })
     .when('/author/:surveySlug', {
-      templateUrl: 'static/survey/views/author.html',
+      templateUrl: '/static/survey/views/author.html',
       controller: 'AuthorCtrl'
     })
     .when('/surveys', {
