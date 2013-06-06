@@ -78,9 +78,16 @@ heroku login
 heroku config:add DJANGO_SECRET_KEY=SECRET!
 ```
 
+Or run the script from scripts/heroku-env.sh, which is available on google drive for each deployment.
+
 ##push the app from the project directory
 ```bash
 git subtree push --prefix server/ heroku master
+```
+
+##push an alternate branch from the project directory
+```bash
+git push heroku `git subtree split --prefix server testbranch`:master
 ```
 
 ##django install
