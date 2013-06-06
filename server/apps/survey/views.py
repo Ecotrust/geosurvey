@@ -8,6 +8,7 @@ from django.core.mail import EmailMultiAlternatives
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 from django.contrib.admin.views.decorators import staff_member_required
+from django.views.decorators.csrf import csrf_exempt
 
 
 import simplejson
@@ -102,7 +103,7 @@ def send_email(email, uuid):
     msg.attach_alternative(html_content, "text/html")
     msg.send()
 
-
+@csrf_exempt
 def register(request, template='survey/register.html'):
     if request.POST:
         # create respondant record
