@@ -1,7 +1,7 @@
 'use strict';
 
 var app = {};
-
+console.log(static_url);
 
 angular.module('askApp', ['ui', 'leaflet.directive', 'ui.bootstrap', 'ngGrid'])
     .config(function($routeProvider, $httpProvider) {
@@ -13,39 +13,39 @@ angular.module('askApp', ['ui', 'leaflet.directive', 'ui.bootstrap', 'ngGrid'])
 
 
     $routeProvider.when('/', {
-        templateUrl: '/static/survey/views/main.html',
+        templateUrl: static_url + 'survey/views/main.html',
         controller: 'SurveyDetailCtrl'
     })
     .when('/author/:surveySlug', {
-      templateUrl: 'static/survey/views/author.html',
+      templateUrl: static_url + 'survey/views/author.html',
       controller: 'AuthorCtrl'
     })
     .when('/surveys', {
-        templateUrl: '/static/survey/views/SurveyList.html',
+        templateUrl: static_url + 'survey/views/SurveyList.html',
         controller: 'SurveyListCtrl'
     })
     .when('/survey/:surveySlug/complete/:uuidSlug', {
-      templateUrl: '/static/survey/views/complete.html',
+      templateUrl: static_url + 'survey/views/complete.html',
       controller: 'CompleteCtrl'
     })
     .when('/survey/:surveySlug/complete/:uuidSlug/:action/:questionSlug', {
-      templateUrl: '/static/survey/views/complete.html',
+      templateUrl: static_url + 'survey/views/complete.html',
       controller: 'CompleteCtrl'
     })
     .when('/survey/:surveySlug/:questionSlug/:uuidSlug', {
-        templateUrl: '/static/survey/views/SurveyDetail.html',
+        templateUrl: static_url + 'survey/views/SurveyDetail.html',
         controller: 'SurveyDetailCtrl'
     })
     .when('/survey/:surveySlug/:uuidSlug', {
-        templateUrl: '/static/survey/views/landing.html',
+        templateUrl: static_url + 'survey/views/landing.html',
         controller: 'SurveyDetailCtrl'
     })
     .when('/RespondantList/:surveySlug', {
-        templateUrl: '/static/survey/views/RespondantList.html',
+        templateUrl: static_url + 'survey/views/RespondantList.html',
         controller: 'RespondantListCtrl'
     })
     .when('/RespondantDetail/:surveySlug/:uuidSlug', {
-      templateUrl: '/static/survey/views/RespondantDetail.html',
+      templateUrl: static_url + 'survey/views/RespondantDetail.html',
       controller: 'RespondantDetailCtrl'
     })
     .otherwise({
