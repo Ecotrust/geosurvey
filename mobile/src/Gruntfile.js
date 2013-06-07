@@ -38,19 +38,17 @@ module.exports = function (grunt) {
           '<%= yeoman.app %>/{,*/}*.html',
           '{.tmp,<%= yeoman.app %>}/styles/{,*/}*.css',
           '{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.js',
-          '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
+          '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp}'
         ],
         tasks: ['livereload']
       }
     },
     connect: {
-      options: {
-        port: 9000,
-        // Change this to '0.0.0.0' to access the server from outside.
-        hostname: 'localhost'
-      },
       livereload: {
         options: {
+          port: 9000,
+          // Change this to '0.0.0.0' to access the server from outside.
+          hostname: 'localhost',
           middleware: function (connect) {
             return [
               lrSnippet,
@@ -62,6 +60,7 @@ module.exports = function (grunt) {
       },
       test: {
         options: {
+          port: 9001,
           middleware: function (connect) {
             return [
               mountFolder(connect, '.tmp'),
@@ -73,20 +72,11 @@ module.exports = function (grunt) {
     },
     open: {
       server: {
-        url: 'http://localhost:<%= connect.options.port %>'
+        url: 'http://localhost:<%= connect.livereload.options.port %>'
       }
     },
     clean: {
-      dist: {
-        files: [{
-          dot: true,
-          src: [
-            '.tmp',
-            '<%= yeoman.dist %>/*',
-            '!<%= yeoman.dist %>/.git*'
-          ]
-        }]
-      },
+      dist: ['.tmp', '<%= yeoman.dist %>/*'],
       server: '.tmp'
     },
     jshint: {
@@ -101,26 +91,29 @@ module.exports = function (grunt) {
     karma: {
       unit: {
         configFile: 'karma.conf.js',
-        singleRun: true
+        singleRun: false
+      },
+      e2e: {
+        configFile: 'karma-e2e.conf.js',
+        singleRun: false
+      },
+      washingtonoptin: {
+        configFile: 'karma-washington-opt-in.conf.js',
+        singleRun: false
       }
     },
     coffee: {
       dist: {
-        files: [{
-          expand: true,
-          cwd: '<%= yeoman.app %>/scripts',
-          src: '{,*/}*.coffee',
-          dest: '.tmp/scripts',
-          ext: '.js'
-        }]
+        files: {
+          '.tmp/scripts/coffee.js': '<%= yeoman.app %>/scripts/*.coffee'
+        }
       },
       test: {
         files: [{
           expand: true,
-          cwd: 'test/spec',
-          src: '{,*/}*.coffee',
-          dest: '.tmp/spec',
-          ext: '.js'
+          cwd: '.tmp/spec',
+          src: '*.coffee',
+          dest: 'test/spec'
         }]
       }
     },
@@ -225,19 +218,7 @@ module.exports = function (grunt) {
         files: {
           '<%= yeoman.dist %>/scripts/scripts.js': [
             '<%= yeoman.dist %>/scripts/scripts.js'
-          ]
-        }
-      }
-    },
-    rev: {
-      dist: {
-        files: {
-          src: [
-            '<%= yeoman.dist %>/scripts/{,*/}*.js',
-            '<%= yeoman.dist %>/styles/{,*/}*.css',
-            '<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
-            '<%= yeoman.dist %>/styles/fonts/*'
-          ]
+          ],
         }
       }
     },
@@ -252,8 +233,7 @@ module.exports = function (grunt) {
             '*.{ico,txt}',
             '.htaccess',
             'components/**/*',
-            'images/{,*/}*.{gif,webp}',
-            'styles/fonts/*'
+            'images/{,*/}*.{gif,webp}'
           ]
         }]
       }
@@ -261,6 +241,8 @@ module.exports = function (grunt) {
   });
 
   grunt.renameTask('regarde', 'watch');
+  // remove when mincss task is renamed
+  grunt.renameTask('mincss', 'cssmin');
 
   grunt.registerTask('server', [
     'clean:server',
@@ -270,6 +252,23 @@ module.exports = function (grunt) {
     'connect:livereload',
     'open',
     'watch'
+  ]);
+
+  grunt.registerTask('c-unit', [
+    'clean:server',
+    // 'connect:test',
+    'karma:unit'
+  ])
+
+  grunt.registerTask('c-e2e', [
+    'clean:server',
+    // 'connect:test',
+    'karma:e2e'
+  ]);
+  grunt.registerTask('c-washingtonoptin', [
+    'clean:server',
+    // 'connect:test',
+    'karma:washingtonoptin'
   ]);
 
   grunt.registerTask('test', [
@@ -293,10 +292,9 @@ module.exports = function (grunt) {
     'concat',
     'copy',
     'cdnify',
+    'usemin',
     'ngmin',
-    'uglify',
-    'rev',
-    'usemin'
+    'uglify'
   ]);
 
   grunt.registerTask('default', ['build']);
