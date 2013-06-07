@@ -1,45 +1,78 @@
-<!doctype html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title></title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <!-- build:css styles/main.css -->
-    <link rel="stylesheet" href="styles/main.css">
-    <!-- endbuild -->
-  </head>
-  <body ng-app="mobileApp">
-    <!--[if lt IE 7]>
-      <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
-    <![endif]-->
-
-    <!--[if lt IE 9]>
-      <script src="components/es5-shim/es5-shim.js"></script>
-      <script src="components/json3/lib/json3.min.js"></script>
-    <![endif]-->
-
-    <!-- Add your site or application content here -->
-    <div class="container" ng-view></div>
-
-    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.1.5/angular.min.js"></script>
+<!DOCTYPE html>
+<html>
     
+    <head>
+        <meta charset="utf-8">
+        <title>
+            Ratchet template page
+        </title>
+        <!-- Sets initial viewport load and disables zooming -->
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+        <!-- Makes your prototype chrome-less once bookmarked to your phone's
+        home screen -->
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <!-- Set a shorter title for iOS6 devices when saved to home screen -->
+        <meta name="apple-mobile-web-app-title" content="Ratchet">
+        <!-- Set Apple icons for when prototype is saved to home screen -->
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="touch-icons/apple-touch-icon-114x114.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="touch-icons/apple-touch-icon-72x72.png">
+        <link rel="apple-touch-icon-precomposed" sizes="57x57" href="touch-icons/apple-touch-icon-57x57.png">
+        <!-- Include the compiled Ratchet CSS -->
+        <link rel="stylesheet" href="assets/lib/css/ratchet.css">
+        <!-- Intro paragraph styles. Delete once you start using this page -->
+        <style type="text/css">
+            .welcome { line-height: 1.5; color: #555; }
+        </style>
+    </head>
+    
+    <body ng-app="mobileApp">
+        <!-- Make sure all your bars are the first things in your <body> -->
+        <header class="bar-title">
+            <h1 class="title">
+                Ratchet
+            </h1>
+        </header>
+        <nav class="bar-tab primary-nav">
+            <ul class="tab-inner">
+                <li class="tab-item">
+                    <a href="#home">
+              <img class="tab-icon" src="assets/img/icon-home.png">
+              <div class="tab-label">Home</div>
+            </a>
+                </li>
+                <li class="tab-item">
+                    <a ng-click="navigateTo('completed-surveys')">
+              <img class="tab-icon" src="assets/img/market.png">
+              <div class="tab-label">Completed Surveys</div>
+            </a>
+                </li>
+                <li class="tab-item">
+                    <a href="#vendors">
+              <img class="tab-icon" src="assets/img/store.png">
+              <div class="tab-label">Vendors</div>
+            </a>
+                </li>
+                <li class="tab-item active">
+                    <a ng-click="navigateTo('survey')">
+              <img class="tab-icon" src="assets/img/survey.png">
+              <div class="tab-label">Survey</div>
+            </a>
+                </li>
+            </ul>
+        </nav>
+        <!-- Wrap all non-bar HTML in the .content div (this is actually what
+        scrolls) -->
+        <div class="content" ng-view>
+        </div>
+    </body>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.1.5/angular.min.js">
+    </script>
     <!-- build:js scripts/scripts.js -->
-    <script src="scripts/app.js"></script>
-    <script src="scripts/controllers/main.js"></script>
+    <script src="scripts/app.js">
+    </script>
+    <script src="scripts/controllers/main.js">
+    </script>
     <!-- endbuild -->
 
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-    <script>
-      var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
-      (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-      g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-      s.parentNode.insertBefore(g,s)}(document,'script'));
-    </script>
-  </body>
 </html>
