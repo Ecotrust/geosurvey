@@ -21,7 +21,7 @@ function ActivitiesCtrl($scope, dialog, $location) {
     $scope.loaded = false;
     $scope.$watch(function() {
         return $location.path();
-    }, function () {
+    }, function() {
         if ($scope.loaded && dialog.isOpen()) {
             $scope.close();
         }
@@ -33,11 +33,11 @@ function ActivitiesCtrl($scope, dialog, $location) {
     };
 }
 
-function MapContinueDialogCtrl($scope, dialog, remainingActivities, $location){
+function MapContinueDialogCtrl($scope, dialog, remainingActivities, $location) {
     $scope.loaded = false;
     $scope.$watch(function() {
         return $location.path();
-    }, function () {
+    }, function() {
         if ($scope.loaded && dialog.isOpen()) {
             $scope.close();
         }
@@ -45,7 +45,7 @@ function MapContinueDialogCtrl($scope, dialog, remainingActivities, $location){
     });
 
     $scope.remainingActivities = remainingActivities;
-    $scope.close = function(result){
+    $scope.close = function(result) {
         dialog.close(result);
     };
 }
@@ -56,12 +56,12 @@ function HelpDialogCtrl($scope, dialog, $location) {
             title: "How to Map Your Activities"
         }
     };
-    
+
     $scope.currentPane = null;
 
-    $scope.show = function (paneName) {
+    $scope.show = function(paneName) {
         if (_.has($scope.panes, paneName)) {
-            _.each($scope.panes, function (value, key, list) {
+            _.each($scope.panes, function(value, key, list) {
                 $scope.panes[key].showing = false;
             });
             $scope.panes[paneName].showing = true;
@@ -75,13 +75,13 @@ function HelpDialogCtrl($scope, dialog, $location) {
     $scope.loaded = false;
     $scope.$watch(function() {
         return $location.path();
-    }, function () {
+    }, function() {
         if ($scope.loaded && dialog.isOpen()) {
             $scope.close();
         }
         $scope.loaded = true;
     });
-    $scope.close = function(result){
+    $scope.close = function(result) {
         dialog.close(result);
     };
 }
@@ -210,7 +210,7 @@ angular.module('askApp')
             location.question = {};
             angular.extend(location.question, $scope.question.modalQuestion);
         }
-        location.question.update = true;    
+        location.question.update = true;
         $scope.activeMarker = location;
         $scope.confirmLocation(location.question);
     };
@@ -237,8 +237,10 @@ angular.module('askApp')
     };
 
 
-    $scope.getResumeQuestionPath = function (lastQuestion) {
-        var resumeQuestion = $scope.survey.questions[_.indexOf($scope.survey.questions, _.findWhere($scope.survey.questions, {slug: lastQuestion})) + 1];
+    $scope.getResumeQuestionPath = function(lastQuestion) {
+        var resumeQuestion = $scope.survey.questions[_.indexOf($scope.survey.questions, _.findWhere($scope.survey.questions, {
+            slug: lastQuestion
+        })) + 1];
         return ['survey', $scope.survey.slug, resumeQuestion.slug, $routeParams.uuidSlug].join('/');
     }
     $scope.getNextQuestionPath = function() {
@@ -274,6 +276,18 @@ angular.module('askApp')
             terminate = answer === testCriteria;
         }
         return terminate;
+    };
+
+    $scope.answerOffline = function (answer) {
+        if (! app.data) {
+            app.data = {};
+        }
+        if (!app.data.responses) {
+            app.data.responses = [];
+        }
+
+        app.data.responses.push(answer);
+        $scope.gotoNextQuestion();
     };
 
     $scope.answerQuestion = function(answer, otherAnswer) {
@@ -312,7 +326,10 @@ angular.module('askApp')
                 }));
             }
             if ($scope.survey.offline) {
-                debugger;
+                $scope.answerOffline({
+                    answer: answer,
+                    question: $scope.question
+                });
             } else {
                 $http({
                     url: url,
@@ -336,7 +353,7 @@ angular.module('askApp')
                                 $location.path(['survey', $scope.survey.slug, 'complete', $routeParams.uuidSlug, 'terminate', $routeParams.questionSlug].join('/'));
                             } else {
                                 $scope.answers[$routeParams.questionSlug] = answer;
-                                if (! app.data.responses) {
+                                if (!app.data.responses) {
                                     app.data.responses = [];
                                 }
 
@@ -346,9 +363,9 @@ angular.module('askApp')
                                 });
                                 $scope.gotoNextQuestion();
                             }
-                        }    
+                        }
                     }
-                    
+
                 }).error(function(data, status, headers, config) {
                     if (console) {
                         console.log(data);
@@ -360,7 +377,7 @@ angular.module('askApp')
 
     $scope.onMultiSelectClicked = function(option, question) {
         option.checked = !option.checked;
-        if (! option.checked && option.other) {
+        if (!option.checked && option.other) {
             $scope.question.otherAnswer = null;
         }
         $scope.isAnswerValid = $scope.validateMultiSelect(question);
@@ -368,8 +385,8 @@ angular.module('askApp')
 
     $scope.validateMultiSelect = function(question) {
         var hoistedAnswers,
-        answers,
-        isOtherAnswerValid = true;
+            answers,
+            isOtherAnswerValid = true;
 
         if (!question.required) {
             return true;
@@ -459,7 +476,7 @@ angular.module('askApp')
 
     $scope.$watch('question.otherAnswer', function(newValue) {
 
-        if ($scope.question && $scope.question.required && ! $scope.answer) {
+        if ($scope.question && $scope.question.required && !$scope.answer) {
             if ($scope.question.allow_other && $scope.question.otherOption && $scope.question.otherOption.checked && $scope.question.otherAnswer && $scope.question.otherAnswer.length > 0) {
                 $scope.isAnswerValid = true;
             } else {
@@ -488,7 +505,9 @@ angular.module('askApp')
             $scope.answerQuestion(answer);
         } else if (!$scope.question.required) {
             // No answer given. Submit empty.
-            $scope.answerQuestion({ text: 'NO_ANSWER' });
+            $scope.answerQuestion({
+                text: 'NO_ANSWER'
+            });
         }
 
     };
@@ -504,18 +523,18 @@ angular.module('askApp')
         }
     };
 
-    $scope.answerMapQuestion = function (locations) {
+    $scope.answerMapQuestion = function(locations) {
 
         // Get a list of the activities that have not yet been mapped.
         var selectedActivities = $scope.getAnswer($scope.question.modalQuestion.hoist_answers.slug);
         // todo: filter out activities that have already been mapped.
-        
+
 
         var remainingActivities = _.difference(
             _.pluck(selectedActivities, 'text'),
-            _.flatten(_.map(locations, function (location) {
-                return _.pluck(location.answers, 'text') 
-            })));;
+            _.flatten(_.map(locations, function(location) {
+            return _.pluck(location.answers, 'text')
+        })));;
 
         var d = $dialog.dialog({
             backdrop: true,
@@ -523,20 +542,21 @@ angular.module('askApp')
             backdropClick: false,
             templateUrl: '/static/survey/views/mapContinueModal.html',
             controller: 'MapContinueDialogCtrl',
-            resolve: { remainingActivities: function () {
-                    return angular.copy(remainingActivities); 
+            resolve: {
+                remainingActivities: function() {
+                    return angular.copy(remainingActivities);
                 }
             }
         });
-        
-        d.open().then(function (result) {
+
+        d.open().then(function(result) {
             if (result == 'yes') {
                 $scope.answerQuestion(locations);
             }
         });
     };
 
-    $scope.loadSurvey = function (data) {
+    $scope.loadSurvey = function(data) {
         $scope.survey = data.survey;
         $scope.survey.state = data.state;
 
@@ -552,8 +572,8 @@ angular.module('askApp')
                 $scope.answers[response.question.slug] = response.answer;
             }
         });
-        
-        if (data.last_question && ! data.complete) {
+
+        if (data.last_question && !data.complete) {
             $scope.resumeQuestionPath = $scope.getResumeQuestionPath(data.last_question);
         }
         // if (data.complete) {
@@ -587,16 +607,16 @@ angular.module('askApp')
         } else if ($scope.question && $scope.question.options.length) {
             $scope.answer = $scope.getAnswer($routeParams.questionSlug);
             // check to make sure answer is in options
-            if ($scope.answer && ! _.isArray($scope.answer)) {
+            if ($scope.answer && !_.isArray($scope.answer)) {
                 $scope.answer = [$scope.answer];
             }
             if ($scope.answer) {
 
-                _.each($scope.answer, function (answer) {
-                    if (! answer.other) {
+                _.each($scope.answer, function(answer) {
+                    if (!answer.other) {
 
                         _.each($scope.question.options, function(option) {
-                            if (answer.text === option.text || answer.text === option.name ) {
+                            if (answer.text === option.text || answer.text === option.name) {
                                 option.checked = true;
                                 $scope.isAnswerValid = true;
                             }
@@ -609,11 +629,11 @@ angular.module('askApp')
                         };
                         $scope.question.otherAnswer = answer;
                     }
-                });    
+                });
             }
         } else {
             $scope.answer = $scope.getAnswer($routeParams.questionSlug);
-            if (! $scope.answer) {
+            if (!$scope.answer) {
                 $scope.answer = null;
             }
         }
@@ -627,18 +647,18 @@ angular.module('askApp')
                     return item.group;
                 }),
                     previousAnswers = [];
-                
+
                 if ($scope.question.update && $scope.activeMarker) {
-                    previousAnswers = _.pluck($scope.activeMarker.answers, 'text');    
+                    previousAnswers = _.pluck($scope.activeMarker.answers, 'text');
                 } else if ($scope.answer) {
                     if (_.isArray($scope.answer)) {
-                        previousAnswers = _.pluck($scope.answer, 'text');        
+                        previousAnswers = _.pluck($scope.answer, 'text');
                     } else {
                         previousAnswers = [$scope.answer.text];
                     }
-                    
+
                 }
-                
+
                 if ($scope.question.randomize_groups) {
                     $scope.question.options = _.flatten(_.shuffle(_.toArray(groups)));
                 } else {
@@ -652,10 +672,10 @@ angular.module('askApp')
                         var result = _.find($scope.activeMarker.answers, function(answer) {
                             return option.label === answer.label;
                         });
-                        option.checked = !_.isUndefined(result);            
+                        option.checked = !_.isUndefined(result);
                     });
                 }
-                
+
                 // Hoist options.
                 if ($scope.question && $scope.question.hoist_answers) {
                     $scope.question.hoisted_options = [];
@@ -664,14 +684,14 @@ angular.module('askApp')
                         var newOption = {};
 
                         angular.extend(newOption, option);
-                        
+
                         if (_.contains(previousAnswers, option.text)) {
                             newOption.checked = true;
                         } else {
                             newOption.checked = false;
                         }
-                    
-                        
+
+
 
                         $scope.question.hoisted_options.unshift(newOption);
                         $scope.question.options = _.filter($scope.question.options, function(item) {
@@ -680,8 +700,8 @@ angular.module('askApp')
                     });
                 }
 
-                _.each($scope.question.options, function (option) {
-                    
+                _.each($scope.question.options, function(option) {
+
                     if (_.contains(previousAnswers, option.text)) {
                         option.checked = true;
                     } else {
@@ -717,35 +737,39 @@ angular.module('askApp')
                     $scope.gotoNextQuestion();
                 }
                 if ($scope.answer) {
-                    _.each($scope.question.options, function (option, index) {
+                    _.each($scope.question.options, function(option, index) {
                         if (option.name === $scope.answer.name) {
                             option.checked = true;
                             $scope.isAnswerValid = true;
                         }
-                    });    
+                    });
                 }
-                
+
             }).error(function(data, status, headers, config) {
                 $scope.gotoNextQuestion();
             });
         }
 
         if ($scope.question) {
-            if ($scope.answer &&  $scope.question.allow_other && $scope.answer.other || _.isArray($scope.answer) && _.findWhere($scope.answer, { other: true })) {
+            if ($scope.answer && $scope.question.allow_other && $scope.answer.other || _.isArray($scope.answer) && _.findWhere($scope.answer, {
+                other: true
+            })) {
                 $scope.question.otherOption = {
                     'checked': true,
                     'other': true
                 };
-                $scope.question.otherAnswer = $scope.answer.text || _.findWhere($scope.answer, { other: true }).text;
+                $scope.question.otherAnswer = $scope.answer.text || _.findWhere($scope.answer, {
+                    other: true
+                }).text;
             } else {
                 $scope.question.otherOption = {
                     'checked': false,
                     'other': true
                 };
                 $scope.question.otherAnswer = null;
-            }    
+            }
         }
-        
+
 
         if ($scope.question && $scope.question.options_from_previous_answer) {
             $scope.question.options = $scope.getAnswer($scope.question.options_from_previous_answer);
@@ -753,7 +777,7 @@ angular.module('askApp')
             _.each($scope.question.options, function(item) {
                 if ($scope.answer) {
                     if (_.isArray($scope.answer)) {
-                        
+
                     } else {
                         if (item.text === $scope.answer.text) {
                             item.checked = true;
@@ -820,7 +844,7 @@ angular.module('askApp')
         if ($scope.question && $scope.question.type === 'map-multipoint') {
             $scope.activeMarker = false;
 
-            if (! $scope.answer) {
+            if (!$scope.answer) {
                 $scope.locations = [];
             } else {
                 $scope.locations = JSON.parse($scope.answer);
@@ -843,7 +867,7 @@ angular.module('askApp')
                 }).open();
             };
 
-            $scope.showHelp = function () {
+            $scope.showHelp = function() {
                 var d = $dialog.dialog({
                     backdrop: true,
                     keyboard: true,
@@ -872,13 +896,13 @@ angular.module('askApp')
             } else {
                 $scope.answer = {};
             }
-            
+
             _.each($scope.question.options, function(value, key, list) {
                 list[key] = {
                     activitySlug: value.label,
                     activityText: value.text,
-                    cost: $scope.answer !== null && _.has($scope.answer, value.text) ? $scope.answer[value.text][0].cost: undefined,
-                    numPeople: $scope.answer !== null && _.has($scope.answer, value.text) ? $scope.answer[value.text][0].numPeople: undefined
+                    cost: $scope.answer !== null && _.has($scope.answer, value.text) ? $scope.answer[value.text][0].cost : undefined,
+                    numPeople: $scope.answer !== null && _.has($scope.answer, value.text) ? $scope.answer[value.text][0].numPeople : undefined
                 };
             });
 
@@ -905,28 +929,33 @@ angular.module('askApp')
                 plugins: [new ngGridFlexibleHeightPlugin()],
                 rowTemplate: '<div ng-style="{\'z-index\': col.zIndex() }" ng-repeat="col in renderedColumns" ng-class="col.colIndex()" class="ngCell {{col.cellClass}}" ng-cell></div>',
                 columnDefs: [{
-                    field: 'activityText',
-                    displayName: 'Expense Item'
-                }, {
-                    field: 'cost',
-                    displayName: 'Cost',
-                    cellTemplate: costCellTemplate
-                }, {
-                    field: 'numPeople',
-                    displayName: '# of People Covered',
-                    cellTemplate: numPeopleCellTemplate
-                }]
+                        field: 'activityText',
+                        displayName: 'Expense Item'
+                    }, {
+                        field: 'cost',
+                        displayName: 'Cost',
+                        cellTemplate: costCellTemplate
+                    }, {
+                        field: 'numPeople',
+                        displayName: '# of People Covered',
+                        cellTemplate: numPeopleCellTemplate
+                    }
+                ]
             };
         }
-    } 
+    }
 
-    if (! app.data && ! app.surveys) {
+    if (!app.data && !app.surveys) {
         $http.get('/api/v1/respondant/' + $routeParams.uuidSlug + '/?format=json').success(function(data) {
             app.data = data;
             $scope.loadSurvey(data);
         });
     } else if (app.surveys) {
-        $scope.loadSurvey({survey: _.findWhere(app.surveys, {slug: 'volume-and-origin'})});
+        $scope.loadSurvey({
+            survey: _.findWhere(app.surveys, {
+                slug: 'volume-and-origin'
+            })
+        });
     } else {
         $scope.loadSurvey(app.data);
     }
