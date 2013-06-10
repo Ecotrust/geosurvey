@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <meta charset="utf-8">
+        <title>
+            Solomon Islands
+        </title>
+        <!-- Sets initial viewport load and disables zooming -->
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+        <!-- Makes your prototype chrome-less once bookmarked to your phone's
+        home screen -->
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <!-- Set a shorter title for iOS6 devices when saved to home screen -->
+        <meta name="apple-mobile-web-app-title" content="Ratchet">
+        <!-- Set Apple icons for when prototype is saved to home screen -->
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="touch-icons/apple-touch-icon-114x114.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="touch-icons/apple-touch-icon-72x72.png">
+        <link rel="apple-touch-icon-precomposed" sizes="57x57" href="touch-icons/apple-touch-icon-57x57.png">
+        <!-- Include the compiled Ratchet CSS -->
+        <link rel="stylesheet" href="assets/lib/css/ratchet.css">
+        <link href="https://netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css" rel="stylesheet">
+        <link href="components/flatui/css/bootstrap.css" rel="stylesheet">
+
+        <!-- Intro paragraph styles. Delete once you start using this page -->
+        <style type="text/css">
+            .welcome { line-height: 1.5; color: #555; }
+            ul {
+                margin: 0;
+             /*   background-color: #222;
+                color: white;*/
+            }
+            /*.list li {
+                background-color: #222;
+                border-top: rgba(255,255,255,5);
+                border-bottom: rgba(255,255,255,5);
+            }*/
+            h1 {
+                margin: 0;
+            }
+            /*.content {
+                background-color: #222;
+                color: white;
+            }*/
+            a.button:hover {
+                text-decoration: none;
+                color: inherit;
+            }
+            .list .chevron, .list [class*="button"], .list [class*="count"], .list .toggle {
+                top: 40%;
+            }
+            [class*="button"], [class*="button"]:active {
+                padding: 10px 20px;
+            }
+
+        </style>
+    </head>
+    
+    <body ng-app="askApp">
+        <!-- Make sure all your bars are the first things in your <body> -->
+        <header class="bar-title">
+            <h1 class="title">
+                Solomon Islands
+            </h1>
+        </header>
+        <nav class="bar-tab primary-nav">
+            <ul class="tab-inner">
+                <li class="tab-item">
+                    <a href="#/SurveyList">
+              <img class="tab-icon" src="assets/img/icon-home.png">
+              <div class="tab-label">Home</div>
+            </a>
+                </li>
+                    <li class="tab-item active">
+                        <a href="#/surveys">
+                  <img class="tab-icon" src="assets/img/survey.png">
+                  <div class="tab-label">Surveys</div>
+                </a>
+                    </li>
+                <li class="tab-item">
+                    <a>
+              <img class="tab-icon" src="assets/img/market.png">
+              <div class="tab-label">Completed Surveys</div>
+            </a>
+                </li>
+                <li class="tab-item">
+                    <a href="#vendors">
+              <img class="tab-icon" src="assets/img/store.png">
+              <div class="tab-label">Vendors</div>
+            </a>
+                </li>
+                
+            </ul>
+        </nav>
+        <!-- Wrap all non-bar HTML in the .content div (this is actually what
+        scrolls) -->
+        <div class="content">
+            <div class="content-padded" ng-view>
+            </div>
+        </div>
+    </body>
+    <script src="components/flatui/js/jquery-1.8.2.min.js"></script>
+    <script src="components/jquery-ui/ui/jquery-ui.js"></script>
+     <script src="components/angular/angular.js"></script>
+     <script src="components/angular-ui/build/angular-ui.js"></script>
+     <script src="scripts/directives/ui-bootstrap-tpls-0.2.0.js"></script>
+     <script src="components/angular-resource/angular-resource.js"></script>
+     <script src="components/angular-cookies/angular-cookies.js"></script>
+     <script src="components/angular-sanitize/angular-sanitize.js"></script>
+     <script src="components/angular-ui/build/angular-ui.js"></script>
+     <script src="components/select2/select2.js"></script>
+     <script src="components/underscore/underscore.js"></script>
+     <script src="components/leaflet/dist/leaflet-src.js"></script>
+     <script src="http://maps.google.com/maps/api/js?v=3.2&sensor=false"></script>
+     <script src="lib/js/Google.js"></script>
+     <script src="lib/js/leaflet.awesome-markers.min.js"></script>
+     <script src="components/angular-grid/build/ng-grid.min.js"></script>
+     <script src="scripts/ng-grid-plugins/ng-grid-flexible-height.js"></script>
+     <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.js"></script>
+
+     <script>
+     window.isAuthenticated = false;
+     </script>
+
+
+    <!-- build:js scripts/scripts.js -->
+    <script src="scripts/app.js"></script>
+
+
+    <script src="scripts/controllers/SurveyList.js"></script>
+
+    <script src="scripts/controllers/SurveyDetail.js"></script>
+    <script src="scripts/controllers/main.js"></script>
+
+    <script src="scripts/controllers/complete.js"></script>
+    <script src="scripts/directives/leaflet.js"></script>
+    <script src="scripts/directives/zoomTo.js"></script>
+    
+    <!-- endbuild -->
+
+</html>

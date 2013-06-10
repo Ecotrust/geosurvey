@@ -57,6 +57,7 @@ class Survey(caching.base.CachingMixin, models.Model):
     questions = models.ManyToManyField('Question', null=True, blank=True, through="Page")
     states = models.CharField(max_length=200, null=True, blank=True)
     anon = models.BooleanField(default=True)
+    offline = models.BooleanField(default=False)
 
     objects = caching.base.CachingManager()
 

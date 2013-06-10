@@ -26,6 +26,10 @@ angular.module('mobileApp', ['restangular', 'serverService', 'ngResource'])
         templateUrl: 'views/surveys.html',
         controller: 'SurveysCtrl'
       })
+      .when('/survey/:surveySlug/:questionSlug', {
+        templateUrl: 'views/survey.html',
+        controller: 'SurveyCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });

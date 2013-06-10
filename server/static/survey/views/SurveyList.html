@@ -1,9 +1,16 @@
-<h2>SurveyList</h2>
-{{surveys.length}}
-<ul>
-  <li ng-repeat="survey in surveys" class=".survey-list">
-    <a href="#/survey/{{ survey.slug }}/{{ survey.firstQuestion }}">{{ survey.name }}</a>
-  </li>
-  
-  
-</ul> 
+<div class="content-padded">
+    <h2>
+        Surveys
+    </h2>
+    <div ng-hide="surveys">
+        <strong>Loading Surveys</strong>
+        <!-- <a class="button button-block">Load Surveys</a> -->
+    </div>
+</div>
+<ul class="list">
+    <li ng-repeat="survey in surveys">
+        {{ survey.name }}
+        <a ng-show="survey.offline" class="button" href="#/survey/{{survey.slug}}/{{survey.questions[0].slug}}/offline">Launch</a>
+        <a ng-hide="survey.offline" class="button" href="#/survey/{{survey.slug}}/{{survey.questions[0].slug}}/uuid">Launch</a>
+    </li>
+</ul>

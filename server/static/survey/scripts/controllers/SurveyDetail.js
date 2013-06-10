@@ -311,46 +311,50 @@ angular.module('askApp')
                     return returnValue;
                 }));
             }
-            $http({
-                url: url,
-                method: 'POST',
-                data: {
-                    'answer': answer
-                },
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                }
-            }).success(function(data) {
-                if (data.complete) {
-                    $location.path(['survey', $scope.survey.slug, 'complete', $routeParams.uuidSlug].join('/'));
-                } else {
-                    if ($scope.dialog) {
-                        // we are in a dialog and need to handle it
-                        $scope.dialog.close();
-                        $scope.addLocation();
+            if ($scope.survey.offline) {
+                debugger;
+            } else {
+                $http({
+                    url: url,
+                    method: 'POST',
+                    data: {
+                        'answer': answer
+                    },
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+                }).success(function(data) {
+                    if (data.complete) {
+                        $location.path(['survey', $scope.survey.slug, 'complete', $routeParams.uuidSlug].join('/'));
                     } else {
-                        if ($scope.question.term_condition && $scope.terminateIf(answer, $scope.question.term_condition)) {
-                            $location.path(['survey', $scope.survey.slug, 'complete', $routeParams.uuidSlug, 'terminate', $routeParams.questionSlug].join('/'));
+                        if ($scope.dialog) {
+                            // we are in a dialog and need to handle it
+                            $scope.dialog.close();
+                            $scope.addLocation();
                         } else {
-                            $scope.answers[$routeParams.questionSlug] = answer;
-                            if (! app.data.responses) {
-                                app.data.responses = [];
-                            }
+                            if ($scope.question.term_condition && $scope.terminateIf(answer, $scope.question.term_condition)) {
+                                $location.path(['survey', $scope.survey.slug, 'complete', $routeParams.uuidSlug, 'terminate', $routeParams.questionSlug].join('/'));
+                            } else {
+                                $scope.answers[$routeParams.questionSlug] = answer;
+                                if (! app.data.responses) {
+                                    app.data.responses = [];
+                                }
 
-                            app.data.responses.push({
-                                answer: answer,
-                                question: $scope.question
-                            });
-                            $scope.gotoNextQuestion();
-                        }
-                    }    
-                }
-                
-            }).error(function(data, status, headers, config) {
-                if (console) {
-                    console.log(data);
-                }
-            });
+                                app.data.responses.push({
+                                    answer: answer,
+                                    question: $scope.question
+                                });
+                                $scope.gotoNextQuestion();
+                            }
+                        }    
+                    }
+                    
+                }).error(function(data, status, headers, config) {
+                    if (console) {
+                        console.log(data);
+                    }
+                });
+            }
         }
     };
 
@@ -539,6 +543,7 @@ angular.module('askApp')
         if (data.state === 'complete' || data.state === 'terminate') {
             $location.path(['survey', $scope.survey.slug, 'complete', $routeParams.uuidSlug].join('/'));
         }
+
 
         _.each(data.responses, function(response) {
             try {
@@ -915,11 +920,13 @@ angular.module('askApp')
         }
     } 
 
-    if (! app.data) {
+    if (! app.data && ! app.surveys) {
         $http.get('/api/v1/respondant/' + $routeParams.uuidSlug + '/?format=json').success(function(data) {
             app.data = data;
             $scope.loadSurvey(data);
-        });    
+        });
+    } else if (app.surveys) {
+        $scope.loadSurvey({survey: _.findWhere(app.surveys, {slug: 'volume-and-origin'})});
     } else {
         $scope.loadSurvey(app.data);
     }
