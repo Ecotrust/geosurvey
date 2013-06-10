@@ -78,6 +78,7 @@ QUESTION_TYPE_CHOICES = (
     ('datepicker', 'Date Picker'),
     ('timepicker', 'Time Picker'),
     ('grid', 'Grid'),
+    ('currency', 'Currency'),
     ('pennies', 'Pennies'),
     ('text', 'Text'),
     ('textarea', 'Text Area'),

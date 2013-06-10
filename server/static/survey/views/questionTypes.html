@@ -51,6 +51,17 @@
             <button type="submit" class="btn btn-primary btn-large btn-block button-block" ng-disabled="question.required && ! answer">continue</button>
         </form>
     </div>
+    <div ng-switch-when="currency">
+        <form class="question" ng-show="survey.questions.length" ng-submit="answerQuestion(answer)">
+            
+            <div class="input-prepend">
+              <span class="add-on">$</span>
+              <input class="input-block-level" type="number" step="any" placeholder="{{ question.label }}" ng-model="answer" autofocus/>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-large btn-block button-block" ng-disabled="question.required && ! answer">continue</button>
+        </form>
+    </div>
     <div ng-switch-when="datepicker">
         <form class="question" ng-show="survey.questions.length" ng-submit="answerQuestion(answer)">
             <input class="input-block-level" type="date" placeholder="{{ question.label }}" ng-model="answer" autofocus/>
