@@ -51,5 +51,5 @@ urlpatterns = patterns('',
 urlpatterns += staticfiles_urlpatterns()
 
 
-if settings.HEROKU:
-    urlpatterns += url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT})
+# if settings.HEROKU:
+#     urlpatterns += url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT})

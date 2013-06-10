@@ -76,6 +76,7 @@ class Survey(caching.base.CachingMixin, models.Model):
 QUESTION_TYPE_CHOICES = (
     ('info', 'Info Page'),
     ('datepicker', 'Date Picker'),
+    ('timepicker', 'Time Picker'),
     ('grid', 'Grid'),
     ('pennies', 'Pennies'),
     ('text', 'Text'),

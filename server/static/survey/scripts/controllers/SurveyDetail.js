@@ -588,6 +588,7 @@ angular.module('askApp')
         }
 
 
+
         if ($scope.question && $scope.question.title) {
             $scope.question.displayTitle = $interpolate($scope.question.title)($scope);
         }
@@ -942,6 +943,11 @@ angular.module('askApp')
                     }
                 ]
             };
+        }
+
+        if ($scope.question && $scope.question.type === 'datepicker') {
+            $scope.answer = (new Date()).toString("yyyy-MM-dd");
+            console.log($scope.answer);
         }
     }
 
