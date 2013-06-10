@@ -947,7 +947,10 @@ angular.module('askApp')
 
         if ($scope.question && $scope.question.type === 'datepicker') {
             $scope.answer = (new Date()).toString("yyyy-MM-dd");
-            console.log($scope.answer);
+         
+        }
+        if ($scope.question && $scope.question.type === 'timepicker') {
+            $scope.answer = (new Date()).toString("HH:mm");
         }
     }
 
