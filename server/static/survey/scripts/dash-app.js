@@ -1,7 +1,5 @@
 'use strict';
 
-var app = {};
-
 angular.module('askApp', ['ui', 'leaflet.directive', 'ui.bootstrap', 'ngGrid'])
     .config(function($routeProvider, $httpProvider) {
 
@@ -13,7 +11,7 @@ angular.module('askApp', ['ui', 'leaflet.directive', 'ui.bootstrap', 'ngGrid'])
 
     $routeProvider.when('/', {
         templateUrl: '/static/survey/views/main.html',
-        controller: 'SurveyDetailCtrl'
+        controller: 'MainCtrl'
     })
     .when('/author/:surveySlug', {
       templateUrl: '/static/survey/views/author.html',

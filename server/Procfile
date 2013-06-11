@@ -1,1 +1,1 @@
-web: python manage.py runserver 0:$PORT --settings=config.environments.heroku
+web: python manage.py collectstatic --noinput; python manage.py run_gunicorn 0:$PORT --workers=4 --settings=config.environments.heroku
