@@ -7,6 +7,10 @@
                 <li><strong>{{ survey.completes |number}}</strong> complete ({{(survey.completes/survey.survey_responses)*100 |number:2}}%)</li>
                 <li><strong>{{ survey.survey_responses - survey.completes | number}}</strong> incomplete ({{((survey.survey_responses - survey.completes)/survey.survey_responses) * 100|number:2}}%)</li>
             </ul>
+            <ul class="unstyled">
+                <li><strong>{{ survey.activity_points | number }}</strong> activity points</li>
+                <li><strong>{{ survey.activity_points / survey.completes |number:2 }}</strong> activity points per survey</li>
+            </ul>
         </div>
     </div>
     <div class="span8">

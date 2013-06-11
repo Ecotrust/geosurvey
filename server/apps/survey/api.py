@@ -110,4 +110,4 @@ class SurveyResource(ModelResource):
 class SurveyReportResource(SurveyResource):
     completes = fields.IntegerField(attribute='completes', readonly=True)
     survey_responses = fields.IntegerField(attribute='survey_responses', readonly=True)
-
+    activity_points = fields.IntegerField(attribute='activity_points', readonly=True)
