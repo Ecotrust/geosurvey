@@ -1,14 +1,55 @@
-<div ng-controller="SurveyDetailCtrl">
-	<div class="modal-header">
-	    <h2 class="question-title">
-	        {{ question.title }}
-	    </h2>
-	</div>
-	<div class="modal-body">
-	    <div ng-init="dialog=$parent.this;" ng-include="'/static/survey/views/questionTypes.html'"></div>
-	</div>
-	<div class="modal-footer">
-		<button class="btn btn-danger btn-large" ng-click="$parent.close('cancel')">Delete Location</button>
-		<button class="btn btn-large save" ng-click="answerMultiSelect(question)" ng-class="{'btn-primary': isAnswerValid, 'disabled': !isAnswerValid }">Save Location</button>
-	</div>
+<div ng-show="panes.confirmPane.showing">
+    <div class="modal-body">
+        <h2>Is the location correct?</h2>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-large" ng-click="close('cancel')">No, let's try again</button>
+        <button class="btn btn-large btn-primary" ng-click="show('activitySelectionPane')">Yes</button>
+    </div>
+</div>
+
+<!-- note: this pane operates under a child scope -->
+<div ng-show="panes.activitySelectionPane.showing" ng-controller="SurveyDetailCtrl">
+    <div class="modal-header">
+        <h3>{{ question.title }}</h3>
+    </div>
+    <div class="modal-body">
+        <div ng-init="dialog=$parent.dialog;" ng-include="'/static/survey/views/questionTypes.html'"></div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-danger btn-large" ng-click="$parent.show('deleteConfirmationPane')">Delete Location</button>
+        <button class="btn btn-large save" ng-click="answerMultiSelect(question); $parent.show('thankYouPane')" ng-class="{'btn-primary': isAnswerValid, 'disabled': !isAnswerValid }">Save Location</button>
+    </div>
+</div>
+
+<div ng-show="panes.deleteConfirmationPane.showing">
+    <div class="modal-body">
+        <h3>Delete this location?</h3>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-large" ng-click="show('activitySelectionPane')">Cancel</button>
+        <button class="btn btn-large btn-danger" ng-click="close('cancel')">Delete Location</button>
+    </div>
+</div>
+
+<div ng-show="panes.thankYouPane.showing">
+    <div class="modal-header">
+        <h2 class="question-title">Thank you for adding an activity marker. Would you like to add another activity marker?</h2>
+    </div>
+    <div class="modal-body">
+
+        <div ng-show="getRemainingActivities().length > 0">
+            <p>The following activities have not yet been mapped:</p>
+            <ul>
+                <li ng-repeat="activity in getRemainingActivities()">
+                    {{activity}}
+                </li>
+            </ul>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-large" ng-click="close()">No</button>
+        <button class="btn btn-large" ng-click="close('doneMapping')">Yes</button>
+    </div>
 </div>
