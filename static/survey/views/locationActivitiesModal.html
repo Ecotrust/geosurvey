@@ -1,14 +1,14 @@
-<div class="modal-header">
-    <h2 class="question-title">
-        {{ question.title }}
-    </h2>
-</div>
-<div class="modal-body">
-    <div ng-include="'/static/survey/views/questionTypes.html'"></div>
-</div>
-<div class="modal-footer">
-
-	<button class="btn btn-danger btn-large" ng-click="cancelConfirmation()" ng-show="question.update">Delete Location</button>
-	<button class="btn btn-danger btn-large" ng-click="cancelConfirmation()" ng-hide="question.update">Cancel</button>
-	<button class="btn btn-large save" ng-click="answerMultiSelect(question)" ng-class="{'btn-primary': isAnswerValid, 'disabled': !isAnswerValid }">Save</button>
+<div ng-controller="SurveyDetailCtrl">
+	<div class="modal-header">
+	    <h2 class="question-title">
+	        {{ question.title }}
+	    </h2>
+	</div>
+	<div class="modal-body">
+	    <div ng-init="dialog=$parent.this;" ng-include="'/static/survey/views/questionTypes.html'"></div>
+	</div>
+	<div class="modal-footer">
+		<button class="btn btn-danger btn-large" ng-click="$parent.close('cancel')">Delete Location</button>
+		<button class="btn btn-large save" ng-click="answerMultiSelect(question)" ng-class="{'btn-primary': isAnswerValid, 'disabled': !isAnswerValid }">Save Location</button>
+	</div>
 </div>
