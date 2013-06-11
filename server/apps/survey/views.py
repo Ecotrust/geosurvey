@@ -7,13 +7,15 @@ from django.template.loader import get_template
 from django.core.mail import EmailMultiAlternatives
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
+from django.contrib.admin.views.decorators import staff_member_required
+from django.views.decorators.csrf import csrf_exempt
 
 
 import simplejson
 
 from apps.survey.models import Survey, Question, Response, Respondant
 
-@login_required
+@staff_member_required
 def delete_responses(request, uuid, template='survey/delete.html'):
     respondant = get_object_or_404(Respondant, uuid=uuid)
     for response in respondant.responses.all():
@@ -31,6 +33,19 @@ def survey(request, survey_slug=None, template='survey/survey.html'):
             return HttpResponse(simplejson.dumps({'success': "true", "uuid": respondant.uuid}))
         return redirect("/respond#/survey/%s/%s" % (survey.slug, respondant.uuid))
     return render_to_response(template, RequestContext(request, {}))
+
+@staff_member_required
+def dash(request, survey_slug=None, template='survey/dash.html'):
+    if survey_slug is not None:
+        survey = get_object_or_404(Survey, slug=survey_slug, anon=True)
+        respondant = Respondant(survey=survey)
+        respondant.save()
+        if request.GET.get('get-uid', None) is not None:
+            return HttpResponse(simplejson.dumps({'success': "true", "uuid": respondant.uuid}))
+        return redirect("/respond#/survey/%s/%s" % (survey.slug, respondant.uuid))
+    return render_to_response(template, RequestContext(request, {}))
+
+
 
 def answer(request, survey_slug, question_slug, uuid): #, survey_slug, question_slug, uuid):
     if request.method == 'POST':
@@ -80,7 +95,7 @@ def send_email(email, uuid):
         'SITE_URL': current_site.domain
         })
 
-    subject, from_email, to = 'Take The Survey', 'eknuth@ecotrust.org', email
+    subject, from_email, to = 'Take The Survey', 'tglaser@ecotrust.org', email
     text_content = plaintext.render(d)
     html_content = htmly.render(d)
 
@@ -88,7 +103,7 @@ def send_email(email, uuid):
     msg.attach_alternative(html_content, "text/html")
     msg.send()
 
-
+@csrf_exempt
 def register(request, template='survey/register.html'):
     if request.POST:
         # create respondant record

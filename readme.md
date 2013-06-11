@@ -63,11 +63,32 @@ Because the app is being served out of the django app we need to specify a path 
 1. Install the heroku toolbelt.
 2. Install git > 1.8
 
-##create the heroku app
+##create the heroku app if it doesn't exist
+```bash
 heroku create appname
+```
 
-##push the app if it is in a directory
+##login to heroku
+```bash
+heroku login
+```
+
+##set environment vars
+```bash
+heroku config:add DJANGO_SECRET_KEY=SECRET!
+```
+
+Or run the script from scripts/heroku-env.sh, which is available on google drive for each deployment.
+
+##push the app from the project directory
+```bash
 git subtree push --prefix server/ heroku master
+```
+
+##push an alternate branch from the project directory
+```bash
+git push heroku `git subtree split --prefix server testbranch`:master
+```
 
 ##django install
 ```bash
@@ -75,5 +96,14 @@ heroku run python manage.py syncdb --settings=config.environments.heroku
 heroku run python manage.py migrate --settings=config.environments.heroku
 ```
 
+##load some data
+```bash
+heroku run python manage.py loaddata apps/survey/fixtures/surveys.json --settings=config.environments.heroku
+heroku run python manage.py loaddata apps/places/fixtures/marco.json.gz --settings=config.environments.heroku
+```
+
 ##open the app
+```bash
 heroku open
+```
+
