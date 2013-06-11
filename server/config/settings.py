@@ -184,3 +184,5 @@ COMPRESS_JS_FILTERS = ['compressor.filters.jsmin.JSMinFilter']
 
 # django-grappelli
 GRAPPELLI_ADMIN_TITLE = "Geosurvey Admin"
+
+HEROKU = False
