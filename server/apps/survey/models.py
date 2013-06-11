@@ -111,7 +111,8 @@ class Question(caching.base.CachingMixin, models.Model):
     type = models.CharField(max_length=20,choices=QUESTION_TYPE_CHOICES,default='text')
     options = models.ManyToManyField(Option, null=True, blank=True)
     options_json = models.CharField(max_length=254, null=True, blank=True)
-    info = models.CharField(max_length=254, null=True, blank=True);1
+    info = models.CharField(max_length=254, null=True, blank=True)
+    grid_cols = models.ManyToManyField(Option, null=True, blank=True, related_name="grid_cols")
 
     zoom = models.IntegerField(null=True, blank=True)
     min_zoom = models.IntegerField(null=True, blank=True, default=10)
@@ -129,11 +130,14 @@ class Question(caching.base.CachingMixin, models.Model):
     hoist_answers = models.ForeignKey('self', null=True, blank=True, related_name="hoisted")
 
 
+
+
     # backend stuff
     filterBy = models.BooleanField(default=False)
     visualize = models.BooleanField(default=False)
     report_type = models.CharField(max_length=20,choices=REPORT_TYPE_CHOICES,null=True, default=None)
     filter_questions = models.ManyToManyField('self', null=True, blank=True)
+
 
 
     @property

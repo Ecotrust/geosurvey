@@ -278,14 +278,21 @@ angular.module('askApp')
         return terminate;
     };
 
-    $scope.answerOffline = function (answer) {
-        if (! app.data) {
+    $scope.answerOffline = function(answer) {
+        if (!app.data) {
             app.data = {};
         }
         if (!app.data.responses) {
             app.data.responses = [];
         }
-
+        if (!$scope.answers) {
+            $scope.answers = [];
+        }
+        app.data.responses.push({
+            answer: answer,
+            question: $scope.question
+        });
+        $scope.answers[$routeParams.questionSlug] = answer;
         app.data.responses.push(answer);
         $scope.gotoNextQuestion();
     };
@@ -899,12 +906,15 @@ angular.module('askApp')
             }
 
             _.each($scope.question.options, function(value, key, list) {
-                list[key] = {
-                    activitySlug: value.label,
-                    activityText: value.text,
-                    cost: $scope.answer !== null && _.has($scope.answer, value.text) ? $scope.answer[value.text][0].cost : undefined,
-                    numPeople: $scope.answer !== null && _.has($scope.answer, value.text) ? $scope.answer[value.text][0].numPeople : undefined
-                };
+                list[key].activitySlug = value.label;
+                list[key].activityText = value.label;
+                _.each($scope.question.grid_cols, function(gridCol, i) {
+                    list[gridCol.label] = $scope.answer !== null && _.has($scope.answer, value.text) ? $scope.answer[value.text][0] : undefined;
+                });
+                // list[key] = {
+                //     cost: $scope.answer !== null && _.has($scope.answer, value.text) ? $scope.answer[value.text][0].cost : undefined,
+                //     numPeople: $scope.answer !== null && _.has($scope.answer, value.text) ? $scope.answer[value.text][0].numPeople : undefined
+                // };
             });
 
             // todo: Fill columns with persisted data if available.
@@ -918,8 +928,9 @@ angular.module('askApp')
 
             // Configure grid.
             var gridCellTemplateDefault = '<div class="ngCellText" ng-class="col.colIndex()"><span ng-cell-text>{{COL_FIELD CUSTOM_FILTERS}}</span></div>';
-            var costCellTemplate = '<input class="colt{{$index}} input-block-level" ng-model="row.entity[col.field]" style="height: 100%;" type="number" min="0" max="10000" value="{{row.getProperty(col.field)}}" ui-event="{ keypress : \'onlyDigits($event)\' }" required/>';
-            var numPeopleCellTemplate = '<input class="colt{{$index}} input-block-level" ng-model="row.entity[col.field]" style="height: 100%;" type="number" min="0" max="1000" value="{{row.getProperty(col.field)}}" ui-event="{ keypress : \'onlyDigits($event)\' }" required/>';
+            var costCellTemplate = '<input class="colt{{$index}} input-block-level" ng-model="row.entity[col.field]" style="height: 100%;" type="number" step="any" value="{{row.getProperty(col.field)}}"  }" onFocus="this.select();" onClick="this.select();"/>';
+            var nameTemplate = '<input class="colt{{$index}} input-block-level" ng-model="row.entity[col.field]" style="height: 100%;" type="text"  value="{{row.getProperty(col.field)}}"  }" />';
+            
             $scope.gridOptions = {
                 data: 'question.options',
                 enableSorting: false,
@@ -931,27 +942,30 @@ angular.module('askApp')
                 rowTemplate: '<div ng-style="{\'z-index\': col.zIndex() }" ng-repeat="col in renderedColumns" ng-class="col.colIndex()" class="ngCell {{col.cellClass}}" ng-cell></div>',
                 columnDefs: [{
                         field: 'activityText',
-                        displayName: 'Expense Item'
-                    }, {
-                        field: 'cost',
-                        displayName: 'Cost',
-                        cellTemplate: costCellTemplate
-                    }, {
-                        field: 'numPeople',
-                        displayName: '# of People Covered',
-                        cellTemplate: numPeopleCellTemplate
+                        displayName: $scope.question.label
                     }
                 ]
             };
+            _.each($scope.question.grid_cols, function(gridCol, i) {
+                $scope.gridOptions.columnDefs.push({
+                    field: gridCol.label,
+                    displayName: gridCol.text,
+                    cellTemplate: costCellTemplate
+                });
+            });
         }
 
         if ($scope.question && $scope.question.type === 'datepicker') {
             $scope.answer = (new Date()).toString("yyyy-MM-dd");
-         
+
         }
         if ($scope.question && $scope.question.type === 'timepicker') {
             $scope.answer = (new Date()).toString("HH:mm");
         }
+    }
+
+    if (!app.surveys) {
+        app.surveys = JSON.parse(localStorage.getItem("surveys"));
     }
 
     if (!app.data && !app.surveys) {
@@ -960,10 +974,12 @@ angular.module('askApp')
             $scope.loadSurvey(data);
         });
     } else if (app.surveys) {
+
         $scope.loadSurvey({
             survey: _.findWhere(app.surveys, {
                 slug: 'volume-and-origin'
-            })
+            }),
+            responses: app.data ? app.data.responses : []
         });
     } else {
         $scope.loadSurvey(app.data);

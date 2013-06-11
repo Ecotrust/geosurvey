@@ -137,6 +137,22 @@
     }, 
     {
         "fields": {
+            "question": 111, 
+            "survey": 5
+        }, 
+        "model": "survey.page", 
+        "pk": 96
+    }, 
+    {
+        "fields": {
+            "question": 112, 
+            "survey": 5
+        }, 
+        "model": "survey.page", 
+        "pk": 97
+    }, 
+    {
+        "fields": {
             "anon": true, 
             "name": "Volume and Origin", 
             "offline": true, 
@@ -145,646 +161,6 @@
         }, 
         "model": "survey.survey", 
         "pk": 5
-    }, 
-    {
-        "fields": {
-            "label": "NY", 
-            "text": "New York"
-        }, 
-        "model": "survey.option", 
-        "pk": 4
-    }, 
-    {
-        "fields": {
-            "label": "NJ", 
-            "text": "New Jersey"
-        }, 
-        "model": "survey.option", 
-        "pk": 5
-    }, 
-    {
-        "fields": {
-            "label": "DE", 
-            "text": "Delaware"
-        }, 
-        "model": "survey.option", 
-        "pk": 6
-    }, 
-    {
-        "fields": {
-            "label": "MD", 
-            "text": "Maryland"
-        }, 
-        "model": "survey.option", 
-        "pk": 7
-    }, 
-    {
-        "fields": {
-            "label": "VA", 
-            "text": "Virgina"
-        }, 
-        "model": "survey.option", 
-        "pk": 8
-    }, 
-    {
-        "fields": {
-            "label": "DC", 
-            "text": "District of Columbia"
-        }, 
-        "model": "survey.option", 
-        "pk": 9
-    }, 
-    {
-        "fields": {
-            "label": "washington", 
-            "text": "Washington"
-        }, 
-        "model": "survey.option", 
-        "pk": 10
-    }, 
-    {
-        "fields": {
-            "label": "oregon", 
-            "text": "Oregon"
-        }, 
-        "model": "survey.option", 
-        "pk": 11
-    }, 
-    {
-        "fields": {
-            "label": "british-columbia", 
-            "text": "British Columbia"
-        }, 
-        "model": "survey.option", 
-        "pk": 12
-    }, 
-    {
-        "fields": {
-            "label": "0", 
-            "text": "0 nights"
-        }, 
-        "model": "survey.option", 
-        "pk": 13
-    }, 
-    {
-        "fields": {
-            "label": "1", 
-            "text": "1 night"
-        }, 
-        "model": "survey.option", 
-        "pk": 14
-    }, 
-    {
-        "fields": {
-            "label": "2", 
-            "text": "2 nights"
-        }, 
-        "model": "survey.option", 
-        "pk": 15
-    }, 
-    {
-        "fields": {
-            "label": "3", 
-            "text": "3 nights"
-        }, 
-        "model": "survey.option", 
-        "pk": 16
-    }, 
-    {
-        "fields": {
-            "label": "4", 
-            "text": "4 nights"
-        }, 
-        "model": "survey.option", 
-        "pk": 17
-    }, 
-    {
-        "fields": {
-            "label": "5", 
-            "text": "5+ nights"
-        }, 
-        "model": "survey.option", 
-        "pk": 18
-    }, 
-    {
-        "fields": {
-            "label": "parking", 
-            "text": "Parking"
-        }, 
-        "model": "survey.option", 
-        "pk": 19
-    }, 
-    {
-        "fields": {
-            "label": "car-fuel", 
-            "text": "Car Fuel"
-        }, 
-        "model": "survey.option", 
-        "pk": 20
-    }, 
-    {
-        "fields": {
-            "label": "airline-flight", 
-            "text": "Airline Flight"
-        }, 
-        "model": "survey.option", 
-        "pk": 21
-    }, 
-    {
-        "fields": {
-            "label": "food-and-beverages-store", 
-            "text": "Food and beverages from a store"
-        }, 
-        "model": "survey.option", 
-        "pk": 22
-    }, 
-    {
-        "fields": {
-            "label": "food-and-beverages-restaurant-or-bar", 
-            "text": "Food and beverages at a restaurant or bar"
-        }, 
-        "model": "survey.option", 
-        "pk": 23
-    }, 
-    {
-        "fields": {
-            "label": "souvenirs-t-shirts-posters-gifts-etc", 
-            "text": "Souvenirs (t-shirts, posters, gifts, etc.)"
-        }, 
-        "model": "survey.option", 
-        "pk": 24
-    }, 
-    {
-        "fields": {
-            "label": "sundries-sunscreen-surf-wax-motion-sickness-pills-batteries-film", 
-            "text": "Sundries (sunscreen, surf wax, motion sickness pills, batteries, film and processing etc.)"
-        }, 
-        "model": "survey.option", 
-        "pk": 25
-    }, 
-    {
-        "fields": {
-            "label": "car-rental", 
-            "text": "Car rental"
-        }, 
-        "model": "survey.option", 
-        "pk": 26
-    }, 
-    {
-        "fields": {
-            "label": "dive-equiment-rental-and-airfills", 
-            "text": "Dive equiment rental and airfills"
-        }, 
-        "model": "survey.option", 
-        "pk": 27
-    }, 
-    {
-        "fields": {
-            "label": "equipment-rental-surfboard-bike-kayak-stand-paddleetc", 
-            "text": "Equipment rental (Surfboard, bike, kayak, stand up paddle,etc)"
-        }, 
-        "model": "survey.option", 
-        "pk": 28
-    }, 
-    {
-        "fields": {
-            "label": "lodging-if-you-stayed-overnight", 
-            "text": "Lodging (if you stayed overnight)"
-        }, 
-        "model": "survey.option", 
-        "pk": 29
-    }, 
-    {
-        "fields": {
-            "label": "charter-fee-whale-watching-etc", 
-            "text": "Charter fee (whale watching, etc.)"
-        }, 
-        "model": "survey.option", 
-        "pk": 30
-    }, 
-    {
-        "fields": {
-            "label": "museum-aquarium-or-other-entrance-fee", 
-            "text": "Museum, aquarium, or other entrance fee"
-        }, 
-        "model": "survey.option", 
-        "pk": 31
-    }, 
-    {
-        "fields": {
-            "label": "lessons-clinics-camps", 
-            "text": "Lessons, clinics, camps"
-        }, 
-        "model": "survey.option", 
-        "pk": 32
-    }, 
-    {
-        "fields": {
-            "label": "male", 
-            "text": "Male"
-        }, 
-        "model": "survey.option", 
-        "pk": 36
-    }, 
-    {
-        "fields": {
-            "label": "female", 
-            "text": "Female"
-        }, 
-        "model": "survey.option", 
-        "pk": 37
-    }, 
-    {
-        "fields": {
-            "label": "white", 
-            "text": "White"
-        }, 
-        "model": "survey.option", 
-        "pk": 38
-    }, 
-    {
-        "fields": {
-            "label": "black-or-african-american", 
-            "text": "Black or African American"
-        }, 
-        "model": "survey.option", 
-        "pk": 39
-    }, 
-    {
-        "fields": {
-            "label": "hispanic-spanish-or-latino", 
-            "text": "Hispanic, Spanish or Latino"
-        }, 
-        "model": "survey.option", 
-        "pk": 40
-    }, 
-    {
-        "fields": {
-            "label": "american-indian-or-alaska-native", 
-            "text": "American Indian or Alaska Native"
-        }, 
-        "model": "survey.option", 
-        "pk": 41
-    }, 
-    {
-        "fields": {
-            "label": "asianpacific-islander", 
-            "text": "Asian/Pacific Islander"
-        }, 
-        "model": "survey.option", 
-        "pk": 42
-    }, 
-    {
-        "fields": {
-            "label": "other", 
-            "text": "Other"
-        }, 
-        "model": "survey.option", 
-        "pk": 43
-    }, 
-    {
-        "fields": {
-            "label": "no-formal-education", 
-            "text": "No formal education"
-        }, 
-        "model": "survey.option", 
-        "pk": 44
-    }, 
-    {
-        "fields": {
-            "label": "less-high-school", 
-            "text": "Less than high school"
-        }, 
-        "model": "survey.option", 
-        "pk": 45
-    }, 
-    {
-        "fields": {
-            "label": "high-school", 
-            "text": "High School"
-        }, 
-        "model": "survey.option", 
-        "pk": 46
-    }, 
-    {
-        "fields": {
-            "label": "some-college", 
-            "text": "Some college"
-        }, 
-        "model": "survey.option", 
-        "pk": 47
-    }, 
-    {
-        "fields": {
-            "label": "bachelors-degree-or-higher", 
-            "text": "Bachelor's degree"
-        }, 
-        "model": "survey.option", 
-        "pk": 48
-    }, 
-    {
-        "fields": {
-            "label": "strongly-agree", 
-            "text": "Strongly Agree"
-        }, 
-        "model": "survey.option", 
-        "pk": 49
-    }, 
-    {
-        "fields": {
-            "label": "somewhat-agree", 
-            "text": "Somewhat Agree"
-        }, 
-        "model": "survey.option", 
-        "pk": 50
-    }, 
-    {
-        "fields": {
-            "label": "neither-agree-nor-disagree", 
-            "text": "Neither Agree nor Disagree"
-        }, 
-        "model": "survey.option", 
-        "pk": 51
-    }, 
-    {
-        "fields": {
-            "label": "somewhat-disagree", 
-            "text": "Somewhat Disagree"
-        }, 
-        "model": "survey.option", 
-        "pk": 52
-    }, 
-    {
-        "fields": {
-            "label": "strongly-disagree", 
-            "text": "Strongly Disagree"
-        }, 
-        "model": "survey.option", 
-        "pk": 53
-    }, 
-    {
-        "fields": {
-            "label": "yes", 
-            "text": "Yes"
-        }, 
-        "model": "survey.option", 
-        "pk": 54
-    }, 
-    {
-        "fields": {
-            "label": "no", 
-            "text": "No"
-        }, 
-        "model": "survey.option", 
-        "pk": 55
-    }, 
-    {
-        "fields": {
-            "label": "just-last-year", 
-            "text": "Just the last year"
-        }, 
-        "model": "survey.option", 
-        "pk": 56
-    }, 
-    {
-        "fields": {
-            "label": "one-three-years", 
-            "text": "One to three years"
-        }, 
-        "model": "survey.option", 
-        "pk": 57
-    }, 
-    {
-        "fields": {
-            "label": "about-four-ten-years", 
-            "text": "About four to ten years"
-        }, 
-        "model": "survey.option", 
-        "pk": 58
-    }, 
-    {
-        "fields": {
-            "label": "more-ten-years", 
-            "text": "More than ten years"
-        }, 
-        "model": "survey.option", 
-        "pk": 59
-    }, 
-    {
-        "fields": {
-            "label": "all-my-life", 
-            "text": "All my life"
-        }, 
-        "model": "survey.option", 
-        "pk": 60
-    }, 
-    {
-        "fields": {
-            "label": "bus", 
-            "text": "Bus"
-        }, 
-        "model": "survey.option", 
-        "pk": 61
-    }, 
-    {
-        "fields": {
-            "label": "bike", 
-            "text": "Bike"
-        }, 
-        "model": "survey.option", 
-        "pk": 62
-    }, 
-    {
-        "fields": {
-            "label": "fly", 
-            "text": "Fly"
-        }, 
-        "model": "survey.option", 
-        "pk": 63
-    }, 
-    {
-        "fields": {
-            "label": "walking", 
-            "text": "Walking"
-        }, 
-        "model": "survey.option", 
-        "pk": 64
-    }, 
-    {
-        "fields": {
-            "label": "drove-personal-car", 
-            "text": "Drove a personal car"
-        }, 
-        "model": "survey.option", 
-        "pk": 65
-    }, 
-    {
-        "fields": {
-            "label": "drove-rented-car", 
-            "text": "Drove a rented car"
-        }, 
-        "model": "survey.option", 
-        "pk": 66
-    }, 
-    {
-        "fields": {
-            "label": "rode-someone-else-carpooled", 
-            "text": "Rode with someone else -- carpooled"
-        }, 
-        "model": "survey.option", 
-        "pk": 67
-    }, 
-    {
-        "fields": {
-            "label": "first-option", 
-            "text": "First Option"
-        }, 
-        "model": "survey.option", 
-        "pk": 68
-    }, 
-    {
-        "fields": {
-            "label": "second-option", 
-            "text": "Second Option"
-        }, 
-        "model": "survey.option", 
-        "pk": 69
-    }, 
-    {
-        "fields": {
-            "label": "third-option", 
-            "text": "Third Option"
-        }, 
-        "model": "survey.option", 
-        "pk": 70
-    }, 
-    {
-        "fields": {
-            "label": "income-1-below-30000", 
-            "text": "Below $30,000"
-        }, 
-        "model": "survey.option", 
-        "pk": 76
-    }, 
-    {
-        "fields": {
-            "label": "income-2-30000-54999", 
-            "text": "$30,000 to $54,999"
-        }, 
-        "model": "survey.option", 
-        "pk": 77
-    }, 
-    {
-        "fields": {
-            "label": "income-3-55000-94999", 
-            "text": "$55,000 to $94,999"
-        }, 
-        "model": "survey.option", 
-        "pk": 78
-    }, 
-    {
-        "fields": {
-            "label": "income-4-95000-and-over", 
-            "text": "$95,000 and over"
-        }, 
-        "model": "survey.option", 
-        "pk": 79
-    }, 
-    {
-        "fields": {
-            "label": "income-5-dont-know", 
-            "text": "Don't know"
-        }, 
-        "model": "survey.option", 
-        "pk": 80
-    }, 
-    {
-        "fields": {
-            "label": "0-60-miles", 
-            "text": "0-60 miles"
-        }, 
-        "model": "survey.option", 
-        "pk": 81
-    }, 
-    {
-        "fields": {
-            "label": "61-120-miles", 
-            "text": "61-120 miles"
-        }, 
-        "model": "survey.option", 
-        "pk": 82
-    }, 
-    {
-        "fields": {
-            "label": "121-180-miles", 
-            "text": "121-180 miles"
-        }, 
-        "model": "survey.option", 
-        "pk": 83
-    }, 
-    {
-        "fields": {
-            "label": "180-miles", 
-            "text": "180+ miles"
-        }, 
-        "model": "survey.option", 
-        "pk": 84
-    }, 
-    {
-        "fields": {
-            "label": "i-do-not-live-coast", 
-            "text": " I do not live on the coast"
-        }, 
-        "model": "survey.option", 
-        "pk": 85
-    }, 
-    {
-        "fields": {
-            "label": "not-all", 
-            "text": "Not at all"
-        }, 
-        "model": "survey.option", 
-        "pk": 86
-    }, 
-    {
-        "fields": {
-            "label": "little", 
-            "text": "A little"
-        }, 
-        "model": "survey.option", 
-        "pk": 87
-    }, 
-    {
-        "fields": {
-            "label": "not-sure", 
-            "text": "Not sure"
-        }, 
-        "model": "survey.option", 
-        "pk": 88
-    }, 
-    {
-        "fields": {
-            "label": "lot", 
-            "text": "A lot"
-        }, 
-        "model": "survey.option", 
-        "pk": 89
-    }, 
-    {
-        "fields": {
-            "label": "main-reason-i-live-coast", 
-            "text": "Main reason I live on the coast"
-        }, 
-        "model": "survey.option", 
-        "pk": 90
-    }, 
-    {
-        "fields": {
-            "label": "graduate-or-professional-degree", 
-            "text": "Graduate or professional degree"
-        }, 
-        "model": "survey.option", 
-        "pk": 91
     }, 
     {
         "fields": {
@@ -892,8 +268,8 @@
     }, 
     {
         "fields": {
-            "label": "spanish-mackere", 
-            "text": "Spanish Mackere"
+            "label": "spanish-mackerel", 
+            "text": "Spanish Mackerel"
         }, 
         "model": "survey.option", 
         "pk": 105
@@ -932,9 +308,98 @@
     }, 
     {
         "fields": {
+            "label": "province", 
+            "text": "Province"
+        }, 
+        "model": "survey.option", 
+        "pk": 110
+    }, 
+    {
+        "fields": {
+            "label": "region", 
+            "text": "Region"
+        }, 
+        "model": "survey.option", 
+        "pk": 111
+    }, 
+    {
+        "fields": {
+            "label": "villages", 
+            "text": "Villages"
+        }, 
+        "model": "survey.option", 
+        "pk": 112
+    }, 
+    {
+        "fields": {
+            "label": "volume-kg", 
+            "text": "Volume (kg)"
+        }, 
+        "model": "survey.option", 
+        "pk": 113
+    }, 
+    {
+        "fields": {
+            "label": "price-wholesale", 
+            "text": "Price (wholesale)"
+        }, 
+        "model": "survey.option", 
+        "pk": 114
+    }, 
+    {
+        "fields": {
+            "label": "starting-price-lb", 
+            "text": "Starting Price (per lb)"
+        }, 
+        "model": "survey.option", 
+        "pk": 115
+    }, 
+    {
+        "fields": {
+            "label": "first-markdown-lb", 
+            "text": "1st Markdown (per lb)"
+        }, 
+        "model": "survey.option", 
+        "pk": 116
+    }, 
+    {
+        "fields": {
+            "label": "second-markdown-price-lb", 
+            "text": "Second Markdown Price (per lb)"
+        }, 
+        "model": "survey.option", 
+        "pk": 117
+    }, 
+    {
+        "fields": {
+            "label": "starting-price-lb", 
+            "text": "Starting Price (per lb)"
+        }, 
+        "model": "survey.option", 
+        "pk": 118
+    }, 
+    {
+        "fields": {
+            "label": "first-markdown-lb", 
+            "text": "First Markdown (per lb)"
+        }, 
+        "model": "survey.option", 
+        "pk": 119
+    }, 
+    {
+        "fields": {
+            "label": "Second-markdown-price-lb", 
+            "text": "Second Markdown Price (per lb)"
+        }, 
+        "model": "survey.option", 
+        "pk": 120
+    }, 
+    {
+        "fields": {
             "allow_other": false, 
             "filterBy": false, 
             "filter_questions": [], 
+            "grid_cols": [], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -966,6 +431,7 @@
             "allow_other": false, 
             "filterBy": false, 
             "filter_questions": [], 
+            "grid_cols": [], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -997,6 +463,7 @@
             "allow_other": false, 
             "filterBy": false, 
             "filter_questions": [], 
+            "grid_cols": [], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -1028,6 +495,7 @@
             "allow_other": false, 
             "filterBy": false, 
             "filter_questions": [], 
+            "grid_cols": [], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -1059,6 +527,7 @@
             "allow_other": false, 
             "filterBy": false, 
             "filter_questions": [], 
+            "grid_cols": [], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -1093,6 +562,7 @@
             "allow_other": false, 
             "filterBy": false, 
             "filter_questions": [], 
+            "grid_cols": [], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -1124,6 +594,7 @@
             "allow_other": false, 
             "filterBy": false, 
             "filter_questions": [], 
+            "grid_cols": [], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -1142,7 +613,7 @@
             "required": true, 
             "slug": "vendor-code", 
             "term_condition": "", 
-            "title": "Vendior Code", 
+            "title": "Vendor Code", 
             "type": "text", 
             "visualize": false, 
             "zoom": null
@@ -1155,6 +626,7 @@
             "allow_other": true, 
             "filterBy": false, 
             "filter_questions": [], 
+            "grid_cols": [], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -1192,6 +664,7 @@
             "allow_other": true, 
             "filterBy": false, 
             "filter_questions": [], 
+            "grid_cols": [], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -1227,6 +700,7 @@
             "allow_other": false, 
             "filterBy": false, 
             "filter_questions": [], 
+            "grid_cols": [], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -1242,10 +716,10 @@
             "order": 10, 
             "randomize_groups": false, 
             "report_type": "distribution", 
-            "required": true, 
+            "required": false, 
             "slug": "ice-volume", 
             "term_condition": "", 
-            "title": "Ice Volume (kilograms)", 
+            "title": "Amount of Ice (kilograms)", 
             "type": "integer", 
             "visualize": false, 
             "zoom": null
@@ -1258,6 +732,7 @@
             "allow_other": false, 
             "filterBy": false, 
             "filter_questions": [], 
+            "grid_cols": [], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -1273,7 +748,7 @@
             "order": 11, 
             "randomize_groups": false, 
             "report_type": "distribution", 
-            "required": true, 
+            "required": false, 
             "slug": "ice-origin", 
             "term_condition": "", 
             "title": "Ice Origin", 
@@ -1289,6 +764,7 @@
             "allow_other": false, 
             "filterBy": false, 
             "filter_questions": [], 
+            "grid_cols": [], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -1320,6 +796,7 @@
             "allow_other": false, 
             "filterBy": false, 
             "filter_questions": [], 
+            "grid_cols": [], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -1335,7 +812,7 @@
             "order": 14, 
             "randomize_groups": false, 
             "report_type": "distribution", 
-            "required": true, 
+            "required": false, 
             "slug": "transport-cost-boat", 
             "term_condition": "", 
             "title": "Transport Cost: Boat/canoe", 
@@ -1351,6 +828,7 @@
             "allow_other": false, 
             "filterBy": false, 
             "filter_questions": [], 
+            "grid_cols": [], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -1366,7 +844,7 @@
             "order": 15, 
             "randomize_groups": false, 
             "report_type": "distribution", 
-            "required": true, 
+            "required": false, 
             "slug": "transport-cost-ship", 
             "term_condition": "", 
             "title": "Transport Cost: Ship", 
@@ -1382,6 +860,7 @@
             "allow_other": false, 
             "filterBy": false, 
             "filter_questions": [], 
+            "grid_cols": [], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -1397,7 +876,7 @@
             "order": 16, 
             "randomize_groups": false, 
             "report_type": "distribution", 
-            "required": true, 
+            "required": false, 
             "slug": "storage-cost", 
             "term_condition": "", 
             "title": "Total Storage Cost", 
@@ -1413,6 +892,7 @@
             "allow_other": false, 
             "filterBy": false, 
             "filter_questions": [], 
+            "grid_cols": [], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -1428,7 +908,7 @@
             "order": 17, 
             "randomize_groups": false, 
             "report_type": "distribution", 
-            "required": true, 
+            "required": false, 
             "slug": "storage-days", 
             "term_condition": "", 
             "title": "Days of Storage", 
@@ -1444,6 +924,7 @@
             "allow_other": false, 
             "filterBy": false, 
             "filter_questions": [], 
+            "grid_cols": [], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -1475,6 +956,7 @@
             "allow_other": false, 
             "filterBy": false, 
             "filter_questions": [], 
+            "grid_cols": [], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -1485,10 +967,10 @@
             "min_zoom": 10, 
             "modalQuestion": null, 
             "options": [
+                105, 
                 102, 
                 103, 
                 104, 
-                105, 
                 106, 
                 107, 
                 108, 
@@ -1509,5 +991,76 @@
         }, 
         "model": "survey.question", 
         "pk": 110
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "grid_cols": [
+                113, 
+                114
+            ], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Resource Details", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "resource-type", 
+            "options_json": "", 
+            "order": 20, 
+            "randomize_groups": false, 
+            "report_type": "distribution", 
+            "required": true, 
+            "slug": "resource-details", 
+            "term_condition": "", 
+            "title": "Resource Details", 
+            "type": "grid", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 111
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "grid_cols": [
+                118, 
+                119, 
+                120
+            ], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Resource Type", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "resource-type", 
+            "options_json": "", 
+            "order": 21, 
+            "randomize_groups": false, 
+            "report_type": "distribution", 
+            "required": true, 
+            "slug": "retail-price", 
+            "term_condition": "", 
+            "title": "Retail Price (by resource type)", 
+            "type": "grid", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 112
     }
 ]

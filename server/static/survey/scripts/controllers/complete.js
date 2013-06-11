@@ -8,9 +8,14 @@ angular.module('askApp')
         url = [url, 'terminate', $routeParams.questionSlug].join('/');
     }
 
-    $http.post(url).success(function (data) {
-        app.data.state = $routeParams.acttion;
-    });
 
+    $http.post(url).success(function (data) {
+        app.data.state = $routeParams.action;
+    });
+    
+    if (app.data) {
+        $scope.responses =app.data.responses;    
+        app.data.responses = [];
+    }
     $scope.completeView = '/static/survey/survey-pages/' + $routeParams.surveySlug + '/complete.html';
   });
