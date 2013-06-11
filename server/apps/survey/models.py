@@ -181,7 +181,7 @@ class Location(caching.base.CachingMixin, models.Model):
     lng = models.DecimalField(max_digits=10, decimal_places=7)
 
     def __str__(self):
-        return "%s (%s,%s)" % (self.response.respondant.uuid, self.lat, self.lng)
+        return "%s/%s/%s" % (self.response.respondant.survey.slug, self.response.question.slug, self.response.respondant.uuid)
 
 class Response(caching.base.CachingMixin, models.Model):
     question = models.ForeignKey(Question)
