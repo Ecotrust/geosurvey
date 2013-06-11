@@ -242,6 +242,34 @@ form .btn-block {
 }
 
 /**
+ * Help Modal
+ */
+.help-pane {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+.help-pane p,
+.help-pane h4 {
+    margin-left: 10px;
+    margin-right: 20px;
+}
+.help-pane p.help-lead {
+    font-size: 16px;
+    margin-left: 0;
+    font-weight: bold;
+}
+.help-pane h3 {
+    font-size: 16px;
+    font-weight: normal;
+}
+.help-pane h4 {
+    font-size: 13px;
+    font-weight: bold;
+}
+
+/**
  * Search Modal
  */
 .form-search {
@@ -271,6 +299,10 @@ form .btn-block {
 
 .map_wrapper .leaflet-top {
     z-index: 0 !important;
+}
+
+.leaflet-control-container .leaflet-top.leaflet-right {
+    top: 60px;
 }
 /**
  * My Activities modal

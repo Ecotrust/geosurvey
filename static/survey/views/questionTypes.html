@@ -21,7 +21,7 @@
                 ui-event="{ keypress : 'onlyDigits($event)' }"
                 autofocus
                 required/>
-            <button type="submit" class="btn btn-primary btn-large btn-block" ng-disabled="question.required && ! answer">continue</button>
+            <button type="submit" class="btn btn-primary btn-large btn-block" ng-disabled="question.required && (! answer)">continue</button>
         </form>
     </div>
     <div ng-switch-when="auto-single-select">
@@ -110,6 +110,7 @@
                     </ul>
                 </div>
             </div>
+            <p ng-show="question.hoisted_options.length > 0" style="margin-bottom: 20px;">Are there additional activities you conducted at this location in the last 12 months? If so, please select from below.</p>
             <div class="todo mrm">
                 <h3 ng-show="question.hoisted_options.length > 0">Other Activities</h3>
                 <ul class="choices">
