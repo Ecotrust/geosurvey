@@ -62,7 +62,7 @@ angular.module('askApp')
     .directive('zoomto', function($dialog) {
 
     return {
-        template: '<div class="control-group"><i class="icon-search icon-2x"></i><input type="text" id="search-query-facade" placeholder="Search locations" ng-click="openModal()"></div>',
+        template: '<div class="control-group"><i class="icon-search icon-2x"></i><input type="text" id="search-query-facade" placeholder="Search" ng-click="openModal()"></div>',
         restrict: 'EA',
         replace: true,
         transclude: true,
