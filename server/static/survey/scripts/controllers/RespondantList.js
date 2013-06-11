@@ -5,10 +5,6 @@ angular.module('askApp')
     $http.get('/api/v1/surveyreport/' + $routeParams.surveySlug + '/?format=json').success(function(data) {
         $scope.survey = data;
         
-        $scope.$watch('filters', function (newFilters) {
-            console.log(newFilters);
-        
-        }, true);
 
         _.each($scope.survey.questions, function (question) {
             // save a reference to filter questions which are specified by uri

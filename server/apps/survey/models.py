@@ -68,6 +68,11 @@ class Survey(caching.base.CachingMixin, models.Model):
     def completes(self):
         return self.respondant_set.filter(complete=True).count()
 
+    @property
+    def activity_points(self):
+        return Location.objects.filter(response__respondant__in=self.respondant_set.filter(complete=True)).count()
+        
+
     def __str__(self):
         return "%s" % self.name
 
@@ -169,6 +174,7 @@ class Question(caching.base.CachingMixin, models.Model):
 
 class LocationAnswer(caching.base.CachingMixin, models.Model):
     answer = models.TextField(null=True, blank=True, default=None)
+    label = models.TextField(null=True, blank=True, default=None)
     location = models.ForeignKey('Location')
 
     def __str__(self):
@@ -225,7 +231,7 @@ class Response(caching.base.CachingMixin, models.Model):
                         location = Location(lat=point['lat'], lng=point['lng'], response=self)
                         location.save()
                         for answer in point['answers']:
-                            answer = LocationAnswer(answer=answer['text'], location=location)
+                            answer = LocationAnswer(answer=answer['text'], label=answer['label'], location=location)
                             answer.save()
                         location.save()
                 self.answer = ", ".join(answers)
