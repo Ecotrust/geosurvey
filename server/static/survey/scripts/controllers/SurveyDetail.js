@@ -189,123 +189,6 @@ angular.module('askApp')
         }
     };
 
-    $scope.addMarker = function(color) {
-        $scope.activeMarker = {
-            lat: $scope.map.marker.lat,
-            lng: $scope.map.marker.lng,
-            color: color
-        };
-
-        $scope.locations.push($scope.activeMarker);
-    }
-
-    $scope.addLocation = function(location) {
-        // var locations = _.without($scope.locations, $scope.activeMarker);
-        location.color = $scope.activeMarker.color;
-        $scope.locations[_.indexOf($scope.locations, $scope.activeMarker)] = location;
-        // $scope.locations = locations;
-        // $scope.locations.push(location);
-        $scope.activeMarker = false;
-
-        $scope.showMyActivitesPopover();
-    };
-
-    $scope.myActivitiesPopoverShown = false;
-    $scope.showMyActivitesPopover = function() {
-        // Only showing this popover once
-        if (!$scope.myActivitiesPopoverShown) {
-            setTimeout(function() {
-                jQuery('.btn-my-activities').popover({
-                    trigger: 'manual',
-                    placement: 'bottom'
-                });
-                jQuery('.btn-my-activities').popover('show');
-                $scope.myActivitiesPopoverShown = true;
-            }, 500);
-        }
-    }
-
-    $scope.showAddLocationDialog = function(question) {
-        if (_.isUndefined(question)) {
-            question = $scope.question.modalQuestion;
-        }
-
-        $scope.dialog = $dialog.dialog({
-            backdrop: true,
-            keyboard: false,
-            backdropClick: false,
-            templateUrl: '/static/survey/views/locationActivitiesModal.html',
-            controller: 'ActivitySelectorDialogCtrl',
-            resolve: { 
-                question: function () { return question; },
-                activeMarker: function () { return $scope.activeMarker; },
-                activityLocations: function () { return $scope.locations; },
-                selectedActivities: function () { return $scope.getAnswer(question.hoist_answers.slug); }
-            },
-            save: function (question, answer) {
-                if (question.update) {
-                    $scope.locations[_.indexOf($scope.locations, $scope.activeMarker)].answers = answer;
-                } else {
-                    $scope.addLocation({
-                        lat: $scope.activeMarker.lat,
-                        lng: $scope.activeMarker.lng,
-                        color: $scope.activeMarker.color,
-                        question: question,
-                        answers: answer
-                    });
-                }
-                $scope.activeMarker = false;
-                question.update = false;
-            }
-        });
-
-        $scope.dialog.open().then(function (result) {
-            if (result == 'cancel') {
-                $scope.removeLocation($scope.activeMarker);
-                $scope.activeMarker = false;
-                if (question) {
-                    question.update = false;
-                }
-            } else if (result == 'doneMapping') {
-                $scope.answerMapQuestion($scope.locations);
-            }
-            $scope.dialog = null;
-        });
-    }
-
-
-    $scope.cancelConfirmation = function() {
-        if ($scope.dialog) {
-            $scope.dialog.options.cancel();
-        } else {
-            $scope.removeLocation($scope.activeMarker);
-            $scope.activeMarker = false;
-        }
-    }
-
-    $scope.editMarker = function(location) {
-        if (!location.question) {
-            location.question = {};
-            angular.extend(location.question, $scope.question.modalQuestion);
-        }
-        location.question.update = true;    
-        $scope.activeMarker = location;
-        $scope.showAddLocationDialog(location.question);
-    };
-
-    $scope.removeLocation = function(location) {
-        // This is used for both canceling a new location and deleting an 
-        // existing location when in edit mode.
-        var locations = _.without($scope.locations, location);
-        $scope.locations = locations;
-    };
-
-    $scope.showLocation = function(location) {
-        $scope.zoomModel.zoomToResult = location;
-    };
-
-
-
     $scope.getNextQuestion = function() {
         // should return the slug of the next question
         var nextQuestion = $scope.survey.questions[_.indexOf($scope.survey.questions, $scope.question) + 1];
@@ -314,11 +197,11 @@ angular.module('askApp')
         return nextQuestion ? nextQuestion.slug : null;
     };
 
-
     $scope.getResumeQuestionPath = function (lastQuestion) {
         var resumeQuestion = $scope.survey.questions[_.indexOf($scope.survey.questions, _.findWhere($scope.survey.questions, {slug: lastQuestion})) + 1];
         return ['survey', $scope.survey.slug, resumeQuestion.slug, $routeParams.uuidSlug].join('/');
     }
+
     $scope.getNextQuestionPath = function() {
         var nextQuestion = $scope.getNextQuestion(),
             nextUrl;
@@ -871,6 +754,126 @@ angular.module('askApp')
                 $scope.locations = JSON.parse($scope.answer);
             }
 
+            $scope.addMarker = function(color) {
+                $scope.activeMarker = {
+                    lat: $scope.map.marker.lat,
+                    lng: $scope.map.marker.lng,
+                    color: color
+                };
+
+                $scope.locations.push($scope.activeMarker);
+
+                $timeout(function () {
+                    $scope.showAddLocationDialog();
+                }, 300);
+            };
+
+            $scope.addLocation = function(location) {
+                // var locations = _.without($scope.locations, $scope.activeMarker);
+                location.color = $scope.activeMarker.color;
+                $scope.locations[_.indexOf($scope.locations, $scope.activeMarker)] = location;
+                // $scope.locations = locations;
+                // $scope.locations.push(location);
+                $scope.activeMarker = false;
+
+                $scope.showMyActivitesPopover();
+            };
+
+            $scope.myActivitiesPopoverShown = false;
+            $scope.showMyActivitesPopover = function() {
+                // Only showing this popover once
+                if (!$scope.myActivitiesPopoverShown) {
+                    setTimeout(function() {
+                        jQuery('.btn-my-activities').popover({
+                            trigger: 'manual',
+                            placement: 'top'
+                        });
+                        jQuery('.btn-my-activities').popover('show');
+                        $scope.myActivitiesPopoverShown = true;
+                    }, 500);
+                }
+            };
+
+            $scope.showAddLocationDialog = function(question) {
+                if (_.isUndefined(question)) {
+                    question = $scope.question.modalQuestion;
+                }
+
+                $scope.dialog = $dialog.dialog({
+                    backdrop: true,
+                    keyboard: false,
+                    backdropClick: false,
+                    templateUrl: '/static/survey/views/locationActivitiesModal.html',
+                    controller: 'ActivitySelectorDialogCtrl',
+                    resolve: {
+                        question: function () { return question; },
+                        activeMarker: function () { return $scope.activeMarker; },
+                        activityLocations: function () { return $scope.locations; },
+                        selectedActivities: function () { return $scope.getAnswer(question.hoist_answers.slug); }
+                    },
+                    save: function (question, answer) {
+                        if (question.update) {
+                            $scope.locations[_.indexOf($scope.locations, $scope.activeMarker)].answers = answer;
+                        } else {
+                            $scope.addLocation({
+                                lat: $scope.activeMarker.lat,
+                                lng: $scope.activeMarker.lng,
+                                color: $scope.activeMarker.color,
+                                question: question,
+                                answers: answer
+                            });
+                        }
+                        $scope.activeMarker = false;
+                        question.update = false;
+                    }
+                });
+
+                $scope.dialog.open().then(function (result) {
+                    if (result == 'cancel') {
+                        $scope.removeLocation($scope.activeMarker);
+                        $scope.activeMarker = false;
+                        if (question) {
+                            question.update = false;
+                        }
+                    } else if (result == 'doneMapping') {
+                        $scope.answerMapQuestion($scope.locations);
+                    }
+                    $scope.dialog = null;
+                });
+            };
+
+
+            $scope.cancelConfirmation = function() {
+                if ($scope.dialog) {
+                    $scope.dialog.options.cancel();
+                } else {
+                    $scope.removeLocation($scope.activeMarker);
+                    $scope.activeMarker = false;
+                }
+            }
+
+            $scope.editMarker = function(location) {
+                if (!location.question) {
+                    location.question = {};
+                    angular.extend(location.question, $scope.question.modalQuestion);
+                }
+                location.question.update = true;    
+                $scope.activeMarker = location;
+                $scope.showAddLocationDialog(location.question);
+            };
+
+            $scope.removeLocation = function(location) {
+                // This is used for both canceling a new location and deleting an 
+                // existing location when in edit mode.
+                var locations = _.without($scope.locations, location);
+                $scope.locations = locations;
+            };
+
+            $scope.showLocation = function(location) {
+                $scope.zoomModel.zoomToResult = location;
+            };
+
+
             $scope.showActivities = function() {
                 $dialog.dialog({
                     backdrop: true,
@@ -977,7 +980,7 @@ angular.module('askApp')
                 }]
             };
         }
-    } 
+    };
 
     if (! app.data) {
         $http.get('/api/v1/respondant/' + $routeParams.uuidSlug + '/?format=json').success(function(data) {
