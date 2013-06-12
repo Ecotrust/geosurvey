@@ -44,10 +44,9 @@ function ZoomAlertCtrl($scope, dialog, $location) {
             },
             templateUrl: '/static/survey/views/leaflet.html',
             link: function(scope, element, attrs, ctrl) {
-                var $el = element[0],
-                    cloudmadeUrl = 'http://{s}.tile.cloudmade.com/API-key/{styleId}/256/{z}/{x}/{y}.png',
-                    cloudmadeAttribution = 'Map data &copy; 2011 OpenStreetMap contributors, Imagery &copy; 2011 CloudMade';
+                var $el = element[0];
 
+                // Map initialization.
                 var nautical = L.tileLayer.wms("http://egisws02.nos.noaa.gov/ArcGIS/services/RNC/NOAA_RNC/ImageServer/WMSServer", {
                     format: 'img/png',
                     transparent: true,
@@ -62,21 +61,24 @@ function ZoomAlertCtrl($scope, dialog, $location) {
                     zoomAnimation: false,
                     markerZoomAnimation: false,
                     inertia: false,
-                    layers: [ggl]
+                    layers: [ggl],
+                    attributionControl: false
                 });
+                map.attributionControl = false;
             
                 var baseMaps = {
                     "Google": ggl,
                     "Nautical Charts": nautical
                 };
-                L.control.layers(baseMaps, null).addTo(map);
+                var options = {
+                    position: 'topleft'
+                };
+                L.control.layers(baseMaps, null, options).addTo(map);
 
                 var point = new L.LatLng(45, -122);
                 map.setView(point, 5);
 
                 scope.activeMarker = null;
-
-
 
                 element.bind('$destroy', function() {
                     //$timeout.cancel(timeoutId);
