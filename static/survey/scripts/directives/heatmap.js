@@ -28,45 +28,67 @@
                     attribution: "NOAA Nautical Charts"
                 });
 
+                var heatmapLayer = L.TileLayer.heatMap({
+                    radius: 20,
+                    opacity: 0.8,
+                    gradient: {
+                        0.45: "rgb(0,0,255)",
+                        0.55: "rgb(0,255,255)",
+                        0.65: "rgb(0,255,0)",
+                        0.95: "yellow",
+                        1.0: "rgb(255,0,0)"
+                    }
+                });
+
 
                 var map = new L.Map($el, {
-                    
-                    layers: [nautical]
+
+                    layers: [nautical, heatmapLayer]
                 });
-            
+
                 var baseMaps = {
                     "Nautical Charts": nautical
                 };
                 scope.selectedFilter = null;
-                scope.$watch('question', function (question) {
+                scope.$watch('question', function(question) {
                     var url = '/reports/geojson/marco/' + question.slug;
                     if (question) {
                         map.setView(new L.LatLng(question.lat, question.lng), question.zoom);
-                        
+
                         if (question.selectedFilter !== scope.selectedFilter) {
                             if (question.selectedFilter) {
-                                url = url  + '?filter=' + question.selectedFilter;
+                                url = url + '?filter=' + question.selectedFilter;
                             }
                             $http.get(url).success(function(data) {
-                                var filterItems;
-                                if (! scope.filterItems) {
-                                    filterItems = _.map(data.geojson, function (location) { 
-                                        return location.properties.label    
+                                var filterItems, heatMapData=[];
+                                if (!scope.filterItems) {
+                                    filterItems = _.map(data.geojson, function(location) {
+                                        return location.properties.label
                                     });
                                     scope.filterItems = _.uniq(filterItems).sort();
                                 }
-                                
+
                                 scope.geojson = data.geojson;
                                 if (scope.points) {
                                     map.removeLayer(scope.points);
                                 }
-                                scope.points = L.geoJson(scope.geojson);
+                                scope.points = L.geoJson(scope.geojson, {
+                                    pointToLayer: function(feature, latlng) {
+                                    
+                                    var marker = L.marker(latlng);
+                                    heatMapData.push({lat: latlng.lat, lng: latlng.lng});
+                                    return marker;
+                                }
+                                });
                                 scope.points.addTo(map);
-                             });
-                             scope.selectedFilter = question.selectedFilter;
-                             console.log('get points');    
+                                debugger;
+                                heatmapLayer.addData(heatMapData);
+
+                            });
+                            scope.selectedFilter = question.selectedFilter;
+                            console.log('get points');
                         }
-                        
+
                     }
                 }, true);
             } // end of link function
