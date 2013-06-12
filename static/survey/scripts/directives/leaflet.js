@@ -2,11 +2,27 @@
 
 'use strict';
 
+function ZoomAlertCtrl($scope, dialog, $location) {
+    $scope.loaded = false;
+    $scope.$watch(function() {
+        return $location.path();
+    }, function () {
+        if ($scope.loaded && dialog.isOpen()) {
+            $scope.close();
+        }
+        $scope.loaded = true;
+    });
+
+    $scope.close = function(result) {
+        dialog.close(result);
+    };
+}
+
 (function() {
 
     var leafletDirective = angular.module('leaflet.directive', []);
 
-    leafletDirective.directive('leaflet', function($http, $log, $compile, $timeout) {
+    leafletDirective.directive('leaflet', function($http, $log, $compile, $timeout, $dialog) {
         return {
             restrict: 'EA',
             replace: true,
@@ -28,10 +44,9 @@
             },
             templateUrl: '/static/survey/views/leaflet.html',
             link: function(scope, element, attrs, ctrl) {
-                var $el = element[0],
-                    cloudmadeUrl = 'http://{s}.tile.cloudmade.com/API-key/{styleId}/256/{z}/{x}/{y}.png',
-                    cloudmadeAttribution = 'Map data &copy; 2011 OpenStreetMap contributors, Imagery &copy; 2011 CloudMade';
+                var $el = element[0];
 
+                // Map initialization.
                 var nautical = L.tileLayer.wms("http://egisws02.nos.noaa.gov/ArcGIS/services/RNC/NOAA_RNC/ImageServer/WMSServer", {
                     format: 'img/png',
                     transparent: true,
@@ -46,21 +61,24 @@
                     zoomAnimation: false,
                     markerZoomAnimation: false,
                     inertia: false,
-                    layers: [ggl]
+                    layers: [ggl],
+                    attributionControl: false
                 });
+                map.attributionControl = false;
             
                 var baseMaps = {
                     "Google": ggl,
                     "Nautical Charts": nautical
                 };
-                L.control.layers(baseMaps, null).addTo(map);
+                var options = {
+                    position: 'topleft'
+                };
+                L.control.layers(baseMaps, null, options).addTo(map);
 
                 var point = new L.LatLng(45, -122);
                 map.setView(point, 5);
 
                 scope.activeMarker = null;
-
-
 
                 element.bind('$destroy', function() {
                     //$timeout.cancel(timeoutId);
@@ -291,10 +309,10 @@
                     if (scope.confirmingLocation) {
                         scope.marker.icon = "crosshair_blank.png";
 
-                    } else if (scope.showZoomAlert && !scope.isZoomedIn()) {
+                    } else if (scope.isCrosshairAlerting && !scope.isZoomedIn()) {
                         scope.marker.icon = "crosshair_red.png";
 
-                    } else if (scope.showZoomAlert && scope.isZoomedIn()) {
+                    } else if (scope.isCrosshairAlerting && scope.isZoomedIn()) {
                         scope.marker.icon = "crosshair_green.png";
 
                     } else {
@@ -313,17 +331,32 @@
                     return scope.zoom >= scope.requiredzoom;
                 };
 
-                scope.showZoomAlert = false;
+                scope.isCrosshairAlerting = false;
+
+                scope.showZoomAlert = function () {
+                    var d = $dialog.dialog({
+                        backdrop: true,
+                        keyboard: true,
+                        backdropClick: false,
+                        backdropFade: true,
+                        transitionClass: 'fade',
+                        templateUrl: '/static/survey/views/zoomAlertModal.html',
+                        controller: 'ZoomAlertCtrl'
+                    });
+                    d.open();
+                }
+
 
                 scope.addMarkerWrapper = function() {
                     if (scope.activeMarker) {
                         scope.activeMarker.marker.closePopup();
                     }
                     if (!scope.isZoomedIn()) {
-                        scope.showZoomAlert = true;
+                        scope.isCrosshairAlerting = true;
+                        scope.showZoomAlert();
                     } else {
                         scope.addMarker(scope.getNextColor());
-                        scope.showZoomAlert = false;
+                        scope.isCrosshairAlerting = false;
                     }
                     scope.updateCrosshair();
                 };
