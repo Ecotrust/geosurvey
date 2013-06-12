@@ -16,22 +16,6 @@ var map = {
     msg: null
 };
 
-
-function MapIntroDialogCtrl($scope, dialog, $location) {
-    $scope.loaded = false;
-    $scope.$watch(function() {
-        return $location.path();
-    }, function () {
-        if ($scope.loaded && dialog.isOpen()) {
-            $scope.close();
-        }
-        $scope.loaded = true;
-    });
-    $scope.close = function(result) {
-        dialog.close(result);
-    };
-}
-
 function ActivitiesCtrl($scope, dialog, $location) {
     $scope.loaded = false;
     $scope.$watch(function() {
@@ -44,23 +28,6 @@ function ActivitiesCtrl($scope, dialog, $location) {
     });
 
     $scope.close = function(result) {
-        dialog.close(result);
-    };
-}
-
-function MapContinueDialogCtrl($scope, dialog, remainingActivities, $location){
-    $scope.loaded = false;
-    $scope.$watch(function() {
-        return $location.path();
-    }, function () {
-        if ($scope.loaded && dialog.isOpen()) {
-            $scope.close();
-        }
-        $scope.loaded = true;
-    });
-
-    $scope.remainingActivities = remainingActivities;
-    $scope.close = function(result){
         dialog.close(result);
     };
 }
@@ -118,7 +85,7 @@ function ActivitySelectorDialogCtrl($scope, dialog, $location, question, activeM
             })));
 
         return remainingActivities;
-    }
+    };
 
     // This dialog has three panes.
     $scope.panes = {
@@ -126,7 +93,7 @@ function ActivitySelectorDialogCtrl($scope, dialog, $location, question, activeM
         activitySelectionPane: {},
         deleteConfirmationPane: {},
         thankYouPane: {}
-    };    
+    };
     $scope.currentPane = null;
     $scope.show = function (paneName) {
         if (_.has($scope.panes, paneName)) {
@@ -200,7 +167,7 @@ angular.module('askApp')
     $scope.getResumeQuestionPath = function (lastQuestion) {
         var resumeQuestion = $scope.survey.questions[_.indexOf($scope.survey.questions, _.findWhere($scope.survey.questions, {slug: lastQuestion})) + 1];
         return ['survey', $scope.survey.slug, resumeQuestion.slug, $routeParams.uuidSlug].join('/');
-    }
+    };
 
     $scope.getNextQuestionPath = function() {
         var nextQuestion = $scope.getNextQuestion(),
@@ -264,7 +231,7 @@ angular.module('askApp')
                         lng: location.lng,
                         color: location.color,
                         answers: location.answers
-                    }
+                    };
 
                     if (location.pennies) {
                         returnValue.pennies = parseInt(location.pennies, 10);
@@ -304,9 +271,9 @@ angular.module('askApp')
                             });
                             $scope.gotoNextQuestion();
                         }
-                    }    
+                    }
                 }
-                
+
             }).error(function(data, status, headers, config) {
                 if (console) {
                     console.log(data);
@@ -480,7 +447,7 @@ angular.module('askApp')
                 $scope.answers[response.question.slug] = response.answer;
             }
         });
-        
+
         if (data.last_question && ! data.complete) {
             $scope.resumeQuestionPath = $scope.getResumeQuestionPath(data.last_question);
         }
@@ -537,7 +504,7 @@ angular.module('askApp')
                         };
                         $scope.question.otherAnswer = answer;
                     }
-                });    
+                });
             }
         } else {
             $scope.answer = $scope.getAnswer($routeParams.questionSlug);
@@ -900,21 +867,6 @@ angular.module('askApp')
                     controller: 'HelpDialogCtrl'
                 });
                 d.open();
-            };
-
-            $scope.showIntro = function () {
-                $timeout(function () {
-                    var d = $dialog.dialog({
-                        backdrop: true,
-                        keyboard: true,
-                        backdropFade: true,
-                        transitionClass: 'fade',
-                        backdropClick: false,
-                        templateUrl: '/static/survey/views/mapIntroModal.html',
-                        controller: 'MapIntroDialogCtrl'
-                    });
-                    d.open();
-                }, 300);
             };
         }
 

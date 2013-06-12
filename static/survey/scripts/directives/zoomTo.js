@@ -4,9 +4,26 @@
 function ZoomToCtrl($scope, dialog, $http, $timeout, $location) {
     var stop;
 
+    $scope.panes = {
+        search: {},
+        mapUsage: {}
+    };    
+    $scope.currentPane = null;
+    $scope.show = function (paneName) {
+        if (_.has($scope.panes, paneName)) {
+            _.each($scope.panes, function (value, key, list) {
+                $scope.panes[key].showing = false;
+            });
+            $scope.panes[paneName].showing = true;
+            $scope.currentPane = $scope.panes[paneName];
+        }
+    };
+    $scope.show('search');
+
     $scope.results = [];
     $scope.showSpinner = false;
     $scope.showNoResults = false;
+    $scope.selectedPlace = null;
 
     if ($scope.states) {
         $scope.stateParam = '&state__in=' + $scope.states.split(',').join('&state__in=')
@@ -38,11 +55,11 @@ function ZoomToCtrl($scope, dialog, $http, $timeout, $location) {
     });
 
     $scope.zoomTo = function (place) {            
-        dialog.close(place);
+        $scope.selectedPlace = place;
     };
 
     $scope.close = function(result) {
-        dialog.close(result);
+        dialog.close($scope.selectedPlace);
     };
 
     // If user hits back button, close the modal.
@@ -69,9 +86,7 @@ angular.module('askApp')
         scope: {
             states: "=states",
             zoomToResult: "=zoomtoresult",
-            numLocations: "=numlocations",
-            done: "&done"
-            
+            numLocations: "=numlocations"
         },
         link: function postLink(scope, element, attrs) {
             scope.isInitialView = true;
@@ -99,7 +114,6 @@ angular.module('askApp')
                             zoom: 15
                         };
                     }
-                    scope.done();
                 });
             };
 
