@@ -732,7 +732,7 @@ angular.module('askApp')
 
                 $timeout(function () {
                     $scope.showAddLocationDialog();
-                }, 300);
+                }, 400);
             };
 
             $scope.addLocation = function(location) {
@@ -796,6 +796,7 @@ angular.module('askApp')
                 });
 
                 $scope.dialog.open().then(function (result) {
+                    $scope.dialog = null;
                     if (result == 'cancel') {
                         $scope.removeLocation($scope.activeMarker);
                         $scope.activeMarker = false;
@@ -805,7 +806,6 @@ angular.module('askApp')
                     } else if (result == 'doneMapping') {
                         $scope.answerMapQuestion($scope.locations);
                     }
-                    $scope.dialog = null;
                 });
             };
 
