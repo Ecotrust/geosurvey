@@ -1,6 +1,6 @@
 <div ng-show="panes.confirmPane.showing">
     <div class="modal-body">
-        <h2>Is the placement of this activity marker (use the graphic of the activity marker) correct?</h2>
+        <h2 class="question-title">Is the placement of this activity marker (use the graphic of the activity marker) correct?</h2>
     </div>
     <div class="modal-footer">
         <button class="btn btn-large" ng-click="close('cancel')">No, let's try again</button>
@@ -11,7 +11,7 @@
 <!-- note: this pane operates under a child scope -->
 <div ng-show="panes.activitySelectionPane.showing" ng-controller="SurveyDetailCtrl">
     <div class="modal-header">
-        <h3>{{ question.title }}</h3>
+        <h2 class="question-title">{{ question.title }}</h2>
     </div>
     <div class="modal-body">
         <div ng-init="dialog=$parent.dialog;" ng-include="'/static/survey/views/questionTypes.html'"></div>
@@ -24,7 +24,7 @@
 
 <div ng-show="panes.deleteConfirmationPane.showing">
     <div class="modal-body">
-        <h3>Delete this location?</h3>
+        <h2 class="question-title">Delete this location?</h2>
     </div>
     <div class="modal-footer">
         <button class="btn btn-large" ng-click="show('activitySelectionPane')">Cancel</button>
@@ -32,12 +32,11 @@
     </div>
 </div>
 
-<div ng-show="panes.thankYouPane.showing">
+<div class="thx-modal" ng-show="panes.thankYouPane.showing">
     <div class="modal-header">
-        <h2 class="question-title">Thank you for adding an activity marker. Would you like to add another activity marker?</h2>
+        <h3>Would you like to add another activity marker?</h3>
     </div>
     <div class="modal-body">
-
         <div ng-show="getRemainingActivities().length > 0">
             <p>The following activities have not yet been mapped:</p>
             <ul>
@@ -46,9 +45,9 @@
                 </li>
             </ul>
         </div>
-
     </div>
     <div class="modal-footer">
+
         <button class="btn btn-large" ng-click="close('doneMapping')">No</button>
         <button class="btn btn-large btn-primary" ng-click="close()">Yes</button>
     </div>

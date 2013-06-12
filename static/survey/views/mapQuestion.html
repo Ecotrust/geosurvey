@@ -45,6 +45,14 @@
             ng-click="showHelp()">
             <i class="icon-question-sign"></i>&nbsp;Help
         </button>
+
+        <button 
+            ng-show="activeMarker == false && locations.length > 0"
+            type="submit"
+            class="btn btn-large pull-right" 
+            ng-click="answerMapQuestion(locations)">
+            Done Mapping
+        </button>
     </div>
 
 
