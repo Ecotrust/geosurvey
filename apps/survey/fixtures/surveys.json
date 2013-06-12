@@ -497,6 +497,16 @@
     }, 
     {
         "fields": {
+            "anon": true, 
+            "name": "Volume and Origin", 
+            "slug": "volume-and-origin", 
+            "states": ""
+        }, 
+        "model": "survey.survey", 
+        "pk": 6
+    }, 
+    {
+        "fields": {
             "label": "NY", 
             "text": "New York"
         }, 
@@ -1139,6 +1149,7 @@
         "fields": {
             "allow_other": false, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": null, 
             "integer_max": 365, 
@@ -1169,6 +1180,7 @@
         "fields": {
             "allow_other": false, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": null, 
             "integer_max": 365, 
@@ -1199,6 +1211,7 @@
         "fields": {
             "allow_other": false, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": null, 
             "integer_max": 365, 
@@ -1229,6 +1242,7 @@
         "fields": {
             "allow_other": false, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -1265,6 +1279,7 @@
         "fields": {
             "allow_other": false, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": null, 
             "integer_max": 365, 
@@ -1295,6 +1310,7 @@
         "fields": {
             "allow_other": false, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -1325,6 +1341,7 @@
         "fields": {
             "allow_other": false, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": "true", 
             "integer_max": 365, 
@@ -1355,6 +1372,7 @@
         "fields": {
             "allow_other": false, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -1385,6 +1403,7 @@
         "fields": {
             "allow_other": false, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -1415,6 +1434,7 @@
         "fields": {
             "allow_other": false, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -1445,6 +1465,7 @@
         "fields": {
             "allow_other": false, 
             "filterBy": true, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -1475,6 +1496,7 @@
         "fields": {
             "allow_other": false, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": "recreate-info", 
             "integer_max": 365, 
@@ -1505,6 +1527,7 @@
         "fields": {
             "allow_other": false, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": "activities", 
             "integer_max": 365, 
@@ -1535,6 +1558,7 @@
         "fields": {
             "allow_other": false, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": "number-trips", 
             "integer_max": 365, 
@@ -1565,6 +1589,7 @@
         "fields": {
             "allow_other": false, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": "location-activities", 
             "integer_max": 365, 
@@ -1595,6 +1620,7 @@
         "fields": {
             "allow_other": false, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": 13, 
             "info": "location-activities", 
             "integer_max": 365, 
@@ -1625,6 +1651,7 @@
         "fields": {
             "allow_other": false, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": "primary-activity", 
             "integer_max": 365, 
@@ -1655,6 +1682,7 @@
         "fields": {
             "allow_other": false, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": "last-info", 
             "integer_max": 365, 
@@ -1685,6 +1713,7 @@
         "fields": {
             "allow_other": false, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": "last-trip-activities", 
             "integer_max": 365, 
@@ -1715,6 +1744,7 @@
         "fields": {
             "allow_other": false, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": "primary-activity-last-trip", 
             "integer_max": 365, 
@@ -1745,6 +1775,7 @@
         "fields": {
             "allow_other": false, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": "number-nights", 
             "integer_max": 365, 
@@ -1782,6 +1813,7 @@
         "fields": {
             "allow_other": true, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -1812,6 +1844,7 @@
         "fields": {
             "allow_other": false, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -1842,6 +1875,7 @@
         "fields": {
             "allow_other": false, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": "demo-info", 
             "integer_max": 365, 
@@ -1872,6 +1906,7 @@
         "fields": {
             "allow_other": false, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -1902,6 +1937,7 @@
         "fields": {
             "allow_other": false, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -1935,6 +1971,7 @@
         "fields": {
             "allow_other": true, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -1965,6 +2002,7 @@
         "fields": {
             "allow_other": false, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -2001,6 +2039,7 @@
         "fields": {
             "allow_other": false, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -2037,6 +2076,7 @@
         "fields": {
             "allow_other": false, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -2067,6 +2107,7 @@
         "fields": {
             "allow_other": false, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -2100,6 +2141,7 @@
         "fields": {
             "allow_other": false, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -2130,6 +2172,7 @@
         "fields": {
             "allow_other": false, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -2160,6 +2203,7 @@
         "fields": {
             "allow_other": false, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -2190,6 +2234,7 @@
         "fields": {
             "allow_other": false, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -2226,6 +2271,7 @@
         "fields": {
             "allow_other": false, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": "last-trip", 
             "integer_max": 365, 
@@ -2256,6 +2302,7 @@
         "fields": {
             "allow_other": false, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -2286,6 +2333,7 @@
         "fields": {
             "allow_other": false, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -2316,6 +2364,7 @@
         "fields": {
             "allow_other": false, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -2349,6 +2398,7 @@
         "fields": {
             "allow_other": true, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -2387,6 +2437,7 @@
         "fields": {
             "allow_other": true, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -2424,6 +2475,7 @@
         "fields": {
             "allow_other": false, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -2454,6 +2506,7 @@
         "fields": {
             "allow_other": true, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -2484,6 +2537,7 @@
         "fields": {
             "allow_other": false, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -2514,6 +2568,7 @@
         "fields": {
             "allow_other": false, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -2551,6 +2606,7 @@
         "fields": {
             "allow_other": true, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -2596,6 +2652,7 @@
         "fields": {
             "allow_other": false, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -2626,6 +2683,7 @@
         "fields": {
             "allow_other": false, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": 50, 
             "info": "", 
             "integer_max": 365, 
@@ -2656,6 +2714,7 @@
         "fields": {
             "allow_other": false, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -2686,6 +2745,7 @@
         "fields": {
             "allow_other": false, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -2716,6 +2776,7 @@
         "fields": {
             "allow_other": false, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -2750,6 +2811,7 @@
         "fields": {
             "allow_other": false, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -2780,6 +2842,7 @@
         "fields": {
             "allow_other": false, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -2810,6 +2873,7 @@
         "fields": {
             "allow_other": false, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -2840,6 +2904,7 @@
         "fields": {
             "allow_other": false, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -2870,6 +2935,9 @@
         "fields": {
             "allow_other": true, 
             "filterBy": true, 
+            "filter_questions": [
+                64
+            ], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -2907,6 +2975,10 @@
         "fields": {
             "allow_other": false, 
             "filterBy": true, 
+            "filter_questions": [
+                63, 
+                66
+            ], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -2937,6 +3009,7 @@
         "fields": {
             "allow_other": false, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": "info-activities", 
             "integer_max": 365, 
@@ -2966,7 +3039,10 @@
     {
         "fields": {
             "allow_other": true, 
-            "filterBy": false, 
+            "filterBy": true, 
+            "filter_questions": [
+                64
+            ], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -2987,7 +3063,7 @@
             "term_condition": "", 
             "title": "Which of the following recreation activities have you participated in <strong>during the last 12 months</strong> in Mid-Atlantic coastal and ocean areas? Select all that apply.", 
             "type": "multi-select", 
-            "visualize": false, 
+            "visualize": true, 
             "zoom": null
         }, 
         "model": "survey.question", 
@@ -2997,6 +3073,7 @@
         "fields": {
             "allow_other": false, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -3027,6 +3104,7 @@
         "fields": {
             "allow_other": false, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": 66, 
             "info": "", 
             "integer_max": 365, 
@@ -3057,6 +3135,7 @@
         "fields": {
             "allow_other": false, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -3071,13 +3150,13 @@
             "options_json": "", 
             "order": 9, 
             "randomize_groups": false, 
-            "report_type": "distribution", 
+            "report_type": "heatmap", 
             "required": true, 
             "slug": "activity-locations", 
             "term_condition": "", 
             "title": "Navigate the map or use the search function to zoom to the areas which you conducted ocean and coastal recreation activities in last 12 months.", 
             "type": "map-multipoint", 
-            "visualize": false, 
+            "visualize": true, 
             "zoom": 6
         }, 
         "model": "survey.question", 
@@ -3087,6 +3166,7 @@
         "fields": {
             "allow_other": false, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": "activity-locations-intro", 
             "integer_max": 365, 
@@ -3117,6 +3197,7 @@
         "fields": {
             "allow_other": false, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": "activity-locations-intro", 
             "integer_max": 365, 
@@ -3147,6 +3228,7 @@
         "fields": {
             "allow_other": false, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": "activity-locations-intro", 
             "integer_max": 365, 
@@ -3177,6 +3259,7 @@
         "fields": {
             "allow_other": false, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": "pennies-intro", 
             "integer_max": 365, 
@@ -3207,6 +3290,7 @@
         "fields": {
             "allow_other": false, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": "last-time", 
             "integer_max": 365, 
@@ -3237,6 +3321,7 @@
         "fields": {
             "allow_other": false, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -3267,6 +3352,7 @@
         "fields": {
             "allow_other": false, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -3304,6 +3390,7 @@
         "fields": {
             "allow_other": true, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -3334,6 +3421,7 @@
         "fields": {
             "allow_other": false, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -3364,6 +3452,7 @@
         "fields": {
             "allow_other": false, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -3394,6 +3483,7 @@
         "fields": {
             "allow_other": false, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -3424,6 +3514,7 @@
         "fields": {
             "allow_other": false, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": "demo-info", 
             "integer_max": 365, 
@@ -3454,6 +3545,7 @@
         "fields": {
             "allow_other": false, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -3484,6 +3576,7 @@
         "fields": {
             "allow_other": false, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -3517,6 +3610,7 @@
         "fields": {
             "allow_other": true, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -3547,6 +3641,7 @@
         "fields": {
             "allow_other": false, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -3577,6 +3672,7 @@
         "fields": {
             "allow_other": false, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -3613,6 +3709,7 @@
         "fields": {
             "allow_other": false, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -3643,6 +3740,7 @@
         "fields": {
             "allow_other": true, 
             "filterBy": false, 
+            "filter_questions": [], 
             "hoist_answers": null, 
             "info": "", 
             "integer_max": 365, 
@@ -3668,5 +3766,329 @@
         }, 
         "model": "survey.question", 
         "pk": 88
+    }, 
+    {
+        "fields": {
+            "answer": "Photography", 
+            "label": "photography", 
+            "location": 46
+        }, 
+        "model": "survey.locationanswer", 
+        "pk": 75
+    }, 
+    {
+        "fields": {
+            "answer": "Swimming or body surfing", 
+            "label": "swimming", 
+            "location": 47
+        }, 
+        "model": "survey.locationanswer", 
+        "pk": 76
+    }, 
+    {
+        "fields": {
+            "answer": "Sitting in your car watching the scene", 
+            "label": "sitting-car", 
+            "location": 47
+        }, 
+        "model": "survey.locationanswer", 
+        "pk": 77
+    }, 
+    {
+        "fields": {
+            "answer": "Scenic enjoyment/sightseeing", 
+            "label": "sightseeing", 
+            "location": 47
+        }, 
+        "model": "survey.locationanswer", 
+        "pk": 78
+    }, 
+    {
+        "fields": {
+            "answer": "Photography", 
+            "label": "photography", 
+            "location": 47
+        }, 
+        "model": "survey.locationanswer", 
+        "pk": 79
+    }, 
+    {
+        "fields": {
+            "answer": "Beach going (sitting, walking, running, dog walking, kite flying, etc.)", 
+            "label": "beach-going", 
+            "location": 47
+        }, 
+        "model": "survey.locationanswer", 
+        "pk": 80
+    }, 
+    {
+        "fields": {
+            "answer": "Hang gliding/parasailing", 
+            "label": "hang-gliding", 
+            "location": 48
+        }, 
+        "model": "survey.locationanswer", 
+        "pk": 81
+    }, 
+    {
+        "fields": {
+            "answer": "Collection of non-living resources/beachcombing (agates, fossils, driftwood)", 
+            "label": "beachcombing", 
+            "location": 49
+        }, 
+        "model": "survey.locationanswer", 
+        "pk": 82
+    }, 
+    {
+        "fields": {
+            "answer": "Swimming or body surfing", 
+            "label": "swimming", 
+            "location": 50
+        }, 
+        "model": "survey.locationanswer", 
+        "pk": 83
+    }, 
+    {
+        "fields": {
+            "answer": "Scenic enjoyment/sightseeing", 
+            "label": "sightseeing", 
+            "location": 50
+        }, 
+        "model": "survey.locationanswer", 
+        "pk": 84
+    }, 
+    {
+        "fields": {
+            "answer": "Photography", 
+            "label": "photography", 
+            "location": 50
+        }, 
+        "model": "survey.locationanswer", 
+        "pk": 85
+    }, 
+    {
+        "fields": {
+            "answer": "Collection of non-living resources/beachcombing (beach glass, shells, fossils, driftwood)", 
+            "label": "beachcombing", 
+            "location": 51
+        }, 
+        "model": "survey.locationanswer", 
+        "pk": 86
+    }, 
+    {
+        "fields": {
+            "answer": "Surfing (from board or kayak or stand up board)", 
+            "label": "surfing", 
+            "location": 52
+        }, 
+        "model": "survey.locationanswer", 
+        "pk": 87
+    }, 
+    {
+        "fields": {
+            "answer": "Swimming or body surfing", 
+            "label": "swimming", 
+            "location": 53
+        }, 
+        "model": "survey.locationanswer", 
+        "pk": 88
+    }, 
+    {
+        "fields": {
+            "answer": "Scenic enjoyment/sightseeing", 
+            "label": "sightseeing", 
+            "location": 53
+        }, 
+        "model": "survey.locationanswer", 
+        "pk": 89
+    }, 
+    {
+        "fields": {
+            "answer": "Photography", 
+            "label": "photography", 
+            "location": 53
+        }, 
+        "model": "survey.locationanswer", 
+        "pk": 90
+    }, 
+    {
+        "fields": {
+            "answer": "Beach going (sitting, walking, running, dog walking, kite flying, etc.)", 
+            "label": "beach-going", 
+            "location": 53
+        }, 
+        "model": "survey.locationanswer", 
+        "pk": 91
+    }, 
+    {
+        "fields": {
+            "answer": "Collection of non-living resources/beachcombing (agates, fossils, driftwood)", 
+            "label": "beachcombing", 
+            "location": 54
+        }, 
+        "model": "survey.locationanswer", 
+        "pk": 92
+    }, 
+    {
+        "fields": {
+            "answer": "Watching birds, whales, seals and/or other marine life (from a charter boat)", 
+            "label": "wildlife-viewing-charter", 
+            "location": 55
+        }, 
+        "model": "survey.locationanswer", 
+        "pk": 93
+    }, 
+    {
+        "fields": {
+            "answer": "Sitting in your car watching the scene", 
+            "label": "sitting-car", 
+            "location": 56
+        }, 
+        "model": "survey.locationanswer", 
+        "pk": 94
+    }, 
+    {
+        "fields": {
+            "answer": "Scenic enjoyment/sightseeing", 
+            "label": "sightseeing", 
+            "location": 57
+        }, 
+        "model": "survey.locationanswer", 
+        "pk": 95
+    }, 
+    {
+        "fields": {
+            "answer": "Skim boarding", 
+            "label": "skimboarding", 
+            "location": 57
+        }, 
+        "model": "survey.locationanswer", 
+        "pk": 96
+    }, 
+    {
+        "fields": {
+            "answer": "Scenic enjoyment/sightseeing", 
+            "label": "sightseeing", 
+            "location": 58
+        }, 
+        "model": "survey.locationanswer", 
+        "pk": 97
+    }, 
+    {
+        "fields": {
+            "lat": "39.4430868", 
+            "lng": "-74.3276596", 
+            "response": 32
+        }, 
+        "model": "survey.location", 
+        "pk": 46
+    }, 
+    {
+        "fields": {
+            "lat": "40.1003972", 
+            "lng": "-74.0332603", 
+            "response": 6
+        }, 
+        "model": "survey.location", 
+        "pk": 47
+    }, 
+    {
+        "fields": {
+            "lat": "41.7225150", 
+            "lng": "-69.9315834", 
+            "response": 59
+        }, 
+        "model": "survey.location", 
+        "pk": 48
+    }, 
+    {
+        "fields": {
+            "lat": "47.4009055", 
+            "lng": "-124.2613792", 
+            "response": 80
+        }, 
+        "model": "survey.location", 
+        "pk": 49
+    }, 
+    {
+        "fields": {
+            "lat": "39.6894220", 
+            "lng": "-74.1422653", 
+            "response": 113
+        }, 
+        "model": "survey.location", 
+        "pk": 50
+    }, 
+    {
+        "fields": {
+            "lat": "39.3682791", 
+            "lng": "-75.1904297", 
+            "response": 132
+        }, 
+        "model": "survey.location", 
+        "pk": 51
+    }, 
+    {
+        "fields": {
+            "lat": "39.3658240", 
+            "lng": "-75.1826191", 
+            "response": 132
+        }, 
+        "model": "survey.location", 
+        "pk": 52
+    }, 
+    {
+        "fields": {
+            "lat": "39.9436339", 
+            "lng": "-74.0687943", 
+            "response": 50
+        }, 
+        "model": "survey.location", 
+        "pk": 53
+    }, 
+    {
+        "fields": {
+            "lat": "47.1782789", 
+            "lng": "-124.1899681", 
+            "response": 97
+        }, 
+        "model": "survey.location", 
+        "pk": 54
+    }, 
+    {
+        "fields": {
+            "lat": "38.7645242", 
+            "lng": "-74.8932838", 
+            "response": 148
+        }, 
+        "model": "survey.location", 
+        "pk": 55
+    }, 
+    {
+        "fields": {
+            "lat": "37.7488480", 
+            "lng": "-75.5514336", 
+            "response": 148
+        }, 
+        "model": "survey.location", 
+        "pk": 56
+    }, 
+    {
+        "fields": {
+            "lat": "38.2292808", 
+            "lng": "-75.1435232", 
+            "response": 23
+        }, 
+        "model": "survey.location", 
+        "pk": 57
+    }, 
+    {
+        "fields": {
+            "lat": "38.0917757", 
+            "lng": "-75.2038193", 
+            "response": 23
+        }, 
+        "model": "survey.location", 
+        "pk": 58
     }
 ]
