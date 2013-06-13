@@ -14,8 +14,8 @@
 
 
     <div class="map-controls-top">
-
-        <span zoomto onload="openModal()" states="survey.states" zoomtoresult="zoomModel.zoomToResult" numlocations="locations.length"></span>
+        <!-- onload="openModal()" -->
+        <span zoomto  states="survey.states" zoomtoresult="zoomModel.zoomToResult" numlocations="locations.length"></span>
 
         <button
             class="btn btn-large btn-primary"
@@ -43,9 +43,9 @@
     <button 
         ng-show="activeMarker == false && locations.length > 0"
         type="submit"
-        class="btn btn-large btn-done-mapping"
+        class="btn btn-large btn-primary btn-done-mapping"
         ng-click="answerMapQuestion(locations)">
-        Done Mapping
+        Done
     </button>
         
 
