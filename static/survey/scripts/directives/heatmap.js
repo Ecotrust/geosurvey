@@ -28,24 +28,9 @@
                     attribution: "NOAA Nautical Charts"
                 });
 
-                var heatmapLayer = L.TileLayer.heatMap({
-                    // radius could be absolute or relative
-                    // absolute: radius in meters, relative: radius in pixels
-                    radius: { value: 15000, absolute: true },
-                    //radius: { value: 20, absolute: false },
-                    opacity: 0.8,
-                    gradient: {
-                        0.45: "rgb(0,0,255)",
-                        0.55: "rgb(0,255,255)",
-                        0.65: "rgb(0,255,0)",
-                        0.95: "yellow",
-                        1.0: "rgb(255,0,0)"
-                    }
-                });
-
                 var map = new L.Map($el, {
 
-                    layers: [nautical, heatmapLayer]
+                    layers: [nautical]
                 });
 
                 var baseMaps = {
@@ -63,6 +48,24 @@
                             }
                             $http.get(url).success(function(data) {
                                 var filterItems, heatMapData=[];
+                                if (scope.heatmapLayer) {
+                                    map.removeLayer(scope.heatmapLayer);
+                                }
+                                scope.heatmapLayer = L.TileLayer.heatMap({
+                                    // radius could be absolute or relative
+                                    // absolute: radius in meters, relative: radius in pixels
+                                    radius: { value: 15000, absolute: true },
+                                    //radius: { value: 20, absolute: false },
+                                    opacity: 0.8,
+                                    gradient: {
+                                        0.45: "rgb(0,0,255)",
+                                        0.55: "rgb(0,255,255)",
+                                        0.65: "rgb(0,255,0)",
+                                        0.95: "yellow",
+                                        1.0: "rgb(255,0,0)"
+                                    }
+                                });
+                                scope.heatmapLayer.addTo(map);
                                 if (!scope.filterItems) {
                                     filterItems = _.map(data.geojson, function(location) {
                                         return location.properties.label
@@ -71,28 +74,19 @@
                                 }
 
                                 scope.geojson = data.geojson;
-                                // if (scope.points) {
-                                //     map.removeLayer(scope.points);
-                                // }
-                                // scope.points = L.geoJson(scope.geojson, {
-                                //     pointToLayer: function(feature, latlng) {
-                                    
-                                //     var marker = L.marker(latlng);
-                                //     heatMapData.push({lat: latlng.lat, lon: latlng.lng, value: 1});
-                                //     return marker;
-                                // }
-                                // });
-                                // scope.points.addTo(map);
+                                
                                 _.each(scope.geojson, function (feature) {
                                     var lat = feature.geometry.coordinates[1];
                                     var lon = feature.geometry.coordinates[0];
                                 
                                     heatMapData.push({lat: lat, lon: lon, value: 1});
                                 });
-                                heatmapLayer.setData(heatMapData);
+                                scope.heatmapLayer.setData(heatMapData);
+                                
                             });
+
                             scope.selectedFilter = question.selectedFilter;
-                            console.log('get points');
+                            
                         }
 
                     }
