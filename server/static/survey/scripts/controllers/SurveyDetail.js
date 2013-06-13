@@ -16,7 +16,6 @@ var map = {
     msg: null
 };
 
-
 function ActivitiesCtrl($scope, dialog, $location) {
     $scope.loaded = false;
     $scope.$watch(function() {
@@ -29,23 +28,6 @@ function ActivitiesCtrl($scope, dialog, $location) {
     });
 
     $scope.close = function(result) {
-        dialog.close(result);
-    };
-}
-
-function MapContinueDialogCtrl($scope, dialog, remainingActivities, $location){
-    $scope.loaded = false;
-    $scope.$watch(function() {
-        return $location.path();
-    }, function () {
-        if ($scope.loaded && dialog.isOpen()) {
-            $scope.close();
-        }
-        $scope.loaded = true;
-    });
-
-    $scope.remainingActivities = remainingActivities;
-    $scope.close = function(result){
         dialog.close(result);
     };
 }
@@ -72,6 +54,66 @@ function HelpDialogCtrl($scope, dialog, $location) {
     $scope.show('pane1');
 
 
+    $scope.loaded = false;
+    $scope.$watch(function() {
+        return $location.path();
+    }, function () {
+        if ($scope.loaded && dialog.isOpen()) {
+            $scope.close();
+        }
+        $scope.loaded = true;
+    });
+    $scope.close = function(result){
+        dialog.close(result);
+    };
+}
+
+
+function ActivitySelectorDialogCtrl($scope, dialog, $location, question, activeMarker, activityLocations, selectedActivities) {
+    $scope.question = question;
+    $scope.activeMarker = activeMarker;
+    $scope.dialog = dialog;
+    $scope.activityLocations = activityLocations;
+    $scope.selectedActivities = selectedActivities;
+
+    $scope.getRemainingActivities = function () {
+        // Filter out activities that have already been mapped.
+        var remainingActivities = _.difference(
+            _.pluck($scope.selectedActivities, 'text'),
+            _.flatten(_.map($scope.activityLocations, function (location) {
+                return _.pluck(location.answers, 'text');
+            })));
+
+        return remainingActivities;
+    };
+
+    // This dialog has three panes.
+    $scope.panes = {
+        confirmPane: {},
+        activitySelectionPane: {},
+        deleteConfirmationPane: {},
+        thankYouPane: {}
+    };
+    $scope.currentPane = null;
+    $scope.show = function (paneName) {
+        if (_.has($scope.panes, paneName)) {
+            _.each($scope.panes, function (value, key, list) {
+                $scope.panes[key].showing = false;
+            });
+            $scope.panes[paneName].showing = true;
+            $scope.currentPane = $scope.panes[paneName];
+        }
+    };
+    if ($scope.question && $scope.question.update) {
+        // editing, no need to confirm location
+        $scope.show('activitySelectionPane');
+    } else {
+        // new location, let's confirm
+        $scope.show('confirmPane');
+    }
+
+
+    // Ensure modal doesn't stay open on change of URL.
     $scope.loaded = false;
     $scope.$watch(function() {
         return $location.path();
@@ -114,120 +156,6 @@ angular.module('askApp')
         }
     };
 
-    $scope.addMarker = function(color) {
-        $scope.activeMarker = {
-            lat: $scope.map.marker.lat,
-            lng: $scope.map.marker.lng,
-            color: color
-        };
-
-        $scope.locations.push($scope.activeMarker);
-    }
-
-    $scope.addLocation = function(location) {
-        // var locations = _.without($scope.locations, $scope.activeMarker);
-        location.color = $scope.activeMarker.color;
-        $scope.locations[_.indexOf($scope.locations, $scope.activeMarker)] = location;
-        // $scope.locations = locations;
-        // $scope.locations.push(location);
-        $scope.activeMarker = false;
-
-        $scope.showMyActivitesPopover();
-    };
-
-    $scope.myActivitiesPopoverShown = false;
-    $scope.showMyActivitesPopover = function() {
-        // Only showing this popover once
-        if (!$scope.myActivitiesPopoverShown) {
-            setTimeout(function() {
-                jQuery('.btn-my-activities').popover({
-                    trigger: 'manual',
-                    placement: 'bottom'
-                });
-                jQuery('.btn-my-activities').popover('show');
-                $scope.myActivitiesPopoverShown = true;
-            }, 500);
-        }
-    }
-
-    $scope.confirmLocation = function(question) {
-        $scope.dialog = $dialog.dialog({
-            backdrop: true,
-            keyboard: true,
-            backdropClick: false,
-            templateUrl: '/static/survey/views/locationActivitiesModal.html',
-            controller: 'SurveyDetailCtrl',
-            scope: {
-                question: question ? question : $scope.question.modalQuestion,
-                activeMarker: $scope.activeMarker,
-                removeLocation: $scope.removeLocation
-            },
-            success: function(question, answer) {
-                if (question.update) {
-                    $scope.locations[_.indexOf($scope.locations, $scope.activeMarker)].answers = answer;
-                } else {
-                    $scope.addLocation({
-                        lat: $scope.activeMarker.lat,
-                        lng: $scope.activeMarker.lng,
-                        color: $scope.activeMarker.color,
-                        question: question,
-                        answers: answer
-                    });
-                }
-                $scope.activeMarker = false;
-                question.update = false;
-                $scope.dialog.close();
-                $scope.dialog = null;
-            },
-            error: function(arg1, arg2) {
-                alert('error confirming');
-            },
-            cancel: function() {
-                $scope.removeLocation($scope.activeMarker);
-                $scope.activeMarker = false;
-                if (question) {
-                    question.update = false;
-                }
-                $scope.dialog.close();
-                $scope.dialog = null;
-            }
-        });
-        $scope.dialog.options.scope.dialog = $scope.dialog;
-        $scope.dialog.open();
-    }
-
-    $scope.cancelConfirmation = function() {
-        if ($scope.dialog) {
-            $scope.dialog.options.cancel();
-        } else {
-            $scope.removeLocation($scope.activeMarker);
-            $scope.activeMarker = false;
-        }
-    }
-
-    $scope.editMarker = function(location) {
-        if (!location.question) {
-            location.question = {};
-            angular.extend(location.question, $scope.question.modalQuestion);
-        }
-        location.question.update = true;    
-        $scope.activeMarker = location;
-        $scope.confirmLocation(location.question);
-    };
-
-    $scope.removeLocation = function(location) {
-        // This is used for both canceling a new location and deleting an 
-        // existing location when in edit mode.
-        var locations = _.without($scope.locations, location);
-        $scope.locations = locations;
-    };
-
-    $scope.showLocation = function(location) {
-        $scope.zoomModel.zoomToResult = location;
-    };
-
-
-
     $scope.getNextQuestion = function() {
         // should return the slug of the next question
         var nextQuestion = $scope.survey.questions[_.indexOf($scope.survey.questions, $scope.question) + 1];
@@ -236,11 +164,11 @@ angular.module('askApp')
         return nextQuestion ? nextQuestion.slug : null;
     };
 
-
     $scope.getResumeQuestionPath = function (lastQuestion) {
         var resumeQuestion = $scope.survey.questions[_.indexOf($scope.survey.questions, _.findWhere($scope.survey.questions, {slug: lastQuestion})) + 1];
         return ['survey', $scope.survey.slug, resumeQuestion.slug, $routeParams.uuidSlug].join('/');
-    }
+    };
+
     $scope.getNextQuestionPath = function() {
         var nextQuestion = $scope.getNextQuestion(),
             nextUrl;
@@ -280,7 +208,7 @@ angular.module('askApp')
 
         var url = ['/respond/answer', $scope.survey.slug, $routeParams.questionSlug, $routeParams.uuidSlug].join('/');
         if ($scope.dialog) {
-            $scope.dialog.options.success($scope.question, answer);
+            $scope.dialog.options.save($scope.question, answer);
         } else {
 
             // sometimes we'll have an other field with option text box
@@ -303,7 +231,7 @@ angular.module('askApp')
                         lng: location.lng,
                         color: location.color,
                         answers: location.answers
-                    }
+                    };
 
                     if (location.pennies) {
                         returnValue.pennies = parseInt(location.pennies, 10);
@@ -343,9 +271,9 @@ angular.module('askApp')
                             });
                             $scope.gotoNextQuestion();
                         }
-                    }    
+                    }
                 }
-                
+
             }).error(function(data, status, headers, config) {
                 if (console) {
                     console.log(data);
@@ -501,35 +429,7 @@ angular.module('askApp')
     };
 
     $scope.answerMapQuestion = function (locations) {
-
-        // Get a list of the activities that have not yet been mapped.
-        var selectedActivities = $scope.getAnswer($scope.question.modalQuestion.hoist_answers.slug);
-        // todo: filter out activities that have already been mapped.
-        
-
-        var remainingActivities = _.difference(
-            _.pluck(selectedActivities, 'text'),
-            _.flatten(_.map(locations, function (location) {
-                return _.pluck(location.answers, 'text') 
-            })));;
-
-        var d = $dialog.dialog({
-            backdrop: true,
-            keyboard: true,
-            backdropClick: false,
-            templateUrl: '/static/survey/views/mapContinueModal.html',
-            controller: 'MapContinueDialogCtrl',
-            resolve: { remainingActivities: function () {
-                    return angular.copy(remainingActivities); 
-                }
-            }
-        });
-        
-        d.open().then(function (result) {
-            if (result == 'yes') {
-                $scope.answerQuestion(locations);
-            }
-        });
+        $scope.answerQuestion(locations);
     };
 
     $scope.loadSurvey = function (data) {
@@ -547,7 +447,7 @@ angular.module('askApp')
                 $scope.answers[response.question.slug] = response.answer;
             }
         });
-        
+
         if (data.last_question && ! data.complete) {
             $scope.resumeQuestionPath = $scope.getResumeQuestionPath(data.last_question);
         }
@@ -604,7 +504,7 @@ angular.module('askApp')
                         };
                         $scope.question.otherAnswer = answer;
                     }
-                });    
+                });
             }
         } else {
             $scope.answer = $scope.getAnswer($routeParams.questionSlug);
@@ -821,6 +721,126 @@ angular.module('askApp')
                 $scope.locations = JSON.parse($scope.answer);
             }
 
+            $scope.addMarker = function(color) {
+                $scope.activeMarker = {
+                    lat: $scope.map.marker.lat,
+                    lng: $scope.map.marker.lng,
+                    color: color
+                };
+
+                $scope.locations.push($scope.activeMarker);
+
+                $timeout(function () {
+                    $scope.showAddLocationDialog();
+                }, 400);
+            };
+
+            $scope.addLocation = function(location) {
+                // var locations = _.without($scope.locations, $scope.activeMarker);
+                location.color = $scope.activeMarker.color;
+                $scope.locations[_.indexOf($scope.locations, $scope.activeMarker)] = location;
+                // $scope.locations = locations;
+                // $scope.locations.push(location);
+                $scope.activeMarker = false;
+
+                $scope.showMyActivitesPopover();
+            };
+
+            $scope.myActivitiesPopoverShown = false;
+            $scope.showMyActivitesPopover = function() {
+                // Only showing this popover once
+                if (!$scope.myActivitiesPopoverShown) {
+                    setTimeout(function() {
+                        jQuery('.btn-my-activities').popover({
+                            trigger: 'manual',
+                            placement: 'top'
+                        });
+                        jQuery('.btn-my-activities').popover('show');
+                        $scope.myActivitiesPopoverShown = true;
+                    }, 500);
+                }
+            };
+
+            $scope.showAddLocationDialog = function(question) {
+                if (_.isUndefined(question)) {
+                    question = $scope.question.modalQuestion;
+                }
+
+                $scope.dialog = $dialog.dialog({
+                    backdrop: true,
+                    keyboard: false,
+                    backdropClick: false,
+                    templateUrl: '/static/survey/views/locationActivitiesModal.html',
+                    controller: 'ActivitySelectorDialogCtrl',
+                    resolve: {
+                        question: function () { return question; },
+                        activeMarker: function () { return $scope.activeMarker; },
+                        activityLocations: function () { return $scope.locations; },
+                        selectedActivities: function () { return $scope.getAnswer(question.hoist_answers.slug); }
+                    },
+                    save: function (question, answer) {
+                        if (question.update) {
+                            $scope.locations[_.indexOf($scope.locations, $scope.activeMarker)].answers = answer;
+                        } else {
+                            $scope.addLocation({
+                                lat: $scope.activeMarker.lat,
+                                lng: $scope.activeMarker.lng,
+                                color: $scope.activeMarker.color,
+                                question: question,
+                                answers: answer
+                            });
+                        }
+                        $scope.activeMarker = false;
+                        question.update = false;
+                    }
+                });
+
+                $scope.dialog.open().then(function (result) {
+                    $scope.dialog = null;
+                    if (result == 'cancel') {
+                        $scope.removeLocation($scope.activeMarker);
+                        $scope.activeMarker = false;
+                        if (question) {
+                            question.update = false;
+                        }
+                    } else if (result == 'doneMapping') {
+                        $scope.answerMapQuestion($scope.locations);
+                    }
+                });
+            };
+
+
+            $scope.cancelConfirmation = function() {
+                if ($scope.dialog) {
+                    $scope.dialog.options.cancel();
+                } else {
+                    $scope.removeLocation($scope.activeMarker);
+                    $scope.activeMarker = false;
+                }
+            }
+
+            $scope.editMarker = function(location) {
+                if (!location.question) {
+                    location.question = {};
+                    angular.extend(location.question, $scope.question.modalQuestion);
+                }
+                location.question.update = true;    
+                $scope.activeMarker = location;
+                $scope.showAddLocationDialog(location.question);
+            };
+
+            $scope.removeLocation = function(location) {
+                // This is used for both canceling a new location and deleting an 
+                // existing location when in edit mode.
+                var locations = _.without($scope.locations, location);
+                $scope.locations = locations;
+            };
+
+            $scope.showLocation = function(location) {
+                $scope.zoomModel.zoomToResult = location;
+            };
+
+
             $scope.showActivities = function() {
                 $dialog.dialog({
                     backdrop: true,
@@ -848,7 +868,6 @@ angular.module('askApp')
                 });
                 d.open();
             };
-
         }
 
         // grid question controller
@@ -913,7 +932,7 @@ angular.module('askApp')
                 }]
             };
         }
-    } 
+    };
 
     if (! app.data) {
         $http.get('/api/v1/respondant/' + $routeParams.uuidSlug + '/?format=json').success(function(data) {
@@ -923,5 +942,4 @@ angular.module('askApp')
     } else {
         $scope.loadSurvey(app.data);
     }
-
 });
