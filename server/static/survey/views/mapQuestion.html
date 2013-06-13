@@ -1,59 +1,53 @@
 <div class="map-multipoint">
-    <div class="row-fluid">
-        
+    <div leaflet 
+        center="map.center" 
+        zoom="map.zoom" 
+        requiredzoom="question.min_zoom" 
+        conflocation="activeMarker != false" 
+        marker="map.marker" 
+        multimarkers="locations" 
+        popupfield="'answers'" 
+        addmarker="addMarker" 
+        multimarkersedit="activeMarker == false"
+        editmarker="editMarker"
+        zoomtoresult="zoomModel.zoomToResult"></div>
+
+
+    <div class="map-controls-top">
+
         <span zoomto onload="openModal()" states="survey.states" zoomtoresult="zoomModel.zoomToResult" numlocations="locations.length"></span>
-        
-<!--         <button
+
+        <button
             class="btn btn-large btn-primary"
-            style="margin-left:3px;"
-            ng-click="showAddLocationDialog()">
-            <i class="icon-plus"></i>&nbsp;&nbsp;Add Location
-        </button> -->
+            ng-click="showHelp()">
+            <i class="icon-plus-sign"></i><span class="map-control-label">&nbsp;Add Location</span>
+        </button>
 
-    </div>
-    <div class="row-fluid">
-        <div class="span12">
-            <div leaflet 
-                center="map.center" 
-                zoom="map.zoom" 
-                requiredzoom="question.min_zoom" 
-                conflocation="activeMarker != false" 
-                marker="map.marker" 
-                multimarkers="locations" 
-                popupfield="'answers'" 
-                addmarker="addMarker" 
-                multimarkersedit="activeMarker == false"
-                editmarker="editMarker"
-                zoomtoresult="zoomModel.zoomToResult"></div>
-        </div>
-    </div>
-
-    <div class="row-fluid">
         <button 
-            class="btn btn-large btn-my-activities" 
-            style="margin-left:10px;" 
+            class="btn btn-large btn-inverse btn-my-activities" 
             ng-click="showActivities()"
             data-html="true"
-            data-title="<b>Location Added</b>"
+            data-title="<b>Review and Edit</b>"
             data-content="<script type='text/javascript'>function hideMe() {jQuery('.btn-my-activities').popover('hide');} </script><p>Go here at any time to edit your locations or review the list of activities you specified.</p><p>&nbsp;<a class='btn btn-block' onclick='hideMe()'>OK</a></p>">
-            <i class="icon-list"></i> My Activities
+            <i class="icon-list"></i> <span class="map-control-label">My Activities</span>
         </button>
 
         <button
-            class="btn btn-large"
-            style="margin-left:3px;"
+            class="btn btn-large btn-help"
             ng-click="showHelp()">
-            <i class="icon-question-sign"></i>&nbsp;Help
+            <i class="icon-question-sign"></i><span class="map-control-label">&nbsp;Help</span>
         </button>
 
-        <button 
-            ng-show="activeMarker == false && locations.length > 0"
-            type="submit"
-            class="btn btn-large pull-right" 
-            ng-click="answerMapQuestion(locations)">
-            Done Mapping
-        </button>
     </div>
+
+    <button 
+        ng-show="activeMarker == false && locations.length > 0"
+        type="submit"
+        class="btn btn-large btn-done-mapping"
+        ng-click="answerMapQuestion(locations)">
+        Done Mapping
+    </button>
+        
 
 
     <div style="display:none">

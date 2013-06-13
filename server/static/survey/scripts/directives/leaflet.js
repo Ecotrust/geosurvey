@@ -65,13 +65,14 @@ function ZoomAlertCtrl($scope, dialog, $location) {
                     attributionControl: false
                 });
                 map.attributionControl = false;
+                map.zoomControl.options.position = 'bottomleft';
             
                 var baseMaps = {
                     "Google": ggl,
                     "Nautical Charts": nautical
                 };
                 var options = {
-                    position: 'topleft'
+                    position: 'bottomleft'
                 };
                 L.control.layers(baseMaps, null, options).addTo(map);
 

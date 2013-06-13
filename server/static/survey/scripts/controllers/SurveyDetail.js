@@ -69,7 +69,7 @@ function HelpDialogCtrl($scope, dialog, $location) {
 }
 
 
-function ActivitySelectorDialogCtrl($scope, dialog, $location, question, activeMarker, activityLocations, selectedActivities) {
+function ActivitySelectorDialogCtrl($scope, dialog, $location, $window, question, activeMarker, activityLocations, selectedActivities) {
     $scope.question = question;
     $scope.activeMarker = activeMarker;
     $scope.dialog = dialog;
@@ -753,7 +753,7 @@ angular.module('askApp')
                     setTimeout(function() {
                         jQuery('.btn-my-activities').popover({
                             trigger: 'manual',
-                            placement: 'top'
+                            placement: 'bottom'
                         });
                         jQuery('.btn-my-activities').popover('show');
                         $scope.myActivitiesPopoverShown = true;
