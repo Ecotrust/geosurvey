@@ -29,7 +29,10 @@
                 });
 
                 var heatmapLayer = L.TileLayer.heatMap({
-                    radius: 20,
+                    // radius could be absolute or relative
+                    // absolute: radius in meters, relative: radius in pixels
+                    radius: { value: 15000, absolute: true },
+                    //radius: { value: 20, absolute: false },
                     opacity: 0.8,
                     gradient: {
                         0.45: "rgb(0,0,255)",
@@ -39,7 +42,6 @@
                         1.0: "rgb(255,0,0)"
                     }
                 });
-
 
                 var map = new L.Map($el, {
 
@@ -69,21 +71,25 @@
                                 }
 
                                 scope.geojson = data.geojson;
-                                if (scope.points) {
-                                    map.removeLayer(scope.points);
-                                }
-                                scope.points = L.geoJson(scope.geojson, {
-                                    pointToLayer: function(feature, latlng) {
+                                // if (scope.points) {
+                                //     map.removeLayer(scope.points);
+                                // }
+                                // scope.points = L.geoJson(scope.geojson, {
+                                //     pointToLayer: function(feature, latlng) {
                                     
-                                    var marker = L.marker(latlng);
-                                    heatMapData.push({lat: latlng.lat, lng: latlng.lng});
-                                    return marker;
-                                }
+                                //     var marker = L.marker(latlng);
+                                //     heatMapData.push({lat: latlng.lat, lon: latlng.lng, value: 1});
+                                //     return marker;
+                                // }
+                                // });
+                                // scope.points.addTo(map);
+                                _.each(scope.geojson, function (feature) {
+                                    var lat = feature.geometry.coordinates[1];
+                                    var lon = feature.geometry.coordinates[0];
+                                
+                                    heatMapData.push({lat: lat, lon: lon, value: 1});
                                 });
-                                scope.points.addTo(map);
-                                debugger;
-                                heatmapLayer.addData(heatMapData);
-
+                                heatmapLayer.setData(heatMapData);
                             });
                             scope.selectedFilter = question.selectedFilter;
                             console.log('get points');
