@@ -872,6 +872,8 @@ angular.module('askApp')
                         $scope.updateCrosshair();
                     } else if (result == 'doneMapping') {
                         $scope.answerMapQuestion($scope.locations);
+                    } else if (result == 'addMoreLocations') {
+                        $scope.showMyActivitesPopover(); 
                     }
                 });
             };
