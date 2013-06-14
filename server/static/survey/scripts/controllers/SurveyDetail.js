@@ -977,7 +977,7 @@ angular.module('askApp')
              * yet mapped.
              */
             $scope.getRemainingActivities = function () {
-                var selectedActivities = $scope.getAnswer(question.hoist_answers.slug)
+                var selectedActivities = $scope.getAnswer($scope.question.modalQuestion.hoist_answers.slug);
                 // Filter out activities that have already been mapped.
                 var remainingActivities = _.difference(
                     _.pluck(selectedActivities, 'text'),
