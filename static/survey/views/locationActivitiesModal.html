@@ -18,7 +18,11 @@
     </div>
     <div class="modal-footer">
         <button class="btn btn-danger btn-large" ng-click="$parent.show('deleteConfirmationPane')">Delete Location</button>
-        <button class="btn btn-large save" ng-click="answerMultiSelect(question); $parent.show('thankYouPane')" ng-class="{'btn-primary': isAnswerValid, 'disabled': !isAnswerValid }">Save</button>
+
+        <span ng-switch on="isAnswerValid">
+            <button ng-switch-when="true" class="btn btn-large save btn-primary" ng-click="answerMultiSelect(question); $parent.show('thankYouPane')">Save</button>
+            <button ng-switch-default class="btn btn-large save disabled" disabled>Save</button>
+        </span>
     </div>
 </div>
 
@@ -49,6 +53,6 @@
     <div class="modal-footer">
 
         <button class="btn btn-large" ng-click="close('doneMapping')">No</button>
-        <button class="btn btn-large btn-primary" ng-click="close()">Yes</button>
+        <button class="btn btn-large btn-primary" ng-click="showMyActivitesPopover(); close()">Yes</button>
     </div>
 </div>
