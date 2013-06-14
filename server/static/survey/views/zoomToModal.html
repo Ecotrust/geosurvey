@@ -23,8 +23,7 @@
     <div class="modal-footer">
         <!-- <p ng-show="results.length > 0">Showing {{ results.length }} of {{ meta.total_count }} results</p> -->
         <br ng-hide="results == 0">
-        <button ng-click="show('mapUsage')" ng-show="isInitialView" class="btn btn-large btn-primary">No thanks, I'll find it using the map</button>
-        <button ng-click="show('mapUsage')" ng-show="!isInitialView" class="btn btn-large btn-primary">Cancel</button>
+        <button ng-click="show('mapUsage')" class="btn btn-large btn-primary">No thanks, I'll find it using the map</button>
     </div>
 </div>
 
@@ -33,6 +32,7 @@
         <p>Please add an activity marker by dragging the map and zooming in using the (plus minus button graphic here) button. Please zoom in closely to ensure accurate placement of the activity marker. You may also find and zoom into a location by using the search bar above the map at any time.</p>
     </div>
     <div class="modal-footer">
+        <button class="btn btn-large pull-left" ng-click="show('search')">Back</button>
         <button class="btn btn-large btn-primary" ng-click="close()">OK</button>
     </div>
 </div>

@@ -208,7 +208,13 @@ angular.module('askApp')
 
         var url = ['/respond/answer', $scope.survey.slug, $routeParams.questionSlug, $routeParams.uuidSlug].join('/');
         if ($scope.dialog) {
-            $scope.dialog.options.save($scope.question, answer);
+            if (!$scope.question.update) {
+                $scope.dialog.options.save($scope.question, answer);
+                $scope.dialog.$scope.show('thankYouPane');
+            } else {
+                $scope.dialog.options.save($scope.question, answer);
+                $scope.dialog.$scope.close();
+            }
         } else {
 
             // sometimes we'll have an other field with option text box
@@ -816,7 +822,7 @@ angular.module('askApp')
             $scope.showMyActivitesPopover = function() {
                 // Only showing this popover once
                 if (!$scope.myActivitiesPopoverShown) {
-                    setTimeout(function() {
+                    $timeout(function() {
                         jQuery('.btn-my-activities').popover({
                             trigger: 'manual',
                             placement: 'bottom'
@@ -873,7 +879,11 @@ angular.module('askApp')
                     } else if (result == 'doneMapping') {
                         $scope.answerMapQuestion($scope.locations);
                     } else if (result == 'addMoreLocations') {
-                        $scope.showMyActivitesPopover(); 
+                        $scope.showMyActivitesPopover();
+                        $timeout(function () {
+                            jQuery("div[zoomto] input").click();
+                        }, 300);
+                        
                     }
                 });
             };
