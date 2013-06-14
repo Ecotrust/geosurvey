@@ -27,9 +27,25 @@
     </div>
 </div>
 
-<div ng-show="panes.mapUsage.showing">
+<div ng-show="panes.mapUsage.showing" class="modal-map-usage">
     <div class="modal-body">
-        <p>Please add an activity marker by dragging the map and zooming in using the (plus minus button graphic here) button. Please zoom in closely to ensure accurate placement of the activity marker. You may also find and zoom into a location by using the search bar above the map at any time.</p>
+        <h4>Next steps:</h4>
+        <ol>
+            <li>Zoom in closely to ensure accurate placement of activity markers.
+                <ul>
+                    <li class="not-for-phone">Click the zoom buttons&nbsp;&nbsp;<img class="img-in-paragraph" src="/static/images/mapmodals/zoombuttons.png">&nbsp;&nbsp;or search <i class="icon-search icon-large"></i> for a location by name.</li>
+                    <li class="for-phone">At any time you can tap <i class="icon-search icon-large"></i> to search for a location by name.</li>
+                </ul>
+            </li>
+            <li>
+                <p>Drag the map to focus the crosshair&nbsp;&nbsp;<img class="img-in-paragraph" src="/static/images/mapmodals/crosshair_white.png">&nbsp;&nbsp;over your location.</p>
+            </li>
+            <li>
+                <p>Click <i class="icon-map-marker icon-large"></i> to add a location</p>
+            </li>
+        </ol>
+
+        <!-- <p>Please add an activity marker by dragging the map and zooming in using the (plus minus button graphic here) button. Please zoom in closely to ensure accurate placement of the activity marker. You may also find and zoom into a location by using the search bar above the map at any time.</p> -->
     </div>
     <div class="modal-footer">
         <button class="btn btn-large pull-left" ng-click="show('search')">Back</button>
