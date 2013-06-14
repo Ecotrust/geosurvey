@@ -2,53 +2,56 @@
     <div leaflet 
         center="map.center" 
         zoom="map.zoom" 
-        requiredzoom="question.min_zoom" 
-        conflocation="activeMarker != false" 
+        requiredzoom="question.min_zoom"
+        
         marker="map.marker" 
         multimarkers="locations" 
         popupfield="'answers'" 
-        addmarker="addMarker" 
+        
+        
+        iscrosshairalerting="isCrosshairAlerting"
         multimarkersedit="activeMarker == false"
         editmarker="editMarker"
         zoomtoresult="zoomModel.zoomToResult"></div>
 
 
-    <div class="map-controls-top">
-        <!-- onload="openModal()" -->
-        <span zoomto  states="survey.states" zoomtoresult="zoomModel.zoomToResult" numlocations="locations.length"></span>
+    <div class="map-controls map-controls-top-left">
+        
+        <span zoomto onload="openModal()" states="survey.states" zoomtoresult="zoomModel.zoomToResult" numlocations="locations.length"></span>
 
-        <button
-            class="btn btn-large btn-primary"
-            ng-click="showHelp()">
-            <i class="icon-plus-sign"></i><span class="map-control-label">&nbsp;Add Location</span>
-        </button>
-
-        <button 
-            class="btn btn-large btn-inverse btn-my-activities" 
-            ng-click="showActivities()"
-            data-html="true"
-            data-title="<b>Review and Edit</b>"
-            data-content="<script type='text/javascript'>function hideMe() {jQuery('.btn-my-activities').popover('hide');} </script><p>Go here at any time to edit your locations or review the list of activities you specified.</p><p>&nbsp;<a class='btn btn-block' onclick='hideMe()'>OK</a></p>">
-            <i class="icon-list"></i> <span class="map-control-label">My Activities</span>
-        </button>
-
-        <button
-            class="btn btn-large btn-help"
-            ng-click="showHelp()">
-            <i class="icon-question-sign"></i><span class="map-control-label">&nbsp;Help</span>
-        </button>
+        <div class="btn-group">
+            <a  class="btn btn-large btn-primary btn-add-marker"
+                ng-class="{'btn-danger': !isZoomedIn() && isCrosshairAlerting, 'btn-primary': isZoomedIn() || !isCrosshairAlerting }"
+                ng-click="triggerAddMarker()">
+                <i class="icon-map-marker icon-large"></i><span class="map-control-label">&nbsp;Add Location</span>
+            </a>
+        </div>
 
     </div>
 
-    <button 
-        ng-show="activeMarker == false && locations.length > 0"
-        type="submit"
-        class="btn btn-large btn-primary btn-done-mapping"
-        ng-click="answerMapQuestion(locations)">
-        Done
-    </button>
-        
+    <div class="map-controls map-controls-top-right">
+        <div class="btn-group">
+            <a  class="btn btn-large btn-inverse btn-my-activities" 
+                ng-click="showActivities()"
+                data-html="true"
+                data-title="<b>Review and Edit</b>"
+                data-content="<script type='text/javascript'>function hideMe() {jQuery('.btn-my-activities').popover('hide');} </script><p>Go here at any time to edit your locations or review the list of activities you specified.</p><p>&nbsp;<a class='btn btn-block' onclick='hideMe()'>OK</a></p>">
+                <i class="icon-list"></i> <span class="map-control-label">My Activities</span>
+            </a>
 
+            <a  class="btn btn-large btn-help"
+                ng-click="showHelp()">
+                <i class="icon-question-sign icon-large"></i><span class="map-control-label">&nbsp;Help</span>
+            </a>
+
+        </div>
+
+        <a  type="submit"
+            class="btn btn-large btn-done-mapping"
+            ng-click="answerMapQuestion(locations)">
+            Done
+        </a>
+    </div>
 
     <div style="display:none">
         <!-- testing controls -->
@@ -57,3 +60,4 @@
         <input ng-model="map.marker.lng" />
     </div>
 </div>
+
