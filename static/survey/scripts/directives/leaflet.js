@@ -2,22 +2,6 @@
 
 'use strict';
 
-function ZoomAlertCtrl($scope, dialog, $location) {
-    $scope.loaded = false;
-    $scope.$watch(function() {
-        return $location.path();
-    }, function () {
-        if ($scope.loaded && dialog.isOpen()) {
-            $scope.close();
-        }
-        $scope.loaded = true;
-    });
-
-    $scope.close = function(result) {
-        dialog.close(result);
-    };
-}
-
 (function() {
 
     var leafletDirective = angular.module('leaflet.directive', []);
@@ -38,10 +22,7 @@ function ZoomAlertCtrl($scope, dialog, $location) {
                 //popupField: '=popupfield',
                 states: "=states",
                 editMarker: '=editmarker',
-                // XXX pendingLocation: '=pendinglocation',
                 isCrosshairAlerting: '=iscrosshairalerting',
-                // XXX addMarker: '=addmarker',
-                // XXX confirmingLocation: '=conflocation',
                 zoomToResult: '=zoomtoresult'
             },
             templateUrl: '/static/survey/views/leaflet.html',
@@ -303,11 +284,6 @@ function ZoomAlertCtrl($scope, dialog, $location) {
 
                 });
 
-                // XXX
-                // scope.$watch('confirmingLocation', function () {
-                //     scope.updateCrosshair();
-                // });
-
                 scope.updateCrosshair = function() {
                     if (scope.confirmingLocation) {
                         scope.marker.icon = "crosshair_blank.png";
@@ -334,77 +310,11 @@ function ZoomAlertCtrl($scope, dialog, $location) {
                     return scope.zoom >= scope.requiredzoom;
                 };
 
-                //scope.isCrosshairAlerting = false;
-
-                scope.showZoomAlert = function () {
-                    var d = $dialog.dialog({
-                        backdrop: true,
-                        keyboard: true,
-                        backdropClick: false,
-                        backdropFade: true,
-                        transitionClass: 'fade',
-                        templateUrl: '/static/survey/views/zoomAlertModal.html',
-                        controller: 'ZoomAlertCtrl'
-                    });
-                    d.open();
-                };
-
-
-                // XXX
-                // scope.$watch('pendingLocation', function (pendingLoc) {
-                //     if (pendingLoc) {
-                //         scope.addMarkerWrapper();
-                //     }
-                // });
-
-                // XXX
-                // scope.addMarkerWrapper = function() {
-                //     if (scope.activeMarker) {
-                //         scope.activeMarker.marker.closePopup();
-                //     }
-                //     if (!scope.isZoomedIn()) {
-                //         scope.isCrosshairAlerting = true;
-                //         scope.showZoomAlert();
-                //     } else {
-                //         scope.addMarker(scope.getNextColor());
-                //         scope.isCrosshairAlerting = false;
-                //     }
-                //     scope.updateCrosshair();
-                // };
-
                 scope.editMarkerWrapper = function(marker) {
                     marker.marker.closePopup();
                     scope.editMarker(marker.data);
                 };
 
-                // XXX
-                // scope.getNextColor = function () {
-                //     var availableColors = [],
-                //         colorPalette = [
-                //         'red',
-                //         'orange',
-                //         'green',
-                //         'darkgreen',
-                //         'darkred',
-                //         'blue',
-                //         'darkblue',
-                //         'purple',
-                //         'darkpurple',
-                //         'cadetblue'
-                //     ];
-
-                //     availableColors = angular.copy(colorPalette);
-                //     _.each(scope.multiMarkers, function (marker) {
-                //         if (_.has(marker, 'color')) {
-                //             availableColors = _.without(availableColors, marker.color);
-                //         }
-                //         if (availableColors.length == 0) {
-                //             // Recyle the colors if we run out.
-                //             availableColors = angular.copy(colorPalette);
-                //         }                        
-                //     });
-                //     return _.first(availableColors);
-                // };
 
                 if (attrs.multimarkers) {
                     var markersDict = [];
