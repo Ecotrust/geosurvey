@@ -4,8 +4,14 @@
     z-index: 2000;
     background-color: red;
     color: yellow;
-	}
+    }
 
+.not-for-phone { display: inherit !important; }
+.for-phone { display: none !important; }
+@media (max-width: 480px) {
+    .not-for-phone { display: none !important; }
+    .for-phone { display: inherit !important; }
+}
 
 /**
  * The Map
@@ -16,11 +22,11 @@ div[leaflet] {
     bottom: 0;
     left: 0;
     right: 0;
-	}
+    }
 .map_wrapper {
     margin-left: -6px;
     margin-right: -12px;
-	}
+    }
 .leaflet-container .leaflet-control-attribution {
     font-size: 9px;
     bottom: 7px;
@@ -32,23 +38,23 @@ div[leaflet] {
  * Map Controls
  */
 .map-controls-top-left {
-	position: absolute;
-	top: 0;
-	left: 5px;
+    position: absolute;
+    top: 0;
+    left: 5px;
 }
 .map-controls-top-right {
-	position: absolute;
-	top: 9px;
-	right: 5px;
+    position: absolute;
+    top: 9px;
+    right: 5px;
 }
 .btn-done-mapping, .btn-add-marker {
-	margin-left: 5px
+    margin-left: 5px
 }
 .btn-done-mapping.large-screen {
-	display: inline;
+    display: inline;
 }
 .btn-done-mapping.small-screen {
-	display: none;
+    display: none;
 }
 .btn-my-activities, .btn-help, .btn-done-mapping, .btn-search {
     background-color: #eee;
@@ -60,70 +66,70 @@ div[leaflet] {
             box-shadow: 0 2px 2px rgba(0,0,0,.3);
 }
 .leaflet-control-container .leaflet-top.leaflet-left {
-	/* the zoom control is being forced to bottom left 
-	while staying in the top left class (if time available, 
-	we should just move the control the the bottom left class) */
+    /* the zoom control is being forced to bottom left 
+    while staying in the top left class (if time available, 
+    we should just move the control the the bottom left class) */
     bottom: 15px;
     top: auto;
     left: 15px;
 }
 .leaflet-control-container .leaflet-bottom.leaflet-left {
-	/* the layers control  just above the zoom control */
+    /* the layers control  just above the zoom control */
     bottom: 85px;
     left: 13px;
 }
 @media (max-width: 790px) {
-	.btn-help .map-control-label {
-		display: none;
-	}
+    .btn-help .map-control-label {
+        display: none;
+    }
 }
 @media (max-width: 750px) {
-	.btn-my-activities .map-control-label {
-		display: none;
-	}
+    .btn-my-activities .map-control-label {
+        display: none;
+    }
 }
 @media (max-width: 640px) {
-	.btn-add-marker .map-control-label {
-		display: none;	
-	}
+    .btn-add-marker .map-control-label {
+        display: none;  
+    }
 }
 @media (max-width: 510px) {
-	.btn-add-marker .map-control-label {
-		display: none;	
-	}
+    .btn-add-marker .map-control-label {
+        display: none;  
+    }
 }
 @media (max-width: 480px) {
     .leaflet-control-zoom {
         display: none;
-    	}
-	.leaflet-control-container .leaflet-bottom.leaflet-left {
-		/* since the zoom control is hidden, move the layers control down */
-		bottom: 0px;
-		left: 3px;
-		}
-	.leaflet-control-layers {
-		border: none !important;
-		}
+        }
+    .leaflet-control-container .leaflet-bottom.leaflet-left {
+        /* since the zoom control is hidden, move the layers control down */
+        bottom: 0px;
+        left: 3px;
+        }
+    .leaflet-control-layers {
+        border: none !important;
+        }
 
 
-	.map-controls-top-left {
-		top: 5px;
-		left: 5px;
-	}
-	.map-controls-top-right {
-		top: 5px;
-		right: 3px;
-	}
-	.btn-done-mapping, .btn-add-marker {
-		margin-left: 5px
-	}
-	.btn-done-mapping {
-		margin-left: 0px;
-		margin-right: 0px;
-		font-size: 13px;
-		padding-left: 15px;
-		padding-right: 15px;
-	}
+    .map-controls-top-left {
+        top: 5px;
+        left: 5px;
+    }
+    .map-controls-top-right {
+        top: 5px;
+        right: 3px;
+    }
+    .btn-done-mapping, .btn-add-marker {
+        margin-left: 5px
+    }
+    .btn-done-mapping {
+        margin-left: 0px;
+        margin-right: 0px;
+        font-size: 13px;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
 }
 
 
@@ -132,12 +138,12 @@ div[leaflet] {
 div[zoomto] {
     display: inline;
     position: relative;
-	}
+    }
 div[zoomto] .large-screen .icon-search {
     position: absolute;
     left: 15px;
     top: -1px;
-	}
+    }
 div[zoomto] input {
     height: auto !important;
     font-size: 18px !important;
@@ -147,25 +153,25 @@ div[zoomto] input {
     -webkit-box-shadow: 0 2px 2px rgba(0,0,0,.5);
        -moz-box-shadow: 0 2px 2px rgba(0,0,0,.5);
             box-shadow: 0 2px 2px rgba(0,0,0,.5);    
-	}
+    }
 div[zoomto] .large-screen {
     display: inline;
-	}
+    }
 div[zoomto] .small-screen {
     display: none;
-	}	
+    }   
 @media (max-width: 510px) {
     div[zoomto] input {
         width: 100px;
-    	}
+        }
     }
 @media (max-width: 480px) {
     div[zoomto] .large-screen {
         display: none;
-    	}
+        }
     div[zoomto] .small-screen {
         display: inline;
-    	}
+        }
 }
 
 
@@ -243,6 +249,19 @@ div[zoomto] .small-screen {
     margin-bottom: 73px;
     max-height: 400px;
     overflow:scroll;
+}
+
+
+.modal-map-usage ul{
+    margin-top: 5px;
+    margin-left: 0;
+}
+
+.modal-body ul {
+    margin-bottom: 10px;
+}
+.modal-body .img-in-paragraph {
+    max-height: 35px;
 }
 
 /* Map Thankyou Modal */
