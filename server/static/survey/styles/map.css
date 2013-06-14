@@ -264,6 +264,14 @@ div[zoomto] .small-screen {
     max-height: 35px;
 }
 
+.modal-body p.col-p {
+    margin-left: 60px;
+}
+.modal-body i[class*="icon-"] {
+    margin-top: 5px;
+}
+
+
 /* Map Thankyou Modal */
 .thx-modal .modal-header h3 {
     font-size: 20px;
