@@ -20,7 +20,7 @@
         <button class="btn btn-danger btn-large" ng-click="$parent.show('deleteConfirmationPane')">Delete Location</button>
 
         <span ng-switch on="isAnswerValid">
-            <button ng-switch-when="true" class="btn btn-large save btn-primary" ng-click="answerMultiSelect(question); $parent.show('thankYouPane')">Save</button>
+            <button ng-switch-when="true" class="btn btn-large save btn-primary" ng-click="answerMultiSelect(question)">Save</button>
             <button ng-switch-default class="btn btn-large save disabled" disabled>Save</button>
         </span>
     </div>
