@@ -20,17 +20,6 @@
         <div zoomto onload="openModal()" states="survey.states" zoomtoresult="zoomModel.zoomToResult" numlocations="locations.length"></div>
 
         <div class="btn-group">
-            <a  class="btn btn-large btn-primary btn-add-marker"
-                ng-class="{'btn-danger': !isZoomedIn() && isCrosshairAlerting, 'btn-primary': isZoomedIn() || !isCrosshairAlerting }"
-                ng-click="addMarker()">
-                <i class="icon-map-marker icon-large"></i><span class="map-control-label">&nbsp;Add Location</span>
-            </a>
-        </div>
-
-    </div>
-
-    <div class="map-controls map-controls-top-right">
-        <div class="btn-group">
             <a  class="btn btn-large btn-inverse btn-my-activities" 
                 ng-click="showActivities()"
                 data-html="true"
@@ -38,11 +27,22 @@
                 data-content="<script type='text/javascript'>function hideMe() {jQuery('.btn-my-activities').popover('hide');} </script><p>Go here at any time to edit your locations or review the list of activities you specified.</p><p>&nbsp;<a class='btn btn-block' onclick='hideMe()'>OK</a></p>">
                 <i class="icon-list"></i> <span class="map-control-label">My Activities</span>
             </a>
+        </div>
 
-            <a  class="btn btn-large btn-help"
+    </div>
+
+    <div class="map-controls map-controls-top-right">
+        <div class="btn-group">
+            <a  class="btn btn-large btn-primary btn-add-marker"
+                ng-class="{'btn-danger': !isZoomedIn() && isCrosshairAlerting, 'btn-primary': isZoomedIn() || !isCrosshairAlerting }"
+                ng-click="addMarker()">
+                <i class="icon-map-marker icon-large"></i><span class="map-control-label"></span>&nbsp;Add
+            </a>
+
+            <!-- <a  class="btn btn-large btn-help"
                 ng-click="showHelp()">
                 <i class="icon-question-sign icon-large"></i><span class="map-control-label">&nbsp;Help</span>
-            </a>
+            </a> -->
 
         </div>
 
