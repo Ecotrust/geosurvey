@@ -721,6 +721,73 @@ angular.module('askApp')
                 $scope.locations = JSON.parse($scope.answer);
             }
 
+
+            $scope.updateCrosshair = function() {
+                if ($scope.activeMarker !== false) {
+                    $scope.map.marker.icon = "crosshair_blank.png";
+
+                } else if ($scope.isCrosshairAlerting && !$scope.isZoomedIn()) {
+                    $scope.map.marker.icon = "crosshair_red.png";
+
+                } else if ($scope.isCrosshairAlerting && $scope.isZoomedIn()) {
+                    $scope.map.marker.icon = "crosshair_green.png";
+
+                } else {
+                    $scope.map.marker.icon = "crosshair_white.png";
+                }
+            };
+
+            $scope.getNextColor = function () {
+                var availableColors = [],
+                    colorPalette = [
+                    'red',
+                    'orange',
+                    'green',
+                    'darkgreen',
+                    'darkred',
+                    'blue',
+                    'darkblue',
+                    'purple',
+                    'darkpurple',
+                    'cadetblue'
+                ];
+
+                availableColors = angular.copy(colorPalette);
+                _.each($scope.locations, function (marker) {
+                    if (_.has(marker, 'color')) {
+                        availableColors = _.without(availableColors, marker.color);
+                    }
+                    if (availableColors.length == 0) {
+                        // Recyle the colors if we run out.
+                        availableColors = angular.copy(colorPalette);
+                    }                        
+                });
+                return _.first(availableColors);
+            };
+
+            $scope.isCrosshairAlerting = false;
+
+            $scope.isZoomedIn = function () {
+                return $scope.map.zoom >= $scope.question.min_zoom;
+            };
+
+            $scope.triggerAddMarker = function () {
+                // the leaflet directive watches this value
+                // XXX $scope.pendingLocation = {lat: $scope.map.marker.lat, lng: $scope.map.marker.lng};
+
+                if ($scope.activeMarker) {
+                    scope.activeMarker.marker.closePopup();
+                }
+                if (!$scope.isZoomedIn()) {
+                    $scope.isCrosshairAlerting = true;
+                    // XXX $scope.showZoomAlert();
+                } else {
+                    $scope.addMarker($scope.getNextColor());
+                    $scope.isCrosshairAlerting = false;
+                }
+                $scope.updateCrosshair();
+            };
+
             $scope.addMarker = function(color) {
                 $scope.activeMarker = {
                     lat: $scope.map.marker.lat,
@@ -742,8 +809,7 @@ angular.module('askApp')
                 // $scope.locations = locations;
                 // $scope.locations.push(location);
                 $scope.activeMarker = false;
-
-                $scope.showMyActivitesPopover();
+                $scope.updateCrosshair();
             };
 
             $scope.myActivitiesPopoverShown = false;
@@ -803,6 +869,7 @@ angular.module('askApp')
                         if (question) {
                             question.update = false;
                         }
+                        $scope.updateCrosshair();
                     } else if (result == 'doneMapping') {
                         $scope.answerMapQuestion($scope.locations);
                     }

@@ -31,40 +31,30 @@ div[leaflet] {
 /**
  * Map Controls
  */
-.map-controls-top {
+.map-controls-top-left {
 	position: absolute;
 	top: 0;
 	left: 5px;
 }
-.btn-add-marker {
-    position: absolute;
-    right: 15px;
-    top: 100px;
-    z-index: 1000;
-
-    -webkit-box-shadow: 0 2px 2px rgba(0,0,0,.5);
-       -moz-box-shadow: 0 2px 2px rgba(0,0,0,.5);
-            box-shadow: 0 2px 2px rgba(0,0,0,.5);
-}
-.btn-done-mapping {
+.map-controls-top-right {
 	position: absolute;
-	bottom: 70px;
-	right: 0px;
-	-webkit-border-radius: 0;
-	   -moz-border-radius: 0;
-	        border-radius: 0;
-	-webkit-border-top-left-radius: 6px;
-	   -moz-border-top-left-radius: 6px;
-	        border-top-left-radius: 6px;
-	-webkit-border-bottom-left-radius: 6px;
-	   -moz-border-bottom-left-radius: 6px;
-	        border-bottom-left-radius: 6px;
+	top: 9px;
+	right: 5px;
 }
-.btn-my-activities, .btn-help {
+.btn-done-mapping, .btn-add-marker {
+	margin-left: 5px
+}
+.btn-done-mapping.large-screen {
+	display: inline;
+}
+.btn-done-mapping.small-screen {
+	display: none;
+}
+.btn-my-activities, .btn-help, .btn-done-mapping, .btn-search {
     background-color: #eee;
     color: black;
 }
-.map-controls-top .btn, .leaflet-control-layers a, .btn-done-mapping {
+.map-controls .btn, .leaflet-control-layers a, .btn-done-mapping {
     -webkit-box-shadow: 0 2px 2px rgba(0,0,0,.3);
        -moz-box-shadow: 0 2px 2px rgba(0,0,0,.3);
             box-shadow: 0 2px 2px rgba(0,0,0,.3);
@@ -82,22 +72,27 @@ div[leaflet] {
     bottom: 85px;
     left: 13px;
 }
-@media (max-width: 690px) {
+@media (max-width: 790px) {
 	.btn-help .map-control-label {
 		display: none;
 	}
 }
-@media (max-width: 650px) {
+@media (max-width: 750px) {
 	.btn-my-activities .map-control-label {
 		display: none;
 	}
 }
-@media (max-width: 550px) {
-	.map-control-label {
+@media (max-width: 640px) {
+	.btn-add-marker .map-control-label {
 		display: none;	
 	}
 }
-@media (max-width: 480px), handheld and (orientation: landscape) {
+@media (max-width: 510px) {
+	.btn-add-marker .map-control-label {
+		display: none;	
+	}
+}
+@media (max-width: 480px) {
     .leaflet-control-zoom {
         display: none;
     	}
@@ -109,10 +104,26 @@ div[leaflet] {
 	.leaflet-control-layers {
 		border: none !important;
 		}
+
+
+	.map-controls-top-left {
+		top: 5px;
+		left: 5px;
+	}
+	.map-controls-top-right {
+		top: 5px;
+		right: 3px;
+	}
+	.btn-done-mapping, .btn-add-marker {
+		margin-left: 5px
+	}
 	.btn-done-mapping {
-		position: absolute;
-		bottom: 10px;
-		}
+		margin-left: 0px;
+		margin-right: 0px;
+		font-size: 13px;
+		padding-left: 15px;
+		padding-right: 15px;
+	}
 }
 
 
@@ -122,7 +133,7 @@ div[zoomto] {
     display: inline;
     position: relative;
 	}
-div[zoomto] .icon-search {
+div[zoomto] .large-screen .icon-search {
     position: absolute;
     left: 15px;
     top: -1px;
@@ -137,9 +148,23 @@ div[zoomto] input {
        -moz-box-shadow: 0 2px 2px rgba(0,0,0,.5);
             box-shadow: 0 2px 2px rgba(0,0,0,.5);    
 	}
-@media (max-width: 480px) {
+div[zoomto] .large-screen {
+    display: inline;
+	}
+div[zoomto] .small-screen {
+    display: none;
+	}	
+@media (max-width: 510px) {
     div[zoomto] input {
-        width: 90px;
+        width: 100px;
+    	}
+    }
+@media (max-width: 480px) {
+    div[zoomto] .large-screen {
+        display: none;
+    	}
+    div[zoomto] .small-screen {
+        display: inline;
     	}
 }
 
