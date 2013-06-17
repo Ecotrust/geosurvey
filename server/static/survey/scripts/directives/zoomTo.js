@@ -54,11 +54,11 @@ function ZoomToCtrl($scope, dialog, $http, $timeout, $location) {
         }
     });
 
-    $scope.zoomTo = function (place) {            
+    $scope.setZoomToPlace = function (place) {
         $scope.selectedPlace = place;
     };
 
-    $scope.close = function(result) {
+    $scope.close = function() {
         dialog.close($scope.selectedPlace);
     };
 
@@ -95,7 +95,7 @@ angular.module('askApp')
                     backdrop: true,
                     backdropFade: true,
                     transitionClass: 'fade',
-                    keyboard: true,
+                    keyboard: false,
                     backdropClick: false,
                     scope: {
                         states: scope.states,

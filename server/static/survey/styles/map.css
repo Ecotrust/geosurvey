@@ -23,10 +23,6 @@ div[leaflet] {
     left: 0;
     right: 0;
     }
-.map_wrapper {
-    margin-left: -6px;
-    margin-right: -12px;
-    }
 .leaflet-container .leaflet-control-attribution {
     font-size: 9px;
     bottom: 7px;
@@ -193,7 +189,7 @@ div[zoomto] .small-screen {
 .leaflet-control-zoom a, .leaflet-control-layers a {
     background-position: 50% 50% !important;
     background-repeat: no-repeat !important;
-    display: block !important;
+    display: block;
     }
 .leaflet-control-zoom a {
     -moz-border-bottom-radius: 0px !important;
@@ -248,7 +244,7 @@ div[zoomto] .small-screen {
 .modal-body {
     margin-bottom: 73px;
     max-height: 400px;
-    overflow:scroll;
+    overflow-y:scroll;
 }
 
 
@@ -263,12 +259,12 @@ div[zoomto] .small-screen {
 .modal-body .img-in-paragraph {
     max-height: 35px;
 }
+.modal-body .icon-in-paragraph {
+    margin-top: 5px;
+}
 
 .modal-body p.col-p {
     margin-left: 60px;
-}
-.modal-body i[class*="icon-"] {
-    margin-top: 5px;
 }
 
 
@@ -306,22 +302,61 @@ div[zoomto] .small-screen {
 }
 
 /* Search Modal */
-.form-search {
-    position: relative;
+.modal-zoomto .modal {
+    max-height: 400px;
+    }
+.modal-zoomto .modal-body {
+    max-height: 200px;
+    }
+.modal-zoomto .modal-body {
+    margin-bottom: 5px;
 }
-.form-search .control-group {
-    padding-left: 20px;
+.modal-zoomto .question-title,
+.modal-zoomto .noresults-label {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 15px;
 }
-.form-search .search-query {
-    height: 24px !important; 
-    width: 76%; 
-    margin-left: 5px;
-    margin-right: 5px;
+.modal-zoomto .question-title, 
+.modal-zoomto p.subtext,
+.modal-zoomto .noresults-label {
+    text-align: center;
 }
 
+.modal-zoomto .noresults-label {
+    color: #777;
+}
+
+.modal-zoomto .form-search {
+    width: 98%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.modal-zoomto .form-search .control-group {
+    position: relative;
+    width: 84%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.modal-zoomto .icon-search, .modal-zoomto .icon-spinner {
+    position: absolute;
+    left: -10px;
+    top: 6px;
+}
+.modal-zoomto input.search-query {
+    height: 24px !important; 
+    padding-left: 45px;
+    margin-left: -23px;
+    width: 100%;
+}
+.modal-zoomto .modal-header {
+    border-bottom: 0px;
+}
 @media (max-width: 600px) {
     .modal {
         max-height: none;
+        overflow-y: scroll;
         width: 100%;
         position: absolute;
         top: 0;
@@ -329,18 +364,64 @@ div[zoomto] .small-screen {
         right: 0;
         bottom: 0;
         margin: 0;
+        border: none;
         -webkit-border-radius: 0;
            -moz-border-radius: 0;
                 border-radius: 0;
     }
-
+    .modal-zoomto .modal-body {
+        max-height: none;
+        /*overflow-y: scroll;*/
+    }
+    .modal-zoomto .modal-body.modal-footer {
+        margin-bottom: 0;
+    }
     .modal-footer {
         position: absolute;
         bottom: 0;
         left: 0;
         right: 0;
     }
+
+    .modal-zoomto .modal-header {
+        padding: 0 !important;
+        padding-top: 2px !important;
+    }
+    .modal-zoomto .modal-body {
+        padding-top: 0 !important;
+    }
+    .modal-zoomto .question-title,
+    .modal-zoomto .noresults-label {
+        font-size: 14px;
+    }
+
+    .modal-zoomto .for-phone .question-title, 
+    .modal-zoomto .for-phone .subtext,
+    .modal-zoomto .for-phone .control-group,
+    .modal-zoomto .for-phone .form-search {
+        margin-bottom: 0;
+        margin-top: 0;
+        padding-bottom: 0;
+        padding-top: 0;
+    }
+    .modal-zoomto .for-phone .question-title {
+        font-weight: 500;
+    }
+    .modal-zoomto .for-phone .subtext {
+        margin: 0;
+        padding: 0;
+        margin-bottom: 3px;
+    }
+    .modal-zoomto .for-phone .control-group {
+        margin-bottom: 10px;
+    }
+
+    div[zoomto] .large-screen .icon-search {
+        top: -5px;
+        }
+
 }
+
 
 /**
  * Misc
@@ -348,4 +429,6 @@ div[zoomto] .small-screen {
 .leaflet-popup-content {
     width: 225px;
 }
-
+.map-multipoint .popover {
+    width: 180px;
+}
