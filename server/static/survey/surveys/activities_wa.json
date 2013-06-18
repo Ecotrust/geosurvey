@@ -5,12 +5,22 @@
         "group": "1"
     },
     {
+        "text": "Beach driving",
+        "label": "beach-driving",
+        "group": "1"
+    },
+    {
+        "text": "Horseback riding",
+        "label": "horseback-riding",
+        "group": "1"
+    },
+    {
         "text": "Biking or hiking",
         "label": "biking-hiking",
         "group": "1"
     },
     {
-        "text": "Collection of non-living resources/beachcombing (agates, fossils, driftwood)",
+        "text": "Collection of non-living resources/beachcombing (agates, beach glass, beach mining, driftwood)",
         "label": "beachcombing",
         "group": "1"
     },
@@ -35,7 +45,7 @@
         "group": "1"
     },
     {
-        "text": "Watching birds and/or other marine life from shore (e.g. whale or seal watching)",
+        "text": "Watching birds, whales, seals, and/or other marine life (from shore or boat)",
         "label": "birdwatching",
         "group": "1"
     },{
