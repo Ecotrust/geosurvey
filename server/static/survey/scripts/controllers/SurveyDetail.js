@@ -434,9 +434,9 @@ angular.module('askApp')
 
     $scope.loadSurvey = function (data) {
         $scope.survey = data.survey;
-        $scope.survey.state = data.state;
+        $scope.survey.status = data.status;
 
-        if (data.state === 'complete' || data.state === 'terminate') {
+        if (data.status === 'complete' || data.status === 'terminate') {
             $location.path(['survey', $scope.survey.slug, 'complete', $routeParams.uuidSlug].join('/'));
         }
 
