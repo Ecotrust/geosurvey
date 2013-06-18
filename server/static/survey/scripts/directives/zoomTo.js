@@ -54,11 +54,11 @@ function ZoomToCtrl($scope, dialog, $http, $timeout, $location) {
         }
     });
 
-    $scope.zoomTo = function (place) {            
+    $scope.setZoomToPlace = function (place) {
         $scope.selectedPlace = place;
     };
 
-    $scope.close = function(result) {
+    $scope.close = function() {
         dialog.close($scope.selectedPlace);
     };
 
@@ -79,7 +79,7 @@ angular.module('askApp')
     .directive('zoomto', function($dialog) {
 
     return {
-        template: '<div class="control-group"><i class="icon-search icon-large"></i><input type="text" id="search-query-facade" placeholder="Search" ng-click="openModal()"></div>',
+        template: '<div><div class="control-group large-screen"><i class="icon-search icon-large"></i><input type="text" id="search-query-facade" placeholder="Search" ng-click="openModal()"></div><a class="btn btn-large btn-search small-screen" ng-click="openModal()"><i class="icon-search icon-large"></i></a></div>',
         restrict: 'EA',
         replace: true,
         transclude: true,
@@ -95,7 +95,7 @@ angular.module('askApp')
                     backdrop: true,
                     backdropFade: true,
                     transitionClass: 'fade',
-                    keyboard: true,
+                    keyboard: false,
                     backdropClick: false,
                     scope: {
                         states: scope.states,

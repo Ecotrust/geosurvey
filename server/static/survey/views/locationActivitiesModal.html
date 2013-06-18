@@ -1,6 +1,7 @@
 <div ng-show="panes.confirmPane.showing">
     <div class="modal-body">
-        <h2 class="question-title">Is the placement of this activity marker (use the graphic of the activity marker) correct?</h2>
+        <i class="pull-left icon-map-marker icon-3x col-icon" style="color: { activeMarker.color }"></i>
+        <h2 class="question-title col-p">Is the placement of this activity marker correct?</h2>
     </div>
     <div class="modal-footer">
         <button class="btn btn-large" ng-click="close('cancel')">No, let's try again</button>
@@ -18,7 +19,11 @@
     </div>
     <div class="modal-footer">
         <button class="btn btn-danger btn-large" ng-click="$parent.show('deleteConfirmationPane')">Delete Location</button>
-        <button class="btn btn-large save" ng-click="answerMultiSelect(question); $parent.show('thankYouPane')" ng-class="{'btn-primary': isAnswerValid, 'disabled': !isAnswerValid }">Save Location</button>
+
+        <span ng-switch on="isAnswerValid">
+            <button ng-switch-when="true" class="btn btn-large save btn-primary" ng-click="answerMultiSelect(question)">Save</button>
+            <button ng-switch-default class="btn btn-large save disabled" disabled>Save</button>
+        </span>
     </div>
 </div>
 
@@ -39,8 +44,8 @@
     <div class="modal-body">
         <div ng-show="getRemainingActivities().length > 0">
             <p>The following activities have not yet been mapped:</p>
-            <ul>
-                <li ng-repeat="activity in getRemainingActivities()">
+            <ul>remainingActivities
+                <li ng-repeat="activity in ">
                     {{activity}}
                 </li>
             </ul>
@@ -49,6 +54,6 @@
     <div class="modal-footer">
 
         <button class="btn btn-large" ng-click="close('doneMapping')">No</button>
-        <button class="btn btn-large btn-primary" ng-click="close()">Yes</button>
+        <button class="btn btn-large btn-primary" ng-click="close('addMoreLocations')">Yes</button>
     </div>
 </div>

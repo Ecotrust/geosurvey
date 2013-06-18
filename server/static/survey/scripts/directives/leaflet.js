@@ -2,22 +2,6 @@
 
 'use strict';
 
-function ZoomAlertCtrl($scope, dialog, $location) {
-    $scope.loaded = false;
-    $scope.$watch(function() {
-        return $location.path();
-    }, function () {
-        if ($scope.loaded && dialog.isOpen()) {
-            $scope.close();
-        }
-        $scope.loaded = true;
-    });
-
-    $scope.close = function(result) {
-        dialog.close(result);
-    };
-}
-
 (function() {
 
     var leafletDirective = angular.module('leaflet.directive', []);
@@ -30,23 +14,21 @@ function ZoomAlertCtrl($scope, dialog, $location) {
             scope: {
                 center: '=center',
                 marker: '=marker',
-                message: '=message',
                 zoom: '=zoom',
                 requiredzoom: '=requiredzoom',
                 multiMarkers: '=multimarkers',
                 multiMarkersEdit: '=multimarkersedit',
-                //popupField: '=popupfield',
+                popupField: '=popupfield',
                 states: "=states",
                 editMarker: '=editmarker',
-                addMarker: '=addmarker',
-                confirmingLocation: '=conflocation',
+                isCrosshairAlerting: '=iscrosshairalerting',
                 zoomToResult: '=zoomtoresult'
             },
             templateUrl: '/static/survey/views/leaflet.html',
             link: function(scope, element, attrs, ctrl) {
                 var $el = element[0];
 
-                // Map initialization.
+                // Layer init
                 var nautical = L.tileLayer.wms("http://egisws02.nos.noaa.gov/ArcGIS/services/RNC/NOAA_RNC/ImageServer/WMSServer", {
                     format: 'img/png',
                     transparent: true,
@@ -56,33 +38,46 @@ function ZoomAlertCtrl($scope, dialog, $location) {
 
                 var ggl = new L.Google();
 
+                // Map init
+                var initPoint = new L.LatLng(45, -122);
                 var map = new L.Map($el, {
                     fadeAnimation: false,
                     zoomAnimation: false,
                     markerZoomAnimation: false,
                     inertia: false,
-                    layers: [ggl],
                     attributionControl: false
-                });
+                })
+                .setView(initPoint, 5)
+                .addLayer(ggl);
+                           
                 map.attributionControl = false;
+                map.zoomControl.options.position = 'bottomleft';
             
+                // Layer picker init
                 var baseMaps = {
                     "Google": ggl,
                     "Nautical Charts": nautical
                 };
                 var options = {
-                    position: 'topleft'
+                    position: 'bottomleft'
                 };
                 L.control.layers(baseMaps, null, options).addTo(map);
 
-                var point = new L.LatLng(45, -122);
-                map.setView(point, 5);
+
+                $http.get("/static/survey/data/marco.json").success(function(data) {
+                    var myStyle = {
+                        "color": "#ff7800",
+                        "fillColor": "ff7000",
+                        "weight": 1,
+                        "opacity": 1,
+                        "fillOpacity": 0.9
+                    };
+
+                    L.geoJson(data, { style: myStyle }).addTo(map);
+                });
+
 
                 scope.activeMarker = null;
-
-                element.bind('$destroy', function() {
-                    //$timeout.cancel(timeoutId);
-                });
 
                 scope.$watch('zoomToResult', function (place) {
                     if (place) {
@@ -102,7 +97,6 @@ function ZoomAlertCtrl($scope, dialog, $location) {
                         }
                     });
                 };
-
 
                 if (attrs.marker) {
                     var crosshairIcon = L.icon({
@@ -170,9 +164,9 @@ function ZoomAlertCtrl($scope, dialog, $location) {
 
                                 map.addLayer(marker);
                                 // marker.dragging.enable();
-                                //marker.bindPopup('<strong>' + scope.message + '</strong>',
+                                // marker.bindPopup('<strong>' + scope.message + '</strong>',
                                 //    { closeButton: false });
-                                //marker.openPopup();
+                                // marker.openPopup();
 
                             }
                         });
@@ -301,10 +295,6 @@ function ZoomAlertCtrl($scope, dialog, $location) {
 
                 });
 
-                scope.$watch('confirmingLocation', function () {
-                    scope.updateCrosshair();
-                });
-
                 scope.updateCrosshair = function() {
                     if (scope.confirmingLocation) {
                         scope.marker.icon = "crosshair_blank.png";
@@ -331,68 +321,11 @@ function ZoomAlertCtrl($scope, dialog, $location) {
                     return scope.zoom >= scope.requiredzoom;
                 };
 
-                scope.isCrosshairAlerting = false;
-
-                scope.showZoomAlert = function () {
-                    var d = $dialog.dialog({
-                        backdrop: true,
-                        keyboard: true,
-                        backdropClick: false,
-                        backdropFade: true,
-                        transitionClass: 'fade',
-                        templateUrl: '/static/survey/views/zoomAlertModal.html',
-                        controller: 'ZoomAlertCtrl'
-                    });
-                    d.open();
-                }
-
-
-                scope.addMarkerWrapper = function() {
-                    if (scope.activeMarker) {
-                        scope.activeMarker.marker.closePopup();
-                    }
-                    if (!scope.isZoomedIn()) {
-                        scope.isCrosshairAlerting = true;
-                        scope.showZoomAlert();
-                    } else {
-                        scope.addMarker(scope.getNextColor());
-                        scope.isCrosshairAlerting = false;
-                    }
-                    scope.updateCrosshair();
-                };
-
                 scope.editMarkerWrapper = function(marker) {
                     marker.marker.closePopup();
                     scope.editMarker(marker.data);
                 };
 
-                scope.getNextColor = function () {
-                    var availableColors = [],
-                        colorPalette = [
-                        'red',
-                        'orange',
-                        'green',
-                        'darkgreen',
-                        'darkred',
-                        'blue',
-                        'darkblue',
-                        'purple',
-                        'darkpurple',
-                        'cadetblue'
-                    ];
-
-                    availableColors = angular.copy(colorPalette);
-                    _.each(scope.multiMarkers, function (marker) {
-                        if (_.has(marker, 'color')) {
-                            availableColors = _.without(availableColors, marker.color);
-                        }
-                        if (availableColors.length == 0) {
-                            // Recyle the colors if we run out.
-                            availableColors = angular.copy(colorPalette);
-                        }                        
-                    });
-                    return _.first(availableColors);
-                };
 
                 if (attrs.multimarkers) {
                     var markersDict = [];
@@ -438,6 +371,62 @@ function ZoomAlertCtrl($scope, dialog, $location) {
 
                                     }, true);
                                     
+                                    marker.on('click', function(e) {
+                                        var popup;
+
+                                        if (scope.popupField) {
+                                            scope.popupText = scope.multiMarkers[mkey][scope.popupField];
+                                            popup = '<ul class="unstyled"><li ng-repeat="item in popupText">{{ item.text }}</li></ul>';
+                                        }
+
+
+                                        if (scope.multiMarkersEdit) {
+                                            popup += '<button class="btn pull-right" ng-click="editMarkerWrapper(activeMarker)">edit</button>';
+                                            popup += '<div class="clearfix"></div>';
+
+                                        }
+
+                                        markersDict[mkey].bindPopup(popup, {
+                                            closeButton: true
+                                        });
+
+                                        markersDict[mkey].openPopup();
+
+                                        //scope.activeMarker = scope.multiMarkers[mkey];
+
+                                        scope.activeMarker = {
+                                            data: scope.multiMarkers[mkey],
+                                            marker: marker
+                                        };
+
+                                        $compile(angular.element(map._popup._contentNode))(scope);
+                                        //$compile(angular.element(map._popup._contentNode.childNodes))(scope);
+                                        scope.$digest();
+
+                                    });
+
+                                    // scope.$watch('multiMarkers.' + mkey + '.answer', function(newValue) {
+
+                                    //     var popup = '<ul><li ng-repeat='messageLine in message'>{{messageLine}}</li></ul><br/><br/>';
+                                    //     popup += '<div>';
+                                    //     popup += '<button class='btn pull-right'>edit</button>';
+                                    //     popup += '<button class='btn btn-danger pull-right' ng-click='delete()'>delete</button>';
+                                    //     popup += '</div>';
+                                    //     popup += '<div class='clearfix'></div>';
+                                    //     if (newValue) {
+                                    //         scope.message = newValue;
+                                    //         markersDict[mkey].bindPopup(popup, {
+                                    //             closeButton: true
+                                    //         });
+                                    //          markersDict[mkey].openPopup();
+                                    //         $compile(angular.element(map._popup._contentNode))(scope);
+                                    //         scope.activeMarker = scope.multiMarkers[mkey];
+                                    //     }
+                                    // }, true);
+
+
+
+
                                     map.addLayer(marker);
                                     markersDict[mkey] = marker;    
                                 }

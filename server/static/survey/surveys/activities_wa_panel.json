@@ -5,12 +5,22 @@
         "group": "1"
     },
     {
+        "text": "Beach driving",
+        "label": "beach-driving",
+        "group": "1"
+    },
+    {
+        "text": "Horseback riding",
+        "label": "horesback-riding",
+        "group": "1"
+    },
+    {
         "text": "Biking or hiking",
         "label": "biking-hiking",
         "group": "1"
     },
     {
-        "text": "Collection of non-living resources/beachcombing (agates, fossils, driftwood)",
+        "text": "Collection of non-living resources/beachcombing (agates, beach glass, beach mining, driftwood)",
         "label": "beachcombing",
         "group": "1"
     },
@@ -50,7 +60,7 @@
         "group": "2"
     },
     {
-        "text": "Fishing (hook and line) from boat/kayak",
+        "text": "Fishing (hook and line) from a boat/kayak",
         "label": "fishing-from-boat",
         "group": "2"
     },
@@ -60,7 +70,7 @@
         "group": "2"
     },
     {
-        "text": "Diving (picking or speark fishing) from a shore",
+        "text": "Diving (picking or spear fishing) from a shore",
         "label": "diving-from-shore",
         "group": "2"
     },
@@ -112,7 +122,7 @@
     {
         "text": "Windsurfing",
         "label": "windsurfing",
-        "group": "2"
+        "group": "3"
     },
     {
         "text": "Free diving/snorkeling (from shore, from boat)",
