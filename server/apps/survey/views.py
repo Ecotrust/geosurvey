@@ -74,10 +74,10 @@ def complete(request, survey_slug, uuid, action=None, question_slug=None):
 
         if action is None and question_slug is None:
             respondant.complete = True
-            respondant.state = 'complete'
+            respondant.status = 'complete'
         elif action == 'terminate' and question_slug is not None:
             respondant.complete = False
-            respondant.state = 'terminate'
+            respondant.status = 'terminate'
             respondant.last_question = question_slug
         respondant.save()
         return HttpResponse(simplejson.dumps({'success': True}))
