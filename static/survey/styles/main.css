@@ -455,6 +455,11 @@ form .btn-block {
     padding: 0 5px;
 }
 
+.dash .ngHeaderCell {
+    text-transform: capitalize;
+}
+
+
 
 .select2-search-choice > div {
     white-space: nowrap;
