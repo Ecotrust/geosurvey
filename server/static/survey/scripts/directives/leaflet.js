@@ -29,7 +29,7 @@
             link: function(scope, element, attrs, ctrl) {
                 var $el = element[0];
 
-                // Map initialization.
+                // Layer init
                 var nautical = L.tileLayer.wms("http://egisws02.nos.noaa.gov/ArcGIS/services/RNC/NOAA_RNC/ImageServer/WMSServer", {
                     format: 'img/png',
                     transparent: true,
@@ -39,17 +39,22 @@
 
                 var ggl = new L.Google();
 
+                // Map init
+                var initPoint = new L.LatLng(45, -122);
                 var map = new L.Map($el, {
                     fadeAnimation: false,
                     zoomAnimation: false,
                     markerZoomAnimation: false,
                     inertia: false,
-                    layers: [ggl],
                     attributionControl: false
-                });
+                })
+                .setView(initPoint, 5)
+                .addLayer(ggl);
+                           
                 map.attributionControl = false;
                 map.zoomControl.options.position = 'bottomleft';
             
+                // Layer picker init
                 var baseMaps = {
                     "Google": ggl,
                     "Nautical Charts": nautical
@@ -59,14 +64,21 @@
                 };
                 L.control.layers(baseMaps, null, options).addTo(map);
 
-                var point = new L.LatLng(45, -122);
-                map.setView(point, 5);
+
+                $http.get("/static/survey/data/marco.json").success(function(data) {
+                    var myStyle = {
+                        "color": "#ff7800",
+                        "fillColor": "ff7000",
+                        "weight": 1,
+                        "opacity": 1,
+                        "fillOpacity": 0.9
+                    };
+
+                    L.geoJson(data, { style: myStyle }).addTo(map);
+                });
+
 
                 scope.activeMarker = null;
-
-                element.bind('$destroy', function() {
-                    //$timeout.cancel(timeoutId);
-                });
 
                 scope.$watch('zoomToResult', function (place) {
                     if (place) {

@@ -32,6 +32,22 @@ function ZoomAlertCtrl($scope, dialog, $location) {
     };
 }
 
+function OutOfBoundsAlertCtrl($scope, dialog, $location) {
+    $scope.loaded = false;
+    $scope.$watch(function() {
+        return $location.path();
+    }, function () {
+        if ($scope.loaded && dialog.isOpen()) {
+            $scope.close();
+        }
+        $scope.loaded = true;
+    });
+
+    $scope.close = function(result) {
+        dialog.close(result);
+    };
+}
+
 function MapContinueDialogCtrl($scope, dialog, remainingActivities, $location){
     $scope.loaded = false;
     $scope.$watch(function() {
@@ -764,6 +780,23 @@ angular.module('askApp')
                 }
             };
 
+
+            $http.get("/static/survey/data/marco.json").success(function(data) {
+                $scope.boundaryLayer = L.geoJson(data);
+            });
+
+            $scope.isOutOfBounds = function () {
+                return false;
+                var point, results;
+                if ($scope.boundaryLayer) {
+                    point = new L.LatLng($scope.map.marker.lat, $scope.map.marker.lng);
+                    results = leafletPip.pointInLayer(point, $scope.boundaryLayer, true);
+                    // results is an array of L.Polygon objects containing that point
+                    return results.length < 1;
+                }
+                return true; // not using a boundary layer
+            };
+
             $scope.addMarker = function () {
                 if ($scope.activeMarker) {
                     scope.activeMarker.marker.closePopup();
@@ -771,7 +804,11 @@ angular.module('askApp')
                 if (!$scope.isZoomedIn()) {
                     $scope.isCrosshairAlerting = true;
                     $scope.showZoomAlert();
+                } else if ($scope.isOutOfBounds()) {
+                    console.log('not in boundary');
+                    $scope.showOutOfBoundsAlert();
                 } else {
+                    // Add location
                     $scope.activeMarker = {
                         lat: $scope.map.marker.lat,
                         lng: $scope.map.marker.lng,
@@ -894,6 +931,19 @@ angular.module('askApp')
                     transitionClass: 'fade',
                     templateUrl: '/static/survey/views/zoomAlertModal.html',
                     controller: 'ZoomAlertCtrl'
+                });
+                d.open();
+            };
+
+            $scope.showOutOfBoundsAlert = function () {
+                var d = $dialog.dialog({
+                    backdrop: true,
+                    keyboard: true,
+                    backdropClick: false,
+                    backdropFade: true,
+                    transitionClass: 'fade',
+                    templateUrl: '/static/survey/views/outOfBoundsAlertModal.html',
+                    controller: 'OutOfBoundsAlertCtrl'
                 });
                 d.open();
             };

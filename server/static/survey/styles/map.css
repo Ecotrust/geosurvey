@@ -1,9 +1,13 @@
 .mapRespondant .admin-edit {
     position: absolute;
-    top: 10px;
+    top: auto;
+    left: auto;
+    bottom: 22px;
+    right: 10px;
     z-index: 2000;
-    background-color: red;
-    color: yellow;
+    background-color: rgba(255,255,255,0.6);
+    color: black;
+    padding: 5px;
     }
 
 .not-for-phone { display: inherit !important; }
@@ -300,6 +304,11 @@ div[zoomto] .small-screen {
     font-size: 13px;
     font-weight: bold;
 }
+
+.modal-outofbounds .modal-body {
+    max-height: 500px;
+}
+
 
 /* Search Modal */
 .modal-zoomto .modal {
