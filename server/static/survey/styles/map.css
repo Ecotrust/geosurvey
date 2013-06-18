@@ -305,8 +305,9 @@ div[zoomto] .small-screen {
     font-weight: bold;
 }
 
+/* Out of bounds modal */
 .modal-outofbounds .modal-body {
-    max-height: 500px;
+    max-height: 600px;
 }
 
 
