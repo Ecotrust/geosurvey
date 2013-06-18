@@ -14,12 +14,11 @@
             scope: {
                 center: '=center',
                 marker: '=marker',
-                message: '=message',
                 zoom: '=zoom',
                 requiredzoom: '=requiredzoom',
                 multiMarkers: '=multimarkers',
                 multiMarkersEdit: '=multimarkersedit',
-                //popupField: '=popupfield',
+                popupField: '=popupfield',
                 states: "=states",
                 editMarker: '=editmarker',
                 isCrosshairAlerting: '=iscrosshairalerting',
@@ -165,9 +164,9 @@
 
                                 map.addLayer(marker);
                                 // marker.dragging.enable();
-                                //marker.bindPopup('<strong>' + scope.message + '</strong>',
+                                // marker.bindPopup('<strong>' + scope.message + '</strong>',
                                 //    { closeButton: false });
-                                //marker.openPopup();
+                                // marker.openPopup();
 
                             }
                         });
@@ -372,6 +371,62 @@
 
                                     }, true);
                                     
+                                    marker.on('click', function(e) {
+                                        var popup;
+
+                                        if (scope.popupField) {
+                                            scope.popupText = scope.multiMarkers[mkey][scope.popupField];
+                                            popup = '<ul class="unstyled"><li ng-repeat="item in popupText">{{ item.text }}</li></ul>';
+                                        }
+
+
+                                        if (scope.multiMarkersEdit) {
+                                            popup += '<button class="btn pull-right" ng-click="editMarkerWrapper(activeMarker)">edit</button>';
+                                            popup += '<div class="clearfix"></div>';
+
+                                        }
+
+                                        markersDict[mkey].bindPopup(popup, {
+                                            closeButton: true
+                                        });
+
+                                        markersDict[mkey].openPopup();
+
+                                        //scope.activeMarker = scope.multiMarkers[mkey];
+
+                                        scope.activeMarker = {
+                                            data: scope.multiMarkers[mkey],
+                                            marker: marker
+                                        };
+
+                                        $compile(angular.element(map._popup._contentNode))(scope);
+                                        //$compile(angular.element(map._popup._contentNode.childNodes))(scope);
+                                        scope.$digest();
+
+                                    });
+
+                                    // scope.$watch('multiMarkers.' + mkey + '.answer', function(newValue) {
+
+                                    //     var popup = '<ul><li ng-repeat='messageLine in message'>{{messageLine}}</li></ul><br/><br/>';
+                                    //     popup += '<div>';
+                                    //     popup += '<button class='btn pull-right'>edit</button>';
+                                    //     popup += '<button class='btn btn-danger pull-right' ng-click='delete()'>delete</button>';
+                                    //     popup += '</div>';
+                                    //     popup += '<div class='clearfix'></div>';
+                                    //     if (newValue) {
+                                    //         scope.message = newValue;
+                                    //         markersDict[mkey].bindPopup(popup, {
+                                    //             closeButton: true
+                                    //         });
+                                    //          markersDict[mkey].openPopup();
+                                    //         $compile(angular.element(map._popup._contentNode))(scope);
+                                    //         scope.activeMarker = scope.multiMarkers[mkey];
+                                    //     }
+                                    // }, true);
+
+
+
+
                                     map.addLayer(marker);
                                     markersDict[mkey] = marker;    
                                 }
