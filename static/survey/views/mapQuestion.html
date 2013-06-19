@@ -40,18 +40,12 @@
                 href="javascript:void(0)">
                 <i class="icon-map-marker icon-large"></i><span class="map-control-label"></span>&nbsp;Add
             </a>
-
-            <!-- <a  class="btn btn-large btn-help"
-                ng-click="showHelp()"
-                href="javascript:void(0)">
-                <i class="icon-question-sign icon-large"></i><span class="map-control-label">&nbsp;Help</span>
-            </a> -->
-
         </div>
 
         <a  type="submit"
             class="btn btn-large btn-done-mapping"
-            ng-click="answerMapQuestion(locations)"
+            ng-show="locations.length > 0"
+            ng-click="showDoneDialog()"
             href="javascript:void(0)">
             Done
         </a>
