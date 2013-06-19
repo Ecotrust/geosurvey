@@ -11,14 +11,14 @@
                      <input type="text" id="search-query" class="search-query" placeholder="Search" ng-model="searchTerm" autofocus/>
                  </div>
              </form>
-             <p class="subtext">Or <a ng-click="show('mapUsage')">find your location using the map</a>.</p>
+             <p class="subtext">Or <a ng-click="show('mapUsage')" href="javascript:void(0)">find your location using the map</a>.</p>
              
          </div>
          <div class="modal-body">        
              <h4 ng-show="showNoResults" class="noresults-label">No Results</h4>
      
              <ul class="nav nav-tabs nav-stacked results" ng-show="results.length > 0">    
-                 <li ng-click="setZoomToPlace(result); show('mapUsage');" ng-show="searchTerm && results.length > 0" ng-repeat="result in results"><a><strong>{{ result.name }}</strong> ({{ result.county }} County)</a></li>
+                 <li ng-click="setZoomToPlace(result); show('mapUsage');" ng-show="searchTerm && results.length > 0" ng-repeat="result in results"><a href="javascript:void(0)"><strong>{{ result.name }}</strong> ({{ result.county }} County)</a></li>
              </ul>
          </div>
      </div> 
@@ -26,7 +26,7 @@
      <div class="for-phone">
         <div class="modal-header">
             <p class="question-title">Search for a location at or near your activities.</p>
-            <p class="subtext">Or <a ng-click="show('mapUsage')">find your location using the map</a>.</p>
+            <p class="subtext">Or <a ng-click="show('mapUsage')"  href="javascript:void(0)">find your location using the map</a>.</p>
         </div>
         <div class="modal-body no-footer">
 
@@ -41,7 +41,7 @@
             <h4 ng-show="showNoResults" class="noresults-label">No Results</h4>
 
             <ul class="nav nav-tabs nav-stacked results" ng-show="results.length > 0">    
-                <li ng-click="setZoomToPlace(result); show('mapUsage');" ng-show="searchTerm && results.length > 0" ng-repeat="result in results"><a><strong>{{ result.name }}</strong> ({{ result.county }} County)</a></li>
+                <li ng-click="setZoomToPlace(result); show('mapUsage');" ng-show="searchTerm && results.length > 0" ng-repeat="result in results"><a href="javascript:void(0)"><strong>{{ result.name }}</strong> ({{ result.county }} County)</a></li>
             </ul>
         </div>
      </div>
@@ -69,7 +69,7 @@
         <!-- <p>Please add an activity marker by dragging the map and zooming in using the (plus minus button graphic here) button. Please zoom in closely to ensure accurate placement of the activity marker. You may also find and zoom into a location by using the search bar above the map at any time.</p> -->
     </div>
     <div class="modal-footer">
-        <button class="btn btn-large pull-left" ng-click="show('search')">Back</button>
+        <button class="btn btn-large" ng-click="show('search')">Back</button>
         <button class="btn btn-large btn-primary" ng-click="close()">OK</button>
     </div>
 </div>
