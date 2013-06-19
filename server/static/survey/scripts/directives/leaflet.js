@@ -63,16 +63,20 @@
                 };
                 L.control.layers(baseMaps, null, options).addTo(map);
 
-                // $http.get("/static/survey/data/marco_dd.json").success(function(data) {
-                //     var boundaryStyle = {
-                //         "color": "#E6D845",//"#ff7800",
-                //         "weight": 2,
-                //         "opacity": 0.5,
-                //         "fillOpacity": 0.0
-                //     };
-
-                //     L.geoJson(data, { style: boundaryStyle }).addTo(map);
-                // });
+                $http.get("/static/survey/data/marco_dd.json").success(function(data) {
+                    var boundaryStyle = {
+                        "color": "#E6D845",
+                        "weight": 3,
+                        "opacity": 0.6,
+                        "fillOpacity": 0.0
+                    };
+                    L.geoJson(data, { style: boundaryStyle })
+                    .addTo(map)
+                    .on('dblclick',
+                        function(e) {
+                            map.setZoom(map.getZoom() + 1);
+                        }); 
+                });
 
                 scope.activeMarker = null;
 
