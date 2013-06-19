@@ -274,9 +274,38 @@ div[zoomto] .small-screen {
 
 /* Map Thankyou Modal */
 .thx-modal .modal-header h3,
-.done-modal .modal-header h3 {
+.done-modal .modal-header h3,
+.activities-modal h3 {
     font-size: 20px;
     font-weight: 500 !important;
+}
+
+/* My Activities Modal */
+.activities-modal .my-activities-legend {
+    margin-left: 30px;
+    margin-right: 10px;
+}
+.activities-modal .my-activities-text {
+    margin-left: 20px;
+}
+.activities-modal .empty-text {
+    margin-left: 30px;
+}
+.activities-modal .location {
+    position: relative;
+    margin-bottom: 15px;
+}
+.activities-modal .location > .icon-map-marker {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.activities-modal .location .btn-group {
+    margin-left: 30px;
+}
+.activities-modal .location .location-activities {
+    margin-top: 5px;
+    margin-left: 55px;
 }
 
 /* Help Modal */
