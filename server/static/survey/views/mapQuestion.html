@@ -22,6 +22,7 @@
         <div class="btn-group">
             <a  class="btn btn-large btn-inverse btn-my-activities" 
                 ng-click="showActivities()"
+                href="javascript:void(0)"
                 data-html="true"
                 data-title="<b>Review and Edit</b>"
                 data-content="<script type='text/javascript'>function hideMe() {jQuery('.btn-my-activities').popover('hide');} </script><p>Go here at any time to edit your locations or review the list of activities you specified.</p><p>&nbsp;<a class='btn btn-block' onclick='hideMe()'>OK</a></p>">
@@ -35,12 +36,14 @@
         <div class="btn-group">
             <a  class="btn btn-large btn-primary btn-add-marker"
                 ng-class="{'btn-danger': !isZoomedIn() && isCrosshairAlerting, 'btn-primary': isZoomedIn() || !isCrosshairAlerting }"
-                ng-click="addMarker()">
+                ng-click="addMarker()"
+                href="javascript:void(0)">
                 <i class="icon-map-marker icon-large"></i><span class="map-control-label"></span>&nbsp;Add
             </a>
 
             <!-- <a  class="btn btn-large btn-help"
-                ng-click="showHelp()">
+                ng-click="showHelp()"
+                href="javascript:void(0)">
                 <i class="icon-question-sign icon-large"></i><span class="map-control-label">&nbsp;Help</span>
             </a> -->
 
@@ -48,7 +51,8 @@
 
         <a  type="submit"
             class="btn btn-large btn-done-mapping"
-            ng-click="answerMapQuestion(locations)">
+            ng-click="answerMapQuestion(locations)"
+            href="javascript:void(0)">
             Done
         </a>
     </div>

@@ -125,6 +125,15 @@ p.landing, p.info {
     font-weight: bold;
     margin-top: 10px;
 }
+.inset-info-section {
+    margin-bottom: 40px;
+    margin-left: 40px;
+}
+@media (max-width: 480px) {
+    .inset-info-section {
+        margin-left: 25px;
+    }
+}
 
 ul + ul {
     margin-top: 10px;
