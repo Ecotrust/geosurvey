@@ -21,11 +21,11 @@
  * The Map
  */
 div[leaflet] {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    position: absolute !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
     }
 .leaflet-container .leaflet-control-attribution {
     font-size: 9px;
@@ -95,7 +95,7 @@ div[leaflet] {
 }
 @media (max-width: 510px) {
     .btn-add-marker .map-control-label {
-        display: none;  
+        display: none;
     }
 }
 @media (max-width: 480px) {
@@ -188,7 +188,7 @@ div[zoomto] .small-screen {
     border: none;
     }
 .leaflet-control-zoom a {
-    background-color: rgba(255, 255, 255, 1.0) !important;
+    background-color: white !important;
     }
 .leaflet-control-zoom a, .leaflet-control-layers a {
     background-position: 50% 50% !important;
@@ -205,7 +205,7 @@ div[zoomto] .small-screen {
     line-height: 32px !important;
     }
 .leaflet-control-zoom a:hover {
-    background-color: rgba(255, 255, 255, 1.0) !important;
+    background-color: white !important;
     }
 .leaflet-touch .leaflet-control-zoom a {
     width: 93px !important;
@@ -441,4 +441,30 @@ div[zoomto] .small-screen {
 }
 .map-multipoint .popover {
     width: 180px;
+}
+
+
+
+/**
+ * IE hacks
+ */
+.btn-my-activities {
+    margin-left: 10px \9 !important;
+}
+@media (min-width: 481) {
+    .btn-my-activities {
+        margin-left: 20px \9 !important;
+    }
+}
+
+div[zoomto] .large-screen {
+    *margin-right: 8px !important;
+}
+
+.btn-my-activities {
+    margin-left: 10px \9 !important;
+}
+
+div[zoomto] .large-screen .icon-search {
+    *top: 20px !important;
 }
