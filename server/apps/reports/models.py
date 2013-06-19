@@ -17,7 +17,7 @@ class QuestionReport(Question):
                 slug = filter.keys()[0]
                 value = filter[slug]
                 filter_question = QuestionReport.objects.get(slug=slug, survey=survey)
-                answers = answers.filter(respondant__responses__in=filter_question.response_set.filter(question=self, answer__in=value))
+                answers = answers.filter(respondant__responses__in=filter_question.response_set.filter(answer__in=value))
         print self.type        
         # locations = Location.objects.filter(response__respondant__responses__in=answers)
         # print answers.values('answer', 'respondant__responses__location').annotate(locations=Count('respondant__responses__location'))
