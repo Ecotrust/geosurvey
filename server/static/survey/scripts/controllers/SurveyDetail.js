@@ -757,12 +757,11 @@ angular.module('askApp')
             };
 
 
-            $http.get("/static/survey/data/marco.json").success(function(data) {
+            $http.get("/static/survey/data/marco_dd.json").success(function(data) {
                 $scope.boundaryLayer = L.geoJson(data);
             });
 
             $scope.isOutOfBounds = function () {
-                return false;
                 var point, results;
                 if ($scope.boundaryLayer) {
                     point = new L.LatLng($scope.map.marker.lat, $scope.map.marker.lng);
