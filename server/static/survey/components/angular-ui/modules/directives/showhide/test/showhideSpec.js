@@ -1,7 +1,7 @@
 /*global beforeEach, describe, it, inject, expect, module, spyOn*/
 
 (function () {
-    'use strict';
+    //'use strict';
 
     describe('uiShow', function () {
 

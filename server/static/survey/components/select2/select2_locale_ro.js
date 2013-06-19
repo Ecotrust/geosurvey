@@ -2,7 +2,7 @@
  * Select2 Romanian translation.
  */
 (function ($) {
-    "use strict";
+    //"use strict";
 
     $.extend($.fn.select2.defaults, {
         formatNoMatches: function () { return "Nu a fost găsit nimic"; },

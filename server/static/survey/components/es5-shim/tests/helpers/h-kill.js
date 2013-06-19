@@ -1,7 +1,7 @@
 // This methods allows the killing of built-in functions,
 // so the shim can take over with that implementation
 var HLP = (function() {
-    "use strict";
+    //"use strict";
     var kill;
     
     kill = function(_class, methods) {

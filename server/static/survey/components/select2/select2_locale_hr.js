@@ -4,7 +4,7 @@
  * Author: Edi Modrić <edi.modric@gmail.com>
  */
 (function ($) {
-    "use strict";
+    //"use strict";
 
     var specialNumbers = {
         1: function(n) { return (n % 100 != 11 ? "znak" : "znakova"); },

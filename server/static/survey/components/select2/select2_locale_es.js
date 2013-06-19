@@ -2,7 +2,7 @@
  * Select2 Spanish translation
  */
 (function ($) {
-    "use strict";
+    //"use strict";
 
     $.extend($.fn.select2.defaults, {
         formatNoMatches: function () { return "No se encontraron resultados"; },

@@ -4,7 +4,7 @@
  * Author: Jens Rantil <jens.rantil@telavox.com>
  */
 (function ($) {
-    "use strict";
+    //"use strict";
 
     $.extend($.fn.select2.defaults, {
         formatNoMatches: function () { return "Inga träffar"; },

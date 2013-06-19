@@ -5,7 +5,7 @@
  *
  */
 describe('uiCodemirror', function () {
-	'use strict';
+	//'use strict';
 
 	// declare these up here to be global to all tests
 	var scope, $compile, $timeout, uiConfig = angular.module('ui.config');

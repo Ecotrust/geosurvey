@@ -1,4 +1,4 @@
-'use strict';
+//'use strict';
 
 
 function ZoomToCtrl($scope, dialog, $http, $timeout, $location) {

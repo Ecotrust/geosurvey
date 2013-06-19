@@ -1,6 +1,6 @@
 /*global describe, beforeEach, module, inject, it, spyOn, expect, $, angular, afterEach, runs, waits */
 describe('uiTinymce', function () {
-  'use strict';
+  //'use strict';
 
   var scope, $compile, element, text = '<p>Hello</p>';
   beforeEach(module('ui'));

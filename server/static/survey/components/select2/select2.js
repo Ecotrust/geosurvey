@@ -39,7 +39,7 @@ the specific language governing permissions and limitations under the Apache Lic
 })(jQuery);
 
 (function ($, undefined) {
-    "use strict";
+    //"use strict";
     /*global document, window, jQuery, console */
 
     if (window.Select2 !== undefined) {
