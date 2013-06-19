@@ -12,7 +12,7 @@ DATABASES = {
 DEBUG = False
 HEROKU = True
 
-ALLOWED_HOSTS = ['marco-survey-test.herokuapp.com']
+ALLOWED_HOSTS = ['.herokuapp.com']
 
 
 try: 
