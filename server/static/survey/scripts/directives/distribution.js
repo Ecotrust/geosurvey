@@ -17,7 +17,12 @@ angular.module('askApp')
             scope.filterJSON;
             scope.distributionData = [];
             scope.gridOptions = {
-                data: 'distributionData'
+                data: 'distributionData',
+                columnDefs: [
+                    {field:'answer', displayName:scope.question.label.replace('?','')},
+                    {field:'surveys', displayName:'Surveys'},
+                    {field:'locations', displayName:'Activity Points'}
+                ]
             };
 
             scope.$watch('filter', function (newFilter) {
@@ -48,6 +53,13 @@ angular.module('askApp')
                     
                 }
                 $http.get(url).success(function(data) {
+                    var locationIdx = {};
+                    _.each(data.answer_domain.locations, function (location) {
+                        locationIdx[location.answer] = location.locations;
+                    });
+                    _.each(data.answer_domain.surveys, function (survey) {
+                        survey.locations = locationIdx[survey.answer];
+                    });
                     scope.distributionData = data.answer_domain;
                 });
             };
