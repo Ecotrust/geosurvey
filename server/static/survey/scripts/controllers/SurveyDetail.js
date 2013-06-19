@@ -926,7 +926,8 @@ angular.module('askApp')
                         locations: $scope.locations,
                         editLocation: $scope.editMarker,
                         removeLocation: $scope.removeLocation,
-                        showLocation: $scope.showLocation
+                        showLocation: $scope.showLocation,
+                        remainingActivities: $scope.getRemainingActivities()
                     },
                     controller: 'ActivitiesCtrl'
                 }).open();
