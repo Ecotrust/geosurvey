@@ -54,9 +54,13 @@
                                 scope.heatmapLayer = L.TileLayer.heatMap({
                                     // radius could be absolute or relative
                                     // absolute: radius in meters, relative: radius in pixels
-                                    radius: { value: 15000, absolute: true },
+                                    radius: { value: 10000, absolute: true },
                                     //radius: { value: 20, absolute: false },
                                     opacity: 0.8,
+                                    legend: {
+                                               position: 'br',
+                                               title: 'Example Distribution'
+                                           },   
                                     gradient: {
                                         0.45: "rgb(0,0,255)",
                                         0.55: "rgb(0,255,255)",

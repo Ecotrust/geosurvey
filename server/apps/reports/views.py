@@ -57,6 +57,5 @@ def get_distribution(request, survey_slug, question_slug):
         
     else:
         filter_question = None
-    print question.type
     answer_domain = question.get_answer_domain(survey, filter_list)
-    return HttpResponse(simplejson.dumps({'success': "true", "answer_domain": list(answer_domain.order_by('-count'))}))
+    return HttpResponse(simplejson.dumps({'success': "true", "answer_domain": list(answer_domain)}))
