@@ -4,7 +4,7 @@ function noSpecs() {
 
 if (!Array.prototype.map) {
   Array.prototype.map = function(fun /*, thisp */) {
-    "use strict";
+    //"use strict";
 
     if (this === void 0 || this === null)
       throw new TypeError();

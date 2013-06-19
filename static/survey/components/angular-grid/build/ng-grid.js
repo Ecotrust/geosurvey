@@ -5,7 +5,7 @@
 * Compiled At: 04/23/2013 14:36
 ***********************************************/
 (function(window, $) {
-'use strict';
+//'use strict';
 
 var EXCESS_ROWS = 6;
 var SCROLL_THRESHOLD = 4;
@@ -150,7 +150,7 @@ if (!Array.prototype.indexOf) {
 }
 if (!Array.prototype.filter) {
     Array.prototype.filter = function(fun ) {
-        "use strict";
+        //"use strict";
         var t = Object(this);
         var len = t.length >>> 0;
         if (typeof fun !== "function") {

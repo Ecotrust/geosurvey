@@ -1,5 +1,5 @@
 describe('Object', function () {
-    "use strict";
+    //"use strict";
 
     describe("Object.keys", function () {
         var obj = {
