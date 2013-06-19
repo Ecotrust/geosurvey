@@ -119,7 +119,7 @@ angular.module('ui.directives').directive('uiCalendar',['ui.config', '$parse', f
  * Binds a CodeMirror widget to a <textarea> element.
  */
 angular.module('ui.directives').directive('uiCodemirror', ['ui.config', '$timeout', function (uiConfig, $timeout) {
-	'use strict';
+	//'use strict';
 
 	var events = ["cursorActivity", "viewportChange", "gutterClick", "focus", "blur", "scroll", "update"];
 	return {
@@ -249,7 +249,7 @@ angular.module('ui.directives').directive('uiCurrency', ['ui.config', 'currencyF
 angular.module('ui.directives')
 
 .directive('uiDate', ['ui.config', function (uiConfig) {
-  'use strict';
+  //'use strict';
   var options;
   options = {};
   if (angular.isObject(uiConfig.date)) {
@@ -859,7 +859,7 @@ angular.module('ui.directives').directive('uiRoute', ['$location', '$parse', fun
  *   Takes 300 (absolute) or -300 or +300 (relative to detected)
  */
 angular.module('ui.directives').directive('uiScrollfix', ['$window', function ($window) {
-  'use strict';
+  //'use strict';
   return {
     link: function (scope, elm, attrs) {
       var top = elm.offset().top;

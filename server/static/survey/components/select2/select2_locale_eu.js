@@ -4,7 +4,7 @@
  * Author: Julen Ruiz Aizpuru <julenx at gmail dot com>
  */
 (function ($) {
-    "use strict";
+    //"use strict";
 
     $.extend($.fn.select2.defaults, {
         formatNoMatches: function () {

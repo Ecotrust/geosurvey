@@ -21,7 +21,7 @@
 
 !function ($) {
 
-  "use strict"; // jshint ;_;
+  //"use strict"; // jshint ;_;
 
 
   /* MODAL CLASS DEFINITION

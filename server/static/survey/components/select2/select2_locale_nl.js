@@ -2,7 +2,7 @@
  * Select2 Dutch translation
  */
 (function ($) {
-    "use strict";
+    //"use strict";
 
     $.extend($.fn.select2.defaults, {
         formatNoMatches: function () { return "Geen resultaten gevonden"; },

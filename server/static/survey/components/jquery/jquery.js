@@ -15,9 +15,9 @@
 
 // Can't do this because several apps including ASP.NET trace
 // the stack via arguments.caller.callee and Firefox dies if
-// you try to trace through "use strict" call chains. (#13335)
+// you try to trace through //"use strict" call chains. (#13335)
 // Support: Firefox 18+
-//"use strict";
+////"use strict";
 var
 	// A central reference to the root jQuery(document)
 	rootjQuery,
@@ -535,7 +535,7 @@ jQuery.extend({
 			// If the code includes a valid, prologue position
 			// strict mode pragma, execute code by injecting a
 			// script tag into the document.
-			if ( code.indexOf("use strict") === 1 ) {
+			if ( code.indexOf(//"use strict") === 1 ) {
 				script = document.createElement("script");
 				script.text = code;
 				document.head.appendChild( script ).parentNode.removeChild( script );

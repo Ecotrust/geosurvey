@@ -1,6 +1,6 @@
 /*global describe, beforeEach, module, inject, it, spyOn, expect, $ */
 describe('uiScrollfix', function () {
-  'use strict';
+  //'use strict';
 
   var scope, $compile, $window;
   beforeEach(module('ui.directives'));

@@ -4,7 +4,7 @@
  * License: MIT
  */
 (function(window) {
-'use strict';
+//'use strict';
 
 /**
  * JSTestDriver adapter for angular scenario tests

@@ -1,6 +1,6 @@
 /*global beforeEach, afterEach, describe, it, inject, expect, module, spyOn, fullcalendar, angular, $*/
 describe('uiCalendar', function () {
-    'use strict';
+    //'use strict';
 
     var scope, $compile;
 

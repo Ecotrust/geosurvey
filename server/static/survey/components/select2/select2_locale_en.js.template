@@ -4,7 +4,7 @@
  * Author: Your Name <your@email>
  */
 (function ($) {
-    "use strict";
+    //"use strict";
 
     $.extend($.fn.select2.defaults, {
         formatNoMatches: function () { return "No matches found"; },
