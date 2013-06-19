@@ -68,7 +68,8 @@
                         "color": "#E6D845",
                         "weight": 3,
                         "opacity": 0.6,
-                        "fillOpacity": 0.0
+                        "fillOpacity": 0.0,
+                        "clickable": false
                     };
                     L.geoJson(data, { style: boundaryStyle })
                     .addTo(map)
