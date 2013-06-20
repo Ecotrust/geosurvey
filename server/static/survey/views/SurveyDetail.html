@@ -11,6 +11,9 @@
         
     </h2>
 
-    <div ng-include="'/static/survey/views/questionTypes.html'"></div>
-    
+    <div ng-hide="question.foreach" ng-include="'/static/survey/views/questionTypes.html'"></div>
+    <div ng-show="question.foreach" ng-repeat="answer in question.foreachAnswers">
+        <h4>{{answer.text}}</h4>
+        <question questionsrc="answer"></question> 
+    </div> 
 </div>

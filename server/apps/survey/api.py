@@ -79,6 +79,7 @@ class QuestionResource(ModelResource):
     grid_cols = fields.ToManyField(OptionResource, 'grid_cols', full=True)
     modalQuestion = fields.ToOneField('self', 'modalQuestion', full=True, null=True, blank=True)
     hoist_answers = fields.ToOneField('self', 'hoist_answers', full=True, null=True, blank=True)
+    foreach_question = fields.ToOneField('self', 'foreach_question', full=True, null=True, blank=True)
     question_types = fields.DictField(attribute='question_types', readonly=True)
     report_types = fields.DictField(attribute='report_types', readonly=True)
     answer_domain = fields.ListField(attribute='answer_domain', readonly=True, null=True)

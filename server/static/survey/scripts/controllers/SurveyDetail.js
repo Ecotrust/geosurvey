@@ -907,7 +907,7 @@ angular.module('askApp')
 
             _.each($scope.question.options, function(value, key, list) {
                 list[key].activitySlug = value.label;
-                list[key].activityText = value.label;
+                list[key].activityText = value.text;
                 _.each($scope.question.grid_cols, function(gridCol, i) {
                     list[gridCol.label] = $scope.answer !== null && _.has($scope.answer, value.text) ? $scope.answer[value.text][0] : undefined;
                 });
@@ -962,6 +962,13 @@ angular.module('askApp')
         if ($scope.question && $scope.question.type === 'timepicker') {
             $scope.answer = (new Date()).toString("HH:mm");
         }
+        if ($scope.question.foreach_question) {
+            $scope.question.foreach = true;
+            $scope.question.foreachAnswers = $scope.getAnswer($scope.question.foreach_question.slug);
+        } else {
+            $scope.question.foreach = false;
+        }
+        console.log($scope.question.foreach);
     }
 
     if (!app.surveys) {

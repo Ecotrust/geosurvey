@@ -128,6 +128,7 @@ class Question(caching.base.CachingMixin, models.Model):
     required = models.BooleanField(default=True)
     modalQuestion = models.ForeignKey('self', null=True, blank=True, related_name="modal_question")
     hoist_answers = models.ForeignKey('self', null=True, blank=True, related_name="hoisted")
+    foreach_question = models.ForeignKey('self', null=True, blank=True, related_name="foreach")
 
 
 
