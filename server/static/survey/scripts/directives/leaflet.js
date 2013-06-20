@@ -1,12 +1,12 @@
 /* adapted from https://github.com/tombatossals/angular-leaflet-directive */
 
-'use strict';
+//'use strict';
 
 (function() {
 
     var leafletDirective = angular.module('leaflet.directive', []);
 
-    leafletDirective.directive('leaflet', function($http, $log, $compile, $timeout) {
+    leafletDirective.directive('leaflet', function($http, $log, $compile, $timeout, $dialog) {
         return {
             restrict: 'EA',
             replace: true,
@@ -14,24 +14,21 @@
             scope: {
                 center: '=center',
                 marker: '=marker',
-                message: '=message',
                 zoom: '=zoom',
                 requiredzoom: '=requiredzoom',
                 multiMarkers: '=multimarkers',
                 multiMarkersEdit: '=multimarkersedit',
-                //popupField: '=popupfield',
+                popupField: '=popupfield',
                 states: "=states",
                 editMarker: '=editmarker',
-                addMarker: '=addmarker',
-                confirmingLocation: '=conflocation',
+                isCrosshairAlerting: '=iscrosshairalerting',
                 zoomToResult: '=zoomtoresult'
             },
             templateUrl: '/static/survey/views/leaflet.html',
             link: function(scope, element, attrs, ctrl) {
-                var $el = element[0],
-                    cloudmadeUrl = 'http://{s}.tile.cloudmade.com/API-key/{styleId}/256/{z}/{x}/{y}.png',
-                    cloudmadeAttribution = 'Map data &copy; 2011 OpenStreetMap contributors, Imagery &copy; 2011 CloudMade';
+                var $el = element[0];
 
+                // Layer init
                 var nautical = L.tileLayer.wms("http://egisws02.nos.noaa.gov/ArcGIS/services/RNC/NOAA_RNC/ImageServer/WMSServer", {
                     format: 'img/png',
                     transparent: true,
@@ -41,30 +38,48 @@
 
                 var ggl = new L.Google();
 
+                // Map init
+                var initPoint = new L.LatLng(45, -122);
                 var map = new L.Map($el, {
                     fadeAnimation: false,
                     zoomAnimation: false,
                     markerZoomAnimation: false,
                     inertia: false,
-                    layers: [ggl]
-                });
+                    attributionControl: false
+                })
+                .setView(initPoint, 5)
+                .addLayer(ggl);
+
+                map.attributionControl = false;
+                map.zoomControl.options.position = 'bottomleft';
             
+                // Layer picker init
                 var baseMaps = {
                     "Google": ggl,
                     "Nautical Charts": nautical
                 };
-                L.control.layers(baseMaps, null).addTo(map);
+                var options = {
+                    position: 'bottomleft'
+                };
+                L.control.layers(baseMaps, null, options).addTo(map);
 
-                var point = new L.LatLng(45, -122);
-                map.setView(point, 5);
+                $http.get("/static/survey/data/marco_dd.json").success(function(data) {
+                    var boundaryStyle = {
+                        "color": "#E6D845",
+                        "weight": 3,
+                        "opacity": 0.6,
+                        "fillOpacity": 0.0,
+                        "clickable": false
+                    };
+                    L.geoJson(data, { style: boundaryStyle })
+                    .addTo(map)
+                    .on('dblclick',
+                        function(e) {
+                            map.setZoom(map.getZoom() + 1);
+                        }); 
+                });
 
                 scope.activeMarker = null;
-
-
-
-                element.bind('$destroy', function() {
-                    //$timeout.cancel(timeoutId);
-                });
 
                 scope.$watch('zoomToResult', function (place) {
                     if (place) {
@@ -84,7 +99,6 @@
                         }
                     });
                 };
-
 
                 if (attrs.marker) {
                     var crosshairIcon = L.icon({
@@ -152,9 +166,9 @@
 
                                 map.addLayer(marker);
                                 // marker.dragging.enable();
-                                //marker.bindPopup('<strong>' + scope.message + '</strong>',
+                                // marker.bindPopup('<strong>' + scope.message + '</strong>',
                                 //    { closeButton: false });
-                                //marker.openPopup();
+                                // marker.openPopup();
 
                             }
                         });
@@ -283,18 +297,14 @@
 
                 });
 
-                scope.$watch('confirmingLocation', function () {
-                    scope.updateCrosshair();
-                });
-
                 scope.updateCrosshair = function() {
                     if (scope.confirmingLocation) {
                         scope.marker.icon = "crosshair_blank.png";
 
-                    } else if (scope.showZoomAlert && !scope.isZoomedIn()) {
+                    } else if (scope.isCrosshairAlerting && !scope.isZoomedIn()) {
                         scope.marker.icon = "crosshair_red.png";
 
-                    } else if (scope.showZoomAlert && scope.isZoomedIn()) {
+                    } else if (scope.isCrosshairAlerting && scope.isZoomedIn()) {
                         scope.marker.icon = "crosshair_green.png";
 
                     } else {
@@ -313,53 +323,11 @@
                     return scope.zoom >= scope.requiredzoom;
                 };
 
-                scope.showZoomAlert = false;
-
-                scope.addMarkerWrapper = function() {
-                    if (scope.activeMarker) {
-                        scope.activeMarker.marker.closePopup();
-                    }
-                    if (!scope.isZoomedIn()) {
-                        scope.showZoomAlert = true;
-                    } else {
-                        scope.addMarker(scope.getNextColor());
-                        scope.showZoomAlert = false;
-                    }
-                    scope.updateCrosshair();
-                };
-
                 scope.editMarkerWrapper = function(marker) {
                     marker.marker.closePopup();
                     scope.editMarker(marker.data);
                 };
 
-                scope.getNextColor = function () {
-                    var availableColors = [],
-                        colorPalette = [
-                        'red',
-                        'orange',
-                        'green',
-                        'darkgreen',
-                        'darkred',
-                        'blue',
-                        'darkblue',
-                        'purple',
-                        'darkpurple',
-                        'cadetblue'
-                    ];
-
-                    availableColors = angular.copy(colorPalette);
-                    _.each(scope.multiMarkers, function (marker) {
-                        if (_.has(marker, 'color')) {
-                            availableColors = _.without(availableColors, marker.color);
-                        }
-                        if (availableColors.length == 0) {
-                            // Recyle the colors if we run out.
-                            availableColors = angular.copy(colorPalette);
-                        }                        
-                    });
-                    return _.first(availableColors);
-                };
 
                 if (attrs.multimarkers) {
                     var markersDict = [];
@@ -405,6 +373,62 @@
 
                                     }, true);
                                     
+                                    // marker.on('click', function(e) {
+                                    //     var popup;
+
+                                    //     if (scope.popupField) {
+                                    //         scope.popupText = scope.multiMarkers[mkey][scope.popupField];
+                                    //         popup = '<ul class="unstyled"><li ng-repeat="item in popupText">{{ item.text }}</li></ul>';
+                                    //     }
+
+
+                                    //     if (scope.multiMarkersEdit) {
+                                    //         popup += '<button class="btn pull-right" ng-click="editMarkerWrapper(activeMarker)">edit</button>';
+                                    //         popup += '<div class="clearfix"></div>';
+
+                                    //     }
+
+                                    //     markersDict[mkey].bindPopup(popup, {
+                                    //         closeButton: true
+                                    //     });
+
+                                    //     markersDict[mkey].openPopup();
+
+                                    //     //scope.activeMarker = scope.multiMarkers[mkey];
+
+                                    //     scope.activeMarker = {
+                                    //         data: scope.multiMarkers[mkey],
+                                    //         marker: marker
+                                    //     };
+
+                                    //     $compile(angular.element(map._popup._contentNode))(scope);
+                                    //     //$compile(angular.element(map._popup._contentNode.childNodes))(scope);
+                                    //     scope.$digest();
+
+                                    // });
+
+                                    // scope.$watch('multiMarkers.' + mkey + '.answer', function(newValue) {
+
+                                    //     var popup = '<ul><li ng-repeat='messageLine in message'>{{messageLine}}</li></ul><br/><br/>';
+                                    //     popup += '<div>';
+                                    //     popup += '<button class='btn pull-right'>edit</button>';
+                                    //     popup += '<button class='btn btn-danger pull-right' ng-click='delete()'>delete</button>';
+                                    //     popup += '</div>';
+                                    //     popup += '<div class='clearfix'></div>';
+                                    //     if (newValue) {
+                                    //         scope.message = newValue;
+                                    //         markersDict[mkey].bindPopup(popup, {
+                                    //             closeButton: true
+                                    //         });
+                                    //          markersDict[mkey].openPopup();
+                                    //         $compile(angular.element(map._popup._contentNode))(scope);
+                                    //         scope.activeMarker = scope.multiMarkers[mkey];
+                                    //     }
+                                    // }, true);
+
+
+
+
                                     map.addLayer(marker);
                                     markersDict[mkey] = marker;    
                                 }

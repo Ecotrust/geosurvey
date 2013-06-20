@@ -19,9 +19,12 @@ class Respondant(caching.base.CachingMixin, models.Model):
     survey = models.ForeignKey('Survey')
     responses = models.ManyToManyField('Response', related_name='responses', null=True, blank=True)
     complete = models.BooleanField(default=False)
-    state = models.CharField(max_length=20, choices=STATE_CHOICES, default=None, null=True, blank=True)
+    status = models.CharField(max_length=20, choices=STATE_CHOICES, default=None, null=True, blank=True)
     last_question = models.CharField(max_length=240, null=True, blank=True)
 
+    county = models.CharField(max_length=240, null=True, blank=True)
+    state = models.CharField(max_length=240, null=True, blank=True)
+    locations = models.IntegerField(null=True, blank=True)
 
     ts = models.DateTimeField(default=datetime.datetime.now())
     email = models.EmailField(max_length=254, null=True, blank=True, default=None)
@@ -36,6 +39,7 @@ class Respondant(caching.base.CachingMixin, models.Model):
         ''' On save, update timestamps '''
         if not self.uuid:
             self.ts = datetime.datetime.now()
+        self.locations = self.location_set.all().count()
         super(Respondant, self).save(*args, **kwargs)
 
 
@@ -68,6 +72,11 @@ class Survey(caching.base.CachingMixin, models.Model):
     @property
     def completes(self):
         return self.respondant_set.filter(complete=True).count()
+
+    @property
+    def activity_points(self):
+        return Location.objects.filter(response__respondant__in=self.respondant_set.filter(complete=True)).count()
+        
 
     def __str__(self):
         return "%s" % self.name
@@ -175,11 +184,22 @@ class Question(caching.base.CachingMixin, models.Model):
         return "%s/%s/%s (%d)" % (self.survey_slug, self.title, self.type, self.order)
         #return "%s/%s" % (self.survey_set.all()[0].slug, self.label)
 
+class LocationAnswer(caching.base.CachingMixin, models.Model):
+    answer = models.TextField(null=True, blank=True, default=None)
+    label = models.TextField(null=True, blank=True, default=None)
+    location = models.ForeignKey('Location')
+    def __str__(self):
+        return "%s/%s" % (self.location.response.respondant.uuid, self.answer)
+
+
 class Location(caching.base.CachingMixin, models.Model):
-    answer = models.TextField()
     response = models.ForeignKey('Response')
+    respondant = models.ForeignKey('Respondant', null=True, blank=True)
     lat = models.DecimalField(max_digits=10, decimal_places=7)
     lng = models.DecimalField(max_digits=10, decimal_places=7)
+
+    def __str__(self):
+        return "%s/%s/%s" % (self.response.respondant.survey.slug, self.response.question.slug, self.response.respondant.uuid)
 
 class Response(caching.base.CachingMixin, models.Model):
     question = models.ForeignKey(Question)
@@ -201,7 +221,6 @@ class Response(caching.base.CachingMixin, models.Model):
             self.answer = simplejson.loads(self.answer_raw)
             if self.question.type in ['auto-single-select', 'single-select']:
                 answer = simplejson.loads(self.answer_raw)
-                print answer
                 if answer.get('text'):
                     self.answer = answer['text']
                 if answer.get('name'):
@@ -217,10 +236,17 @@ class Response(caching.base.CachingMixin, models.Model):
                 self.answer = ", ".join(answers)
             if self.question.type in ['map-multipoint'] and self.id:
                 answers = []
+                self.location_set.all().delete()
                 for point in simplejson.loads(simplejson.loads(self.answer_raw)):
                         answers.append("%s,%s: %s" % (point['lat'], point['lng'] , point['answers']))
-                        #location = Location(answer=answer['text'], lat=point['lat'], lng=point['lng'], response=self)
-                        #location.save()
+                        location = Location(lat=point['lat'], lng=point['lng'], response=self, respondant=self.respondant)
+                        location.save()
+                        for answer in point['answers']:
+                            answer = LocationAnswer(answer=answer['text'], label=answer['label'], location=location)
+                            answer.save()
+                        location.save()
                 self.answer = ", ".join(answers)
-        print self.answer
+        if hasattr(self.respondant, self.question.slug):
+            setattr(self.respondant, self.question.slug, self.answer)
+            self.respondant.save()
         super(Response, self).save(*args, **kwargs)

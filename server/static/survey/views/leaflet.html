@@ -1,17 +1,3 @@
 <div class="map_wrapper">
-	<button 
-		class="btn btn-large btn-add-marker"
-		ng-class="{'btn-danger': !isZoomedIn() && showZoomAlert, 'btn-primary': isZoomedIn() || !showZoomAlert }"
-		ng-show="!confirmingLocation" 
-		ng-click="addMarkerWrapper()">			
-			<span ng-show="!isZoomedIn() && showZoomAlert">
-				<i class="icon-zoom-in"></i> &nbsp;&nbsp;Zoom in closer to ensure accuracy
-			</span>
-
-			<span ng-hide="!isZoomedIn() && showZoomAlert"> 
-				<i class="icon-plus"></i> &nbsp;&nbsp;Add Location
-			</span>
-
-	</button>
     <div class="map"></div>
 </div>

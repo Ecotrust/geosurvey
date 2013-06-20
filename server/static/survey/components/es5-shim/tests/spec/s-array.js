@@ -14,7 +14,7 @@ describe('Array', function() {
     };
     
     describe('forEach', function() {
-        "use strict";
+        //"use strict";
         var expected, actual;
         
         beforeEach(function() {
@@ -297,7 +297,7 @@ describe('Array', function() {
     });
     
     describe('indexOf', function() {
-        "use strict";
+        //"use strict";
         var actual, expected, testSubject;
         
         beforeEach(function() {
@@ -405,7 +405,7 @@ describe('Array', function() {
         });
     });
     describe('lastIndexOf', function() {
-        "use strict";
+        //"use strict";
         var actual, expected, testSubject, testAL;
         
         beforeEach(function() {

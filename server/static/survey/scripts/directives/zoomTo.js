@@ -1,12 +1,29 @@
-'use strict';
+//'use strict';
 
 
 function ZoomToCtrl($scope, dialog, $http, $timeout, $location) {
     var stop;
 
+    $scope.panes = {
+        search: {},
+        mapUsage: {}
+    };    
+    $scope.currentPane = null;
+    $scope.show = function (paneName) {
+        if (_.has($scope.panes, paneName)) {
+            _.each($scope.panes, function (value, key, list) {
+                $scope.panes[key].showing = false;
+            });
+            $scope.panes[paneName].showing = true;
+            $scope.currentPane = $scope.panes[paneName];
+        }
+    };
+    $scope.show('search');
+
     $scope.results = [];
     $scope.showSpinner = false;
     $scope.showNoResults = false;
+    $scope.selectedPlace = null;
 
     if ($scope.states) {
         $scope.stateParam = '&state__in=' + $scope.states.split(',').join('&state__in=')
@@ -37,12 +54,12 @@ function ZoomToCtrl($scope, dialog, $http, $timeout, $location) {
         }
     });
 
-    $scope.zoomTo = function (place) {            
-        dialog.close(place);
+    $scope.setZoomToPlace = function (place) {
+        $scope.selectedPlace = place;
     };
 
-    $scope.close = function(result) {
-        dialog.close(result);
+    $scope.close = function() {
+        dialog.close($scope.selectedPlace);
     };
 
     // If user hits back button, close the modal.
@@ -62,7 +79,7 @@ angular.module('askApp')
     .directive('zoomto', function($dialog) {
 
     return {
-        template: '<div class="control-group"><i class="icon-search icon-2x"></i><input type="text" id="search-query-facade" placeholder="Search locations" ng-click="openModal()"></div>',
+        template: '<div><div class="control-group large-screen"><i class="icon-search icon-large"></i><input type="text" id="search-query-facade" placeholder="Search" ng-click="openModal()"></div><a class="btn btn-large btn-search small-screen" ng-click="openModal()"><i class="icon-search icon-large"></i></a></div>',
         restrict: 'EA',
         replace: true,
         transclude: true,
@@ -70,7 +87,6 @@ angular.module('askApp')
             states: "=states",
             zoomToResult: "=zoomtoresult",
             numLocations: "=numlocations"
-            
         },
         link: function postLink(scope, element, attrs) {
             scope.isInitialView = true;
@@ -79,7 +95,7 @@ angular.module('askApp')
                     backdrop: true,
                     backdropFade: true,
                     transitionClass: 'fade',
-                    keyboard: true,
+                    keyboard: false,
                     backdropClick: false,
                     scope: {
                         states: scope.states,
@@ -98,7 +114,6 @@ angular.module('askApp')
                             zoom: 15
                         };
                     }
-                    
                 });
             };
 

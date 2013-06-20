@@ -5,7 +5,7 @@
 * Compiled At: 04/23/2013 14:36
 ***********************************************/
 (function(window, $) {
-'use strict';
+//'use strict';
 // the # of rows we want to add to the top and bottom of the rendered grid rows 
 var EXCESS_ROWS = 6;
 var SCROLL_THRESHOLD = 4;
@@ -159,7 +159,7 @@ if (!Array.prototype.indexOf) {
 }
 if (!Array.prototype.filter) {
     Array.prototype.filter = function(fun /*, thisp */) {
-        "use strict";
+        //"use strict";
         var t = Object(this);
         var len = t.length >>> 0;
         if (typeof fun !== "function") {
