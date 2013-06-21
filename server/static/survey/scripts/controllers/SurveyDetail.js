@@ -20,7 +20,7 @@ function ZoomAlertCtrl($scope, dialog, $location) {
     $scope.loaded = false;
     $scope.$watch(function() {
         return $location.path();
-    }, function () {
+    }, function() {
         if ($scope.loaded && dialog.isOpen()) {
             $scope.close();
         }
@@ -48,7 +48,7 @@ function OutOfBoundsAlertCtrl($scope, dialog, $location) {
     };
 }
 
-function addMoreDialogCtrl($scope, dialog, remainingActivities, $location){
+function addMoreDialogCtrl($scope, dialog, remainingActivities, $location) {
     $scope.loaded = false;
     $scope.$watch(function() {
         return $location.path();
@@ -65,11 +65,11 @@ function addMoreDialogCtrl($scope, dialog, remainingActivities, $location){
     };
 }
 
-function DoneDialogCtrl($scope, dialog, remainingActivities, $location){
+function DoneDialogCtrl($scope, dialog, remainingActivities, $location) {
     $scope.loaded = false;
     $scope.$watch(function() {
         return $location.path();
-    }, function () {
+    }, function() {
         if ($scope.loaded && dialog.isOpen()) {
             $scope.close();
         }
@@ -77,7 +77,7 @@ function DoneDialogCtrl($scope, dialog, remainingActivities, $location){
     });
 
     $scope.remainingActivities = remainingActivities;
-    $scope.close = function(result){
+    $scope.close = function(result) {
         dialog.close(result);
     };
 }
@@ -86,7 +86,7 @@ function ActivitiesCtrl($scope, dialog, $location) {
     $scope.loaded = false;
     $scope.$watch(function() {
         return $location.path();
-    }, function () {
+    }, function() {
         if ($scope.loaded && dialog.isOpen()) {
             $scope.close();
         }
@@ -111,8 +111,7 @@ function ActivitySelectorDialogCtrl($scope, dialog, $location, $window, question
         thankYouPane: {}
     };
     $scope.currentPane = null;
-    $scope.show = function (paneName) {
->>>>>>> origin/master
+    $scope.show = function(paneName) {
         if (_.has($scope.panes, paneName)) {
             _.each($scope.panes, function(value, key, list) {
                 $scope.panes[key].showing = false;
@@ -173,128 +172,17 @@ angular.module('askApp')
         }
     };
 
-<<<<<<< HEAD
-    $scope.addMarker = function(color) {
-        $scope.activeMarker = {
-            lat: $scope.map.marker.lat,
-            lng: $scope.map.marker.lng,
-            color: color
-        };
-
-        $scope.locations.push($scope.activeMarker);
-    }
-
-    $scope.addLocation = function(location) {
-        // var locations = _.without($scope.locations, $scope.activeMarker);
-        location.color = $scope.activeMarker.color;
-        $scope.locations[_.indexOf($scope.locations, $scope.activeMarker)] = location;
-        // $scope.locations = locations;
-        // $scope.locations.push(location);
-        $scope.activeMarker = false;
-
-        $scope.showMyActivitesPopover();
-    };
-
-    $scope.myActivitiesPopoverShown = false;
-    $scope.showMyActivitesPopover = function() {
-        // Only showing this popover once
-        if (!$scope.myActivitiesPopoverShown) {
-            setTimeout(function() {
-                jQuery('.btn-my-activities').popover({
-                    trigger: 'manual',
-                    placement: 'bottom'
-                });
-                jQuery('.btn-my-activities').popover('show');
-                $scope.myActivitiesPopoverShown = true;
-            }, 500);
-        }
-    }
-
-    $scope.confirmLocation = function(question) {
-        $scope.dialog = $dialog.dialog({
-            backdrop: true,
-            keyboard: true,
-            backdropClick: false,
-            templateUrl: '/static/survey/views/locationActivitiesModal.html',
-            controller: 'SurveyDetailCtrl',
-            scope: {
-                question: question ? question : $scope.question.modalQuestion,
-                activeMarker: $scope.activeMarker,
-                removeLocation: $scope.removeLocation
-            },
-            success: function(question, answer) {
-                if (question.update) {
-                    $scope.locations[_.indexOf($scope.locations, $scope.activeMarker)].answers = answer;
-                } else {
-                    $scope.addLocation({
-                        lat: $scope.activeMarker.lat,
-                        lng: $scope.activeMarker.lng,
-                        color: $scope.activeMarker.color,
-                        question: question,
-                        answers: answer
-                    });
-                }
-                $scope.activeMarker = false;
-                question.update = false;
-                $scope.dialog.close();
-                $scope.dialog = null;
-            },
-            error: function(arg1, arg2) {
-                alert('error confirming');
-            },
-            cancel: function() {
-                $scope.removeLocation($scope.activeMarker);
-                $scope.activeMarker = false;
-                if (question) {
-                    question.update = false;
-                }
-                $scope.dialog.close();
-                $scope.dialog = null;
-            }
-        });
-        $scope.dialog.options.scope.dialog = $scope.dialog;
-        $scope.dialog.open();
-    }
-
-    $scope.cancelConfirmation = function() {
-        if ($scope.dialog) {
-            $scope.dialog.options.cancel();
-        } else {
-            $scope.removeLocation($scope.activeMarker);
-            $scope.activeMarker = false;
-        }
-    }
-
-    $scope.editMarker = function(location) {
-        if (!location.question) {
-            location.question = {};
-            angular.extend(location.question, $scope.question.modalQuestion);
-        }
-        location.question.update = true;
-        $scope.activeMarker = location;
-        $scope.confirmLocation(location.question);
-    };
-
-    $scope.removeLocation = function(location) {
-        // This is used for both canceling a new location and deleting an 
-        // existing location when in edit mode.
-        var locations = _.without($scope.locations, location);
-        $scope.locations = locations;
-    };
-
-    $scope.showLocation = function(location) {
-        $scope.zoomModel.zoomToResult = location;
-    };
-
-
     $scope.getNextQuestion = function() {
         // should return the slug of the next question
         var nextQuestion = $scope.survey.questions[_.indexOf($scope.survey.questions, $scope.question) + 1];
 
         return nextQuestion ? nextQuestion.slug : null;
     };
-    $scope.getResumeQuestionPath = function (lastQuestion) {
-        var resumeQuestion = $scope.survey.questions[_.indexOf($scope.survey.questions, _.findWhere($scope.survey.questions, {slug: lastQuestion})) + 1];
+
+    $scope.getResumeQuestionPath = function(lastQuestion) {
+        var resumeQuestion = $scope.survey.questions[_.indexOf($scope.survey.questions, _.findWhere($scope.survey.questions, {
+            slug: lastQuestion
+        })) + 1];
         return ['survey', $scope.survey.slug, resumeQuestion.slug, $routeParams.uuidSlug].join('/');
     };
 
@@ -433,13 +321,13 @@ angular.module('askApp')
                             }
                         }
                     }
-                }
 
-            }).error(function(data, status, headers, config) {
-                if (console) {
-                    console.log(data);
-                }
-            });
+                }).error(function(data, status, headers, config) {
+                    if (console) {
+                        console.log(data);
+                    }
+                });
+            }
         }
     };
 
@@ -590,7 +478,7 @@ angular.module('askApp')
         }
     };
 
-    $scope.answerMapQuestion = function (locations) {
+    $scope.answerMapQuestion = function(locations) {
         $scope.answerQuestion(locations);
     };
 
@@ -602,7 +490,6 @@ angular.module('askApp')
             $location.path(['survey', $scope.survey.slug, 'complete', $routeParams.uuidSlug].join('/'));
         }
 
-
         _.each(data.responses, function(response) {
             try {
                 $scope.answers[response.question.slug] = JSON.parse(response.answer_raw);
@@ -611,8 +498,7 @@ angular.module('askApp')
             }
         });
 
-
-        if (data.last_question && ! data.complete) {
+        if (data.last_question && !data.complete) {
             $scope.resumeQuestionPath = $scope.getResumeQuestionPath(data.last_question);
         }
         // if (data.complete) {
@@ -625,7 +511,6 @@ angular.module('askApp')
             });
 
         }
-
 
 
         if ($scope.question && $scope.question.title) {
@@ -910,7 +795,7 @@ angular.module('askApp')
                 $scope.boundaryLayer = L.geoJson(data);
             });
 
-            $scope.isOutOfBounds = function () {
+            $scope.isOutOfBounds = function() {
                 var point, results;
                 if ($scope.boundaryLayer) {
                     point = new L.LatLng($scope.map.marker.lat, $scope.map.marker.lng);
@@ -921,7 +806,7 @@ angular.module('askApp')
                 return true; // not using a boundary layer
             };
 
-            $scope.addMarker = function () {
+            $scope.addMarker = function() {
                 if ($scope.activeMarker) {
                     scope.activeMarker.marker.closePopup();
                 }
@@ -939,7 +824,7 @@ angular.module('askApp')
                         color: $scope.getNextColor()
                     };
                     $scope.locations.push($scope.activeMarker);
-                    $timeout(function () {
+                    $timeout(function() {
                         $scope.showAddLocationDialog();
                     }, 400);
                     $scope.isCrosshairAlerting = false;
@@ -971,7 +856,7 @@ angular.module('askApp')
                     location.question = {};
                     angular.extend(location.question, $scope.question.modalQuestion);
                 }
-                location.question.update = true;    
+                location.question.update = true;
                 $scope.activeMarker = location;
                 $scope.showAddLocationDialog(location.question);
             };
@@ -993,7 +878,7 @@ angular.module('askApp')
                 if (_.isUndefined(question)) {
                     question = $scope.question.modalQuestion;
                 }
-                
+
                 $scope.dialog = $dialog.dialog({
                     backdrop: true,
                     keyboard: false,
@@ -1001,10 +886,14 @@ angular.module('askApp')
                     templateUrl: '/static/survey/views/locationActivitiesModal.html',
                     controller: 'ActivitySelectorDialogCtrl',
                     resolve: {
-                        question: function () { return question; },
-                        activeMarker: function () { return $scope.activeMarker; }
+                        question: function() {
+                            return question;
+                        },
+                        activeMarker: function() {
+                            return $scope.activeMarker;
+                        }
                     },
-                    save: function (question, answer) {
+                    save: function(question, answer) {
                         if (question.update) {
                             $scope.locations[_.indexOf($scope.locations, $scope.activeMarker)].answers = answer;
                         } else {
@@ -1021,7 +910,7 @@ angular.module('askApp')
                     }
                 });
 
-                $scope.dialog.open().then(function (result) {
+                $scope.dialog.open().then(function(result) {
                     $scope.dialog = null;
                     if (result == 'cancel') {
                         $scope.removeLocation($scope.activeMarker);
@@ -1037,7 +926,7 @@ angular.module('askApp')
                 });
             };
 
-            $scope.showZoomAlert = function () {
+            $scope.showZoomAlert = function() {
                 var d = $dialog.dialog({
                     backdrop: true,
                     keyboard: false,
@@ -1050,7 +939,7 @@ angular.module('askApp')
                 d.open();
             };
 
-            $scope.showOutOfBoundsAlert = function () {
+            $scope.showOutOfBoundsAlert = function() {
                 var d = $dialog.dialog({
                     backdrop: true,
                     keyboard: false,
@@ -1081,27 +970,27 @@ angular.module('askApp')
                 }).open();
             };
 
-
-            $scope.showAddMoreDialog = function () {
+            $scope.showAddMoreDialog = function() {
                 var d = $dialog.dialog({
                     backdrop: true,
                     keyboard: false,
                     backdropClick: false,
                     templateUrl: '/static/survey/views/addMoreModal.html',
                     controller: 'addMoreDialogCtrl',
-                    resolve: { remainingActivities: function () {
+                    resolve: {
+                        remainingActivities: function() {
                             return $scope.getRemainingActivities();
                         }
                     }
                 });
-                
-                d.open().then(function (result) {
+
+                d.open().then(function(result) {
                     if (result === 'doneMapping') {
                         $scope.answerMapQuestion($scope.locations);
-                    
+
                     } else if (result === 'addMoreLocations') {
                         $scope.showMyActivitesPopover();
-                        $timeout(function () {
+                        $timeout(function() {
                             // trigger the search modal to be open
                             jQuery("div[zoomto] input").click();
                         }, 300);
@@ -1109,20 +998,21 @@ angular.module('askApp')
                 });
             };
 
-            $scope.showDoneDialog = function () {
+            $scope.showDoneDialog = function() {
                 var d = $dialog.dialog({
                     backdrop: true,
                     keyboard: false,
                     backdropClick: false,
                     templateUrl: '/static/survey/views/doneModal.html',
                     controller: 'DoneDialogCtrl',
-                    resolve: { remainingActivities: function () {
+                    resolve: {
+                        remainingActivities: function() {
                             return $scope.getRemainingActivities();
                         }
                     }
                 });
-                
-                d.open().then(function (result) {
+
+                d.open().then(function(result) {
                     if (result == 'yes') {
                         $scope.answerMapQuestion($scope.locations);
                     }
@@ -1148,14 +1038,14 @@ angular.module('askApp')
              * @return {array} Returns activities that the user had selected but has not
              * yet mapped.
              */
-            $scope.getRemainingActivities = function () {
+            $scope.getRemainingActivities = function() {
                 var selectedActivities = $scope.getAnswer($scope.question.modalQuestion.hoist_answers.slug);
                 // Filter out activities that have already been mapped.
                 var remainingActivities = _.difference(
                     _.pluck(selectedActivities, 'text'),
-                    _.flatten(_.map($scope.locations, function (location) {
-                        return _.pluck(location.answers, 'text');
-                    })));
+                    _.flatten(_.map($scope.locations, function(location) {
+                    return _.pluck(location.answers, 'text');
+                })));
 
                 return angular.copy(remainingActivities);
             };
@@ -1163,43 +1053,43 @@ angular.module('askApp')
             /**
              * @return {string} Returns the color to be applied to the next marker.
              */
-            $scope.getNextColor = function () {
+            $scope.getNextColor = function() {
                 var availableColors = [],
                     colorPalette = [
-                    'red',
-                    'orange',
-                    'green',
-                    'darkgreen',
-                    'darkred',
-                    'blue',
-                    'darkblue',
-                    'purple',
-                    'darkpurple',
-                    'cadetblue'
-                ];
+                            'red',
+                            'orange',
+                            'green',
+                            'darkgreen',
+                            'darkred',
+                            'blue',
+                            'darkblue',
+                            'purple',
+                            'darkpurple',
+                            'cadetblue'
+                    ];
 
                 availableColors = angular.copy(colorPalette);
-                _.each($scope.locations, function (marker) {
+                _.each($scope.locations, function(marker) {
                     if (_.has(marker, 'color')) {
                         availableColors = _.without(availableColors, marker.color);
                     }
                     if (availableColors.length == 0) {
                         // Recyle the colors if we run out.
                         availableColors = angular.copy(colorPalette);
-                    }                        
+                    }
                 });
                 return _.first(availableColors);
             };
 
             $scope.isCrosshairAlerting = false;
 
-            $scope.isZoomedIn = function () {
+            $scope.isZoomedIn = function() {
                 return $scope.map.zoom >= $scope.question.min_zoom;
-            };            
+            };
 
         }
 
-        // grid question controller
+         // grid question controller
         if ($scope.question && $scope.question.type === 'grid') {
             // Prep row initial row data, each row containing values.
             // for activityLabel, activityText, cost and numPeople.
@@ -1265,8 +1155,6 @@ angular.module('askApp')
                 });
             });
         }
-    };
-
 
         if ($scope.question && $scope.question.type === 'datepicker') {
             $scope.answer = (new Date()).toString("yyyy-MM-dd");
@@ -1281,12 +1169,7 @@ angular.module('askApp')
         } else {
             $scope.question.foreach = false;
         }
-        console.log($scope.question.foreach);
-    }
-
-    if (!app.surveys) {
-        app.surveys = JSON.parse(localStorage.getItem("surveys"));
-    }
+    };
 
     if (!app.data && !app.surveys) {
         $http.get('/api/v1/respondant/' + $routeParams.uuidSlug + '/?format=json').success(function(data) {

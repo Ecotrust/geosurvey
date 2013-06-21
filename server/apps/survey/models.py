@@ -44,8 +44,8 @@ class Respondant(caching.base.CachingMixin, models.Model):
 
 
 class Page(caching.base.CachingMixin, models.Model):
-    question = models.ForeignKey('Question')
-    survey = models.ForeignKey('Survey')
+    question = models.ForeignKey('Question', null=True, blank=True)
+    survey = models.ForeignKey('Survey', null=True, blank=True)
     objects = caching.base.CachingManager()
 
     def __str__(self):

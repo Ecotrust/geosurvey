@@ -6,30 +6,23 @@ from tastypie.authorization import DjangoAuthorization, Authorization
 from django.conf.urls.defaults import url
 from django.db.models import Avg, Max, Min, Count
 
-from survey.models import Survey, Question, Option, Respondant, Response #, Page
+from survey.models import Survey, Question, Option, Respondant, Response, Page
 
 class StaffUserOnlyAuthorization(Authorization):
-    def read_list(self, object_list, bundle):
-        # This assumes a ``QuerySet`` from ``ModelResource``.
-        return True
 
-    def read_detail(self, object_list, bundle):
-        # Is the requested object owned by the user?
-        return True
+    # def create_list(self, object_list, bundle):
+    #     # Assuming their auto-assigned to ``user``.
+    #     return bundle.request.user.is_staff
 
-    def create_list(self, object_list, bundle):
-        # Assuming their auto-assigned to ``user``.
-        return bundle.request.user.is_staff
-
-    def create_detail(self, object_list, bundle):
-        return bundle.request.user.is_staff
+    # def create_detail(self, object_list, bundle):
+    #     return bundle.request.user.is_staff
 
     def update_list(self, object_list, bundle):
         return bundle.request.user.is_staff
 
-    def update_detail(self, object_list, bundle):
-        print "updating question"
-        return bundle.request.user.is_staff
+    # def update_detail(self, object_list, bundle):
+    #     print "updating question"
+    #     return bundle.request.user.is_staff
 
     def delete_list(self, object_list, bundle):
         # Sorry user, no deletes for you!
@@ -74,9 +67,26 @@ class OptionResource(ModelResource):
         queryset = Option.objects.all()
 
 
+class PageResource(ModelResource):
+    question = fields.ForeignKey('apps.survey.api.QuestionResource', 'question', related_name='question',full=True, null=True, blank=True)
+    survey = fields.ForeignKey('apps.survey.api.SurveyResource', 'survey', related_name='survey', full=True, null=True, blank=True)
+    class Meta:
+        queryset = Page.objects.all()
+        always_return_data = True
+        authorization = Authorization()
+        authentication = Authentication()    
+
+    # def obj_create(self, bundle, request=None, **kwargs):
+    #     try:
+    #         import pdb; pdb.set_trace()
+    #         bundle = super(PageResource, self).obj_create(request, **kwargs)
+
+    #     except:
+    #         pass
+
 class QuestionResource(ModelResource):
-    options = fields.ToManyField(OptionResource, 'options', full=True)
-    grid_cols = fields.ToManyField(OptionResource, 'grid_cols', full=True)
+    options = fields.ToManyField(OptionResource, 'options', full=True, null=True, blank=True)
+    grid_cols = fields.ToManyField(OptionResource, 'grid_cols', full=True, null=True, blank=True)
     modalQuestion = fields.ToOneField('self', 'modalQuestion', full=True, null=True, blank=True)
     hoist_answers = fields.ToOneField('self', 'hoist_answers', full=True, null=True, blank=True)
     foreach_question = fields.ToOneField('self', 'foreach_question', full=True, null=True, blank=True)
@@ -96,13 +106,19 @@ class QuestionResource(ModelResource):
         }
 
 class SurveyResource(ModelResource):
-    questions = fields.ToManyField(QuestionResource, 'questions', full=True)
+    questions = fields.ToManyField(QuestionResource, 'questions', full=True, null=True, blank=True)
 
     class Meta:
         queryset = Survey.objects.all()
+        always_return_data = True
+        authorization = StaffUserOnlyAuthorization()
+        authentication = Authentication()
         filtering = {
             'slug': ['exact']
         }
+
+    def save_m2m(self, bundle):
+        pass
 
     def prepend_urls(self):
         return [

@@ -1,17 +1,23 @@
 //'use strict';
 
-angular.module('askApp', ['ui', 'leaflet.directive', 'heatmap.directive', 'ui.bootstrap', 'ngGrid'])
+var app = {};
+
+angular.module('askApp', ['ui', 'leaflet.directive', 'heatmap.directive', 'ui.bootstrap'])
     .config(function($routeProvider, $httpProvider) {
 
-    $httpProvider.defaults.headers.post = {
-        'X-CSRFToken': token,
-        'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
-    };
+    // $httpProvider.defaults.headers.post = {
+    //     'X-CSRFToken': token,
+    //     'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+    // };
 
 
     $routeProvider.when('/', {
         templateUrl: '/static/survey/views/main.html',
         controller: 'MainCtrl'
+    })
+    .when('/author', {
+      templateUrl: '/static/survey/views/author.html',
+      controller: 'AuthorCtrl'
     })
     .when('/author/:surveySlug', {
       templateUrl: '/static/survey/views/author.html',
