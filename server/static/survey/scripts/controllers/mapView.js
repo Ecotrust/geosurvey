@@ -1,4 +1,4 @@
-'use strict';
+//'use strict';
 
 angular.module('askApp')
     .controller('MapViewCtrl', function($scope, $routeParams, $http, $location) {

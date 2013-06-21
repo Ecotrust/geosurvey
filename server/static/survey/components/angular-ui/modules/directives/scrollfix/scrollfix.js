@@ -5,7 +5,7 @@
  *   Takes 300 (absolute) or -300 or +300 (relative to detected)
  */
 angular.module('ui.directives').directive('uiScrollfix', ['$window', function ($window) {
-  'use strict';
+  //'use strict';
   return {
     link: function (scope, elm, attrs) {
       var top = elm.offset().top;

@@ -4,7 +4,7 @@
  * Author: Salim KAYABAŞI <salim.kayabasi@gmail.com>
  */
 (function ($) {
-    "use strict";
+    //"use strict";
 
     $.extend($.fn.select2.defaults, {
         formatNoMatches: function () { return "Sonuç bulunamadı"; },

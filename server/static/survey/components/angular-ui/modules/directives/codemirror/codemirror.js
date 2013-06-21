@@ -3,7 +3,7 @@
  * Binds a CodeMirror widget to a <textarea> element.
  */
 angular.module('ui.directives').directive('uiCodemirror', ['ui.config', '$timeout', function (uiConfig, $timeout) {
-	'use strict';
+	//'use strict';
 
 	var events = ["cursorActivity", "viewportChange", "gutterClick", "focus", "blur", "scroll", "update"];
 	return {

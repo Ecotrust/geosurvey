@@ -9,7 +9,7 @@
 angular.module('ui.directives')
 
 .directive('uiDate', ['ui.config', function (uiConfig) {
-  'use strict';
+  //'use strict';
   var options;
   options = {};
   if (angular.isObject(uiConfig.date)) {

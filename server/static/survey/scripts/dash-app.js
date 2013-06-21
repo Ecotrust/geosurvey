@@ -1,4 +1,4 @@
-'use strict';
+//'use strict';
 
 angular.module('askApp', ['ui', 'leaflet.directive', 'heatmap.directive', 'ui.bootstrap', 'ngGrid'])
     .config(function($routeProvider, $httpProvider) {

@@ -1,4 +1,4 @@
-'use strict';
+//'use strict';
 
 angular.module('askApp')
     .directive('distribution', function($http) {

@@ -2,7 +2,7 @@
  * Select2 French translation
  */
 (function ($) {
-    "use strict";
+    //"use strict";
 
     $.extend($.fn.select2.defaults, {
         formatNoMatches: function () { return "Aucun résultat trouvé"; },
