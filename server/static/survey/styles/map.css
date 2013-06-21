@@ -34,7 +34,7 @@ div[leaflet] {
 }
 @media (max-width: 480px) {
     .leaflet-container .leaflet-control-attribution {
-        max-width: 200px;
+        max-width: 220px;
     }
 }
 
