@@ -1,4 +1,4 @@
-'use strict';
+//'use strict';
 
 /* jasmine specs for services go here */
 describe('Dom Utility Service', function () {

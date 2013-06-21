@@ -1,6 +1,6 @@
 /* adapted from https://github.com/tombatossals/angular-leaflet-directive */
 
-'use strict';
+//'use strict';
 
 (function() {
 

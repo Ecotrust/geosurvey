@@ -1,4 +1,4 @@
-'use strict';
+//'use strict';
 
 angular.module('askApp')
     .controller('RespondantDetailCtrl', function($scope, $routeParams, $http) {

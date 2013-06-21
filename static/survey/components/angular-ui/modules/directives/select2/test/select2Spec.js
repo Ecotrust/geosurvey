@@ -1,6 +1,6 @@
 /*global describe, beforeEach, module, inject, it, spyOn, expect, $ */
 describe('uiSelect2', function () {
-  'use strict';
+  //'use strict';
 
   var scope, $compile, options, $timeout;
   beforeEach(module('ui.directives'));

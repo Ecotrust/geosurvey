@@ -1,6 +1,6 @@
 /*global describe, beforeEach, module, inject, it, spyOn, expect, $ */
 describe('uiReset', function () {
-  'use strict';
+  //'use strict';
 
   var scope, $compile;
   beforeEach(module('ui.directives'));

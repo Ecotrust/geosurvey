@@ -1,6 +1,6 @@
 /*global describe, beforeEach, module, inject, it, spyOn, expect, $ */
 describe('uiRoute', function () {
-  'use strict';
+  //'use strict';
 
   var scope, $compile, $location;
   beforeEach(module('ui.directives'));
