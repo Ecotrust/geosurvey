@@ -478,6 +478,10 @@ div[zoomto] .small-screen {
 .map-multipoint .popover {
     width: 180px;
 }
+.map-multipoint .popover-title {
+    display: none;
+}
+
 
 h1.marker-popup-heading {
     font-size: 16px;
