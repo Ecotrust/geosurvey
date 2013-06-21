@@ -4,7 +4,7 @@
  * Author: bigmihail <bigmihail@bigmir.net>
  */
 (function ($) {
-    "use strict";
+    //"use strict";
 
     $.extend($.fn.select2.defaults, {
         formatNoMatches: function () { return "Нічого не знайдено"; },

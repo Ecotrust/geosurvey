@@ -1,6 +1,6 @@
 
 describe('Function', function() {
-    "use strict";
+    //"use strict";
     describe('bind', function() {
         var actual, expected,
             testSubject;

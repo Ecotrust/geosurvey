@@ -2,7 +2,7 @@
  * Select2 Chinese translation
  */
 (function ($) {
-    "use strict";
+    //"use strict";
     $.extend($.fn.select2.defaults, {
         formatNoMatches: function () { return "没有找到匹配项"; },
         formatInputTooShort: function (input, min) { var n = min - input.length; return "请再输入" + n + "个字符";},
