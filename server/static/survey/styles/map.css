@@ -29,9 +29,14 @@ div[leaflet] {
     }
 .leaflet-container .leaflet-control-attribution {
     font-size: 9px;
-    bottom: 7px;
+    background: white\9;
+    filter: alpha(opacity=70)\9;
 }
-
+@media (max-width: 480px) {
+    .leaflet-container .leaflet-control-attribution {
+        max-width: 200px;
+    }
+}
 
 
 /**
@@ -41,11 +46,13 @@ div[leaflet] {
     position: absolute;
     top: 0;
     left: 5px;
+    z-index: 10;
 }
 .map-controls-top-right {
     position: absolute;
     top: 9px;
     right: 5px;
+    z-index: 10;
 }
 .btn-done-mapping, .btn-add-marker {
     margin-left: 5px

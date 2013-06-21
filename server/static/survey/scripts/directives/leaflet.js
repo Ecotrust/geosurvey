@@ -36,31 +36,31 @@
                     attribution: "NOAA Nautical Charts"
                 });
 
-                var ggl = new L.Google();
+                var bing = new L.BingLayer("An7H2cF0yNoBvXFHD4Bf8Z5irB2Uqldfzpp_6YvINN3OHCSripU36QHagqr_Cx6Q", {
+                    type: "AerialWithLabels"
+                });
 
                 // Map init
-                var initPoint = new L.LatLng(45, -122);
+                //var initPoint = new L.LatLng(45, -122);
+                var southWest = new L.LatLng(36.241227, -78.068848),
+                northEast = new L.LatLng(41.208880, -65.632324),
+                bounds = new L.LatLngBounds(southWest, northEast);
                 var map = new L.Map($el, {
-                    fadeAnimation: false,
-                    zoomAnimation: false,
-                    markerZoomAnimation: false,
-                    inertia: false,
-                    attributionControl: false
+                    //fadeAnimation: false,
+                    //zoomAnimation: false,
+                    //markerZoomAnimation: false,
+                    inertia: false
                 })
-                .setView(initPoint, 5)
-                .addLayer(ggl);
-
-                map.attributionControl = false;
+                //.setView(initPoint, 5)
+                //.setZoom(5)
+                .fitBounds(bounds)
+                .addLayer(bing);
+                map.attributionControl.setPrefix('');;
                 map.zoomControl.options.position = 'bottomleft';
 
                 // Layer picker init
-                var baseMaps = {
-                    "Google": ggl,
-                    "Nautical Charts": nautical
-                };
-                var options = {
-                    position: 'bottomleft'
-                };
+                var baseMaps = { "Satellite": bing, "Nautical Charts": nautical };
+                var options = { position: 'bottomleft' };
                 L.control.layers(baseMaps, null, options).addTo(map);
 
                 $http.get("/static/survey/data/marco_dd.json").success(function(data) {
@@ -124,22 +124,22 @@
                         marker.on('dblclick', function(e) {
                             map.setZoom(map.getZoom() + 1);
                         });
-                        marker.on('dragstart', function(e) {
-                            draggingMarker = true;
-                            map.closePopup();
-                        });
+                        // marker.on('dragstart', function(e) {
+                        //     draggingMarker = true;
+                        //     map.closePopup();
+                        // });
 
-                        marker.on('drag', function(e) {
-                            scope.$apply(function(s) {
-                                s.marker.lat = marker.getLatLng().lat;
-                                s.marker.lng = marker.getLatLng().lng;
-                            });
-                        });
+                        // marker.on('drag', function(e) {
+                        //     scope.$apply(function(s) {
+                        //         s.marker.lat = marker.getLatLng().lat;
+                        //         s.marker.lng = marker.getLatLng().lng;
+                        //     });
+                        // });
 
-                        marker.on('dragend', function(e) {
-                            marker.openPopup();
-                            draggingMarker = false;
-                        });
+                        // marker.on('dragend', function(e) {
+                        //     marker.openPopup();
+                        //     draggingMarker = false;
+                        // });
 
                         // map.on('click', function(e) {
                         //     marker.setLatLng(e.latlng);
@@ -349,20 +349,20 @@
                                     });
                                     markDat.color = color;    
                                     marker.closePopup();
-                                    marker.on('dragstart', function(e) {
-                                        draggingMarker = true;
-                                    });
+                                    // marker.on('dragstart', function(e) {
+                                    //     draggingMarker = true;
+                                    // });
 
-                                    marker.on('drag', function(e) {
-                                        scope.$apply(function(s) {
-                                            markDat.lat = marker.getLatLng().lat;
-                                            markDat.lng = marker.getLatLng().lng;
-                                        });
-                                    });
+                                    // marker.on('drag', function(e) {
+                                    //     scope.$apply(function(s) {
+                                    //         markDat.lat = marker.getLatLng().lat;
+                                    //         markDat.lng = marker.getLatLng().lng;
+                                    //     });
+                                    // });
 
-                                    marker.on('dragend', function(e) {
-                                        draggingMarker = false;
-                                    });
+                                    // marker.on('dragend', function(e) {
+                                    //     draggingMarker = false;
+                                    // });
 
                                     scope.$watch('multiMarkers.' + mkey, function() {
                                         if (scope.multiMarkers[mkey]) {
@@ -373,44 +373,38 @@
 
                                     }, true);
                                     
-                                    marker.on('mouseover', function(e) {
-                                        scope.multiMarkers[mkey].mouseoverPromise = $timeout(
-                                            function () {
-                                                var popup;
+                                    // marker.on('click', function(e) {
+                                    //     console.log('click');
+                                    // });
+                                    // marker.on('mouseover', function(e) {
+                                    //     console.log('over');
+                                    //     var popup;
 
-                                                if (scope.popupField) {
-                                                    scope.popupText = scope.multiMarkers[mkey][scope.popupField];
-                                                    popup = '<ul class="unstyled"><li ng-repeat="item in popupText">{{ item.text }}</li></ul>';
-                                                }
+                                    //     if (scope.popupField) {
+                                    //         scope.popupText = scope.multiMarkers[mkey][scope.popupField];
+                                    //         popup = '<ul class="unstyled"><li ng-repeat="item in popupText">{{ item.text }}</li></ul>';
+                                    //     }
 
-                                                if (scope.multiMarkersEdit) {
-                                                    popup += '<button class="btn pull-right" ng-click="editMarkerWrapper(activeMarker)">edit</button>';
-                                                    popup += '<div class="clearfix"></div>';
-                                                }
+                                    //     if (scope.multiMarkersEdit) {
+                                    //         popup += '<button class="btn pull-right" ng-click="editMarkerWrapper(activeMarker)">edit</button>';
+                                    //         popup += '<div class="clearfix"></div>';
+                                    //     }
 
-                                                markersDict[mkey].bindPopup(popup, {
-                                                    closeButton: true
-                                                });
+                                    //     markersDict[mkey].bindPopup(popup, {
+                                    //         closeButton: true
+                                    //     });
 
-                                                markersDict[mkey].openPopup();
+                                    //     markersDict[mkey].openPopup();
 
-                                                scope.activeMarker = {
-                                                    data: scope.multiMarkers[mkey],
-                                                    marker: marker
-                                                };
+                                    //     scope.activeMarker = {
+                                    //         data: scope.multiMarkers[mkey],
+                                    //         marker: marker
+                                    //     };
 
-                                                $compile(angular.element(map._popup._contentNode))(scope);
-                                                //$compile(angular.element(map._popup._contentNode.childNodes))(scope);
-                                                scope.$digest();
-
-                                            }, 200, false);
-                                    });
-
-                                    marker.on('mouseout', function(e) {
-                                        if (scope.multiMarkers[mkey].mouseoverPromise) {
-                                            $timeout.cancel(scope.multiMarkers[mkey].mouseoverPromise);
-                                        }
-                                    });
+                                    //     $compile(angular.element(map._popup._contentNode))(scope);
+                                    //     //$compile(angular.element(map._popup._contentNode.childNodes))(scope);
+                                    //     scope.$digest();
+                                    // });
 
                                     map.addLayer(marker);
                                     markersDict[mkey] = marker;    
