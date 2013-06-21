@@ -257,14 +257,6 @@
     }, 
     {
         "fields": {
-            "question": 135, 
-            "survey": 26
-        }, 
-        "model": "survey.page", 
-        "pk": 134
-    }, 
-    {
-        "fields": {
             "question": 136, 
             "survey": 26
         }, 
@@ -2602,7 +2594,7 @@
             "foreach_question": null, 
             "grid_cols": [], 
             "hoist_answers": null, 
-            "info": null, 
+            "info": "", 
             "integer_max": 365, 
             "integer_min": 0, 
             "label": "Name of Fish Seller", 
@@ -2611,16 +2603,16 @@
             "min_zoom": 10, 
             "modalQuestion": null, 
             "options": [], 
-            "options_from_previous_answer": null, 
-            "options_json": null, 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
             "order": 0, 
             "randomize_groups": false, 
-            "report_type": null, 
+            "report_type": "distribution", 
             "required": true, 
             "slug": "name-fish-seller", 
-            "term_condition": null, 
+            "term_condition": "", 
             "title": "Name of Fish Seller", 
-            "type": "Yes/No", 
+            "type": "text", 
             "visualize": false, 
             "zoom": null
         }, 
@@ -3009,39 +3001,6 @@
         }, 
         "model": "survey.question", 
         "pk": 134
-    }, 
-    {
-        "fields": {
-            "allow_other": false, 
-            "filterBy": false, 
-            "filter_questions": [], 
-            "foreach_question": null, 
-            "grid_cols": [], 
-            "hoist_answers": null, 
-            "info": null, 
-            "integer_max": 365, 
-            "integer_min": 0, 
-            "label": "Secondary Occupation", 
-            "lat": null, 
-            "lng": null, 
-            "min_zoom": 10, 
-            "modalQuestion": null, 
-            "options": [], 
-            "options_from_previous_answer": null, 
-            "options_json": null, 
-            "order": 10, 
-            "randomize_groups": false, 
-            "report_type": null, 
-            "required": true, 
-            "slug": "secondary-occupation", 
-            "term_condition": null, 
-            "title": "Secondary Occupation", 
-            "type": "text", 
-            "visualize": false, 
-            "zoom": null
-        }, 
-        "model": "survey.question", 
-        "pk": 135
     }, 
     {
         "fields": {
