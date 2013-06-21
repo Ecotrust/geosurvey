@@ -41,21 +41,13 @@
                 });
 
                 // Map init
-                //var initPoint = new L.LatLng(45, -122);
-                var southWest = new L.LatLng(36.241227, -78.068848),
-                northEast = new L.LatLng(41.208880, -65.632324),
-                bounds = new L.LatLngBounds(southWest, northEast);
+                var initPoint = new L.LatLng(45, -122);
                 var map = new L.Map($el, {
-                    //fadeAnimation: false,
-                    //zoomAnimation: false,
-                    //markerZoomAnimation: false,
                     inertia: false
                 })
-                //.setView(initPoint, 5)
-                //.setZoom(5)
-                .fitBounds(bounds)
-                .addLayer(bing);
-                map.attributionControl.setPrefix('');;
+                .addLayer(bing)
+                .setView(initPoint, 5);
+                map.attributionControl.setPrefix('');
                 map.zoomControl.options.position = 'bottomleft';
 
                 // Layer picker init
@@ -63,6 +55,7 @@
                 var options = { position: 'bottomleft' };
                 L.control.layers(baseMaps, null, options).addTo(map);
 
+                // Study area boundary
                 $http.get("/static/survey/data/marco_dd.json").success(function(data) {
                     var boundaryStyle = {
                         "color": "#E6D845",
@@ -76,7 +69,7 @@
                     .on('dblclick',
                         function(e) {
                             map.setZoom(map.getZoom() + 1);
-                        }); 
+                        });
                 });
 
                 scope.activeMarker = null;
@@ -124,52 +117,16 @@
                         marker.on('dblclick', function(e) {
                             map.setZoom(map.getZoom() + 1);
                         });
-                        // marker.on('dragstart', function(e) {
-                        //     draggingMarker = true;
-                        //     map.closePopup();
-                        // });
-
-                        // marker.on('drag', function(e) {
-                        //     scope.$apply(function(s) {
-                        //         s.marker.lat = marker.getLatLng().lat;
-                        //         s.marker.lng = marker.getLatLng().lng;
-                        //     });
-                        // });
-
-                        // marker.on('dragend', function(e) {
-                        //     marker.openPopup();
-                        //     draggingMarker = false;
-                        // });
-
-                        // map.on('click', function(e) {
-                        //     marker.setLatLng(e.latlng);
-                        //     marker.openPopup();
-                        //     scope.$apply(function (s) {
-                        //         s.marker.lat = marker.getLatLng().lat;
-                        //         s.marker.lng = marker.getLatLng().lng;
-                        //     });
-                        // });
-
 
                         scope.$watch('marker.icon', function(newValue) {
                             if (marker && marker._icon && marker._icon.src) {
                                 marker._icon.src = '/static/survey/img/' + newValue;
                             }
-                            
                         });
                         scope.$watch('marker.visibility', function(newValue, oldValue) {
-
                             if (newValue) {
-                                // marker.draggable = true;
-
                                 marker.setLatLng(new L.LatLng(scope.center.lat, scope.center.lng));
-
                                 map.addLayer(marker);
-                                // marker.dragging.enable();
-                                // marker.bindPopup('<strong>' + scope.message + '</strong>',
-                                //    { closeButton: false });
-                                // marker.openPopup();
-
                             }
                         });
 
@@ -330,6 +287,7 @@
 
 
                 if (attrs.multimarkers) {
+
                     var markersDict = [];
                     scope.$watch('multiMarkers.length', function(newMarkerList) {
   
@@ -342,6 +300,7 @@
                                     var marker = new L.marker(
                                     scope.multiMarkers[mkey], {
                                         draggable: markDat.draggable ? true : false,
+                                        title: 'click for details',
                                         icon: L.AwesomeMarkers.icon({
                                             icon: 'icon-circle',
                                             color: color
@@ -349,20 +308,6 @@
                                     });
                                     markDat.color = color;    
                                     marker.closePopup();
-                                    // marker.on('dragstart', function(e) {
-                                    //     draggingMarker = true;
-                                    // });
-
-                                    // marker.on('drag', function(e) {
-                                    //     scope.$apply(function(s) {
-                                    //         markDat.lat = marker.getLatLng().lat;
-                                    //         markDat.lng = marker.getLatLng().lng;
-                                    //     });
-                                    // });
-
-                                    // marker.on('dragend', function(e) {
-                                    //     draggingMarker = false;
-                                    // });
 
                                     scope.$watch('multiMarkers.' + mkey, function() {
                                         if (scope.multiMarkers[mkey]) {
@@ -373,38 +318,24 @@
 
                                     }, true);
                                     
-                                    // marker.on('click', function(e) {
-                                    //     console.log('click');
-                                    // });
-                                    // marker.on('mouseover', function(e) {
-                                    //     console.log('over');
-                                    //     var popup;
-
-                                    //     if (scope.popupField) {
-                                    //         scope.popupText = scope.multiMarkers[mkey][scope.popupField];
-                                    //         popup = '<ul class="unstyled"><li ng-repeat="item in popupText">{{ item.text }}</li></ul>';
-                                    //     }
-
-                                    //     if (scope.multiMarkersEdit) {
-                                    //         popup += '<button class="btn pull-right" ng-click="editMarkerWrapper(activeMarker)">edit</button>';
-                                    //         popup += '<div class="clearfix"></div>';
-                                    //     }
-
-                                    //     markersDict[mkey].bindPopup(popup, {
-                                    //         closeButton: true
-                                    //     });
-
-                                    //     markersDict[mkey].openPopup();
-
-                                    //     scope.activeMarker = {
-                                    //         data: scope.multiMarkers[mkey],
-                                    //         marker: marker
-                                    //     };
-
-                                    //     $compile(angular.element(map._popup._contentNode))(scope);
-                                    //     //$compile(angular.element(map._popup._contentNode.childNodes))(scope);
-                                    //     scope.$digest();
-                                    // });
+                                    var popup;
+                                    if (scope.popupField) {    
+                                        popup = '<ul class="unstyled"><li ng-repeat="item in popupText">{{ item.text }}</li></ul>';
+                                    }
+                                    if (scope.multiMarkersEdit) {
+                                        popup += '<button class="btn pull-right" ng-click="editMarkerWrapper(activeMarker)">edit</button>';
+                                        popup += '<div class="clearfix"></div>';
+                                    }
+                                    marker.bindPopup(popup, { closeButton: true });
+                                    marker.on('click', function(e) {
+                                        scope.activeMarker = {
+                                            data: scope.multiMarkers[mkey],
+                                            marker: marker
+                                        };
+                                        scope.popupText = scope.multiMarkers[mkey][scope.popupField];
+                                        $compile(angular.element(map._popup._contentNode))(scope);
+                                        scope.$digest();
+                                    });
 
                                     map.addLayer(marker);
                                     markersDict[mkey] = marker;    
