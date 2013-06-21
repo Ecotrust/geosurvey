@@ -21,6 +21,7 @@
                 popupField: '=popupfield',
                 states: "=states",
                 editMarker: '=editmarker',
+                deleteMarker: '=deletemarker',
                 isCrosshairAlerting: '=iscrosshairalerting',
                 zoomToResult: '=zoomtoresult'
             },
@@ -270,11 +271,11 @@
                 };
 
 
-                scope.deleteMarker = function() {
-                    var i = _.indexOf(scope.multiMarkers, scope.activeMarker.data);
-                    scope.activeMarker.marker.closePopup();
-                    scope.multiMarkers.splice(i, 1);
-                };
+                // scope.deleteMarker = function() {
+                //     var i = _.indexOf(scope.multiMarkers, scope.activeMarker.data);
+                //     scope.activeMarker.marker.closePopup();
+                //     scope.multiMarkers.splice(i, 1);
+                // };
 
                 scope.isZoomedIn = function () {
                     return scope.zoom >= scope.requiredzoom;
@@ -283,6 +284,11 @@
                 scope.editMarkerWrapper = function(marker) {
                     marker.marker.closePopup();
                     scope.editMarker(marker.data);
+                };
+
+                scope.deleteMarkerWrapper = function(marker) {
+                    marker.marker.closePopup();
+                    scope.deleteMarker(marker.data);
                 };
 
 
@@ -320,10 +326,12 @@
                                     
                                     var popup;
                                     if (scope.popupField) {    
-                                        popup = '<ul class="unstyled"><li ng-repeat="item in popupText">{{ item.text }}</li></ul>';
+                                        popup = '<h1 class="marker-popup-heading">Activities</h1>';
+                                        popup += '<ul class="unstyled marker-popup-list"><li ng-repeat="item in popupText"><i class="icon-ok-circle"></i>&nbsp;{{ item.text }}</li></ul>';
                                     }
                                     if (scope.multiMarkersEdit) {
-                                        popup += '<button class="btn pull-right" ng-click="editMarkerWrapper(activeMarker)">edit</button>';
+                                        popup += '<button class="btn pull-right" ng-click="editMarkerWrapper(activeMarker)"><i class="icon-edit"></i>&nbsp;Edit</button>';
+                                        popup += '<button class="btn btn-danger pull-right" ng-click="deleteMarkerWrapper(activeMarker)"><i class="icon-trash"></i>&nbsp;Remove</button>';
                                         popup += '<div class="clearfix"></div>';
                                     }
                                     marker.bindPopup(popup, { closeButton: true });
