@@ -114,6 +114,28 @@
             <button type="submit" class="btn btn-large btn-block button-block" ng-class="{'btn-primary': isAnswerValid, disabled: !isAnswerValid }">continue</button>
         </form>
     </div>
+    <div ng-switch-when="yes-no">
+        <form class="question" ng-show="survey.questions.length" ng-submit="answerSingleSelect(question.options, question.otherAnswer)">
+            <div class="todo mrm">
+                <ul>
+                  <li 
+                    ng-click="$parent.onSingleSelectClicked(option, $parent.question)"
+                    ng-repeat="option in question.options"
+                    ng-class="{'todo-done': option.checked }">
+                    <!-- <div class="todo-icon fui-man-24"></div> -->
+                    <div class="todo-content">
+                      <h4 class="todo-name">
+                        {{ option.text || option.name }}
+                      </h4>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            <input class="input-block-level" type="text" placeholder="Other Option" ng-show="question.otherOption.checked" ng-model="question.otherAnswer" autofocus/>             
+            <button type="submit" class="btn btn-large btn-block button-block" ng-class="{'btn-primary': isAnswerValid, disabled: !isAnswerValid }">continue</button>
+        </form>
+    </div>
+    
     <div ng-switch-when="multi-select">
         <form class="question" ng-submit="answerMultiSelect(question)">
             <div class="todo mrm">

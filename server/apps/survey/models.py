@@ -97,11 +97,13 @@ QUESTION_TYPE_CHOICES = (
     ('integer', 'Integer'),
     ('auto-single-select', 'Single Select with Autocomplete'),
     ('map-multipoint', 'Map with Multiple Points'),
+    ('yes-no', 'Yes/No'),
 )
 
 class Option(caching.base.CachingMixin, models.Model):
     text = models.CharField(max_length=254)
-    label = models.SlugField(max_length=64) 
+    label = models.SlugField(max_length=64)
+    type = models.CharField(max_length=20,choices=QUESTION_TYPE_CHOICES,default='integer')
     objects = caching.base.CachingManager()
 
     def __str__(self):
@@ -147,8 +149,6 @@ class Question(caching.base.CachingMixin, models.Model):
     visualize = models.BooleanField(default=False)
     report_type = models.CharField(max_length=20,choices=REPORT_TYPE_CHOICES,null=True, default=None)
     filter_questions = models.ManyToManyField('self', null=True, blank=True)
-
-
 
     @property
     def answer_domain(self):

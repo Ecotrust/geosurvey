@@ -1,0 +1,5197 @@
+[
+    {
+        "fields": {
+            "question": 89, 
+            "survey": 5
+        }, 
+        "model": "survey.page", 
+        "pk": 78
+    }, 
+    {
+        "fields": {
+            "question": 91, 
+            "survey": 5
+        }, 
+        "model": "survey.page", 
+        "pk": 79
+    }, 
+    {
+        "fields": {
+            "question": 92, 
+            "survey": 5
+        }, 
+        "model": "survey.page", 
+        "pk": 80
+    }, 
+    {
+        "fields": {
+            "question": 93, 
+            "survey": 5
+        }, 
+        "model": "survey.page", 
+        "pk": 81
+    }, 
+    {
+        "fields": {
+            "question": 94, 
+            "survey": 5
+        }, 
+        "model": "survey.page", 
+        "pk": 82
+    }, 
+    {
+        "fields": {
+            "question": 97, 
+            "survey": 5
+        }, 
+        "model": "survey.page", 
+        "pk": 83
+    }, 
+    {
+        "fields": {
+            "question": 98, 
+            "survey": 5
+        }, 
+        "model": "survey.page", 
+        "pk": 84
+    }, 
+    {
+        "fields": {
+            "question": 99, 
+            "survey": 5
+        }, 
+        "model": "survey.page", 
+        "pk": 85
+    }, 
+    {
+        "fields": {
+            "question": 100, 
+            "survey": 5
+        }, 
+        "model": "survey.page", 
+        "pk": 86
+    }, 
+    {
+        "fields": {
+            "question": 101, 
+            "survey": 5
+        }, 
+        "model": "survey.page", 
+        "pk": 87
+    }, 
+    {
+        "fields": {
+            "question": 102, 
+            "survey": 5
+        }, 
+        "model": "survey.page", 
+        "pk": 88
+    }, 
+    {
+        "fields": {
+            "question": 105, 
+            "survey": 5
+        }, 
+        "model": "survey.page", 
+        "pk": 90
+    }, 
+    {
+        "fields": {
+            "question": 106, 
+            "survey": 5
+        }, 
+        "model": "survey.page", 
+        "pk": 91
+    }, 
+    {
+        "fields": {
+            "question": 107, 
+            "survey": 5
+        }, 
+        "model": "survey.page", 
+        "pk": 92
+    }, 
+    {
+        "fields": {
+            "question": 103, 
+            "survey": 5
+        }, 
+        "model": "survey.page", 
+        "pk": 93
+    }, 
+    {
+        "fields": {
+            "question": 109, 
+            "survey": 5
+        }, 
+        "model": "survey.page", 
+        "pk": 94
+    }, 
+    {
+        "fields": {
+            "question": 110, 
+            "survey": 5
+        }, 
+        "model": "survey.page", 
+        "pk": 95
+    }, 
+    {
+        "fields": {
+            "question": 111, 
+            "survey": 5
+        }, 
+        "model": "survey.page", 
+        "pk": 96
+    }, 
+    {
+        "fields": {
+            "question": 112, 
+            "survey": 5
+        }, 
+        "model": "survey.page", 
+        "pk": 97
+    }, 
+    {
+        "fields": {
+            "question": 113, 
+            "survey": 5
+        }, 
+        "model": "survey.page", 
+        "pk": 98
+    }, 
+    {
+        "fields": {
+            "question": 121, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 120
+    }, 
+    {
+        "fields": {
+            "question": 122, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 121
+    }, 
+    {
+        "fields": {
+            "question": 123, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 122
+    }, 
+    {
+        "fields": {
+            "question": 124, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 123
+    }, 
+    {
+        "fields": {
+            "question": 127, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 126
+    }, 
+    {
+        "fields": {
+            "question": 128, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 127
+    }, 
+    {
+        "fields": {
+            "question": 129, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 128
+    }, 
+    {
+        "fields": {
+            "question": 130, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 129
+    }, 
+    {
+        "fields": {
+            "question": 131, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 130
+    }, 
+    {
+        "fields": {
+            "question": 132, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 131
+    }, 
+    {
+        "fields": {
+            "question": 133, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 132
+    }, 
+    {
+        "fields": {
+            "question": 134, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 133
+    }, 
+    {
+        "fields": {
+            "question": 135, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 134
+    }, 
+    {
+        "fields": {
+            "question": 136, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 135
+    }, 
+    {
+        "fields": {
+            "question": 137, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 136
+    }, 
+    {
+        "fields": {
+            "question": 138, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 137
+    }, 
+    {
+        "fields": {
+            "question": 139, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 138
+    }, 
+    {
+        "fields": {
+            "question": 140, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 139
+    }, 
+    {
+        "fields": {
+            "question": 141, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 140
+    }, 
+    {
+        "fields": {
+            "question": 142, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 141
+    }, 
+    {
+        "fields": {
+            "question": 143, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 142
+    }, 
+    {
+        "fields": {
+            "question": 144, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 143
+    }, 
+    {
+        "fields": {
+            "question": null, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 144
+    }, 
+    {
+        "fields": {
+            "question": null, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 145
+    }, 
+    {
+        "fields": {
+            "question": null, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 146
+    }, 
+    {
+        "fields": {
+            "question": null, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 147
+    }, 
+    {
+        "fields": {
+            "question": null, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 148
+    }, 
+    {
+        "fields": {
+            "question": null, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 149
+    }, 
+    {
+        "fields": {
+            "question": null, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 150
+    }, 
+    {
+        "fields": {
+            "question": 145, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 151
+    }, 
+    {
+        "fields": {
+            "question": 146, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 152
+    }, 
+    {
+        "fields": {
+            "question": 147, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 153
+    }, 
+    {
+        "fields": {
+            "question": 148, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 154
+    }, 
+    {
+        "fields": {
+            "question": 149, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 155
+    }, 
+    {
+        "fields": {
+            "question": 150, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 156
+    }, 
+    {
+        "fields": {
+            "question": 151, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 157
+    }, 
+    {
+        "fields": {
+            "question": 152, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 158
+    }, 
+    {
+        "fields": {
+            "question": 153, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 159
+    }, 
+    {
+        "fields": {
+            "question": 154, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 160
+    }, 
+    {
+        "fields": {
+            "question": 155, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 161
+    }, 
+    {
+        "fields": {
+            "question": 156, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 162
+    }, 
+    {
+        "fields": {
+            "question": 157, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 163
+    }, 
+    {
+        "fields": {
+            "question": 158, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 164
+    }, 
+    {
+        "fields": {
+            "question": 159, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 165
+    }, 
+    {
+        "fields": {
+            "question": 160, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 166
+    }, 
+    {
+        "fields": {
+            "question": 161, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 167
+    }, 
+    {
+        "fields": {
+            "question": 162, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 168
+    }, 
+    {
+        "fields": {
+            "question": 163, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 169
+    }, 
+    {
+        "fields": {
+            "question": 164, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 170
+    }, 
+    {
+        "fields": {
+            "question": 165, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 171
+    }, 
+    {
+        "fields": {
+            "question": 166, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 172
+    }, 
+    {
+        "fields": {
+            "question": 167, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 173
+    }, 
+    {
+        "fields": {
+            "question": 168, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 174
+    }, 
+    {
+        "fields": {
+            "question": 169, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 175
+    }, 
+    {
+        "fields": {
+            "question": 170, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 176
+    }, 
+    {
+        "fields": {
+            "question": 171, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 177
+    }, 
+    {
+        "fields": {
+            "question": 172, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 178
+    }, 
+    {
+        "fields": {
+            "question": 173, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 179
+    }, 
+    {
+        "fields": {
+            "question": 174, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 180
+    }, 
+    {
+        "fields": {
+            "question": 175, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 181
+    }, 
+    {
+        "fields": {
+            "question": 176, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 182
+    }, 
+    {
+        "fields": {
+            "question": 177, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 183
+    }, 
+    {
+        "fields": {
+            "question": 178, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 184
+    }, 
+    {
+        "fields": {
+            "question": 179, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 185
+    }, 
+    {
+        "fields": {
+            "question": 180, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 186
+    }, 
+    {
+        "fields": {
+            "question": 181, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 187
+    }, 
+    {
+        "fields": {
+            "question": 182, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 188
+    }, 
+    {
+        "fields": {
+            "question": 183, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 189
+    }, 
+    {
+        "fields": {
+            "question": 184, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 190
+    }, 
+    {
+        "fields": {
+            "question": 185, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 191
+    }, 
+    {
+        "fields": {
+            "question": 186, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 192
+    }, 
+    {
+        "fields": {
+            "question": 187, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 193
+    }, 
+    {
+        "fields": {
+            "question": 188, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 194
+    }, 
+    {
+        "fields": {
+            "question": 189, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 195
+    }, 
+    {
+        "fields": {
+            "question": 190, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 196
+    }, 
+    {
+        "fields": {
+            "question": 191, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 197
+    }, 
+    {
+        "fields": {
+            "question": 192, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 198
+    }, 
+    {
+        "fields": {
+            "question": 193, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 199
+    }, 
+    {
+        "fields": {
+            "question": 194, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 200
+    }, 
+    {
+        "fields": {
+            "question": 195, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 201
+    }, 
+    {
+        "fields": {
+            "question": 196, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 202
+    }, 
+    {
+        "fields": {
+            "question": 197, 
+            "survey": 26
+        }, 
+        "model": "survey.page", 
+        "pk": 203
+    }, 
+    {
+        "fields": {
+            "anon": true, 
+            "name": "Volume and Origin", 
+            "offline": true, 
+            "slug": "volume-and-origin", 
+            "states": ""
+        }, 
+        "model": "survey.survey", 
+        "pk": 5
+    }, 
+    {
+        "fields": {
+            "anon": true, 
+            "name": "Vendor Survey", 
+            "offline": true, 
+            "slug": "vendor-survey", 
+            "states": ""
+        }, 
+        "model": "survey.survey", 
+        "pk": 26
+    }, 
+    {
+        "fields": {
+            "label": "yes", 
+            "text": "Yes", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 92
+    }, 
+    {
+        "fields": {
+            "label": "no", 
+            "text": "No", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 93
+    }, 
+    {
+        "fields": {
+            "label": "50-liter", 
+            "text": "50 liter", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 94
+    }, 
+    {
+        "fields": {
+            "label": "100-liter", 
+            "text": "100 liter", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 95
+    }, 
+    {
+        "fields": {
+            "label": "150-liter", 
+            "text": "150 liter", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 96
+    }, 
+    {
+        "fields": {
+            "label": "200-liter", 
+            "text": "200 liter", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 97
+    }, 
+    {
+        "fields": {
+            "label": "300-liter", 
+            "text": "300 liter", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 98
+    }, 
+    {
+        "fields": {
+            "label": "spear", 
+            "text": "Spear", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 99
+    }, 
+    {
+        "fields": {
+            "label": "net", 
+            "text": "Net", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 100
+    }, 
+    {
+        "fields": {
+            "label": "handline", 
+            "text": "Handline", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 101
+    }, 
+    {
+        "fields": {
+            "label": "common-reef-fish", 
+            "text": "Common Reef Fish", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 102
+    }, 
+    {
+        "fields": {
+            "label": "topa", 
+            "text": "Topa", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 103
+    }, 
+    {
+        "fields": {
+            "label": "kingfish", 
+            "text": "Kingfish", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 104
+    }, 
+    {
+        "fields": {
+            "label": "spanish-mackerel", 
+            "text": "Spanish Mackerel", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 105
+    }, 
+    {
+        "fields": {
+            "label": "coral-groupercoral-trout", 
+            "text": "Coral grouper/Coral trout", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 106
+    }, 
+    {
+        "fields": {
+            "label": "deepwater-snapper", 
+            "text": "Deepwater Snapper", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 107
+    }, 
+    {
+        "fields": {
+            "label": "humpheadnapoleon-wrasse", 
+            "text": "Humphead/Napoleon Wrasse", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 108
+    }, 
+    {
+        "fields": {
+            "label": "molluscsquidoctopuslobster", 
+            "text": "Mollusc/squid/octopus/lobster", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 109
+    }, 
+    {
+        "fields": {
+            "label": "province", 
+            "text": "Province", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 110
+    }, 
+    {
+        "fields": {
+            "label": "region", 
+            "text": "Region", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 111
+    }, 
+    {
+        "fields": {
+            "label": "villages", 
+            "text": "Villages", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 112
+    }, 
+    {
+        "fields": {
+            "label": "volume-kg", 
+            "text": "Volume (kg)", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 113
+    }, 
+    {
+        "fields": {
+            "label": "price-wholesale", 
+            "text": "Price (wholesale)", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 114
+    }, 
+    {
+        "fields": {
+            "label": "starting-price-lb", 
+            "text": "Starting Price (per lb)", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 115
+    }, 
+    {
+        "fields": {
+            "label": "first-markdown-lb", 
+            "text": "1st Markdown (per lb)", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 116
+    }, 
+    {
+        "fields": {
+            "label": "second-markdown-price-lb", 
+            "text": "Second Markdown Price (per lb)", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 117
+    }, 
+    {
+        "fields": {
+            "label": "starting-price-lb", 
+            "text": "Starting Price (per lb)", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 118
+    }, 
+    {
+        "fields": {
+            "label": "first-markdown-lb", 
+            "text": "First Markdown (per lb)", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 119
+    }, 
+    {
+        "fields": {
+            "label": "Second-markdown-price-lb", 
+            "text": "Second Markdown Price (per lb)", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 120
+    }, 
+    {
+        "fields": {
+            "label": "primary", 
+            "text": "Primary", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 121
+    }, 
+    {
+        "fields": {
+            "label": "secondary", 
+            "text": "Secondary", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 122
+    }, 
+    {
+        "fields": {
+            "label": "tertiary", 
+            "text": "Tertiary", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 123
+    }, 
+    {
+        "fields": {
+            "label": "esky", 
+            "text": "Esky", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 124
+    }, 
+    {
+        "fields": {
+            "label": "cooler", 
+            "text": "cooler", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 125
+    }, 
+    {
+        "fields": {
+            "label": "scale", 
+            "text": "scale", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 126
+    }, 
+    {
+        "fields": {
+            "label": "calculator", 
+            "text": "calculator", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 127
+    }, 
+    {
+        "fields": {
+            "label": "knivesscaler", 
+            "text": "knives/scaler", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 128
+    }, 
+    {
+        "fields": {
+            "label": "freezer", 
+            "text": "freezer", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 129
+    }, 
+    {
+        "fields": {
+            "label": "baskets", 
+            "text": "baskets", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 130
+    }, 
+    {
+        "fields": {
+            "label": "boat", 
+            "text": "boat", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 131
+    }, 
+    {
+        "fields": {
+            "label": "engine", 
+            "text": "engine", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 132
+    }, 
+    {
+        "fields": {
+            "label": "dugout-canoe", 
+            "text": "dugout canoe", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 133
+    }, 
+    {
+        "fields": {
+            "label": "vehicle", 
+            "text": "vehicle", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 134
+    }, 
+    {
+        "fields": {
+            "label": "number-owned", 
+            "text": "number owned", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 135
+    }, 
+    {
+        "fields": {
+            "label": "size", 
+            "text": "size", 
+            "type": "text"
+        }, 
+        "model": "survey.option", 
+        "pk": 136
+    }, 
+    {
+        "fields": {
+            "label": "new-cost", 
+            "text": "new cost", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 137
+    }, 
+    {
+        "fields": {
+            "label": "partnership", 
+            "text": "partnership", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 138
+    }, 
+    {
+        "fields": {
+            "label": "single", 
+            "text": "single", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 139
+    }, 
+    {
+        "fields": {
+            "label": "paid", 
+            "text": "paid", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 140
+    }, 
+    {
+        "fields": {
+            "label": "family", 
+            "text": "family", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 141
+    }, 
+    {
+        "fields": {
+            "label": "other", 
+            "text": "other", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 142
+    }, 
+    {
+        "fields": {
+            "label": "number", 
+            "text": "number", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 143
+    }, 
+    {
+        "fields": {
+            "label": "full-time", 
+            "text": "full time", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 144
+    }, 
+    {
+        "fields": {
+            "label": "part-time", 
+            "text": "part time", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 145
+    }, 
+    {
+        "fields": {
+            "label": "family", 
+            "text": "family", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 146
+    }, 
+    {
+        "fields": {
+            "label": "other", 
+            "text": "other", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 147
+    }, 
+    {
+        "fields": {
+            "label": "amount", 
+            "text": "Amount", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 148
+    }, 
+    {
+        "fields": {
+            "label": "retail-market-kg", 
+            "text": "Retail market (kg)", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 149
+    }, 
+    {
+        "fields": {
+            "label": "value-adders-kg", 
+            "text": "Value adders (kg)", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 150
+    }, 
+    {
+        "fields": {
+            "label": "sale-other-fish-sellers-kg", 
+            "text": "Sale to other fish sellers (kg)?", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 151
+    }, 
+    {
+        "fields": {
+            "label": "other", 
+            "text": "Other (%)", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 152
+    }, 
+    {
+        "fields": {
+            "label": "log-book", 
+            "text": "log book", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 153
+    }, 
+    {
+        "fields": {
+            "label": "computer", 
+            "text": "computer", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 154
+    }, 
+    {
+        "fields": {
+            "label": "primary", 
+            "text": "Primary", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 155
+    }, 
+    {
+        "fields": {
+            "label": "secondary", 
+            "text": "Secondary", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 156
+    }, 
+    {
+        "fields": {
+            "label": "village", 
+            "text": "village", 
+            "type": "text"
+        }, 
+        "model": "survey.option", 
+        "pk": 157
+    }, 
+    {
+        "fields": {
+            "label": "province", 
+            "text": "province", 
+            "type": "text"
+        }, 
+        "model": "survey.option", 
+        "pk": 158
+    }, 
+    {
+        "fields": {
+            "label": "amount", 
+            "text": "amount", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 159
+    }, 
+    {
+        "fields": {
+            "label": "j", 
+            "text": "J", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 160
+    }, 
+    {
+        "fields": {
+            "label": "f", 
+            "text": "F", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 161
+    }, 
+    {
+        "fields": {
+            "label": "m", 
+            "text": "M", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 162
+    }, 
+    {
+        "fields": {
+            "label": "april", 
+            "text": "April", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 163
+    }, 
+    {
+        "fields": {
+            "label": "january", 
+            "text": "January", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 164
+    }, 
+    {
+        "fields": {
+            "label": "february", 
+            "text": "February", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 165
+    }, 
+    {
+        "fields": {
+            "label": "march", 
+            "text": "March", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 166
+    }, 
+    {
+        "fields": {
+            "label": "april", 
+            "text": "April", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 167
+    }, 
+    {
+        "fields": {
+            "label": "may", 
+            "text": "May", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 168
+    }, 
+    {
+        "fields": {
+            "label": "june", 
+            "text": "June", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 169
+    }, 
+    {
+        "fields": {
+            "label": "july", 
+            "text": "July", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 170
+    }, 
+    {
+        "fields": {
+            "label": "august", 
+            "text": "August", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 171
+    }, 
+    {
+        "fields": {
+            "label": "september", 
+            "text": "September", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 172
+    }, 
+    {
+        "fields": {
+            "label": "october", 
+            "text": "October", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 173
+    }, 
+    {
+        "fields": {
+            "label": "november", 
+            "text": "November", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 174
+    }, 
+    {
+        "fields": {
+            "label": "december", 
+            "text": "December", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 175
+    }, 
+    {
+        "fields": {
+            "label": "service", 
+            "text": "service", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 176
+    }, 
+    {
+        "fields": {
+            "label": "fish-processing", 
+            "text": "fish processing", 
+            "type": "yes-no"
+        }, 
+        "model": "survey.option", 
+        "pk": 177
+    }, 
+    {
+        "fields": {
+            "label": "ice", 
+            "text": "ice", 
+            "type": "yes-no"
+        }, 
+        "model": "survey.option", 
+        "pk": 178
+    }, 
+    {
+        "fields": {
+            "label": "other", 
+            "text": "other", 
+            "type": "text"
+        }, 
+        "model": "survey.option", 
+        "pk": 179
+    }, 
+    {
+        "fields": {
+            "label": "price", 
+            "text": "price", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 180
+    }, 
+    {
+        "fields": {
+            "label": "species", 
+            "text": "species", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 181
+    }, 
+    {
+        "fields": {
+            "label": "size", 
+            "text": "size", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 182
+    }, 
+    {
+        "fields": {
+            "label": "other", 
+            "text": "other", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 183
+    }, 
+    {
+        "fields": {
+            "label": "gutted", 
+            "text": "gutted", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 184
+    }, 
+    {
+        "fields": {
+            "label": "whole", 
+            "text": "whole", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 185
+    }, 
+    {
+        "fields": {
+            "label": "ice", 
+            "text": "ice", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 186
+    }, 
+    {
+        "fields": {
+            "label": "freezer", 
+            "text": "freezer", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 187
+    }, 
+    {
+        "fields": {
+            "label": "ice", 
+            "text": "ice", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 188
+    }, 
+    {
+        "fields": {
+            "label": "air-transport", 
+            "text": "air transport", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 189
+    }, 
+    {
+        "fields": {
+            "label": "land-transport", 
+            "text": "land transport", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 190
+    }, 
+    {
+        "fields": {
+            "label": "boat-transport", 
+            "text": "boat transport", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 191
+    }, 
+    {
+        "fields": {
+            "label": "market-fee", 
+            "text": "market fee", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 192
+    }, 
+    {
+        "fields": {
+            "label": "labor", 
+            "text": "labor", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 193
+    }, 
+    {
+        "fields": {
+            "label": "petrolfuel", 
+            "text": "petrol/fuel", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 194
+    }, 
+    {
+        "fields": {
+            "label": "foodsmokesbetel-nut", 
+            "text": "food/smokes/betel nut", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 195
+    }, 
+    {
+        "fields": {
+            "label": "storage", 
+            "text": "storage", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 196
+    }, 
+    {
+        "fields": {
+            "label": "other", 
+            "text": "other", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 197
+    }, 
+    {
+        "fields": {
+            "label": "price", 
+            "text": "price", 
+            "type": "text"
+        }, 
+        "model": "survey.option", 
+        "pk": 198
+    }, 
+    {
+        "fields": {
+            "label": "supply", 
+            "text": "supply", 
+            "type": "text"
+        }, 
+        "model": "survey.option", 
+        "pk": 199
+    }, 
+    {
+        "fields": {
+            "label": "costs", 
+            "text": "costs", 
+            "type": "text"
+        }, 
+        "model": "survey.option", 
+        "pk": 200
+    }, 
+    {
+        "fields": {
+            "label": "fish-quality", 
+            "text": "fish quality", 
+            "type": "text"
+        }, 
+        "model": "survey.option", 
+        "pk": 201
+    }, 
+    {
+        "fields": {
+            "label": "credit", 
+            "text": "credit", 
+            "type": "text"
+        }, 
+        "model": "survey.option", 
+        "pk": 202
+    }, 
+    {
+        "fields": {
+            "label": "other-problems", 
+            "text": "other problems", 
+            "type": "text"
+        }, 
+        "model": "survey.option", 
+        "pk": 203
+    }, 
+    {
+        "fields": {
+            "label": "answer", 
+            "text": "Answer", 
+            "type": "text"
+        }, 
+        "model": "survey.option", 
+        "pk": 204
+    }, 
+    {
+        "fields": {
+            "label": "increasing", 
+            "text": "Increasing", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 205
+    }, 
+    {
+        "fields": {
+            "label": "decreasing", 
+            "text": "Decreasing", 
+            "type": "integer"
+        }, 
+        "model": "survey.option", 
+        "pk": 206
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "survey-name", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 0, 
+            "randomize_groups": false, 
+            "report_type": "distribution", 
+            "required": true, 
+            "slug": "surveyor-name", 
+            "term_condition": "", 
+            "title": "Surveyor Name", 
+            "type": "text", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 89
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "survey-date", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 1, 
+            "randomize_groups": false, 
+            "report_type": "distribution", 
+            "required": true, 
+            "slug": "survey-date", 
+            "term_condition": "", 
+            "title": "Date of Survey", 
+            "type": "datepicker", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 91
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "date of first sale", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 3, 
+            "randomize_groups": false, 
+            "report_type": "distribution", 
+            "required": true, 
+            "slug": "date-first-sale", 
+            "term_condition": "", 
+            "title": "Date of First Sale", 
+            "type": "datepicker", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 92
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Time of Survey", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 4, 
+            "randomize_groups": false, 
+            "report_type": "distribution", 
+            "required": true, 
+            "slug": "survey-time", 
+            "term_condition": "", 
+            "title": "Time of Survey", 
+            "type": "timepicker", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 93
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Eskie Owner", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [
+                92, 
+                93
+            ], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 5, 
+            "randomize_groups": false, 
+            "report_type": "distribution", 
+            "required": true, 
+            "slug": "eskie-owner", 
+            "term_condition": "", 
+            "title": "Vendor owns the Eskie?", 
+            "type": "single-select", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 94
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Total Volume (kilograms)", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 6, 
+            "randomize_groups": false, 
+            "report_type": "distribution", 
+            "required": true, 
+            "slug": "total-volume", 
+            "term_condition": "", 
+            "title": "Total Volume For All Resources (kilograms)", 
+            "type": "integer", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 97
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Vendor Code", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 7, 
+            "randomize_groups": false, 
+            "report_type": "distribution", 
+            "required": true, 
+            "slug": "vendor-code", 
+            "term_condition": "", 
+            "title": "Vendor Code", 
+            "type": "text", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 98
+    }, 
+    {
+        "fields": {
+            "allow_other": true, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Eskie Size/wt", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [
+                94, 
+                95, 
+                96, 
+                97, 
+                98
+            ], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 8, 
+            "randomize_groups": false, 
+            "report_type": "distribution", 
+            "required": true, 
+            "slug": "eskie-size", 
+            "term_condition": "", 
+            "title": "Eskie size/wt", 
+            "type": "single-select", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 99
+    }, 
+    {
+        "fields": {
+            "allow_other": true, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Gear Type", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [
+                99, 
+                100, 
+                101
+            ], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 9, 
+            "randomize_groups": false, 
+            "report_type": "distribution", 
+            "required": true, 
+            "slug": "gear-type", 
+            "term_condition": "", 
+            "title": "Gear Type", 
+            "type": "multi-select", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 100
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Ice Volume (kilograms)", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 10, 
+            "randomize_groups": false, 
+            "report_type": "distribution", 
+            "required": false, 
+            "slug": "ice-volume", 
+            "term_condition": "", 
+            "title": "Amount of Ice (kilograms)", 
+            "type": "integer", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 101
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Ice Origin", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 11, 
+            "randomize_groups": false, 
+            "report_type": "distribution", 
+            "required": false, 
+            "slug": "ice-origin", 
+            "term_condition": "", 
+            "title": "Ice Origin", 
+            "type": "textarea", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 102
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Ice Cost", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 12, 
+            "randomize_groups": false, 
+            "report_type": "distribution", 
+            "required": true, 
+            "slug": "ice-cost", 
+            "term_condition": "", 
+            "title": "Ice Purchase Cost", 
+            "type": "currency", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 103
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Transport Cost: Boat/canoe", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 14, 
+            "randomize_groups": false, 
+            "report_type": "distribution", 
+            "required": false, 
+            "slug": "transport-cost-boat", 
+            "term_condition": "", 
+            "title": "Transport Cost: Boat/canoe", 
+            "type": "currency", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 105
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Transport Cost: Ship", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 15, 
+            "randomize_groups": false, 
+            "report_type": "distribution", 
+            "required": false, 
+            "slug": "transport-cost-ship", 
+            "term_condition": "", 
+            "title": "Transport Cost: Ship", 
+            "type": "currency", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 106
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Storage Cost", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 16, 
+            "randomize_groups": false, 
+            "report_type": "distribution", 
+            "required": false, 
+            "slug": "storage-cost", 
+            "term_condition": "", 
+            "title": "Total Storage Cost", 
+            "type": "currency", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 107
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Days of Storage", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 17, 
+            "randomize_groups": false, 
+            "report_type": "distribution", 
+            "required": false, 
+            "slug": "storage-days", 
+            "term_condition": "", 
+            "title": "Days of Storage", 
+            "type": "integer", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 108
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Days of Storage", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 18, 
+            "randomize_groups": false, 
+            "report_type": "distribution", 
+            "required": true, 
+            "slug": "days-storage", 
+            "term_condition": "", 
+            "title": "Days of Storage", 
+            "type": "integer", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 109
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Resource Types(s)", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [
+                105, 
+                102, 
+                103, 
+                104, 
+                106, 
+                107, 
+                108, 
+                109
+            ], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 19, 
+            "randomize_groups": false, 
+            "report_type": "distribution", 
+            "required": true, 
+            "slug": "resource-type", 
+            "term_condition": "", 
+            "title": "Resource Type(s)", 
+            "type": "multi-select", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 110
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [
+                113, 
+                114
+            ], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Resource Details", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "resource-type", 
+            "options_json": "", 
+            "order": 20, 
+            "randomize_groups": false, 
+            "report_type": "distribution", 
+            "required": true, 
+            "slug": "resource-details", 
+            "term_condition": "", 
+            "title": "Resource Details", 
+            "type": "grid", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 111
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [
+                118, 
+                119, 
+                120
+            ], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Resource Type", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "resource-type", 
+            "options_json": "", 
+            "order": 22, 
+            "randomize_groups": false, 
+            "report_type": "distribution", 
+            "required": true, 
+            "slug": "retail-price", 
+            "term_condition": "", 
+            "title": "Retail Price (by resource type)", 
+            "type": "grid", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 112
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Resource Location", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 21, 
+            "randomize_groups": false, 
+            "report_type": "distribution", 
+            "required": true, 
+            "slug": "resource-location", 
+            "term_condition": "", 
+            "title": "Resource Location", 
+            "type": "multi-select", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 113
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": null, 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Name of Fish Seller", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": null, 
+            "options_json": null, 
+            "order": 0, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "name-fish-seller", 
+            "term_condition": null, 
+            "title": "Name of Fish Seller", 
+            "type": "Yes/No", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 121
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": null, 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Code Number", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": null, 
+            "options_json": null, 
+            "order": 1, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "code-number", 
+            "term_condition": null, 
+            "title": "Code Number", 
+            "type": "text", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 122
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": null, 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Contact Telephone", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": null, 
+            "options_json": null, 
+            "order": 2, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "contact-telephone", 
+            "term_condition": null, 
+            "title": "Contact Telephone", 
+            "type": "text", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 123
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": null, 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Gender", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": null, 
+            "options_json": null, 
+            "order": 3, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "gender", 
+            "term_condition": null, 
+            "title": "Gender", 
+            "type": "text", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 124
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": null, 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Age", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": null, 
+            "options_json": null, 
+            "order": 4, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "age", 
+            "term_condition": null, 
+            "title": "Age", 
+            "type": "integer", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 127
+    }, 
+    {
+        "fields": {
+            "allow_other": true, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "education", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [
+                121, 
+                122, 
+                123
+            ], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 5, 
+            "randomize_groups": false, 
+            "report_type": "distribution", 
+            "required": true, 
+            "slug": "education", 
+            "term_condition": "", 
+            "title": "Education", 
+            "type": "single-select", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 128
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": null, 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Village", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": null, 
+            "options_json": null, 
+            "order": 6, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "village", 
+            "term_condition": null, 
+            "title": "Where do you live: village", 
+            "type": "text", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 129
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": null, 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Province", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": null, 
+            "options_json": null, 
+            "order": 7, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "province", 
+            "term_condition": null, 
+            "title": "Where do you live: province", 
+            "type": "text", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 130
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": null, 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Years Selling Fish", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": null, 
+            "options_json": null, 
+            "order": 8, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "years-selling-fish", 
+            "term_condition": null, 
+            "title": "How many years have you been selling fish?", 
+            "type": "integer", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 131
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": null, 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Primary Occupation", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": null, 
+            "options_json": null, 
+            "order": 9, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "primary-occupation", 
+            "term_condition": null, 
+            "title": "Primary Occupation", 
+            "type": "text", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 132
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": null, 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Secondary Occupation", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": null, 
+            "options_json": null, 
+            "order": 10, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "Secondary Occupation", 
+            "term_condition": null, 
+            "title": "Secondary Occupation", 
+            "type": "text", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 133
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [
+                135, 
+                137, 
+                136
+            ], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Business Assets", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [
+                124, 
+                125, 
+                126, 
+                127, 
+                128, 
+                129, 
+                130, 
+                131, 
+                132, 
+                133, 
+                134
+            ], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 11, 
+            "randomize_groups": false, 
+            "report_type": "distribution", 
+            "required": true, 
+            "slug": "business-assets", 
+            "term_condition": "", 
+            "title": "Business Assets", 
+            "type": "grid", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 134
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": null, 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Secondary Occupation", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": null, 
+            "options_json": null, 
+            "order": 10, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "secondary-occupation", 
+            "term_condition": null, 
+            "title": "Secondary Occupation", 
+            "type": "text", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 135
+    }, 
+    {
+        "fields": {
+            "allow_other": true, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Business Structure", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [
+                138, 
+                139
+            ], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 13, 
+            "randomize_groups": false, 
+            "report_type": "distribution", 
+            "required": true, 
+            "slug": "business-structure", 
+            "term_condition": "", 
+            "title": "Business Structure", 
+            "type": "single-select", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 136
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": null, 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Get Started", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": null, 
+            "options_json": null, 
+            "order": 14, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "get-started", 
+            "term_condition": null, 
+            "title": "How did you get started in this business?", 
+            "type": "textarea", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 137
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": null, 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Before you were a Fish Seller", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": null, 
+            "options_json": null, 
+            "order": 15, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "do-before-fish-seller", 
+            "term_condition": null, 
+            "title": "What did you do before you were a fish seller", 
+            "type": "textarea", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 138
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Specialize in Species", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [
+                92, 
+                93
+            ], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 16, 
+            "randomize_groups": false, 
+            "report_type": "distribution", 
+            "required": true, 
+            "slug": "specialize-species", 
+            "term_condition": "", 
+            "title": "Do you specialize in a certain type(s)/species of fish/invertebrates", 
+            "type": "single-select", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 139
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Main Types", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [
+                102, 
+                103, 
+                104, 
+                106, 
+                107, 
+                108, 
+                109
+            ], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 17, 
+            "randomize_groups": false, 
+            "report_type": "distribution", 
+            "required": true, 
+            "slug": "specialize-types", 
+            "term_condition": "", 
+            "title": "What are the main types/species", 
+            "type": "multi-select", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 140
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [
+                144, 
+                145, 
+                146, 
+                147
+            ], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "How many employees do you have", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [
+                143
+            ], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 18, 
+            "randomize_groups": false, 
+            "report_type": "distribution", 
+            "required": true, 
+            "slug": "how-many-employees", 
+            "term_condition": "", 
+            "title": "How many employees do you have", 
+            "type": "grid", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 141
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Do you hire day labor", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [
+                92, 
+                93
+            ], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 19, 
+            "randomize_groups": false, 
+            "report_type": "distribution", 
+            "required": true, 
+            "slug": "day-labor", 
+            "term_condition": "", 
+            "title": "Do you hire day labor", 
+            "type": "yes-no", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 142
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": null, 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "How many", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": null, 
+            "options_json": null, 
+            "order": 20, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "average-day-labor", 
+            "term_condition": null, 
+            "title": "How many on average", 
+            "type": "integer", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 143
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": null, 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "What do they do for you?", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": null, 
+            "options_json": null, 
+            "order": 21, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "day-labor-tasks", 
+            "term_condition": null, 
+            "title": "What do they do for you?", 
+            "type": "textarea", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 144
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Do you fish for your business?", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [
+                92, 
+                93
+            ], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 22, 
+            "randomize_groups": false, 
+            "report_type": "distribution", 
+            "required": true, 
+            "slug": "do-you-fish", 
+            "term_condition": "", 
+            "title": "Do you fish for your business?", 
+            "type": "yes-no", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 145
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Own a fishing boat that other's operate?", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [
+                92, 
+                93
+            ], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 23, 
+            "randomize_groups": false, 
+            "report_type": "distribution", 
+            "required": true, 
+            "slug": "own-boat", 
+            "term_condition": "", 
+            "title": "Own a fishing boat that other's operate?", 
+            "type": "yes-no", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 146
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": null, 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Do you buy fish direct from fishers?", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": null, 
+            "options_json": null, 
+            "order": 24, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "buy-direct-fishers", 
+            "term_condition": null, 
+            "title": "Do you buy fish direct from fishers?", 
+            "type": "yes-no", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 147
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": null, 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Do you buy fish direct from other fish sellers?", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": null, 
+            "options_json": null, 
+            "order": 25, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "buy-other-sellers", 
+            "term_condition": null, 
+            "title": "Do you buy fish direct from other fish sellers?", 
+            "type": "yes-no", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 148
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": null, 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Do you process fish?", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": null, 
+            "options_json": null, 
+            "order": 26, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "process-fish", 
+            "term_condition": null, 
+            "title": "Do you process fish?", 
+            "type": "yes-no", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 149
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": null, 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Do you assemble fish for futher sale?", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": null, 
+            "options_json": null, 
+            "order": 27, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "assemble-fish", 
+            "term_condition": null, 
+            "title": "Do you assemble fish for futher sale?", 
+            "type": "yes-no", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 150
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": null, 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Do you transport fish?", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": null, 
+            "options_json": null, 
+            "order": 28, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "transport-fish", 
+            "term_condition": null, 
+            "title": "Do you transport fish?", 
+            "type": "yes-no", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 151
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": null, 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Do you wholesale fish?", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": null, 
+            "options_json": null, 
+            "order": 29, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "wholesale-fish", 
+            "term_condition": null, 
+            "title": "Do you wholesale fish?", 
+            "type": "single-select", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 152
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": null, 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Do you  sell fish to value adders (restaurant, stall owners)?", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": null, 
+            "options_json": null, 
+            "order": 30, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "sell-value-add", 
+            "term_condition": null, 
+            "title": "Do you  sell fish to value adders (restaurant, stall owners)?", 
+            "type": "yes-no", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 153
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": null, 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Sell fish to other fish sellers", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": null, 
+            "options_json": null, 
+            "order": 31, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "sell-other-sellers", 
+            "term_condition": null, 
+            "title": "Sell fish to other fish sellers", 
+            "type": "yes-no", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 154
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": null, 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Do you retail fish in the market?", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": null, 
+            "options_json": null, 
+            "order": 32, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "retail-fish", 
+            "term_condition": null, 
+            "title": "Do you retail fish in the market?", 
+            "type": "yes-no", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 155
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [
+                149, 
+                150, 
+                151, 
+                152
+            ], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "In an average week, how much fish do you sell?", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [
+                148
+            ], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 33, 
+            "randomize_groups": false, 
+            "report_type": "distribution", 
+            "required": true, 
+            "slug": "weekly-location-amount", 
+            "term_condition": "", 
+            "title": "In an average week, how much fish do you sell?", 
+            "type": "grid", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 156
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": null, 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Do you keep business records of purchase and sale (amount,price)", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": null, 
+            "options_json": null, 
+            "order": 34, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "business-records", 
+            "term_condition": null, 
+            "title": "Do you keep business records of purchase and sale (amount,price)", 
+            "type": "text", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 157
+    }, 
+    {
+        "fields": {
+            "allow_other": true, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "How do you keep records", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [
+                153, 
+                154
+            ], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 35, 
+            "randomize_groups": false, 
+            "report_type": "distribution", 
+            "required": true, 
+            "slug": "record-method", 
+            "term_condition": "", 
+            "title": "How do you keep records", 
+            "type": "multi-select", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 158
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [
+                157, 
+                158
+            ], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Where do you purchase fish?", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [
+                155, 
+                156
+            ], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 36, 
+            "randomize_groups": false, 
+            "report_type": "distribution", 
+            "required": true, 
+            "slug": "purchase-locations", 
+            "term_condition": "", 
+            "title": "Where do you purchase fish?", 
+            "type": "grid", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 159
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": null, 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Do you usually compete with others to buy fish", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": null, 
+            "options_json": null, 
+            "order": 37, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "compete", 
+            "term_condition": null, 
+            "title": "Do you usually compete with others to buy fish", 
+            "type": "yes-no", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 160
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": null, 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "How many others buy fish in the area", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": null, 
+            "options_json": null, 
+            "order": 38, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "how-many-others", 
+            "term_condition": null, 
+            "title": "How many others buy fish in the area", 
+            "type": "integer", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 161
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": null, 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "How do you determine how much fish to purchase?", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": null, 
+            "options_json": null, 
+            "order": 39, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "determine-how-much", 
+            "term_condition": null, 
+            "title": "How do you determine how much fish to purchase?", 
+            "type": "textarea", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 162
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": null, 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "How much fish do you purchase on average a week?", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": null, 
+            "options_json": null, 
+            "order": 40, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "week-average", 
+            "term_condition": null, 
+            "title": "How much fish do you purchase on average a week (kg)?", 
+            "type": "integer", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 163
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [
+                159
+            ], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "How much fish do you purchase on average during different months of the year (kg)?", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [
+                164, 
+                165, 
+                166, 
+                167, 
+                168, 
+                169, 
+                170, 
+                171, 
+                172, 
+                173, 
+                174, 
+                175
+            ], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 41, 
+            "randomize_groups": false, 
+            "report_type": "distribution", 
+            "required": true, 
+            "slug": "average-months", 
+            "term_condition": "", 
+            "title": "How much fish do you purchase on average during different months of the year (kg)?", 
+            "type": "grid", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 164
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": null, 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "How do you determine at what price to sell your fish?", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": null, 
+            "options_json": null, 
+            "order": 42, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "determine-price", 
+            "term_condition": null, 
+            "title": "How do you determine at what price to sell your fish?", 
+            "type": "textarea", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 165
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": null, 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Do fish sellers discuss prices and supply amongst themselves?", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": null, 
+            "options_json": null, 
+            "order": 43, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "sellers-discuss", 
+            "term_condition": null, 
+            "title": "Do fish sellers discuss prices and supply amongst themselves?", 
+            "type": "yes-no", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 166
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": null, 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": null, 
+            "options_json": null, 
+            "order": 44, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "influence-large-sellers", 
+            "term_condition": null, 
+            "title": "Are prices influenced by the larger fish sellers?", 
+            "type": "text", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 167
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": null, 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Do you have a certain location in the market you always use", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": null, 
+            "options_json": null, 
+            "order": 45, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "favorite-location", 
+            "term_condition": null, 
+            "title": "Do you have a certain location in the market you always use", 
+            "type": "yes-no", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 168
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [
+                177, 
+                178, 
+                179
+            ], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Do you provide services different from other fish sellers to sell your fish?", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [
+                176
+            ], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 46, 
+            "randomize_groups": false, 
+            "report_type": "distribution", 
+            "required": true, 
+            "slug": "other-services", 
+            "term_condition": "", 
+            "title": "Do you provide services different from other fish sellers to sell your fish?", 
+            "type": "grid", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 169
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": null, 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Do you have certain return/main customers?", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": null, 
+            "options_json": null, 
+            "order": 47, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "return-customers", 
+            "term_condition": null, 
+            "title": "Do you have certain return/main customers?", 
+            "type": "yes-no", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 170
+    }, 
+    {
+        "fields": {
+            "allow_other": true, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "How do customers select fish", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [
+                180, 
+                181, 
+                182
+            ], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 48, 
+            "randomize_groups": false, 
+            "report_type": "distribution", 
+            "required": true, 
+            "slug": "selection-criteria", 
+            "term_condition": "", 
+            "title": "How do customers select fish", 
+            "type": "multi-select", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 171
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": null, 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "How do you get information on market prices and supply?", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": null, 
+            "options_json": null, 
+            "order": 49, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "market-info", 
+            "term_condition": null, 
+            "title": "How do you get information on market prices and supply?", 
+            "type": "textarea", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 172
+    }, 
+    {
+        "fields": {
+            "allow_other": true, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "What form do you purchase fish?", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [
+                184, 
+                185
+            ], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 50, 
+            "randomize_groups": false, 
+            "report_type": "distribution", 
+            "required": true, 
+            "slug": "purchase-form", 
+            "term_condition": "", 
+            "title": "What form do you purchase fish?", 
+            "type": "multi-select", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 173
+    }, 
+    {
+        "fields": {
+            "allow_other": true, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "What form do you sell your fish?", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [
+                184, 
+                185
+            ], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 51, 
+            "randomize_groups": false, 
+            "report_type": "distribution", 
+            "required": true, 
+            "slug": "sell-form", 
+            "term_condition": "", 
+            "title": "What form do you sell your fish?", 
+            "type": "multi-select", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 174
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": null, 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "What type of fish processing do you use before selling", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": null, 
+            "options_json": null, 
+            "order": 52, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "fish-processing-method", 
+            "term_condition": null, 
+            "title": "What type of fish processing do you use before selling", 
+            "type": "textarea", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 175
+    }, 
+    {
+        "fields": {
+            "allow_other": true, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": null, 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "How do you maintain the freshness of your fish", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": null, 
+            "options_json": null, 
+            "order": 53, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "maintain-freshness", 
+            "term_condition": null, 
+            "title": "How do you maintain the freshness of your fish", 
+            "type": "multi-select", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 176
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": null, 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "How many kg of your fish is lost to spoilage", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": null, 
+            "options_json": null, 
+            "order": 54, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "kg-lost-to-spoilage", 
+            "term_condition": null, 
+            "title": "How many kg of your fish is lost to spoilage", 
+            "type": "integer", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 177
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": null, 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Do you often have fish left over at the end of the day?", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": null, 
+            "options_json": null, 
+            "order": 55, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "fish-left", 
+            "term_condition": null, 
+            "title": "Do you often have fish left over at the end of the day?", 
+            "type": "yes-no", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 178
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": null, 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "What do you do with this unsold fish?", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": null, 
+            "options_json": null, 
+            "order": 56, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "dispose-unsold", 
+            "term_condition": null, 
+            "title": "What do you do with this unsold fish?", 
+            "type": "textarea", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 179
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": null, 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "On average how much money do you need to buy and sell one esky", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": null, 
+            "options_json": null, 
+            "order": 57, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "esky-cost", 
+            "term_condition": null, 
+            "title": "On average how much money do you need to buy and sell one esky", 
+            "type": "currency", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 180
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": null, 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "On average, how many days does it take you to buy and sell one esky", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": null, 
+            "options_json": null, 
+            "order": 58, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "sell-esky-days", 
+            "term_condition": null, 
+            "title": "On average, how many days does it take you to buy and sell one esky", 
+            "type": "integer", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 181
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": null, 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Do you borrow money to operate your business", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": null, 
+            "options_json": null, 
+            "order": 59, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "borrow-money", 
+            "term_condition": null, 
+            "title": "Do you borrow money to operate your business", 
+            "type": "yes-no", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 182
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [
+                148
+            ], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "What are your main expenses in buying and selling one esky", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [
+                188, 
+                189, 
+                190, 
+                191, 
+                192, 
+                193, 
+                194, 
+                195, 
+                196, 
+                197
+            ], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 60, 
+            "randomize_groups": false, 
+            "report_type": "distribution", 
+            "required": true, 
+            "slug": "sell-esky-expense", 
+            "term_condition": "", 
+            "title": "What are your main expenses in buying and selling one esky", 
+            "type": "grid", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 183
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": null, 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "How do changes in your expenses affect the price that you sell fish", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": null, 
+            "options_json": null, 
+            "order": 61, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "changes-expenses-price", 
+            "term_condition": null, 
+            "title": "How do changes in your expenses affect the price that you sell fish", 
+            "type": "textarea", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 184
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [
+                204
+            ], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "What are the primary business problems that you face", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [
+                198, 
+                199, 
+                200, 
+                201, 
+                202, 
+                203
+            ], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 62, 
+            "randomize_groups": false, 
+            "report_type": "distribution", 
+            "required": true, 
+            "slug": "business-problems", 
+            "term_condition": "", 
+            "title": "What are the primary business problems that you face", 
+            "type": "grid", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 185
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": null, 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "How do you deal with these problems", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": null, 
+            "options_json": null, 
+            "order": 63, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "deal-with-problems", 
+            "term_condition": null, 
+            "title": "How do you deal with these problems", 
+            "type": "textarea", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 186
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": null, 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Have you noticed an increase or decrease in the amount of fish landed during the last five years", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": null, 
+            "options_json": null, 
+            "order": 64, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "change-landing", 
+            "term_condition": null, 
+            "title": "Have you noticed an increase or decrease in the amount of fish landed during the last five years", 
+            "type": "yes-no", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 187
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": null, 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "What do you think is the reason for this?", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": null, 
+            "options_json": null, 
+            "order": 65, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "change-landing-reason", 
+            "term_condition": null, 
+            "title": "What do you think is the reason for this?", 
+            "type": "textarea", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 188
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": null, 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Have you noticed any changes in the species and sizes of fish you buy and sell", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": null, 
+            "options_json": null, 
+            "order": 66, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "change-size", 
+            "term_condition": null, 
+            "title": "Have you noticed any changes in the species and sizes of fish you buy and sell", 
+            "type": "yes-no", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 189
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": null, 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "What do you think is the reason for this?", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": null, 
+            "options_json": null, 
+            "order": 67, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "change-size-reason", 
+            "term_condition": null, 
+            "title": "What do you think is the reason for this?", 
+            "type": "textarea", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 190
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": null, 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Could you sell more fish if production was increased", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": null, 
+            "options_json": null, 
+            "order": 68, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "sell-more-prod-increased", 
+            "term_condition": null, 
+            "title": "Could you sell more fish if production was increased", 
+            "type": "yes-no", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 191
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Has the price you buy fish been increasing or decreasing during the last five years?", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [
+                205, 
+                206
+            ], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 69, 
+            "randomize_groups": false, 
+            "report_type": "distribution", 
+            "required": true, 
+            "slug": "buy-price-change", 
+            "term_condition": "", 
+            "title": "Has the price you buy fish been increasing or decreasing during the last five years?", 
+            "type": "single-select", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 192
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": null, 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Why?", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": null, 
+            "options_json": null, 
+            "order": 70, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "why-price-change", 
+            "term_condition": null, 
+            "title": "Why?", 
+            "type": "textarea", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 193
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Has the price you sell fish been increasing or decreasing in the last five years?", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [
+                205, 
+                206
+            ], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 71, 
+            "randomize_groups": false, 
+            "report_type": "distribution", 
+            "required": true, 
+            "slug": "price-sell-change", 
+            "term_condition": "", 
+            "title": "Has the price you sell fish been increasing or decreasing in the last five years?", 
+            "type": "single-select", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 194
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": null, 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Why", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": null, 
+            "options_json": null, 
+            "order": 72, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "price-sell-change-reason", 
+            "term_condition": null, 
+            "title": "Why", 
+            "type": "textarea", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 195
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": null, 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Are there any changes or improvements you would like to see made in the market?", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": null, 
+            "options_json": null, 
+            "order": 73, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "changes", 
+            "term_condition": null, 
+            "title": "Are there any changes or improvements you would like to see made in the market?", 
+            "type": "textarea", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 196
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "foreach_question": null, 
+            "grid_cols": [], 
+            "hoist_answers": null, 
+            "info": null, 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Is there anything the MFMR can do to assist you and your business", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": null, 
+            "options_json": null, 
+            "order": 74, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "mfmr-assist", 
+            "term_condition": null, 
+            "title": "Is there anything the MFMR can do to assist you and your business", 
+            "type": "text", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 197
+    }
+]

@@ -512,7 +512,6 @@ angular.module('askApp')
 
         }
 
-
         if ($scope.question && $scope.question.title) {
             $scope.question.displayTitle = $interpolate($scope.question.title)($scope);
         }
@@ -673,6 +672,13 @@ angular.module('askApp')
             }).error(function(data, status, headers, config) {
                 $scope.gotoNextQuestion();
             });
+        }
+
+        if ($scope.question && $scope.question.type === 'yes-no') {
+            $scope.question.options = [
+                {'text': 'Yes', 'label': "Yes", checked: false},
+                {'text': 'No', 'label': "No", checked: false}
+            ]
         }
 
         if ($scope.question) {
@@ -1093,7 +1099,10 @@ angular.module('askApp')
         if ($scope.question && $scope.question.type === 'grid') {
             // Prep row initial row data, each row containing values.
             // for activityLabel, activityText, cost and numPeople.
-            $scope.question.options = $scope.getAnswer($scope.question.options_from_previous_answer);
+            if ($scope.question.options_from_previous_answer) {
+                $scope.question.options = $scope.getAnswer($scope.question.options_from_previous_answer);    
+            }
+            
 
             if ($scope.question.options.length < 1) {
                 // Skip this question since we have no items to list.
@@ -1131,6 +1140,8 @@ angular.module('askApp')
             var gridCellTemplateDefault = '<div class="ngCellText" ng-class="col.colIndex()"><span ng-cell-text>{{COL_FIELD CUSTOM_FILTERS}}</span></div>';
             var costCellTemplate = '<input class="colt{{$index}} input-block-level" ng-model="row.entity[col.field]" style="height: 100%;" type="number" step="any" value="{{row.getProperty(col.field)}}"  }" onFocus="this.select();" onClick="this.select();"/>';
             var nameTemplate = '<input class="colt{{$index}} input-block-level" ng-model="row.entity[col.field]" style="height: 100%;" type="text"  value="{{row.getProperty(col.field)}}"  }" />';
+            var checkboxTemplate = '<input class="colt{{$index}} input-block-level" ng-model="row.entity[col.field]" style="height: 100%;" type="checkbox"  value="{{row.getProperty(col.field)}}"  }" />';
+
             
             $scope.gridOptions = {
                 data: 'question.options',
@@ -1147,11 +1158,21 @@ angular.module('askApp')
                     }
                 ]
             };
+
             _.each($scope.question.grid_cols, function(gridCol, i) {
+                var template;
+                console.log(gridCol);
+                if (gridCol.type === 'integer') {
+                    template = costCellTemplate;
+                } else if (gridCol.type === 'yes-no') {
+                    template = checkboxTemplate;
+                } else {
+                    template = nameTemplate;
+                }
                 $scope.gridOptions.columnDefs.push({
                     field: gridCol.label,
                     displayName: gridCol.text,
-                    cellTemplate: costCellTemplate
+                    cellTemplate: template
                 });
             });
         }
@@ -1170,8 +1191,13 @@ angular.module('askApp')
             $scope.question.foreach = false;
         }
     };
-
-    if (!app.data && !app.surveys) {
+    if (! $routeParams.uuidSlug) {
+        $http.get('/api/v1/survey/' + $routeParams.surveySlug + '/?format=json').success(function(data) {
+            $scope.loadSurvey({
+                survey: data
+            });
+        });
+    } else if (!app.data && !app.surveys) {
         $http.get('/api/v1/respondant/' + $routeParams.uuidSlug + '/?format=json').success(function(data) {
             app.data = data;
             $scope.loadSurvey(data);
@@ -1180,7 +1206,7 @@ angular.module('askApp')
 
         $scope.loadSurvey({
             survey: _.findWhere(app.surveys, {
-                slug: 'volume-and-origin'
+                slug: $routeParams.surveySlug
             }),
             responses: app.data ? app.data.responses : []
         });

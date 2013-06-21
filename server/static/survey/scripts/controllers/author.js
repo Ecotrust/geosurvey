@@ -12,17 +12,24 @@ angular.module('askApp')
                 
                 if ($scope.survey.questions.length === 0) {
                     $scope.survey.questions = [];
-                    $scope.startEditingQuestion({
-                        label: null,
-                        slug: null
-                    });
-                    
+                    $scope.newQuestion();
                 }
             });
         } else {
             $scope.newSurvey = true;
         }
 
+        $scope.newQuestion = function () {
+            var order = 0;
+            if ($scope.survey.questions.length) {
+                order = $scope.survey.questions.length + 1;
+            }
+            $scope.startEditingQuestion({
+                label: null,
+                slug: null,
+                order: $scope.survey.questions.length
+            });
+        }
 
         $scope.createSurvey = function (survey) {
             survey.slug = _.string.slugify(survey.name);
@@ -45,6 +52,9 @@ angular.module('askApp')
             var url = question.resource_uri,
                 method = 'PUT',
                 data = question;
+            if (! question.label) {
+                question.label = question.title;
+            }
             if (! url) {
                 url = '/api/v1/page/';
                 method = 'POST';
@@ -53,6 +63,7 @@ angular.module('askApp')
                     question: question
                 }
             }
+
             $http({
                 method: method,
                 url: url,
