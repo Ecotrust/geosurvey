@@ -1191,8 +1191,11 @@ angular.module('askApp')
             $scope.question.foreach = false;
         }
     };
-    if (! $routeParams.uuidSlug) {
+    if (! $routeParams.uuidSlug && !app.data) {
         $http.get('/api/v1/survey/' + $routeParams.surveySlug + '/?format=json').success(function(data) {
+            app.data = {
+                survey: data
+            };
             $scope.loadSurvey({
                 survey: data
             });
