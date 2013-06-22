@@ -37,7 +37,7 @@
                     attribution: "NOAA Nautical Charts"
                 });
 
-                var bing = new L.BingLayer("An7H2cF0yNoBvXFHD4Bf8Z5irB2Uqldfzpp_6YvINN3OHCSripU36QHagqr_Cx6Q", {
+                var bing = new L.BingLayer("Av8HukehDaAvlflJLwOefJIyuZsNEtjCOnUB_NtSTCwKYfxzEMrxlKfL1IN7kAJF", {
                     type: "AerialWithLabels"
                 });
 
