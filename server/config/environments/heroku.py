@@ -12,7 +12,7 @@ DATABASES = {
 DEBUG = False
 HEROKU = True
 
-ALLOWED_HOSTS = ['.herokuapp.com']
+ALLOWED_HOSTS = [os.environ['ALLOWED_HOSTS']]
 
 
 try: 
