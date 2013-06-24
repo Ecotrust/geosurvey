@@ -4,5 +4,9 @@
         <p><strong>You have already begun the survey.  You may resume where you left off.</strong></p>
         <a class="btn btn-large btn-block" href="#/{{ resumeQuestionPath }}">Resume Survey.</a>
     </div>
-    <a ng-hide="survey.status == 'complete' || survey.staus == 'terminate'" class="btn btn-primary btn-large btn-block" href="#/{{ nextQuestionPath }}">Go to first question.</a>
+    <a ng-hide="survey.status == 'complete' || survey.status == 'terminate' || survey.status == 'invalid'" class="btn btn-primary btn-large btn-block" href="#/{{ nextQuestionPath }}">Go to first question.</a>
+	<div ng-show="survey.status == 'invalid'">
+    	<p><strong>Registration is required.</strong></p>		
+	    <a class="btn btn-primary btn-large btn-block" href="/register">Register</a>
+	</div>
 </div>
