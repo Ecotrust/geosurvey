@@ -29,9 +29,14 @@ div[leaflet] {
     }
 .leaflet-container .leaflet-control-attribution {
     font-size: 9px;
-    bottom: 7px;
+    background: white\9;
+    filter: alpha(opacity=70)\9;
 }
-
+@media (max-width: 480px) {
+    .leaflet-container .leaflet-control-attribution {
+        max-width: 220px;
+    }
+}
 
 
 /**
@@ -41,11 +46,13 @@ div[leaflet] {
     position: absolute;
     top: 0;
     left: 5px;
+    z-index: 10;
 }
 .map-controls-top-right {
     position: absolute;
     top: 9px;
     right: 5px;
+    z-index: 10;
 }
 .btn-done-mapping, .btn-add-marker {
     margin-left: 5px
@@ -471,7 +478,34 @@ div[zoomto] .small-screen {
 .map-multipoint .popover {
     width: 180px;
 }
+.map-multipoint .popover-title {
+    display: none;
+}
 
+
+h1.marker-popup-heading {
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 6px;
+    line-height: 20px;
+}
+
+ul.marker-popup-list {
+    margin-bottom: 15px;
+}
+ul.marker-popup-list li {
+    line-height: 16px;
+    margin-bottom: 4px;
+    white-space:nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.leaflet-popup-content-wrapper {
+    -webkit-border-radius: 0;
+    border-radius: 0;
+}
 
 
 /**

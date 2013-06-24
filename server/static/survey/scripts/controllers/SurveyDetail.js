@@ -1204,7 +1204,9 @@ angular.module('askApp')
         $http.get('/api/v1/respondant/' + $routeParams.uuidSlug + '/?format=json').success(function(data) {
             app.data = data;
             $scope.loadSurvey(data);
-        });
+        }).error(function(data, status, headers, config) {
+            $scope.survey.status = 'invalid';
+        });    
     } else if (app.surveys) {
 
         $scope.loadSurvey({
@@ -1213,6 +1215,7 @@ angular.module('askApp')
             }),
             responses: app.data ? app.data.responses : []
         });
+
     } else {
         $scope.loadSurvey(app.data);
     }
