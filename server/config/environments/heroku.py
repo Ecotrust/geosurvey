@@ -37,6 +37,7 @@ try:
         }
     }
 except AttributeError:
+    print "NO REDIS!!!!!!!!!"
     pass
 
 COMPRESS_ENABLED = False

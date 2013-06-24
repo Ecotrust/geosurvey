@@ -2,7 +2,7 @@
 
 var app = {};
 
-angular.module('askApp', ['ui', 'leaflet.directive', 'ui.bootstrap', 'ngGrid', 'question.directive'])
+angular.module('askApp', ['ui', 'leaflet.directive', 'ui.bootstrap', 'ngGrid'])
     .config(function($routeProvider, $httpProvider) {
 
     if (typeof token != 'undefined') {
