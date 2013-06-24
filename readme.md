@@ -78,6 +78,7 @@ heroku login
 heroku config:add DJANGO_SECRET_KEY=SECRET!
 heroku addons:add sendgrid
 heroku addons:add redistogo
+heroku addons:add pgbackups
 
 ```
 
@@ -112,5 +113,21 @@ heroku run python manage.py loaddata apps/places/fixtures/marco.json.gz --settin
 ##open the app
 ```bash
 heroku open
+```
+
+#manage the heroku database
+
+##dump a backup
+This will dump a compressed binary backup of the current database to a file that can be retrieved as "latest.dump".
+```bash
+heroku pgbackups:capture
+curl -o latest.dump `heroku pgbackups:url`
+```
+
+##restore a backup
+Transfer the dump file to a web accessible space.  To find the database url, use the pg:info command.
+```bash
+heroku pg:info
+heroku pgbackups:restore HEROKU_POSTGRESQL_WHITE_URL 'http://www.example.org/latest.dump'
 ```
 
