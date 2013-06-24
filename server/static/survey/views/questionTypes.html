@@ -93,7 +93,7 @@
     <div ng-switch-when="multi-select">
         <form class="question" ng-submit="answerMultiSelect(question)">
             <div class="todo mrm">
-                <div ng-show="question.hoisted_options.length"  class="hoisted-activities">
+                <div ng-show="question.hoisted_options.length" ng-cloak class="hoisted-activities">
                     <h3>Activities You Selected</h3>
                     <ul class="hoisted">
                         <li 
@@ -116,7 +116,7 @@
                 <ul class="choices">
                   <li 
                     ng-click="$parent.onMultiSelectClicked(option, $parent.question)"
-                    ng-repeat="option in question.options"
+                    ng-repeat="option in question.options" ng-cloak
                     ng-class="{'todo-done': option.checked }">
                     <!-- <div class="todo-icon fui-man-24"></div> -->
                     <div class="todo-content">
