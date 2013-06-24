@@ -73,12 +73,19 @@ heroku create appname
 heroku login
 ```
 
-##set environment vars
+##set environment vars and install addons.
 ```bash
 heroku config:add DJANGO_SECRET_KEY=SECRET!
+heroku addons:add sendgrid
+heroku addons:add redistogo
+
 ```
 
 Or run the script from scripts/heroku-env.sh, which is available on google drive for each deployment.
+
+#Deploy
+
+First push the server directory as a subtree from the master branch to heroku.  Then you can use a subtree split to push an alternate branch.
 
 ##push the app from the project directory
 ```bash
