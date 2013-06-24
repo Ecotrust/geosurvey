@@ -8,11 +8,6 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Adding field 'Question.foreach_question'
-        db.add_column(u'survey_question', 'foreach_question',
-                      self.gf('django.db.models.fields.related.ForeignKey')(blank=True, related_name='foreach', null=True, to=orm['survey.Question']),
-                      keep_default=False)
-
         # Adding M2M table for field grid_cols on 'Question'
         m2m_table_name = db.shorten_name(u'survey_question_grid_cols')
         db.create_table(m2m_table_name, (
@@ -22,11 +17,6 @@ class Migration(SchemaMigration):
         ))
         db.create_unique(m2m_table_name, ['question_id', 'option_id'])
 
-        # Adding field 'Survey.offline'
-        db.add_column(u'survey_survey', 'offline',
-                      self.gf('django.db.models.fields.BooleanField')(default=False),
-                      keep_default=False)
-
 
         # Changing field 'Page.question'
         db.alter_column(u'survey_page', 'question_id', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['survey.Question'], null=True))
@@ -35,14 +25,9 @@ class Migration(SchemaMigration):
         db.alter_column(u'survey_page', 'survey_id', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['survey.Survey'], null=True))
 
     def backwards(self, orm):
-        # Deleting field 'Question.foreach_question'
-        db.delete_column(u'survey_question', 'foreach_question_id')
-
+        
         # Removing M2M table for field grid_cols on 'Question'
         db.delete_table(db.shorten_name(u'survey_question_grid_cols'))
-
-        # Deleting field 'Survey.offline'
-        db.delete_column(u'survey_survey', 'offline')
 
 
         # User chose to not deal with backwards NULL issues for 'Page.question'
