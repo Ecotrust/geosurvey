@@ -12,14 +12,14 @@ class PageInline(admin.TabularInline):
 
 
 class SurveyAdmin(admin.ModelAdmin):
+    list_display = ('name','slug',)
     prepopulated_fields = {'slug':('name',),}
 
 
 class QuestionAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug':('label',),'info':('label',),}
-    inlines = [
-        PageInline,
-    ]
+    list_display = ('survey_slug','slug','type', 'title',  )
+    
     class Media:
         js = [
            '/static/grappelli/tinymce/jscripts/tiny_mce/tiny_mce.js'
@@ -30,7 +30,7 @@ class OptionAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Respondant, RespondantAdmin)
-admin.site.register(Question)
+admin.site.register(Question, QuestionAdmin)
 admin.site.register(Survey, SurveyAdmin)
 admin.site.register(Option, OptionAdmin)
 admin.site.register(Response)
