@@ -1,6 +1,6 @@
 from django.db import models
 from django.db.models import Avg, Max, Min, Count
-
+from django.db.models import Avg, Max, Min, Count, Sum
 import datetime
 import uuid
 import simplejson
@@ -112,6 +112,7 @@ class Option(caching.base.CachingMixin, models.Model):
 REPORT_TYPE_CHOICES = (
         ('distribution', 'Distribution'),
         ('heatmap', 'Heatmap'),
+        ('heatmap-distribution', 'Heatmap & Distribution'),
     )
 
 class Question(caching.base.CachingMixin, models.Model):
@@ -153,9 +154,14 @@ class Question(caching.base.CachingMixin, models.Model):
     @property
     def answer_domain(self):
         if self.visualize or self.filterBy:
-            return self.response_set.all().order_by('answer').values('answer').annotate(count=Count('answer')).order_by('-count')
+            answers = self.response_set.filter(respondant__complete=True)
+            if self.type in ['map-multipoint']:
+                return LocationAnswer.objects.filter(location__response__in=answers).values('answer').annotate(locations=Count('answer'), surveys=Count('location__respondant', distinct=True))
+            else:
+                return answers.values('answer').annotate(locations=Sum('respondant__locations'), surveys=Count('answer'))
         else:
             return None
+        
 
     objects = caching.base.CachingManager()
 
@@ -201,6 +207,11 @@ class Location(caching.base.CachingMixin, models.Model):
     def __str__(self):
         return "%s/%s/%s" % (self.response.respondant.survey.slug, self.response.question.slug, self.response.respondant.uuid)
 
+class MultiAnswer(caching.base.CachingMixin, models.Model):
+    response = models.ForeignKey('Response')
+    answer_text = models.TextField()
+    answer_label = models.TextField(null=True, blank=True)
+
 class Response(caching.base.CachingMixin, models.Model):
     question = models.ForeignKey(Question)
     respondant = models.ForeignKey(Respondant)
@@ -230,9 +241,13 @@ class Response(caching.base.CachingMixin, models.Model):
                 answers = []
                 for answer in simplejson.loads(self.answer_raw):
                     if answer.get('text'):
-                        answers.append(answer['text'])
+                        answer_text = answer['text']
                     if answer.get('name'):
-                        answers.append(answer['name'])
+                        answer_text = answer['name']
+                    answers.append(answer_text)
+                    answer_label = answer.get('label', None)
+                    multi_answer = MultiAnswer(response=self, answer_text=answer_text, answer_label=answer_label)
+                    multi_answer.save()
                 self.answer = ", ".join(answers)
             if self.question.type in ['map-multipoint'] and self.id:
                 answers = []

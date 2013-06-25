@@ -12,12 +12,26 @@ from apps.reports.models import QuestionReport
 def get_geojson(request, survey_slug, question_slug):
     survey = get_object_or_404(Survey, slug=survey_slug)
     question = get_object_or_404(QuestionReport, slug=question_slug, survey=survey)
-    locations = LocationAnswer.objects.filter(location__response__respondant__survey=survey)
+    locations = LocationAnswer.objects.filter(location__response__respondant__survey=survey, location__respondant__complete=True)
     
-    filter_item = request.GET.get('filter', None)
+    filter_list = []
+    filters = None
 
-    if filter_item is not None:
-        locations = locations.filter(label=filter_item)
+    if request.GET:    
+        filters = request.GET.get('filters', None)
+
+    if filters is not None:
+        filter_list = simplejson.loads(filters)
+
+    if filters is not None:    
+        for filter in filter_list:
+            slug = filter.keys()[0]
+            value = filter[slug]
+            filter_question = QuestionReport.objects.get(slug=slug, survey=survey)
+            print filter_question.response_set.all()
+            locations = locations.filter(location__respondant__responses__in=filter_question.response_set.filter(answer__in=value))
+            print slug, value
+            print locations.count()
 
     geojson = [];
     for location in locations:

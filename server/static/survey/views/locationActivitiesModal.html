@@ -18,7 +18,7 @@
         <div ng-init="dialog=$parent.dialog;" ng-include="'/static/survey/views/questionTypes.html'"></div>
     </div>
     <div class="modal-footer">
-        <button class="btn btn-danger btn-large" ng-click="$parent.show('deleteConfirmationPane')">Delete Location</button>
+        <button class="btn btn-danger btn-large" ng-click="$parent.show('deleteConfirmationPane')">Remove Location</button>
 
         <span ng-switch on="isAnswerValid">
             <button ng-switch-when="true" class="btn btn-large save btn-primary" ng-click="answerMultiSelect(question)">Save</button>
@@ -29,11 +29,11 @@
 
 <div ng-show="panes.deleteConfirmationPane.showing">
     <div class="modal-body">
-        <h2 class="question-title">Delete this location?</h2>
+        <h2 class="question-title">Remove this location?</h2>
     </div>
     <div class="modal-footer">
         <button class="btn btn-large" ng-click="show('activitySelectionPane')">Cancel</button>
-        <button class="btn btn-large btn-danger" ng-click="close('cancel')">Delete Location</button>
+        <button class="btn btn-large btn-danger" ng-click="close('cancel')">Remove Location</button>
     </div>
 </div>
 

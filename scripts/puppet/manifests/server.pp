@@ -101,7 +101,7 @@ postgresql::database { "geosurvey":
 
 
 python::venv::isolate { "/usr/local/venv/geosurvey":
-  requirements => "/vagrant/server/REQUIREMENTS",
+  requirements => "/vagrant/server/requirements.txt",
   subscribe => [Package['build-essential']],
 }
 

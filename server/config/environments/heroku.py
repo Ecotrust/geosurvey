@@ -12,12 +12,12 @@ DATABASES = {
 DEBUG = True
 HEROKU = True
 
-ALLOWED_HOSTS = ['.herokuapp.com']
+ALLOWED_HOSTS = [os.environ['ALLOWED_HOSTS']]
 
 
-try: 
+try:
     EMAIL_HOST_USER = os.environ['SENDGRID_USERNAME']
-    EMAIL_HOST= 'smtp.sendgrid.net'
+    EMAIL_HOST = 'smtp.sendgrid.net'
     EMAIL_PORT = 587
     EMAIL_USE_TLS = True
     EMAIL_HOST_PASSWORD = os.environ['SENDGRID_PASSWORD']
@@ -40,8 +40,7 @@ except AttributeError:
     print "NO REDIS!!!!!!!!!"
     pass
 
-COMPRESS_ENABLED = False
-  
+COMPRESS_ENABLED = True
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 

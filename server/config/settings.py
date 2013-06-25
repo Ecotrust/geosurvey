@@ -96,6 +96,8 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.gzip.GZipMiddleware'
+
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -186,3 +188,5 @@ COMPRESS_JS_FILTERS = ['compressor.filters.jsmin.JSMinFilter']
 GRAPPELLI_ADMIN_TITLE = "Geosurvey Admin"
 
 HEROKU = False
+
+ANALYTICS_ID = ""
