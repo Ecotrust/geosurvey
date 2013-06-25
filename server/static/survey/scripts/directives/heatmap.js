@@ -21,30 +21,43 @@
                     cloudmadeUrl = 'http://{s}.tile.cloudmade.com/API-key/{styleId}/256/{z}/{x}/{y}.png',
                     cloudmadeAttribution = 'Map data &copy; 2011 OpenStreetMap contributors, Imagery &copy; 2011 CloudMade';
 
-                var nautical = L.tileLayer.wms("http://egisws02.nos.noaa.gov/ArcGIS/services/RNC/NOAA_RNC/ImageServer/WMSServer", {
-                    format: 'img/png',
-                    transparent: true,
-                    layers: null,
-                    attribution: "NOAA Nautical Charts"
-                });
 
+                var bing = new L.BingLayer("Av8HukehDaAvlflJLwOefJIyuZsNEtjCOnUB_NtSTCwKYfxzEMrxlKfL1IN7kAJF", {
+                    type: "AerialWithLabels"
+                });
                 var map = new L.Map($el, {
 
-                    layers: [nautical]
+                    layers: [bing]
                 });
-
+                
                 var baseMaps = {
-                    "Nautical Charts": nautical
+                    "Bing": bing
                 };
+
+                var mapInitialized=false;
                 scope.selectedFilter = null;
                 scope.$watch('question', function(question) {
-                    var url = '/reports/geojson/marco/' + question.slug;
+                    var url = '/reports/geojson/marco/' + question.slug, filter=[], filterJSON;
                     if (question) {
-                        map.setView(new L.LatLng(question.lat, question.lng), question.zoom);
-
-                        if (question.selectedFilter !== scope.selectedFilter) {
-                            if (question.selectedFilter) {
-                                url = url + '?filter=' + question.selectedFilter;
+                        if (! mapInitialized) {
+                            map.setView(new L.LatLng(question.lat, question.lng), question.zoom); 
+                            mapInitialized = true;
+                        }
+                        
+                        
+                        _.each(question.filters, function (v, k) {
+                            var thisFilter = {};
+                            
+                            if (v.length) {    
+                                thisFilter[k] = v;
+                                filter.push(thisFilter);
+                            }
+                        });
+                        
+                        filterJSON = JSON.stringify(filter);
+                        if (filterJSON !== scope.filterJSON) {
+                            if (filterJSON) {
+                                url = url + '?filters=' + filterJSON;
                             }
                             $http.get(url).success(function(data) {
                                 var filterItems, heatMapData=[];
@@ -89,8 +102,8 @@
                                 
                             });
 
-                            scope.selectedFilter = question.selectedFilter;
-                            
+                            scope.filterJSON = filterJSON;
+                        
                         }
 
                     }
