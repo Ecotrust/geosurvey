@@ -42,7 +42,11 @@ padding: 7px 9px;
 }
 
 .question input[type="number"] {
-    height: 40px;
+    height: 40px !important;
+}
+
+.input-other {
+    height: 44px;
 }
 
 .pull-right + .pull-right {
