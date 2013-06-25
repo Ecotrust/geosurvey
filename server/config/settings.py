@@ -188,3 +188,5 @@ COMPRESS_JS_FILTERS = ['compressor.filters.jsmin.JSMinFilter']
 GRAPPELLI_ADMIN_TITLE = "Geosurvey Admin"
 
 HEROKU = False
+
+ANALYTICS_ID = ""

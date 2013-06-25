@@ -9,7 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 from django.contrib.admin.views.decorators import staff_member_required
 from django.views.decorators.csrf import csrf_exempt
-
+from django.conf import settings
 
 import simplejson
 
@@ -30,9 +30,12 @@ def survey(request, survey_slug=None, template='survey/survey.html'):
         respondant = Respondant(survey=survey)
         respondant.save()
         if request.GET.get('get-uid', None) is not None:
+            import pdb
+            pdb.set_trace()
             return HttpResponse(simplejson.dumps({'success': "true", "uuid": respondant.uuid}))
         return redirect("/respond#/survey/%s/%s" % (survey.slug, respondant.uuid))
-    return render_to_response(template, RequestContext(request, {}))
+    context = {'ANALYTICS_ID': settings.ANALYTICS_ID}
+    return render_to_response(template, RequestContext(request, context))
 
 @staff_member_required
 def dash(request, survey_slug=None, template='survey/dash.html'):
