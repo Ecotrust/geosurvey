@@ -34,7 +34,7 @@ def survey(request, survey_slug=None, template='survey/survey.html'):
             pdb.set_trace()
             return HttpResponse(simplejson.dumps({'success': "true", "uuid": respondant.uuid}))
         return redirect("/respond#/survey/%s/%s" % (survey.slug, respondant.uuid))
-    context = {'ANALYTICS_ID': settings.ANALYTICS_ID}
+    context = {'ANALYTICS_ID': settings.ANALYTICS_ID, 'MAP_API_KEY': settings.MAP_API_KEY}
     return render_to_response(template, RequestContext(request, context))
 
 @staff_member_required
