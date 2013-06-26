@@ -122,7 +122,9 @@ class Question(caching.base.CachingMixin, models.Model):
     slug = models.SlugField(max_length=64)
     type = models.CharField(max_length=20,choices=QUESTION_TYPE_CHOICES,default='text')
     options = models.ManyToManyField(Option, null=True, blank=True)
-    options_json = models.CharField(max_length=254, null=True, blank=True)
+    options_json = models.TextField(null=True, blank=True)
+    rows = models.TextField(null=True, blank=True)
+    cols = models.TextField(null=True, blank=True)
     info = models.CharField(max_length=254, null=True, blank=True)
     grid_cols = models.ManyToManyField(Option, null=True, blank=True, related_name="grid_cols")
 
@@ -165,6 +167,8 @@ class Question(caching.base.CachingMixin, models.Model):
 
     objects = caching.base.CachingManager()
 
+    def save(self, *args, **kwargs):
+        super(Question, self).save(*args, **kwargs)
 
     class Meta:
         ordering = ['order']

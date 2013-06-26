@@ -19,9 +19,10 @@ angular.module('askApp', ['ui', 'leaflet.directive', 'heatmap.directive', 'ui.bo
       templateUrl: '/static/survey/views/author.html',
       controller: 'AuthorCtrl'
     })
-    .when('/author/:surveySlug', {
+    .when('/author/:surveySlug/', {
       templateUrl: '/static/survey/views/author.html',
-      controller: 'AuthorCtrl'
+      controller: 'AuthorCtrl',
+      reloadOnSearch: false
     })
     .when('/surveys', {
         templateUrl: '/static/survey/views/SurveyList.html',

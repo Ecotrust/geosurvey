@@ -20,9 +20,8 @@ class StaffUserOnlyAuthorization(Authorization):
     def update_list(self, object_list, bundle):
         return bundle.request.user.is_staff
 
-    # def update_detail(self, object_list, bundle):
-    #     print "updating question"
-    #     return bundle.request.user.is_staff
+    def update_detail(self, object_list, bundle):
+        return bundle.request.user.is_staff
 
     def delete_list(self, object_list, bundle):
         # Sorry user, no deletes for you!
@@ -65,7 +64,8 @@ class RespondantResource(ModelResource):
 class OptionResource(ModelResource):
     class Meta:
         queryset = Option.objects.all()
-
+        authorization = StaffUserOnlyAuthorization()
+        authentication = Authentication()
 
 class PageResource(ModelResource):
     question = fields.ForeignKey('apps.survey.api.QuestionResource', 'question', related_name='question',full=True, null=True, blank=True)
@@ -73,7 +73,7 @@ class PageResource(ModelResource):
     class Meta:
         queryset = Page.objects.all()
         always_return_data = True
-        authorization = Authorization()
+        authorization = StaffUserOnlyAuthorization()
         authentication = Authentication()    
 
     # def obj_create(self, bundle, request=None, **kwargs):

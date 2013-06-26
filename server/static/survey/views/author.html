@@ -88,7 +88,7 @@ input {
                 <div class="row-fluid" ng-show="activeQuestion.type == 'single-select' || activeQuestion.type == 'multi-select'">
                     <div class="span6">
                         <label>Options</label>
-                        <textarea class="input-block-level"></textarea>
+                        <textarea class="input-block-level" rows="6" ng-model="activeQuestion.rows"></textarea>
                     </div>
                     <div class="span6">
                         <label>
