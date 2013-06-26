@@ -2,7 +2,7 @@
     <div ng-hide="question.type == 'map-multipoint'" class="row-fluid row-progress-bar" style="height:12px !important;">
         <div class="offset9 span3" style="height:12px !important; line-height: 5px;">
             <div class="progress">
-              <div class="bar" style="width: {{ ((survey.questions.indexOf(question) + 1) / survey.questions.length) * 100 }}%;"></div>
+              <div class="bar noTransition" style="width: {{ ((survey.questions.indexOf(question) + 1) / survey.questions.length) * 100 }}%;"></div>
             </div>
         </div>
     </div>
