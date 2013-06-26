@@ -57,7 +57,7 @@
             <button type="submit" class="btn btn-primary btn-large btn-block" ng-disabled="question.required && ! answer">continue</button>
         </form>
     </div>
-    <div ng-switch-when="single-select">
+    <div ng-switch-when="single-select" ng-cloak>
         <form class="question" ng-show="survey.questions.length" ng-submit="answerSingleSelect(question.options, question.otherAnswer)">
             <div class="todo mrm">
                 <ul>
@@ -90,7 +90,7 @@
             <button type="submit" class="btn btn-large btn-block" ng-class="{'btn-primary': isAnswerValid, disabled: !isAnswerValid }">continue</button>
         </form>
     </div>
-    <div ng-switch-when="multi-select">
+    <div ng-switch-when="multi-select" ng-cloak>
         <form class="question" ng-submit="answerMultiSelect(question)">
             <div class="todo mrm">
                 <div ng-show="question.hoisted_options.length" ng-cloak class="hoisted-activities">
@@ -127,7 +127,8 @@
                     </div>
                   </li>
                   <li 
-                    ng-show="question.allow_other"
+                    ng-show="question.allow_other" 
+                    ng-cloak
                     ng-click="onMultiSelectClicked(question.otherOption, question)"
                     ng-class="{'todo-done': question.otherOption.checked }"
                     ng-model="question.otherAnswer.text">
@@ -142,7 +143,7 @@
                 </ul>
               </div>
 
-            <input class="input-block-level input-other" type="text" placeholder="Other" ng-show="question.allow_other && question.otherOption.checked" ng-model="question.otherAnswer" autofocus/> 
+            <input class="input-block-level input-other" type="text" placeholder="Other" ng-show="question.allow_other && question.otherOption.checked" ng-model="question.otherAnswer" autofocus ng-cloak/> 
             <button type="submit" class="btn btn-large btn-block" ng-hide="dialog" ng-class="{'btn-primary': isAnswerValid, 'disabled': !isAnswerValid }">continue</button>
         </form>
     </div>
