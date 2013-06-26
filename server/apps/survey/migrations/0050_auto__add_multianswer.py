@@ -20,7 +20,8 @@ class Migration(SchemaMigration):
 
     def backwards(self, orm):        
         # Deleting model 'MultiAnswer'
-        db.delete_table(u'survey_multianswer')
+        pass
+        #db.delete_table(u'survey_multianswer')
 
 
     models = {
