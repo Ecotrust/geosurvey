@@ -8,21 +8,19 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        pass
         # Adding model 'MultiAnswer'
-        # db.create_table(u'survey_multianswer', (
-        #     (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-        #     ('response', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['survey.Response'])),
-        #     ('answer_text', self.gf('django.db.models.fields.TextField')()),
-        #     ('answer_label', self.gf('django.db.models.fields.TextField')()),
-        # ))
-        # db.send_create_signal(u'survey', ['MultiAnswer'])
+        db.create_table(u'survey_multianswer', (
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('response', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['survey.Response'])),
+            ('answer_text', self.gf('django.db.models.fields.TextField')()),
+            ('answer_label', self.gf('django.db.models.fields.TextField')()),
+        ))
+        db.send_create_signal(u'survey', ['MultiAnswer'])
 
 
-    def backwards(self, orm):
-        pass
+    def backwards(self, orm):        
         # Deleting model 'MultiAnswer'
-        # db.delete_table(u'survey_multianswer')
+        db.delete_table(u'survey_multianswer')
 
 
     models = {
