@@ -24,7 +24,7 @@ input {
                 ng-click="$parent.startEditingQuestion(question)"
                 ng-class="{'active': question == questionBeingEdited }"
                 ng-repeat="question in survey.questions">
-                <a>{{question.label}} ({{question.order}})</a>
+                <a>{{question.label}} ({{question.order}}) {{ question.update }}</a>
             </li>
         </ul>
         <p ng-hide="survey.questions.length">No Questions, yet.</p>

@@ -15,13 +15,25 @@ angular.module('askApp')
                     $scope.newQuestion();
                 }
 
-                if ($location.search()) {
+                if ($location.search().question) {
                     $scope.startEditingQuestion(_.findWhere($scope.survey.questions, {slug: $location.search().question}))
                 } else {
                     $scope.startEditingQuestion($scope.survey.questions[0]);
                 }
 
             });
+
+            $scope.$watch('survey.questions', function (newValue) {
+                if (newValue) {
+                    _.each($scope.survey.questions, function (question, index) {
+                        if (question.order !== index) {
+                            question.order = index;
+                            question.update=true;
+                        }
+                    });
+                }
+            }, true);
+
         } else {
             $scope.newSurvey = true;
         }
