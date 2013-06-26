@@ -19,6 +19,10 @@ function ZoomToCtrl($scope, dialog, $http, $timeout, $location) {
         }
     };
     $scope.show('search');
+    $timeout(function () {
+        document.getElementById("search-query").focus();
+    }, 20);
+    
 
     $scope.results = [];
     $scope.showSpinner = false;
