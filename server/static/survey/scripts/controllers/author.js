@@ -8,13 +8,32 @@ angular.module('askApp')
         if ($routeParams.surveySlug) {    
             $http.get('/api/v1/survey/' + $routeParams.surveySlug + '/?format=json').success(function(data) {
                 _.extend($scope.survey, data);
-                $scope.startEditingQuestion($scope.survey.questions[0]);
+                
                 
                 if ($scope.survey.questions.length === 0) {
                     $scope.survey.questions = [];
                     $scope.newQuestion();
                 }
+
+                if ($location.search().question) {
+                    $scope.startEditingQuestion(_.findWhere($scope.survey.questions, {slug: $location.search().question}))
+                } else {
+                    $scope.startEditingQuestion($scope.survey.questions[0]);
+                }
+
             });
+
+            $scope.$watch('survey.questions', function (newValue) {
+                if (newValue) {
+                    _.each($scope.survey.questions, function (question, index) {
+                        if (question.order !== index) {
+                            question.order = index;
+                            question.update=true;
+                        }
+                    });
+                }
+            }, true);
+
         } else {
             $scope.newSurvey = true;
         }
@@ -42,6 +61,7 @@ angular.module('askApp')
             $scope.activeQuestion = {};
             $scope.questionBeingEdited = question;
             angular.extend($scope.activeQuestion, question);
+            $location.search({question:question.slug});
         };
 
         $scope.questionIsDirty = function(question) {

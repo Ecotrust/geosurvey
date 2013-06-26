@@ -553,6 +553,18 @@ angular.module('askApp')
         /* Specific to single and multi select for now. */
         $scope.isAnswerValid = $scope.question && !$scope.question.required;
 
+        if ($scope.question && $scope.question.rows) {
+            $scope.question.options = [];
+            _.each($scope.question.rows.split('\n'), function (row, index) {
+                $scope.question.options.push({
+                    text: row,
+                    label: _.string.slugify(row),
+                    checked: false
+                });
+            });
+        }
+
+
         if ($scope.question && $scope.question.type === 'integer') {
             $scope.answer = parseInt($scope.getAnswer($routeParams.questionSlug), 10);
         } else if ($scope.question && $scope.question.options.length) {
@@ -1203,7 +1215,7 @@ angular.module('askApp')
         if ($scope.question && $scope.question.type === 'timepicker') {
             $scope.answer = (new Date()).toString("HH:mm");
         }
-        if ($scope.question && $scope.question.foreach_question) {
+        if ($scope.question.foreach_question) {
             $scope.question.foreach = true;
             $scope.question.foreachAnswers = $scope.getAnswer($scope.question.foreach_question.slug);
         } else {
