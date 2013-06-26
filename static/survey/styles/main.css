@@ -160,8 +160,11 @@ ul + ul {
 .question textarea {
     width: 100%;
 }
-.progress .bar {
-    -webkit-transition: none;
+.noTransition {
+    -moz-transition: none !important;
+    -webkit-transition: none !important;
+    -o-transition: none !important;
+    transition: none !important;
 }
 form .btn-block {
     width: 100%;
