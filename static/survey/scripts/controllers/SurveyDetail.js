@@ -1132,5 +1132,8 @@ angular.module('askApp')
         });    
     } else {
         $scope.loadSurvey(app.data);
+        $timeout(function () {
+            window.scrollTo(0, 0);    
+        }, 0);
     }
 });
