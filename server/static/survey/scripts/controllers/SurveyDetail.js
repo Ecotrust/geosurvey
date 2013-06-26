@@ -236,6 +236,10 @@ angular.module('askApp')
 
     $scope.answerQuestion = function(answer, otherAnswer) {
 
+        $timeout(function () {
+            $scope.showSpinner = true;
+        }, 300);
+
         var url = ['/respond/answer', $scope.survey.slug, $routeParams.questionSlug, $routeParams.uuidSlug].join('/');
         if ($scope.dialog) {
             if (!$scope.question.update) {
@@ -1131,9 +1135,9 @@ angular.module('askApp')
             $scope.survey.status = 'invalid';
         });    
     } else {
-        $scope.loadSurvey(app.data);
         $timeout(function () {
             window.scrollTo(0, 0);    
         }, 0);
+        $scope.loadSurvey(app.data);
     }
 });
