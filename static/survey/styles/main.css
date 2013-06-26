@@ -41,6 +41,12 @@ margin-bottom: 15px;
 padding: 7px 9px;
 }
 
+.ajax-spinner {
+    width: 24px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .question input[type="number"] {
     height: 40px !important;
 }

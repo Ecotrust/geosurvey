@@ -385,10 +385,11 @@ div[zoomto] .small-screen {
     margin-left: auto;
     margin-right: auto;
 }
-.modal-zoomto .icon-search, .modal-zoomto .icon-spinner {
+.modal-zoomto .icon-search, .modal-zoomto .icon-spinner,
+.modal-zoomto .icon-search, .modal-zoomto .ajax-spinner {
     position: absolute;
     left: -10px;
-    top: 6px;
+    top: 8px;
 }
 .modal-zoomto input.search-query {
     height: 24px !important; 

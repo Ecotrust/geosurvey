@@ -7,7 +7,7 @@
              <form class="form-search">
                  <div class="control-group">
                      <i ng-show="!showSpinner" class='icon-search icon-2x'></i>
-                     <i ng-show="showSpinner" class='icon-spinner icon-spin icon-2x'></i>
+                     <img ng-show="showSpinner" class="ajax-spinner" src="/static/survey/img/ajax-loader.gif" alt="loading..." width="32" height="32">
                      <input type="text" id="search-query" class="search-query" placeholder="Search" ng-model="searchTerm" autofocus/>
                  </div>
              </form>
