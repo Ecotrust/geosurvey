@@ -21,17 +21,20 @@ angular.module('ui.directives').directive('uiSortable', [
           onStart = function(e, ui) {
             // Save position of dragged item
             ui.item.sortable = { index: ui.item.index() };
+            console.log('onstart');
           };
 
           onUpdate = function(e, ui) {
             // For some reason the reference to ngModel in stop() is wrong
             ui.item.sortable.resort = ngModel;
+            console.log('onupdate');
           };
 
           onReceive = function(e, ui) {
             ui.item.sortable.relocate = true;
             // added item to array into correct position and set up flag
             ngModel.$modelValue.splice(ui.item.index(), 0, ui.item.sortable.moved);
+            console.log('onreceive');
           };
 
           onRemove = function(e, ui) {
@@ -45,6 +48,7 @@ angular.module('ui.directives').directive('uiSortable', [
 
           onStop = function(e, ui) {
             // digest all prepared changes
+            console.log('onstop');
             if (ui.item.sortable.resort && !ui.item.sortable.relocate) {
 
               // Fetch saved and current position of dropped element

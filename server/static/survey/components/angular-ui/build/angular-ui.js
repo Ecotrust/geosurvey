@@ -1131,16 +1131,19 @@ angular.module('ui.directives').directive('uiSortable', [
               var end, start;
               start = ui.item.sortable.index;
               end = ui.item.index();
-              if (start < end)
-                end--;
 
+
+              // not sure why this is here!?
+              // if (start < end)
+              //   end--;
+              
               // Reorder array and apply change to scope
               ui.item.sortable.resort.$modelValue.splice(end, 0, ui.item.sortable.resort.$modelValue.splice(start, 1)[0]);
-
             }
             if (ui.item.sortable.resort || ui.item.sortable.relocate) {
               scope.$apply();
             }
+
           };
 
           // If user provided 'start' callback compose it with onStart function

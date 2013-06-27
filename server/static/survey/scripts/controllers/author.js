@@ -5,6 +5,8 @@ angular.module('askApp')
         $scope.survey = {};
         $scope.activeQuestion = null;
         $scope.questionBeingEdited = null;
+        $scope.questionsToBeUpdated = [];
+        $scope.updatedQuestionQueue = [];
         if ($routeParams.surveySlug) {    
             $http.get('/api/v1/survey/' + $routeParams.surveySlug + '/?format=json').success(function(data) {
                 _.extend($scope.survey, data);
@@ -15,27 +17,62 @@ angular.module('askApp')
                     $scope.newQuestion();
                 }
 
-                if ($location.search().question) {
+                if ($location.search().question && $location.search().question !== 'null') {
                     $scope.startEditingQuestion(_.findWhere($scope.survey.questions, {slug: $location.search().question}))
                 } else {
                     $scope.startEditingQuestion($scope.survey.questions[0]);
                 }
 
             });
-
+           
             $scope.$watch('survey.questions', function (newValue) {
-                if (newValue) {
+                if (newValue && ! $scope.questionsToBeUpdated.length && ! $scope.updatedQuestionQueue.length) {
                     _.each($scope.survey.questions, function (question, index) {
                         if (question.order !== index) {
                             question.order = index;
                             question.update=true;
+                            $scope.questionsToBeUpdated.push(question);
                         }
                     });
+                    if ($scope.questionsToBeUpdated.length) {
+                        $scope.updatedQuestionQueue = [];
+                        $scope.updateCounter = $scope.updateTotal = $scope.questionsToBeUpdated.length;
+                        $scope.updateQuestions($scope.questionsToBeUpdated);    
+                    }
+                    
                 }
             }, true);
 
         } else {
             $scope.newSurvey = true;
+        }
+
+        $scope.updateQuestionList = function (questions) {
+            _.each(questions, function (question) {
+                var index = _.indexOf($scope.survey.questions, _.findWhere($scope.survey.questions, {slug: question.slug}));
+                $scope.survey.questions[index] = question;
+            });
+            console.log('done');
+            $scope.updatedQuestionQueue = [];
+            $scope.questionsToBeUpdated = [];
+        }
+
+        $scope.updateQuestions = function (questions) {
+            var questionToBeUpdated = _.first(questions),
+                rest = _.rest(questions);
+            $scope.saveQuestion(questionToBeUpdated, true).success(function (newQuestion, status){
+                $scope.updatedQuestionQueue.push(newQuestion);
+                if (rest.length) {
+                    $scope.updateQuestions(rest);    
+                    $scope.questionsToBeUpdated = rest;
+                    $scope.updateCounter = $scope.updateCounter - 1;
+                } else {
+                    // $scope.updateQuestionList($scope.updatedQuestionQueue);
+                    $scope.updatedQuestionQueue = [];
+                    $scope.questionsToBeUpdated = [];
+
+                }                
+            })
         }
 
         $scope.newQuestion = function () {
@@ -68,7 +105,7 @@ angular.module('askApp')
             return ! _.isEqual(question, $scope.questionBeingEdited);
         };
 
-        $scope.saveQuestion = function (question) {
+        $scope.saveQuestion = function (question, deferUpdatingList) {
             var url = question.resource_uri,
                 method = 'PUT',
                 data = question;
@@ -83,23 +120,30 @@ angular.module('askApp')
                     question: question
                 }
             }
-
-            $http({
+            $scope.stopWatchingQuestions = true;
+            return $http({
                 method: method,
                 url: url,
                 data: data
             }).success(function (result, status) {
                 var index;
                 if (status === 202) {
-                    index = _.indexOf($scope.survey.questions, $scope.questionBeingEdited);
-                    $scope.survey.questions[index] = result;
-                    $scope.questionBeingEdited = result;
+                    if (! deferUpdatingList) {
+                        index = _.indexOf($scope.survey.questions, $scope.questionBeingEdited);
+                        $scope.survey.questions[index] = result;
+                        $scope.questionBeingEdited = result;
+                        $scope.stopWatchingQuestions = false;    
+                    }
+                    
                 } else if (status === 201) {
                     if (!$scope.survey.questions) {
                         $scope.survey.questions = [];
                     }
-                    $scope.survey.questions.push(result.question);
-                    $scope.questionBeingEdited = result.question;
+                    if (! deferUpdatingList) {
+                        $scope.survey.questions.push(result.question);
+                        $scope.questionBeingEdited = result.question;    
+                    }
+                    
                 }
                 
                 $scope.startEditingQuestion($scope.questionBeingEdited);
