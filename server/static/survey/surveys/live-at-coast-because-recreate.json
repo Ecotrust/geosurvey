@@ -15,8 +15,8 @@
         "group": "1"
     },
     {
-        "text": "Not sure",
-        "label": "not-sure",
+        "text": "Somewhat",
+        "label": "somewhat",
         "group": "1"
     },
     {
@@ -27,6 +27,11 @@
     {
         "text": "Main reason I live on the coast",
         "label": "main-reason",
+        "group": "1"
+    },
+    {
+        "text": "Not sure",
+        "label": "not-sure",
         "group": "1"
     }
 ]

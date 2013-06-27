@@ -54,6 +54,9 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 # ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
+MAP_API_KEY = os.environ.get('MAP_API_KEY')
+ANALYTICS_ID = os.environ.get('ANALYTICS_ID')
+
 
 # config/environments/local.py is ignored to allow for easy settings
 # overrides without affecting others environments / developers
