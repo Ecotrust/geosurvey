@@ -76,7 +76,7 @@ div[leaflet] {
     /* the zoom control is being forced to bottom left 
     while staying in the top left class (if time available, 
     we should just move the control the the bottom left class) */
-    bottom: 15px;
+    bottom: 17px;
     top: auto;
     left: 15px;
 }
@@ -215,8 +215,8 @@ div[zoomto] .small-screen {
     background-color: white !important;
     }
 .leaflet-touch .leaflet-control-zoom a {
-    width: 93px !important;
-    height: 93px !important;
+    width: 44px !important;
+    height: 39px !important;
     }
 .leaflet-control-zoom-in {
     background-size: 27px 27px !important;
@@ -230,7 +230,6 @@ div[zoomto] .small-screen {
     font-size: 46px !important;
     line-height: 40px !important;
     }
-
 
 /**
  * Modals
