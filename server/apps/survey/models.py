@@ -231,6 +231,7 @@ class Response(caching.base.CachingMixin, models.Model):
                 #self.answer = self.answer_raw['name']
             if self.question.type in ['auto-multi-select', 'multi-select']:
                 answers = []
+                self.multianswer_set.all().delete()
                 for answer in simplejson.loads(self.answer_raw):
                     if answer.get('text'):
                         answer_text = answer['text']
