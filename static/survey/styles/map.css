@@ -76,7 +76,7 @@ div[leaflet] {
     /* the zoom control is being forced to bottom left 
     while staying in the top left class (if time available, 
     we should just move the control the the bottom left class) */
-    bottom: 15px;
+    bottom: 17px;
     top: auto;
     left: 15px;
 }
@@ -215,8 +215,8 @@ div[zoomto] .small-screen {
     background-color: white !important;
     }
 .leaflet-touch .leaflet-control-zoom a {
-    width: 93px !important;
-    height: 93px !important;
+    width: 44px !important;
+    height: 39px !important;
     }
 .leaflet-control-zoom-in {
     background-size: 27px 27px !important;
@@ -231,7 +231,6 @@ div[zoomto] .small-screen {
     line-height: 40px !important;
     }
 
-
 /**
  * Modals
  */
@@ -243,7 +242,7 @@ div[zoomto] .small-screen {
 }
 
 .modal {
-    max-height: 600px;
+    max-height: 500px;
     overflow:hidden;
 }
 .modal-footer {
@@ -254,8 +253,8 @@ div[zoomto] .small-screen {
 }
 .modal-body {
     margin-bottom: 73px;
-    max-height: 400px;
-    overflow-y:scroll;
+    max-height: 310px;
+    overflow-y: auto;
 }
 
 
@@ -349,13 +348,15 @@ div[zoomto] .small-screen {
 
 /* Search Modal */
 .modal-zoomto .modal {
-    max-height: 400px;
+    max-height: 420px;
     }
+.modal-zoomto .modal {
+    height: 50px;
+}
 .modal-zoomto .modal-body {
     max-height: 200px;
-    }
-.modal-zoomto .modal-body {
-    margin-bottom: 5px;
+    min-height: 100px;
+    margin-bottom: 10px;
 }
 .modal-zoomto .question-title,
 .modal-zoomto .noresults-label {
@@ -385,10 +386,11 @@ div[zoomto] .small-screen {
     margin-left: auto;
     margin-right: auto;
 }
-.modal-zoomto .icon-search, .modal-zoomto .icon-spinner {
+.modal-zoomto .icon-search, .modal-zoomto .icon-spinner,
+.modal-zoomto .icon-search, .modal-zoomto .ajax-spinner {
     position: absolute;
     left: -10px;
-    top: 6px;
+    top: 8px;
 }
 .modal-zoomto input.search-query {
     height: 24px !important; 
@@ -402,7 +404,7 @@ div[zoomto] .small-screen {
 @media (max-width: 600px) {
     .modal {
         max-height: none;
-        overflow-y: scroll;
+        overflow: hidden;
         width: 100%;
         position: absolute;
         top: 0;
@@ -415,12 +417,16 @@ div[zoomto] .small-screen {
            -moz-border-radius: 0;
                 border-radius: 0;
     }
-    .modal-zoomto .modal-body {
-        max-height: none;
-        /*overflow-y: scroll;*/
+    .modal-header {
+        /*padding: 5px !important;*/
     }
-    .modal-zoomto .modal-body.modal-footer {
-        margin-bottom: 0;
+    .modal-body {
+        max-height: none !important;
+        min-height: none !important;
+        overflow-y: auto;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+        margin-bottom: 0 !important;
     }
     .modal-footer {
         position: absolute;
@@ -433,8 +439,10 @@ div[zoomto] .small-screen {
         padding: 0 !important;
         padding-top: 2px !important;
     }
-    .modal-zoomto .modal-body {
-        padding-top: 0 !important;
+    .modal-zoomto .modal-footer {
+        margin-bottom: 0;
+        padding-top: 0;
+        padding-bottom: 0;
     }
     .modal-zoomto .question-title,
     .modal-zoomto .noresults-label {
@@ -505,6 +513,37 @@ ul.marker-popup-list li {
 .leaflet-popup-content-wrapper {
     -webkit-border-radius: 0;
     border-radius: 0;
+}
+
+/* Loading Spinner */
+.ajax-spinner-barckground {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 2013;
+    background-color: rgba(0,0,0,0.45);
+}
+.ajax-spinner-wrapper {
+    width: 50px;
+    height: 50px;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    
+    margin-left: -25px;
+    margin-top: -25px;    
+    
+    background-color: white;
+    -webkit-border-radius: 3px;
+       -moz-border-radius: 3px;
+            border-radius: 3px;
+}
+.ajax-spinner-wrapper .ajax-spinner {
+    margin-top: 12px;
+    margin-left: 12px;
 }
 
 

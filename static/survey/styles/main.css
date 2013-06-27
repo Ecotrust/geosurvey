@@ -41,8 +41,18 @@ margin-bottom: 15px;
 padding: 7px 9px;
 }
 
+.landing-ajax-spinner {
+    width: 24px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .question input[type="number"] {
-    height: 40px;
+    height: 40px !important;
+}
+
+.input-other {
+    height: 44px;
 }
 
 .pull-right + .pull-right {
@@ -150,8 +160,11 @@ ul + ul {
 .question textarea {
     width: 100%;
 }
-.progress .bar {
-    -webkit-transition: none;
+.noTransition {
+    -moz-transition: none !important;
+    -webkit-transition: none !important;
+    -o-transition: none !important;
+    transition: none !important;
 }
 form .btn-block {
     width: 100%;

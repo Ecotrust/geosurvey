@@ -30,11 +30,9 @@ def survey(request, survey_slug=None, template='survey/survey.html'):
         respondant = Respondant(survey=survey)
         respondant.save()
         if request.GET.get('get-uid', None) is not None:
-            import pdb
-            pdb.set_trace()
             return HttpResponse(simplejson.dumps({'success': "true", "uuid": respondant.uuid}))
         return redirect("/respond#/survey/%s/%s" % (survey.slug, respondant.uuid))
-    context = {'ANALYTICS_ID': settings.ANALYTICS_ID}
+    context = {'ANALYTICS_ID': settings.ANALYTICS_ID, 'MAP_API_KEY': settings.MAP_API_KEY}
     return render_to_response(template, RequestContext(request, context))
 
 @staff_member_required
@@ -98,7 +96,7 @@ def send_email(email, uuid):
         'SITE_URL': current_site.domain
         })
 
-    subject, from_email, to = 'Take The Survey', 'tglaser@ecotrust.org', email
+    subject, from_email, to = 'Take The Survey', 'Coastal Recreation Survey <surveysupport@surfrider.org>', email
     text_content = plaintext.render(d)
     html_content = htmly.render(d)
 

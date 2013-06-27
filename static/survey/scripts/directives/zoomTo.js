@@ -17,7 +17,29 @@ function ZoomToCtrl($scope, dialog, $http, $timeout, $location) {
             $scope.panes[paneName].showing = true;
             $scope.currentPane = $scope.panes[paneName];
         }
+        $scope.onResize();
     };
+
+    $scope.onResize = function () {
+        $timeout(function () {
+            // Set modal body height to allow scrolling.
+            var m = jQuery('.modal').height(),
+                h = jQuery('.modal-header:visible').outerHeight(),
+                f = jQuery('.modal-footer:visible').outerHeight(),
+                b = jQuery(window).width() < 601 ? m - h - f : 'auto';
+            jQuery('.modal-body').height(b);
+            jQuery('.modal-body').css('margin-bottom', f+'px');
+        }, 0);
+    };
+    $timeout(function () {
+        jQuery(window).resize($scope.onResize);
+    }, 0);
+    $scope.onResize();
+
+    $timeout(function () {
+        document.getElementById("search-query").focus();
+    }, 20);
+
     $scope.show('search');
 
     $scope.results = [];

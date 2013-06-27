@@ -82,7 +82,7 @@ function DoneDialogCtrl($scope, dialog, remainingActivities, $location){
     };
 }
 
-function ActivitiesCtrl($scope, dialog, $location) {
+function ActivitiesCtrl($scope, dialog, $location, $timeout) {
     $scope.loaded = false;
     $scope.$watch(function() {
         return $location.path();
@@ -93,12 +93,29 @@ function ActivitiesCtrl($scope, dialog, $location) {
         $scope.loaded = true;
     });
 
+    $scope.onResize = function () {
+        $timeout(function () {
+            // Set modal body height to allow scrolling.
+            var m = jQuery('.modal').height(),
+                h = jQuery('.modal-header:visible').outerHeight(),
+                f = jQuery('.modal-footer:visible').outerHeight(),
+                b = jQuery(window).width() < 601 ? m - h - f : 'auto';
+            jQuery('.modal-body').height(b);
+            jQuery('.modal-body').css('margin-bottom', f+'px');
+        }, 0);
+    };
+    $timeout(function () {
+        jQuery(window).resize($scope.onResize);
+        $scope.onResize();
+    }, 30);
+    
+
     $scope.close = function(result) {
         dialog.close(result);
     };
 }
 
-function ActivitySelectorDialogCtrl($scope, dialog, $location, $window, question, activeMarker) {
+function ActivitySelectorDialogCtrl($scope, dialog, $location, $window, $timeout, question, activeMarker) {
     $scope.question = question;
     $scope.activeMarker = activeMarker;
     $scope.dialog = dialog;
@@ -119,7 +136,25 @@ function ActivitySelectorDialogCtrl($scope, dialog, $location, $window, question
             $scope.panes[paneName].showing = true;
             $scope.currentPane = $scope.panes[paneName];
         }
+        $scope.onResize();
     };
+
+    $scope.onResize = function () {
+        $timeout(function () {
+            // Set modal body height to allow scrolling.
+            var m = jQuery('.modal').height(),
+                h = jQuery('.modal-header:visible').outerHeight(),
+                f = jQuery('.modal-footer:visible').outerHeight(),
+                b = jQuery(window).width() < 601 ? m - h - f : 'auto';
+            jQuery('.modal-body').height(b);
+            jQuery('.modal-body').css('margin-bottom', f+'px');
+        }, 0);
+    };
+    $timeout(function () {
+        jQuery(window).resize($scope.onResize);
+        $scope.onResize();
+    }, 0);
+
     if ($scope.question && $scope.question.update) {
         // editing, no need to confirm location
         $scope.show('activitySelectionPane');
@@ -127,7 +162,6 @@ function ActivitySelectorDialogCtrl($scope, dialog, $location, $window, question
         // new location, let's confirm
         $scope.show('confirmPane');
     }
-
 
     // Ensure modal doesn't stay open on change of URL.
     $scope.loaded = false;
@@ -172,9 +206,22 @@ angular.module('askApp')
         }
     };
 
-    $scope.getNextQuestion = function() {
+    $scope.gotoNextQuestion = function(numQsToSkips) {
+        var nextUrl = $scope.getNextQuestionPath(numQsToSkips);
+        if (nextUrl) {
+            $location.path(nextUrl);
+        }
+    };
+
+    $scope.getNextQuestionPath = function(numQsToSkips) {
+        var nextQuestion = $scope.getNextQuestion(numQsToSkips);
+        return ['survey', $scope.survey.slug, nextQuestion || 'complete', $routeParams.uuidSlug].join('/');
+    };
+
+    $scope.getNextQuestion = function(numQsToSkips) {
+        var index = _.indexOf($scope.survey.questions, $scope.question) + 1 + (numQsToSkips || 0);
         // should return the slug of the next question
-        var nextQuestion = $scope.survey.questions[_.indexOf($scope.survey.questions, $scope.question) + 1];
+        var nextQuestion = $scope.survey.questions[index];
 
         return nextQuestion ? nextQuestion.slug : null;
     };
@@ -183,24 +230,26 @@ angular.module('askApp')
         var resumeQuestion = $scope.survey.questions[_.indexOf($scope.survey.questions, _.findWhere($scope.survey.questions, {slug: lastQuestion})) + 1];
         return ['survey', $scope.survey.slug, resumeQuestion.slug, $routeParams.uuidSlug].join('/');
     };
-
-    $scope.getNextQuestionPath = function() {
-        var nextQuestion = $scope.getNextQuestion(),
-            nextUrl;
-
-        if (nextQuestion) {
-            nextUrl = ['survey', $scope.survey.slug, nextQuestion, $routeParams.uuidSlug].join('/');
-        } else {
-            nextUrl = ['survey', $scope.survey.slug, 'complete', $routeParams.uuidSlug].join('/');
-        }
-
-        return nextUrl;
-    };
-
-    $scope.gotoNextQuestion = function() {
-        var nextUrl = $scope.getNextQuestionPath();
-        if (nextUrl) {
-            $location.path(nextUrl);
+    
+    /* () */ 
+    $scope.shouldSkipNextQuestion = function (currentQuestionSlug, currentAnswer, callback) {
+        switch(currentQuestionSlug) 
+        {
+        case 'state':
+            $http.get('/static/survey/surveys/counties/' + (currentAnswer || {}).label + '.json')
+            .success(function(data) { 
+                callback(false);
+            })
+            .error(function(data) {
+                callback(true);
+            });
+            break;
+        
+        case 'expenses':
+            callback(!(currentAnswer && currentAnswer.length > 0));
+            break;
+        default: 
+            callback(false);
         }
     };
 
@@ -220,6 +269,10 @@ angular.module('askApp')
     };
 
     $scope.answerQuestion = function(answer, otherAnswer) {
+
+        $timeout(function () {
+            $scope.showSpinner = true;
+        }, 300);
 
         var url = ['/respond/answer', $scope.survey.slug, $routeParams.questionSlug, $routeParams.uuidSlug].join('/');
         if ($scope.dialog) {
@@ -290,7 +343,11 @@ angular.module('askApp')
                                 answer: answer,
                                 question: $scope.question
                             });
-                            $scope.gotoNextQuestion();
+
+                            $scope.shouldSkipNextQuestion($scope.question.slug, answer, function (shouldSkip) {
+                                var numQsToSkips = shouldSkip ? 1 : 0;
+                                $scope.gotoNextQuestion(numQsToSkips);
+                            });
                         }
                     }
                 }
@@ -302,7 +359,7 @@ angular.module('askApp')
             });
         }
     };
-
+    
     $scope.onMultiSelectClicked = function(option, question) {
         option.checked = !option.checked;
         if (! option.checked && option.other) {
@@ -470,6 +527,8 @@ angular.module('askApp')
 
         if (data.last_question && ! data.complete) {
             $scope.resumeQuestionPath = $scope.getResumeQuestionPath(data.last_question);
+        } else {
+            $scope.resumeQuestionPath = 'NO_RESUME';
         }
         // if (data.complete) {
         //     $location.path(['survey', $scope.survey.slug, 'complete', $routeParams.uuidSlug].join('/'));
@@ -511,9 +570,11 @@ angular.module('askApp')
                     if (! answer.other) {
 
                         _.each($scope.question.options, function(option) {
-                            if (answer.text === option.text || answer.text === option.name ) {
+                            if ( (answer.text || answer.name) === (option.text || option.name) ) {
                                 option.checked = true;
                                 $scope.isAnswerValid = true;
+                            } else {
+                                option.checked = false;
                             }
                         });
                     } else {
@@ -626,19 +687,19 @@ angular.module('askApp')
             }
 
             $http.get('/static/survey/surveys/counties/' + stateAbrv + '.json').success(function(data, status, headers, config) {
-                if (Object.prototype.toString.call(data) === '[object Array]' && data.length > 0) {
-                    $scope.question.options = data;
-                } else {
-                    $scope.gotoNextQuestion();
+                $scope.question.options = data;
+                if (!$scope.answer) { 
+                    return;
                 }
-                if ($scope.answer) {
-                    _.each($scope.question.options, function (option, index) {
-                        if (option.name === $scope.answer.name) {
-                            option.checked = true;
-                            $scope.isAnswerValid = true;
-                        }
-                    });    
+                if (_.isArray($scope.answer)) {
+                    $scope.answer = _.first($scope.answer);
                 }
+                _.each($scope.question.options, function (option, index) {
+                    if (option.name === $scope.answer.name) {
+                        option.checked = true;
+                        $scope.isAnswerValid = true;
+                    }
+                });    
                 
             }).error(function(data, status, headers, config) {
                 $scope.gotoNextQuestion();
@@ -666,22 +727,19 @@ angular.module('askApp')
             $scope.question.options = $scope.getAnswer($scope.question.options_from_previous_answer);
 
             _.each($scope.question.options, function(item) {
-                if ($scope.answer) {
-                    if (_.isArray($scope.answer)) {
-                        
-                    } else {
-                        if (item.text === $scope.answer.text) {
+                item.checked = false;
+            });
+            if ($scope.answer) {
+                var answerArr = _.isArray($scope.answer) ? $scope.answer : [$scope.answer];
+                _.each($scope.question.options, function(item) {
+                    _.each(answerArr, function (answer) {
+                        if ((item.text || item.name) === (answer.text || answer.name)) {
                             item.checked = true;
                             $scope.isAnswerValid = true;
-                        } else {
-                            item.checked = false;
                         }
-                    }
-                } else {
-                    item.checked = false;
-                }
-            });
-
+                    });
+                });
+            }
         }
 
         if ($scope.question) {
@@ -1051,8 +1109,7 @@ angular.module('askApp')
 
         // grid question controller
         if ($scope.question && $scope.question.type === 'grid') {
-            // Prep row initial row data, each row containing values.
-            // for activityLabel, activityText, cost and numPeople.
+            // Prep initial row data.
             $scope.question.options = $scope.getAnswer($scope.question.options_from_previous_answer);
 
             if ($scope.question.options.length < 1) {
@@ -1061,28 +1118,19 @@ angular.module('askApp')
             }
 
             if ($scope.answer) {
-                $scope.answer = _.groupBy($scope.answer, 'activityText')
+                $scope.answer = _.groupBy($scope.answer, 'text');
             } else {
                 $scope.answer = {};
             }
             
             _.each($scope.question.options, function(value, key, list) {
                 list[key] = {
-                    activitySlug: value.label,
-                    activityText: value.text,
+                    label: value.label,
+                    text: value.text,
                     cost: $scope.answer !== null && _.has($scope.answer, value.text) ? $scope.answer[value.text][0].cost: undefined,
                     numPeople: $scope.answer !== null && _.has($scope.answer, value.text) ? $scope.answer[value.text][0].numPeople: undefined
                 };
             });
-
-            // todo: Fill columns with persisted data if available.
-
-            // Hard coding values for now.
-            // $scope.question.options = [
-            //     {activitySlug: 'camping', activityText: 'Camping', cost: undefined, numPeople: undefined},
-            //     {activitySlug: 'eating', activityText: 'Eating', cost: undefined, numPeople: undefined},
-            //     {activitySlug: 'surfing', activityText: 'Surfing', cost: undefined, numPeople: undefined}
-            // ];
 
             // Configure grid.
             var gridCellTemplateDefault = '<div class="ngCellText" ng-class="col.colIndex()"><span ng-cell-text>{{COL_FIELD CUSTOM_FILTERS}}</span></div>';
@@ -1098,7 +1146,7 @@ angular.module('askApp')
                 plugins: [new ngGridFlexibleHeightPlugin()],
                 rowTemplate: '<div ng-style="{\'z-index\': col.zIndex() }" ng-repeat="col in renderedColumns" ng-class="col.colIndex()" class="ngCell {{col.cellClass}}" ng-cell></div>',
                 columnDefs: [{
-                    field: 'activityText',
+                    field: 'text',
                     displayName: 'Expense Item'
                 }, {
                     field: 'cost',
@@ -1121,6 +1169,9 @@ angular.module('askApp')
             $scope.survey.status = 'invalid';
         });    
     } else {
+        $timeout(function () {
+            window.scrollTo(0, 0);    
+        }, 0);
         $scope.loadSurvey(app.data);
     }
 });
