@@ -82,7 +82,7 @@ function DoneDialogCtrl($scope, dialog, remainingActivities, $location){
     };
 }
 
-function ActivitiesCtrl($scope, dialog, $location) {
+function ActivitiesCtrl($scope, dialog, $location, $timeout) {
     $scope.loaded = false;
     $scope.$watch(function() {
         return $location.path();
@@ -93,12 +93,29 @@ function ActivitiesCtrl($scope, dialog, $location) {
         $scope.loaded = true;
     });
 
+    $scope.onResize = function () {
+        $timeout(function () {
+            // Set modal body height to allow scrolling.
+            var m = jQuery('.modal').height(),
+                h = jQuery('.modal-header:visible').outerHeight(),
+                f = jQuery('.modal-footer:visible').outerHeight(),
+                b = jQuery(window).width() < 601 ? m - h - f : 'auto';
+            jQuery('.modal-body').height(b);
+            jQuery('.modal-body').css('margin-bottom', f+'px');
+        }, 0);
+    };
+    $timeout(function () {
+        jQuery(window).resize($scope.onResize);
+        $scope.onResize();
+    }, 30);
+    
+
     $scope.close = function(result) {
         dialog.close(result);
     };
 }
 
-function ActivitySelectorDialogCtrl($scope, dialog, $location, $window, question, activeMarker) {
+function ActivitySelectorDialogCtrl($scope, dialog, $location, $window, $timeout, question, activeMarker) {
     $scope.question = question;
     $scope.activeMarker = activeMarker;
     $scope.dialog = dialog;
@@ -119,7 +136,25 @@ function ActivitySelectorDialogCtrl($scope, dialog, $location, $window, question
             $scope.panes[paneName].showing = true;
             $scope.currentPane = $scope.panes[paneName];
         }
+        $scope.onResize();
     };
+
+    $scope.onResize = function () {
+        $timeout(function () {
+            // Set modal body height to allow scrolling.
+            var m = jQuery('.modal').height(),
+                h = jQuery('.modal-header:visible').outerHeight(),
+                f = jQuery('.modal-footer:visible').outerHeight(),
+                b = jQuery(window).width() < 601 ? m - h - f : 'auto';
+            jQuery('.modal-body').height(b);
+            jQuery('.modal-body').css('margin-bottom', f+'px');
+        }, 0);
+    };
+    $timeout(function () {
+        jQuery(window).resize($scope.onResize);
+        $scope.onResize();
+    }, 0);
+
     if ($scope.question && $scope.question.update) {
         // editing, no need to confirm location
         $scope.show('activitySelectionPane');
@@ -127,7 +162,6 @@ function ActivitySelectorDialogCtrl($scope, dialog, $location, $window, question
         // new location, let's confirm
         $scope.show('confirmPane');
     }
-
 
     // Ensure modal doesn't stay open on change of URL.
     $scope.loaded = false;
