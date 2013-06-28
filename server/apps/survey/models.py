@@ -49,7 +49,8 @@ class Page(caching.base.CachingMixin, models.Model):
     objects = caching.base.CachingManager()
 
     def __str__(self):
-        return "%s/%s (%d)" % (self.survey.name, self.question.slug, self.question.order)
+        if self.survey is not None and self.question is not None:
+            return "%s/%s (%d)" % (self.survey.name, self.question.slug, self.question.order)
 
     class Meta:
         ordering = ['survey', 'question__order']
