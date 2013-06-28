@@ -21,7 +21,7 @@
                 ui-event="{ keypress : 'onlyDigits($event)' }"
                 autofocus
                 required/>
-            <button type="submit" class="btn btn-primary btn-large btn-block" ng-disabled="question.required && (! answer)">Continue <img class="ajax-spinner" ng-show="showSpinner" src="/static/survey/img/ajax-loader.gif" alt="loading..." width="24" height="24"></button>
+            <button type="submit" class="btn btn-primary btn-large btn-block">Continue <img class="ajax-spinner" ng-show="showSpinner" src="/static/survey/img/ajax-loader.gif" alt="loading..." width="24" height="24"></button>
         </form>
     </div>
     <div ng-switch-when="auto-single-select">
