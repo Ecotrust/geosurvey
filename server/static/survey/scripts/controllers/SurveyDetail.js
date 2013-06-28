@@ -1199,7 +1199,7 @@ angular.module('askApp')
                 };
 
                 console.log(gridCol);
-                if (gridCol.type === 'integer') {
+                if (gridCol.type === 'integer' || gridCol.type === 'currency') {
                     template = costCellTemplate;
                 } else if (gridCol.type === 'yes-no') {
                     template = checkboxTemplate;
