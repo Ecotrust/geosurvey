@@ -20,7 +20,7 @@
                 ui-event="{ keypress : 'onlyDigits($event)' }"
                 autofocus
                 required/>
-            <button type="submit" class="btn btn-primary btn-large btn-block button-block" ng-disabled="question.required && (! answer)">continue</button>
+            <button type="submit" class="btn btn-primary btn-large btn-block button-block" ng-disabled="question.required && ! answer && answer != 0">continue</button>
         </form>
     </div>
     <div ng-switch-when="auto-single-select">
@@ -59,7 +59,8 @@
               <input class="input-block-level" type="number" step="any" placeholder="{{ question.label }}" ng-model="answer" autofocus/>
             </div>
 
-            <button type="submit" class="btn btn-primary btn-large btn-block button-block" ng-disabled="question.required && ! answer">continue</button>
+            <!-- <button type="submit" class="btn btn-primary btn-large btn-block button-block" ng-disabled="question.required && ! answer">continue</button> -->
+            <button type="submit" class="btn btn-primary btn-large btn-block button-block" ng-disabled="question.required && ! answer && answer != 0">continue</button>
         </form>
     </div>
     <div ng-switch-when="datepicker">
