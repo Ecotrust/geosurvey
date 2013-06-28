@@ -24,21 +24,27 @@ try:
 except KeyError: 
     pass
 
-try:
-    redis_url = urlparse.urlparse(os.environ.get('REDISTOGO_URL', None))
-    CACHES = {
-        'default': {
-            'BACKEND': 'redis_cache.RedisCache',
-            'LOCATION': '%s:%s' % (redis_url.hostname, redis_url.port),
-            'OPTIONS': {
-                'DB': 0,
-                'PASSWORD': redis_url.password,
-            }
-        }
+# try:
+#     redis_url = urlparse.urlparse(os.environ.get('REDISTOGO_URL', None))
+#     CACHES = {
+#         'default': {
+#             'BACKEND': 'redis_cache.RedisCache',
+#             'LOCATION': '%s:%s' % (redis_url.hostname, redis_url.port),
+#             'OPTIONS': {
+#                 'DB': 0,
+#                 'PASSWORD': redis_url.password,
+#             }
+#         }
+#     }
+# except AttributeError:
+#     print "NO REDIS!!!!!!!!!"
+#     pass
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
     }
-except AttributeError:
-    print "NO REDIS!!!!!!!!!"
-    pass
+}
 
 COMPRESS_ENABLED = True
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
