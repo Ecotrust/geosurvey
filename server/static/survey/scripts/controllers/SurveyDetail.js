@@ -1216,11 +1216,11 @@ angular.module('askApp')
         }
 
         if ($scope.question && $scope.question.type === 'datepicker') {
-            $scope.answer = (new Date()).toString("yyyy-MM-dd");
+            $scope.now = (new Date()).toString("yyyy-MM-dd");
 
         }
         if ($scope.question && $scope.question.type === 'timepicker') {
-            $scope.answer = (new Date()).toString("HH:mm");
+            $scope.now = (new Date()).toString("HH:mm");
         }
         if ($scope.question.foreach_question) {
             $scope.question.foreach = true;
