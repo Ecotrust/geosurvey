@@ -103,6 +103,19 @@ angular.module('askApp')
             });
         }
 
+        $scope.newGridColumn = function (question) {
+            var option = {
+                text: question.newOptionText,
+                text: _.string.slugify(question.newOptionText)
+            };
+            $http.post('/api/v1/option/', option).success(function (data) {
+                question.grid_cols.push(data);
+                question.activeOption = data;
+                question.newOption = false;
+                question.newOptionText = null;
+            });
+        }
+
         $scope.createSurvey = function (survey) {
             survey.slug = _.string.slugify(survey.name);
             $http.post('/api/v1/survey/', $scope.survey).success(function(data) {

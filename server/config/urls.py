@@ -20,6 +20,7 @@ v1_api.register(PlaceResource())
 v1_api.register(QuestionResource())
 v1_api.register(ResponseResource())
 v1_api.register(PageResource())
+v1_api.register(OptionResource())
 
 v1_api.register(SurveyReportResource())
 

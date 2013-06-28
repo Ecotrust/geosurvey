@@ -1171,7 +1171,9 @@ angular.module('askApp')
             var costCellTemplate = '<input class="colt{{$index}} input-block-level" ng-model="row.entity[col.field]" style="height: 100%;" type="number" step="any" value="{{row.getProperty(col.field)}}"  }" onFocus="this.select();" onClick="this.select();"/>';
             var nameTemplate = '<input class="colt{{$index}} input-block-level" ng-model="row.entity[col.field]" style="height: 100%;" type="text"  value="{{row.getProperty(col.field)}}"  }" />';
             var checkboxTemplate = '<input class="colt{{$index}} input-block-level" ng-model="row.entity[col.field]" style="height: 100%;" type="checkbox"  value="{{row.getProperty(col.field)}}"  }" />';
-
+            //var selectTemplate = '<select class="colt{{$index}} input-block-level" ng-model="row.entity[col.field]" style="height: 100%;" value="{{row.getProperty(col.field)}}"  }"><option ng-repeat="option in row.entity[\'rows\']">{{option}}</option></select>';
+            // var selectTemplate = '<div style="height:100%">{{col.field}}</div>'
+            var selectTemplate = '<div class="ngCellText happy" ng-class="col.colIndex()"><span ng-cell-text><select class="colt{{$index}} input-block-level" ng-model="row.entity[col.field]" style="height: 100%;" value="{{row.getProperty(col.field)}}"  }"><option value="">select {{row.getProperty(col.field)}}</option><option ng-repeat="option in col.colDef.options">{{option}}</option></select></span></div>';
             
             $scope.gridOptions = {
                 data: 'question.options',
@@ -1191,20 +1193,25 @@ angular.module('askApp')
             };
 
             _.each($scope.question.grid_cols, function(gridCol, i) {
-                var template;
+                var template, col = {
+                    field: gridCol.label,
+                    displayName: gridCol.text,
+                };
+
                 console.log(gridCol);
                 if (gridCol.type === 'integer') {
                     template = costCellTemplate;
                 } else if (gridCol.type === 'yes-no') {
                     template = checkboxTemplate;
+                } else if (gridCol.type === 'single-select') {
+                    template = selectTemplate;
+                    col.options = gridCol.rows.split('\n');
                 } else {
                     template = nameTemplate;
                 }
-                $scope.gridOptions.columnDefs.push({
-                    field: gridCol.label,
-                    displayName: gridCol.text,
-                    cellTemplate: template
-                });
+                col.cellTemplate = template
+
+                $scope.gridOptions.columnDefs.push(col);
             });
         }
 

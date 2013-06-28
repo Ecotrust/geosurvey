@@ -63,6 +63,7 @@ class RespondantResource(ModelResource):
 
 class OptionResource(ModelResource):
     class Meta:
+        always_return_data = True
         queryset = Option.objects.all()
         authorization = StaffUserOnlyAuthorization()
         authentication = Authentication()
