@@ -28,10 +28,7 @@ def get_geojson(request, survey_slug, question_slug):
             slug = filter.keys()[0]
             value = filter[slug]
             filter_question = QuestionReport.objects.get(slug=slug, survey=survey)
-            print filter_question.response_set.all()
             locations = locations.filter(location__respondant__responses__in=filter_question.response_set.filter(answer__in=value))
-            print slug, value
-            print locations.count()
 
     geojson = [];
     for location in locations:

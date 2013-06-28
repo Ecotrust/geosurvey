@@ -13,7 +13,7 @@ angular.module('askApp', ['ui', 'leaflet.directive', 'ui.bootstrap', 'ngGrid'])
 
     $routeProvider.when('/', {
         templateUrl: '/static/survey/views/main.html',
-        controller: 'SurveyDetailCtrl'
+        controller: 'MainCtrl'
     })
         .when('/survey/:surveySlug/:questionSlug/offline', {
         templateUrl: '/static/survey/views/SurveyDetail.html',

@@ -136,6 +136,7 @@ INSTALLED_APPS = (
     'compressor',
 
     # Project specific apps go here
+    'apps.account',
     'apps.places',
     'apps.survey',
     'apps.reports'
