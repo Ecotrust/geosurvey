@@ -106,7 +106,7 @@ angular.module('askApp')
         $scope.newGridColumn = function (question) {
             var option = {
                 text: question.newOptionText,
-                text: _.string.slugify(question.newOptionText)
+                label: _.string.slugify(question.newOptionText)
             };
             $http.post('/api/v1/option/', option).success(function (data) {
                 question.grid_cols.push(data);
