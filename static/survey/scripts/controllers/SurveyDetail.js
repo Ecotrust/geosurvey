@@ -1143,6 +1143,7 @@ angular.module('askApp')
                 canSelectRows: false,
                 multiSelect: false,
                 rowHeight: 50,
+                headerRowHeight: 45,
                 plugins: [new ngGridFlexibleHeightPlugin()],
                 rowTemplate: '<div ng-style="{\'z-index\': col.zIndex() }" ng-repeat="col in renderedColumns" ng-class="col.colIndex()" class="ngCell {{col.cellClass}}" ng-cell></div>',
                 columnDefs: [{
@@ -1151,11 +1152,13 @@ angular.module('askApp')
                 }, {
                     field: 'cost',
                     displayName: 'Cost',
-                    cellTemplate: costCellTemplate
+                    cellTemplate: costCellTemplate,
+                    minWidth: 30
                 }, {
                     field: 'numPeople',
                     displayName: '# of People Covered',
-                    cellTemplate: numPeopleCellTemplate
+                    cellTemplate: numPeopleCellTemplate,
+                    minWidth: 70
                 }]
             };
         }
