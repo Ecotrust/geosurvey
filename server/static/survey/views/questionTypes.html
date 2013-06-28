@@ -46,7 +46,7 @@
     </div>
     <div ng-switch-when="text">
         <form class="question" ng-show="survey.questions.length" ng-submit="answerQuestion(answer)">
-            <input class="input-block-level" type="text" placeholder="{{ question.label }}" ng-model="answer" autofocus/>
+            <input class="input-block-level" type="text" placeholder="{{ question.label }}" ng-model="answer" autofocus />
             <button type="submit" class="btn btn-primary btn-large btn-block button-block" ng-disabled="question.required && ! answer">continue</button>
         </form>
     </div>

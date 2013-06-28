@@ -110,6 +110,9 @@ input {
                 <div class="row-fluid" ng-show="activeQuestion.type == 'grid'">
                     <div class="span3">
                         <h4>Grid Options</h4>
+                        <label>Options from previous answer</label>
+                        <input type="text" ng-model="activeQuestion.options_from_previous_answer">
+                        <br/>
                         <ul class="nav nav-pills nav-stacked">
                             <li
                                 ng-class="{'active': grid_col == activeQuestion.activeOption }"
@@ -149,6 +152,8 @@ input {
                             <input type="checkbox" ng-model="activeQuestion.allow_other"/>
                             Allow Other
                         </label>
+                        <label>Options from previous answer</label>
+                        <input type="text" ng-model="activeQuestion.options_from_previous_answer">
                     </div>
                 </div>
             </div>
