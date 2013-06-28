@@ -27,25 +27,29 @@ angular.module('askApp')
            
             $scope.$watch('survey.questions', function (newValue) {
                 if (newValue && ! $scope.questionsToBeUpdated.length && ! $scope.updatedQuestionQueue.length) {
-                    _.each($scope.survey.questions, function (question, index) {
-                        if (question.order !== index) {
-                            question.order = index;
-                            question.update=true;
-                            $scope.questionsToBeUpdated.push(question);
-                        }
-                    });
-                    if ($scope.questionsToBeUpdated.length) {
-                        $scope.updatedQuestionQueue = [];
-                        $scope.updateCounter = $scope.updateTotal = $scope.questionsToBeUpdated.length;
-                        $scope.updateQuestions($scope.questionsToBeUpdated);    
-                    }
-                    
+                   $scope.checkQuestionOrder($scope.survey.questions);
                 }
             }, true);
 
         } else {
             $scope.newSurvey = true;
         }
+
+        $scope.checkQuestionOrder = function (questions) {
+            _.each(questions, function (question, index) {
+                if (question.order !== index) {
+                    question.order = index;
+                    question.update=true;
+                    $scope.questionsToBeUpdated.push(question);
+                }
+            });
+            if ($scope.questionsToBeUpdated.length) {
+                $scope.updatedQuestionQueue = [];
+                $scope.updateCounter = $scope.updateTotal = $scope.questionsToBeUpdated.length;
+                $scope.updateQuestions($scope.questionsToBeUpdated);    
+            }
+            
+        };
 
         $scope.updateQuestionList = function (questions) {
             _.each(questions, function (question) {
@@ -75,6 +79,18 @@ angular.module('askApp')
             })
         }
 
+        $scope.delete = function (question) {
+            $http({
+                method: 'DELETE',
+                url: question.resource_uri,
+                data: question
+            }).success(function (data) {
+                $scope.survey.questions.splice(_.indexOf($scope.survey.questions, $scope.questions)+1,1);
+                $scope.checkQuestionOrder($scope.survey.questions);
+                $scope.startEditingQuestion($scope.survey.questions[0]);
+            });
+        };
+
         $scope.newQuestion = function () {
             var order = 0;
             if ($scope.survey.questions.length) {
@@ -95,6 +111,7 @@ angular.module('askApp')
         }
 
         $scope.startEditingQuestion = function (question) {
+            $scope.confirmDelete = false;
             $scope.activeQuestion = {};
             $scope.questionBeingEdited = question;
             angular.extend($scope.activeQuestion, question);

@@ -49,10 +49,20 @@ input {
             </div>
         </div>
         <div class="well">
-            <h1>{{ survey.name }}</h1>
-            <div class="btn-group pull-right">
-                <a class="btn" target="_blank" href="/admin/survey/question/{{activeQuestion.id}}/">edit</a>
-                <a class="btn" target="_blank" href="/respond#/survey/{{survey.slug}}/{{activeQuestion.slug}}/offline">survey</a>
+            <h1>
+                {{ survey.name }}
+                <div class="btn-group pull-right" ng-hide="confirmDelete">
+                    <a class="btn" target="_blank" href="/admin/survey/question/{{activeQuestion.id}}/">edit</a>
+                    <a class="btn" target="_blank" href="/respond#/survey/{{survey.slug}}/{{activeQuestion.slug}}/offline">survey</a>
+                    <a class="btn btn-danger" target="_blank" ng-click="confirmDelete = true">delete</a>
+                </div>
+                <div class="btn-group pull-right" ng-show="confirmDelete">
+                    
+                    <a class="btn btn-danger" target="_blank" ng-click="delete(activeQuestion)">delete</a>
+                    <a class="btn" target="_blank" ng-click="confirmDelete = false">cancel</a>
+            </h1>
+            <div class="row-fluid clearfix">
+                
             </div>
             <form ng-submit="saveQuestion(activeQuestion)">
 
