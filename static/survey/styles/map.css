@@ -63,28 +63,42 @@ div[leaflet] {
 .btn-done-mapping.small-screen {
     display: none;
 }
-.btn-my-activities, .btn-help, .btn-done-mapping, .btn-search {
+.btn-my-activities, 
+.btn-done-mapping, 
+.btn-search, 
+.geosurvey-map-control-layers-toggle .btn {
     background-color: #eee;
     color: black;
 }
-.map-controls .btn, .leaflet-control-layers a, .btn-done-mapping {
+.map-controls .btn, 
+.leaflet-control-layers a, 
+.btn-search, 
+.btn-my-activities, 
+.btn-done-mapping, 
+.geosurvey-map-control-layers-toggle .btn {
     -webkit-box-shadow: 0 2px 2px rgba(0,0,0,.3);
        -moz-box-shadow: 0 2px 2px rgba(0,0,0,.3);
             box-shadow: 0 2px 2px rgba(0,0,0,.3);
+}
+.geosurvey-map-control-layers-toggle .btn {
+    font-size: 14px;
+    padding: 8px 11px;
 }
 .leaflet-control-container .leaflet-top.leaflet-left {
     /* the zoom control is being forced to bottom left 
     while staying in the top left class (if time available, 
     we should just move the control the the bottom left class) */
-    bottom: 17px;
+    bottom: 70px;
     top: auto;
     left: 15px;
 }
 .leaflet-control-container .leaflet-bottom.leaflet-left {
     /* the layers control  just above the zoom control */
-    bottom: 85px;
+    bottom: 15px;
     left: 13px;
+    z-index: 10; /* higher than map attribution*/
 }
+
 @media (max-width: 790px) {
     .btn-help .map-control-label {
         display: none;
@@ -111,8 +125,9 @@ div[leaflet] {
         }
     .leaflet-control-container .leaflet-bottom.leaflet-left {
         /* since the zoom control is hidden, move the layers control down */
-        bottom: 0px;
-        left: 3px;
+        bottom: 18px;
+        left: auto;
+        right: 4px;
         }
     .leaflet-control-layers {
         border: none !important;
