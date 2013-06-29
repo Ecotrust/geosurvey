@@ -13,7 +13,7 @@ def get_geojson(request, survey_slug, question_slug):
     survey = get_object_or_404(Survey, slug=survey_slug)
     question = get_object_or_404(QuestionReport, slug=question_slug, survey=survey)
     locations = LocationAnswer.objects.filter(location__response__respondant__survey=survey, location__respondant__complete=True)
-    
+
     filter_list = []
     filters = None
 
@@ -28,10 +28,10 @@ def get_geojson(request, survey_slug, question_slug):
             slug = filter.keys()[0]
             value = filter[slug]
             filter_question = QuestionReport.objects.get(slug=slug, survey=survey)
-            print filter_question.response_set.all()
-            locations = locations.filter(location__respondant__responses__in=filter_question.response_set.filter(answer__in=value))
-            print slug, value
-            print locations.count()
+            if filter_question.type == 'map-multipoint':
+                locations = locations.filter(answer__in=value)
+            else:
+                locations = locations.filter(location__respondant__responses__in=filter_question.response_set.filter(answer__in=value))
 
     geojson = [];
     for location in locations:
@@ -48,7 +48,6 @@ def get_geojson(request, survey_slug, question_slug):
         }
         geojson.append(d)
 
-    
     return HttpResponse(simplejson.dumps({'success': "true", 'geojson': geojson}))
 
 @staff_member_required
