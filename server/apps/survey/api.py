@@ -3,7 +3,7 @@ from tastypie import fields, utils
 
 from tastypie.authentication import SessionAuthentication, Authentication
 from tastypie.authorization import DjangoAuthorization, Authorization
-from django.conf.urls.defaults import url
+from django.conf.urls import url
 from django.db.models import Avg, Max, Min, Count
 
 from survey.models import Survey, Question, Option, Respondant, Response, Page

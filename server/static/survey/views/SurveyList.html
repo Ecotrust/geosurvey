@@ -1,16 +1,21 @@
 <div class="content-padded">
     <h2>
-        Surveys
+        Surveys for {{ user.username }}
     </h2>
-    <div ng-hide="surveys">
+    <div ng-hide="surveys" ng-show="hideSurveys">
         <strong>Loading Surveys</strong>
         <!-- <a class="button button-block">Load Surveys</a> -->
     </div>
 </div>
-<ul class="list">
-    <li ng-repeat="survey in surveys">
-        {{ survey.name }}
-        <a ng-show="survey.offline" class="button" href="#/survey/{{survey.slug}}/{{survey.questions[0].slug}}/offline">Launch</a>
-        <a ng-hide="survey.offline" class="button" href="#/survey/{{survey.slug}}/{{survey.questions[0].slug}}/uuid">Launch</a>
-    </li>
-</ul>
+<div ng-hide="hideSurveys">
+    <div ng-show="user.is_staff">
+        <a class="btn btn-block btn-large" ng-click="updateSurveys()">update surveys</a>
+    </div>
+    <ul class="list" ng-hide="hideSurveys">
+        <li ng-repeat="survey in surveys">
+            {{ survey.name }} ({{survey.updated_at |date: 'yyyy-MM-dd HH:mm'}})
+            <a ng-show="survey.offline" class="button" href="#/survey/{{survey.slug}}/{{survey.questions[0].slug}}/offline">Launch</a>
+            <a ng-hide="survey.offline" class="button" href="#/survey/{{survey.slug}}/{{survey.questions[0].slug}}/uuid">Launch</a>
+        </li>
+    </ul>
+</div>

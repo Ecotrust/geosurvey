@@ -1,6 +1,12 @@
 //'use strict';
 
-var app = {};
+if (localStorage.getItem('hapifish')) {
+    app = JSON.parse(localStorage.getItem('hapifish'));
+    console.log(app);
+} else {
+    var app = {};    
+}
+
 
 angular.module('askApp', ['ui', 'leaflet.directive', 'ui.bootstrap', 'ngGrid'])
     .config(function($routeProvider, $httpProvider) {
@@ -22,6 +28,11 @@ angular.module('askApp', ['ui', 'leaflet.directive', 'ui.bootstrap', 'ngGrid'])
         .when('/author/:surveySlug', {
         templateUrl: 'views/author.html',
         controller: 'AuthorCtrl'
+    })
+        .when('/surveys/:state', {
+        templateUrl: 'views/SurveyList.html',
+        controller: 'SurveyListCtrl',
+        offline: true
     })
         .when('/surveys', {
         templateUrl: 'views/SurveyList.html',

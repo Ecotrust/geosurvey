@@ -1,6 +1,5 @@
 'use strict';
 
-
 angular.module('askApp')
   .controller('MainCtrl', function ($scope, $location, $http) {
     
@@ -12,11 +11,17 @@ angular.module('askApp')
 
     };
 
+    $scope.saveState = function () {
+        localStorage.setItem('hapifish', JSON.stringify(app));
+    }
+
     $scope.createUser = function (user) {
         var url = "/account/createUser";
 
         $http.post(url, user)
             .success(function () {
+                app.user = data.user;
+                $scope.saveState();
                 $location.path('/surveys');
             })
         .error(function (data) {
@@ -38,6 +43,8 @@ angular.module('askApp')
 
         })
             .success(function (data) {
+                app.user = data.user;
+                $scope.saveState();
                 $location.path('/surveys');
             })
             .error(function (data) {

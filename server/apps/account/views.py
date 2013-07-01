@@ -27,7 +27,8 @@ def authenticateUser(request):
             profile = user.profile
             user_dict = {
                 'username': user.username,
-                'name': ' '.join([user.first_name, user.last_name])
+                'name': ' '.join([user.first_name, user.last_name]),
+                'is_staff': user.is_staff
             }
             return HttpResponse(simplejson.dumps({
                 'success': True, 'user': user_dict
@@ -53,7 +54,8 @@ def createUser(request):
                 login(request, user)
                 user_dict = {
                     'username': user.username,
-                    'name': ' '.join([user.first_name, user.last_name])
+                    'name': ' '.join([user.first_name, user.last_name]),
+                    'is_staff': user.is_staff
                 }
                 return HttpResponse(simplejson.dumps({'success': True, 'user': user_dict}))
         else:
