@@ -16,3 +16,4 @@ geosurvey_env
 logs
 scripts/heroku-env.sh
 *.orig
+mobile/*

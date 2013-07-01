@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User, check_password
+from django.contrib.auth.forms import PasswordResetForm
 
 import simplejson
 
@@ -63,6 +64,10 @@ def createUser(request):
 @csrf_exempt
 def forgotPassword(request):
     if request.POST:
+        param = simplejson.loads(request.POST.keys()[0])
+        # email = param.get('email', None)
+        # form = PasswordResetForm({'email': email})
+        # form.save(from_email='eknuth@ecotrust.org', email_template_name='registration/password_reset_email.html')
         return HttpResponse(simplejson.dumps({'success': True}))
     else:
         return HttpResponse("error", status=500)
