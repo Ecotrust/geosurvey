@@ -137,6 +137,7 @@ INSTALLED_APPS = (
 
     # Project specific apps go here
     'apps.account',
+    'apps.mobile',
     'apps.places',
     'apps.survey',
     'apps.reports'
