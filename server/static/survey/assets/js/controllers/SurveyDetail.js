@@ -268,6 +268,12 @@ angular.module('askApp')
             }
         } else {
 
+            if ($scope.question.type === 'timepicker' || $scope.question.type === 'datepicker') {
+                if (! $scope.answer) {
+                    answer = $scope.now;
+                }
+            }
+
             // sometimes we'll have an other field with option text box
             if (answer === 'other' && otherAnswer) {
                 answer = otherAnswer;

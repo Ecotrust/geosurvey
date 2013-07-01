@@ -13,7 +13,7 @@
     </div>
     <ul class="list" ng-hide="hideSurveys">
         <li ng-repeat="survey in surveys">
-            {{ survey.name }} ({{survey.updated_at |date: 'yyyy-MM-dd HH:mm'}})
+            {{ survey.name }} <span class="badge badge-success">{{survey.updated_at |date: 'yyyy-MM-dd HH:mm'}}</span>
             <a ng-show="survey.offline" class="button" href="#/survey/{{survey.slug}}/{{survey.questions[0].slug}}/offline">Launch</a>
             <a ng-hide="survey.offline" class="button" href="#/survey/{{survey.slug}}/{{survey.questions[0].slug}}/uuid">Launch</a>
         </li>
