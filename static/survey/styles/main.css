@@ -115,6 +115,9 @@ select + input {
 .ngHeaderText {
     white-space: normal;
 }
+.ngCellText {
+    white-space: normal;
+}
 
 p.landing, p.info {
     margin-top: 30px;

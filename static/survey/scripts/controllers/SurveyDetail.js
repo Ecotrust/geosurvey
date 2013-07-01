@@ -799,6 +799,14 @@ angular.module('askApp')
                 $scope.locations = JSON.parse($scope.answer);
             }
 
+            // $scope.layers = [];
+            // $scope.layers[0] = {label: 'Satellite Imagery', mapId: 'bing'};
+            // $scope.layers[1] = {label: 'Nautical Charts', mapId: 'nautical'};
+            // $scope.toggleLayer = function () {
+            //     if ()
+            //     $scope.map.addLayer(, true).removeLayer();
+            // };
+
             $scope.updateCrosshair = function() {
                 if ($scope.activeMarker !== false) {
                     $scope.map.marker.icon = "crosshair_blank.png";
@@ -1142,7 +1150,7 @@ angular.module('askApp')
                 enableCellSelection: true,
                 canSelectRows: false,
                 multiSelect: false,
-                rowHeight: 50,
+                rowHeight: 70,
                 headerRowHeight: 45,
                 plugins: [new ngGridFlexibleHeightPlugin()],
                 rowTemplate: '<div ng-style="{\'z-index\': col.zIndex() }" ng-repeat="col in renderedColumns" ng-class="col.colIndex()" class="ngCell {{col.cellClass}}" ng-cell></div>',
