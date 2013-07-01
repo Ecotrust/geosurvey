@@ -76,6 +76,9 @@ heroku login
 ##set environment vars and install addons.
 ```bash
 heroku config:add DJANGO_SECRET_KEY=SECRET!
+heroku config:add DJANGO_SECRET_KEY=example.com
+heroku config:add DJANGO_SECRET_KEY=KEY
+heroku config:add ANALYTICS_ID=UA-example
 heroku addons:add sendgrid
 heroku addons:add redistogo
 heroku addons:add pgbackups
