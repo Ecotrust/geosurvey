@@ -1246,6 +1246,8 @@ angular.module('askApp')
             $routeParams.uuidSlug = 'offline:' + ts.getTime();
             app.respondents[$routeParams.uuidSlug] = {
                 uuid: $routeParams.uuidSlug,
+                survey: $routeParams.surveySlug,
+                ts: ts,
                 responses: []
             }
             $scope.saveState();
