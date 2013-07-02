@@ -31,5 +31,4 @@ angular.module('askApp')
     } else {
         $scope.updateSurveys();
     }
-
 });

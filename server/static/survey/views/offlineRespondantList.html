@@ -1,0 +1,7 @@
+<p ng-hide="respondents">This device has no completed surveys.</p>
+<div ng-hide="hideList">
+    <a class="btn btn-block btn-large" ng-click="syncronize()">synchronize</a>
+    <ul class="list" ng-show="respondents">
+        <li ng-repeat="respondent in respondents">{{ respondent.uuid |date: 'yyyy-MM-dd HH:mm'}}</li>
+    </ul>
+</div>

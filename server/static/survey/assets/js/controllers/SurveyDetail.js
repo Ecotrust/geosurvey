@@ -162,8 +162,7 @@ angular.module('askApp')
     $scope.zoomModel = {
         zoomToResult: undefined
     };
-
-
+  
     $scope.getAnswer = function(questionSlug) {
         if ($scope.answers[questionSlug]) {
             return $scope.answers[questionSlug];
@@ -237,22 +236,15 @@ angular.module('askApp')
     };
 
     $scope.answerOffline = function(answer) {
-        if (!app.data) {
-            app.data = {};
-        }
-        if (!app.data.responses) {
-            app.data.responses = [];
-        }
-        if (!$scope.answers) {
-            $scope.answers = [];
-        }
-        app.data.responses.push({
-            answer: answer,
-            question: $scope.question
-        });
+        app.respondents[$routeParams.uuidSlug].responses.push(answer);
         $scope.answers[$routeParams.questionSlug] = answer;
-        app.data.responses.push(answer);
+        $scope.saveState();
         $scope.gotoNextQuestion();
+
+    };
+
+    $scope.saveState = function () {
+        localStorage.setItem('hapifish', JSON.stringify(app));
     };
 
     $scope.answerQuestion = function(answer, otherAnswer) {
@@ -1235,7 +1227,7 @@ angular.module('askApp')
             $scope.question.foreach = false;
         }
     };
-    if (! $routeParams.uuidSlug && !app.data) {
+    if ($routeParams.uuidSlug && ! _.string.startsWith($routeParams.uuidSlug, 'offline')) {
         $http.get('/api/v1/survey/' + $routeParams.surveySlug + '/?format=json').success(function(data) {
             app.data = {
                 survey: data
@@ -1244,6 +1236,26 @@ angular.module('askApp')
                 survey: data
             });
         });
+    } else if ($routeParams && _.string.startsWith($routeParams.uuidSlug, 'offline')) {
+        var ts = new Date();
+        if ($routeParams.uuidSlug === 'offline') {
+            $scope.answers = [];
+            if (!app.respondents) {
+                app.respondents = {};
+            }
+            $routeParams.uuidSlug = 'offline:' + ts.getTime();
+            app.respondents[$routeParams.uuidSlug] = {
+                uuid: $routeParams.uuidSlug,
+                responses: []
+            }
+            $scope.saveState();
+        }
+        $scope.loadSurvey({
+            survey: _.findWhere(app.surveys, {
+                slug: $routeParams.surveySlug
+            }),
+            responses: app.respondents[$routeParams.uuidSlug].responses
+        });
     } else if (!app.data && !app.surveys) {
         $http.get('/api/v1/respondant/' + $routeParams.uuidSlug + '/?format=json').success(function(data) {
             app.data = data;
@@ -1251,16 +1263,5 @@ angular.module('askApp')
         }).error(function(data, status, headers, config) {
             $scope.survey.status = 'invalid';
         });    
-    } else if (app.surveys) {
-
-        $scope.loadSurvey({
-            survey: _.findWhere(app.surveys, {
-                slug: $routeParams.surveySlug
-            }),
-            responses: app.data ? app.data.responses : []
-        });
-
-    } else {
-        $scope.loadSurvey(app.data);
     }
 });

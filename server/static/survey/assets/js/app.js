@@ -21,23 +21,15 @@ angular.module('askApp', ['ui', 'leaflet.directive', 'ui.bootstrap', 'ngGrid'])
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
     })
-        .when('/survey/:surveySlug/:questionSlug/offline', {
-        templateUrl: 'views/SurveyDetail.html',
-        controller: 'SurveyDetailCtrl'
-    })
         .when('/author/:surveySlug', {
         templateUrl: 'views/author.html',
         controller: 'AuthorCtrl'
-    })
-        .when('/surveys/:state', {
-        templateUrl: 'views/SurveyList.html',
-        controller: 'SurveyListCtrl',
-        offline: true
     })
         .when('/surveys', {
         templateUrl: 'views/SurveyList.html',
         controller: 'SurveyListCtrl'
     })
+
         .when('/survey/:surveySlug/complete/:uuidSlug', {
         templateUrl: 'views/complete.html',
         controller: 'CompleteCtrl'
@@ -53,6 +45,10 @@ angular.module('askApp', ['ui', 'leaflet.directive', 'ui.bootstrap', 'ngGrid'])
         .when('/survey/:surveySlug/:uuidSlug', {
         templateUrl: 'views/landing.html',
         controller: 'SurveyDetailCtrl'
+    })
+        .when('/respondents/', {
+        templateUrl: 'views/offlineRespondantList.html',
+        controller: 'offlineRespondantListCtrl'
     })
         .when('/RespondantList/:surveySlug', {
         templateUrl: 'views/RespondantList.html',
