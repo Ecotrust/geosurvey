@@ -138,9 +138,6 @@ class SurveyResource(ModelResource):
             'slug': ['exact']
         }
 
-    # def save_m2m(self, bundle):
-    #     pass
-
     def prepend_urls(self):
         return [
             url(r"^(?P<resource_name>%s)/(?P<slug>[\w\d_.-]+)/$" % self._meta.resource_name, self.wrap_view('dispatch_detail'), name="api_dispatch_detail"),
