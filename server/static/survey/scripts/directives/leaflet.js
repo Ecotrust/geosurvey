@@ -6,7 +6,7 @@
 
     var leafletDirective = angular.module('leaflet.directive', []);
 
-    leafletDirective.directive('leaflet', function($http, $log, $compile, $timeout, $dialog) {
+    leafletDirective.directive('leaflet', function($http, $log, $compile, $timeout, $dialog, $routeParams) {
         return {
             restrict: 'EA',
             replace: true,
@@ -49,14 +49,11 @@
                 map.zoomControl.options.position = 'bottomleft';
 
                 // Layer picker init
-                // var baseMaps = { "Satellite": bing, "Nautical Charts": nautical };
                 var options = { position: 'bottomleft' };
-                // L.control.layers(baseMaps, null, options).addTo(map);
-
                 L.control.layersToggle("View Satellite Imagery", bing, "View Nautical Charts", nautical, options).addTo(map);
 
-                // Study area boundary
-                $http.get("/static/survey/data/marco_dd.json").success(function(data) {
+                // Study area boundary (if applicable)
+                $http.get("/static/survey/data/boundaries/" + $routeParams.surveySlug + ".json").success(function(data) {
                     var boundaryStyle = {
                         "color": "#E6D845",
                         "weight": 3,
@@ -71,22 +68,6 @@
                             map.setZoom(map.getZoom() + 1);
                         });
                 });
-
-                // var layerToggle = L.control();
-
-                // layerToggle.onAdd = function (map) {
-                //     this._div = L.DomUtil.create('div', 'layerToggle'); // create a div with a class "layerToggle"
-                //     this.update();
-                //     return this._div;
-                // };
-
-                // // method that we will use to update the control based on feature properties passed
-                // layerToggle.update = function (props) {
-                //     var grades = [0, 10, 20, 50, 100, 200, 500, 1000];
-                //     this._div.innerHTML = 'Layer Title: ' + (props ? props.name: 'empty');
-                // };
-
-                // layerToggle.addTo(map);
 
                 scope.activeMarker = null;
 

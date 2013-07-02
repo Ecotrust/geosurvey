@@ -799,14 +799,6 @@ angular.module('askApp')
                 $scope.locations = JSON.parse($scope.answer);
             }
 
-            // $scope.layers = [];
-            // $scope.layers[0] = {label: 'Satellite Imagery', mapId: 'bing'};
-            // $scope.layers[1] = {label: 'Nautical Charts', mapId: 'nautical'};
-            // $scope.toggleLayer = function () {
-            //     if ()
-            //     $scope.map.addLayer(, true).removeLayer();
-            // };
-
             $scope.updateCrosshair = function() {
                 if ($scope.activeMarker !== false) {
                     $scope.map.marker.icon = "crosshair_blank.png";
@@ -823,7 +815,7 @@ angular.module('askApp')
             };
 
 
-            $http.get("/static/survey/data/marco_dd.json").success(function(data) {
+            $http.get("/static/survey/data/boundaries/" + $routeParams.surveySlug + ".json").success(function(data) {
                 $scope.boundaryLayer = L.geoJson(data);
             });
 
@@ -835,7 +827,7 @@ angular.module('askApp')
                     // results is an array of L.Polygon objects containing that point
                     return results.length < 1;
                 }
-                return true; // not using a boundary layer
+                return false; // not using a boundary layer
             };
 
             $scope.addMarker = function () {
@@ -846,7 +838,6 @@ angular.module('askApp')
                     $scope.isCrosshairAlerting = true;
                     $scope.showZoomAlert();
                 } else if ($scope.isOutOfBounds()) {
-                    console.log('not in boundary');
                     $scope.showOutOfBoundsAlert();
                 } else {
                     // Add location
