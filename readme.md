@@ -68,6 +68,11 @@ Because the app is being served out of the django app we need to specify a path 
 heroku create appname
 ```
 
+##add git remote for app
+```bach
+git remote add heroku <Git URL from Heroku settings page>
+```
+
 ##login to heroku
 ```bash
 heroku login
