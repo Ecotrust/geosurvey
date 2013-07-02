@@ -1,3 +1,6 @@
+<h2>
+    Surveys taken by {{ user.username }}
+</h2>
 <p ng-hide="respondents.length">This device has no completed surveys.</p>
 <div ng-show="busy">
     <h1>Synchronizing Surveys</h1>
@@ -6,13 +9,14 @@
     </div>
 </div>
 <div ng-show="respondents.length > 0 && ! busy">
-    <a class="btn btn-block btn-large" ng-click="syncronize(respondents)">synchronize</a>
     <ul class="list" ng-show="respondents">
         <li ng-repeat="respondent in respondents">
             <a ng-click="resume(respondent)">
                 {{ respondent.survey }}
+                <span class="chevron"></span>
                 <span class="badge">{{ respondent.ts |date: 'yyyy-MM-dd HH:mm'}}</span>
             </a>
         </li>
     </ul>
+    <a class="btn btn-block btn-large" ng-click="syncronize(respondents)">submit surveys</a>
 </div>
