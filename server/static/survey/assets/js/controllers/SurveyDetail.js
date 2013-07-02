@@ -148,6 +148,13 @@ function ActivitySelectorDialogCtrl($scope, dialog, $location, $window, question
 angular.module('askApp')
     .controller('SurveyDetailCtrl', function($scope, $routeParams, $http, $location, $dialog, $interpolate, $timeout) {
 
+        if (app.user ) {
+            $scope.user = app.user;    
+        } else {
+            $location.path('/');
+        }
+
+
     $scope.survey = {
         state: 'loading'
     };
@@ -236,6 +243,8 @@ angular.module('askApp')
     };
 
     $scope.answerOffline = function(answer) {
+        console.log(answer);
+        // delete the display title, because it is generated
         app.respondents[$routeParams.uuidSlug].responses.push(answer);
         $scope.answers[$routeParams.questionSlug] = answer;
         $scope.saveState();

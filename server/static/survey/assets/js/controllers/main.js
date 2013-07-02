@@ -1,7 +1,10 @@
+
 'use strict';
 
 angular.module('askApp')
   .controller('MainCtrl', function ($scope, $location, $http) {
+
+    $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
     
     // showForm can be in ['login', 'new-user', 'forgot'];
     $scope.showForm = 'login';

@@ -50,9 +50,27 @@ class ResponseResource(ModelResource):
             'question': ALL_WITH_RELATIONS
         }
 
+class OfflineResponseResource(ModelResource):
+    question = fields.ToOneField('apps.survey.api.QuestionResource', 'question')
+
+    class Meta:
+        queryset = Response.objects.all()
+        authorization = StaffUserOnlyAuthorization()
+        authentication = Authentication()
+
+class OfflineRespondantResource(ModelResource):
+    responses = fields.ToManyField(OfflineResponseResource, 'responses', null=True, blank=True)
+    survey = fields.ToOneField('apps.survey.api.SurveyResource', 'survey', null=True, blank=True)
+    class Meta:
+        always_return_data = True
+        queryset = Respondant.objects.all()
+        authorization = StaffUserOnlyAuthorization()
+        authentication = Authentication()
+
+
 class RespondantResource(ModelResource):
-    responses = fields.ToManyField(ResponseResource, 'responses', full=True)
-    survey = fields.ToOneField('apps.survey.api.SurveyResource', 'survey', null=True, blank=True, full=True)
+    responses = fields.ToManyField(ResponseResource, 'responses', full=True, null=True, blank=True)
+    survey = fields.ToOneField('apps.survey.api.SurveyResource', 'survey', null=True, blank=True, full=True, readonly=True)
     class Meta:
         queryset = Respondant.objects.all()
         filtering = {
@@ -60,6 +78,8 @@ class RespondantResource(ModelResource):
             'responses': ALL_WITH_RELATIONS
         }
         ordering = ['-ts']
+        authorization = StaffUserOnlyAuthorization()
+        authentication = Authentication()
 
 class OptionResource(ModelResource):
     class Meta:
@@ -118,8 +138,8 @@ class SurveyResource(ModelResource):
             'slug': ['exact']
         }
 
-    def save_m2m(self, bundle):
-        pass
+    # def save_m2m(self, bundle):
+    #     pass
 
     def prepend_urls(self):
         return [

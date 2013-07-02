@@ -16,6 +16,8 @@ v1_api = Api(api_name='v1')
 
 v1_api.register(SurveyResource())
 v1_api.register(RespondantResource())
+v1_api.register(OfflineRespondantResource())
+v1_api.register(OfflineResponseResource())
 v1_api.register(PlaceResource())
 v1_api.register(QuestionResource())
 v1_api.register(ResponseResource())

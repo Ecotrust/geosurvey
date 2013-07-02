@@ -33,7 +33,10 @@ class Respondant(caching.base.CachingMixin, models.Model):
 
 
     def __str__(self):
-        return "%s" % self.email
+        if self.email:
+            return "%s" % self.email
+        else:
+            return "%s" % self.uuid
 
     def save(self, *args, **kwargs):
         ''' On save, update timestamps '''
@@ -221,15 +224,15 @@ class MultiAnswer(caching.base.CachingMixin, models.Model):
 
 class Response(caching.base.CachingMixin, models.Model):
     question = models.ForeignKey(Question)
-    respondant = models.ForeignKey(Respondant)
+    respondant = models.ForeignKey(Respondant, null=True, blank=True)
     answer = models.TextField()
     answer_raw = models.TextField()
     ts = models.DateTimeField(default=datetime.datetime.now())
     objects = caching.base.CachingManager()
 
 
-    def __str__(self):
-        return "%s/%s/%s" % (self.respondant.email, self.question.survey_slug, self.question.slug)
+    # def __str__(self):
+    #     return "%s/%s/%s" % (self.respondant.email, self.question.survey_slug, self.question.slug)
 
     def save(self, *args, **kwargs):
         ''' On save, update timestamps '''
@@ -269,7 +272,7 @@ class Response(caching.base.CachingMixin, models.Model):
                             answer.save()
                         location.save()
                 self.answer = ", ".join(answers)
-        if hasattr(self.respondant, self.question.slug):
-            setattr(self.respondant, self.question.slug, self.answer)
-            self.respondant.save()
+            if hasattr(self.respondant, self.question.slug):
+                setattr(self.respondant, self.question.slug, self.answer)
+                self.respondant.save()
         super(Response, self).save(*args, **kwargs)
