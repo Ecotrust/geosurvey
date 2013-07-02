@@ -9,7 +9,7 @@ DATABASES = {
     
 }
 
-DEBUG = False
+DEBUG = True
 HEROKU = True
 
 ALLOWED_HOSTS = [os.environ['ALLOWED_HOSTS']]
