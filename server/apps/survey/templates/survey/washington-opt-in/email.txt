@@ -1,5 +1,5 @@
 Hello,
-You recently submitted your e-mail address to take a survey on ocean and coastal recreation on the Washington coast. The link below will take you to the survey. Use this same link again if you need to stop and come back to the survey, your information will be saved.
+You recently submitted your e-mail address to take a survey on ocean and coastal recreation in the Pacific coast of Washington. The link below will take you to the survey. Use this same link again if you need to stop and come back to the survey, your information will be saved.
 
 http://{{ SITE_URL }}/respond#/survey/{{ survey_slug }}/{{ uuid }}
 
