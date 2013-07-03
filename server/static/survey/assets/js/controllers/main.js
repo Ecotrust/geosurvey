@@ -19,7 +19,7 @@ angular.module('askApp')
     }
 
     $scope.createUser = function (user) {
-        var url = "/account/createUser";
+        var url = app.server + "/account/createUser";
 
         $http.post(url, user)
             .success(function () {
@@ -37,7 +37,7 @@ angular.module('askApp')
     $scope.showError = false;
     $scope.showInfo = false;
     $scope.authenticateUser = function (user) {
-        var url = "/account/authenticateUser";
+        var url = app.server + "/account/authenticateUser";
 
         $http({
             method: 'POST',
@@ -57,7 +57,7 @@ angular.module('askApp')
     };
 
     $scope.forgotPassword = function (user) {
-        var url = "/account/forgotPassword";
+        var url = app.server + "/account/forgotPassword";
         $scope.showInfo = false;
         $http.post(url, user)
             .success(function () {

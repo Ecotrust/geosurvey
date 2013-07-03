@@ -5,7 +5,7 @@ angular.module('askApp')
 
     $scope.updateSurveys = function () {
         $scope.hideSurveys = true;
-        $http.get('/api/v1/survey/?format=json').success(function(data) {
+        $http.get(app.server + '/api/v1/survey/?format=json').success(function(data) {
             $scope.surveys = data.objects;
             _.each($scope.surveys, function (survey) {
                 survey.updated_at = new Date();

@@ -2,7 +2,7 @@ from django.core.management.base import BaseCommand, CommandError
 from django.conf import settings
 from apps.survey.api import *
 
-import os
+import os, errno
 import requests
 import simplejson
 import path
@@ -13,6 +13,10 @@ def copy_dir(src, dst):
     full_dst = dst
 
     try:
+        try:
+            shutil.rmtree(full_dst)
+        except:
+            pass
         shutil.copytree(full_src, full_dst)
     except OSError as exc: # python >2.5
         if exc.errno == errno.ENOTDIR:
@@ -25,27 +29,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         print "Packaging"
         url = "http://%s" % args[0]
-        dest = settings.PROJECT_ROOT / '../mobile'
-        api = "%s/api" % dest
-
-        try:
-            shutil.rmtree(dest)
-        except OSError, e:
-            print e
-
-        os.makedirs(api)
-        # load surveys
-        r = requests.get("%s/api/v1/survey/?format=json" % url)
-        surveys = r.json()
-
-        # write survey json to file system
-        with open("%s/surveys.json" % api,'w') as f:
-            f.write(r.text)
-
-        for survey in surveys['objects']:
-            with open("%s/%s.json" % (api, survey['slug']),'w') as f:
-                f.write(simplejson.dumps(survey))
-
+        dest = settings.PROJECT_ROOT / '../android/app/assets/www'
 
         # copy the app html
         app_src = settings.PROJECT_ROOT / 'static/survey/mobile.html'

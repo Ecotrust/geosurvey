@@ -7,6 +7,7 @@ if (localStorage.getItem('hapifish')) {
     var app = {};    
 }
 
+app.server = "http://simarketsurvey-test.herokuapp.com";
 
 angular.module('askApp', ['ui', 'leaflet.directive', 'ui.bootstrap', 'ngGrid'])
     .config(function($routeProvider, $httpProvider) {

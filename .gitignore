@@ -16,4 +16,9 @@ geosurvey_env
 logs
 scripts/heroku-env.sh
 *.orig
-mobile/*
+android/app/assets/www/assets
+android/app/assets/www/views
+android/app/assets/index.html
+android/app/bin
+android/app/gen
+

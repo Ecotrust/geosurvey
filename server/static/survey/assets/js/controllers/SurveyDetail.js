@@ -164,7 +164,7 @@ angular.module('askApp')
     $scope.isAuthenticated = isAuthenticated;
 
     // landing page view
-    $scope.landingView = '/static/survey/survey-pages/' + $routeParams.surveySlug + '/landing.html';
+    $scope.landingView = 'survey-pages/' + $routeParams.surveySlug + '/landing.html';
 
     $scope.zoomModel = {
         zoomToResult: undefined
@@ -227,7 +227,7 @@ angular.module('askApp')
         switch(currentQuestionSlug) 
         {
         case 'state':
-            $http.get('/static/survey/surveys/counties/' + (currentAnswer || {}).label + '.json')
+            $http.get('surveys/counties/' + (currentAnswer || {}).label + '.json')
             .success(function(data) { 
                 callback(false);
             })
@@ -280,7 +280,6 @@ angular.module('askApp')
     };
 
     $scope.answerOffline = function(answer) {
-        console.log(answer);
         // delete the display title, because it is generated
         app.respondents[$routeParams.uuidSlug].responses.push(answer);
         $scope.answers[$routeParams.questionSlug] = answer;
@@ -551,7 +550,7 @@ angular.module('askApp')
         $scope.answerQuestion(locations);
     };
 
-    $scope.loadSurvey = function(data) {
+$scope.loadSurvey = function(data) {
         $scope.survey = data.survey;
         $scope.survey.status = data.status;
 
@@ -588,7 +587,7 @@ angular.module('askApp')
         }
 
         if ($scope.question && $scope.question.type === 'info' && $scope.question.info) {
-            $scope.infoView = '/static/survey/survey-pages/' + $routeParams.surveySlug + '/' + $scope.question.info + '.html';
+            $scope.infoView = 'survey-pages/' + $routeParams.surveySlug + '/' + $scope.question.info + '.html';
 
         }
 
@@ -728,7 +727,7 @@ angular.module('askApp')
                 stateAbrv = stateAnswer.label;
             }
 
-            $http.get('/static/survey/surveys/counties/' + stateAbrv + '.json').success(function(data, status, headers, config) {
+            $http.get('surveys/counties/' + stateAbrv + '.json').success(function(data, status, headers, config) {
                 $scope.question.options = data;
                 if (!$scope.answer) { 
                     return;
@@ -869,7 +868,7 @@ angular.module('askApp')
             };
 
 
-            $http.get("/static/survey/data/marco_dd.json").success(function(data) {
+            $http.get("data/marco_dd.json").success(function(data) {
                 $scope.boundaryLayer = L.geoJson(data);
             });
 
@@ -892,7 +891,6 @@ angular.module('askApp')
                     $scope.isCrosshairAlerting = true;
                     $scope.showZoomAlert();
                 } else if ($scope.isOutOfBounds()) {
-                    console.log('not in boundary');
                     $scope.showOutOfBoundsAlert();
                 } else {
                     // Add location
@@ -961,7 +959,7 @@ angular.module('askApp')
                     backdrop: true,
                     keyboard: false,
                     backdropClick: false,
-                    templateUrl: '/static/survey/views/locationActivitiesModal.html',
+                    templateUrl: 'views/locationActivitiesModal.html',
                     controller: 'ActivitySelectorDialogCtrl',
                     resolve: {
                         question: function() {
@@ -1011,7 +1009,7 @@ angular.module('askApp')
                     backdropClick: false,
                     backdropFade: true,
                     transitionClass: 'fade',
-                    templateUrl: '/static/survey/views/zoomAlertModal.html',
+                    templateUrl: 'views/zoomAlertModal.html',
                     controller: 'ZoomAlertCtrl'
                 });
                 d.open();
@@ -1024,7 +1022,7 @@ angular.module('askApp')
                     backdropClick: false,
                     backdropFade: true,
                     transitionClass: 'fade',
-                    templateUrl: '/static/survey/views/outOfBoundsAlertModal.html',
+                    templateUrl: 'views/outOfBoundsAlertModal.html',
                     controller: 'OutOfBoundsAlertCtrl'
                 });
                 d.open();
@@ -1035,7 +1033,7 @@ angular.module('askApp')
                     backdrop: true,
                     keyboard: true,
                     backdropClick: false,
-                    templateUrl: '/static/survey/views/activitiesModal.html',
+                    templateUrl: 'views/activitiesModal.html',
                     scope: {
                         hoisted_options: $scope.getAnswer($scope.question.modalQuestion.hoist_answers.slug),
                         locations: $scope.locations,
@@ -1053,7 +1051,7 @@ angular.module('askApp')
                     backdrop: true,
                     keyboard: false,
                     backdropClick: false,
-                    templateUrl: '/static/survey/views/addMoreModal.html',
+                    templateUrl: 'views/addMoreModal.html',
                     controller: 'addMoreDialogCtrl',
                     resolve: {
                         remainingActivities: function() {
@@ -1081,7 +1079,7 @@ angular.module('askApp')
                     backdrop: true,
                     keyboard: false,
                     backdropClick: false,
-                    templateUrl: '/static/survey/views/doneModal.html',
+                    templateUrl: 'views/doneModal.html',
                     controller: 'DoneDialogCtrl',
                     resolve: {
                         remainingActivities: function() {
@@ -1240,7 +1238,6 @@ angular.module('askApp')
                     displayName: gridCol.text,
                 };
 
-                console.log(gridCol);
                 if (gridCol.type === 'integer' || gridCol.type === 'currency') {
                     template = costCellTemplate;
                 } else if (gridCol.type === 'yes-no') {
@@ -1274,7 +1271,7 @@ angular.module('askApp')
         $scope.loading = false;
     };
     if ($routeParams.uuidSlug && ! _.string.startsWith($routeParams.uuidSlug, 'offline')) {
-        $http.get('/api/v1/survey/' + $routeParams.surveySlug + '/?format=json').success(function(data) {
+        $http.get(app.server + '/api/v1/survey/' + $routeParams.surveySlug + '/?format=json').success(function(data) {
             app.data = {
                 survey: data
             };
@@ -1305,7 +1302,7 @@ angular.module('askApp')
             responses: app.respondents[$routeParams.uuidSlug].responses
         });
     } else if (!app.data && !app.surveys) {
-        $http.get('/api/v1/respondant/' + $routeParams.uuidSlug + '/?format=json').success(function(data) {
+        $http.get(app.server + '/api/v1/respondant/' + $routeParams.uuidSlug + '/?format=json').success(function(data) {
             app.data = data;
             $scope.loadSurvey(data);
         }).error(function(data, status, headers, config) {

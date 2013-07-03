@@ -2,19 +2,18 @@
 
 angular.module('askApp')
     .controller('offlineRespondantListCtrl', function($scope, $http, $routeParams, $location) {
+        $http.defaults.headers.post['Content-Type'] = 'application/json';
 
         $scope.respondents = _.toArray(app.respondents);
         
-        if (app.user ) {
+        if (app.user) {
             $scope.user = app.user;    
         } else {
             $location.path('/');
         }
 
         $scope.sendRespondent = function (respondent) {
-
-            var url = '/api/v1/offlinerespondant/';
-
+            var url = app.server + '/api/v1/offlinerespondant/';
             _.each(respondent.responses, function (response) {
                 var question_uri = response.question.resource_uri;
                 response.question = question_uri;
@@ -25,8 +24,10 @@ angular.module('askApp')
                 uuid: respondent.uuid,
                 responses: respondent.responses,
                 survey: '/api/v1/survey/' + respondent.survey + '/'
-            }
-            return $http.post(url, newRespondent);
+            };
+            return $http.post(url, newRespondent).error(function (err) {
+                alert(JSON.stringify(err));
+            });
             
         }   
 

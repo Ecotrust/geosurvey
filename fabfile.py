@@ -104,5 +104,14 @@ def restart_gunicorn():
 
 def kill_server():
         run('killall python')
+
+def package():
+        run("cd %s && %s/bin/python manage.py package localhost:8000" % (vars['app_dir'], vars['venv']))
+        local("android/app/cordova/build --debug")
+        local("scp ./android/app/bin/SIMarketSurvey-debug.apk ninkasi:/var/www/eknuth/simarket.apk")
+def emulator():
+        run("cd %s && %s/bin/python manage.py package localhost:8000" % (vars['app_dir'], vars['venv']))
+        local("android/app/cordova/run --emulator")
+
 # def update(): 
 #    run('cd /usr/local/apps/land_owner_tools/lot/ && git fetch && git merge origin/master')
