@@ -178,6 +178,7 @@ angular.module('askApp')
         }
     };
 
+
     $scope.gotoNextQuestion = function(numQsToSkips) {
         var nextUrl = $scope.getNextQuestionPath(numQsToSkips);
         if (nextUrl) {
@@ -187,15 +188,31 @@ angular.module('askApp')
 
     $scope.getNextQuestionPath = function(numQsToSkips) {
         var nextQuestion = $scope.getNextQuestion(numQsToSkips);
+
         return ['survey', $scope.survey.slug, nextQuestion || 'complete', $routeParams.uuidSlug].join('/');
     };
 
-    $scope.getNextQuestion = function(numQsToSkips) {
+    $scope.getNextQuestionWithSkip = function(numQsToSkips) {
         var index = _.indexOf($scope.survey.questions, $scope.question) + 1 + (numQsToSkips || 0);
         // should return the slug of the next question
         var nextQuestion = $scope.survey.questions[index];
+        if (nextQuestion.skip_question && nextQuestion.skip_condition) {
+            if ($scope.skipIf(_.findWhere($scope.survey.questions, {resource_uri: nextQuestion.skip_question}).slug, $scope.question.skip_condition)) {
+                nextQuestion = false;
+            }
+        }
 
-        return nextQuestion ? nextQuestion.slug : null;
+        return nextQuestion ? nextQuestion.slug : false;
+    };
+
+
+    $scope.getNextQuestion = function(numQsToSkips) {
+        var foundQuestion = false, index = numQsToSkips || 0;
+        while (foundQuestion === false) {
+            foundQuestion = $scope.getNextQuestionWithSkip(index);
+            index++;
+        }
+        return foundQuestion;
     };
 
     $scope.getResumeQuestionPath = function(lastQuestion) {
@@ -232,7 +249,9 @@ angular.module('askApp')
             testCriteria = condition.slice(1),
             skip = false,
             answer = $scope.getAnswer(questionSlug);
-
+        if (_.isObject(answer)) {
+            answer = answer.answer? answer.answer.text: answer.text;
+        }
         if (op === '<') {
             skip = answer < testCriteria;
         } else if (op === '>') {
@@ -242,9 +261,7 @@ angular.module('askApp')
         } else if (op === '!') {
             skip = answer !== testCriteria;
         }
-        if (skip) {
-            $scope.gotoNextQuestion();
-        }
+        return skip;
     };
 
     $scope.terminateIf = function(answer, condition) {
@@ -1253,11 +1270,7 @@ angular.module('askApp')
         } else {
             $scope.question.foreach = false;
         }
-        if ($scope.question.skip_question && $scope.question.skip_condition) {
-            $scope.skipIf(_.findWhere($scope.survey.questions, 
-                    {resource_uri: $scope.question.skip_question}).slug, 
-                $scope.question.skip_condition)
-        }
+        
         $scope.loading = false;
     };
     if ($routeParams.uuidSlug && ! _.string.startsWith($routeParams.uuidSlug, 'offline')) {
