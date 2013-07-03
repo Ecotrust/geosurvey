@@ -2,7 +2,6 @@
 
 angular.module('askApp')
     .controller('offlineRespondantListCtrl', function($scope, $http, $routeParams, $location) {
-        $http.defaults.headers.post['Content-Type'] = 'application/json';
 
         $scope.respondents = _.toArray(app.respondents);
         

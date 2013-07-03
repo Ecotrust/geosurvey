@@ -147,7 +147,7 @@ function ActivitySelectorDialogCtrl($scope, dialog, $location, $window, question
 
 angular.module('askApp')
     .controller('SurveyDetailCtrl', function($scope, $routeParams, $http, $location, $dialog, $interpolate, $timeout) {
-
+        $scope.loading=true;
         if (app.user ) {
             $scope.user = app.user;    
         } else {
@@ -224,6 +224,26 @@ angular.module('askApp')
             break;
         default: 
             callback(false);
+        }
+    };
+
+    $scope.skipIf = function(questionSlug, condition) {
+        var op = condition[0],
+            testCriteria = condition.slice(1),
+            skip = false,
+            answer = $scope.getAnswer(questionSlug);
+
+        if (op === '<') {
+            skip = answer < testCriteria;
+        } else if (op === '>') {
+            skip = answer > testCriteria;
+        } else if (op === '=') {
+            skip = answer === testCriteria;
+        } else if (op === '!') {
+            skip = answer !== testCriteria;
+        }
+        if (skip) {
+            $scope.gotoNextQuestion();
         }
     };
 
@@ -559,17 +579,6 @@ angular.module('askApp')
 
         /* Specific to single and multi select for now. */
         $scope.isAnswerValid = $scope.question && !$scope.question.required;
-
-        if ($scope.question && $scope.question.rows) {
-            $scope.question.options = [];
-            _.each($scope.question.rows.split('\n'), function (row, index) {
-                $scope.question.options.push({
-                    text: row,
-                    label: _.string.slugify(row),
-                    checked: false
-                });
-            });
-        }
 
 
         if ($scope.question && $scope.question.type === 'integer') {
@@ -1140,7 +1149,16 @@ angular.module('askApp')
             };
 
         }
-
+        if ($scope.question && $scope.question.rows) {
+            $scope.question.options = [];
+            _.each($scope.question.rows.split('\n'), function (row, index) {
+                $scope.question.options.push({
+                    text: row,
+                    label: _.string.slugify(row),
+                    checked: false
+                });
+            });
+        }
          // grid question controller
         if ($scope.question && $scope.question.type === 'grid') {
             // Prep row initial row data, each row containing values.
@@ -1235,6 +1253,12 @@ angular.module('askApp')
         } else {
             $scope.question.foreach = false;
         }
+        if ($scope.question.skip_question && $scope.question.skip_condition) {
+            $scope.skipIf(_.findWhere($scope.survey.questions, 
+                    {resource_uri: $scope.question.skip_question}).slug, 
+                $scope.question.skip_condition)
+        }
+        $scope.loading = false;
     };
     if ($routeParams.uuidSlug && ! _.string.startsWith($routeParams.uuidSlug, 'offline')) {
         $http.get('/api/v1/survey/' + $routeParams.surveySlug + '/?format=json').success(function(data) {

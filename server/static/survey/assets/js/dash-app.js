@@ -10,16 +10,14 @@ angular.module('askApp', ['ui', 'leaflet.directive', 'heatmap.directive', 'ui.bo
     //     'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
     // };
 
+    $httpProvider.defaults.headers.post['Content-Type'] = 'application/json';
 
-    $routeProvider.when('/', {
-        templateUrl: '/static/survey/views/main.html',
-        controller: 'MainCtrl'
+    $routeProvider.when('/author/:surveySlug', {
+      templateUrl: '/static/survey/views/author.html',
+      controller: 'AuthorCtrl',
+      reloadOnSearch: false
     })
     .when('/author', {
-      templateUrl: '/static/survey/views/author.html',
-      controller: 'AuthorCtrl'
-    })
-    .when('/author/:surveySlug/', {
       templateUrl: '/static/survey/views/author.html',
       controller: 'AuthorCtrl',
       reloadOnSearch: false

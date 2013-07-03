@@ -2,6 +2,8 @@
 
 angular.module('askApp')
   .controller('AuthorCtrl', function ($scope, $http, $routeParams, $location) {
+        $http.defaults.headers.post['Content-Type'] = 'application/json';
+    console.log($routeParams);
         $scope.survey = {};
         $scope.activeQuestion = null;
         $scope.questionBeingEdited = null;
@@ -11,12 +13,10 @@ angular.module('askApp')
             $http.get('/api/v1/survey/' + $routeParams.surveySlug + '/?format=json').success(function(data) {
                 _.extend($scope.survey, data);
                 
-                
                 if ($scope.survey.questions.length === 0) {
                     $scope.survey.questions = [];
                     $scope.newQuestion();
                 }
-
                 if ($location.search().question && $location.search().question !== 'null') {
                     $scope.startEditingQuestion(_.findWhere($scope.survey.questions, {slug: $location.search().question}))
                 } else {
@@ -151,6 +151,15 @@ angular.module('askApp')
                 }
             }
             $scope.stopWatchingQuestions = true;
+
+            // set empty strings to null
+            _.each(question, function (value, key) {
+                console.log(value);
+                if (value === '') {
+                    console.log(key);
+                    question[key] = null;
+                }
+            });
             return $http({
                 method: method,
                 url: url,

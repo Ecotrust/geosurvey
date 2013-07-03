@@ -141,6 +141,10 @@ class Question(caching.base.CachingMixin, models.Model):
     integer_min = models.IntegerField(default=0, null=True, blank=True)
     integer_max = models.IntegerField(default=365, null=True, blank=True)
     term_condition = models.CharField(max_length=254, null=True, blank=True)
+    skip_question = models.ForeignKey('self', null=True, blank=True)
+    skip_condition = models.CharField(max_length=254, null=True, blank=True)
+
+
 
     randomize_groups = models.BooleanField(default=False)
     options_from_previous_answer = models.CharField(max_length=254, null=True, blank=True)
