@@ -1,7 +1,9 @@
 //'use strict';
 
 var app = {};
-app.server = "http://simarketsurvey-test.herokuapp.com";
+
+app.server = "http://" + window.location.host;
+console.log(app.server);
 angular.module('askApp', ['ui', 'leaflet.directive', 'heatmap.directive', 'ui.bootstrap'])
     .config(function($routeProvider, $httpProvider) {
 
