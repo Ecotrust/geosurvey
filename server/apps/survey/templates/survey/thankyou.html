@@ -9,7 +9,7 @@
     <meta http-Equiv="Cache-Control" Content="no-cache"/>
     <meta http-Equiv="Pragma" Content="no-cache"/>
     <meta http-Equiv="Expires" Content="0"/>
-    <title>Mid-Atlantic Coastal and Ocean Recreation Survey</title>
+    <title>Washington Coastal and Ocean Recreation Survey</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
@@ -26,7 +26,7 @@
         #register-row {
           width: 100%;
           height: 500px;
-          background-image: url(/static/images/young-surfer-920x613.jpg);
+          background-image: url({{ STATIC_URL }}survey/img/washington/register-309x206.jpeg);
           background-repeat:no-repeat;
           background-size: contain;
           position: relative;
@@ -90,7 +90,7 @@
     <div class="container">
       <div id="title-row" class="row">
         <div class="span">
-          <h3>Mid-Atlantic Coastal and Ocean Recreation Survey</h3>
+          <h3>Washington Coastal and Ocean Recreation Survey</h3>
         </div>
       </div>
       <div class="row">
@@ -103,7 +103,6 @@
 
             <ul class="unstyled">
               <li><a href="#faq" data-toggle="modal">Frequently Asked Questions</a></li>
-              <li><a target="_blank" href="http://www.midatlanticocean.org/">MARCO</a></li>
               <li><a target="_blank" href="http://www.surfrider.org">Surfrider Foundation</a></li>
             </ul>
   
@@ -112,15 +111,13 @@
       </div>
       <div id="photo-credits-row" class="row">
         <div class="span">
-          <p><small>Photo: Beata Jancsik/<a href="http://www.shutterstock.com">Shutterstock.com</a></small></p>
+          <p><small>Photo: &copy; Kathy Greer 2010</small></p>
         </div>
       </div>
       <div id="logo-row" class="row">
         <div style="width:100%;">
-          <a target="_blank" href="http://www.surfrider.org"><img src="/static/images/logos/surfrider.jpg" style="width: 18%; margin-left: 0; padding-left: 0; margin-right: 30px;"></a>
-          <a target="_blank" href="http://www.ecotrust.org"><img src="/static/images/logos/ecotrust.jpg" style="width: 22%; margin-right: 30px;"></a>
-          <a target="_blank" href="http://www.nature.org"><img src="/static/images/logos/tnc.jpg" style="width: 22%; margin-right: 30px;"></a>
-          <a target="_blank" href="http://www.monmouth.edu"><img src="/static/images/logos/monmouth.jpg" style="width: 22%;"></a>
+          <a target="_blank" href="http://www.surfrider.org"><img src="{{ STATIC_URL }}images/logos/surfrider.jpg" style="width: 15%; margin-left: 180px; padding-left: 0; margin-right: 100px;"></a>
+          <a target="_blank" href="http://www.ecotrust.org"><img src="{{ STATIC_URL }}images/logos/ecotrust.jpg" style="width: 19%; margin-right: 30px;"></a>
         </div>
       </div>
 
