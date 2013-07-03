@@ -1,6 +1,6 @@
 <div ng-switch on="question.type">
     <div ng-switch-when="pennies">
-        <div ng-include="'/static/survey/views/pennies.html'"></div>
+        <div ng-include="'views/pennies.html'"></div>
     </div>
     <div ng-switch-when="info">
         
@@ -192,10 +192,10 @@
         </form>
     </div>
     <div ng-switch-when="map-multipoint">
-        <div ng-include="'/static/survey/views/mapQuestion.html'"></div>
+        <div ng-include="'views/mapQuestion.html'"></div>
     </div>
     <div ng-switch-when="grid">
-        <div ng-include="'/static/survey/views/gridQuestion.html'"></div>
+        <div ng-include="'views/gridQuestion.html'"></div>
     </div>
 </div>
 

@@ -8,10 +8,19 @@ angular.module('askApp')
         url = [url, 'terminate', $routeParams.questionSlug].join('/');
     }
 
+    if (app.surveys) {
+        $scope.surveys = app.surveys;
+    }
+    $scope.survey = _.findWhere($scope.surveys, { slug: $routeParams.surveySlug});
 
-    $http.post(url).success(function (data) {
-        app.data.state = $routeParams.action;
-    });
+    if ($scope.survey.offline) {
+        app.respondents[$routeParams.uuidSlug].complete = true;
+    } else {
+        $http.post(url).success(function (data) {
+            app.data.state = $routeParams.action;
+        });    
+    }
+    
     
     if (app.data) {
         $scope.responses =app.data.responses;    

@@ -188,15 +188,19 @@ angular.module('askApp')
 
     $scope.getNextQuestionPath = function(numQsToSkips) {
         var nextQuestion = $scope.getNextQuestion(numQsToSkips);
-
-        return ['survey', $scope.survey.slug, nextQuestion || 'complete', $routeParams.uuidSlug].join('/');
+        if (nextQuestion) {
+            return ['survey', $scope.survey.slug, nextQuestion, $routeParams.uuidSlug].join('/');    
+        } else {
+            return ['survey', $scope.survey.slug, 'complete', $routeParams.uuidSlug].join('/');
+        }
+        
     };
 
     $scope.getNextQuestionWithSkip = function(numQsToSkips) {
         var index = _.indexOf($scope.survey.questions, $scope.question) + 1 + (numQsToSkips || 0);
         // should return the slug of the next question
         var nextQuestion = $scope.survey.questions[index];
-        if (nextQuestion.skip_question && nextQuestion.skip_condition) {
+        if (nextQuestion && nextQuestion.skip_question && nextQuestion.skip_condition) {
             if ($scope.skipIf(_.findWhere($scope.survey.questions, {resource_uri: nextQuestion.skip_question}).slug, $scope.question.skip_condition)) {
                 nextQuestion = false;
             }
@@ -208,7 +212,7 @@ angular.module('askApp')
 
     $scope.getNextQuestion = function(numQsToSkips) {
         var foundQuestion = false, index = numQsToSkips || 0;
-        while (foundQuestion === false) {
+        while (foundQuestion === false && index < $scope.survey.questions.length - 1) {
             foundQuestion = $scope.getNextQuestionWithSkip(index);
             index++;
         }
