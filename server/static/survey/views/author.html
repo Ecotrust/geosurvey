@@ -120,6 +120,20 @@ input {
                         </div>
                     </div>
                 </div>
+                <div class="row-fluid" ng-show="activeQuestion.type == 'single-select' || activeQuestion.type == 'multi-select' || activeQuestion.type == 'grid'">
+                    <div class="span4">
+                        <label>Options</label>
+                        <textarea class="input-block-level" rows="6" ng-model="activeQuestion.rows"></textarea>
+                    </div>
+                    <div class="span6">
+                        <label ng-show="activeQuestion.type == 'single-select' || activeQuestion.type == 'multi-select'">
+                            <input type="checkbox" ng-model="activeQuestion.allow_other"/>
+                            Allow Other
+                        </label>
+                        <label>Options from previous answer</label>
+                        <input type="text" ng-model="activeQuestion.options_from_previous_answer">
+                    </div>
+                </div>
                 <div class="row-fluid" ng-show="activeQuestion.type == 'grid'">
                     <div class="span3">
                         <h4>Grid Options</h4>
@@ -153,20 +167,6 @@ input {
                     <div ng-show="activeQuestion.activeOption && activeQuestion.activeOption.type == 'single-select' || activeQuestion.activeOption.type == 'multi-select'" class="span3">
                         <h4>{{ activeQuestion.activeOption.text }} Options</h4>
                         <textarea class="span12" rows=5 ng-model="activeQuestion.activeOption.rows"></textarea>
-                    </div>
-                </div>
-                <div class="row-fluid" ng-show="activeQuestion.type == 'single-select' || activeQuestion.type == 'multi-select'">
-                    <div class="span4">
-                        <label>Options</label>
-                        <textarea class="input-block-level" rows="6" ng-model="activeQuestion.rows"></textarea>
-                    </div>
-                    <div class="span6">
-                        <label>
-                            <input type="checkbox" ng-model="activeQuestion.allow_other"/>
-                            Allow Other
-                        </label>
-                        <label>Options from previous answer</label>
-                        <input type="text" ng-model="activeQuestion.options_from_previous_answer">
                     </div>
                 </div>
             </div>

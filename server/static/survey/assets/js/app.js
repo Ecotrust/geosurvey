@@ -6,8 +6,13 @@ if (localStorage.getItem('hapifish')) {
 } else {
     var app = {};    
 }
+if (_.string.startsWith(window.location.protocol, "http")) {
+    app.server = window.location.protocol + "//" + window.location.host;
+} else {
+    app.server = "http://simarketsurvey-test.herokuapp.com";    
+}
 
-app.server = "http://simarketsurvey-test.herokuapp.com";
+console.log(app.server);
 
 angular.module('askApp', ['ui', 'leaflet.directive', 'ui.bootstrap', 'ngGrid'])
     .config(function($routeProvider, $httpProvider) {
