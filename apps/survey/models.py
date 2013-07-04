@@ -65,8 +65,12 @@ class Survey(caching.base.CachingMixin, models.Model):
     objects = caching.base.CachingManager()
 
     @property
-    def survey_responses(self):
+    def num_registered(self):
         return self.respondant_set.all().count()
+
+    @property
+    def num_no_starts(self):
+        return self.respondant_set.filter(responses=None).count()
 
     @property
     def completes(self):
