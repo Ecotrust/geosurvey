@@ -2,10 +2,25 @@
 <div class="row-fluid">
     <div class="span4">
         <div class="well">
-            <h2>{{ survey.survey_responses |number}} surveys taken</h2>
+            <h2>{{ survey.num_registered |number}} registered</h2>
             <ul class="unstyled">
-                <li><strong>{{ survey.completes |number}}</strong> complete ({{(survey.completes/survey.survey_responses)*100 |number:2}}%)</li>
-                <li><strong>{{ survey.survey_responses - survey.completes | number}}</strong> incomplete ({{((survey.survey_responses - survey.completes)/survey.survey_responses) * 100|number:2}}%)</li>
+                <li><strong>{{ survey.num_no_starts |number}}</strong> not started ({{(survey.num_no_starts/survey.num_registered)*100 |number:1}}%)</li>
+                <li><strong>{{ survey.num_registered - survey.completes - survey.num_no_starts | number}}</strong> partial ({{((survey.num_registered - survey.completes - survey.num_no_starts)/survey.num_registered) * 100|number:1}}%)</li>
+                <li><strong>{{ survey.completes |number}}</strong> complete ({{(survey.completes/survey.num_registered)*100 |number:1}}%)</li>
+            </ul>
+            <ul class="unstyled">
+                <li><strong>{{ survey.activity_points | number }}</strong> activity points</li>
+                <li><strong>{{ survey.activity_points / survey.completes |number:2 }}</strong> activity points per survey</li>
+            </ul>
+
+
+
+
+
+            <h2>{{ survey.num_registered |number}} surveys taken</h2>
+            <ul class="unstyled">
+                <li><strong>{{ survey.completes |number}}</strong> complete ({{(survey.completes/survey.num_registered)*100 |number:2}}%)</li>
+                <li><strong>{{ survey.num_registered - survey.completes | number}}</strong> incomplete ({{((survey.num_registered - survey.completes)/survey.num_registered) * 100|number:2}}%)</li>
             </ul>
             <ul class="unstyled">
                 <li><strong>{{ survey.activity_points | number }}</strong> activity points</li>
@@ -39,7 +54,7 @@
                     </dl>
                 </div>
                 <div ui-if="question.report_type == 'heatmap' || question.report_type == 'heatmap-distribution'">
-                    <div heatmap question="question" filteritems="question.filters" class="heatmap"></div>
+                    <div heatmap question="question" filteritems="question.filters" radius="1600" class="heatmap"></div>
                 </div>
                 <div ui-if="question.report_type == 'distribution' || question.report_type == 'heatmap-distribution'">
                     <distribution filter="question.filters" question="question" survey-slug="survey.slug"></distribution>

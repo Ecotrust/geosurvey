@@ -13,7 +13,8 @@
             transclude: true,
             scope: {
                 question: "=question",
-                filterItems: "=filteritems"
+                filterItems: "=filteritems",
+                radius: "=radius"
             },
             templateUrl: '/static/survey/views/heatmap.html',
             link: function(scope, element, attrs, ctrl) {
@@ -67,7 +68,7 @@
                                 scope.heatmapLayer = L.TileLayer.heatMap({
                                     // radius could be absolute or relative
                                     // absolute: radius in meters, relative: radius in pixels
-                                    radius: { value: 10000, absolute: true },
+                                    radius: { value: scope.radius || 10000, absolute: true },
                                     //radius: { value: 20, absolute: false },
                                     opacity: 0.8,
                                     legend: {
