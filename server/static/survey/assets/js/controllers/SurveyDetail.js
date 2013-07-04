@@ -201,7 +201,7 @@ angular.module('askApp')
         // should return the slug of the next question
         var nextQuestion = $scope.survey.questions[index];
         if (nextQuestion && nextQuestion.skip_question && nextQuestion.skip_condition) {
-            if ($scope.skipIf(_.findWhere($scope.survey.questions, {resource_uri: nextQuestion.skip_question}).slug, $scope.question.skip_condition)) {
+            if ($scope.skipIf(_.findWhere($scope.survey.questions, {resource_uri: nextQuestion.skip_question}).slug, nextQuestion.skip_condition)) {
                 nextQuestion = false;
             }
         }
@@ -595,7 +595,7 @@ $scope.loadSurvey = function(data) {
 
         }
 
-        $scope.nextQuestionPath = $scope.getNextQuestionPath();
+        //$scope.nextQuestionPath = $scope.getNextQuestionPath();
 
         /* Specific to single and multi select for now. */
         $scope.isAnswerValid = $scope.question && !$scope.question.required;
