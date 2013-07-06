@@ -169,10 +169,28 @@ angular.module('askApp')
     $scope.zoomModel = {
         zoomToResult: undefined
     };
-  
+
     $scope.getAnswer = function(questionSlug) {
-        if ($scope.answers[questionSlug]) {
-            return $scope.answers[questionSlug];
+        var slug, gridSlug;
+        if (_.string.include(questionSlug, ":")) {
+            slug = questionSlug.split(':')[0];
+            gridSlug = questionSlug.split(':')[1];
+        } else {
+            slug = questionSlug;
+        }
+        if ($scope.answers[slug]) {
+            if (gridSlug) {
+                return _.flatten(_.map($scope.answers[slug], function (answer) {
+                    return _.map(answer[gridSlug], function (gridAnswer){
+                        return {
+                            text: answer.text + ": " + gridAnswer,
+                            label: _.string.slugify(answer.text + ": " + gridAnswer)
+                        }
+                    });
+                }));
+            } else {
+                return $scope.answers[slug];
+            }
         } else {
             return false;
         }
@@ -1183,7 +1201,7 @@ $scope.loadSurvey = function(data) {
             // Prep row initial row data, each row containing values.
             // for activityLabel, activityText, cost and numPeople.
             if ($scope.question.options_from_previous_answer) {
-                $scope.question.options = $scope.getAnswer($scope.question.options_from_previous_answer);    
+                $scope.question.options = $scope.getAnswer($scope.question.options_from_previous_answer);
             }
 
 
@@ -1217,7 +1235,8 @@ $scope.loadSurvey = function(data) {
             var checkboxTemplate = '<input class="colt{{$index}} input-block-level" ng-model="row.entity[col.field]" style="height: 100%;" type="checkbox"  value="{{row.getProperty(col.field)}}"  }" />';
             //var selectTemplate = '<select class="colt{{$index}} input-block-level" ng-model="row.entity[col.field]" style="height: 100%;" value="{{row.getProperty(col.field)}}"  }"><option ng-repeat="option in row.entity[\'rows\']">{{option}}</option></select>';
             // var selectTemplate = '<div style="height:100%">{{col.field}}</div>'
-            var selectTemplate = '<div class="ngCellText happy" ng-class="col.colIndex()"><span ng-cell-text><select class="colt{{$index}} input-block-level" ng-model="row.entity[col.field]" style="height: 100%;" value="{{row.getProperty(col.field)}}"  }"><option value="">select {{row.getProperty(col.field)}}</option><option ng-repeat="option in col.colDef.options">{{option}}</option></select></span></div>';
+            var selectTemplate = '<div class="ngCellText" ng-class="col.colIndex()"><span ng-cell-text><select class="colt{{$index}} input-block-level" ng-model="row.entity[col.field]" style="height: 100%;" value="{{row.getProperty(col.field)}}"  }"><option value="">select {{row.getProperty(col.field)}}</option><option ng-repeat="option in col.colDef.options">{{option}}</option></select></span></div>';
+            var multiSelectTemplate = '<div class="ngCellText" ng-class="col.colIndex()"><span ng-cell-text><select multiple="true" class="colt{{$index}} input-block-level" ng-model="row.entity[col.field]" style="height: 100%;" value="{{row.getProperty(col.field)}}"  }"><option value="">select option</option><option ng-repeat="option in col.colDef.options">{{option}}</option></select></span></div>';
             
             $scope.gridOptions = {
                 data: 'question.options',
@@ -1249,7 +1268,11 @@ $scope.loadSurvey = function(data) {
                 } else if (gridCol.type === 'single-select') {
                     template = selectTemplate;
                     col.options = gridCol.rows.split('\n');
-                } else {
+                } else if (gridCol.type === 'multi-select') {
+                    template = multiSelectTemplate;
+                    col.options = gridCol.rows.split('\n');
+                }
+                 else {
                     template = nameTemplate;
                 }
                 col.cellTemplate = template
