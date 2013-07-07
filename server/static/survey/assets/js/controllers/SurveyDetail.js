@@ -214,12 +214,26 @@ angular.module('askApp')
         
     };
 
+    $scope.deleteAnswer = function (question, uuidSlug) {
+        var index, responses = app.respondents[uuidSlug].responses;
+        _.each(responses, function (response, i) {
+            if (response.question.slug === question.slug) {
+                index = i;
+            }
+        });
+        if (index) {
+            console.log(question.slug);
+            responses.splice(index, 1);
+        }
+    }
+
     $scope.getNextQuestionWithSkip = function(numQsToSkips) {
         var index = _.indexOf($scope.survey.questions, $scope.question) + 1 + (numQsToSkips || 0);
         // should return the slug of the next question
         var nextQuestion = $scope.survey.questions[index];
         if (nextQuestion && nextQuestion.skip_question && nextQuestion.skip_condition) {
             if ($scope.skipIf(_.findWhere($scope.survey.questions, {resource_uri: nextQuestion.skip_question}).slug, nextQuestion.skip_condition)) {
+                $scope.deleteAnswer(nextQuestion, $routeParams.uuidSlug);
                 nextQuestion = false;
             }
         }
@@ -302,7 +316,6 @@ angular.module('askApp')
     };
 
     $scope.answerOffline = function(answer) {
-        // delete the display title, because it is generated
         app.respondents[$routeParams.uuidSlug].responses.push(answer);
         $scope.answers[$routeParams.questionSlug] = answer;
         $scope.saveState();
