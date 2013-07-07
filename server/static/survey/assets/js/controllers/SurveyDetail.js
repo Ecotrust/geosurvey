@@ -174,7 +174,7 @@ angular.module('askApp')
         var slug, gridSlug;
         if (_.string.include(questionSlug, ":")) {
             slug = questionSlug.split(':')[0];
-            gridSlug = questionSlug.split(':')[1];
+            gridSlug = questionSlug.split(':')[1].replace('-', '');
         } else {
             slug = questionSlug;
         }
