@@ -789,10 +789,18 @@ $scope.loadSurvey = function(data) {
         }
 
         if ($scope.question && $scope.question.type === 'yes-no') {
-            $scope.question.options = [
-                {'text': 'Yes', 'label': "Yes", checked: $scope.answer[0].text === 'Yes'},
-                {'text': 'No', 'label': "No", checked: $scope.answer[0].text === 'No'}
-            ]
+            if ($scope.answer) {
+                $scope.question.options = [
+                    {'text': 'Yes', 'label': "Yes", checked: $scope.answer[0].text === 'Yes'},
+                    {'text': 'No', 'label': "No", checked: $scope.answer[0].text === 'No'}
+                ]    
+            } else {
+                $scope.question.options = [
+                    {'text': 'Yes', 'label': "Yes", checked: false },
+                    {'text': 'No', 'label': "No", checked: false }
+                ]
+            }
+            
         }
 
         if ($scope.question) {
