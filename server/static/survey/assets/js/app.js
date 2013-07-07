@@ -9,7 +9,7 @@ if (localStorage.getItem('hapifish')) {
 if (_.string.startsWith(window.location.protocol, "http")) {
     app.server = window.location.protocol + "//" + window.location.host;
 } else {
-    app.server = "http://APP_SERVER";    
+    app.server = "https://APP_SERVER";
 }
 
 console.log(app.server);
