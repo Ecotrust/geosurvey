@@ -28,9 +28,8 @@ def copy_dir(src, dst):
 class Command(BaseCommand):
 
     def handle(self, *args, **options):
-        print "Packaging"
         url = args[0]
-        print url
+        print "Packaging for %s" % url
         dest = settings.PROJECT_ROOT / '../android/app/assets/www'
 
         # copy the app html

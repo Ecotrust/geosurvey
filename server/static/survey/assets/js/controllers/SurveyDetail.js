@@ -216,15 +216,18 @@ angular.module('askApp')
 
     $scope.deleteAnswer = function (question, uuidSlug) {
         var index, responses = app.respondents[uuidSlug].responses;
+        if ($scope.answers[question.slug]) {
+            delete $scope.answers[question.slug];
+        }
         _.each(responses, function (response, i) {
             if (response.question.slug === question.slug) {
                 index = i;
             }
         });
         if (index) {
-            console.log(question.slug);
-            responses.splice(index, 1);
+            app.respondents[uuidSlug].responses.splice(index, 1);
         }
+        $scope.saveState();
     }
 
     $scope.getNextQuestionWithSkip = function(numQsToSkips) {
@@ -316,6 +319,7 @@ angular.module('askApp')
     };
 
     $scope.answerOffline = function(answer) {
+        $scope.deleteAnswer($scope.question, $routeParams.uuidSlug);
         app.respondents[$routeParams.uuidSlug].responses.push(answer);
         $scope.answers[$routeParams.questionSlug] = answer;
         $scope.saveState();
@@ -375,6 +379,7 @@ angular.module('askApp')
                 }));
             }
             if ($scope.survey.offline) {
+
                 $scope.answerOffline({
                     answer: answer,
                     question: $scope.question
@@ -1202,10 +1207,13 @@ $scope.loadSurvey = function(data) {
         if ($scope.question && $scope.question.rows) {
             $scope.question.options = [];
             _.each($scope.question.rows.split('\n'), function (row, index) {
+                var matches = _.filter($scope.answer, function (answer) {
+                    return answer.text === row;
+                });
                 $scope.question.options.push({
                     text: row,
                     label: _.string.slugify(row),
-                    checked: false
+                    checked: matches.length ? true: false
                 });
             });
         }
