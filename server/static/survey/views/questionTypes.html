@@ -17,6 +17,7 @@
                 placeholder="{{ question.label }}"
                 type="number"
                 min="{{question.integer_min}}"
+                max="{{question.integer_max}}"
                 ui-event="{ keypress : 'onlyDigits($event)' }"
                 autofocus
                 required/>
