@@ -2,6 +2,7 @@ from django.core.management.base import BaseCommand, CommandError
 from django.conf import settings
 from apps.survey.api import *
 
+from subprocess import call
 import os, errno
 import requests
 import simplejson
@@ -28,7 +29,8 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         print "Packaging"
-        url = "http://%s" % args[0]
+        url = args[0]
+        print url
         dest = settings.PROJECT_ROOT / '../android/app/assets/www'
 
         # copy the app html
@@ -39,4 +41,4 @@ class Command(BaseCommand):
         # copy app assets
         copy_dir('static/survey/assets', "%s/assets" % dest)
         copy_dir('static/survey/views', "%s/views" % dest)
-        
+        os.system("sed -i -e 's/APP_SERVER/%s/' %s/assets/js/app.js" % (url, dest))

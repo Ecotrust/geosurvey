@@ -106,9 +106,15 @@ def kill_server():
         run('killall python')
 
 def package():
-        run("cd %s && %s/bin/python manage.py package localhost:8000" % (vars['app_dir'], vars['venv']))
+        run("cd %s && %s/bin/python manage.py package simarketsurvey.herokuapp.com" % (vars['app_dir'], vars['venv']))
         local("android/app/cordova/build --debug")
-        local("scp ./android/app/bin/SIMarketSurvey-debug.apk ninkasi:/var/www/eknuth/simarket.apk")
+        local("cp ./android/app/bin/SIMarketSurvey-debug.apk server/static/simarket.apk")
+
+def package_test():
+        run("cd %s && %s/bin/python manage.py package simarketsurvey-test.herokuapp.com" % (vars['app_dir'], vars['venv']))
+        local("android/app/cordova/build --debug")
+        local("cp ./android/app/bin/SIMarketSurvey-debug.apk server/static/simarket-test.apk")
+
 def emulator():
         run("cd %s && %s/bin/python manage.py package localhost:8000" % (vars['app_dir'], vars['venv']))
         local("android/app/cordova/run --emulator")
