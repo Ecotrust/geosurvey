@@ -1237,12 +1237,12 @@ $scope.loadSurvey = function(data) {
                 $scope.answer = {};
             }
 
-       
            _.each($scope.question.options, function(value, key, list) {
+
                list[key].activitySlug = value.label;
                list[key].activityText = value.text;
                _.each($scope.question.grid_cols, function(gridCol, i) {
-                   list[gridCol.label] = $scope.answer !== null && _.has($scope.answer, value.text) ? $scope.answer[value.text][0] : undefined;
+                   list[key][gridCol.label.replace('-', '')] = $scope.answer !== null && _.has($scope.answer, value.text) ? $scope.answer[value.text][0][gridCol.label] : undefined;
                });
                // list[key] = {
                //     cost: $scope.answer !== null && _.has($scope.answer, value.text) ? $scope.answer[value.text][0].cost : undefined,
@@ -1251,9 +1251,9 @@ $scope.loadSurvey = function(data) {
            });
             // Configure grid.
             var gridCellTemplateDefault = '<div class="ngCellText" ng-class="col.colIndex()"><span ng-cell-text>{{COL_FIELD CUSTOM_FILTERS}}</span></div>';
-            var costCellTemplate = '<input class="colt{{$index}} input-block-level" ng-model="row.entity[col.field]" style="height: 100%;" type="number" step="any" }" onFocus="this.select();" onClick="this.select();"/>';
+            var costCellTemplate = '<input class="colt{{$index}} input-block-level" ng-model="row.entity[col.field]" style="height: 100%;" type="number" step="any" }" value="{{row.getProperty(col.field)}}" onFocus="this.select();" onClick="this.select();"/>';
             var nameTemplate = '<input class="colt{{$index}} input-block-level" ng-model="row.entity[col.field]" style="height: 100%;" type="text"  value="{{row.getProperty(col.field)}}"  }" />';
-            var checkboxTemplate = '<input class="colt{{$index}} input-block-level" ng-model="row.entity[col.field]" style="height: 100%;" type="checkbox"  value="{{row.getProperty(col.field)}}"  }" />';
+            var checkboxTemplate = '<input class="colt{{$index}} input-block-level" ng-model="row.entity[col.field]" style="height: 100%;" type="checkbox"  value="{{row.getProperty(col.field)}}" />';
             //var selectTemplate = '<select class="colt{{$index}} input-block-level" ng-model="row.entity[col.field]" style="height: 100%;" value="{{row.getProperty(col.field)}}"  }"><option ng-repeat="option in row.entity[\'rows\']">{{option}}</option></select>';
             // var selectTemplate = '<div style="height:100%">{{col.field}}</div>'
             var selectTemplate = '<div class="ngCellText" ng-class="col.colIndex()"><span ng-cell-text><select class="colt{{$index}} input-block-level" ng-model="row.entity[col.field]" style="height: 100%;" value="{{row.getProperty(col.field)}}"  }"><option value="">select {{row.getProperty(col.field)}}</option><option ng-repeat="option in col.colDef.options">{{option}}</option></select></span></div>';
@@ -1278,7 +1278,7 @@ $scope.loadSurvey = function(data) {
 
             _.each($scope.question.grid_cols, function(gridCol, i) {
                 var template, col = {
-                    field: gridCol.label,
+                    field: gridCol.label.replace('-', ''),
                     displayName: gridCol.text,
                 };
 
@@ -1297,17 +1297,17 @@ $scope.loadSurvey = function(data) {
                     template = nameTemplate;
                 }
                 col.cellTemplate = template
-
                 $scope.gridOptions.columnDefs.push(col);
             });
         }
 
         if ($scope.question && $scope.question.type === 'datepicker') {
-            $scope.now = (new Date()).toString("yyyy-MM-dd");
+            $scope.now =  $scope.answer || (new Date()).toString("yyyy-MM-dd");
 
         }
         if ($scope.question && $scope.question.type === 'timepicker') {
-            $scope.now = (new Date()).toString("HH:mm");
+
+            $scope.now = $scope.answer || (new Date()).toString("HH:mm");
         }
         if ($scope.question.foreach_question) {
             $scope.question.foreach = true;
