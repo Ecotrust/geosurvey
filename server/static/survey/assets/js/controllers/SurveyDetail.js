@@ -1244,18 +1244,29 @@ $scope.loadSurvey = function(data) {
             } else {
                 $scope.answer = {};
             }
-
+            $scope.question.selectedOptions = {};
            _.each($scope.question.options, function(value, key, list) {
-
-               list[key].activitySlug = value.label;
+               list[key].activitySlug = value.label.replace('-', '');
                list[key].activityText = value.text;
                _.each($scope.question.grid_cols, function(gridCol, i) {
-                   list[key][gridCol.label.replace('-', '')] = $scope.answer !== null && _.has($scope.answer, value.text) ? $scope.answer[value.text][0][gridCol.label] : undefined;
+                    var gridLabel = gridCol.label.replace('-', '');
+
+                    if ($scope.answer !== null && _.has($scope.answer, value.text)) {
+
+                        list[key][gridLabel] = $scope.answer[value.text][0][gridLabel];
+                        _.each($scope.answer[value.text][0][gridLabel], function (answer) {
+                            if (! $scope.question.selectedOptions[gridLabel]) {
+                                $scope.question.selectedOptions[gridLabel] = {};
+                                
+                            }
+                            if (! $scope.question.selectedOptions[gridLabel][value.activitySlug]) {
+                                $scope.question.selectedOptions[gridLabel][value.activitySlug] = {};
+                                
+                            }
+                            $scope.question.selectedOptions[gridLabel][value.activitySlug][answer] = true;
+                        });
+                    }   
                });
-               // list[key] = {
-               //     cost: $scope.answer !== null && _.has($scope.answer, value.text) ? $scope.answer[value.text][0].cost : undefined,
-               //     numPeople: $scope.answer !== null && _.has($scope.answer, value.text) ? $scope.answer[value.text][0].numPeople : undefined
-               // };
            });
             // Configure grid.
             var gridCellTemplateDefault = '<div class="ngCellText" ng-class="col.colIndex()"><span ng-cell-text>{{COL_FIELD CUSTOM_FILTERS}}</span></div>';
@@ -1265,7 +1276,7 @@ $scope.loadSurvey = function(data) {
             //var selectTemplate = '<select class="colt{{$index}} input-block-level" ng-model="row.entity[col.field]" style="height: 100%;" value="{{row.getProperty(col.field)}}"  }"><option ng-repeat="option in row.entity[\'rows\']">{{option}}</option></select>';
             // var selectTemplate = '<div style="height:100%">{{col.field}}</div>'
             var selectTemplate = '<div class="ngCellText" ng-class="col.colIndex()"><span ng-cell-text><select class="colt{{$index}} input-block-level" ng-model="row.entity[col.field]" style="height: 100%;" value="{{row.getProperty(col.field)}}"  }"><option value="">select {{row.getProperty(col.field)}}</option><option ng-repeat="option in col.colDef.options">{{option}}</option></select></span></div>';
-            var multiSelectTemplate = '<div class="ngCellText" ng-class="col.colIndex()"><span ng-cell-text><select multiple="true" class="colt{{$index}} input-block-level" ng-model="row.entity[col.field]" style="height: 100%;" value="{{row.getProperty(col.field)}}"  }"><option value="">select option</option><option ng-repeat="option in col.colDef.options">{{option}}</option></select></span></div>';
+            var multiSelectTemplate = '<div class="ngCellText" ng-class="col.colIndex()"><span ng-cell-text><select multiple="true" class="colt{{$index}} input-block-level" ng-model="row.entity[col.field]" style="height: 100%;" value="{{row.getProperty(col.field)}}"  }"><option value="">select option</option><option ng-repeat="option in col.colDef.options" ng-selected="question.selectedOptions[col.colDef.field][row.entity.activitySlug][option]" value="{{option}}">{{option}}</option></select></span></div>';
             
             $scope.gridOptions = {
                 data: 'question.options',
@@ -1288,6 +1299,7 @@ $scope.loadSurvey = function(data) {
                 var template, col = {
                     field: gridCol.label.replace('-', ''),
                     displayName: gridCol.text,
+                    slug: gridCol.label
                 };
 
                 if (gridCol.type === 'integer' || gridCol.type === 'currency') {
