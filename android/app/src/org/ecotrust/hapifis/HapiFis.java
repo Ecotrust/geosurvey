@@ -17,12 +17,12 @@
        under the License.
  */
 
-package org.ecotrust.simarketsurvey;
+package org.ecotrust.hapifis;
 
 import android.os.Bundle;
 import org.apache.cordova.*;
 
-public class SIMarketSurvey extends DroidGap
+public class HapiFis extends DroidGap
 {
     @Override
     public void onCreate(Bundle savedInstanceState)
