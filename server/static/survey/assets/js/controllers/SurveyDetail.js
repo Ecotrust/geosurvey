@@ -144,14 +144,20 @@ function ActivitySelectorDialogCtrl($scope, dialog, $location, $window, question
     };
 }
 
-
 angular.module('askApp')
     .controller('SurveyDetailCtrl', function($scope, $routeParams, $http, $location, $dialog, $interpolate, $timeout) {
         $scope.loading=true;
-        if (app.user ) {
-            $scope.user = app.user;    
+        console.log('surveydetail!');
+        if (app.user) {
+            $scope.user = app.user;
         } else {
+            console.log('redirecting' + $location.path());
+            if (!app) {
+                app = {};
+            }
+            app.next = $location.path();
             $location.path('/');
+            return false;
         }
 
 

@@ -86,8 +86,7 @@
                   </a>
                   <ul class="survey-list"> 
                     <li ng-repeat="survey in surveys">
-                      <a ng-hide="survey.anon" href="#/survey/{{ survey.slug }}/uuid">{{ survey.name }}</a>
-                      <a ng-show="survey.anon" href="/respond/{{ survey.slug }}">{{ survey.name }}</a>
+                      <a target="_blank" href="/static/survey/mobile.html#/survey/{{survey.slug}}/{{survey.questions[0].slug}}/offline">{{ survey.name }}</a>
                     </li>  
                   </ul>
                 </li>

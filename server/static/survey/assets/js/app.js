@@ -24,7 +24,9 @@ angular.module('askApp', ['ui', 'leaflet.directive', 'ui.bootstrap', 'ngGrid'])
     $httpProvider.defaults.headers.post['Content-Type'] = 'application/json';
     $routeProvider.when('/', {
         templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
+        controller: 'MainCtrl',
+        reloadOnSearch: false
+
     })
         .when('/author/:surveySlug', {
         templateUrl: 'views/author.html',

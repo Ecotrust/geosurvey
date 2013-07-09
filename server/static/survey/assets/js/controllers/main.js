@@ -1,11 +1,14 @@
 
-'use strict';
-
 angular.module('askApp')
   .controller('MainCtrl', function ($scope, $location, $http) {
-
     $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
     
+    if (app.user) {
+        $scope.user = app.user;
+    } else {
+        $scope.user = false;
+    }
+
     // showForm can be in ['login', 'new-user', 'forgot'];
     $scope.showForm = 'login';
 
@@ -13,6 +16,12 @@ angular.module('askApp')
         $scope.showForm = form;
 
     };
+
+    $scope.logout = function () {
+        app.user = false;
+        $scope.saveState();
+        window.location.reload();
+    }
 
     $scope.saveState = function () {
         localStorage.setItem('hapifish', JSON.stringify(app));
@@ -46,9 +55,18 @@ angular.module('askApp')
 
         })
             .success(function (data) {
+                var next;
                 app.user = data.user;
                 $scope.saveState();
-                $location.path('/surveys');
+                if (app.next) {
+                    next = app.next;
+                    console.log(next);
+                    delete app.next;
+                    $location.path(app.next);
+                } else {
+                    $location.path('/surveys');    
+                }
+                
             })
             .error(function (data) {
                 $scope.showError = data;
