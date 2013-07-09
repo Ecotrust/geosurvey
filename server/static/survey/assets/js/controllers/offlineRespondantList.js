@@ -5,11 +5,21 @@ angular.module('askApp')
         $http.defaults.headers.post['Content-Type'] = 'application/json';
 
         $scope.respondents = _.toArray(app.respondents);
-        
+        $scope.respondentIndex = app.respondents;        
         if (app.user) {
             $scope.user = app.user;    
         } else {
             $location.path('/');
+        }
+
+        if ($routeParams.uuidSlug) {
+            $scope.respondent = $scope.respondentIndex[$routeParams.uuidSlug]
+        }
+
+        $scope.deleteRespondent = function (respondent) {
+            $scope.respondents = _.without($scope.respondents, respondent);
+            $scope.saveState();
+            $location.path('/respondents');
         }
 
         $scope.sendRespondent = function (respondent) {

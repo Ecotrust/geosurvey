@@ -15,7 +15,7 @@
     <div ng-show="respondents.length > 0 && ! busy">
         <ul class="list" ng-show="respondents">
             <li ng-repeat="respondent in respondents">
-                <a ng-click="resume(respondent)">
+                <a href="#/respondent/{{ respondent.uuid }}/">
                     {{ respondent.survey }}
                     <span class="chevron"></span>
                     <span class="badge">{{ respondent.ts |date: 'yyyy-MM-dd HH:mm'}}</span>

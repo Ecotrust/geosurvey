@@ -57,6 +57,10 @@ angular.module('askApp', ['ui', 'leaflet.directive', 'ui.bootstrap', 'ngGrid'])
         templateUrl: 'views/offlineRespondantList.html',
         controller: 'offlineRespondantListCtrl'
     })
+        .when('/respondent/:uuidSlug', {
+        templateUrl: 'views/completedSurveys.html',
+        controller: 'offlineRespondantListCtrl'
+    })
         .when('/RespondantList/:surveySlug', {
         templateUrl: 'views/RespondantList.html',
         controller: 'RespondantListCtrl'
