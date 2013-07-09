@@ -2,7 +2,7 @@
 
 var app = {};
 
-app.server = "http://" + window.location.host;
+app.server = window.location.protocol + '//' + window.location.host;
 console.log(app.server);
 angular.module('askApp', ['ui', 'leaflet.directive', 'heatmap.directive', 'ui.bootstrap'])
     .config(function($routeProvider, $httpProvider) {
