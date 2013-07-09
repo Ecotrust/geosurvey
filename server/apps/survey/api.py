@@ -112,3 +112,4 @@ class SurveyReportResource(SurveyResource):
     num_registered = fields.IntegerField(attribute='num_registered', readonly=True)
     num_no_starts = fields.IntegerField(attribute='num_no_starts', readonly=True)
     activity_points = fields.IntegerField(attribute='activity_points', readonly=True)
+    common_last_questions = fields.ListField(attribute='common_last_questions', readonly=True)

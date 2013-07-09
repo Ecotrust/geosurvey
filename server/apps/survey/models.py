@@ -79,7 +79,10 @@ class Survey(caching.base.CachingMixin, models.Model):
     @property
     def activity_points(self):
         return Location.objects.filter(response__respondant__in=self.respondant_set.filter(complete=True)).count()
-        
+
+    @property
+    def common_last_questions(self):
+        return self.respondant_set.values("last_question").annotate(num_exits=Count("uuid")).order_by('-num_exits')[:10]
 
     def __str__(self):
         return "%s" % self.name
