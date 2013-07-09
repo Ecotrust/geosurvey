@@ -94,10 +94,11 @@
             .error {
                 color: red;
             }
-            .main .forms form {
-                height: 320px;
+            /*.main .forms form {*/
+    /*            margin-top: 20px;
+                height: 260px;
             }
-
+*/
                 .main ul {
                     font-size: 18px;
                     list-style-type: none;
@@ -109,16 +110,10 @@
                     text-align: center;
                     margin-bottom: 10px;
                 }
-                
-                .main .new-user {
-                    margin-top: 20px;
-                    float: right;
-                    
-                }
-                .main .new-user .button {
-                    margin-top: 10px;
-                    float: right;
-                }
+        .main .segmented-controller {
+            margin-top: 20px;
+        }         
+
         .ngHeaderText {
             white-space: normal;
         }
@@ -136,42 +131,7 @@
         </style>
     </head>
     
-    <body ng-app="askApp">
-        <!-- Make sure all your bars are the first things in your <body> -->
-        <header class="bar-title">
-            <h1 class="title">
-                Hapi Fis
-            </h1>
-        </header>
-        <nav class="bar-tab primary-nav">
-            <ul class="tab-inner">
-                <li class="tab-item">
-                    <a href="#/SurveyList">
-              <img class="tab-icon" src="assets/img/icon-home.png">
-              <div class="tab-label">Home</div>
-            </a>
-                </li>
-                    <li class="tab-item">
-                        <a href="#/surveys">
-                  <img class="tab-icon" src="assets/img/survey.png">
-                  <div class="tab-label">Surveys</div>
-                </a>
-                    </li>
-                <li class="tab-item">
-                <a href="#/respondents">
-              <img class="tab-icon" src="assets/img/market.png">
-              <div class="tab-label">Completed Surveys</div>
-            </a>
-                </li>
-            </ul>
-        </nav>
-        <!-- Wrap all non-bar HTML in the .content div (this is actually what
-        scrolls) -->
-        <div class="content">
-            <div class="content-padded" ng-view>
-            </div>
-        </div>
-    </body>
+    <body ng-app="askApp"  ng-view></body>
     <script src="assets/lib/js/date.min.js"></script>
     <script src="assets/lib/js/jquery-1.8.2.min.js"></script>
     <script src="assets/lib/js/jquery-ui.min.js"></script>
@@ -199,6 +159,7 @@
     <script src="assets/js/controllers/SurveyList.js"></script>
     <script src="assets/js/controllers/offlineRespondantList.js"></script>
     <script src="assets/js/controllers/SurveyDetail.js"></script>
+    <script src="assets/js/controllers/mobileMenu.js"></script>
     <script src="assets/js/controllers/main.js"></script>
 
     <script src="assets/js/controllers/complete.js"></script>

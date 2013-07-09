@@ -1,22 +1,27 @@
-<div class="respondant" ng-class="{mapRespondant: question.type == 'map-multipoint'}" ng-hide="loading">
-    <div ng-hide="question.type == 'map-multipoint'" class="row-fluid row-progress-bar" style="height:12px !important;">
-        <div class="offset9 span3" style="height:12px !important; line-height: 5px;">
-            <div class="progress">
-              <div class="bar" style="width: {{ ((survey.questions.indexOf(question) + 1) / survey.questions.length) * 100 }}%;"></div>
+<header class="bar-title" ng-include="'views/mobileHeader.html'"></header>
+<nav class="bar-tab primary-nav" ng-include="'views/mobileMenu.html'"></nav>
+<div class="content">
+  <div class="content-padded">
+    <div class="respondant" ng-class="{mapRespondant: question.type == 'map-multipoint'}" ng-hide="loading">
+        <div ng-hide="question.type == 'map-multipoint'" class="row-fluid row-progress-bar" style="height:12px !important;">
+            <div class="offset9 span3" style="height:12px !important; line-height: 5px;">
+                <div class="progress">
+                  <div class="bar" style="width: {{ ((survey.questions.indexOf(question) + 1) / survey.questions.length) * 100 }}%;"></div>
+                </div>
+                <!-- <div class="pull-right btn-group">
+                    <a class="btn" target="_blank" href="/admin/survey/question/{{question.id}}">admin</a>
+                    <a class="btn" target="_blank" href="/dash#/author/{{survey.slug}}/?question={{question.slug}}">edit</a>
+                </div> -->
             </div>
-            <!-- <div class="pull-right btn-group">
-                <a class="btn" target="_blank" href="/admin/survey/question/{{question.id}}">admin</a>
-                <a class="btn" target="_blank" href="/dash#/author/{{survey.slug}}/?question={{question.slug}}">edit</a>
-            </div> -->
         </div>
-    </div>
-    <h2 class="question-title" ng-bind-html-unsafe="question.displayTitle" ng-hide="question.type == 'info' || question.type == 'map-multipoint'" >
-        
-    </h2>
+        <h2 class="question-title" ng-bind-html-unsafe="question.displayTitle" ng-hide="question.type == 'info' || question.type == 'map-multipoint'" >
+            
+        </h2>
 
-    <div ng-hide="question.foreach" ng-include="'views/questionTypes.html'"></div>
-    <div ng-show="question.foreach" ng-repeat="answer in question.foreachAnswers">
-        <h4>{{answer.text}}</h4>
-        <question questionsrc="answer"></question> 
-    </div> 
-</div>
+        <div ng-hide="question.foreach" ng-include="'views/questionTypes.html'"></div>
+        <div ng-show="question.foreach" ng-repeat="answer in question.foreachAnswers">
+            <h4>{{answer.text}}</h4>
+            <question questionsrc="answer"></question> 
+        </div> 
+    </div>
+</div>\
