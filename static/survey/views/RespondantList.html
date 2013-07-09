@@ -13,6 +13,13 @@
                 <li><strong>{{ survey.activity_points / survey.completes |number:2 }}</strong> activity points per survey</li>
             </ul>
         </div>
+        <div class="well">
+            <h4>Most Common Exits</h4>
+            <dl class="dl-horizontal" ng-repeat="group in survey.common_last_questions">
+                <dt ng-show="group.last_question != null"><a href="/respond/{{ survey.slug }}/{{ group.last_question }}">{{ group.last_question }}</a></dt>
+                <dd ng-show="group.last_question != null">{{ group.num_exits }}</dd>
+            </dl>
+        </div>
     </div>
     <div class="span8">
         <!-- <div class="row-fluid">
