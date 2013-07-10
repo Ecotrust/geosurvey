@@ -14,7 +14,7 @@ if (_.string.startsWith(window.location.protocol, "http")) {
 
 console.log(app.server);
 
-angular.module('askApp', ['ui', 'leaflet.directive', 'ui.bootstrap', 'ngGrid'])
+angular.module('askApp', ['ui', 'ui.bootstrap', 'ngGrid'])
     .config(function($routeProvider, $httpProvider) {
 
     if (typeof token != 'undefined') {

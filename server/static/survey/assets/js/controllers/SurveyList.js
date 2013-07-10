@@ -3,6 +3,9 @@
 angular.module('askApp')
     .controller('SurveyListCtrl', function($scope, $http, $routeParams, $location) {
 
+    $scope.path = $location.path().slice(1,5);
+
+
     $scope.updateSurveys = function () {
         $scope.hideSurveys = true;
         $http.get(app.server + '/api/v1/survey/?format=json').success(function(data) {

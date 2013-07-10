@@ -12,6 +12,9 @@ angular.module('askApp')
             $location.path('/');
         }
 
+        $scope.path = $location.path().slice(1,5);
+
+
         if ($routeParams.uuidSlug) {
             $scope.respondent = $scope.respondentIndex[$routeParams.uuidSlug]
         }

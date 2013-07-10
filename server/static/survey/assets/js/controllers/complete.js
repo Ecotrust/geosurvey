@@ -9,6 +9,7 @@ angular.module('askApp')
     } else {
         $scope.user = false;
     }
+    $scope.path = $location.path().slice(1,5);
 
     
     if ($routeParams.action === 'terminate' && $routeParams.questionSlug) {

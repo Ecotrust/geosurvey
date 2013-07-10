@@ -2,6 +2,8 @@
 angular.module('askApp')
   .controller('MainCtrl', function ($scope, $location, $http) {
     $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
+
+    $scope.path = 'home';
     
     if (app.user) {
         $scope.user = app.user;

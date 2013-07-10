@@ -147,7 +147,7 @@ function ActivitySelectorDialogCtrl($scope, dialog, $location, $window, question
 angular.module('askApp')
     .controller('SurveyDetailCtrl', function($scope, $routeParams, $http, $location, $dialog, $interpolate, $timeout) {
         $scope.loading=true;
-        console.log('surveydetail!');
+        $scope.path = $location.path().slice(1,5);
         if (app.user) {
             $scope.user = app.user;
         } else {
