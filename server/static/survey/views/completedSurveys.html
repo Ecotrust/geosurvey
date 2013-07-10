@@ -1,0 +1,11 @@
+<header class="bar-title" ng-include="'views/mobileHeader.html'"></header>
+<nav class="bar-tab primary-nav" ng-include="'views/mobileMenu.html'"></nav>
+<div class="content">
+  <div class="content-padded">
+    <h3>
+        {{ respondent.survey }}
+    </h3>
+    <p>Completed on {{ respondent.ts | date }}</p>
+    <a class="btn btn-block btn-large btn-primary" ng-click="resume(respondent)">Resume</a>
+    <a class="btn btn-block btn-large btn-danger" ng-click="deleteRespondent(respondent)">Delete</a>
+</div>

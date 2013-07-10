@@ -1,4 +1,9 @@
-<div class="info respondant">
-    You have completed the survey.
-    <div ng-include src="completeView"></div>
+<header class="bar-title" ng-include="'views/mobileHeader.html'"></header>
+<nav class="bar-tab primary-nav" ng-include="'views/mobileMenu.html'"></nav>
+<div class="content">
+  <div class="content-padded">
+    <div class="info respondant">
+        You have completed the survey.
+        <div ng-include src="completeView"></div>
+    </div>
 </div>
