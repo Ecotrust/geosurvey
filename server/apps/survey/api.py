@@ -96,7 +96,7 @@ class RespondantResource(SurveyModelResource):
 class OptionResource(SurveyModelResource):
     class Meta:
         always_return_data = True
-        queryset = Option.objects.all()
+        queryset = Option.objects.all().order_by('order');
         authorization = StaffUserOnlyAuthorization()
         authentication = Authentication()
 

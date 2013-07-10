@@ -110,7 +110,9 @@ class Option(caching.base.CachingMixin, models.Model):
     type = models.CharField(max_length=20,choices=QUESTION_TYPE_CHOICES,default='integer')
     rows = models.TextField(null=True, blank=True)
     required = models.BooleanField(default=True)
+    order = models.IntegerField(null=True, blank=True)
     objects = caching.base.CachingManager()
+
 
     def __str__(self):
         return "%s" % self.text

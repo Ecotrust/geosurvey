@@ -146,7 +146,7 @@ input {
                         <label>Options from previous answer</label>
                         <input type="text" ng-model="activeQuestion.options_from_previous_answer">
                         <br/>
-                        <ul class="nav nav-pills nav-stacked">
+                        <ul class="nav nav-pills nav-stacked" ng-model="activeQuestion.grid_cols" ui-sortable="{axis: 'y'}">
                             <li
                                 ng-class="{'active': grid_col == activeQuestion.activeOption }"
                                 ng-repeat="grid_col in activeQuestion.grid_cols">

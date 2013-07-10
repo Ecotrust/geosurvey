@@ -30,6 +30,15 @@ angular.module('askApp')
                    $scope.checkQuestionOrder($scope.survey.questions);
                 }
             }, true);
+            $scope.$watch('activeQuestion.grid_cols', function (newValue) {
+                if (newValue) {
+                    _.each(newValue, function (option, i) {
+                        if (option.order !== i)
+                            option.order = i;
+                    }); 
+                }
+                
+            }, true);
 
         } else {
             $scope.newSurvey = true;
