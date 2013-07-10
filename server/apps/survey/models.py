@@ -82,7 +82,11 @@ class Survey(caching.base.CachingMixin, models.Model):
 
     @property
     def common_last_questions(self):
-        return self.respondant_set.values("last_question").annotate(num_exits=Count("uuid")).order_by('-num_exits')[:10]
+        return self.respondant_set.exclude(last_question__isnull=True).values("last_question").annotate(num_exits=Count("uuid")).order_by('-num_exits')[:10]
+
+    @property
+    def completes_per_state(self):
+        return self.respondant_set.filter(complete=True).values("state").annotate(num_respondants=Count("uuid")).order_by('-num_respondants')
 
     def __str__(self):
         return "%s" % self.name
