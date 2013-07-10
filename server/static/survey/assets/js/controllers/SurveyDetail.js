@@ -210,6 +210,10 @@ angular.module('askApp')
         }
     };
 
+    $scope.gotoQuestion = function (questionSlug) {
+        $location.path(['survey', $scope.survey.slug, questionSlug, $routeParams.uuidSlug].join('/'));
+    }
+
     $scope.getNextQuestionPath = function(numQsToSkips) {
         var nextQuestion = $scope.getNextQuestion(numQsToSkips);
         if (nextQuestion) {
@@ -236,6 +240,17 @@ angular.module('askApp')
         $scope.saveState();
     }
 
+    $scope.getLastQuestion = function (numQsToSkips) {
+        var index = _.indexOf($scope.survey.questions, $scope.question), lastQuestion = false;
+        while (index >= 0 && ! lastQuestion) {
+            index--;
+            if ($scope.survey.questions[index] && _.has($scope.answers, $scope.survey.questions[index].slug)) {
+                lastQuestion = $scope.survey.questions[index]
+            }
+        }
+        return lastQuestion;
+    }
+
     $scope.getNextQuestionWithSkip = function(numQsToSkips) {
         var index = _.indexOf($scope.survey.questions, $scope.question) + 1 + (numQsToSkips || 0);
         // should return the slug of the next question
@@ -259,6 +274,7 @@ angular.module('askApp')
         }
         return foundQuestion;
     };
+
 
     $scope.getResumeQuestionPath = function(lastQuestion) {
         var resumeQuestion = $scope.survey.questions[_.indexOf($scope.survey.questions, _.findWhere($scope.survey.questions, {

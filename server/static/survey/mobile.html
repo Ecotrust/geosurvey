@@ -61,6 +61,20 @@
             .list .chevron, .list [class*="button"], .list [class*="count"], .list .toggle {
                 top: 40%;
             }
+            .bar-title .button-prev, .bar-title .button-prev:active {
+                padding-right: 12px;
+                padding-bottom: 4px;
+                padding-top: 4px;    
+                background-color: #E67E22;
+                background-image: none;
+                border: 0;
+            }
+            .bar-title .button-prev:before, .bar-title .button-prev:active:before {
+             background-color: #E67E22;
+             background-image: none;
+             border: 0;
+             box-shadow: none;
+            }
             [class*="button"], [class*="button"]:active {
                 padding: 10px 20px;
             }
@@ -164,6 +178,7 @@
 
     <script src="assets/js/controllers/complete.js"></script>
     <script src="assets/js/directives/mobilemenu.js"></script>
+    <script src="assets/js/directives/titlebar.js"></script>
     <!-- endbuild -->
 
 </html>

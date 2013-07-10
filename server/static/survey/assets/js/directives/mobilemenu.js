@@ -8,7 +8,7 @@ angular.module('askApp')
         replace: true,
         transclude: true,
         scope: false,
-        link: function postLink(scope, element, attrs) {
+        link: function (scope, element, attrs) {
         }
     }
 });

@@ -79,12 +79,24 @@ angular.module('askApp')
 
 
         $scope.resume = function(respondent) {
-            var url = [
-                '/survey',
-                respondent.survey,
-                _.last(respondent.responses).question.slug,
-                respondent.uuid
+            var url;
+            if (respondent.responses.length) {
+                url = [
+                    '/survey',
+                    respondent.survey,
+                    _.last(respondent.responses).question.slug,
+                    respondent.uuid
                 ].join('/');
+
+            } else {
+                url = [
+                    '/survey',
+                    respondent.survey,
+                    _.first(_.findWhere(app.surveys, {slug: respondent.survey}).questions).slug,
+                    respondent.uuid
+                ].join('/');
+            }
+            
            $location.path(url);
         }
 });
