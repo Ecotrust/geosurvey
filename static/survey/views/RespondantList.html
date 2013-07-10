@@ -24,7 +24,7 @@
             <h4>Completions Per State</h4>
             <dl class="dl-horizontal dl-horizontal-compact" ng-repeat="group in survey.completes_per_state">
                 <dt>{{ group.state }}</dt>
-                <dd>{{ group.num_respondants }}</dd>
+                <dd>{{ group.num_respondants }} ({{ (group.num_respondants / survey.completes)*100 | number:0 }}%)</dd>
             </dl>
         </div>
     </div>
