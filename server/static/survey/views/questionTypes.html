@@ -5,7 +5,7 @@
     <div ng-switch-when="info">
         
         <div class="info-content" ng-include="infoView"></div>
-        <button class="btn btn-primary btn-block button-block btn-large" ng-click="gotoNextQuestion()">continue</button>
+        <button class="btn btn-primary btn-block button-block btn-large" ng-tap="gotoNextQuestion()">continue</button>
     </div>
     <div ng-switch-when="integer">
         <form class="question" ng-show="survey.questions.length" ng-submit="answerQuestion(answer)">
@@ -86,7 +86,7 @@
             <div class="todo mrm">
                 <ul>
                   <li 
-                    ng-click="$parent.onSingleSelectClicked(option, $parent.question)"
+                    ng-tap="$parent.onSingleSelectClicked(option, $parent.question)"
                     ng-repeat="option in question.options"
                     ng-class="{'todo-done': option.checked }">
                     <!-- <div class="todo-icon fui-man-24"></div> -->
@@ -99,7 +99,7 @@
                   </li>
                   <li 
                     ng-show="question.allow_other"
-                    ng-click="$parent.onSingleSelectClicked($parent.question.otherOption, $parent.question)"
+                    ng-tap="$parent.onSingleSelectClicked($parent.question.otherOption, $parent.question)"
                     ng-class="{'todo-done': $parent.question.otherOption.checked }">
                     <!-- <div class="todo-icon fui-man-24"></div> -->
                     <div class="todo-content">
@@ -119,7 +119,7 @@
             <div class="todo mrm">
                 <ul>
                   <li 
-                    ng-click="$parent.onSingleSelectClicked(option, $parent.question)"
+                    ng-tap="$parent.onSingleSelectClicked(option, $parent.question)"
                     ng-repeat="option in question.options"
                     ng-class="{'todo-done': option.checked }">
                     <!-- <div class="todo-icon fui-man-24"></div> -->
@@ -142,7 +142,7 @@
                     <h3>Activities You Selected</h3>
                     <ul class="hoisted">
                         <li 
-                          ng-click="$parent.onMultiSelectClicked(option, $parent.question)"
+                          ng-tap="$parent.onMultiSelectClicked(option, $parent.question)"
                           ng-repeat="option in question.hoisted_options"
                           ng-class="{'todo-done': option.checked }">
                           <!-- <div class="todo-icon fui-man-24"></div> -->
@@ -160,7 +160,7 @@
                 <h3 ng-show="question.hoisted_options.length > 0">Other Activities</h3>
                 <ul class="choices">
                   <li 
-                    ng-click="$parent.onMultiSelectClicked(option, $parent.question)"
+                    ng-tap="$parent.onMultiSelectClicked(option, $parent.question)"
                     ng-repeat="option in question.options" ng-cloak
                     ng-class="{'todo-done': option.checked }">
                     <!-- <div class="todo-icon fui-man-24"></div> -->
@@ -173,7 +173,7 @@
                   </li>
                   <li 
                     ng-show="question.allow_other"
-                    ng-click="onMultiSelectClicked(question.otherOption, question)"
+                    ng-tap="onMultiSelectClicked(question.otherOption, question)"
                     ng-class="{'todo-done': question.otherOption.checked }"
                     ng-model="question.otherAnswer.text">
                     <!-- <div class="todo-icon fui-man-24"></div> -->
