@@ -3,7 +3,7 @@
 angular.module('askApp')
     .controller('RespondantDetailCtrl', function($scope, $routeParams, $http) {
 
-    $http.get('/api/v1/respondant/'  + $routeParams.uuidSlug + '/?format=json&survey__slug=' + $routeParams.surveySlug).success(function(data) {
+    $http.get('/api/v1/reportrespondant/'  + $routeParams.uuidSlug + '/?format=json&survey__slug=' + $routeParams.surveySlug).success(function(data) {
         _.each(data.responses, function (response) {
 
             response.answer_parsed = JSON.parse(response.answer_raw);
