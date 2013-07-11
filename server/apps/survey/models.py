@@ -245,7 +245,7 @@ class Response(caching.base.CachingMixin, models.Model):
 
     def save_related(self):
         self.answer = simplejson.loads(self.answer_raw)
-        if self.question.type in ['auto-single-select', 'single-select']:
+        if self.question.type in ['auto-single-select', 'single-select', 'yes-no']:
             answer = simplejson.loads(self.answer_raw)
             if answer.get('text'):
                 self.answer = answer['text']

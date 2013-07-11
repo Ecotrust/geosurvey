@@ -16,7 +16,7 @@
                 <strong>{{response.question.label}}:</strong>
                 <span ng-switch on="response.question.type">
                     <span ng-switch-default>{{response.answer}}</span>
-                    <span ng-switch-when="yes-no">{{response.answer.text}}</span>
+                    <span ng-switch-when="yes-no">{{response.answer_parsed.text}}</span>
                     <ul class="unstyled" ng-switch-when="multi-select">
                         <li ng-repeat="answer in response.answer_parsed">{{answer.text}}</li>
                     </ul>
