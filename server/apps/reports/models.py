@@ -27,8 +27,11 @@ class QuestionReport(Question):
                         answers = answers.filter(respondant__responses__in=filter_question.response_set.filter(answer__in=value))
                         locations = locations.filter(location__response__in=answers)
                 else:
-                    answers = answers.filter(respondant__responses__in=filter_question.response_set.filter(answer__in=value))
+                    if filter_question.type in ['map-multipoint']:
+                        answers = answers.filter(respondant__responses__in=filter_question.response_set.filter(location__locationanswer__answer__in=value))
+                    else:
+                        answers = answers.filter(respondant__responses__in=filter_question.response_set.filter(answer__in=value))
         if self.type in ['map-multipoint']:
             return locations.values('answer').annotate(locations=Count('answer'), surveys=Count('location__respondant', distinct=True))
         else:
-            return answers.values('answer').annotate(locations=Sum('respondant__locations'), surveys=Count('answer'))        
+            return answers.values('answer').annotate(locations=Sum('respondant__locations'), surveys=Count('answer'))
