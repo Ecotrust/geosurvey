@@ -1376,7 +1376,7 @@ $scope.loadSurvey = function(data) {
             if (!app.respondents) {
                 app.respondents = {};
             }
-            $routeParams.uuidSlug = 'offline:' + ts.getTime();
+            $routeParams.uuidSlug = 'offline_' + ts.getTime();
             app.respondents[$routeParams.uuidSlug] = {
                 uuid: $routeParams.uuidSlug,
                 survey: $routeParams.surveySlug,

@@ -34,12 +34,12 @@ angular.module('askApp')
             });
             var newRespondent = {
                 ts: respondent.ts,
-                uuid: respondent.uuid,
+                uuid: respondent.uuid.replace(':', '_'),
                 responses: respondent.responses,
                 survey: '/api/v1/survey/' + respondent.survey + '/'
             };
             return $http.post(url, newRespondent).error(function (err) {
-                alert(JSON.stringify(err));
+                console.log(JSON.stringify(err));
             });
             
         }   

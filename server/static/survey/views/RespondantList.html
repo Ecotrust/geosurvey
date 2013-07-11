@@ -7,16 +7,27 @@
                 <li><strong>{{ survey.completes |number}}</strong> complete ({{(survey.completes/survey.survey_responses)*100 |number:2}}%)</li>
                 <li><strong>{{ survey.survey_responses - survey.completes | number}}</strong> incomplete ({{((survey.survey_responses - survey.completes)/survey.survey_responses) * 100|number:2}}%)</li>
             </ul>
-            <ul class="unstyled">
+           <!--  <ul class="unstyled">
                 <li><strong>{{ survey.activity_points | number }}</strong> activity points</li>
                 <li><strong>{{ survey.activity_points / survey.completes |number:2 }}</strong> activity points per survey</li>
-            </ul>
+            </ul> -->
         </div>
     </div>
     <div class="span8">
         <!-- <div class="row-fluid">
             <div heatmap question="question.slug"></div>
         </div> -->
+        <div class="row-fluid">
+            <table class="table">
+                <tbody>
+                    <tr ng-repeat="respondent in respondents">
+                        <td>{{ respondent.user.username }}</td>
+                        <td>{{ respondent.ts|date:"yyyy/MM/dd hh:mm"}}</td>
+                        <td><a href="#/RespondantDetail/{{survey.slug}}/{{ respondent.uuid }}">Responses ({{respondent.responses.length}})</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
         <div class="row-fluid" ng-repeat="question in survey.questions">
             <div  ui-if="question.visualize">
                 <div class="clearfix">

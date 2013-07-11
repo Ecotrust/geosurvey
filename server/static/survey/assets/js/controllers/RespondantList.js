@@ -22,7 +22,7 @@ angular.module('askApp')
 
     }).success(function() {
         $http.get('/api/v1/respondant/?format=json&limit=5&survey__slug__exact=' + $routeParams.surveySlug).success(function(data) {
-            $scope.respondants = data.objects;
+            $scope.respondents = data.objects;
             $scope.meta = data.meta;
         });
          

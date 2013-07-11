@@ -4,11 +4,15 @@ angular.module('askApp')
     .controller('RespondantDetailCtrl', function($scope, $routeParams, $http) {
 
     $http.get('/api/v1/respondant/'  + $routeParams.uuidSlug + '/?format=json&survey__slug=' + $routeParams.surveySlug).success(function(data) {
-        $scope.response = data;
-        // if ($scope.getResponseBySlug('activity-locations')) {
-        //     $scope.mapResponse = JSON.parse($scope.getResponseBySlug('activity-locations').answer);
-        // }
+        _.each(data.responses, function (response) {
+
+            response.answer_parsed = JSON.parse(response.answer_raw);
+        })
+        $scope.respondent = data;
     });
+        
+    
+
 
     $scope.map = {
         center: {

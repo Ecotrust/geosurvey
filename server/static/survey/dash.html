@@ -29,6 +29,7 @@
     <link rel="stylesheet" href="{{ STATIC_URL }}survey/lib/css/leaflet.awesome-markers.css">
     <link rel="stylesheet" href="{{ STATIC_URL }}survey/components/jquery-ui-bootstrap/jquery.ui.theme.font-awesome.css">
 
+
     <!--[if lt IE 9]>
     <link rel="stylesheet" href="{{ STATIC_URL }}survey/components/leaflet/dist/leaflet.ie.css">
     <![endif]-->
@@ -53,11 +54,11 @@
 
     <!-- Add your site or application content here -->
     {% if user.is_authenticated %}
-    <div class="navbar .navbar-static-top navbar-inverse">
-      <div class="container-fluid">
+    <div class="navbar .navbar-static-top navbar-inverse hidden"  ng-controller="SurveyListCtrl" ng-cloak>
+      <div class="container-fluid" ng-show="loaded">
         <div class="navbar-inner">
           <div class="container"> 
-            <div ng-controller="SurveyListCtrl">
+            <div>
               {% verbatim %}
               <ul class="nav">
                 <li>
@@ -165,9 +166,9 @@
     <script src="{{ STATIC_URL }}survey/assets/js/controllers/RespondantList.js"></script>
     <script src="{{ STATIC_URL }}survey/assets/js/controllers/RespondantDetail.js"></script>
     <script src="{{ STATIC_URL }}survey/assets/js/controllers/complete.js"></script>
-    <script src="{{ STATIC_URL }}survey/assets/js/directives/leaflet.js"></script>
-    <script src="{{ STATIC_URL }}survey/assets/js/directives/heatmap.js"></script>
-    <script src="{{ STATIC_URL }}survey/assets/js/directives/zoomTo.js"></script>
+    <!-- // <script src="{{ STATIC_URL }}survey/assets/js/directives/leaflet.js"></script>
+    // <script src="{{ STATIC_URL }}survey/assets/js/directives/heatmap.js"></script>
+    // <script src="{{ STATIC_URL }}survey/assets/js/directives/zoomTo.js"></script> -->
     <script src="{{ STATIC_URL }}survey/assets/js/controllers/author.js"></script>
     <script src="{{ STATIC_URL }}survey/assets/js/directives/distribution.js"></script>
     <!-- endbuild -->
@@ -176,6 +177,9 @@
     var token = "{{csrf_token}}";
     {% if user.is_authenticated %}
     var isAuthenticated = true;
+    app.user = {
+        username: "{{user.username}}"
+      }
     {% else %}
     var isAuthenticated = false;
     {% endif %}

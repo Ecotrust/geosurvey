@@ -1,6 +1,9 @@
 from django.db import models
 from django.db.models import Avg, Max, Min, Count
 from django.db.models import Avg, Max, Min, Count, Sum
+from django.contrib.auth.models import User
+from django.db.models import signals
+
 import datetime
 import uuid
 import simplejson
@@ -28,9 +31,10 @@ class Respondant(caching.base.CachingMixin, models.Model):
 
     ts = models.DateTimeField(default=datetime.datetime.now())
     email = models.EmailField(max_length=254, null=True, blank=True, default=None)
+
+    surveyor = models.ForeignKey(User, null=True, blank=True)
+
     objects = caching.base.CachingManager()
-
-
 
     def __str__(self):
         if self.email:
@@ -42,6 +46,9 @@ class Respondant(caching.base.CachingMixin, models.Model):
         ''' On save, update timestamps '''
         if not self.uuid:
             self.ts = datetime.datetime.now()
+        else:
+            if ":" in self.uuid:
+                self.uuid = self.uuid.replace(":", "_")
         self.locations = self.location_set.all().count()
         super(Respondant, self).save(*args, **kwargs)
 
@@ -236,49 +243,57 @@ class Response(caching.base.CachingMixin, models.Model):
     ts = models.DateTimeField(default=datetime.datetime.now())
     objects = caching.base.CachingManager()
 
+    def save_related(self):
+        self.answer = simplejson.loads(self.answer_raw)
+        if self.question.type in ['auto-single-select', 'single-select']:
+            answer = simplejson.loads(self.answer_raw)
+            if answer.get('text'):
+                self.answer = answer['text']
+            if answer.get('name'):
+                self.answer = answer['name']
+            #self.answer = self.answer_raw['name']
+        if self.question.type in ['auto-multi-select', 'multi-select']:
+            answers = []
+            self.multianswer_set.all().delete()
+            for answer in simplejson.loads(self.answer_raw):
+                if answer.get('text'):
+                    answer_text = answer['text']
+                if answer.get('name'):
+                    answer_text = answer['name']
+                answers.append(answer_text)
+                answer_label = answer.get('label', None)
+                multi_answer = MultiAnswer(response=self, answer_text=answer_text, answer_label=answer_label)
+                multi_answer.save()
+            self.answer = ", ".join(answers)
+        if self.question.type in ['map-multipoint'] and self.id:
+            answers = []
+            self.location_set.all().delete()
+            for point in simplejson.loads(simplejson.loads(self.answer_raw)):
+                    answers.append("%s,%s: %s" % (point['lat'], point['lng'] , point['answers']))
+                    location = Location(lat=point['lat'], lng=point['lng'], response=self, respondant=self.respondant)
+                    location.save()
+                    for answer in point['answers']:
+                        answer = LocationAnswer(answer=answer['text'], label=answer['label'], location=location)
+                        answer.save()
+                    location.save()
+            self.answer = ", ".join(answers)
+        if hasattr(self.respondant, self.question.slug):
+            setattr(self.respondant, self.question.slug, self.answer)
+            self.respondant.save()
+        print self.answer
+        self.save()
 
-    # def __str__(self):
-    #     return "%s/%s/%s" % (self.respondant.email, self.question.survey_slug, self.question.slug)
+
 
     def save(self, *args, **kwargs):
         ''' On save, update timestamps '''
         if not self.id:
             self.ts = datetime.datetime.now()
-        else:
-            self.answer = simplejson.loads(self.answer_raw)
-            if self.question.type in ['auto-single-select', 'single-select']:
-                answer = simplejson.loads(self.answer_raw)
-                if answer.get('text'):
-                    self.answer = answer['text']
-                if answer.get('name'):
-                    self.answer = answer['name']
-                #self.answer = self.answer_raw['name']
-            if self.question.type in ['auto-multi-select', 'multi-select']:
-                answers = []
-                self.multianswer_set.all().delete()
-                for answer in simplejson.loads(self.answer_raw):
-                    if answer.get('text'):
-                        answer_text = answer['text']
-                    if answer.get('name'):
-                        answer_text = answer['name']
-                    answers.append(answer_text)
-                    answer_label = answer.get('label', None)
-                    multi_answer = MultiAnswer(response=self, answer_text=answer_text, answer_label=answer_label)
-                    multi_answer.save()
-                self.answer = ", ".join(answers)
-            if self.question.type in ['map-multipoint'] and self.id:
-                answers = []
-                self.location_set.all().delete()
-                for point in simplejson.loads(simplejson.loads(self.answer_raw)):
-                        answers.append("%s,%s: %s" % (point['lat'], point['lng'] , point['answers']))
-                        location = Location(lat=point['lat'], lng=point['lng'], response=self, respondant=self.respondant)
-                        location.save()
-                        for answer in point['answers']:
-                            answer = LocationAnswer(answer=answer['text'], label=answer['label'], location=location)
-                            answer.save()
-                        location.save()
-                self.answer = ", ".join(answers)
-            if hasattr(self.respondant, self.question.slug):
-                setattr(self.respondant, self.question.slug, self.answer)
-                self.respondant.save()
         super(Response, self).save(*args, **kwargs)
+
+def save_related(sender, instance, created, **kwargs):
+    # save the related objects on initial creation
+    if created:
+        instance.save_related()
+
+signals.post_save.connect(save_related, sender=Response)

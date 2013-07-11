@@ -3,23 +3,41 @@
 
         <h2>Respondent Info</h2>
         <dl>
+            <dt>surveyor</dt>
+            <dd>{{ respondent.user.username }}</dd>
             <dt>identity</dt>
-            <dd>{{ response.email || response.uuid}}</dd>
+            <dd>{{ respondent.email || respondent.uuid}}</dd>
             <dt>timestamp</dt>
-            <dd>{{ response.ts  | date:'MM/dd/yyyy @ h:mma'}}</dd>
+            <dd>{{ respondent.ts  | date:'MM/dd/yyyy @ h:mma'}}</dd>
         </dl>
         <h2>Responses</h2>
-        <div ng-repeat="answer in response.responses">
-            <div ng-switch on="answer.question.type">
-                <div ng-switch-default>
-                    <dl class="{{ answer.question.slug }}">
-                        <dt>{{ answer.question.title }}</dt>
-                        <dd>{{ answer.ts  | date:'MM/dd/yyyy @ h:mma'}}</dd>
-                        <dd>{{ answer.answer }}</dd>
-                    </dl>
-                </div>
-            </div>
-        </div>
+        <ul class="list unstyled">
+            <li ng-repeat="response in respondent.responses">
+                <strong>{{response.question.label}}:</strong>
+                <span ng-switch on="response.question.type">
+                    <span ng-switch-default>{{response.answer}}</span>
+                    <span ng-switch-when="yes-no">{{response.answer.text}}</span>
+                    <ul class="unstyled" ng-switch-when="multi-select">
+                        <li ng-repeat="answer in response.answer_parsed">{{answer.text}}</li>
+                    </ul>
+                    <table class="table" ng-switch-when="grid">
+                        <thead>
+                            <th></th>
+                            <th ng-repeat="grid_col in response.question.grid_cols"><strong>{{grid_col.text}}</strong></th>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="answer in response.answer_parsed">
+                                <td>{{ answer.text }}</td>
+                                <td ng-repeat="grid_col in response.question.grid_cols" ng-hide="grid_col.type=='multi-select'">{{answer[grid_col.label.replace('-', '')]}}</td>
+                                <td ng-repeat="grid_col in response.question.grid_cols" ng-show="grid_col.type=='multi-select'">
+                                    <span ng-repeat="multiAnswer in answer[grid_col.label.replace('-', '')]">{{multiAnswer}}<span ng-hide="$last">,</span> </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </span>
+            </li>
+        </ul>
     </div>
     <div class="span6">
         <!--<div leaflet multimarkers="mapResponse" center="map.center" zoom="map.zoom" popupfield="'answers'"></div>-->

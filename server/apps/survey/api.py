@@ -63,7 +63,7 @@ class ResponseResource(SurveyModelResource):
         }
 
 class OfflineResponseResource(SurveyModelResource):
-    question = fields.ToOneField('apps.survey.api.QuestionResource', 'question')
+    question = fields.ToOneField('apps.survey.api.QuestionResource', 'question', null=True, blank=True)
 
     class Meta:
         queryset = Response.objects.all()
@@ -74,17 +74,21 @@ class OfflineRespondantResource(SurveyModelResource):
     responses = fields.ToManyField(OfflineResponseResource, 'responses', null=True, blank=True)
     survey = fields.ToOneField('apps.survey.api.SurveyResource', 'survey', null=True, blank=True)
     class Meta:
-        always_return_data = True
+        # always_return_data = True
         queryset = Respondant.objects.all()
         authorization = StaffUserOnlyAuthorization()
         authentication = Authentication()
-
+        ordering = ['-ts']
+    
+    def obj_create(self, bundle, **kwargs):
+        return super(OfflineRespondantResource, self).obj_create(bundle, surveyor=bundle.request.user)
 
 class RespondantResource(SurveyModelResource):
     responses = fields.ToManyField(ResponseResource, 'responses', full=True, null=True, blank=True)
     survey = fields.ToOneField('apps.survey.api.SurveyResource', 'survey', null=True, blank=True, full=True, readonly=True)
+    user = fields.ToOneField('apps.account.api.UserResource', 'surveyor', null=True, blank=True, full=True, readonly=True)
     class Meta:
-        queryset = Respondant.objects.all()
+        queryset = Respondant.objects.all().order_by('-ts')
         filtering = {
             'survey': ALL_WITH_RELATIONS,
             'responses': ALL_WITH_RELATIONS
@@ -92,6 +96,7 @@ class RespondantResource(SurveyModelResource):
         ordering = ['-ts']
         authorization = StaffUserOnlyAuthorization()
         authentication = Authentication()
+
 
 class OptionResource(SurveyModelResource):
     class Meta:
