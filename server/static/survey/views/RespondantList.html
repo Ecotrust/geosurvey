@@ -29,7 +29,7 @@
             </table>
         </div>
         <div class="row-fluid" ng-repeat="question in survey.questions">
-            <div  ui-if="question.visualize">
+           <!--  <div  ui-if="question.visualize">
                 <div class="clearfix">
                     <select class="pull-right" placeholder="filter by {{ question.slug }}" multiple=true ng-model="question.filters[question.slug]" ui-select2 style="width: 200px">
                         <option value="{{answer.answer}}" ng-repeat="answer in question.answer_domain">
@@ -55,7 +55,7 @@
                 <div ui-if="question.report_type == 'distribution' || question.report_type == 'heatmap-distribution'">
                     <distribution filter="question.filters" question="question" survey-slug="survey.slug"></distribution>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </div>
