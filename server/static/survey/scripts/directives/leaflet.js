@@ -48,9 +48,11 @@
                 map.attributionControl.setPrefix('');
                 map.zoomControl.options.position = 'bottomleft';
 
-                // Layer picker init
-                var options = { position: 'bottomleft' };
-                L.control.layersToggle("View Satellite Imagery", bing, "View Nautical Charts", nautical, options).addTo(map);
+                if (scope.multiMarkersEdit) {
+                    // Layer picker init
+                    var options = { position: 'bottomleft' };
+                    L.control.layersToggle("View Satellite Imagery", bing, "View Nautical Charts", nautical, options).addTo(map);
+                }
 
                 // Study area boundary (if applicable)
                 $http.get("/static/survey/data/boundaries/" + $routeParams.surveySlug + ".json").success(function(data) {
@@ -252,6 +254,10 @@
                 });
 
                 scope.updateCrosshair = function() {
+                    if (!scope.multiMarkersEdit) {
+                        return;
+                    }
+
                     if (scope.confirmingLocation) {
                         scope.marker.icon = "crosshair_blank.png";
 

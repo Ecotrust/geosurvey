@@ -787,6 +787,14 @@ angular.module('askApp')
 
                 });
             });
+
+            $scope.penniesTextBox_click = function ($event) {
+                if ($event.target.attributes["data-location-key"]) {
+                    var loc = $scope.locations[$event.target.attributes["data-location-key"].value];
+                    $scope.zoomModel.zoomToResult = loc;
+                }
+            };
+
         }
 
         // map 

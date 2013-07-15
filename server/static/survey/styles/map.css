@@ -20,7 +20,11 @@
 /**
  * The Map
  */
-div[leaflet] {
+.pennies div[leaflet] {
+    width: 100%;
+    height: 400px;
+    }
+.map-multipoint div[leaflet] {
     position: absolute !important;
     top: 0 !important;
     bottom: 0 !important;
@@ -84,7 +88,7 @@ div[leaflet] {
     font-size: 14px;
     padding: 8px 11px;
 }
-.leaflet-control-container .leaflet-top.leaflet-left {
+.map-multipoint .leaflet-control-container .leaflet-top.leaflet-left {
     /* the zoom control is being forced to bottom left 
     while staying in the top left class (if time available, 
     we should just move the control the the bottom left class) */
