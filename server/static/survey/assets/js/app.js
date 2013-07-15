@@ -73,6 +73,10 @@ angular.module('askApp', ['ui', 'ui.bootstrap', 'ngGrid'])
         templateUrl: 'views/survey.html',
         controller: 'SurveyCtrl'
     })
+        .when('/settings', {
+        templateUrl: 'views/settings.html',
+        controller: 'SettingsCtrl'
+    })
         .otherwise({
         redirectTo: '/'
     });

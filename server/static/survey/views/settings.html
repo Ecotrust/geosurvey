@@ -1,0 +1,14 @@
+<header class="bar-title" titlebar></header>
+<mobilemenu user="user"></mobilemenu>
+<div class="content">
+	<div class="content-padded">
+		<h2>Settings</h2>
+		<div ng-hide="confirmClear">
+		    <a class="btn btn-block btn-large btn-danger" ng-click="confirmClear = true">Clear Cache</a>
+		</div>
+		<div ng-show="confirmClear">
+		    <a class="btn btn-block btn-large btn-danger" ng-tap="clearCache()">ok</a>
+		    <a class="btn btn-block btn-large" ng-tap="confirmClear = false">cancel</a>
+		</div>
+	</div>
+</div>
