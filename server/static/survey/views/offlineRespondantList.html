@@ -14,12 +14,12 @@
     </div>
     <div ng-show="respondents.length > 0 && ! busy">
         <ul class="list" ng-show="respondents">
-            <li ng-repeat="respondent in respondents">
+            <li ng-repeat="respondent in respondents| orderBy: 'ts':true">
                 <a href="#/respondent/{{ respondent.uuid }}/">
                     {{ respondent.survey }}
                     <span class="chevron"></span>
                     <span class="label label-success" ng-show="respondent.complete">{{ respondent.ts |date: 'yyyy-MM-dd HH:mm'}}</span>
-                    <span class="label" ng-hide="respondent.complete">incomplete</span>
+                    <span class="label" ng-hide="respondent.complete">{{ respondent.ts |date: 'yyyy-MM-dd HH:mm'}} incomplete</span>
                 </a>
             </li>
         </ul>
