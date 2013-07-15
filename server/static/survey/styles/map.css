@@ -298,8 +298,8 @@ div[zoomto] .small-screen {
 
 
 /* Map Thankyou Modal */
-.thx-modal .modal-header h3,
-.done-modal .modal-header h3,
+.modal-heading,
+.modal-header h3,
 .activities-modal h3 {
     font-size: 20px;
     font-weight: 500 !important;

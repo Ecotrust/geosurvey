@@ -82,6 +82,23 @@ function DoneDialogCtrl($scope, dialog, remainingActivities, $location){
     };
 }
 
+function PrimaryRequiredDialogCtrl($scope, dialog, primaryActivityText, $location){
+    $scope.loaded = false;
+    $scope.$watch(function() {
+        return $location.path();
+    }, function () {
+        if ($scope.loaded && dialog.isOpen()) {
+            $scope.close();
+        }
+        $scope.loaded = true;
+    });
+
+    $scope.primaryActivityText = primaryActivityText;
+    $scope.close = function(result){
+        dialog.close(result);
+    };
+}
+
 function ActivitiesCtrl($scope, dialog, $location, $timeout) {
     $scope.loaded = false;
     $scope.$watch(function() {
@@ -506,7 +523,12 @@ angular.module('askApp')
     };
 
     $scope.answerMapQuestion = function (locations) {
-        $scope.answerQuestion(locations);
+        if ($scope.isPrimaryActivityMapped()) {
+            $scope.answerQuestion(locations);
+        } else {
+            $scope.showPrimaryRequiredDialog();
+        }
+
     };
 
     $scope.loadSurvey = function (data) {
@@ -1004,9 +1026,11 @@ angular.module('askApp')
                     backdropClick: false,
                     templateUrl: '/static/survey/views/addMoreModal.html',
                     controller: 'addMoreDialogCtrl',
-                    resolve: { remainingActivities: function () {
+                    resolve: { 
+                        remainingActivities: function () {
                             return $scope.getRemainingActivities();
-                        }
+                        },
+
                     }
                 });
                 
@@ -1025,23 +1049,57 @@ angular.module('askApp')
             };
 
             $scope.showDoneDialog = function () {
-                var d = $dialog.dialog({
+                if ( ! $scope.isPrimaryActivityMapped()) {
+                    $scope.showPrimaryRequiredDialog();
+                } else {
+                    $dialog.dialog({
+                        backdrop: true,
+                        keyboard: false,
+                        backdropClick: false,
+                        templateUrl: '/static/survey/views/doneModal.html',
+                        controller: 'DoneDialogCtrl',
+                        resolve: { remainingActivities: function () {
+                                return $scope.getRemainingActivities();
+                            }
+                        }                    
+                    })
+                    .open()
+                    .then(function (result) {
+                        if (result == 'yes') {
+                            $scope.answerMapQuestion($scope.locations);
+                        }
+                    });
+                }
+            };
+
+            $scope.isPrimaryActivityMapped = function () {
+                var primaryText = ($scope.question.options || {text: "NONE"}).text,
+                    remaining = $scope.getRemainingActivities();
+
+                if (primaryText === 'NONE') {
+                    // This survey does not require mapping of the primary 
+                    // activity. Return as if the primary activity is mapped.
+                    return true;
+                }
+
+                return !_.contains(remaining, primaryText);
+            };
+
+            $scope.showPrimaryRequiredDialog = function () {
+                var primaryActivityText = ($scope.question.options || {text: "NONE"}).text;
+
+                $dialog.dialog({
                     backdrop: true,
                     keyboard: false,
                     backdropClick: false,
-                    templateUrl: '/static/survey/views/doneModal.html',
-                    controller: 'DoneDialogCtrl',
-                    resolve: { remainingActivities: function () {
-                            return $scope.getRemainingActivities();
+                    templateUrl: '/static/survey/views/primaryRequiredModal.html',
+                    controller: 'PrimaryRequiredDialogCtrl',
+                    resolve: { primaryActivityText: function () {
+                            return primaryActivityText;
                         }
                     }
-                });
                 
-                d.open().then(function (result) {
-                    if (result == 'yes') {
-                        $scope.answerMapQuestion($scope.locations);
-                    }
-                });
+                }).open()
             };
 
             $scope.myActivitiesPopoverShown = false;
