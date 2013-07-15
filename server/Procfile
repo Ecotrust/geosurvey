@@ -1,1 +1,1 @@
-web: python manage.py collectstatic --noinput --settings=config.environments.heroku; && gunicorn -b 0:$PORT config.heroku_wsgi
+web: python manage.py collectstatic --noinput --settings=config.environments.heroku && gunicorn -b 0:$PORT config.heroku_wsgi
