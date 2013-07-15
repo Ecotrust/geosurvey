@@ -5,7 +5,7 @@ from survey.models import Survey, Question, Option, Response, Respondant, Page, 
 
 class RespondantAdmin(admin.ModelAdmin):
     readonly_fields=('uuid',)
-    list_display = ('uuid', 'state', 'county', 'complete',)
+    list_display = ('uuid', 'ts', 'complete',)
 
 class PageInline(admin.TabularInline):
     model = Page

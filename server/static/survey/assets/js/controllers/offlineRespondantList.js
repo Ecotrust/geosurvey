@@ -36,6 +36,8 @@ angular.module('askApp')
                 ts: respondent.ts,
                 uuid: respondent.uuid.replace(':', '_'),
                 responses: respondent.responses,
+                status: respondent.status,
+                complete: respondent.complete,
                 survey: '/api/v1/survey/' + respondent.survey + '/'
             };
             return $http.post(url, newRespondent).error(function (err) {
