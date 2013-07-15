@@ -1,1 +1,1 @@
-web: python manage.py collectstatic --noinput --settings=config.environments.heroku; python manage.py run_gunicorn 0:$PORT --workers=4 --settings=config.environments.heroku
+web: python manage.py collectstatic --noinput --settings=config.environments.heroku; && gunicorn -b 0:$PORT -w 9 -k gevent --max-requests 250 --preload config.heroku_wsgi

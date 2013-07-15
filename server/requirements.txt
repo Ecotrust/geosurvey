@@ -17,3 +17,4 @@ gunicorn
 django-storages
 boto
 requests
+dj-static
