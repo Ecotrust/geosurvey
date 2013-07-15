@@ -1319,7 +1319,7 @@ $scope.loadSurvey = function(data) {
                 rowTemplate: '<div ng-style="{\'z-index\': col.zIndex() }" ng-repeat="col in renderedColumns" ng-class="col.colIndex()" class="ngCell {{col.cellClass}}" ng-cell></div>',
                 columnDefs: [{
                         field: 'activityText',
-                        displayName: $scope.question.label
+                        displayName: " "
                     }
                 ]
 
