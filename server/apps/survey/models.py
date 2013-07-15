@@ -106,6 +106,7 @@ QUESTION_TYPE_CHOICES = (
     ('multi-select', 'Multi Select'),
     ('location', 'Location'),
     ('integer', 'Integer'),
+    ('number', 'Number'),
     ('auto-single-select', 'Single Select with Autocomplete'),
     ('map-multipoint', 'Map with Multiple Points'),
     ('yes-no', 'Yes/No'),
@@ -147,8 +148,8 @@ class Question(caching.base.CachingMixin, models.Model):
     min_zoom = models.IntegerField(null=True, blank=True, default=10)
     lat = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
     lng = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
-    integer_min = models.IntegerField(default=0, null=True, blank=True)
-    integer_max = models.IntegerField(default=365, null=True, blank=True)
+    integer_min = models.IntegerField(default=None, null=True, blank=True)
+    integer_max = models.IntegerField(default=None, null=True, blank=True)
     term_condition = models.CharField(max_length=254, null=True, blank=True)
     skip_question = models.ForeignKey('self', null=True, blank=True)
     skip_condition = models.CharField(max_length=254, null=True, blank=True)

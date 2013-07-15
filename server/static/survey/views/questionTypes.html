@@ -15,8 +15,26 @@
                 class="input-block-level"
                 placeholder="{{ question.label }}"
                 type="number"
+                step="1"
                 min="{{question.integer_min}}"
                 max="{{question.integer_max}}"
+                ui-event="{ keypress : 'onlyDigits($event)' }"
+                autofocus
+                required/>
+            <button type="submit" class="btn btn-primary btn-large btn-block button-block" ng-disabled="question.required && ! answer && answer != 0">continue</button>
+        </form>
+    </div>
+    <div ng-switch-when="number">
+        <form class="question" ng-show="survey.questions.length" ng-submit="answerQuestion(answer)">
+            <input
+                name="integerAnswer"
+                ng-model="answer"
+                class="input-block-level"
+                placeholder="{{ question.label }}"
+                type="number"
+                min="{{question.integer_min}}"
+                max="{{question.integer_max}}"
+                step="any"
                 ui-event="{ keypress : 'onlyDigits($event)' }"
                 autofocus
                 required/>
