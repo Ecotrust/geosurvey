@@ -6,8 +6,14 @@
             {{ respondent.survey }}
         </h3>
         <p>Completed on {{ respondent.ts | date }}</p>
-        <a class="btn btn-block btn-large btn-primary" ng-click="resume(respondent)">Resume</a>
-        <a class="btn btn-block btn-large btn-danger" ng-click="deleteRespondent(respondent)">Delete</a>
+        <div ng-hide="confirmDelete">
+            <a class="btn btn-block btn-large btn-primary" ng-click="resume(respondent)">Resume</a>
+            <a class="btn btn-block btn-large btn-danger" ng-click="confirmDelete = true">Delete</a>
+        </div>
+        <div ng-show="confirmDelete">
+            <a class="btn btn-block btn-large btn-danger" ng-tap="deleteRespondent(respondent)">ok</a>
+            <a class="btn btn-block btn-large" ng-tap="confirmDelete = false">cancel</a>
+        </div>
         <hr/>
         <h4>Survey Answers</h4>
     </div>
