@@ -23,7 +23,8 @@
                 editMarker: '=editmarker',
                 deleteMarker: '=deletemarker',
                 isCrosshairAlerting: '=iscrosshairalerting',
-                zoomToResult: '=zoomtoresult'
+                zoomToResult: '=zoomtoresult',
+                activeMarkerKey: '=activeMarkerKey'
             },
             templateUrl: '/static/survey/views/leaflet.html',
             link: function(scope, element, attrs, ctrl) {
@@ -296,6 +297,27 @@
 
                 if (attrs.multimarkers) {
 
+                    var popup;
+                    if (scope.popupField) {    
+                        popup = '<h1 class="marker-popup-heading">Activities</h1>';
+                        popup += '<ul class="unstyled marker-popup-list"><li ng-repeat="item in popupText"><i class="icon-ok-circle"></i>&nbsp;{{ item.text }}</li></ul>';
+                    }
+                    if (scope.multiMarkersEdit) {
+                        popup += '<button class="btn pull-right" ng-click="editMarkerWrapper(activeMarker)"><i class="icon-edit"></i>&nbsp;Edit</button>';
+                        popup += '<button class="btn btn-danger pull-right" ng-click="deleteMarkerWrapper(activeMarker)"><i class="icon-trash"></i>&nbsp;Remove</button>';
+                        popup += '<div class="clearfix"></div>';
+                    }
+
+                    scope.showMarkerPopup = function (marker, templateData) {
+                        scope.activeMarker = {
+                            data: templateData,
+                            marker: marker
+                        };
+                        scope.popupText = templateData[scope.popupField];
+                        marker.openPopup();
+                        $compile(angular.element(map._popup._contentNode))(scope);
+                    };
+
                     var markersDict = [];
                     scope.$watch('multiMarkers.length', function(newMarkerList) {
   
@@ -314,7 +336,7 @@
                                             color: color
                                         })
                                     });
-                                    markDat.color = color;    
+                                    markDat.color = color;
                                     marker.closePopup();
 
                                     scope.$watch('multiMarkers.' + mkey, function() {
@@ -326,24 +348,9 @@
 
                                     }, true);
                                     
-                                    var popup;
-                                    if (scope.popupField) {    
-                                        popup = '<h1 class="marker-popup-heading">Activities</h1>';
-                                        popup += '<ul class="unstyled marker-popup-list"><li ng-repeat="item in popupText"><i class="icon-ok-circle"></i>&nbsp;{{ item.text }}</li></ul>';
-                                    }
-                                    if (scope.multiMarkersEdit) {
-                                        popup += '<button class="btn pull-right" ng-click="editMarkerWrapper(activeMarker)"><i class="icon-edit"></i>&nbsp;Edit</button>';
-                                        popup += '<button class="btn btn-danger pull-right" ng-click="deleteMarkerWrapper(activeMarker)"><i class="icon-trash"></i>&nbsp;Remove</button>';
-                                        popup += '<div class="clearfix"></div>';
-                                    }
                                     marker.bindPopup(popup, { closeButton: true });
                                     marker.on('click', function(e) {
-                                        scope.activeMarker = {
-                                            data: scope.multiMarkers[mkey],
-                                            marker: marker
-                                        };
-                                        scope.popupText = scope.multiMarkers[mkey][scope.popupField];
-                                        $compile(angular.element(map._popup._contentNode))(scope);
+                                        scope.showMarkerPopup(marker, scope.multiMarkers[mkey]);
                                         scope.$digest();
                                     });
 
@@ -354,6 +361,18 @@
                             })(mkey);
                         } // for mkey in multiMarkers
                     }); // watch multiMarkers
+
+
+                    scope.$watch('activeMarkerKey', function (activeKey) {
+                        // For situations where a component outside of the map can 
+                        // change which marker is active.
+                        if (scope.multiMarkers.hasOwnProperty(activeKey)) {
+                            var markerData = scope.multiMarkers[activeKey];
+                            var marker = markersDict[activeKey];
+                            scope.showMarkerPopup(marker, markerData);
+                        }
+                    });
+
                 } // if attrs.multiMarkers
             } // end of link function
         };

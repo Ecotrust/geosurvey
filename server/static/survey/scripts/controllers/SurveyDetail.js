@@ -811,9 +811,10 @@ angular.module('askApp')
             });
 
             $scope.penniesTextBox_click = function ($event) {
-                if ($event.target.attributes["data-location-key"]) {
-                    var loc = $scope.locations[$event.target.attributes["data-location-key"].value];
-                    $scope.zoomModel.zoomToResult = loc;
+                if (_.has($event.target.attributes, "data-location-key")) {
+                    var key = $event.target.attributes["data-location-key"].value;
+                    $scope.zoomModel.zoomToResult = $scope.locations[key];
+                    map.activeMarkerKey = key;
                 }
             };
 
