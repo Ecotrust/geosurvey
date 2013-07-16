@@ -246,14 +246,12 @@ class Response(caching.base.CachingMixin, models.Model):
 
     def save_related(self):
         self.answer = simplejson.loads(self.answer_raw)
-        print self.answer
         if self.question.type in ['auto-single-select', 'single-select']:
             answer = simplejson.loads(self.answer_raw)
             if answer.get('text'):
                 self.answer = answer['text']
             if answer.get('name'):
                 self.answer = answer['name']
-            #self.answer = self.answer_raw['name']
         if self.question.type in ['auto-multi-select', 'multi-select']:
             answers = []
             self.multianswer_set.all().delete()
@@ -279,11 +277,12 @@ class Response(caching.base.CachingMixin, models.Model):
                         answer.save()
                     location.save()
             self.answer = ", ".join(answers)
+        if self.question.type == 'grid':
+            print self.answer_raw
         if hasattr(self.respondant, self.question.slug):
             setattr(self.respondant, self.question.slug, self.answer)
             self.respondant.save()
         self.save()
-
 
 
     def save(self, *args, **kwargs):
