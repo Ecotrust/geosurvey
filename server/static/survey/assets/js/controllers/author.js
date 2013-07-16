@@ -144,6 +144,17 @@ angular.module('askApp')
             return ! _.isEqual(question, $scope.questionBeingEdited);
         };
 
+        $scope.deleteOption = function (option) {
+            $http({
+                method: 'DELETE',
+                url: option.resource_uri,
+                data: option
+            }).success(function (data) {
+                $scope.activeQuestion.grid_cols = _.without($scope.activeQuestion.grid_cols, $scope.activeQuestion.activeOption);
+                $scope.activeQuestion.activeOption = false;
+            });
+        }
+
         $scope.saveQuestion = function (question, deferUpdatingList) {
             var url = question.resource_uri,
                 method = 'PUT',

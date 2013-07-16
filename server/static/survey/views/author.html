@@ -168,6 +168,8 @@ input {
                                 <a class="btn btn-primary" ng-click="newGridColumn(activeQuestion)">save new option</a>
                             </div>  
                             <div class="span6" ng-show="activeQuestion.activeOption">
+                                <label>Column Name</label>
+                                <input type="text" class="span8" rows=5 ng-model="activeQuestion.activeOption.text"></textarea>
                                 <label>Question Type</label>
                                 <select ng-model="activeQuestion.activeOption.type">
                                     <option ng-repeat="(key, val) in activeQuestion.question_types" value="{{key}}" ng-selected="activeQuestion.activeOption.type == key">{{val}}</option>
@@ -177,9 +179,10 @@ input {
                                     <input type="checkbox" ng-model="activeQuestion.activeOption.required"/>
                                 </label>
                                 <div ng-show="activeQuestion.activeOption && activeQuestion.activeOption.type == 'single-select' || activeQuestion.activeOption.type == 'multi-select'">
-                                    <h4>{{ activeQuestion.activeOption.text }} Options</h4>
+                                    <label>{{ activeQuestion.activeOption.text }} Options</label>
                                     <textarea class="span12" rows=5 ng-model="activeQuestion.activeOption.rows"></textarea>
                                 </div>
+                                <a class="btn btn-danger" ng-click="deleteOption(activeQuestion.activeOption)">delete column</a>
                             </div>
                         </div>
                     </div>
