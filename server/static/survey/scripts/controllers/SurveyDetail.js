@@ -784,6 +784,10 @@ angular.module('askApp')
 
             $scope.question.total = 100;
 
+            $timeout(function () { 
+               map.zoom = 'ALL_MARKERS';
+            }, 1000);
+
             _.each($scope.locations, function(location) {
                 location.pennies = null;
                 $scope.$watch(function() {

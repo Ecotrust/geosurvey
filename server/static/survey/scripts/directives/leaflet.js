@@ -76,7 +76,7 @@
 
                 scope.$watch('zoomToResult', function (place) {
                     if (place) {
-                        scope.zoomTo(place); 
+                        scope.zoomTo(place);
                         scope.zoomToResult = undefined;
                     }
                 });
@@ -248,11 +248,35 @@
 
                     // Listen for zoom
                     scope.$watch('zoom', function(newValue, oldValue) {
-                        map.setZoom(newValue);
+                        if (newValue === 'ALL_MARKERS') {
+                           scope.zoomToAllMarkers();
+                        } else {
+                            map.setZoom(newValue);
+                        }
                     });
 
 
                 });
+
+                scope.zoomToAllMarkers = function () {
+                    //$timeout(function () {
+                        var lats = _.map(scope.multiMarkers, function (val) { return val.lat; }),
+                            lngs = _.map(scope.multiMarkers, function (val) { return val.lng; }),
+
+                            maxlat = Math.max.apply(Math, lats),
+                            maxlng = Math.max.apply(Math, lngs),
+
+                            minlat = Math.min.apply(Math, lats),
+                            minlng = Math.min.apply(Math, lngs),
+
+                            sw = new L.LatLng(minlat, minlng),
+                            ne = new L.LatLng(maxlat, maxlng),
+
+                            bounds = new L.LatLngBounds(sw, ne);
+
+                        map.fitBounds(bounds.pad(0.2));
+                    //}, 300);
+                };
 
                 scope.updateCrosshair = function() {
                     if (!scope.multiMarkersEdit) {
@@ -355,7 +379,7 @@
                                     });
 
                                     map.addLayer(marker);
-                                    markersDict[mkey] = marker;    
+                                    markersDict[mkey] = marker;
                                 }
                                 
                             })(mkey);
