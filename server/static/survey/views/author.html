@@ -167,7 +167,7 @@ input {
                                 <input type="text" ng-model="activeQuestion.newOptionText"/>
                                 <a class="btn btn-primary" ng-click="newGridColumn(activeQuestion)">save new option</a>
                             </div>  
-                            <div class="span6" ng-show="activeQuestion.activeOption">
+                            <div class="span6" ng-show="activeQuestion.activeOption && ! activeQuestion.newOption">
                                 <label>Column Name</label>
                                 <input type="text" class="span8" rows=5 ng-model="activeQuestion.activeOption.text"></textarea>
                                 <label>Question Type</label>

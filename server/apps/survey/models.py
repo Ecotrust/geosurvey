@@ -236,6 +236,18 @@ class MultiAnswer(caching.base.CachingMixin, models.Model):
     answer_text = models.TextField()
     answer_label = models.TextField(null=True, blank=True)
 
+class GridAnswer(caching.base.CachingMixin, models.Model):
+    response = models.ForeignKey('Response')
+    row_text = models.TextField(null=True, blank=True)
+    row_label = models.TextField(null=True, blank=True)
+    col_text = models.TextField(null=True, blank=True)
+    col_label = models.TextField(null=True, blank=True)
+    answer_text = models.TextField(null=True, blank=True)
+
+    def __str__(self):
+        return "%s: %s" % (self.row_text, self.col_text)
+
+
 class Response(caching.base.CachingMixin, models.Model):
     question = models.ForeignKey(Question)
     respondant = models.ForeignKey(Respondant, null=True, blank=True)
@@ -278,7 +290,30 @@ class Response(caching.base.CachingMixin, models.Model):
                     location.save()
             self.answer = ", ".join(answers)
         if self.question.type == 'grid':
-            print self.answer_raw
+            self.gridanswer_set.all().delete()
+            for answer in self.answer:
+                for grid_col in self.question.grid_cols.all():
+                    try:
+                        if grid_col.type in ['integer', 'number', 'single-select', 'text', 'yes-no']:
+                            grid_answer = GridAnswer(response=self,
+                                answer_text=answer[grid_col.label.replace('-', '')],
+                                row_label=answer['label'], row_text=answer['text'],
+                                col_label=grid_col.label, col_text=grid_col.text)
+                            grid_answer.save()
+                        elif grid_col.type == 'multi-select':
+                            for this_answer in answer[grid_col.label.replace('-', '')]:
+                                print this_answer
+                                grid_answer = GridAnswer(response=self,
+                                    answer_text=this_answer,
+                                    row_label=answer['label'], row_text=answer['text'],
+                                    col_label=grid_col.label, col_text=grid_col.text)
+                                grid_answer.save()
+                        else:
+                            print grid_col.type
+                            print answer
+                    except Exception as e:
+                        print "problem with ", answer
+                        print e
         if hasattr(self.respondant, self.question.slug):
             setattr(self.respondant, self.question.slug, self.answer)
             self.respondant.save()
