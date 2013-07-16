@@ -20,7 +20,7 @@
                     <ul class="unstyled" ng-switch-when="multi-select">
                         <li ng-repeat="answer in response.answer_parsed">{{answer.text}}</li>
                     </ul>
-                    <table class="table" ng-switch-when="grid">
+                    <table class="table table-bordered" ng-switch-when="grid">
                         <thead>
                             <th></th>
                             <th ng-repeat="grid_col in response.question.grid_cols"><strong>{{grid_col.text}}</strong></th>

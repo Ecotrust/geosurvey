@@ -293,14 +293,20 @@ class Response(caching.base.CachingMixin, models.Model):
             self.gridanswer_set.all().delete()
             for answer in self.answer:
                 for grid_col in self.question.grid_cols.all():
-                    try:
-                        if grid_col.type in ['integer', 'number', 'single-select', 'text', 'yes-no']:
+                    if grid_col.type in ['currency', 'integer', 'number', 'single-select', 'text', 'yes-no']:
+                        try:
                             grid_answer = GridAnswer(response=self,
                                 answer_text=answer[grid_col.label.replace('-', '')],
                                 row_label=answer['label'], row_text=answer['text'],
                                 col_label=grid_col.label, col_text=grid_col.text)
                             grid_answer.save()
-                        elif grid_col.type == 'multi-select':
+                        except Exception as e:
+                            print "problem with ", grid_col.label
+                            print "not found in", self.answer_raw
+                            print e
+                        
+                    elif grid_col.type == 'multi-select':
+                        try:
                             for this_answer in answer[grid_col.label.replace('-', '')]:
                                 print this_answer
                                 grid_answer = GridAnswer(response=self,
@@ -308,12 +314,13 @@ class Response(caching.base.CachingMixin, models.Model):
                                     row_label=answer['label'], row_text=answer['text'],
                                     col_label=grid_col.label, col_text=grid_col.text)
                                 grid_answer.save()
-                        else:
-                            print grid_col.type
-                            print answer
-                    except Exception as e:
-                        print "problem with ", answer
-                        print e
+                        except:
+                            print "problem with ", answer
+                            print e
+                    else:
+                        print grid_col.type
+                        print answer
+                
         if hasattr(self.respondant, self.question.slug):
             setattr(self.respondant, self.question.slug, self.answer)
             self.respondant.save()

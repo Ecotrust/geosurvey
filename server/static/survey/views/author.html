@@ -170,6 +170,8 @@ input {
                             <div class="span6" ng-show="activeQuestion.activeOption && ! activeQuestion.newOption">
                                 <label>Column Name</label>
                                 <input type="text" class="span8" rows=5 ng-model="activeQuestion.activeOption.text"></textarea>
+                                <label>Column Label (should not contain a dash)</label>
+                                <input type="text" class="span8" rows=5 ng-model="activeQuestion.activeOption.label"></textarea>
                                 <label>Question Type</label>
                                 <select ng-model="activeQuestion.activeOption.type">
                                     <option ng-repeat="(key, val) in activeQuestion.question_types" value="{{key}}" ng-selected="activeQuestion.activeOption.type == key">{{val}}</option>

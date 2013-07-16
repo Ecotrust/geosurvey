@@ -49,8 +49,9 @@ angular.module('askApp')
         $scope.synchronized = [];
         $scope.busy = false;
         $scope.syncronize = function(respondents) {
-            var first = _.first(respondents),
-                rest = _.rest(respondents);
+            var completed = _.filter(respondents, function (respondent) { return respondent.complete });
+            var first = _.first(completed),
+                rest = _.rest(completed);
             $scope.busy = true;
             $scope.sendRespondent(first).success(function (data) {
                 $scope.synchronized.push(data);

@@ -3,7 +3,6 @@
 angular.module('askApp')
   .controller('AuthorCtrl', function ($scope, $http, $routeParams, $location) {
         $http.defaults.headers.post['Content-Type'] = 'application/json';
-    console.log($routeParams);
         $scope.survey = {};
         $scope.activeQuestion = null;
         $scope.questionBeingEdited = null;
@@ -65,7 +64,6 @@ angular.module('askApp')
                 var index = _.indexOf($scope.survey.questions, _.findWhere($scope.survey.questions, {slug: question.slug}));
                 $scope.survey.questions[index] = question;
             });
-            console.log('done');
             $scope.updatedQuestionQueue = [];
             $scope.questionsToBeUpdated = [];
         }
@@ -115,7 +113,7 @@ angular.module('askApp')
         $scope.newGridColumn = function (question) {
             var option = {
                 text: question.newOptionText,
-                label: _.string.slugify(question.newOptionText)
+                label: _.string.slugify(question.newOptionText).replace(/-/g,'')
             };
             $http.post('/api/v1/option/', option).success(function (data) {
                 question.grid_cols.push(data);
@@ -174,9 +172,7 @@ angular.module('askApp')
 
             // set empty strings to null
             _.each(question, function (value, key) {
-                console.log(value);
                 if (value === '') {
-                    console.log(key);
                     question[key] = null;
                 }
             });
