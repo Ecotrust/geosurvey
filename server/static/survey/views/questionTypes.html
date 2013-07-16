@@ -82,13 +82,13 @@
     </div>
     <div ng-switch-when="datepicker">
         <form class="question" ng-show="survey.questions.length" ng-submit="answerQuestion(answer)">
-            <input class="input-block-level" type="date" placeholder="{{ question.label }}" ng-model="answer" value="{{ now}}"/>
+            <input class="input-block-level" type="date" placeholder="{{ question.label }}" ng-model="answer"/>
             <button type="submit" class="btn btn-primary btn-large btn-block button-block">continue</button>
         </form>
     </div>
     <div ng-switch-when="timepicker">
         <form class="question" ng-show="survey.questions.length" ng-submit="answerQuestion(answer)">
-            <input class="input-block-level" type="time" placeholder="{{ question.label }}" ng-model="answer" value="{{ now}}"/>
+            <input class="input-block-level" type="time" placeholder="{{ question.label }}" ng-model="answer"/>
             <button type="submit" class="btn btn-primary btn-large btn-block button-block">continue</button>
         </form>
     </div>
