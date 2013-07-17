@@ -45,6 +45,11 @@ angular.module('askApp', ['ui', 'ui.bootstrap', 'ngGrid'])
         templateUrl: 'views/complete.html',
         controller: 'CompleteCtrl'
     })
+        .when('/survey/:surveySlug/:questionSlug/:uuidSlug/edit', {
+        templateUrl: 'views/SurveyDetail.html',
+        controller: 'SurveyDetailCtrl',
+        action: 'edit'
+    })
         .when('/survey/:surveySlug/:questionSlug/:uuidSlug', {
         templateUrl: 'views/SurveyDetail.html',
         controller: 'SurveyDetailCtrl'

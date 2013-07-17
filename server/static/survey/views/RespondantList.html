@@ -26,8 +26,7 @@
                         <td>{{ respondent.ts|date:"yyyy/MM/dd hh:mm"}}</td>
                         <td><a href="#/RespondantDetail/{{survey.slug}}/{{ respondent.uuid }}">Responses ({{respondent.responses.length}})</a></td>
                         <td>
-                            <span class="label label-success" ng-show="respondent.complete">Complete</span>
-                            <span class="label" ng-hide="respondent.complete">Incomplete</span>
+                            <a class="btn" target="_blank" href="/static/survey/mobile.html#/survey/{{survey.slug}}/{{ respondent.uuid }}/edit">edit</a>
                         </td>
                     </tr>
                 </tbody>

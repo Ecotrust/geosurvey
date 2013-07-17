@@ -87,12 +87,14 @@ angular.module('askApp')
         }
 
         $scope.delete = function (question) {
+            var questionToBeDeleted = question;
             $http({
                 method: 'DELETE',
                 url: question.resource_uri,
                 data: question
             }).success(function (data) {
-                $scope.survey.questions.splice(_.indexOf($scope.survey.questions, $scope.questions)+1,1);
+                $scope.survey.questions.splice(_.indexOf($scope.survey.questions,
+                    _.findWhere($scope.survey.questions, { resource_uri: questionToBeDeleted.resource_uri } )),1);
                 $scope.checkQuestionOrder($scope.survey.questions);
                 $scope.startEditingQuestion($scope.survey.questions[0]);
             });
@@ -158,7 +160,6 @@ angular.module('askApp')
         }
 
         $scope.saveQuestion = function (question, deferUpdatingList) {
-            console.log(angular.toJson(question.grid_cols));
             var url = question.resource_uri,
                 method = 'PUT',
                 data = question;
