@@ -52,23 +52,27 @@ angular.module('askApp')
             var completed = _.filter(respondents, function (respondent) { return respondent.complete });
             var first = _.first(completed),
                 rest = _.rest(completed);
-            $scope.busy = true;
-            $scope.sendRespondent(first).success(function (data) {
-                $scope.synchronized.push(data);
-                if (rest.length) {
-                    $scope.syncronize(rest);
-                } else {
-                    $scope.busy = false;
-                    _.each($scope.synchronized, function (synced) {
-                        var original = _.findWhere($scope.respondents, { uuid: synced.uuid})
-                        $scope.respondents.splice(_.indexOf($scope.respondents, original));
-                        $scope.saveState();
-                    })
-                    $scope.synchronized = [];
+            $scope.confirmSubmit = false;
+            if (completed.length) {
+                $scope.busy = true;
+                $scope.sendRespondent(first).success(function (data) {
+                    $scope.synchronized.push(data);
+                    if (rest.length) {
+                        $scope.syncronize(rest);
+                    } else {
+                        $scope.busy = false;
+                        _.each($scope.synchronized, function (synced) {
+                            var original = _.findWhere($scope.respondents, { uuid: synced.uuid})
+                            $scope.respondents.splice(_.indexOf($scope.respondents, original));
+                            $scope.saveState();
+                        })
+                        $scope.synchronized = [];
 
-                }
-                
-            });
+                    }
+                    
+                });    
+            }
+            
         }
 
 

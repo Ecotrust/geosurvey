@@ -12,7 +12,11 @@
           <div class="bar" style="width: {{ synchronized.length/respondents.length * 100 }}%;"></div>
         </div>
     </div>
-    <div ng-show="respondents.length > 0 && ! busy">
+    <div ng-show="confirmSubmit">
+        <a class="btn btn-block btn-large btn-danger" ng-click="syncronize(respondents)">ok</a>
+        <a class="btn btn-block btn-large" ng-tap="confirmSubmit = false">cancel</a>
+    </div>
+    <div ng-show="respondents.length > 0 && ! (busy || confirmSubmit)">
         <ul class="list" ng-show="respondents">
             <li ng-repeat="respondent in respondents| orderBy: 'ts':true">
                 <a href="#/respondent/{{ respondent.uuid }}/">
@@ -23,6 +27,6 @@
                 </a>
             </li>
         </ul>
-        <a class="btn btn-block btn-large" ng-click="syncronize(respondents)">submit surveys</a>
+        <a class="btn btn-block btn-large" ng-click="confirmSubmit = true">submit surveys</a>
     </div>
 </div>
