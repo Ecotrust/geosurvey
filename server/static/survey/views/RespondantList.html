@@ -20,13 +20,13 @@
                 <dd ng-show="group.last_question != null && group.last_question != 'feedback'">{{ group.num_exits }}</dd>
             </dl>
         </div>
-        <div class="well">
+        <!-- <div class="well">
             <h4>Completions Per State</h4>
             <dl class="dl-horizontal dl-horizontal-compact" ng-repeat="group in survey.completes_per_state">
                 <dt>{{ group.state }}</dt>
                 <dd>{{ group.num_respondants }} <small>({{ (group.num_respondants / survey.completes)*100 | number:0 }}%)</small></dd>
             </dl>
-        </div>
+        </div> -->
     </div>
     <div class="span8">
         <!-- <div class="row-fluid">
