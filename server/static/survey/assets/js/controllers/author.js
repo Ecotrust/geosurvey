@@ -131,7 +131,10 @@ angular.module('askApp')
         }
 
         $scope.startEditingQuestion = function (question) {
-            question.grid_cols.sort(function(a, b) {return a.order - b.order});
+            if (question.grid_cols.length) {
+                question.grid_cols.sort(function(a, b) {return a.order - b.order});    
+            }
+            
             $scope.confirmDelete = false;
             $scope.activeQuestion = {};
             $scope.questionBeingEdited = question;
