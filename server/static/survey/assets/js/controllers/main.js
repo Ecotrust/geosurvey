@@ -33,7 +33,7 @@ angular.module('askApp')
         var url = app.server + "/account/createUser";
 
         $http.post(url, user)
-            .success(function () {
+            .success(function (data) {
                 app.user = data.user;
                 $scope.saveState();
                 $location.path('/surveys');
