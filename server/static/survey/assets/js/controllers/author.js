@@ -131,6 +131,7 @@ angular.module('askApp')
         }
 
         $scope.startEditingQuestion = function (question) {
+            question.grid_cols.sort(function(a, b) {return a.order - b.order});
             $scope.confirmDelete = false;
             $scope.activeQuestion = {};
             $scope.questionBeingEdited = question;
@@ -154,6 +155,7 @@ angular.module('askApp')
         }
 
         $scope.saveQuestion = function (question, deferUpdatingList) {
+            console.log(angular.toJson(question.grid_cols));
             var url = question.resource_uri,
                 method = 'PUT',
                 data = question;
@@ -182,8 +184,11 @@ angular.module('askApp')
                 data: data
             }).success(function (result, status) {
                 var index;
+                
                 if (status === 202) {
                     if (! deferUpdatingList) {
+                        result.grid_cols.sort(function(a, b) {return a.order - b.order});
+                        console.log(result.grid_cols);
                         index = _.indexOf($scope.survey.questions, $scope.questionBeingEdited);
                         $scope.survey.questions[index] = result;
                         $scope.questionBeingEdited = result;
