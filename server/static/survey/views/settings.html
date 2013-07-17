@@ -7,6 +7,7 @@
 		    <a class="btn btn-block btn-large btn-danger" ng-click="confirmClear = true">Clear Cache</a>
 		</div>
 		<div ng-show="confirmClear">
+		 	<div class="alert alert-info">This will remove all data including surveys</div>
 		    <a class="btn btn-block btn-large btn-danger" ng-tap="clearCache()">ok</a>
 		    <a class="btn btn-block btn-large" ng-tap="confirmClear = false">cancel</a>
 		</div>
