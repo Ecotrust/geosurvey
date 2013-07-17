@@ -782,6 +782,13 @@ angular.module('askApp')
                 });
             }
 
+            if ($scope.locations.length === 1) {
+                // One location with primary activity. 
+                // Auto-answer with all pennies go to the one location.
+                $scope.locations.pennies = 100;
+                $scope.answerQuestion($scope.locations);
+            }
+
             $scope.question.total = 100;
 
             $timeout(function () { 
