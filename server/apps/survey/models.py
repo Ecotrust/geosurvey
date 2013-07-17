@@ -65,8 +65,12 @@ class Survey(caching.base.CachingMixin, models.Model):
     objects = caching.base.CachingManager()
 
     @property
-    def survey_responses(self):
+    def num_registered(self):
         return self.respondant_set.all().count()
+
+    @property
+    def num_no_starts(self):
+        return self.respondant_set.filter(responses=None).count()
 
     @property
     def completes(self):
@@ -75,7 +79,14 @@ class Survey(caching.base.CachingMixin, models.Model):
     @property
     def activity_points(self):
         return Location.objects.filter(response__respondant__in=self.respondant_set.filter(complete=True)).count()
-        
+
+    @property
+    def common_last_questions(self):
+        return self.respondant_set.exclude(last_question__isnull=True).values("last_question").annotate(num_exits=Count("uuid")).order_by('-num_exits')[:10]
+
+    @property
+    def completes_per_state(self):
+        return self.respondant_set.filter(complete=True).values("state").annotate(num_respondants=Count("uuid")).order_by('-num_respondants')
 
     def __str__(self):
         return "%s" % self.name

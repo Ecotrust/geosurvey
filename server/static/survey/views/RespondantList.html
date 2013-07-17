@@ -2,15 +2,30 @@
 <div class="row-fluid">
     <div class="span4">
         <div class="well">
-            <h2>{{ survey.survey_responses |number}} surveys taken</h2>
-            <ul class="unstyled">
-                <li><strong>{{ survey.completes |number}}</strong> complete ({{(survey.completes/survey.survey_responses)*100 |number:2}}%)</li>
-                <li><strong>{{ survey.survey_responses - survey.completes | number}}</strong> incomplete ({{((survey.survey_responses - survey.completes)/survey.survey_responses) * 100|number:2}}%)</li>
+            <h4>{{ survey.num_registered |number}} registered</h4>
+            <ul class="unstyled indented">
+                <li><strong>{{ survey.num_no_starts |number}}</strong> not started <small>({{(survey.num_no_starts/survey.num_registered)*100 |number:1}}%)</small></li>
+                <li><strong>{{ survey.num_registered - survey.completes - survey.num_no_starts | number}}</strong> partial <small>({{((survey.num_registered - survey.completes - survey.num_no_starts)/survey.num_registered) * 100|number:1}}%)</small></li>
+                <li><strong>{{ survey.completes |number}}</strong> complete <small>({{(survey.completes/survey.num_registered)*100 |number:1}}%)</small></li>
             </ul>
             <ul class="unstyled">
                 <li><strong>{{ survey.activity_points | number }}</strong> activity points</li>
                 <li><strong>{{ survey.activity_points / survey.completes |number:2 }}</strong> activity points per survey</li>
             </ul>
+        </div>
+        <div class="well">
+            <h4>Most Common Last Questions</h4>
+            <dl class="dl-horizontal dl-horizontal-compact" ng-repeat="group in survey.common_last_questions">
+                <dt ng-show="group.last_question != null && group.last_question != 'feedback'"><a href="/respond/{{ survey.slug }}/{{ group.last_question }}">{{ group.last_question }}</a></dt>
+                <dd ng-show="group.last_question != null && group.last_question != 'feedback'">{{ group.num_exits }}</dd>
+            </dl>
+        </div>
+        <div class="well">
+            <h4>Completions Per State</h4>
+            <dl class="dl-horizontal dl-horizontal-compact" ng-repeat="group in survey.completes_per_state">
+                <dt>{{ group.state }}</dt>
+                <dd>{{ group.num_respondants }} <small>({{ (group.num_respondants / survey.completes)*100 | number:0 }}%)</small></dd>
+            </dl>
         </div>
     </div>
     <div class="span8">
@@ -18,13 +33,15 @@
             <div heatmap question="question.slug"></div>
         </div> -->
         <div class="row-fluid" ng-repeat="question in survey.questions">
-            <div  ui-if="question.visualize">
+            <div  ui-if="question.visualize" style="margin-bottom: 50px;">
                 <div class="clearfix">
+                    
                     <select class="pull-right" placeholder="filter by {{ question.slug }}" multiple=true ng-model="question.filters[question.slug]" ui-select2 style="width: 200px">
                         <option value="{{answer.answer}}" ng-repeat="answer in question.answer_domain">
                             <strong>{{answer.answer}}</strong>
                         </option>
                     </select>
+                    
                     <div ng-repeat="filterQuestion in question.filterQuestions">
                         <select class="pull-right" placeholder="filter by {{ filterQuestion.slug }}" multiple=true ng-model="question.filters[filterQuestion.slug]" ui-select2 style="width: 200px">
                             <option value="{{answer.answer}}" ng-repeat="answer in filterQuestion.answer_domain">
@@ -32,6 +49,7 @@
                             </option>
                         </select>
                     </div>
+                    
                     <dl ng-repeat="(slug, filter) in question.filters">
                         <dt>{{ slug }}:</dt>                           
                         <dd ng-show="filter.length" ng-repeat="filterItem in filter">{{filterItem}}</dd>
@@ -39,7 +57,7 @@
                     </dl>
                 </div>
                 <div ui-if="question.report_type == 'heatmap' || question.report_type == 'heatmap-distribution'">
-                    <div heatmap question="question" filteritems="question.filters" class="heatmap"></div>
+                    <div heatmap question="question" filteritems="question.filters" radius="1600" class="heatmap"></div>
                 </div>
                 <div ui-if="question.report_type == 'distribution' || question.report_type == 'heatmap-distribution'">
                     <distribution filter="question.filters" question="question" survey-slug="survey.slug"></distribution>

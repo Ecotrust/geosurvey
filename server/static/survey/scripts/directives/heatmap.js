@@ -13,7 +13,8 @@
             transclude: true,
             scope: {
                 question: "=question",
-                filterItems: "=filteritems"
+                filterItems: "=filteritems",
+                radius: "=radius"
             },
             templateUrl: '/static/survey/views/heatmap.html',
             link: function(scope, element, attrs, ctrl) {
@@ -35,17 +36,23 @@
                 };
 
                 var mapInitialized=false;
-                scope.selectedFilter = null;
-                scope.$watch('question', function(question) {
-                    var url = '/reports/geojson/marco/' + question.slug, filter=[], filterJSON;
-                    if (question) {
+                scope.$watch('question.slug', function() {
+                    if (scope.question) {
+                        var url = '/reports/geojson/marco/' + scope.question.slug
                         if (! mapInitialized) {
-                            map.setView(new L.LatLng(question.lat, question.lng), question.zoom); 
+                            map.setView(new L.LatLng(scope.question.lat, scope.question.lng), scope.question.zoom); 
                             mapInitialized = true;
                         }
-                        
-                        
-                        _.each(question.filters, function (v, k) {
+                    }
+                });
+
+                scope.selectedFilter = null;
+                scope.$watch('question.filters', function(newFilters) {
+                    if (newFilters) {
+                        var url = '/reports/geojson/marco/' + scope.question.slug,
+                            filter=[], 
+                            filterJSON;
+                        _.each(newFilters, function (v, k) {
                             var thisFilter = {};
                             
                             if (v.length) {    
@@ -67,7 +74,7 @@
                                 scope.heatmapLayer = L.TileLayer.heatMap({
                                     // radius could be absolute or relative
                                     // absolute: radius in meters, relative: radius in pixels
-                                    radius: { value: 10000, absolute: true },
+                                    radius: { value: scope.radius || 10000, absolute: true },
                                     //radius: { value: 20, absolute: false },
                                     opacity: 0.8,
                                     legend: {

@@ -33,6 +33,7 @@ urlpatterns = patterns('',
     url(r'^report', include(report_urls)),
     #anon survey user for specific survey
     url(r'^respond/(?P<survey_slug>[\w\d-]+)$', 'apps.survey.views.survey'),
+    url(r'^respond/(?P<survey_slug>[\w\d-]+)/(?P<question_slug>[\w\d-]+)$', 'apps.survey.views.surveyAnonWithQuestion'),
     #survey responder with preassigned uuid
     url(r'^respond$', 'apps.survey.views.survey'),
     #other survey urls
