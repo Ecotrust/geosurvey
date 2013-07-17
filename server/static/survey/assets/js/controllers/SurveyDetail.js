@@ -311,14 +311,18 @@ angular.module('askApp')
             skip = false,
             answer = $scope.getAnswer(questionSlug);
         if (_.isObject(answer)) {
-            answer = answer.answer? answer.answer.text: answer.text;
+            if (_.isNumber(answer.answer)) {
+                answer = answer.answer;
+            } else {
+                answer = answer.answer? answer.answer.text: answer.text;    
+            }
         }
         if (op === '<') {
             skip = answer < testCriteria;
         } else if (op === '>') {
             skip = answer > testCriteria;
         } else if (op === '=') {
-            skip = answer === testCriteria;
+            skip = answer == testCriteria;
         } else if (op === '!') {
             skip = answer !== testCriteria;
         }
