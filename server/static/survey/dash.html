@@ -54,7 +54,7 @@
 
     <!-- Add your site or application content here -->
     {% if user.is_authenticated %}
-    <div class="navbar .navbar-static-top navbar-inverse hidden"  ng-controller="SurveyListCtrl" ng-cloak>
+    <div class="navbar .navbar-static-top navbar-inverse hidden"  ng-controller="SurveyListMenuCtrl" ng-cloak>
       <div class="container-fluid" ng-show="loaded">
         <div class="navbar-inner">
           <div class="container"> 
@@ -159,6 +159,7 @@
     <script src="{{ STATIC_URL }}survey/assets/js/controllers/main.js"></script>
     <script src="{{ STATIC_URL }}survey/assets/js/controllers/menu.js"></script>
     <script src="{{ STATIC_URL }}survey/assets/js/controllers/SurveyList.js"></script>
+    <script src="{{ STATIC_URL }}survey/assets/js/controllers/SurveyListMenu.js"></script>
     <script src="{{ STATIC_URL }}survey/assets/js/controllers/SurveyDetail.js"></script>
     <script src="{{ STATIC_URL }}survey/assets/js/services/offlineSurvey.js"></script>
     <script src="{{ STATIC_URL }}survey/assets/js/controllers/mapView.js"></script>
