@@ -183,6 +183,7 @@ class SurveyResource(SurveyModelResource):
         ]
 
 class SurveyReportResource(SurveyResource):
+    questions = fields.ToManyField(QuestionResource, 'questions', null=True, blank=True)
     completes = fields.IntegerField(attribute='completes', readonly=True)
     survey_responses = fields.IntegerField(attribute='survey_responses', readonly=True)
     activity_points = fields.IntegerField(attribute='activity_points', readonly=True)
