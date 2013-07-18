@@ -15,7 +15,7 @@
             <li ng-repeat="survey in surveys">
                 <a ng-show="survey.offline" href="#/survey/{{survey.slug}}/{{survey.questions[0].slug}}/offline">
                     {{ survey.name }}
-                    <br/><span class="label label-success">updated: {{survey.updated_at |date: 'yyyy-MM-dd HH:mm'}}</span>
+                    <br/><span class="label label-success">updated: {{survey.updated_at |date: 'dd-MM-yyyy HH:mm' }}</span>
                     <span class="chevron"></span>
                 </a>
             </li>

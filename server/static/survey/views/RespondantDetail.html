@@ -8,7 +8,7 @@
             <dt>identity</dt>
             <dd>{{ respondent.email || respondent.uuid}}</dd>
             <dt>timestamp</dt>
-            <dd>{{ respondent.ts  | date:'MM/dd/yyyy @ h:mma'}}</dd>
+            <dd>{{ respondent.ts  |date: 'dd-MM-yyyy HH:mm' }}</dd>
         </dl>
         <h2>Responses</h2>
         <ul class="list unstyled">

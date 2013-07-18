@@ -23,7 +23,7 @@
                 <tbody>
                     <tr ng-repeat="respondent in respondents">
                         <td>{{ respondent.user.username }}</td>
-                        <td>{{ respondent.ts|date:"yyyy/MM/dd hh:mm"}}</td>
+                        <td>{{ respondent.ts|date: 'dd-MM-yyyy HH:mm' }}</td>
                         <td><a href="#/RespondantDetail/{{survey.slug}}/{{ respondent.uuid }}">Responses ({{respondent.responses.length}})</a></td>
                         <td>
 <!--                             <a class="btn" target="_blank" href="/static/survey/mobile.html#/survey/{{survey.slug}}/{{ respondent.uuid }}/edit">edit</a>

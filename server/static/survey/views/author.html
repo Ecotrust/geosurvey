@@ -195,7 +195,7 @@ input {
             </div>
             </form>
             <div ng-show="activeQuestion.updated_at" class="pull-left">
-                Updated at {{ activeQuestion.updated_at | date:'MM/dd/yyyy @ h:mma'}}
+                Updated at {{ activeQuestion.updated_at |date: 'dd-MM-yyyy HH:mm'}}
             </div>
             <div class="buttons pull-right">
                 <button class="btn btn-danger btn-large" ng-click="startEditingQuestion(questionBeingEdited)">
