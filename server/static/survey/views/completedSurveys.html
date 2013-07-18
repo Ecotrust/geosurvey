@@ -5,7 +5,7 @@
         <h3>
             {{ respondent.survey }}
         </h3>
-        <p>Completed on {{ respondent.ts |date: 'yyyy-dd-MM HH:mm' }}</p>
+        <p>Completed on {{ respondent.ts |date: 'dd-MM-yyyy HH:mm' }}</p>
         <div ng-hide="confirmDelete">
             <a class="btn btn-block btn-large btn-primary" ng-click="resume(respondent)">Resume</a>
             <a class="btn btn-block btn-large btn-danger" ng-click="confirmDelete = true">Delete</a>

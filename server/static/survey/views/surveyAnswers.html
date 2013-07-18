@@ -16,9 +16,9 @@
                 <tbody>
                     <tr ng-repeat="answer in response.answer">
                         <td>{{ answer.text }}</td>
-                        <td ng-repeat="grid_col in response.question.grid_cols" ng-hide="grid_col.type=='multi-select'">{{answer[grid_col.label.replace('-', '')]}}</td>
+                        <td ng-repeat="grid_col in response.question.grid_cols" ng-hide="grid_col.type=='multi-select'">{{answer[grid_col.label.replace('-', '')]}}{{grid_col.label.replace('-', '')}}</td>
                         <td ng-repeat="grid_col in response.question.grid_cols" ng-show="grid_col.type=='multi-select'">
-                            <span ng-repeat="multiAnswer in answer[grid_col.label.replace('-', '')]">{{multiAnswer}}<span ng-hide="$last">,</span> </span>
+                            <span ng-repeat="multiAnswer in answer[grid_col.label.replace(''-'', '')]">{{multiAnswer}}<span ng-hide="$last">,</span> </span>
                         </td>
                     </tr>
                 </tbody>

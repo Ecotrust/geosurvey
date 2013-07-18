@@ -180,7 +180,7 @@ angular.module('askApp')
         var slug, gridSlug;
         if (_.string.include(questionSlug, ":")) {
             slug = questionSlug.split(':')[0];
-            gridSlug = questionSlug.split(':')[1].replace('-', '');
+            gridSlug = questionSlug.split(':')[1].replace(/-/g, '');
         } else {
             slug = questionSlug;
         }
@@ -362,7 +362,7 @@ angular.module('askApp')
             if ($scope.question.integer_max < answer || $scope.question.integer_min > answer) {
                 return false;
             }
-            if ($scope.question.type === 'integer' || _.includes($scope.answer, '.')) {
+            if ($scope.question.type === 'integer' && _.string.include($scope.answer, '.')) {
                 return false;
             }
 
@@ -1281,11 +1281,10 @@ $scope.loadSurvey = function(data) {
             }
             $scope.question.selectedOptions = {};
            _.each($scope.question.options, function(value, key, list) {
-               list[key].activitySlug = value.label.replace('-', '');
+               list[key].activitySlug = value.label.replace(/-/g, '');
                list[key].activityText = value.text;
                _.each($scope.question.grid_cols, function(gridCol, i) {
-                    var gridLabel = gridCol.label.replace('-', '');
-
+                    var gridLabel = gridCol.label.replace(/-/g, '');
                     if ($scope.answer !== null && _.has($scope.answer, value.text)) {
 
                         list[key][gridLabel] = $scope.answer[value.text][0][gridLabel];
@@ -1333,14 +1332,14 @@ $scope.loadSurvey = function(data) {
 
             _.each($scope.question.grid_cols, function(gridCol, i) {
                 var template, col = {
-                    field: gridCol.label.replace('-', ''),
+                    field: gridCol.label.replace(/-/g, ''),
                     displayName: gridCol.text,
-                    slug: gridCol.label,
+                    slug: gridCol.label.replace(/-/g, ''),
                     required: gridCol.required || 'false',
                     max: gridCol.max,
                     min: gridCol.min
                 };
-
+                console.log(col);
                 if (gridCol.type === 'integer') {
                     template = integerCellTemplate;
                 } else if (gridCol.type === 'number' || gridCol.type === 'currency') {

@@ -16,8 +16,18 @@ angular.module('askApp')
 
 
         if ($routeParams.uuidSlug) {
-            $scope.respondent = $scope.respondentIndex[$routeParams.uuidSlug]
+            $scope.respondent = $scope.respondentIndex[$routeParams.uuidSlug];
+
+            _.each($scope.respondent.responses, function (response) {
+                if (response.question.grid_cols) {
+                    _.each(response.question.grid_cols, function (grid_col) {
+                        grid_col.label = grid_col.label.replace(/-/g, '');
+                    });
+                }
+            });
         }
+
+
 
         $scope.deleteRespondent = function (respondent) {
             $scope.respondents = _.without($scope.respondents, respondent);
@@ -55,6 +65,15 @@ angular.module('askApp')
             $scope.confirmSubmit = false;
             if (completed.length) {
                 $scope.busy = true;
+
+                _.each(first.responses, function (response) {
+                    if (response.question.grid_cols) {
+                        _.each(response.question.grid_cols, function (grid_col) {
+                            grid_col.label = grid_col.label.replace(/-/g, '');
+                        });
+                    }
+                });
+
                 $scope.sendRespondent(first).success(function (data) {
                     $scope.synchronized.push(data);
                     if (rest.length) {
