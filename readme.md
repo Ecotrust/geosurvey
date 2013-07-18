@@ -12,8 +12,8 @@ fab test update
 # Install Requirements
 From the geosurvey project directory
 ```bash
-sudo npm install -g yo grunt-cli bower
-npm install && bower install --dev
+sudo npm install -g yo grunt-cli
+npm install
 npm install generator-angular generator-karma
 ```
 
@@ -75,10 +75,8 @@ heroku login
 
 ##set environment vars and install addons.
 ```bash
-heroku config:add DJANGO_SECRET_KEY=SECRET!
-heroku config:add ALLOWED_HOSTS=example.com
-heroku config:add DJANGO_SECRET_KEY=KEY
 heroku config:add ANALYTICS_ID=UA-example
+heroku config:add DJANGO_SECRET_KEY=SECRET!
 heroku addons:add sendgrid
 heroku addons:add redistogo
 heroku addons:add pgbackups
@@ -88,6 +86,13 @@ heroku addons:add pgbackups
 Or run the script from scripts/heroku-env.sh, which is available on google drive for each deployment.
 
 #Deploy
+
+##Provision the database
+The dev instance is free, but limited.  For some reason the python buildpack doesn't seem to be provisioning and promoting a postgres db at this time.
+```bash
+heroku addons:add heroku-postgresql:dev
+heroku pg:promote `heroku addons | grep HEROKU_POSTGRES | awk '{print $2}'`
+```
 
 First push the server directory as a subtree from the master branch to heroku.  Then you can use a subtree split to push an alternate branch.
 
@@ -101,7 +106,9 @@ git subtree push --prefix server/ heroku master
 git push heroku `git subtree split --prefix server testbranch`:master
 ```
 
+
 ##django install
+Collect static is run out of the Procfile every time the app is relaunched.  The static files are served by a piece of wsgi middleware, which ought to be sufficient for this purpose.
 ```bash
 heroku run python manage.py syncdb --settings=config.environments.heroku
 heroku run python manage.py migrate --settings=config.environments.heroku
