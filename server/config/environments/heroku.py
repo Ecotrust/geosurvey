@@ -4,6 +4,8 @@ import dj_database_url
 import urlparse
 import os
 
+DATABASES = {}
+
 DATABASES['default'] =  dj_database_url.config()
 
 DEBUG = False
@@ -41,8 +43,6 @@ except AttributeError:
     pass
 
 COMPRESS_ENABLED = True
-# Honor the 'X-Forwarded-Proto' header for request.is_secure()
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
 # AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
