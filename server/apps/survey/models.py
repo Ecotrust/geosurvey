@@ -1,5 +1,4 @@
 from django.db import models
-from django.db.models import Avg, Max, Min, Count
 from django.db.models import Avg, Max, Min, Count, Sum
 import datetime
 import uuid
@@ -220,6 +219,7 @@ class Response(caching.base.CachingMixin, models.Model):
     respondant = models.ForeignKey(Respondant)
     answer = models.TextField()
     answer_raw = models.TextField()
+    user_agent = models.TextField(default='')
     ts = models.DateTimeField(default=datetime.datetime.now())
     objects = caching.base.CachingManager()
 

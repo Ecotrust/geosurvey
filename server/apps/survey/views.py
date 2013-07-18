@@ -74,6 +74,7 @@ def answer(request, survey_slug, question_slug, uuid): #, survey_slug, question_
             return HttpResponse(simplejson.dumps({'success': False, 'complete': True}))
         response, created = Response.objects.get_or_create(question=question,respondant=respondant)
         response.answer_raw = simplejson.dumps(simplejson.loads(request.POST.keys()[0]).get('answer', None))
+        response.user_agent = request.META.get('HTTP_USER_AGENT', '')
         response.save()
         respondant.responses.add(response)
         respondant.last_question = question_slug
