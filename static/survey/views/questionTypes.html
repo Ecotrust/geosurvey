@@ -6,7 +6,7 @@
         
         <div class="info-content" ng-include="infoView"></div>
         
-        <button class="btn btn-primary btn-block btn-large" ng-click="gotoNextQuestion()">Continue <img class="ajax-spinner" ng-show="showSpinner" src="/static/survey/img/ajax-loader.gif" alt="loading..." width="24" height="24"></button>
+        <button class="btn btn-primary btn-block btn-large" ng-click="answerQuestion('')">Continue <img class="ajax-spinner" ng-show="showSpinner" src="/static/survey/img/ajax-loader.gif" alt="loading..." width="24" height="24"></button>
     </div>
     <div ng-switch-when="integer">
         <form class="question" ng-show="survey.questions.length" ng-submit="answerQuestion(answer)">
