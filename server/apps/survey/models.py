@@ -119,6 +119,8 @@ class Option(caching.base.CachingMixin, models.Model):
     rows = models.TextField(null=True, blank=True)
     required = models.BooleanField(default=True)
     order = models.IntegerField(null=True, blank=True)
+    min = models.IntegerField(default=None, null=True, blank=True)
+    max = models.IntegerField(default=None, null=True, blank=True)    
     objects = caching.base.CachingManager()
 
 

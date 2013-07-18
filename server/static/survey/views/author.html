@@ -180,6 +180,12 @@ input {
                                     Required
                                     <input type="checkbox" ng-model="activeQuestion.activeOption.required"/>
                                 </label>
+                                <div ng-show="activeQuestion.activeOption && activeQuestion.activeOption.type == 'integer' || activeQuestion.activeOption.type == 'number'">
+                                    <label>Min</label>
+                                    <input class="span12" type="text" ng-model="activeQuestion.activeOption.min"></textarea>
+                                    <label>Max</label>
+                                    <input class="span12" type="text" ng-model="activeQuestion.activeOption.max"></textarea>
+                                </div>
                                 <div ng-show="activeQuestion.activeOption && activeQuestion.activeOption.type == 'single-select' || activeQuestion.activeOption.type == 'multi-select'">
                                     <label>{{ activeQuestion.activeOption.text }} Options</label>
                                     <textarea class="span12" rows=5 ng-model="activeQuestion.activeOption.rows"></textarea>
