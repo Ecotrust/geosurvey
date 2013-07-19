@@ -1,123 +1,305 @@
-from fabric.api import *
+import os
+from tempfile import mkdtemp
+from contextlib import contextmanager
 
-vars = {
-    'app_dir': '/usr/local/apps/geosurvey/server',
-    'venv': '/usr/local/apps/geosurvey/geosurvey_env'
-}
+from fabric.operations import put
+from fabric.api import env, local, sudo, run, cd, prefix, task, settings
 
-env.forward_agent = True
+branch = 'master'
 
+CHEF_VERSION = '10.20.0'
 
+project = "geosurvey"
+app = "server"
 
-def dev():
-    """ Use development server settings """
-    servers = ['vagrant@127.0.0.1:2222']
-    env.hosts = servers
-    env.key_filename = '~/.vagrant.d/insecure_private_key'
-    vars['app_dir'] = '/vagrant/server'
-    vars['venv'] = '/usr/local/venv/geosurvey'
-    return servers
-
-
-def prod():
-    """ Use production server settings """
-    servers = []
-    env.hosts = servers
-    return servers
+env.root_dir = "/usr/local/apps/%s" % project
+env.venvs = '/usr/local/venv'
+env.virtualenv = '%s/%s' % (env.venvs, project)
+env.activate = 'source %s/bin/activate ' % env.virtualenv
+env.code_dir = '%s/%s' % (env.root_dir, app)
+env.media_dir = '%s/media' % env.root_dir
 
 
-def test():
-    """ Use test server settings """
-    servers = ['dionysus']
-    env.hosts = servers
-    return servers
+@contextmanager
+def _virtualenv():
+    with prefix(env.activate):
+        yield
 
 
-def all():
-    """ Use all servers """
-    env.hosts = dev() + prod() + test()
+def _manage_py(command):
+    run('python manage.py %s'
+            % command)
 
 
-def _install_requirements():
-    run('cd %(app_dir)s && %(venv)s/bin/pip install -r requirements.txt' % vars)
+@task
+def install_chef(latest=True):
+    """
+    Install chef-solo on the server
+    """
+    sudo('apt-get update', pty=True)
+    sudo('apt-get install -y git-core rubygems ruby ruby-dev', pty=True)
+
+    if latest:
+        sudo('gem install chef --no-ri --no-rdoc', pty=True)
+    else:
+        sudo('gem install chef --no-ri --no-rdoc --version {0}'.format(CHEF_VERSION), pty=True)
+
+def parse_ssh_config(text):
+    """
+    Parse an ssh-config output into a Python dict.
+
+    Because Windows doesn't have grep, lol.
+    """
+    try:
+        lines = text.split('\n')
+        lists = [l.split(' ') for l in lines]
+        lists = [filter(None, l) for l in lists]
+
+        tuples = [(l[0], ''.join(l[1:]).strip().strip('\r')) for l in lists]
+
+        return dict(tuples)
+
+    except IndexError:
+        raise Exception("Malformed input")
 
 
-def install_bowerdeps():
-    run('cd /vagrant && /usr/bin/bower install --dev')
+def set_env_for_user(user='example'):
+    if user == 'vagrant':
+        # set ssh key file for vagrant
+        result = local('vagrant ssh-config', capture=True)
+        data = parse_ssh_config(result)
 
-#%(venv)s/bin/python manage.py site localhost:8080 && \
-#/usr/local/bin/node-v0.8.23/bin/bower install --dev && \
-def _sync_django():
-    run('cd %(app_dir)s && %(venv)s/bin/python manage.py syncdb --noinput' %vars)
-
-def _install_django():
-    run('cd %(app_dir)s && %(venv)s/bin/python manage.py collectstatic --noinput && \
-                           sudo chgrp -R www-data . && \
-                           sudo chmod -R g+w . && \
-                           sudo chmod -R g+w ../.git && \
-                           sudo chgrp -R www-data ../.git && \
-                           %(venv)s/bin/python manage.py migrate && \
-                           /usr/bin/touch wsgi.py' % vars)
+        try:
+            env.user = user
+            env.host_string = 'vagrant@127.0.0.1:%s' % data['Port']
+            env.key_filename = data['IdentityFile'].strip('"')
+        except KeyError:
+            raise Exception("Missing data from ssh-config")
 
 
+@task
+def up():
+    """
+    Provision with Chef 11 instead of the default.
 
-def migrate():
-    run('cd %(app_dir)s && %(venv)s/bin/python manage.py migrate' % vars)
+    1.  Bring up VM without provisioning
+    2.  Remove all Chef and Moneta
+    3.  Install latest Chef
+    4.  Reload VM to recreate shared folders
+    5.  Provision
+    """
+    local('vagrant up --no-provision')
 
+    set_env_for_user('vagrant')
 
-def create_superuser():
-    """ Create the django superuser (interactive!) """
-    run('cd %(app_dir)s && %(venv)s/bin/python manage.py createsuperuser' % vars)
-
-
-def init():
-    #_install_bowerdeps()
-    _install_requirements()
-    _sync_django()
-    _install_django()
-
-
-def update():
-    """ Sync with master git repo """
-    run('cd %(app_dir)s && git fetch && git merge origin/master' % vars)
-    init()
+    sudo('gem uninstall --no-all --no-executables --no-ignore-dependencies chef moneta')
+    install_chef(latest=False)
+    local('vagrant reload')
+    local('vagrant provision')
 
 
-def loaddata():
-    run("cd %s && %s/bin/python manage.py loaddata apps/survey/fixtures/surveys.json" % (vars['app_dir'], vars['venv']))
+@task
+def bootstrap(username=None):
+    set_env_for_user(username)
 
-def dumpdata():
-    survey_json = "%s/apps/survey/fixtures/surveys.json" % vars['app_dir']
-    run("cd %s && %s/bin/python manage.py dumpdata survey --exclude survey.Response --exclude survey.Respondant  | python -mjson.tool > ~/surveys.json" % (vars['app_dir'], vars['venv']))
-    get("~/surveys.json", 'server/apps/survey/fixtures/')
-  #run('cd /vagrant/server && /usr/local/venv/geosurvey/bin/python manage.py dumpdata places --exclude places.ShoreLine |gzip > apps/places/fixtures/initial_data.json.gz')
+    # Bootstrap
+    #run('test -e %s || ln -s /vagrant/marco %s' % (env.code_dir, env.code_dir))
+    with cd(env.code_dir):
+        with _virtualenv():
+            run('pip install -r requirements.txt')
+            _manage_py('syncdb --noinput')
+            # _manage_py('add_srid 99996')
+            _manage_py('migrate')
+            # _manage_py('collectstatic --noinput')
+            # _manage_py('enable_sharing')
+@task
+def createsuperuser(username=None):
+    set_env_for_user(username)
 
-def run_server():
-	run('cd /vagrant/server && /usr/local/venv/geosurvey/bin/python manage.py runserver 0.0.0.0:8000')
+    # Bootstrap
+    #run('test -e %s || ln -s /vagrant/marco %s' % (env.code_dir, env.code_dir))
+    with cd(env.code_dir):
+        with _virtualenv():
+            _manage_py('createsuperuser')
 
-def run_gunicorn():
-    # run('killall python')
-    run('cd /vagrant/server && /usr/local/venv/geosurvey/bin/python manage.py run_gunicorn 0.0.0.0:8000')
+@task
+def runserver():
+    set_env_for_user('vagrant')
+    with cd(env.code_dir):
+        with _virtualenv():
+            _manage_py('runserver 0.0.0.0:8000')
+@task
+def push():
+    """
+    Update application code on the server
+    """
+    with settings(warn_only=True):
+        remote_result = local('git remote | grep %s' % env.remote)
+        if not remote_result.succeeded:
+            local('git remote add %s ssh://%s@%s:%s%s' %
+                (env.remote, env.user, env.host, env.port,env.root_dir))
 
-def restart_gunicorn():
-        run('killall python')
+        result = local("git push %s %s" % (env.remote, env.branch))
 
-def kill_server():
-        run('killall python')
+        # if push didn't work, the repository probably doesn't exist
+        # 1. create an empty repo
+        # 2. push to it with -u
+        # 3. retry
+        # 4. profit
 
-def package():
-        run("cd %s && %s/bin/python manage.py package simarketsurvey.herokuapp.com" % (vars['app_dir'], vars['venv']))
-        local("android/app/cordova/build --debug")
-        local("cp ./android/app/bin/HapiFis-debug.apk server/static/simarket.apk")
+        if not result.succeeded:
+            # result2 = run("ls %s" % env.code_dir)
+            # if not result2.succeeded:
+            #     run('mkdir %s' % env.code_dir)
+            print "Creating remote repo, now."
+            with cd(env.root_dir):
+                run("git init")
+                run("git config --bool receive.denyCurrentBranch false")
+                local("git push %s -u %s" % (env.remote, env.branch))
 
-def package_test():
-        run("cd %s && %s/bin/python manage.py package simarketsurvey-test.herokuapp.com" % (vars['app_dir'], vars['venv']))
-        local("android/app/cordova/build --debug")
-        local("cp ./android/app/bin/HapiFis-debug.apk server/static/simarket-test.apk")
+    with cd(env.root_dir):
+        # Really, git?  Really?
+        run('git checkout %s' % env.branch)
+        run('git reset HEAD')
+        run('git checkout .')
+        run('git checkout %s' % env.branch)
 
-def emulator():
-        run("cd %s && %s/bin/python manage.py package localhost:8000" % (vars['app_dir'], vars['venv']))
-        local("android/app/cordova/run --emulator")
+        sudo('chown -R www-data:deploy *')
+        sudo('chown -R www-data:deploy /usr/local/venv')
+        sudo('chmod -R 0770 *')
 
-# def update(): 
-#    run('cd /usr/local/apps/land_owner_tools/lot/ && git fetch && git merge origin/master')
+
+@task
+def deploy():
+    set_env_for_user(env.user)
+
+    push()
+    sudo('chmod -R 0770 %s' % env.virtualenv)
+
+    with cd(env.code_dir):
+        with _virtualenv():
+            run('pip install -r requirements.txt')
+            _manage_py('collectstatic --noinput')
+            _manage_py('syncdb --noinput')
+            # _manage_py('add_srid 99996')
+            _manage_py('migrate')
+            # _manage_py('enable_sharing')
+            sudo('chown -R www-data:deploy %s/public/static' % env.root_dir)
+
+
+    restart()
+
+
+@task
+def restart():
+    """
+    Reload nginx/gunicorn
+    """
+    with settings(warn_only=True):
+        sudo('supervisorctl restart app')
+        sudo('/etc/init.d/nginx reload')
+
+
+@task
+def vagrant(username='vagrant'):
+    # set ssh key file for vagrant
+    set_env_for_user(username)
+    result = local('vagrant ssh-config', capture=True)
+    data = parse_ssh_config(result)
+    env.remote = 'vagrant'
+    env.branch = branch
+    env.host = '127.0.0.1'
+    env.port = data['Port']
+    env.code_dir = '/vagrant/%s' % app
+
+    try:
+        env.host_string = '%s@127.0.0.1:%s' % (username, data['Port'])
+    except KeyError:
+        raise Exception("Missing data from ssh-config")
+
+
+@task
+def staging(connection):
+    env.remote = 'staging'
+    env.role = 'staging'
+    env.branch = branch
+    env.user, env.host = connection.split('@')
+    env.port = 22
+    env.host_string = '%s@%s:%s' % (env.user, env.host, env.port)
+
+
+def upload_project_sudo(local_dir=None, remote_dir=""):
+    """
+    Copied from Fabric and updated to use sudo.
+    """
+    local_dir = local_dir or os.getcwd()
+
+    # Remove final '/' in local_dir so that basename() works
+    local_dir = local_dir.rstrip(os.sep)
+
+    local_path, local_name = os.path.split(local_dir)
+    #tar_file = "%s.tar.gz" % local_name
+    #target_tar = os.path.join(remote_dir, tar_file)
+    zip_file = "%s.zip" % local_name
+    target_zip = os.path.join(remote_dir, zip_file)
+    target_zip = target_zip.replace('\\','/')
+    tmp_folder = mkdtemp()
+    try:
+        #tar_path = os.path.join(tmp_folder, tar_file)
+        zip_path = os.path.join(tmp_folder, zip_file)
+        #local("tar -czf %s -C %s %s" % (tar_path, local_path, local_name))
+        #local("tar -czf %s %s" % (tar_path, local_dir))
+        zipdir(local_dir, zip_path)
+        #put(tar_path, target_tar, use_sudo=True)
+        put(zip_path, target_zip, use_sudo=True)
+        with cd(remote_dir):
+            try:
+                #sudo("tar -xzf %s" % tar_file)
+                sudo("apt-get install -y unzip")
+                sudo("unzip %s" % zip_file)
+            finally:
+                #sudo("rm -f %s" % tar_file)
+                sudo("rm -f %s" % zip_file)
+    finally:
+        pass
+        #local("rm -rf %s" % tmp_folder)
+
+def zipdir(basedir, archivename):
+    from zipfile import ZipFile, ZIP_DEFLATED
+    from contextlib import closing
+    with closing(ZipFile(archivename, "w", ZIP_DEFLATED)) as z:
+        for root, dirs, files in os.walk(basedir):
+            #NOTE: ignoring empty directories
+            for fn in files:
+                absfn = os.path.join(root, fn)
+                zfn = absfn[len(basedir)+len(os.sep):] #XXX: relative path
+                z.write(absfn, zfn)
+
+@task
+def sync_config():
+    sudo("rm -rf /etc/chef")
+    #upload_project_sudo(local_dir='./scripts/cookbooks', remote_dir='/etc/chef')
+    sudo('mkdir -p /etc/chef/cookbooks')
+    upload_project_sudo(local_dir='./scripts/cookbooks', remote_dir='/etc/chef/cookbooks')
+    #upload_project_sudo(local_dir='./scripts/roles/', remote_dir='/etc/chef')
+    sudo('mkdir -p /etc/chef/roles')
+    upload_project_sudo(local_dir='./scripts/roles', remote_dir='/etc/chef/roles')
+
+
+@task
+def provision():
+    """
+    Run chef-solo
+    """
+    sync_config()
+
+    node_name = "node_%s.json" % (env.role)
+
+    with cd('/etc/chef/cookbooks'):
+        sudo('chef-solo -c /etc/chef/cookbooks/solo.rb -j /etc/chef/cookbooks/%s' % node_name, pty=True)
+
+
+@task
+def prepare():
+    install_chef(latest=False)
+    provision()

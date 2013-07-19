@@ -7,8 +7,8 @@ DATABASES = {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'geosurvey',
         'USER': 'vagrant',
-        'HOST': 'localhost',
-        'PORT': '5432'
+#        'HOST': 'localhost',
+#        'PORT': '5432'
     }
 }
 
