@@ -1,10 +1,10 @@
 <div ng-switch on="question.type">
     <div ng-switch-when="pennies">
-        <div ng-include="'views/pennies.html'"></div>
+        <div ng-include="viewPath + 'views/pennies.html'"></div>
     </div>
     <div ng-switch-when="info">
         
-        <div class="info-content" ng-include="infoView"></div>
+        <div class="info-content" ng-include="viewPath + infoView"></div>
         <button class="btn btn-primary btn-block button-block btn-large" ng-tap="gotoNextQuestion()">continue</button>
     </div>
     <div ng-switch-when="integer">
@@ -210,9 +210,9 @@
         </form>
     </div>
     <div ng-switch-when="map-multipoint">
-        <div ng-include="'views/mapQuestion.html'"></div>
+        <div ng-include="viewPath + 'views/mapQuestion.html'"></div>
     </div>
     <div ng-switch-when="grid">
-        <div ng-include="'views/gridQuestion.html'"></div>
+        <div ng-include="viewPath + 'views/gridQuestion.html'"></div>
     </div>
 </div>

@@ -1,6 +1,6 @@
 //'use strict';
 
-if (localStorage.getItem('hapifish')) {
+if (localStorage.getItem('hapifish') && window.location.pathname !== '/respond') {
     app = JSON.parse(localStorage.getItem('hapifish'));
     console.log(app);
 } else {
@@ -11,9 +11,13 @@ if (_.string.startsWith(window.location.protocol, "http")) {
 } else {
     app.server = "https://APP_SERVER";
 }
-
-console.log(app.server);
-
+if (window.location.pathname === '/respond') {
+    app.viewPath = app.server + '/static/survey/';
+    app.offline = false;
+} else {
+    app.viewPath = '';
+    app.offline = true;
+}
 angular.module('askApp', ['ui', 'ui.bootstrap', 'ngGrid'])
     .config(function($routeProvider, $httpProvider) {
 
@@ -23,63 +27,58 @@ angular.module('askApp', ['ui', 'ui.bootstrap', 'ngGrid'])
 
     $httpProvider.defaults.headers.post['Content-Type'] = 'application/json';
     $routeProvider.when('/', {
-        templateUrl: 'views/main.html',
+        templateUrl: app.viewPath + 'views/main.html',
         controller: 'MainCtrl',
         reloadOnSearch: false
 
     })
         .when('/author/:surveySlug', {
-        templateUrl: 'views/author.html',
+        templateUrl: app.viewPath + 'views/author.html',
         controller: 'AuthorCtrl'
     })
         .when('/surveys', {
-        templateUrl: 'views/SurveyList.html',
+        templateUrl: app.viewPath + 'views/SurveyList.html',
         controller: 'SurveyListCtrl'
     })
 
         .when('/survey/:surveySlug/complete/:uuidSlug', {
-        templateUrl: 'views/complete.html',
+        templateUrl: app.viewPath + 'views/complete.html',
         controller: 'CompleteCtrl'
     })
         .when('/survey/:surveySlug/complete/:uuidSlug/:action/:questionSlug', {
-        templateUrl: 'views/complete.html',
+        templateUrl: app.viewPath + 'views/complete.html',
         controller: 'CompleteCtrl'
     })
-        .when('/survey/:surveySlug/:questionSlug/:uuidSlug/edit', {
-        templateUrl: 'views/SurveyDetail.html',
-        controller: 'SurveyDetailCtrl',
-        action: 'edit'
-    })
-        .when('/survey/:surveySlug/:questionSlug/:uuidSlug', {
-        templateUrl: 'views/SurveyDetail.html',
+        .when('/survey/:surveySlug/:uuidSlug', {
+        templateUrl: app.viewPath + 'views/landing.html',
         controller: 'SurveyDetailCtrl'
     })
-        .when('/survey/:surveySlug/:uuidSlug', {
-        templateUrl: 'views/landing.html',
+        .when('/survey/:surveySlug/:questionSlug/:uuidSlug', {
+        templateUrl: app.viewPath + 'views/SurveyDetail.html',
         controller: 'SurveyDetailCtrl'
     })
         .when('/respondents', {
-        templateUrl: 'views/offlineRespondantList.html',
+        templateUrl: app.viewPath + 'views/offlineRespondantList.html',
         controller: 'offlineRespondantListCtrl'
     })
         .when('/respondent/:uuidSlug', {
-        templateUrl: 'views/completedSurveys.html',
+        templateUrl: app.viewPath + 'views/completedSurveys.html',
         controller: 'offlineRespondantListCtrl'
     })
         .when('/RespondantList/:surveySlug', {
-        templateUrl: 'views/RespondantList.html',
+        templateUrl: app.viewPath + 'views/RespondantList.html',
         controller: 'RespondantListCtrl'
     })
         .when('/RespondantDetail/:surveySlug/:uuidSlug', {
-        templateUrl: 'views/RespondantDetail.html',
+        templateUrl: app.viewPath + 'views/RespondantDetail.html',
         controller: 'RespondantDetailCtrl'
     })
         .when('/survey', {
-        templateUrl: 'views/survey.html',
+        templateUrl: app.viewPath + 'views/survey.html',
         controller: 'SurveyCtrl'
     })
         .when('/settings', {
-        templateUrl: 'views/settings.html',
+        templateUrl: app.viewPath + 'views/settings.html',
         controller: 'SettingsCtrl'
     })
         .otherwise({

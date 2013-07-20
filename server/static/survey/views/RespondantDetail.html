@@ -11,33 +11,38 @@
             <dd>{{ respondent.ts  |date: 'dd-MM-yyyy HH:mm' }}</dd>
         </dl>
         <h2>Responses</h2>
-        <ul class="list unstyled">
-            <li ng-repeat="response in respondent.responses">
-                <strong>{{response.question.label}}:</strong>
-                <span ng-switch on="response.question.type">
-                    <span ng-switch-default>{{response.answer}}</span>
-                    <span ng-switch-when="yes-no">{{response.answer_parsed.text}}</span>
-                    <ul class="unstyled" ng-switch-when="multi-select">
-                        <li ng-repeat="answer in response.answer_parsed">{{answer.text}}</li>
-                    </ul>
-                    <table class="table table-bordered" ng-switch-when="grid">
-                        <thead>
-                            <th></th>
-                            <th ng-repeat="grid_col in response.question.grid_cols"><strong>{{grid_col.text}}</strong></th>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="answer in response.answer_parsed">
-                                <td>{{ answer.text }}</td>
-                                <td ng-repeat="grid_col in response.question.grid_cols" ng-hide="grid_col.type=='multi-select'">{{answer[grid_col.label.replace('-', '')]}}</td>
-                                <td ng-repeat="grid_col in response.question.grid_cols" ng-show="grid_col.type=='multi-select'">
-                                    <span ng-repeat="multiAnswer in answer[grid_col.label.replace('-', '')]">{{multiAnswer}}<span ng-hide="$last">,</span> </span>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </span>
-            </li>
-        </ul>
+        <table class="table">
+            <tbody ng-repeat="response in respondent.responses">
+                <tr>
+                    <td>{{response.question.label}}:</td>
+                    <td>
+                        <span ng-switch on="response.question.type">
+                            <span ng-switch-default>{{response.answer}}</span>
+                            <span ng-switch-when="yes-no">{{response.answer_parsed.text}}</span>
+                            <ul class="unstyled" ng-switch-when="multi-select">
+                                <li ng-repeat="answer in response.answer_parsed">{{answer.text}}</li>
+                            </ul>
+                            <table class="table table-bordered" ng-switch-when="grid">
+                                <thead>
+                                    <th></th>
+                                    <th ng-repeat="grid_col in response.question.grid_cols"><strong>{{grid_col.text}}</strong></th>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="answer in response.answer_parsed">
+                                        <td>{{ answer.text }}</td>
+                                        <td ng-repeat="grid_col in response.question.grid_cols" ng-hide="grid_col.type=='multi-select'">{{answer[grid_col.label.replace('-', '')]}}</td>
+                                        <td ng-repeat="grid_col in response.question.grid_cols" ng-show="grid_col.type=='multi-select'">
+                                            <span ng-repeat="multiAnswer in answer[grid_col.label.replace('-', '')]">{{multiAnswer}}<span ng-hide="$last">,</span> </span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </span>
+                    </td>
+                    <td><a target="_blank" href="/respond#/survey/{{surveySlug}}/{{response.question.slug}}/{{ uuid }}" class="btn">edit</a>
+                </tr>
+            </tbody>
+        </table>
     </div>
     <div class="span6">
         <!--<div leaflet multimarkers="mapResponse" center="map.center" zoom="map.zoom" popupfield="'answers'"></div>-->

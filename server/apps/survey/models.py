@@ -259,74 +259,76 @@ class Response(caching.base.CachingMixin, models.Model):
     objects = caching.base.CachingManager()
 
     def save_related(self):
-        self.answer = simplejson.loads(self.answer_raw)
-        if self.question.type in ['auto-single-select', 'single-select']:
-            answer = simplejson.loads(self.answer_raw)
-            if answer.get('text'):
-                self.answer = answer['text']
-            if answer.get('name'):
-                self.answer = answer['name']
-        if self.question.type in ['auto-multi-select', 'multi-select']:
-            answers = []
-            self.multianswer_set.all().delete()
-            for answer in simplejson.loads(self.answer_raw):
+        if self.answer_raw:
+            self.answer = simplejson.loads(self.answer_raw)
+            if self.question.type in ['auto-single-select', 'single-select']:
+                answer = simplejson.loads(self.answer_raw)
                 if answer.get('text'):
-                    answer_text = answer['text']
+                    self.answer = answer['text']
                 if answer.get('name'):
-                    answer_text = answer['name']
-                answers.append(answer_text)
-                answer_label = answer.get('label', None)
-                multi_answer = MultiAnswer(response=self, answer_text=answer_text, answer_label=answer_label)
-                multi_answer.save()
-            self.answer = ", ".join(answers)
-        if self.question.type in ['map-multipoint'] and self.id:
-            answers = []
-            self.location_set.all().delete()
-            for point in simplejson.loads(simplejson.loads(self.answer_raw)):
-                    answers.append("%s,%s: %s" % (point['lat'], point['lng'] , point['answers']))
-                    location = Location(lat=point['lat'], lng=point['lng'], response=self, respondant=self.respondant)
-                    location.save()
-                    for answer in point['answers']:
-                        answer = LocationAnswer(answer=answer['text'], label=answer['label'], location=location)
-                        answer.save()
-                    location.save()
-            self.answer = ", ".join(answers)
-        if self.question.type == 'grid':
-            self.gridanswer_set.all().delete()
-            for answer in self.answer:
-                for grid_col in self.question.grid_cols.all():
-                    if grid_col.type in ['currency', 'integer', 'number', 'single-select', 'text', 'yes-no']:
-                        try:
-                            grid_answer = GridAnswer(response=self,
-                                answer_text=answer[grid_col.label.replace('-', '')],
-                                row_label=answer['label'], row_text=answer['text'],
-                                col_label=grid_col.label, col_text=grid_col.text)
-                            grid_answer.save()
-                        except Exception as e:
-                            print "problem with ", grid_col.label
-                            print "not found in", self.answer_raw
-                            print e
-                        
-                    elif grid_col.type == 'multi-select':
-                        try:
-                            for this_answer in answer[grid_col.label.replace('-', '')]:
-                                print this_answer
+                    self.answer = answer['name']
+            if self.question.type in ['auto-multi-select', 'multi-select']:
+                answers = []
+                self.multianswer_set.all().delete()
+                for answer in simplejson.loads(self.answer_raw):
+                    if answer.get('text'):
+                        answer_text = answer['text']
+                    if answer.get('name'):
+                        answer_text = answer['name']
+                    answers.append(answer_text)
+                    answer_label = answer.get('label', None)
+                    multi_answer = MultiAnswer(response=self, answer_text=answer_text, answer_label=answer_label)
+                    multi_answer.save()
+                self.answer = ", ".join(answers)
+            if self.question.type in ['map-multipoint'] and self.id:
+                answers = []
+                self.location_set.all().delete()
+                for point in simplejson.loads(simplejson.loads(self.answer_raw)):
+                        answers.append("%s,%s: %s" % (point['lat'], point['lng'] , point['answers']))
+                        location = Location(lat=point['lat'], lng=point['lng'], response=self, respondant=self.respondant)
+                        location.save()
+                        for answer in point['answers']:
+                            answer = LocationAnswer(answer=answer['text'], label=answer['label'], location=location)
+                            answer.save()
+                        location.save()
+                self.answer = ", ".join(answers)
+            if self.question.type == 'grid':
+                self.gridanswer_set.all().delete()
+                for answer in self.answer:
+                    for grid_col in self.question.grid_cols.all():
+                        if grid_col.type in ['currency', 'integer', 'number', 'single-select', 'text', 'yes-no']:
+                            try:
                                 grid_answer = GridAnswer(response=self,
-                                    answer_text=this_answer,
+                                    answer_text=answer[grid_col.label.replace('-', '')],
                                     row_label=answer['label'], row_text=answer['text'],
                                     col_label=grid_col.label, col_text=grid_col.text)
                                 grid_answer.save()
-                        except:
-                            print "problem with ", answer
-                            print e
-                    else:
-                        print grid_col.type
-                        print answer
-                
-        if hasattr(self.respondant, self.question.slug):
-            setattr(self.respondant, self.question.slug, self.answer)
-            self.respondant.save()
-        self.save()
+                            except Exception as e:
+                                print "problem with ", grid_col.label
+                                print "not found in", self.answer_raw
+                                print e
+                            
+                        elif grid_col.type == 'multi-select':
+                            try:
+                                for this_answer in answer[grid_col.label.replace('-', '')]:
+                                    print this_answer
+                                    grid_answer = GridAnswer(response=self,
+                                        answer_text=this_answer,
+                                        row_label=answer['label'], row_text=answer['text'],
+                                        col_label=grid_col.label, col_text=grid_col.text)
+                                    grid_answer.save()
+                            except:
+                                print "problem with ", answer
+                                print e
+                        else:
+                            print grid_col.type
+                            print answer
+                    
+            if hasattr(self.respondant, self.question.slug):
+                setattr(self.respondant, self.question.slug, self.answer)
+                self.respondant.save()
+            self.save()
+            print self.answer
 
 
     def save(self, *args, **kwargs):
