@@ -53,6 +53,11 @@ angular.module('askApp', ['ui', 'ui.bootstrap', 'ngGrid'])
         templateUrl: app.viewPath + 'views/landing.html',
         controller: 'SurveyDetailCtrl'
     })
+        .when('/survey/:surveySlug/:questionSlug/:uuidSlug/:action', {
+        templateUrl: app.viewPath + 'views/SurveyDetail.html',
+        controller: 'SurveyDetailCtrl',
+        edit: true
+    })
         .when('/survey/:surveySlug/:questionSlug/:uuidSlug', {
         templateUrl: app.viewPath + 'views/SurveyDetail.html',
         controller: 'SurveyDetailCtrl'

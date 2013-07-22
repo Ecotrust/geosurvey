@@ -22,7 +22,7 @@
             <table class="table">
                 <tbody>
                     <tr ng-repeat="respondent in respondents">
-                        <td>{{ respondent.user.username }}</td>
+                        <td>{{ respondent.user.username }}{{ respondent.status }}</td>
                         <td>{{ respondent.ts|date: 'dd-MM-yyyy HH:mm' }}</td>
                         <td><a href="#/RespondantDetail/{{survey.slug}}/{{ respondent.uuid }}">Responses ({{respondent.responses.length}})</a></td>
                         <td>

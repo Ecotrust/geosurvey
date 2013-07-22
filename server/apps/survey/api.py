@@ -56,11 +56,12 @@ class ResponseResource(SurveyModelResource):
     answer_count = fields.IntegerField(readonly=True)
 
     class Meta:
-        queryset = Response.objects.all().order_by('question__order');
+        queryset = Response.objects.all()
         filtering = {
             'answer': ALL,
             'question': ALL_WITH_RELATIONS
         }
+        ordering = ['question__order']
 
 class OfflineResponseResource(SurveyModelResource):
     question = fields.ToOneField('apps.survey.api.QuestionResource', 'question', null=True, blank=True)

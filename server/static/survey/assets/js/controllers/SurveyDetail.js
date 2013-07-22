@@ -210,33 +210,37 @@ angular.module('askApp')
     };
 
     $scope.gotoQuestion = function (questionSlug) {
-        $location.path(['survey', $scope.survey.slug, questionSlug, $routeParams.uuidSlug].join('/'));
+        $location.path(['survey', $scope.survey.slug, questionSlug, $routeParams.uuidSlug, $routeParams.action].join('/'));
     }
 
     $scope.getNextQuestionPath = function(numQsToSkips) {
         var nextQuestion = $scope.getNextQuestion(numQsToSkips);
 
         if (nextQuestion) {
-            return ['survey', $scope.survey.slug, nextQuestion, $routeParams.uuidSlug].join('/');
+            return ['survey', $scope.survey.slug, nextQuestion, $routeParams.uuidSlug, $routeParams.action].join('/');
         } else {
-            return ['survey', $scope.survey.slug, 'complete', $routeParams.uuidSlug].join('/');
+            return ['survey', $scope.survey.slug, 'complete', $routeParams.uuidSlug, $routeParams.action].join('/');
         }
     };
 
     $scope.deleteAnswer = function (question, uuidSlug) {
-        var index, responses = app.respondents[uuidSlug].responses;
-        if ($scope.answers[question.slug]) {
-            delete $scope.answers[question.slug];
-        }
-        _.each(responses, function (response, i) {
-            if (response.question.slug === question.slug) {
-                index = i;
+        var index;
+        
+        if (app.offline) {
+            if ($scope.answers[question.slug]) {
+                delete $scope.answers[question.slug];
             }
-        });
-        if (index) {
-            app.respondents[uuidSlug].responses.splice(index, 1);
+            _.each(app.respondents[uuidSlug].responses, function (response, i) {
+                if (response.question.slug === question.slug) {
+                    index = i;
+                }
+            });
+            if (index) {
+                app.respondents[uuidSlug].responses.splice(index, 1);
+            }
+            $scope.saveState();
         }
-        $scope.saveState();
+        
     }
 
     $scope.getLastQuestion = function (numQsToSkips) {
@@ -625,7 +629,7 @@ angular.module('askApp')
 $scope.loadSurvey = function(data) {
         $scope.survey = data.survey;
         $scope.survey.status = data.status;
-        if (data.status === 'complete' || data.status === 'terminate') {
+        if (! $routeParams.action === 'edit' && data.status === 'complete' || data.status === 'terminate') {
             $location.path(['survey', $scope.survey.slug, 'complete', $routeParams.uuidSlug].join('/'));
         }
 
@@ -818,10 +822,15 @@ $scope.loadSurvey = function(data) {
         }
 
         if ($scope.question && $scope.question.type === 'yes-no') {
-            if ($scope.answer) {
+            if ($scope.answer && _.isArray($scope.answer)) {
                 $scope.question.options = [
                     {'text': 'Yes', 'label': "Yes", checked: $scope.answer[0].text === 'Yes'},
                     {'text': 'No', 'label': "No", checked: $scope.answer[0].text === 'No'}
+                ]    
+            } else if ($scope.answer && ! _.isArray($scope.answer)) {
+                $scope.question.options = [
+                    {'text': 'Yes', 'label': "Yes", checked: $scope.answer.text === 'Yes'},
+                    {'text': 'No', 'label': "No", checked: $scope.answer.text === 'No'}
                 ]    
             } else {
                 $scope.question.options = [
@@ -1388,7 +1397,7 @@ $scope.loadSurvey = function(data) {
             survey: app.data.survey,
             responses: app.data.responses
         });
-    } else if ($routeParams && _.string.startsWith($routeParams.uuidSlug, 'offline')) {
+    } else if ($routeParams && _.string.startsWith($routeParams.uuidSlug, 'offline') && app.offline) {
         var ts = new Date();
         if ($routeParams.uuidSlug === 'offline') {
             $scope.answers = [];
