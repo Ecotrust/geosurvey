@@ -1,0 +1,10 @@
+Hello!
+
+You recently signed up to take a survey (http://www.surfrider.org/mid-atlantic-recreation/) on ocean and coastal recreation organized by the Surfrider Foundation.  We noticed that you have not completed the survey, so this is a reminder to help us collect this important data by completing your survey.
+
+Here is a link to begin the survey: http://{{ SITE_URL }}/respond#/survey/{{ SURVEY_SLUG }}/{{ UUID }}
+
+
+If you are having any technical issues please send an email to: surveysupport@surfrider.org
+
+Thank you!

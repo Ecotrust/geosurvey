@@ -1,8 +1,9 @@
 from django.core.management.base import BaseCommand, CommandError
 from optparse import make_option
 from django.template.loader import get_template
-from django.core.mail import EmailMultiAlternatives
-from survey.models import Survey, Response
+from django.template import Context
+from django.core.mail import get_connection, EmailMultiAlternatives
+from survey.models import Survey, Response, Respondant
 
 
 class Command(BaseCommand):
@@ -16,6 +17,18 @@ class Command(BaseCommand):
                 default='',
                 type='string',
                 help='Slug to identify the survey.'),
+            make_option('--from',
+                action='store',
+                dest='from',
+                default='Coastal Recreation Survey <surveysupport@surfrider.org>',
+                type='string',
+                help='Email address the emails will be sent from.'),
+            make_option('--subject',
+                action='store',
+                dest='subject',
+                default='Reminder: Surfrider Coastal Recreation Survey',
+                type='string',
+                help='Text to be used as the subject line for all of the emails.'),
             make_option('--html',
                 action='store',
                 dest='html_path',
@@ -37,54 +50,47 @@ class Command(BaseCommand):
 
 
     def handle(self, *args, **options):
-        #self.stdout.write('survey:\t' + options['survey_slug'])
-        #self.stdout.write('html: \t' + options['html_path'])
-        #self.stdout.write('text: \t' + options['text_path'])
-        #self.stdout.write('dry: \t%r' % options['is_dry_run'])
-        #self.stdout.write('')
-
+        from django.contrib.sites.models import Site
+        current_site = Site.objects.get_current()
         text = get_template(options['text_path'])
         html = get_template(options['html_path'])
+        respondants = self.getRespondantsToRemind(options['survey_slug'])
+        connection = get_connection()
 
-        addresses = self.getAddresses(options['survey_slug'])
+        if (options['is_dry_run']):
+            self.stdout.write('')
+            self.stdout.write('This is a DRY RUN. No emails will be sent. But here is the list of addresses for the %s survey on %s:' % (options['survey_slug'], current_site.domain))
+            self.stdout.write('')
 
-        for address in addresses:
-            self.sendTo(address, html, text)
+        for respondant in respondants:
+            context = Context({
+                'UUID': respondant['uuid'],
+                'SITE_URL': current_site.domain,
+                'SURVEY_SLUG': options['survey_slug']
+                })
+            if (options['is_dry_run']):
+                self.stdout.write(respondant['email'] + ' (' + respondant['uuid'] + ')')
+            else:
+                self.send(options['from'], respondant['email'], options['subject'], context, html, text, connection)
 
 
-    def ensureSurveyExists(self, slug):
+    def getRespondantsToRemind(self, slug):
+        self.stdout.write('Getting addresses for ' + slug)
         survey = Survey.objects.get(slug=slug)
+        respondants = Respondant.objects.filter(last_question=None, complete=False).exclude(email=None).values('email', 'uuid')
+        respondants = respondants.filter(survey=survey)
+        return [
+            {'email': 'tglaser@ecotrust.org', 'uuid': 'uuid1'}
+            #{'email': 'cchen@ecotrust.org', 'uuid': 'uuid2'},
+            #{'email': 'mgove@surfrider.org', 'uuid': 'uuid3'}
+            ]
+        #return respondants
 
-    def getAddresses(self, slug):
-        self.stdout.write('Getting Addresses for: ' + slug)
-        Respondant.objects.filter(last_question=None, complete=False).exclude(email=None).values('email')
-        survey = Survey.objects.get(slug=slug)
-        return ('tglaser@gmail.com', 'tglaser@ecotrust.org')
+    def send(self, from_address, to_address, subject, context, html_template, text_template, connection):
+        self.stdout.write('Sending from ' + from_address + ' to ' + to_address + ' (' + context['UUID'] + ', ' + context['SURVEY_SLUG'] + ', ' + context['SITE_URL'] + ')');
+        text_content = text_template.render(context)
+        html_content = html_template.render(context)
+        msg = EmailMultiAlternatives(subject, text_content, from_address, [to_address], connection=connection)
+        msg.attach_alternative(html_content, "text/html")
+        msg.send()
 
-
-    def sendTo(self, address, html_template, text_template):
-        self.stdout.write('Sending to: ' + address);
-
-
-
-
-# def send_email(email, uuid):
-#     from django.contrib.sites.models import Site
-
-#     current_site = Site.objects.get_current()
-    
-#     plaintext = get_template('survey/email.txt')
-#     htmly = get_template('survey/email.html')
-
-#     d = Context({
-#         'uuid': uuid,
-#         'SITE_URL': current_site.domain
-#         })
-
-#     subject, from_email, to = 'Take The Survey', 'Coastal Recreation Survey <surveysupport@surfrider.org>', email
-#     text_content = plaintext.render(d)
-#     html_content = htmly.render(d)
-
-#     msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
-#     msg.attach_alternative(html_content, "text/html")
-#     msg.send()        
