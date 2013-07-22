@@ -130,8 +130,8 @@ heroku open
 ##dump a backup
 This will dump a compressed binary backup of the current database to a file that can be retrieved as "latest.dump".
 ```bash
-heroku pgbackups:capture
-curl -o latest.dump `heroku pgbackups:url`
+heroku pgbackups:capture --expire
+curl -o `date +%Y%m%d%H%M`.dump `heroku pgbackups:url`
 ```
 
 ##restore a backup
