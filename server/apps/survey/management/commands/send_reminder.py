@@ -56,8 +56,9 @@ class Command(BaseCommand):
         html = get_template(options['html_path'])
         respondants = self.getRespondantsToRemind(options['survey_slug'])
         connection = get_connection()
+        self.is_dry_run = options['is_dry_run']
 
-        if (options['is_dry_run']):
+        if self.is_dry_run:
             self.stdout.write('')
             self.stdout.write('This is a DRY RUN. No emails will be sent. But here is the list of addresses for the %s survey on %s:' % (options['survey_slug'], current_site.domain))
             self.stdout.write('')
@@ -68,10 +69,7 @@ class Command(BaseCommand):
                 'SITE_URL': current_site.domain,
                 'SURVEY_SLUG': options['survey_slug']
                 })
-            if (options['is_dry_run']):
-                self.stdout.write(respondant['email'] + ' (' + respondant['uuid'] + ')')
-            else:
-                self.send(options['from'], respondant['email'], options['subject'], context, html, text, connection)
+            self.send(options['from'], respondant['email'], options['subject'], context, html, text, connection)
 
 
     def getRespondantsToRemind(self, slug):
@@ -79,18 +77,17 @@ class Command(BaseCommand):
         survey = Survey.objects.get(slug=slug)
         respondants = Respondant.objects.filter(complete=False).exclude(email=None).exclude(status='terminate').values('email', 'uuid')
         respondants = respondants.filter(survey=survey)
-        #return [
-        #    {'email': 'tglaser@ecotrust.org', 'uuid': 'uuid1'}
-        #    #{'email': 'cchen@ecotrust.org', 'uuid': 'uuid2'},
-        #    #{'email': 'mgove@surfrider.org', 'uuid': 'uuid3'}
-        #    ]
+        #return [{'email': 'tglaser@ecotrust.org', 'uuid': 'uuid1'}]
         return respondants
 
     def send(self, from_address, to_address, subject, context, html_template, text_template, connection):
-        self.stdout.write('Sending from ' + from_address + ' to ' + to_address + ' (' + context['UUID'] + ', ' + context['SURVEY_SLUG'] + ', ' + context['SITE_URL'] + ')');
+        if self.is_dry_run:
+            self.stdout.write(to_address + ' (' + context['UUID'] + ')')
+        else:
+            self.stdout.write('Sending from ' + from_address + ' to ' + to_address + ' (' + context['UUID'] + ', ' + context['SURVEY_SLUG'] + ', ' + context['SITE_URL'] + ')');
         text_content = text_template.render(context)
         html_content = html_template.render(context)
         msg = EmailMultiAlternatives(subject, text_content, from_address, [to_address], connection=connection)
         msg.attach_alternative(html_content, "text/html")
-        msg.send()
-
+        if not self.is_dry_run:
+            msg.send()
