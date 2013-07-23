@@ -7,8 +7,8 @@ from survey.models import Survey, Response, Respondant
 
 
 class Command(BaseCommand):
-    args = '--survey survey_slug --html html_template_path --text text_template_path [--dryrun]'
-    help = 'Send an email to all registered respondants having not yet taken the survey.'
+    args = '--survey <survey_slug> --from <from_address> --subject <subject> --html <html_template_path> --text <text_template_path> [--dryrun]'
+    help = 'Send an email to all registered respondants having not yet completed the survey (except respodants marked as "terminated").'
 
     option_list = BaseCommand.option_list + (
             make_option('--survey',
@@ -77,14 +77,14 @@ class Command(BaseCommand):
     def getRespondantsToRemind(self, slug):
         self.stdout.write('Getting addresses for ' + slug)
         survey = Survey.objects.get(slug=slug)
-        respondants = Respondant.objects.filter(last_question=None, complete=False).exclude(email=None).values('email', 'uuid')
+        respondants = Respondant.objects.filter(complete=False).exclude(email=None).exclude(status='terminate').values('email', 'uuid')
         respondants = respondants.filter(survey=survey)
-        return [
-            {'email': 'tglaser@ecotrust.org', 'uuid': 'uuid1'}
-            #{'email': 'cchen@ecotrust.org', 'uuid': 'uuid2'},
-            #{'email': 'mgove@surfrider.org', 'uuid': 'uuid3'}
-            ]
-        #return respondants
+        #return [
+        #    {'email': 'tglaser@ecotrust.org', 'uuid': 'uuid1'}
+        #    #{'email': 'cchen@ecotrust.org', 'uuid': 'uuid2'},
+        #    #{'email': 'mgove@surfrider.org', 'uuid': 'uuid3'}
+        #    ]
+        return respondants
 
     def send(self, from_address, to_address, subject, context, html_template, text_template, connection):
         self.stdout.write('Sending from ' + from_address + ' to ' + to_address + ' (' + context['UUID'] + ', ' + context['SURVEY_SLUG'] + ', ' + context['SITE_URL'] + ')');
