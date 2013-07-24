@@ -9,16 +9,14 @@ class Migration(SchemaMigration):
 
     def forwards(self, orm):
         # Adding field 'Option.type'
-        pass
-        # db.add_column(u'survey_option', 'type',
-        #               self.gf('django.db.models.fields.CharField')(default='integer', max_length=20),
-        #               keep_default=False)
+        db.add_column(u'survey_option', 'type',
+                      self.gf('django.db.models.fields.CharField')(default='integer', max_length=20),
+                      keep_default=False)
 
 
     def backwards(self, orm):
         # Deleting field 'Option.type'
-        pass
-        # db.delete_column(u'survey_option', 'type')
+        db.delete_column(u'survey_option', 'type')
 
 
     models = {

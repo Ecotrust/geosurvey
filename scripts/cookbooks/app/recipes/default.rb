@@ -196,13 +196,13 @@ end
 if node[:user] == "vagrant"
     execute "create database user" do
         command "createuser -U postgres -s vagrant"
-        not_if "psql -c '\du' |grep vagrant"
+        not_if "psql -U postgres -c '\\du' |grep vagrant", :user => 'postgres'
     end
 end
 
 execute "create database" do
     command "createdb -U postgres -T template0 -O postgres #{node[:dbname]} -E UTF8 --locale=en_US.UTF-8"
-    not_if "psql -U postgres --list | grep #{node[:dbname]}"
+    not_if "psql -U postgres --list | grep #{node[:dbname]}", :user => 'postgres'
 end
 
 execute "load postgis" do
@@ -223,4 +223,7 @@ python_virtualenv "/usr/local/venv/#{node[:project]}" do
     else
         owner "www-data"
     end
+end
+link "/usr/venv" do
+  to "/usr/local/venv"
 end

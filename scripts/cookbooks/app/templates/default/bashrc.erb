@@ -9,7 +9,7 @@ alias l='ls'
 alias du='du -sh'
 alias rmpyc='find . -name "*.pyc" -exec rm {} \;'
 
-VENV=/usr/local/venv/marine-planner
+VENV=/usr/local/venv/<%= node[:project] %>
 VBIN=$VENV/bin
 APPS=/usr/local/apps
 MANAGEPY=$APPS/marine-planner/marco/manage.py
@@ -31,4 +31,4 @@ function dbreset {
     python $MANAGEPY migrate --settings=example.settings_server
 }
 
-cd $APPS/marine-planner/ && source $VBIN/activate
+cd $APPS/<%= node[:project] %>/ && source $VBIN/activate
