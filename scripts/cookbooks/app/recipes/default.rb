@@ -196,7 +196,7 @@ end
 if node[:user] == "vagrant"
     execute "create database user" do
         command "createuser -U postgres -s vagrant"
-        not_if "psql -c '\du' |grep vagrant"
+        not_if "psql -U postgres -c '\\du' |grep vagrant"
     end
 end
 
