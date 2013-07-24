@@ -1,0 +1,10 @@
+
+.dash-table th, 
+.dash-table td {
+	padding-right: 20px;
+	text-align: right;
+}
+
+.primary-td {
+	font-weight: 500;
+}
