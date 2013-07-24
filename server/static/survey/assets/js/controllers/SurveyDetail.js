@@ -215,7 +215,7 @@ angular.module('askApp')
 
     $scope.getNextQuestionPath = function(numQsToSkips) {
         var nextQuestion = $scope.getNextQuestion(numQsToSkips);
-
+        
         if (nextQuestion) {
             return ['survey', $scope.survey.slug, nextQuestion, $routeParams.uuidSlug, $routeParams.action].join('/');
         } else {
@@ -271,7 +271,7 @@ angular.module('askApp')
 
     $scope.getNextQuestion = function(numQsToSkips) {
         var foundQuestion = false, index = numQsToSkips || 0;
-        while (foundQuestion === false && index < $scope.survey.questions.length - 1) {
+        while (foundQuestion === false && index < $scope.survey.questions.length) {
             foundQuestion = $scope.getNextQuestionWithSkip(index);
             index++;
         }
