@@ -20,13 +20,6 @@
                 <dd ng-show="group.last_question != null && group.last_question != 'feedback'">{{ group.num_exits }}</dd>
             </dl>
         </div>
-        <div class="well">
-            <h4>Completions Per State</h4>
-            <dl class="dl-horizontal dl-horizontal-compact" ng-repeat="group in survey.completes_per_state">
-                <dt>{{ group.state }}</dt>
-                <dd>{{ group.num_respondants }} <small>({{ (group.num_respondants / survey.completes)*100 | number:0 }}%)</small></dd>
-            </dl>
-        </div>
     </div>
     <div class="span8">
         <!-- <div class="row-fluid">
@@ -51,7 +44,7 @@
                     </div>
                     
                     <dl ng-repeat="(slug, filter) in question.filters">
-                        <dt>{{ slug }}:</dt>                           
+                        <dt>{{ slug }}:</dt>     
                         <dd ng-show="filter.length" ng-repeat="filterItem in filter">{{filterItem}}</dd>
                         <dd ng-hide="filter.length">all</dd>
                     </dl>
@@ -63,6 +56,23 @@
                     <distribution filter="question.filters" question="question" survey-slug="survey.slug"></distribution>
                 </div>
             </div>
+        </div>
+        <div class="well" ng-init="populationPercents = { 'New York': '26', 'New Jersey': '28', 'Delaware': '3', 'Maryland': '18', 'Virginia': '26' };">
+            <h4>Completions Per State</h4>
+            <table class="dash-table">
+                <tr>
+                    <th>&nbsp;</th>
+                    <th>Surveys Complete</th>
+                    <th>% of Total Complete</th>
+                    <th>% of Region Population</th>
+                </tr>
+                <tr ng-repeat="group in survey.completes_per_state">
+                    <td class="primary-td">{{ group.state }}</td>
+                    <td>{{ group.num_respondants }}</td>
+                    <td>{{ (group.num_respondants / survey.completes)*100 | number:0 }}%</td>
+                    <td>{{ populationPercents[group.state] + '%'}}</td>
+                </tr>
+            </table>
         </div>
     </div>
 </div>
