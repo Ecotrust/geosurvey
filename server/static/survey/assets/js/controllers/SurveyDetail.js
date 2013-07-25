@@ -258,8 +258,8 @@ angular.module('askApp')
         var index = _.indexOf($scope.survey.questions, $scope.question) + 1 + (numQsToSkips || 0);
         // should return the slug of the next question
         var nextQuestion = $scope.survey.questions[index];
-        if (nextQuestion && nextQuestion.skip_question && nextQuestion.skip_condition) {
-            if ($scope.skipIf(_.findWhere($scope.survey.questions, {resource_uri: nextQuestion.skip_question}).slug, nextQuestion.skip_condition)) {
+        if (nextQuestion && nextQuestion.blocks) {
+            if ($scope.skipIf(nextQuestion.blocks)) {
                 $scope.deleteAnswer(nextQuestion, $routeParams.uuidSlug);
                 nextQuestion = false;
             }
@@ -307,27 +307,37 @@ angular.module('askApp')
         }
     };
 
-    $scope.skipIf = function(questionSlug, condition) {
-        var op = condition[0],
-            testCriteria = condition.slice(1),
-            skip = false,
-            answer = $scope.getAnswer(questionSlug);
-        if (_.isObject(answer)) {
-            if (_.isNumber(answer.answer)) {
-                answer = answer.answer;
-            } else {
-                answer = answer.answer? answer.answer.text: answer.text;    
+    $scope.skipIf = function(blocks) {
+        // if ($scope.skipIf(_where($scope.survey.questions, {resource_uri: nextQuestion.skip_question}).slug, nextQuestion.skip_condition))
+        // $scope.question.blocks
+        
+        var skip = true;
+        
+        _.each(blocks, function(block) {
+            var questionSlug = _.findWhere($scope.survey.questions, {resource_uri: block.skip_question}).slug,
+                answer = $scope.getAnswer(questionSlug),
+                condition = block.skip_condition,
+                op = condition[0],
+                testCriteria = condition.slice(1);
+            
+            if (_.isObject(answer)) {
+                if (_.isNumber(answer.answer)) {
+                    answer = answer.answer;
+                } else {
+                    answer = answer.answer? answer.answer.text: answer.text;    
+                }
             }
-        }
-        if (op === '<') {
-            skip = answer < testCriteria;
-        } else if (op === '>') {
-            skip = answer > testCriteria;
-        } else if (op === '=') {
-            skip = answer == testCriteria;
-        } else if (op === '!') {
-            skip = answer !== testCriteria;
-        }
+            answer = decodeURIComponent(answer);
+            if (op === '<' && answer >= testCriteria) {
+                skip = false;
+            } else if (op === '>' && answer <= testCriteria) {
+                skip = false;
+            } else if (op === '=' && answer !== testCriteria) {
+                skip = false;
+            } else if (op === '!' && answer === testCriteria) {
+                skip = false;
+            }
+        });
         return skip;
     };
 
@@ -544,6 +554,10 @@ angular.module('askApp')
                 other: true
             });
         }
+        
+        _.each(answers, function(answer) {
+            answer.text = encodeURIComponent(answer.text);
+        });
 
         $scope.answerQuestion(answers);
     };
@@ -591,9 +605,12 @@ angular.module('askApp')
         var answer = _.find(options, function(option) {
             return option.checked;
         });
+        var copy = {};
+        _.extend(copy, answer);
 
         if (answer) {
-            $scope.answerQuestion(answer);
+            copy.text = encodeURIComponent(answer.text);
+            $scope.answerQuestion(copy);
         } else if (otherAnswer) {
             answer = {
                 checked: true,

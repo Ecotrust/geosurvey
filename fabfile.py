@@ -128,6 +128,14 @@ def runserver():
     with cd(env.code_dir):
         with _virtualenv():
             _manage_py('runserver 0.0.0.0:8000')
+            
+@task
+def dumpdata():
+    set_env_for_user('vagrant')
+    with cd(env.code_dir):
+        with _virtualenv():
+            _manage_py('dumpdata --format=json --indent=4 survey | gzip > apps/survey/fixtures/surveys.json.gz ')
+            
 @task
 def push():
     """
