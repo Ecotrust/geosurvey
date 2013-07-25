@@ -89,11 +89,23 @@ class Survey(caching.base.CachingMixin, models.Model):
         # clear values for this property, we only get a tally of the last_questions 
         # answered after the switch. -- Tim Glaser
         info_pages_date = datetime.datetime(2013, 7, 18)
-        respondants = self.respondant_set.exclude(last_question__isnull=True).filter(ts__gt=info_pages_date).values("last_question")
-        total_exits = len(respondants)
-        groups = respondants.annotate(num_exits=Count("uuid")).order_by('-num_exits')[:10]
+        all_partials = self.respondant_set.exclude(last_question__isnull=True).exclude(last_question='feedback').exclude(complete=True)
+        
+        # Get a list of only respondants that submitted their last question after the info_pages_date.
+        respondants_list = []
+        for respondant in all_partials:
+            last_responses = respondant.responses.filter(question__slug=respondant.last_question, ts__gt=info_pages_date)
+            # there should either be one or zero (zero if last response was prior to info_pages_date)
+            if (len(last_responses) == 1): 
+                respondants_list.append(respondant.pk)
+        
+        partials_after_date = all_partials.filter(pk__in=respondants_list)
+        total_exits = len(partials_after_date)
+
+        groups = partials_after_date.values('last_question').annotate(num_exits=Count("uuid")).order_by('-num_exits')[:10]
         for group in groups:
             group['percent_exits'] = float(group['num_exits']) / float(total_exits)
+
         return groups
 
 
