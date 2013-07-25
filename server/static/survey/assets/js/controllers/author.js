@@ -112,6 +112,16 @@ angular.module('askApp')
             });
         }
 
+        $scope.addBlock = function (question, block) {
+            question.blocks.push(block);
+            $scope.newBlock = false;
+            // $scope.saveQuestion(question).success(function () {
+            //     $scope.newBlock = false;    
+            // });
+            
+        };
+
+
         $scope.newGridColumn = function (question) {
             var option = {
                 text: question.newOptionText,
@@ -123,7 +133,7 @@ angular.module('askApp')
                 question.newOption = false;
                 question.newOptionText = null;
             });
-        }
+        };
 
         $scope.createSurvey = function (survey) {
             survey.slug = _.string.slugify(survey.name);
@@ -136,7 +146,7 @@ angular.module('askApp')
             if (question.grid_cols && question.grid_cols.length) {
                 question.grid_cols.sort(function(a, b) {return a.order - b.order});    
             }
-            
+            $scope.newBlock = false;
             $scope.confirmDelete = false;
             $scope.activeQuestion = {};
             $scope.questionBeingEdited = question;

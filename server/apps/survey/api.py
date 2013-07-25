@@ -6,7 +6,7 @@ from tastypie.authorization import DjangoAuthorization, Authorization
 from django.conf.urls import url
 from django.db.models import Avg, Max, Min, Count
 
-from survey.models import Survey, Question, Option, Respondant, Response, Page
+from survey.models import Survey, Question, Option, Respondant, Response, Page, Block
 
 class SurveyModelResource(ModelResource):
     def obj_update(self, bundle, request=None, **kwargs):
@@ -140,6 +140,18 @@ class PageResource(SurveyModelResource):
     def save_m2m(self, bundle):
         pass
 
+
+
+class BlockResource(SurveyModelResource):
+    skip_question = fields.ToOneField('apps.survey.api.QuestionResource', 'skip_question', null=True, blank=True)
+
+    class Meta:
+        queryset = Block.objects.all()
+        always_return_data = True
+        authorization = StaffUserOnlyAuthorization()
+        authentication = Authentication()
+
+
 class QuestionResource(SurveyModelResource):
     options = fields.ToManyField(OptionResource, 'options', full=True, null=True, blank=True)
     grid_cols = fields.ToManyField(OptionResource, 'grid_cols', full=True, null=True, blank=True)
@@ -151,6 +163,8 @@ class QuestionResource(SurveyModelResource):
     answer_domain = fields.ListField(attribute='answer_domain', readonly=True, null=True)
     filter_questions = fields.ToManyField('self', 'filter_questions', null=True, blank=True)
     skip_question = fields.ToOneField('self', 'skip_question', null=True, blank=True)
+    blocks = fields.ToManyField('apps.survey.api.BlockResource', 'blocks', null=True, blank=True, full=True)
+
     class Meta:
         queryset = Question.objects.all()
         always_return_data = True

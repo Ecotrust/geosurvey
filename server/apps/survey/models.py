@@ -133,6 +133,11 @@ REPORT_TYPE_CHOICES = (
         ('heatmap-distribution', 'Heatmap & Distribution'),
     )
 
+class Block(caching.base.CachingMixin, models.Model):
+    name = models.CharField(max_length=254, null=True, blank=True)
+    skip_question = models.ForeignKey('Question', null=True, blank=True)
+    skip_condition = models.CharField(max_length=254, null=True, blank=True)
+
 class Question(caching.base.CachingMixin, models.Model):
     title = models.TextField()
     label = models.CharField(max_length=254)
@@ -156,7 +161,7 @@ class Question(caching.base.CachingMixin, models.Model):
     skip_question = models.ForeignKey('self', null=True, blank=True)
     skip_condition = models.CharField(max_length=254, null=True, blank=True)
 
-
+    blocks = models.ManyToManyField('Block', null=True, blank=True)    
 
     randomize_groups = models.BooleanField(default=False)
     options_from_previous_answer = models.CharField(max_length=254, null=True, blank=True)

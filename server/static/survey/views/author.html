@@ -103,18 +103,52 @@ input {
                         </label> -->
                     </div>
                     <div class="span6">
-                        <label>Skip Question</label>
-                        <select ng-model="activeQuestion.skip_question">
-                            <option value="">None</option>
-                            <option
-                                ng-repeat="question in survey.questions" 
-                                ng-selected="activeQuestion.skip_question == question.resource_uri"
-                                value="{{question.resource_uri}}">{{question.slug}}</option>
-                        </select>
-                        <div ng-show="activeQuestion.skip_question">
+                        <a class="btn" ng-click="newBlock = {}" ng-hide="newBlock">New Block</a>
+                        <div ng-show="newBlock">
+                            <h4>New Conditional Block</h4>
+                            <label>Block Name</label>
+                            <input class="span6" ng-model="newBlock.name"/>
+                            <label>Skip Question</label>
+                            <select ng-model="newBlock.question">
+                                <option value="">None</option>
+                                <option
+                                    ng-repeat="question in survey.questions" 
+                                    ng-selected="activeQuestion.skip_question == question.resource_uri"
+                                    value="{{question.resource_uri}}">{{question.slug}}</option>
+                            </select>
                             <label>Skip Condition</label>
-                            <input class="span12" ng-model="activeQuestion.skip_condition" />
+                            <input class="span6" ng-model="newBlock.condition"/>
+                            <div>
+                                <a class="btn btn-danger" ng-click="newBlock = false">Cancel</a>
+                                <a class="btn" ng-click="addBlock(activeQuestion, newBlock)">Save</a>
+                            </div>
                         </div>
+                        <div ng-show="!newBlock">
+                            <h4>Conditional Blocks</h4>
+                            <ul class="nav nav-pills nav-stacked" ng-show="activeQuestion.blocks.length">
+                                <li
+                                    ng-class="{'active': grid_col == activeQuestion.activeOption }"
+                                    ng-repeat="block in activeQuestion.blocks">
+                                    <a>{{block.name}}</a>
+                                </li>
+                            </ul>
+                            <div ng-show="activeQuestion.blocks.length == 0">
+                                <label>Skip Question</label>
+                                <select ng-model="activeQuestion.skip_question">
+                                    <option value="">None</option>
+                                    <option
+                                        ng-repeat="question in survey.questions" 
+                                        ng-selected="activeQuestion.skip_question == question.resource_uri"
+                                        value="{{question.resource_uri}}">{{question.slug}}</option>
+                                </select>
+                                <div ng-show="activeQuestion.skip_question">
+                                    <label>Skip Condition</label>
+                                    <input class="span12" ng-model="activeQuestion.skip_condition" />
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
                         <div ng-show="activeQuestion.type == 'integer' || activeQuestion.type == 'number'">
                             <h3>Validation Options</h3>
                             <label>Minimum Value</label>

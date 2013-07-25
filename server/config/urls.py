@@ -26,6 +26,7 @@ v1_api.register(ResponseResource())
 v1_api.register(PageResource())
 v1_api.register(OptionResource())
 v1_api.register(UserResource())
+v1_api.register(BlockResource())
 
 v1_api.register(SurveyReportResource())
 
