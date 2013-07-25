@@ -17,7 +17,7 @@
             <h4>Most Common Last Questions</h4>
             <dl class="dl-horizontal dl-horizontal-compact" ng-repeat="group in survey.common_last_questions">
                 <dt ng-show="group.last_question != null && group.last_question != 'feedback'"><a href="/respond/{{ survey.slug }}/{{ group.last_question }}">{{ group.last_question }}</a></dt>
-                <dd ng-show="group.last_question != null && group.last_question != 'feedback'">{{ group.percent_exits * 100 | number:0 }}%</dd>
+                <dd ng-show="group.last_question != null && group.last_question != 'feedback'">{{ group.percent_exits * 100 | number:0 }}% ({{ group.num_exits }})</dd>
             </dl>
         </div>
     </div>
@@ -67,10 +67,10 @@
                     <th>% of Region Population</th>
                 </tr>
                 <tr ng-repeat="group in survey.completes_per_state">
-                    <td class="primary-td">{{ group.state }}</td>
-                    <td>{{ group.num_respondants }}</td>
-                    <td>{{ (group.num_respondants / survey.completes)*100 | number:0 }}%</td>
-                    <td>{{ populationPercents[group.state]}}</td>
+                    <td ng-show="(group.num_respondants / survey.completes)*100 > 1" class="primary-td">{{ group.state }}</td>
+                    <td ng-show="(group.num_respondants / survey.completes)*100 > 1">{{ group.num_respondants }}</td>
+                    <td ng-show="(group.num_respondants / survey.completes)*100 > 1">{{ (group.num_respondants / survey.completes)*100 | number:0 }}%</td>
+                    <td ng-show="(group.num_respondants / survey.completes)*100 > 1">{{ populationPercents[group.state]}}</td>
                 </tr>
             </table>
         </div>
