@@ -258,7 +258,7 @@ angular.module('askApp')
         var index = _.indexOf($scope.survey.questions, $scope.question) + 1 + (numQsToSkips || 0);
         // should return the slug of the next question
         var nextQuestion = $scope.survey.questions[index];
-        if (nextQuestion && nextQuestion.blocks) {
+        if (nextQuestion && nextQuestion.blocks && nextQuestion.blocks.length) {
             if ($scope.skipIf(nextQuestion.blocks)) {
                 $scope.deleteAnswer(nextQuestion, $routeParams.uuidSlug);
                 nextQuestion = false;
@@ -308,9 +308,6 @@ angular.module('askApp')
     };
 
     $scope.skipIf = function(blocks) {
-        // if ($scope.skipIf(_where($scope.survey.questions, {resource_uri: nextQuestion.skip_question}).slug, nextQuestion.skip_condition))
-        // $scope.question.blocks
-        
         var skip = true;
         
         _.each(blocks, function(block) {
@@ -371,13 +368,15 @@ angular.module('askApp')
 
     $scope.answerQuestion = function(answer, otherAnswer) {
         if ($scope.question.type === 'integer' || $scope.question.type === 'number') {
-            if ($scope.question.integer_max < answer || $scope.question.integer_min > answer) {
+            if ($scope.question.interger_max && $scope.question.integer_max < answer) {
+                return false;
+            }
+            if ($scope.question.integer_min || $scope.question.integer_min > answer) {
                 return false;
             }
             if ($scope.question.type === 'integer' && _.string.include($scope.answer, '.')) {
                 return false;
             }
-
         }
 
         var url = ['/respond/answer', $scope.survey.slug, $routeParams.questionSlug, $routeParams.uuidSlug].join('/');
@@ -555,9 +554,9 @@ angular.module('askApp')
             });
         }
         
-        _.each(answers, function(answer) {
-            answer.text = encodeURIComponent(answer.text);
-        });
+        //_.each(answers, function(answer) {
+            //answer.text = encodeURIComponent(answer.text);
+        //});
 
         $scope.answerQuestion(answers);
     };
@@ -605,12 +604,13 @@ angular.module('askApp')
         var answer = _.find(options, function(option) {
             return option.checked;
         });
-        var copy = {};
-        _.extend(copy, answer);
+        //var copy = {};
+        //_.extend(copy, answer);
 
         if (answer) {
-            copy.text = encodeURIComponent(answer.text);
-            $scope.answerQuestion(copy);
+            //copy.text = encodeURIComponent(answer.text);
+            //$scope.answerQuestion(copy);
+            $scope.answerQuestion(answer);
         } else if (otherAnswer) {
             answer = {
                 checked: true,

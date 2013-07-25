@@ -258,8 +258,8 @@ class GridAnswer(caching.base.CachingMixin, models.Model):
 class Response(caching.base.CachingMixin, models.Model):
     question = models.ForeignKey(Question)
     respondant = models.ForeignKey(Respondant, null=True, blank=True)
-    answer = models.TextField()
-    answer_raw = models.TextField()
+    answer = models.TextField(null=True, blank=True)
+    answer_raw = models.TextField(null=True, blank=True)
     ts = models.DateTimeField(default=datetime.datetime.now())
     objects = caching.base.CachingManager()
 

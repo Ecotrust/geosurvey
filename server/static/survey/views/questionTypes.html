@@ -20,7 +20,7 @@
                 max="{{question.integer_max}}"
                 ui-event="{ keypress : 'onlyDigits($event)' }"
                 autofocus
-                required/>
+                ng-required="{{question.required}}"/>
             <button type="submit" class="btn btn-primary btn-large btn-block button-block" ng-disabled="question.required && ! answer && answer != 0">continue</button>
         </form>
     </div>
@@ -37,7 +37,7 @@
                 step="any"
                 ui-event="{ keypress : 'onlyDigits($event)' }"
                 autofocus
-                required/>
+                ng-required="{{question.required}}"/>
             <button type="submit" class="btn btn-primary btn-large btn-block button-block" ng-disabled="question.required && ! answer && answer != 0">continue</button>
         </form>
     </div>
