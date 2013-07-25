@@ -109,6 +109,7 @@ class SurveyResource(ModelResource):
 
 class SurveyReportResource(SurveyResource):
     completes = fields.IntegerField(attribute='completes', readonly=True)
+    num_partials = fields.IntegerField(attribute='num_partials', readonly=True)
     num_registered = fields.IntegerField(attribute='num_registered', readonly=True)
     num_no_starts = fields.IntegerField(attribute='num_no_starts', readonly=True)
     activity_points = fields.IntegerField(attribute='activity_points', readonly=True)
