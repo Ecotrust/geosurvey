@@ -76,12 +76,26 @@ class Survey(caching.base.CachingMixin, models.Model):
         return self.respondant_set.filter(complete=True).count()
 
     @property
+    def num_partials(self):
+        return self.num_registered - self.completes - self.num_no_starts
+
+    @property
     def activity_points(self):
         return Location.objects.filter(response__respondant__in=self.respondant_set.filter(complete=True)).count()
 
     @property
     def common_last_questions(self):
-        return self.respondant_set.exclude(last_question__isnull=True).values("last_question").annotate(num_exits=Count("uuid")).order_by('-num_exits')[:10]
+        # On July 18, 2013 we started recording info pages as last questions. To show 
+        # clear values for this property, we only get a tally of the last_questions 
+        # answered after the switch. -- Tim Glaser
+        info_pages_date = datetime.datetime(2013, 7, 18)
+        respondants = self.respondant_set.exclude(last_question__isnull=True).filter(ts__gt=info_pages_date).values("last_question")
+        total_exits = len(respondants)
+        groups = respondants.annotate(num_exits=Count("uuid")).order_by('-num_exits')[:10]
+        for group in groups:
+            group['percent_exits'] = float(group['num_exits']) / float(total_exits)
+        return groups
+
 
     @property
     def completes_per_state(self):
