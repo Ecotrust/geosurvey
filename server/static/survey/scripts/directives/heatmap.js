@@ -68,15 +68,18 @@
                             }
                             $http.get(url).success(function(data) {
                                 // BEGIN CLUSTER
-                                var markers = L.markerClusterGroup({maxClusterRadius: 30, singleMarkerMode: true});
+                                if (scope.clusterMarkers) {
+                                    map.removeLayer(scope.clusterMarkers);
+                                }
+                                scope.clusterMarkers = L.markerClusterGroup({maxClusterRadius: 30, singleMarkerMode: true});
                                 scope.geojson = data.geojson;
                                 _.each(scope.geojson, function (feature) {
                                     var lat = feature.geometry.coordinates[1],
                                         lon = feature.geometry.coordinates[0],
                                         marker = L.marker(new L.LatLng(lat, lon));
-                                    markers.addLayer(marker);
+                                    scope.clusterMarkers.addLayer(marker);
                                 });
-                                map.addLayer(markers);
+                                map.addLayer(scope.clusterMarkers);
                                 // END CLUSTER
 
                                 // BEGIN HEATMAP
