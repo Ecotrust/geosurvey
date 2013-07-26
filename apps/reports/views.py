@@ -33,22 +33,7 @@ def get_geojson(request, survey_slug, question_slug):
             else:
                 locations = locations.filter(location__respondant__responses__in=filter_question.response_set.filter(answer__in=value))
 
-    geojson = [];
-    for location in locations:
-        d = {
-            'type': "Feature",
-            'properties': {
-                'activity': location.answer,
-                'label': location.label
-            },
-            'geometry': {
-                'type': "Point",
-                'coordinates': [location.location.lng,location.location.lat]
-            }
-        }
-        geojson.append(d)
-
-    return HttpResponse(simplejson.dumps({'success': "true", 'geojson': geojson}))
+    return HttpResponse(simplejson.dumps({'success': "true", 'geojson': list(locations.values('geojson'))}))
 
 @staff_member_required
 def get_distribution(request, survey_slug, question_slug):

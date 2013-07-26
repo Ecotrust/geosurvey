@@ -222,9 +222,26 @@ class LocationAnswer(caching.base.CachingMixin, models.Model):
     answer = models.TextField(null=True, blank=True, default=None)
     label = models.TextField(null=True, blank=True, default=None)
     location = models.ForeignKey('Location')
+    geojson = models.TextField(null=True, blank=True, default=None)
+    
     def __str__(self):
         return "%s/%s" % (self.location.response.respondant.uuid, self.answer)
 
+    def save(self, *args, **kwargs):
+        d = {
+            'type': "Feature",
+            'properties': {
+                'activity': self.answer,
+                'label': self.label
+            },
+            'geometry': {
+                'type': "Point",
+                'coordinates': [self.location.lng, self.location.lat]
+            }
+        }
+        self.geojson = simplejson.dumps(d)
+        print self.geojson
+        super(LocationAnswer, self).save(*args, **kwargs)
 
 class Location(caching.base.CachingMixin, models.Model):
     response = models.ForeignKey('Response')
@@ -234,6 +251,7 @@ class Location(caching.base.CachingMixin, models.Model):
 
     def __str__(self):
         return "%s/%s/%s" % (self.response.respondant.survey.slug, self.response.question.slug, self.response.respondant.uuid)
+
 
 class MultiAnswer(caching.base.CachingMixin, models.Model):
     response = models.ForeignKey('Response')
