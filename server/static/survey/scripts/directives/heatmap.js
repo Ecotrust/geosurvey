@@ -74,8 +74,9 @@
                                 scope.clusterMarkers = L.markerClusterGroup({maxClusterRadius: 30, singleMarkerMode: true});
                                 scope.geojson = data.geojson;
                                 _.each(scope.geojson, function (feature) {
-                                    var lat = feature.geometry.coordinates[1],
-                                        lon = feature.geometry.coordinates[0],
+                                    var f = JSON.parse(feature.geojson)
+                                    var lat = f.geometry.coordinates[1],
+                                        lon = f.geometry.coordinates[0],
                                         marker = L.marker(new L.LatLng(lat, lon));
                                     scope.clusterMarkers.addLayer(marker);
                                 });
