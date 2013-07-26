@@ -308,7 +308,7 @@ angular.module('askApp')
     };
 
     $scope.skipIf = function(blocks) {
-        var skip = true;
+        var keep = true;
         
         _.each(blocks, function(block) {
             var questionSlug = _.findWhere($scope.survey.questions, {resource_uri: block.skip_question}).slug,
@@ -316,25 +316,29 @@ angular.module('askApp')
                 condition = block.skip_condition,
                 op = condition[0],
                 testCriteria = condition.slice(1);
-            
+                
             if (_.isObject(answer)) {
                 if (_.isNumber(answer.answer)) {
                     answer = answer.answer;
+                } else if (_.isArray(answer)) {
+                    answer = _.pluck(answer, "text");
                 } else {
-                    answer = answer.answer? answer.answer.text: answer.text;    
+                    answer = [answer.answer ? answer.answer.text : answer.text];    
                 }
             }
-            answer = decodeURIComponent(answer);
-            if (op === '<' && answer >= testCriteria) {
-                skip = false;
-            } else if (op === '>' && answer <= testCriteria) {
-                skip = false;
-            } else if (op === '=' && answer !== testCriteria) {
-                skip = false;
-            } else if (op === '!' && answer === testCriteria) {
-                skip = false;
+            //answer = decodeURIComponent(answer);
+            //make sure the question is skipped when it does not meet the conditions of each (and every one) of its blocks
+            if (op === '<') {
+                keep = keep && (!isNaN(answer) && answer >= testCriteria);
+            } else if (op === '>') {
+                keep = keep && (!isNaN(answer) && answer <= testCriteria);
+            } else if (op === '=') {
+                keep = keep && ( ! _.contains(answer, testCriteria) );
+            } else if (op === '!') {
+                keep = keep && ( _.contains(answer, testCriteria) );
             }
         });
+        var skip = !keep;
         return skip;
     };
 

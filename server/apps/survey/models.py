@@ -137,6 +137,9 @@ class Block(caching.base.CachingMixin, models.Model):
     name = models.CharField(max_length=254, null=True, blank=True)
     skip_question = models.ForeignKey('Question', null=True, blank=True)
     skip_condition = models.CharField(max_length=254, null=True, blank=True)
+    
+    def __str__(self):
+        return "%s" % self.name
 
 class Question(caching.base.CachingMixin, models.Model):
     title = models.TextField()
