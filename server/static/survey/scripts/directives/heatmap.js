@@ -67,46 +67,60 @@
                                 url = url + '?filters=' + filterJSON;
                             }
                             $http.get(url).success(function(data) {
-                                var filterItems, heatMapData=[];
-                                if (scope.heatmapLayer) {
-                                    map.removeLayer(scope.heatmapLayer);
-                                }
-                                scope.heatmapLayer = L.TileLayer.heatMap({
-                                    // radius could be absolute or relative
-                                    // absolute: radius in meters, relative: radius in pixels
-                                    radius: { value: scope.radius || 10000, absolute: true },
-                                    //radius: { value: 20, absolute: false },
-                                    opacity: 0.8,
-                                    legend: {
-                                               position: 'br',
-                                               title: 'Example Distribution'
-                                           },   
-                                    gradient: {
-                                        0.45: "rgb(0,0,255)",
-                                        0.55: "rgb(0,255,255)",
-                                        0.65: "rgb(0,255,0)",
-                                        0.95: "yellow",
-                                        1.0: "rgb(255,0,0)"
-                                    }
-                                });
-                                scope.heatmapLayer.addTo(map);
-                                if (!scope.filterItems) {
-                                    filterItems = _.map(data.geojson, function(location) {
-                                        return location.properties.label
-                                    });
-                                    scope.filterItems = _.uniq(filterItems).sort();
-                                }
-
+                                // BEGIN CLUSTER
+                                var markers = L.markerClusterGroup({maxClusterRadius: 30, singleMarkerMode: true});
                                 scope.geojson = data.geojson;
-                                
                                 _.each(scope.geojson, function (feature) {
-                                    var lat = feature.geometry.coordinates[1];
-                                    var lon = feature.geometry.coordinates[0];
-                                
-                                    heatMapData.push({lat: lat, lon: lon, value: 1});
+                                    var lat = feature.geometry.coordinates[1],
+                                        lon = feature.geometry.coordinates[0],
+                                        marker = L.marker(new L.LatLng(lat, lon));
+                                    markers.addLayer(marker);
                                 });
-                                scope.heatmapLayer.setData(heatMapData);
+                                map.addLayer(markers);
+                                // END CLUSTER
+
+                                // BEGIN HEATMAP
+                                // var filterItems, heatMapData=[];
+                                // if (scope.heatmapLayer) {
+                                //     map.removeLayer(scope.heatmapLayer);
+                                // }
+                                // scope.heatmapLayer = L.TileLayer.heatMap({
+                                //     // radius could be absolute or relative
+                                //     // absolute: radius in meters, relative: radius in pixels
+                                //     //radius: { value: scope.radius || 10000, absolute: true },
+                                //     radius: { value: 10, absolute: false },
+                                //     opacity: 0.8,
+                                //     legend: {
+                                //                position: 'br',
+                                //                title: 'Example Distribution'
+                                //            },   
+                                //     gradient: {
+                                //         0.45: "rgb(0,0,255)",
+                                //         0.55: "rgb(0,255,255)",
+                                //         0.65: "rgb(0,255,0)",
+                                //         0.95: "yellow",
+                                //         1.0: "rgb(255,0,0)"
+                                //     }
+                                // });
+                                // scope.heatmapLayer.addTo(map);
+                                // if (!scope.filterItems) {
+                                //     filterItems = _.map(data.geojson, function(location) {
+                                //         return location.properties.label
+                                //     });
+                                //     scope.filterItems = _.uniq(filterItems).sort();
+                                // }
+
+                                // scope.geojson = data.geojson;
                                 
+                                // _.each(scope.geojson, function (feature) {
+                                //     var lat = feature.geometry.coordinates[1];
+                                //     var lon = feature.geometry.coordinates[0];
+                                
+                                //     heatMapData.push({lat: lat, lon: lon, value: 1});
+                                // });
+                                // scope.heatmapLayer.setData(heatMapData);
+                                // END HEATMAP
+
                             });
 
                             scope.filterJSON = filterJSON;
