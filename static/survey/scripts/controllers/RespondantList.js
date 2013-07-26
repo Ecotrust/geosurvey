@@ -35,4 +35,10 @@ angular.module('askApp')
     $scope.getQuestionBySlug = function (slug) {
 		return _.findWhere($scope.survey.questions, {'slug': slug});
     };
+
+    $scope.getFilterLabelBySlug = function (slug) {
+        // Keeping this simple for the one case it's needed so far.
+        var label = slug === 'activity-locations' ? 'activity' : slug;
+        return label;
+    };
 });
