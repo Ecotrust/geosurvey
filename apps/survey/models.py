@@ -240,7 +240,6 @@ class LocationAnswer(caching.base.CachingMixin, models.Model):
             }
         }
         self.geojson = simplejson.dumps(d)
-        print self.geojson
         super(LocationAnswer, self).save(*args, **kwargs)
 
 class Location(caching.base.CachingMixin, models.Model):
