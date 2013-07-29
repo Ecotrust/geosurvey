@@ -38,7 +38,6 @@ angular.module('askApp')
 
     $scope.getFilterLabelBySlug = function (slug) {
         // Keeping this simple for the one case it's needed so far.
-        var label = slug === 'activity-locations' ? 'activity' : slug;
-        return label;
+        return slug === 'activity-locations' ? 'activity' : slug;
     };
 });
