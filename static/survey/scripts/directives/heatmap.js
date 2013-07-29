@@ -66,6 +66,7 @@
                             if (filterJSON) {
                                 url = url + '?filters=' + filterJSON;
                             }
+                            scope.loading = true;
                             $http.get(url).success(function(data) {
                                 // BEGIN CLUSTER
                                 if (scope.clusterMarkers) {
@@ -81,6 +82,7 @@
                                     scope.clusterMarkers.addLayer(marker);
                                 });
                                 map.addLayer(scope.clusterMarkers);
+                                scope.loading = false;
                                 // END CLUSTER
 
                                 // BEGIN HEATMAP
