@@ -141,6 +141,12 @@ ul + ul {
 .todo h3 {
     padding-left: 15px;
 }
+.todo li:first-child {
+    border-radius: 6px 6px 0 0;
+}
+.todo li.last-child {
+    border-radius: 0 0 6px 6px;
+}
 .modal .question {
     max-width: 100%;
 }

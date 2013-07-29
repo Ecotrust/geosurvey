@@ -326,6 +326,7 @@ angular.module('askApp')
                     answer = [answer.answer ? answer.answer.text : answer.text];    
                 }
             }
+            
             //answer = decodeURIComponent(answer);
             //make sure the question is skipped when it does not meet the conditions of each (and every one) of its blocks
             if (op === '<') {
@@ -333,9 +334,24 @@ angular.module('askApp')
             } else if (op === '>') {
                 keep = keep && (!isNaN(answer) && answer <= testCriteria);
             } else if (op === '=') {
-                keep = keep && ( ! _.contains(answer, testCriteria) );
+                if ( !isNaN(answer) ) { // if it is a number
+                    keep = keep && ( answer !== testCriteria );
+                } else if (_.str.include(testCriteria, '|')) { // if condition is a list
+                    // keep if intersection of condition list and answer list is empty
+                    keep = keep && ( _.intersection( testCriteria.split('|'), answer ).length === 0 );
+                } else { // otherwise, condition is a string, keep if condition string is NOT contained in the answer
+                    keep = keep && ( ! _.contains(answer, testCriteria) );
+                }
             } else if (op === '!') {
-                keep = keep && ( _.contains(answer, testCriteria) );
+                if ( !isNaN(answer) ) { // if it is a number
+                    // keep the question if equal (not not equal)
+                    keep = keep && ( answer === testCriteria );
+                } else if (_.str.include(testCriteria, '|')) { // if condition is a list
+                    // keep if intersection of condition list and answer list is populated
+                    keep = keep && ( _.intersection( testCriteria.split('|'), answer ).length > 0 );
+                } else { // otherwise, condition is a string, keep if condition string is contained in the answer
+                    keep = keep && ( _.contains(answer, testCriteria) );
+                }
             }
         });
         var skip = !keep;
