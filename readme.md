@@ -140,4 +140,8 @@ Transfer the dump file to a web accessible space.  To find the database url, use
 heroku pg:info
 heroku pgbackups:restore HEROKU_POSTGRESQL_WHITE_URL 'http://www.example.org/latest.dump'
 ```
-
+Or to restore locally in the development environment, use pg_restore.
+```bash
+vagrant ssh
+pg_restore --verbose --clean --no-acl --no-owner -h localhost -d geosurvey latest.dump
+```
