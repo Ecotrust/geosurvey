@@ -107,7 +107,6 @@
                     ng-tap="$parent.onSingleSelectClicked(option, $parent.question)"
                     ng-repeat="option in question.options"
                     ng-class="{'todo-done': option.checked }">
-                    <!-- <div class="todo-icon fui-man-24"></div> -->
                     <div class="todo-content">
                       <h4 class="todo-name">
                         {{ option.text || option.name }}
@@ -119,7 +118,6 @@
                     ng-show="question.allow_other"
                     ng-tap="$parent.onSingleSelectClicked($parent.question.otherOption, $parent.question)"
                     ng-class="{'todo-done': $parent.question.otherOption.checked }">
-                    <!-- <div class="todo-icon fui-man-24"></div> -->
                     <div class="todo-content">
                       <h4 class="todo-name">
                         Other
@@ -127,7 +125,7 @@
                     </div>
                   </li>
                 </ul>
-              </div>
+            </div>
             <input class="input-block-level" type="text" placeholder="Other Option" ng-show="question.otherOption.checked" ng-model="question.otherAnswer" autofocus/>             
             <button type="submit" class="btn btn-large btn-block button-block" ng-class="{'btn-primary': isAnswerValid, disabled: !isAnswerValid }">continue</button>
         </form>
@@ -140,7 +138,6 @@
                     ng-tap="$parent.onSingleSelectClicked(option, $parent.question)"
                     ng-repeat="option in question.options"
                     ng-class="{'todo-done': option.checked }">
-                    <!-- <div class="todo-icon fui-man-24"></div> -->
                     <div class="todo-content">
                       <h4 class="todo-name">
                         {{ option.text || option.name }}
@@ -163,7 +160,6 @@
                           ng-tap="$parent.onMultiSelectClicked(option, $parent.question)"
                           ng-repeat="option in question.hoisted_options"
                           ng-class="{'todo-done': option.checked }">
-                          <!-- <div class="todo-icon fui-man-24"></div> -->
                           <div class="todo-content">
                             <h4 class="todo-name">
                               {{option.text}}
@@ -174,14 +170,53 @@
                 </div>
             </div>
             <p ng-show="question.hoisted_options.length > 0" style="margin-bottom: 20px;">Are there additional activities you conducted at this location in the last 12 months? If so, please select from below.</p>
+            
             <div class="todo mrm">
+            
+              <!-- show if groupedOptions are present -->
+              <div ng-show="question.groupedOptions.length">
+                <div ng-repeat="groupOption in question.groupedOptions">
+                    <h3 ng-show="question.hoisted_options.length > 0">Other Activities</h3>
+                    <h3>{{groupOption.optionLabel}}</h3>
+                    <ul class="choices">
+                      <li 
+                        ng-tap="$parent.onMultiSelectClicked(option, $parent.question)"
+                        ng-repeat="option in groupOption.options" 
+                        ng-class="{'todo-done': option.checked, 'option-group-name': option.isGroupName }">
+                        <div class="todo-content">
+                          <h4 class="todo-name">
+                            {{option.text}}
+                          </h4>
+                        </div>
+                      </li>
+                    </ul>
+                </div>
+                <div ng-show="question.allow_other">
+                    <h3>Other</h3>
+                    <ul class="choices">
+                      <li 
+                        ng-tap="onMultiSelectClicked(question.otherOption, question)"
+                        ng-class="{'todo-done': question.otherOption.checked }"
+                        ng-model="question.otherAnswer.text">
+                        <div class="todo-content">
+                          <h4 class="todo-name">
+                            Other
+                          </h4>
+                          
+                        </div>
+                      </li>
+                    </ul>
+                </div>
+              </div>
+              
+              <!-- show if groupedOptions are NOT present -->
+              <div ng-show="question.groupedOptions.length == 0">
                 <h3 ng-show="question.hoisted_options.length > 0">Other Activities</h3>
                 <ul class="choices">
                   <li 
                     ng-tap="$parent.onMultiSelectClicked(option, $parent.question)"
-                    ng-repeat="option in question.options" ng-cloak
+                    ng-repeat="option in question.options" 
                     ng-class="{'todo-done': option.checked }">
-                    <!-- <div class="todo-icon fui-man-24"></div> -->
                     <div class="todo-content">
                       <h4 class="todo-name">
                         {{option.text}}
@@ -194,7 +229,6 @@
                     ng-tap="onMultiSelectClicked(question.otherOption, question)"
                     ng-class="{'todo-done': question.otherOption.checked }"
                     ng-model="question.otherAnswer.text">
-                    <!-- <div class="todo-icon fui-man-24"></div> -->
                     <div class="todo-content">
                       <h4 class="todo-name">
                         Other
@@ -204,7 +238,8 @@
                   </li>
                 </ul>
               </div>
-
+              
+            </div>
             <input class="input-block-level" type="text" placeholder="Other Option" ng-show="question.allow_other && question.otherOption.checked" ng-model="question.otherAnswer" autofocus/> 
             <button type="submit" class="btn btn-large btn-block button-block" ng-hide="dialog" ng-class="{'btn-primary': isAnswerValid, 'disabled': !isAnswerValid }">continue</button>
         </form>

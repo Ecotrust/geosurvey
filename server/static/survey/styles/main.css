@@ -147,6 +147,12 @@ ul + ul {
 .todo li.last-child {
     border-radius: 0 0 6px 6px;
 }
+.todo li.option-group-name {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 4px;
+  margin-top: 2px; 
+}
 .modal .question {
     max-width: 100%;
 }

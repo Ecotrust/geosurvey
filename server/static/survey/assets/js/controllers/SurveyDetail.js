@@ -258,12 +258,13 @@ angular.module('askApp')
         var index = _.indexOf($scope.survey.questions, $scope.question) + 1 + (numQsToSkips || 0);
         // should return the slug of the next question
         var nextQuestion = $scope.survey.questions[index];
-        if (nextQuestion && nextQuestion.blocks && nextQuestion.blocks.length) {
-            if ($scope.skipIf(nextQuestion.blocks)) {
+        //if (nextQuestion && nextQuestion.blocks && nextQuestion.blocks.length) {
+        if (nextQuestion) {
+            if ($scope.skipIf(nextQuestion)) {
                 $scope.deleteAnswer(nextQuestion, $routeParams.uuidSlug);
                 nextQuestion = false;
             }
-        }
+        } 
 
         return nextQuestion ? nextQuestion.slug : false;
     };
@@ -307,9 +308,45 @@ angular.module('askApp')
         }
     };
 
-    $scope.skipIf = function(blocks) {
+    $scope.keepQuestion = function(op, answer, testCriteria) {
+        if (op === '<') {
+            return !isNaN(answer) && answer >= testCriteria;
+        } else if (op === '>') {
+            return !isNaN(answer) && answer <= testCriteria;
+        } else if (op === '=') {
+            if ( !isNaN(answer) ) { // if it is a number
+                return answer !== testCriteria;
+            } else if (_.str.include(testCriteria, '|')) { // if condition is a list
+                // keep if intersection of condition list and answer list is empty
+                return _.intersection( testCriteria.split('|'), answer ).length === 0;
+            } else { // otherwise, condition is a string, keep if condition string is NOT contained in the answer
+                return ! _.contains(answer, testCriteria);
+            }
+        } else if (op === '!') {  
+            if ( !isNaN(answer) ) { // if it is a number
+                // keep the question if equal (not not equal)
+                return answer === testCriteria;
+            } else if (_.str.include(testCriteria, '|')) { // if condition is a list
+                // keep if intersection of condition list and answer list is populated
+                return _.intersection( testCriteria.split('|'), answer ).length > 0 ;
+            } else { // otherwise, condition is a string, keep if condition string is contained in the answer
+                return _.contains(answer, testCriteria);
+            }
+        }
+        return undefined;
+    };
+    
+    $scope.skipIf = function(nextQuestion) {
         var keep = true;
         
+        if ( nextQuestion.blocks && nextQuestion.blocks.length ) {
+            var blocks = nextQuestion.blocks;
+        } else if ( nextQuestion.skip_question && nextQuestion.skip_condition ) {
+            var blocks = [nextQuestion];
+        } else {
+            var blocks = []; //(return false)
+        }
+          
         _.each(blocks, function(block) {
             var questionSlug = _.findWhere($scope.survey.questions, {resource_uri: block.skip_question}).slug,
                 answer = $scope.getAnswer(questionSlug),
@@ -328,34 +365,10 @@ angular.module('askApp')
             }
             
             //answer = decodeURIComponent(answer);
-            //make sure the question is skipped when it does not meet the conditions of each (and every one) of its blocks
-            if (op === '<') {
-                keep = keep && (!isNaN(answer) && answer >= testCriteria);
-            } else if (op === '>') {
-                keep = keep && (!isNaN(answer) && answer <= testCriteria);
-            } else if (op === '=') {
-                if ( !isNaN(answer) ) { // if it is a number
-                    keep = keep && ( answer !== testCriteria );
-                } else if (_.str.include(testCriteria, '|')) { // if condition is a list
-                    // keep if intersection of condition list and answer list is empty
-                    keep = keep && ( _.intersection( testCriteria.split('|'), answer ).length === 0 );
-                } else { // otherwise, condition is a string, keep if condition string is NOT contained in the answer
-                    keep = keep && ( ! _.contains(answer, testCriteria) );
-                }
-            } else if (op === '!') {
-                if ( !isNaN(answer) ) { // if it is a number
-                    // keep the question if equal (not not equal)
-                    keep = keep && ( answer === testCriteria );
-                } else if (_.str.include(testCriteria, '|')) { // if condition is a list
-                    // keep if intersection of condition list and answer list is populated
-                    keep = keep && ( _.intersection( testCriteria.split('|'), answer ).length > 0 );
-                } else { // otherwise, condition is a string, keep if condition string is contained in the answer
-                    keep = keep && ( _.contains(answer, testCriteria) );
-                }
-            }
+            keep = keep && $scope.keepQuestion(op, answer, testCriteria);
         });
-        var skip = !keep;
-        return skip;
+        
+        return !keep;
     };
 
     $scope.terminateIf = function(answer, condition) {
@@ -745,10 +758,10 @@ $scope.loadSurvey = function(data) {
             }
         }
 
-
         // Fill options list.
         if ($scope.question && $scope.question.options_json && $scope.question.options_json.length > 0 && !$scope.question.options_from_previous_answer) {
             // Using the provided json file to set options.
+            
             $http.get($scope.question.options_json).success(function(data) {
                 var groups = _.groupBy(data, function(item) {
                     return item.group;
@@ -813,6 +826,12 @@ $scope.loadSurvey = function(data) {
                         option.checked = true;
                     } else {
                         option.checked = false;
+                    }
+                    
+                    //distinguish group titles
+                    if ( _.startsWith(option.text, '*') ) {
+                        option.text = _.splice(option.text, 1);
+                        option.isGroupName = true;
                     }
 
 
@@ -1293,11 +1312,32 @@ $scope.loadSurvey = function(data) {
                 var matches = _.filter($scope.answer, function (answer) {
                     return answer.text === row;
                 });
+                
                 $scope.question.options.push({
-                    text: row,
+                    text: _.string.startsWith(row, '*') ? row.substr(1) : row,
                     label: _.string.slugify(row),
-                    checked: matches.length ? true: false
+                    checked: matches.length ? true: false,
+                    isGroupName: _.string.startsWith(row, '*')
                 });
+            });
+            
+            $scope.question.groupedOptions = [];
+            var groupName = "";
+            _.each($scope.question.rows.split('\n'), function (row, index) {
+                var matches = _.filter($scope.answer, function (answer) {
+                    return answer.text === row;
+                });
+                var isGroupName = _.string.startsWith(row, '*');
+                if ( isGroupName ) {
+                    groupName = row.substr(1);
+                    $scope.question.groupedOptions.push( { optionLabel: groupName, options: [] } );
+                } else if ( $scope.question.groupedOptions.length > 0 ) {
+                    _.findWhere( $scope.question.groupedOptions, { optionLabel: groupName } ).options.push({
+                        text: row,
+                        label: _.string.slugify(row),
+                        checked: matches.length ? true : false
+                    })
+                } 
             });
         }
          // grid question controller
