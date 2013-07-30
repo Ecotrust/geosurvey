@@ -2,6 +2,7 @@
 ```bash
 vagrant up
 fab vagrant bootstrap
+fab vagrant createsuperuser
 fab vagrant runserver
 ```
 
