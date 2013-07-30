@@ -144,7 +144,7 @@ ul + ul {
 .todo li:first-child {
     border-radius: 6px 6px 0 0;
 }
-.todo li.last-child {
+.todo li:last-child {
     border-radius: 0 0 6px 6px;
 }
 .todo li.option-group-name {
@@ -152,6 +152,31 @@ ul + ul {
   font-weight: 700;
   margin-bottom: 4px;
   margin-top: 2px; 
+}
+.question .options-list .accordion-div {
+  border-style: solid;
+  border-bottom-width: 1px;
+  border-left-width: 0px;
+  border-right-width: 0px;
+  border-top-width: 0px;
+  border-bottom-color: rgb(229, 229, 229);
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.question .options-list .accordion-other-div {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.question .options-list .accordion-group {
+  border: 0px;
+}
+.question .options-list .accordion-toggle {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 4px;
+  margin-top: 2px;
+  text-decoration: none;
+  color: rgb(98, 133, 168);
 }
 .modal .question {
     max-width: 100%;

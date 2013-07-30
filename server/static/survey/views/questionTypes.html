@@ -172,11 +172,11 @@
             </div>
             <p ng-show="question.hoisted_options.length > 0" style="margin-bottom: 20px;">Are there additional activities you conducted at this location in the last 12 months? If so, please select from below.</p>
             
-            <div class="todo mrm">
+            <div class="todo mrm options-list">
             
-              <!-- with accordion 
+              <!-- with accordion -->
               <accordion ng-show="question.groupedOptions.length">
-                <div ng-repeat="groupOption in question.groupedOptions">
+                <div ng-repeat="groupOption in question.groupedOptions" class="accordion-div">
                     <h3 ng-show="$parent.question.hoisted_options.length > 0">Other Activities</h3>
                     <accordion-group heading="{{groupOption.optionLabel}}">
                         <ul class="choices">
@@ -193,7 +193,7 @@
                         </ul>
                     </accordion-group>
                 </div>
-                <div ng-show="question.allow_other">
+                <div ng-show="question.allow_other" class="accordion-other-div">
                     <accordion-group heading="Other">
                         <ul class="choices">
                           <li 
@@ -210,9 +210,9 @@
                         </ul>
                     </accordion-group>
                 </div>
-              </accordion>-->
+              </accordion>
             
-              <!-- show if groupedOptions are present -->
+              <!-- show if groupedOptions are present 
               <div ng-show="question.groupedOptions.length">
                 <div ng-repeat="groupOption in question.groupedOptions">
                     <h3 ng-show="$parent.question.hoisted_options.length > 0">Other Activities</h3>
@@ -246,7 +246,7 @@
                       </li>
                     </ul>
                 </div>
-              </div>
+              </div> -->
               
               <!-- show if groupedOptions are NOT present -->
               <div ng-show="question.groupedOptions.length == 0">
