@@ -534,10 +534,20 @@ angular.module('askApp')
         if (!question.required) {
             return true;
         }
-
+        
         answers = _.filter(question.options, function(option) {
             return option.checked;
         });
+        
+        // in case of multiselect containing groups 
+        if (question.groupedOptions.length) {
+            answers = [];
+            _.each(question.groupedOptions, function(groupedOption) {
+                answers = answers.concat(_.filter(groupedOption.options, function(option) {
+                    return option.checked;
+                }));
+            });
+        }
 
         if (question.hoisted_options) {
             hoistedAnswers = _.filter(question.hoisted_options, function(option) {
@@ -554,7 +564,7 @@ angular.module('askApp')
                 answers.push(question.otherAnswer);
             }
         }
-
+        
         // enable/disable continue button
         return answers.length > 0 && isOtherAnswerValid;
     };
@@ -577,6 +587,16 @@ angular.module('askApp')
         answers = _.filter(question.options, function(option) {
             return option.checked;
         });
+        
+        // in case of multiselect containing groups 
+        if (question.groupedOptions.length) {
+            answers = [];
+            _.each(question.groupedOptions, function(groupedOption) {
+                answers = answers.concat(_.filter(groupedOption.options, function(option) {
+                    return option.checked;
+                }));
+            });
+        }
 
         if (question.otherAnswer) {
             answers.push({
