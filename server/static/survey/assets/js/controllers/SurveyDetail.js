@@ -183,6 +183,7 @@ angular.module('askApp')
         } else {
             slug = questionSlug;
         }
+        
         if ($scope.answers[slug]) {
             if (gridSlug) {
                 return _.flatten(_.map($scope.answers[slug], function (answer) {
@@ -259,6 +260,7 @@ angular.module('askApp')
         // should return the slug of the next question
         var nextQuestion = $scope.survey.questions[index];
         //if (nextQuestion && nextQuestion.blocks && nextQuestion.blocks.length) {
+        
         if (nextQuestion) {
             if ($scope.skipIf(nextQuestion)) {
                 $scope.deleteAnswer(nextQuestion, $routeParams.uuidSlug);
@@ -359,6 +361,8 @@ angular.module('askApp')
                     answer = answer.answer;
                 } else if (_.isArray(answer)) {
                     answer = _.pluck(answer, "text");
+                } else if (_.isArray(answer.answer)) {
+                    answer = _.pluck(answer.answer, "text");
                 } else {
                     answer = [answer.answer ? answer.answer.text : answer.text];    
                 }
@@ -422,7 +426,6 @@ angular.module('askApp')
                 $scope.dialog.$scope.close();
             }
         } else {
-
             if ($scope.question.type === 'timepicker' || $scope.question.type === 'datepicker') {
                 if (! $scope.answer) {
                     answer = $scope.now;
@@ -530,7 +533,7 @@ angular.module('askApp')
         var hoistedAnswers,
             answers,
             isOtherAnswerValid = true;
-
+        
         if (!question.required) {
             return true;
         }
@@ -576,7 +579,7 @@ angular.module('askApp')
      */
     $scope.answerMultiSelect = function(question) {
         var answers;
-
+        
         if (!$scope.isAnswerValid) {
             return;
         }
@@ -856,7 +859,6 @@ $scope.loadSurvey = function(data) {
 
 
                 });
-
 
                 if ($scope.question.type === "multi-select") {
                     $scope.isAnswerValid = $scope.validateMultiSelect($scope.question);
