@@ -29,8 +29,6 @@ class Respondant(caching.base.CachingMixin, models.Model):
     email = models.EmailField(max_length=254, null=True, blank=True, default=None)
     objects = caching.base.CachingManager()
 
-
-
     def __str__(self):
         return "%s" % self.email
 
@@ -312,3 +310,26 @@ class Response(caching.base.CachingMixin, models.Model):
             setattr(self.respondant, self.question.slug, self.answer)
             self.respondant.save()
         super(Response, self).save(*args, **kwargs)
+
+
+class UsageTopic(caching.base.CachingMixin, models.Model):
+    survey = models.ForeignKey('Survey')
+    question = models.ForeignKey('Question')
+    slug = models.SlugField(max_length=254, unique=True)
+    entries = models.ManyToManyField('UsageEntry', related_name='entries', null=True, blank=True)
+    objects = caching.base.CachingManager()
+
+    def __str__(self):
+        return "%s/%s/%s" % (self.survey.slug, self.question.slug, self.slug)
+
+
+class UsageEntry(caching.base.CachingMixin, models.Model):
+    topic = models.ForeignKey('UsageTopic')
+    respondant = models.ForeignKey('Respondant')
+    data = models.CharField(max_length=240, null=True, blank=True)
+    ts = models.DateTimeField(default=datetime.datetime.now())
+    objects = caching.base.CachingManager()
+
+    def __str__(self):
+        return "%s/%s" % (str(self.topic), self.respondant.uuid)
+

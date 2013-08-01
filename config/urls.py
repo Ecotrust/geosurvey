@@ -45,6 +45,7 @@ urlpatterns = patterns('',
     url(r'^dash$', 'apps.survey.views.dash'),
     #other survey urls
     url(r'^dash', include(survey_urls)),
+    url(r'^log', include(survey_urls)),
 
     (r'^register', survey_urls.register),
 )

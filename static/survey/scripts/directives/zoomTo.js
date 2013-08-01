@@ -1,7 +1,7 @@
 //'use strict';
 
 
-function ZoomToCtrl($scope, dialog, $http, $timeout, $location) {
+function ZoomToCtrl($scope, dialog, $http, $timeout, $location, $routeParams, logger) {
     var stop;
 
     $scope.panes = {
@@ -68,6 +68,7 @@ function ZoomToCtrl($scope, dialog, $http, $timeout, $location) {
                     $scope.showSpinner = false;
                     $scope.showNoResults = $scope.results.length == 0 && $scope.searchTerm && $scope.searchTerm.length > 0;
                 });
+                logger.logUsage('search-term-typed', $scope.searchTerm);
             }, 1000);
         } else {
             $scope.results = [];

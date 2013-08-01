@@ -13,7 +13,7 @@ from django.conf import settings
 
 import simplejson
 
-from apps.survey.models import Survey, Question, Response, Respondant
+from apps.survey.models import Survey, Question, Response, Respondant, UsageTopic, UsageEntry
 
 @staff_member_required
 def delete_responses(request, uuid, template='survey/delete.html'):
@@ -80,6 +80,24 @@ def answer(request, survey_slug, question_slug, uuid): #, survey_slug, question_
         respondant.last_question = question_slug
         respondant.save()
         return HttpResponse(simplejson.dumps({'success': "%s/%s/%s" % (survey_slug, question_slug, uuid)}))
+    return HttpResponse(simplejson.dumps({'success': False}))
+
+
+def log_usage(request, survey_slug, question_slug, usage_slug, uuid):
+    if request.method == 'POST':
+        survey = get_object_or_404(Survey, slug=survey_slug)
+        question = get_object_or_404(Question, slug=question_slug, survey=survey)
+        respondant = get_object_or_404(Respondant, uuid=uuid)
+
+        topic, created = UsageTopic.objects.get_or_create(survey=survey, question=question, slug=usage_slug)
+
+        entry = UsageEntry(topic=topic, respondant=respondant)
+        entry.data = simplejson.dumps(simplejson.loads(request.POST.keys()[0]).get('data', None))
+        entry.save()
+
+        topic.entries.add(entry)
+        topic.save()
+        return HttpResponse(simplejson.dumps({'success': "%s" % str(entry) }))
     return HttpResponse(simplejson.dumps({'success': False}))
 
 
