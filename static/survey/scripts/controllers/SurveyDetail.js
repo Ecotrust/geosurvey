@@ -823,7 +823,7 @@ angular.module('askApp')
             };
 
 
-            $http.get("/static/survey/data/marco_dd.json").success(function(data) {
+            $http.get("/static/survey/data/marco_dd.json?v=2").success(function(data) {
                 $scope.boundaryLayer = L.geoJson(data);
             });
 
