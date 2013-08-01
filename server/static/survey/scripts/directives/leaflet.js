@@ -56,7 +56,7 @@
                 L.control.layersToggle("View Satellite Imagery", bing, "View Nautical Charts", nautical, options).addTo(map);
 
                 // Study area boundary
-                $http.get("/static/survey/data/marco_dd.json").success(function(data) {
+                $http.get("/static/survey/data/marco_dd.json?v=2").success(function(data) {
                     var boundaryStyle = {
                         "color": "#E6D845",
                         "weight": 3,
