@@ -1,7 +1,9 @@
 # Server
 ```bash
 vagrant up
-fab dev run_server
+fab vagrant bootstrap
+fab vagrant createsuperuser
+fab vagrant runserver
 ```
 
 ## to update test server
