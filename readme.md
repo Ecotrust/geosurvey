@@ -17,6 +17,15 @@ npm install && bower install --dev
 npm install generator-angular generator-karma
 ```
 
+# Backing up and restoring databases
+
+```bash
+pg_dump -U vagrant --clean --no-acl -Fc geosurvey> geosurvey.dump
+```
+
+```bash
+pg_restore --verbose --clean --no-acl --no-owner -U vagrant -d geosurvey geosurvey.dump
+```
 # Launching Server
 Run all of these in seperate tabs/windows
 
