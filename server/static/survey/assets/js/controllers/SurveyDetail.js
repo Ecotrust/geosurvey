@@ -403,7 +403,7 @@ angular.module('askApp')
         localStorage.setItem('hapifish', JSON.stringify(app));
     };
 
-    $scope.answerQuestion = function(answer, otherAnswer) {
+    $scope.answerQuestion = function(answer, otherAnswer, unit) {
         if ($scope.question.type === 'integer' || $scope.question.type === 'number') {
             if ($scope.question.interger_max && $scope.question.integer_max < answer) {
                 return false;
@@ -442,6 +442,14 @@ angular.module('askApp')
                 answer = '';
             }
 
+            // for number with unit questions, we need to submit a unit as well
+            if ($scope.question.type === 'number-with-unit') {
+                answer = {
+                    value: answer,
+                    unit: unit
+                }    
+            }
+            
 
             if ($scope.locations && $scope.locations.length) {
                 answer = angular.toJson(_.map($scope.locations,

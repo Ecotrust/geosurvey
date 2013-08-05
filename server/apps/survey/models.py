@@ -110,6 +110,7 @@ QUESTION_TYPE_CHOICES = (
     ('auto-single-select', 'Single Select with Autocomplete'),
     ('map-multipoint', 'Map with Multiple Points'),
     ('yes-no', 'Yes/No'),
+    ('number-with-unit', 'Number with Unit'),
 )
 
 class Option(caching.base.CachingMixin, models.Model):
@@ -263,6 +264,7 @@ class Response(caching.base.CachingMixin, models.Model):
     respondant = models.ForeignKey(Respondant, null=True, blank=True)
     answer = models.TextField(null=True, blank=True)
     answer_raw = models.TextField(null=True, blank=True)
+    unit = models.TextField(null=True, blank=True)
     ts = models.DateTimeField(default=datetime.datetime.now())
     objects = caching.base.CachingManager()
 
@@ -275,6 +277,10 @@ class Response(caching.base.CachingMixin, models.Model):
                     self.answer = answer['text']
                 if answer.get('name'):
                     self.answer = answer['name']
+            if self.question.type in ['number-with-unit']:
+                answer = simplejson.loads(self.answer_raw)
+                self.answer = answer['value']
+                self.unit = answer['unit']
             if self.question.type in ['auto-multi-select', 'multi-select']:
                 answers = []
                 self.multianswer_set.all().delete()
