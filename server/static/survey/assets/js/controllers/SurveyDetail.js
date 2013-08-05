@@ -151,7 +151,6 @@ angular.module('askApp')
         if (app.user) {
             $scope.user = app.user;
         } else if (app.offline) {
-            console.log('redirecting' + $location.path());
             if (!app) {
                 app = {};
             }
@@ -1449,7 +1448,6 @@ $scope.loadSurvey = function(data) {
                     max: gridCol.max,
                     min: gridCol.min
                 };
-                console.log(col);
                 if (gridCol.type === 'integer') {
                     template = integerCellTemplate;
                 } else if (gridCol.type === 'number' || gridCol.type === 'currency') {
