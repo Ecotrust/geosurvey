@@ -19,6 +19,10 @@ class QuestionAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug':('label',),'info':('label',),}
     list_display = ('survey_slug','slug','type', 'title',  )
     
+    def formfield_for_manytomany(self, db_field, request, **kwargs):
+        if db_field.name == "blocks":
+            kwargs["queryset"] = Block.objects.all().order_by('name')
+        return super(QuestionAdmin, self).formfield_for_manytomany(db_field, request, **kwargs)
 
     class Media:
         js = [
