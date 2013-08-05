@@ -55,6 +55,7 @@ class Respondant(caching.base.CachingMixin, models.Model):
 
 class Page(caching.base.CachingMixin, models.Model):
     question = models.ForeignKey('Question', null=True, blank=True)
+    questions = models.ManyToManyField('Question', null=True, blank=True, related_name="questions")
     survey = models.ForeignKey('Survey', null=True, blank=True)
     objects = caching.base.CachingManager()
 

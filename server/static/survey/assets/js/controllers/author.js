@@ -11,7 +11,6 @@ angular.module('askApp')
         if ($routeParams.surveySlug) {    
             $http.get('/api/v1/survey/' + $routeParams.surveySlug + '/?format=json').success(function(data) {
                 _.extend($scope.survey, data);
-                
                 if ($scope.survey.questions.length === 0) {
                     $scope.survey.questions = [];
                     $scope.newQuestion();
