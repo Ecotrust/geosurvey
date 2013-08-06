@@ -2,57 +2,59 @@
 
 // // loading survey from fixture
 
-// var isAuthenticated = false;
+var isAuthenticated = false;
 
-// var token = 'csrftoken';
-// var stateAbrv = "NO_STATE";
+var token = 'csrftoken';
+var stateAbrv = "NO_STATE";
 
-// var answers = {
-//     'age': 36
-// }
-
-
-// describe('Controller: SurveyDetailCtrl', function() {
-
-//     // load the controller's module
-//     beforeEach(module('askApp'));
+var answers = {
+    'age': 36
+}
 
 
-//     var SurveyDetailCtrl, $httpBackend, scope;
+describe('Controller: SurveyDetailCtrl', function() {
+
+    // load the controller's module
+    beforeEach(module('askApp'));
 
 
-//     beforeEach(inject(function(_$httpBackend_, $rootScope, $routeParams, $compile, $controller) {
-//         $httpBackend = _$httpBackend_;
-//         $httpBackend.expectGET('/api/v1/survey/test-survey/?format=json').respond(survey);
-//         $routeParams.surveySlug = 'test-survey';
-//         $routeParams.questionSlug = 'name';
-//         $routeParams.uuidSlug = 'uuid-xxxxy'
-//         scope = $rootScope.$new();
-
-//         scope.token = 'csrftoken';
-
-//         SurveyDetailCtrl = $controller('SurveyDetailCtrl', {
-//             $scope: scope
-//         });
-
-//     }));
-
-//     afterEach(function() {
-//         $httpBackend.verifyNoOutstandingExpectation();
-//         $httpBackend.verifyNoOutstandingRequest();
-//     });
+    var SurveyDetailCtrl, $httpBackend, scope;
 
 
-//     it('should attach a survey', function() {
+    beforeEach(inject(function(_$httpBackend_, $rootScope, $routeParams, $compile, $controller) {
+        $httpBackend = _$httpBackend_;
+        // $httpBackend.expectGET('/api/v1/survey/test-survey/?format=json').respond(survey);
+        // $httpBackend.flush(); 
+        $routeParams.surveySlug = 'test-survey';
+        $routeParams.questionSlug = 'name';
+        $routeParams.uuidSlug = 'uuid-xxxxy'
+        scope = $rootScope.$new();
 
-//         expect(scope.survey).toBeUndefined();
-//         $httpBackend.flush();
+        scope.token = 'csrftoken';
 
-//         expect(scope.survey.name).toBe('Test Survey');
+        SurveyDetailCtrl = $controller('SurveyDetailCtrl', {
+            $scope: scope
+        });
 
-//         expect(scope.question.slug).toBe('name');
-//     });
+    }));
 
+    // afterEach(function() {
+    //     $httpBackend.verifyNoOutstandingExpectation();
+    //     $httpBackend.verifyNoOutstandingRequest();
+    // });
+
+
+    it('should attach a survey', function() {
+        $httpBackend.expectGET('/api/v1/respondant/uuid-xxxxy/name?format=json').respond(survey);
+        $httpBackend.flush(); 
+        //expect(scope.survey).toBe({state: 'loading'});
+        
+
+        // expect(scope.survey.name).toBe('Test Survey');
+
+        // expect(scope.question.slug).toBe('name');
+    });
+});
 
 //     it('should attach a survey with a different question', function() {
 
