@@ -77,8 +77,19 @@ function ZoomToCtrl($scope, dialog, $http, $timeout, $location, $routeParams, lo
         }
     });
 
-    $scope.setZoomToPlace = function (place) {
+    $scope.searchResult_clicked = function (place) {
         $scope.selectedPlace = place;
+        $scope.showMapUsage();
+    };
+
+    $scope.manualZoomLink_clicked = function () {
+        $scope.selectedPlace = null;
+        $scope.showMapUsage();
+    };
+
+    $scope.showMapUsage = function () {
+        $scope.show('mapUsage');
+        logger.logUsage('map-usage-shown', '');
     };
 
     $scope.close = function() {
@@ -99,7 +110,7 @@ function ZoomToCtrl($scope, dialog, $http, $timeout, $location, $routeParams, lo
 }
 
 angular.module('askApp')
-    .directive('zoomto', function($dialog) {
+    .directive('zoomto', function($dialog, logger) {
 
     return {
         template: '<div><div class="control-group large-screen"><i class="icon-search icon-large"></i><input type="text" id="search-query-facade" placeholder="Search" ng-click="openModal()"></div><a class="btn btn-large btn-search small-screen" ng-click="openModal()"><i class="icon-search icon-large"></i></a></div>',
@@ -136,6 +147,9 @@ angular.module('askApp')
                             lng: place.lng,
                             zoom: 15
                         };
+                        logger.logUsage('search-term-chosen', place.name + ' ('  + place.county + ')');
+                    } else {
+                        logger.logUsage('manual-zoom-chosen', '');
                     }
                 });
             };

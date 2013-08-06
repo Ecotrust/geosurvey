@@ -6,12 +6,11 @@ angular.module('askApp')
     // Public API here
     return {
       logUsage: function (usageSlug, data) {
-        var questionSlug = 'non-question';
-        if ($routeParams.questionSlug) {
-            questionSlug = $routeParams.questionSlug;
-        }
+        var survey = $routeParams.surveySlug || 'undefined-survey',
+            question = $routeParams.questionSlug || 'undefined-question',
+            uuid = $routeParams.uuidSlug || 'undefined-uuid';
 
-        url = ['/log/usage', $routeParams.surveySlug, questionSlug, usageSlug, $routeParams.uuidSlug].join('/');
+        url = ['/log/usage', survey, question, usageSlug, uuid].join('/');
         
         $http({
             url: url,

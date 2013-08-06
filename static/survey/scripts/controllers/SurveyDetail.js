@@ -180,7 +180,7 @@ function ActivitySelectorDialogCtrl($scope, dialog, $location, $window, $timeout
 
 
 angular.module('askApp')
-    .controller('SurveyDetailCtrl', function($scope, $routeParams, $http, $location, $dialog, $interpolate, $timeout) {
+    .controller('SurveyDetailCtrl', function($scope, $routeParams, $http, $location, $dialog, $interpolate, $timeout, logger) {
 
     $scope.survey = {
         state: 'loading'
@@ -872,6 +872,7 @@ angular.module('askApp')
                 // $scope.locations.push(location);
                 $scope.activeMarker = false;
                 $scope.updateCrosshair();
+                logger.logUsage('locationAdded', '{numLocations: ' + $scope.locations.length + '}');
             };
 
             $scope.cancelConfirmation = function() {
@@ -952,6 +953,7 @@ angular.module('askApp')
                         $scope.showAddMoreDialog();
                     }
                 });
+                logger.logUsage('add-location-modal-shown', '');
             };
 
             $scope.showZoomAlert = function () {
@@ -965,6 +967,7 @@ angular.module('askApp')
                     controller: 'ZoomAlertCtrl'
                 });
                 d.open();
+                logger.logUsage('zoom-alert-shown', '');
             };
 
             $scope.showOutOfBoundsAlert = function () {
@@ -978,6 +981,7 @@ angular.module('askApp')
                     controller: 'OutOfBoundsAlertCtrl'
                 });
                 d.open();
+                logger.logUsage('out-of-bounds-alert-shown', '');
             };
 
             $scope.showActivities = function() {
