@@ -521,7 +521,7 @@ angular.module('askApp')
             }
         });
 
-        if (data.last_question) {
+        if (data.last_question && ! data.complete) {
             $scope.resumeQuestionPath = $scope.getResumeQuestionPath(data.last_question);
         } else {
             $scope.resumeQuestionPath = 'NO_RESUME';
