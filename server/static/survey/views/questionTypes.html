@@ -24,6 +24,32 @@
             <button type="submit" class="btn btn-primary btn-large btn-block button-block" ng-disabled="question.required && ! answer && answer != 0">continue</button>
         </form>
     </div>
+    <div ng-switch-when="number-with-unit">
+        <form class="question" ng-show="survey.questions.length" ng-submit="answerQuestion(answer, null, answerUnit)">
+            <input
+                name="integerAnswer"
+                ng-model="answer"
+                class="span7"
+                placeholder="{{ question.label }}"
+                type="number"
+                min="{{question.integer_min}}"
+                max="{{question.integer_max}}"
+                step="any"
+                ui-event="{ keypress : 'onlyDigits($event)' }"
+                autofocus
+                ng-required="{{question.required}}"/>
+            <select
+                ng-model="answerUnit"
+                class="span3 unit-select"
+                placeholder="{{ question.label }}"
+                required>
+                <option value="">Select Unit</option>
+                <option ng-repeat="option in question.options">{{ option.text }}</option>
+            </select>
+        
+            <button type="submit" class="btn btn-primary btn-large btn-block button-block" ng-disabled="question.required && ! answer && answer != 0">continue</button>
+        </form>
+    </div>
     <div ng-switch-when="number">
         <form class="question" ng-show="survey.questions.length" ng-submit="answerQuestion(answer)">
             <input

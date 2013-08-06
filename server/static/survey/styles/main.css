@@ -45,6 +45,12 @@ padding: 7px 9px;
     height: 40px;
 }
 
+.question .unit-select {
+  height: 59px;
+  font-weight: bold;
+  font-size: 20px;
+}
+
 .pull-right + .pull-right {
     margin: 0 5px;
 }

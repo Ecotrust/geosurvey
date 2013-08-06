@@ -107,7 +107,10 @@ input {
                         <select ng-model="activeQuestion.report_type"  ng-show="activeQuestion.visualize">
                             <option ng-repeat="(key, val) in activeQuestion.report_types" value="{{key}}" ng-selected="activeQuestion.report_type == key">{{val}}</option>
                         </select>
-                        
+                        <div ng-show="activeQuestion.type == 'number-with-unit'">
+                            <label>Units</label>
+                            <textarea class="input-block-level" rows="6" ng-model="activeQuestion.rows"></textarea>
+                        </div>
                         <!-- <label>
                             <input type="checkbox" ng-model="activeQuestion.filterBy"/>
                             Filter By

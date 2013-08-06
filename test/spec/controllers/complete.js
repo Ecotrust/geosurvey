@@ -1,22 +1,22 @@
-'use strict';
+// 'use strict';
 
-describe('Controller: CompleteCtrl', function () {
+// describe('Controller: CompleteCtrl', function () {
 
-  // load the controller's module
-  beforeEach(module('askApp'));
+//   // load the controller's module
+//   beforeEach(module('askApp'));
 
-  var CompleteCtrl,
-    scope;
+//   var CompleteCtrl,
+//     scope;
 
-  // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope) {
-    scope = $rootScope.$new();
-    CompleteCtrl = $controller('CompleteCtrl', {
-      $scope: scope
-    });
-  }));
+//   // Initialize the controller and a mock scope
+//   beforeEach(inject(function ($controller, $rootScope) {
+//     scope = $rootScope.$new();
+//     CompleteCtrl = $controller('CompleteCtrl', {
+//       $scope: scope
+//     });
+//   }));
 
-  it('should attach a list of awesomeThings to the scope', function () {
-    expect(scope.awesomeThings.length).toBe(3);
-  });
-});
+//   it('should attach a list of awesomeThings to the scope', function () {
+//     expect(scope.awesomeThings.length).toBe(3);
+//   });
+// });
