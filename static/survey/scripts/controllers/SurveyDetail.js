@@ -513,10 +513,6 @@ angular.module('askApp')
         $scope.survey = data.survey;
         $scope.survey.status = data.status;
 
-        if (data.status === 'complete' || data.status === 'terminate') {
-            $location.path(['survey', $scope.survey.slug, 'complete', $routeParams.uuidSlug].join('/'));
-        }
-
         _.each(data.responses, function(response) {
             try {
                 $scope.answers[response.question.slug] = JSON.parse(response.answer_raw);
@@ -525,14 +521,11 @@ angular.module('askApp')
             }
         });
 
-        if (data.last_question && ! data.complete) {
+        if (data.last_question) {
             $scope.resumeQuestionPath = $scope.getResumeQuestionPath(data.last_question);
         } else {
             $scope.resumeQuestionPath = 'NO_RESUME';
         }
-        // if (data.complete) {
-        //     $location.path(['survey', $scope.survey.slug, 'complete', $routeParams.uuidSlug].join('/'));
-        // }
         // we may inject a question into the scope
         if (!$scope.question) {
             $scope.question = _.find($scope.survey.questions, function(question) {
