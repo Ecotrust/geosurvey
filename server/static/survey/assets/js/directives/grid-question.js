@@ -57,10 +57,6 @@ angular.module('askApp')
                         // handle single selects
                         matches = [true];
                     }
-                    
-
-                    console.log(row);
-                    console.log(matches.length);
                     scope.question.options.push({
                         text: _.string.startsWith(row, '*') ? row.substr(1) : row,
                         label: _.string.slugify(row),
@@ -89,7 +85,6 @@ angular.module('askApp')
                 });
 
             }
-            console.log(scope.question);
 
              // grid question controller
             if (scope.question.type === 'grid') {
