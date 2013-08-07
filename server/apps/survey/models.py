@@ -64,7 +64,8 @@ class Page(caching.base.CachingMixin, models.Model):
     def __str__(self):
         if self.survey is not None and self.question is not None:
             return "%s (%s)" % (self.survey.name, ", ".join([question.slug for question in self.questions.all()]))
-
+        else:
+            return "NA"
     class Meta:
         ordering = ['order']
 
