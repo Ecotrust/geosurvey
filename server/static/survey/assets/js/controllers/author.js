@@ -5,13 +5,20 @@ angular.module('askApp')
         $http.defaults.headers.post['Content-Type'] = 'application/json';
         $scope.survey = {};
         $scope.activeQuestion = null;
+        $scope.activePage = null;
+
         $scope.questionBeingEdited = null;
+        $scope.pageBeingEdited = null;
+        
         $scope.questionsToBeUpdated = [];
         $scope.updatedQuestionQueue = [];
+
+        $scope.pagesToBeUpdated = [];
+        $scope.updatedpagesQueue = [];
+
         if ($routeParams.surveySlug) {    
             $http.get('/api/v1/survey/' + $routeParams.surveySlug + '/?format=json').success(function(data) {
                 _.extend($scope.survey, data);
-                
                 if ($scope.survey.questions.length === 0) {
                     $scope.survey.questions = [];
                     $scope.newQuestion();
@@ -24,9 +31,14 @@ angular.module('askApp')
 
             });
            
-            $scope.$watch('survey.questions', function (newValue) {
-                if (newValue && ! $scope.questionsToBeUpdated.length && ! $scope.updatedQuestionQueue.length) {
-                   $scope.checkQuestionOrder($scope.survey.questions);
+            // $scope.$watch('survey.questions', function (newValue) {
+            //     if (newValue && ! $scope.questionsToBeUpdated.length && ! $scope.updatedQuestionQueue.length) {
+            //        $scope.checkQuestionOrder($scope.survey.questions);
+            //     }
+            // }, true);
+            $scope.$watch('survey.pages', function (newValue) {
+                if (newValue){// && ! $scope.questionsToBeUpdated.length && ! $scope.updatedQuestionQueue.length) {
+                   $scope.checkPageOrder(newValue);
                 }
             }, true);
             $scope.$watch('activeQuestion.grid_cols', function (newValue) {
@@ -42,6 +54,16 @@ angular.module('askApp')
         } else {
             $scope.newSurvey = true;
         }
+
+
+        $scope.checkPageOrder = function (pages) {
+            _.each(pages, function (page, index) {
+                if (page.order !== index + 1) {
+                    page.order = index + 1;
+                    $scope.savePage(page);     
+                }
+            });
+        };
 
         $scope.checkQuestionOrder = function (questions) {
             _.each(questions, function (question, index) {
@@ -85,6 +107,25 @@ angular.module('askApp')
                 }                
             })
         }
+
+        $scope.updatePages = function (pages) {
+            var pageToBeUpdated = _.first(pages),
+                rest = _.rest(pages);
+            $scope.savePage(pageToBeUpdated, true).success(function (newPage, status){
+                $scope.updatedPageQueue.push(newPage);
+                if (rest.length) {
+                    $scope.updatePages(rest);    
+                    $scope.pagesToBeUpdated = rest;
+                    $scope.updateCounter = $scope.updateCounter - 1;
+                } else {
+                    // $scope.updatepageList($scope.updatedpageQueue);
+                    $scope.updatePageQueue = [];
+                    $scope.pagesToBeUpdated = [];
+
+                }                
+            })
+        }
+
 
         $scope.delete = function (question) {
             var questionToBeDeleted = question;
@@ -142,6 +183,12 @@ angular.module('askApp')
             });
         }
 
+        $scope.startEditingPage = function (page) {
+            $scope.pageBeingEdited = page;
+            $scope.activePage = {};
+            angular.extend($scope.activePage, page);
+        };
+
         $scope.startEditingQuestion = function (question) {
             if (question.grid_cols && question.grid_cols.length) {
                 question.grid_cols.sort(function(a, b) {return a.order - b.order});    
@@ -168,6 +215,23 @@ angular.module('askApp')
                 $scope.activeQuestion.activeOption = false;
             });
         }
+
+
+
+
+        $scope.savePage = function (page, deferUpdatingList) {
+            var url = page.resource_uri,
+                method = 'PUT',
+                data = page;
+            return $http({
+                method: method,
+                url: url,
+                data: { order: page.order }
+            }).success(function (result, status) {
+               console.log(result);
+            });  
+        };
+
 
         $scope.saveQuestion = function (question, deferUpdatingList) {
             var url = question.resource_uri,

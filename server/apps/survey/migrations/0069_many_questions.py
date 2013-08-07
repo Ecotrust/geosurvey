@@ -1,23 +1,18 @@
 # -*- coding: utf-8 -*-
 import datetime
 from south.db import db
-from south.v2 import SchemaMigration
+from south.v2 import DataMigration
 from django.db import models
 
-
-class Migration(SchemaMigration):
+class Migration(DataMigration):
 
     def forwards(self, orm):
-        # Adding field 'Response.unit'
-        db.add_column(u'survey_response', 'unit',
-                      self.gf('django.db.models.fields.TextField')(null=True, blank=True),
-                      keep_default=False)
-
+        for page in orm.Page.objects.all():
+            page.questions.add(page.question)
+            page.save()
 
     def backwards(self, orm):
-        # Deleting field 'Response.unit'
-        db.delete_column(u'survey_response', 'unit')
-
+        "Write your backwards methods here."
 
     models = {
         u'auth.group': {
@@ -111,6 +106,7 @@ class Migration(SchemaMigration):
             'Meta': {'ordering': "['survey', 'question__order']", 'object_name': 'Page'},
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'question': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['survey.Question']", 'null': 'True', 'blank': 'True'}),
+            'questions': ('django.db.models.fields.related.ManyToManyField', [], {'blank': 'True', 'related_name': "'questions'", 'null': 'True', 'symmetrical': 'False', 'to': u"orm['survey.Question']"}),
             'survey': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['survey.Survey']", 'null': 'True', 'blank': 'True'})
         },
         u'survey.question': {
@@ -162,7 +158,7 @@ class Migration(SchemaMigration):
             'survey': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['survey.Survey']"}),
             'surveyor': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']", 'null': 'True', 'blank': 'True'}),
             'ts': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2013, 8, 6, 0, 0)'}),
-            'uuid': ('django.db.models.fields.CharField', [], {'default': "'5fdd430a-4c05-4256-9378-4794b7df4e59'", 'max_length': '36', 'primary_key': 'True'})
+            'uuid': ('django.db.models.fields.CharField', [], {'default': "'33b8ac68-d0cf-4362-b4de-0ecd3e1e4a69'", 'max_length': '36', 'primary_key': 'True'})
         },
         u'survey.response': {
             'Meta': {'object_name': 'Response'},
@@ -171,8 +167,7 @@ class Migration(SchemaMigration):
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'question': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['survey.Question']"}),
             'respondant': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['survey.Respondant']", 'null': 'True', 'blank': 'True'}),
-            'ts': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2013, 8, 6, 0, 0)'}),
-            'unit': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'})
+            'ts': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2013, 8, 6, 0, 0)'})
         },
         u'survey.survey': {
             'Meta': {'object_name': 'Survey'},
@@ -187,3 +182,4 @@ class Migration(SchemaMigration):
     }
 
     complete_apps = ['survey']
+    symmetrical = True

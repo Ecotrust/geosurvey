@@ -130,12 +130,16 @@ class OptionResource(SurveyModelResource):
 
 class PageResource(SurveyModelResource):
     question = fields.ForeignKey('apps.survey.api.QuestionResource', 'question', related_name='question',full=True, null=True, blank=True)
-    survey = fields.ForeignKey('apps.survey.api.SurveyResource', 'survey', related_name='survey', full=True, null=True, blank=True)
+    questions = fields.ToManyField('apps.survey.api.QuestionResource', 'questions', full=True, null=True, blank=True)
+    survey = fields.ForeignKey('apps.survey.api.SurveyResource', 'survey', related_name='survey', null=True, blank=True)
     class Meta:
-        queryset = Page.objects.all()
+        queryset = Page.objects.all().order_by('order')
         always_return_data = True
         authorization = StaffUserOnlyAuthorization()
         authentication = Authentication()
+        filtering = {
+            'survey': ALL_WITH_RELATIONS
+        }
 
     def save_m2m(self, bundle):
         pass
@@ -164,6 +168,8 @@ class QuestionResource(SurveyModelResource):
     filter_questions = fields.ToManyField('self', 'filter_questions', null=True, blank=True)
     skip_question = fields.ToOneField('self', 'skip_question', null=True, blank=True)
     blocks = fields.ToManyField('apps.survey.api.BlockResource', 'blocks', null=True, blank=True, full=True)
+    pages = fields.ToManyField('apps.survey.api.PageResource', 'page_set', null=True, blank=True)
+
 
     class Meta:
         queryset = Question.objects.all()
@@ -177,7 +183,7 @@ class QuestionResource(SurveyModelResource):
 
 class SurveyResource(SurveyModelResource):
     questions = fields.ToManyField(QuestionResource, 'questions', full=True, null=True, blank=True)
-
+    pages = fields.ToManyField(PageResource, 'page_set', full=True, null=True, blank=True)
     class Meta:
         queryset = Survey.objects.all()
         always_return_data = True

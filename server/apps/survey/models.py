@@ -55,15 +55,18 @@ class Respondant(caching.base.CachingMixin, models.Model):
 
 class Page(caching.base.CachingMixin, models.Model):
     question = models.ForeignKey('Question', null=True, blank=True)
+    questions = models.ManyToManyField('Question', null=True, blank=True, related_name="question_page")
     survey = models.ForeignKey('Survey', null=True, blank=True)
+    blocks = models.ManyToManyField('Block', null=True, blank=True)
+    order = models.IntegerField(default=1)
     objects = caching.base.CachingManager()
 
     def __str__(self):
         if self.survey is not None and self.question is not None:
-            return "%s/%s (%d)" % (self.survey.name, self.question.slug, self.question.order)
+            return "%s (%s)" % (self.survey.name, ", ".join([question.slug for question in self.questions.all()]))
 
     class Meta:
-        ordering = ['survey', 'question__order']
+        ordering = ['order']
 
 
 class Survey(caching.base.CachingMixin, models.Model):
@@ -206,6 +209,8 @@ class Question(caching.base.CachingMixin, models.Model):
 
     @property
     def survey_slug(self):
+        if self.question_page.all() and self.question_page.all()[0].survey:
+            return self.question_page.all()[0].survey.slug
         if self.survey_set.all():
             return self.survey_set.all()[0].slug
         elif self.modal_question.all():
@@ -268,10 +273,19 @@ class Response(caching.base.CachingMixin, models.Model):
     ts = models.DateTimeField(default=datetime.datetime.now())
     objects = caching.base.CachingManager()
 
+    def __str__(self):
+        if self.respondant and self.question:
+            return "%s/%s (%s)" %(self.respondant.survey.slug, self.question.slug, self.respondant.uuid)
+        else:
+            return "No Respondant"
+
+    class Meta:
+        ordering = ['-ts']
+
     def save_related(self):
         if self.answer_raw:
             self.answer = simplejson.loads(self.answer_raw)
-            if self.question.type in ['auto-single-select', 'single-select']:
+            if self.question.type in ['auto-single-select', 'single-select', 'yes-no']:
                 answer = simplejson.loads(self.answer_raw)
                 if answer.get('text'):
                     self.answer = answer['text']

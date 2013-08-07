@@ -9,17 +9,19 @@ files = [
   JASMINE_ADAPTER,
   'server/static/survey/assets/lib/js/jquery-1.8.2.min.js',
   'server/static/survey/assets/lib/js/angular.js',
+  'server/static/survey/components/angular-mocks/angular-mocks.js',
   'server/static/survey/assets/lib/js/underscore.js',
   'server/static/survey/assets/lib/js/underscore.string.js',
   // 'app/components/angular/angular.js',
   'server/static/survey/assets/lib/js/ng-grid.min.js',
-  'server/static/survey/components/angular-mocks/angular-mocks.js',
   'server/static/survey/assets/lib/js/angular-ui.js',
   // 'app/components/angular-ui/build/angular-ui.js',
   'test/fixtures/*.js',
+  'test/mock/**/*.js',
   'server/static/survey/assets/js/*.js',
   'server/static/survey/assets/js/**/*.js',
-  'test/mock/**/*.js',
+  'server/static/survey/assets/js/**/**/*.js',
+  
   'test/spec/**/*.js'
 ];
 
