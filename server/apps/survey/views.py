@@ -11,6 +11,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
 
+import datetime
 import simplejson
 
 from apps.survey.models import Survey, Question, Response, Respondant
@@ -57,18 +58,17 @@ def submit_page(request, survey_slug, uuid): #, survey_slug, question_slug, uuid
         
         if respondant.complete is True and not request.user.is_staff:
             return HttpResponse(simplejson.dumps({'success': False, 'complete': True}))
-        
+        print request.POST        
         answers = simplejson.loads(request.POST.keys()[0]).get('answers', None)
-        
+
         for answerDict in answers:
             answer = answerDict['answer']
             question_slug = answerDict['slug']
-            print survey
-            print question_slug
             
             question = get_object_or_404(Question, slug=question_slug, question_page__survey=survey)
             response, created = Response.objects.get_or_create(question=question,respondant=respondant)
             response.answer_raw = simplejson.dumps(answer)
+            response.ts = datetime.datetime.now()
             response.save_related()
 
             if created:

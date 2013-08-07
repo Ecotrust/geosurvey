@@ -1,6 +1,5 @@
 angular.module('askApp')
     .controller('SurveyDetailCtrl', function($scope, $routeParams, $http, $location, $dialog, $interpolate, $timeout) {
-        console.log($routeParams);
         $scope.loading=true;
         $scope.path = $location.path().slice(1,5);
         if (app.user) {
@@ -254,7 +253,12 @@ angular.module('askApp')
                 url: ['/respond/submitPage', $scope.survey.slug, $routeParams.uuidSlug].join('/'),
                 method: 'POST',
                 data: {
-                    'answers': answers
+                    'answers': _.map(answers, function (answer) {
+                        return {
+                            slug: answer.question.slug,
+                            answer: answer.answer
+                        }
+                    })
                 },
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
@@ -308,14 +312,11 @@ angular.module('askApp')
                 answer = "NA";
             }
         }
-        if (! answer) {
-            answer = "NA";
-        }
-
+        
         //var url = ['/respond/answer', survey.slug, $routeParams.questionSlug, $routeParams.uuidSlug].join('/');
-
         if (question.type === 'timepicker' || question.type === 'datepicker') {
-            if (! answer) {
+
+            if (answer) {
                 answer = new Date();
             }
         }
@@ -338,6 +339,8 @@ angular.module('askApp')
             answer = '';
         }
 
+
+
         // for number with unit questions, we need to submit a unit as well
         if (question.type === 'number-with-unit') {
             answer = {
@@ -346,6 +349,11 @@ angular.module('askApp')
             }    
         }
         
+        if (! answer) {
+            answer = "NA";
+        }
+
+
         return { question: question, answer: answer };
     };
     

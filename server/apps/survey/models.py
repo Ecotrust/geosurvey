@@ -274,12 +274,18 @@ class Response(caching.base.CachingMixin, models.Model):
     objects = caching.base.CachingManager()
 
     def __str__(self):
-        return self.respondant.uuid
+        if self.respondant and self.question:
+            return "%s/%s (%s)" %(self.respondant.survey.slug, self.question.slug, self.respondant.uuid)
+        else:
+            return "No Respondant"
+
+    class Meta:
+        ordering = ['-ts']
 
     def save_related(self):
         if self.answer_raw:
             self.answer = simplejson.loads(self.answer_raw)
-            if self.question.type in ['auto-single-select', 'single-select']:
+            if self.question.type in ['auto-single-select', 'single-select', 'yes-no']:
                 answer = simplejson.loads(self.answer_raw)
                 if answer.get('text'):
                     self.answer = answer['text']
