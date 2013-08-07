@@ -7,6 +7,8 @@ class RespondantAdmin(admin.ModelAdmin):
     readonly_fields=('uuid',)
     list_display = ('uuid', 'ts', 'complete',)
 
+
+
 class PageInline(admin.TabularInline):
     model = Page
 

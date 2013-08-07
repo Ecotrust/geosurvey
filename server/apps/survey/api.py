@@ -133,7 +133,7 @@ class PageResource(SurveyModelResource):
     questions = fields.ToManyField('apps.survey.api.QuestionResource', 'questions', full=True, null=True, blank=True)
     survey = fields.ForeignKey('apps.survey.api.SurveyResource', 'survey', related_name='survey', null=True, blank=True)
     class Meta:
-        queryset = Page.objects.all()
+        queryset = Page.objects.all().order_by('order')
         always_return_data = True
         authorization = StaffUserOnlyAuthorization()
         authentication = Authentication()

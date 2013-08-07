@@ -38,11 +38,16 @@ input {
                 </ul>
             </li>
         </ul> -->
-        <ul class="nav nav-pills nav-stacked" ng-model="survey.questions" ui-sortable="{axis: 'y'}">
-            <li ng-repeat="question in survey.questions" title="{{question.title}}"
-                ng-click="$parent.startEditingQuestion(question)"
-                ng-class="{'active': question == questionBeingEdited }">
-                <a style="cursor: pointer; text-decoration: none">{{question.label}} ({{question.order}}// {{ question.pages }})</a>
+        <ul class="nav nav-pills nav-stacked" ng-model="survey.pages" ui-sortable="{axis: 'y'}">
+            <li ng-repeat="page in survey.pages"
+                ng-click="$parent.startEditingPage(page)"
+                ng-class="{'active': page == pageBeingEdited }">
+                <a style="cursor: pointer; text-decoration: none">Page {{ page.order }}</a>
+                <div ng-show="page == pageBeingEdited">
+                    <ul>
+                        <li ng-repeat="question in page.questions"><a ng-click="startEditingQuestion(question)">{{ question.slug }}</a></li>
+                    </ul>
+                </div>
             </li>
         </ul>
         <p ng-hide="survey.questions.length">No Questions, yet.</p>

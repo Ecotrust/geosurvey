@@ -50,6 +50,41 @@ def dash(request, survey_slug=None, template='survey/dash.html'):
 
 
 
+def submit_page(request, survey_slug, uuid): #, survey_slug, question_slug, uuid):
+    if request.method == 'POST':
+        survey = get_object_or_404(Survey, slug=survey_slug)
+        respondant = get_object_or_404(Respondant, uuid=uuid)
+        
+        if respondant.complete is True and not request.user.is_staff:
+            return HttpResponse(simplejson.dumps({'success': False, 'complete': True}))
+        
+        answers = simplejson.loads(request.POST.keys()[0]).get('answers', None)
+        
+        for answerDict in answers:
+            answer = answerDict['answer']
+            question_slug = answerDict['slug']
+            print survey
+            print question_slug
+            
+            question = get_object_or_404(Question, slug=question_slug, question_page__survey=survey)
+            response, created = Response.objects.get_or_create(question=question,respondant=respondant)
+            response.answer_raw = simplejson.dumps(answer)
+            response.save_related()
+
+            if created:
+                respondant.responses.add(response)
+
+        if request.user:
+            respondant.surveyor = request.user
+
+        respondant.last_question = question_slug
+        respondant.save()
+
+        return HttpResponse(simplejson.dumps({'success': True }))
+    return HttpResponse(simplejson.dumps({'success': False}))
+
+
+
 def answer(request, survey_slug, question_slug, uuid): #, survey_slug, question_slug, uuid):
     if request.method == 'POST':
 
