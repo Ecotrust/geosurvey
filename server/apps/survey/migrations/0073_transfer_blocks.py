@@ -12,7 +12,7 @@ class Migration(DataMigration):
             for question in page.questions.all():
                 for block in question.blocks.all():
                     page.blocks.add(block)
-        page.save()
+            page.save()
 
 
     def backwards(self, orm):
