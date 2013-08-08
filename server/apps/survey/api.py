@@ -129,8 +129,8 @@ class OptionResource(SurveyModelResource):
 
 
 class PageResource(SurveyModelResource):
-    question = fields.ForeignKey('apps.survey.api.QuestionResource', 'question', related_name='question',full=True, null=True, blank=True)
     questions = fields.ToManyField('apps.survey.api.QuestionResource', 'questions', full=True, null=True, blank=True)
+    blocks = fields.ToManyField('apps.survey.api.BlockResource', 'blocks', full=True, null=True, blank=True)
     survey = fields.ForeignKey('apps.survey.api.SurveyResource', 'survey', related_name='survey', null=True, blank=True)
     class Meta:
         queryset = Page.objects.all().order_by('order')

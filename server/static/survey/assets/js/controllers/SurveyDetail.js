@@ -103,6 +103,33 @@ angular.module('askApp')
         return foundQuestion;
     };
 
+    $scope.getNextPageWithSkip = function(numPsToSkips) {
+        var index = _.indexOf($scope.survey.pages, $scope.page) + 1 + (numPsToSkips || 0);
+        var nextPage = $scope.survey.pages[index];
+        
+        if (nextPage) {
+            if ($scope.skipPageIf(nextPage)) {
+                _.each(nextPage.questions, function (question) {
+                    $scope.deleteAnswer(question, $routeParams.uuidSlug);
+                });
+                
+                nextPage = false;
+            }
+        } 
+
+        return nextPage ? nextPage : false;
+    };
+
+
+    $scope.getNextPage = function(numPsToSkips) {
+        var foundPage = false, index = numPsToSkips || 0;
+        while (foundPage === false && index < $scope.survey.pages.length) {
+            foundPage = $scope.getNextPageWithSkip(index);
+            index++;
+        }
+        return foundPage;
+    };
+
     $scope.getPageFromQuestion = function(questionSlug) {
         return _.find($scope.survey.pages, function (page) {
             return _.findWhere(page.questions, {slug: questionSlug});
@@ -172,6 +199,70 @@ angular.module('askApp')
         return undefined;
     };
     
+    $scope.getAnswer = function(questionSlug) {
+        var slug, gridSlug;
+        if (_.string.include(questionSlug, ":")) {
+            slug = questionSlug.split(':')[0];
+            gridSlug = questionSlug.split(':')[1].replace(/-/g, '');
+        } else {
+            slug = questionSlug;
+        }
+        
+        if ($scope.answers[slug]) {
+            if (gridSlug) {
+                return _.flatten(_.map($scope.answers[slug], function (answer) {
+                    return _.map(answer[gridSlug], function (gridAnswer){
+                        return {
+                            text: answer.text + ": " + gridAnswer,
+                            label: _.string.slugify(answer.text + ": " + gridAnswer)
+                        }
+                    });
+                }));
+            } else {
+                return $scope.answers[slug];
+            }
+        } else {
+            return false;
+        }
+    };
+
+    $scope.skipPageIf = function(nextPage) {
+        var keep = true;
+        
+        if ( nextPage.blocks && nextPage.blocks.length ) {
+            var blocks = nextPage.blocks;
+        } else if ( nextPage.skip_question && nextPage.skip_condition ) {
+            var blocks = [nextPage];
+        } else {
+            var blocks = []; //(return false)
+        }
+          
+        _.each(blocks, function(block) {
+            var questionSlug = _.findWhere($scope.survey.questions, {resource_uri: block.skip_question}).slug,
+                answer = $scope.getAnswer(questionSlug),
+                condition = block.skip_condition,
+                op = condition[0],
+                testCriteria = condition.slice(1);
+                
+            if (_.isObject(answer)) {
+                if (_.isNumber(answer.answer)) {
+                    answer = answer.answer;
+                } else if (_.isArray(answer)) {
+                    answer = _.pluck(answer, "text");
+                } else if (_.isArray(answer.answer)) {
+                    answer = _.pluck(answer.answer, "text");
+                } else {
+                    answer = [answer.answer ? answer.answer.text : answer.text];    
+                }
+            }
+            
+            keep = keep && $scope.keepQuestion(op, answer, testCriteria);
+        });
+        
+        return !keep;
+    };
+
+
     $scope.skipIf = function(nextQuestion) {
         var keep = true;
         
@@ -283,12 +374,12 @@ angular.module('askApp')
     };
 
     $scope.gotoNextPage = function () {
-        if ($scope.page.order === $scope.survey.pages.length) {
-            $location.path(['survey', $scope.survey.slug, 'complete', $routeParams.uuidSlug, $routeParams.action].join('/'));
+        var nextPage = $scope.getNextPage();
+        if (nextPage) {
+            $location.path(['survey', $scope.survey.slug, nextPage.order, $routeParams.uuidSlug].join('/'));
         } else {
-            $location.path(['survey', $scope.survey.slug, $scope.page.order + 1, $routeParams.uuidSlug].join('/'));
+            $location.path(['survey', $scope.survey.slug, 'complete', $routeParams.uuidSlug, $routeParams.action].join('/'));
         }
-        
     }
 
 
@@ -349,10 +440,13 @@ angular.module('askApp')
             }    
         }
         
+        if (question.type === 'grid') {
+            answer = question.options;
+        }
+
         if (! answer) {
             answer = "NA";
         }
-
 
         return { question: question, answer: answer };
     };
@@ -623,6 +717,13 @@ $scope.loadSurvey = function(data) {
         }
 
 
+
+        _.each($scope.page.questions, function (question) {
+            if (question.rows.length && ! question.options) {
+                question.options = [];
+            }
+        });
+
         if ($scope.question && $scope.question.title) {
             $scope.question.displayTitle = $interpolate($scope.question.title)($scope);
         }
@@ -777,111 +878,11 @@ $scope.loadSurvey = function(data) {
             }
         }
 
-       
-         // grid question controller
-        if ($scope.question && $scope.question.type === 'grid') {
-            // Prep row initial row data, each row containing values.
-            // for activityLabel, activityText, cost and numPeople.
-            if ($scope.question.options_from_previous_answer) {
-                $scope.question.options = $scope.getAnswer($scope.question.options_from_previous_answer);
-            }
-
-
-            if ($scope.question.options.length < 1) {
-                // Skip this question since we have no items to list.
-                $scope.gotoNextQuestion();
-            }
-
-            if ($scope.answer) {
-                $scope.answer = _.groupBy($scope.answer, 'text');
-            } else {
-                $scope.answer = {};
-            }
-            $scope.question.selectedOptions = {};
-           _.each($scope.question.options, function(value, key, list) {
-               list[key].activitySlug = value.label.replace(/-/g, '');
-               list[key].activityText = value.text;
-               _.each($scope.question.grid_cols, function(gridCol, i) {
-                    var gridLabel = gridCol.label.replace(/-/g, '');
-                    if ($scope.answer !== null && _.has($scope.answer, value.text)) {
-
-                        list[key][gridLabel] = $scope.answer[value.text][0][gridLabel];
-                        _.each($scope.answer[value.text][0][gridLabel], function (answer) {
-                            if (! $scope.question.selectedOptions[gridLabel]) {
-                                $scope.question.selectedOptions[gridLabel] = {};
-                                
-                            }
-                            if (! $scope.question.selectedOptions[gridLabel][value.activitySlug]) {
-                                $scope.question.selectedOptions[gridLabel][value.activitySlug] = {};
-                                
-                            }
-                            $scope.question.selectedOptions[gridLabel][value.activitySlug][answer] = true;
-                        });
-                    }   
-               });
-           });
-            // Configure grid.
-            var gridCellTemplateDefault = '<div class="ngCellText" ng-class="col.colIndex()"><span ng-cell-text>{{COL_FIELD CUSTOM_FILTERS}}</span></div>';
-            var costCellTemplate = '<input class="colt{{$index}} input-block-level" ng-model="row.entity[col.field]"  max="{{col.colDef.max}}" min="{{col.colDef.min}}" required="{{col.colDef.required}}" style="height: 100%;" type="number" step="any" }" value="{{row.getProperty(col.field)}}" onFocus="this.select();" onClick="this.select();"/>';
-            var integerCellTemplate = '<input class="colt{{$index}} input-block-level" required="{{col.colDef.required}}" max="{{col.colDef.max}}" min="{{col.colDef.min}}" ng-model="row.entity[col.field]" style="height: 100%;" type="number" step="1" }" value="{{row.getProperty(col.field)}}" onFocus="this.select();" onClick="this.select();"/>';
-            var nameTemplate = '<input class="colt{{$index}} input-block-level" ng-model="row.entity[col.field]" style="height: 100%;" type="text"   required="col.colDef.required" value="{{row.getProperty(col.field)}}"  }" />';
-            var checkboxTemplate = '<input class="colt{{$index}} input-block-level" ng-model="row.entity[col.field]" style="height: 100%;" type="checkbox"  required="col.colDef.required" value="{{row.getProperty(col.field)}}" />';
-            //var selectTemplate = '<select class="colt{{$index}} input-block-level" ng-model="row.entity[col.field]" style="height: 100%;" value="{{row.getProperty(col.field)}}"  }"><option ng-repeat="option in row.entity[\'rows\']">{{option}}</option></select>';
-            // var selectTemplate = '<div style="height:100%">{{col.field}}</div>'
-            var selectTemplate = '<div class="ngCellText" ng-class="col.colIndex()"><span ng-cell-text><select class="colt{{$index}} input-block-level" ng-model="row.entity[col.field]"  required="{{col.colDef.required}}" style="height: 100%;" value="{{row.getProperty(col.field)}}"  }"><option value="">select {{row.getProperty(col.field)}}</option><option ng-repeat="option in col.colDef.options">{{option}}</option></select></span></div>';
-            var multiSelectTemplate = '<div class="ngCellText" ng-class="col.colIndex()"><span ng-cell-text><select multiple="true" class="colt{{$index}} input-block-level" ng-model="row.entity[col.field]"  required="{{col.colDef.required}}" style="height: 100%;" value="{{row.getProperty(col.field)}}"  }"><option ng-repeat="option in col.colDef.options" ng-selected="question.selectedOptions[col.colDef.field][row.entity.activitySlug][option]" value="{{option}}">{{option}}</option></select></span></div>';
-            
-            $scope.gridOptions = {
-                data: 'question.options',
-                enableSorting: false,
-                enableCellSelection: true,
-                canSelectRows: false,
-                multiSelect: false,
-                rowHeight: 50,
-                plugins: [new ngGridFlexibleHeightPlugin()],
-                rowTemplate: '<div ng-style="{\'z-index\': col.zIndex() }" ng-repeat="col in renderedColumns" ng-class="col.colIndex()" class="ngCell {{col.cellClass}}" ng-cell></div>',
-                columnDefs: [{
-                        field: 'activityText',
-                        displayName: " "
-                    }
-                ]
-
-            };
-
-            _.each($scope.question.grid_cols, function(gridCol, i) {
-                var template, col = {
-                    field: gridCol.label.replace(/-/g, ''),
-                    displayName: gridCol.text,
-                    slug: gridCol.label.replace(/-/g, ''),
-                    required: gridCol.required || 'false',
-                    max: gridCol.max,
-                    min: gridCol.min
-                };
-                if (gridCol.type === 'integer') {
-                    template = integerCellTemplate;
-                } else if (gridCol.type === 'number' || gridCol.type === 'currency') {
-                    template = costCellTemplate;
-                } else if (gridCol.type === 'yes-no') {
-                    template = checkboxTemplate;
-                } else if (gridCol.type === 'single-select') {
-                    template = selectTemplate;
-                    col.options = gridCol.rows.split('\n');
-                } else if (gridCol.type === 'multi-select') {
-                    template = multiSelectTemplate;
-                    col.options = gridCol.rows.split('\n');
-                }
-                 else {
-                    template = nameTemplate;
-                }
-                col.cellTemplate = template
-                $scope.gridOptions.columnDefs.push(col);
-            });
-        }
-
         $scope.nextQuestionPath = $scope.getNextQuestionPath();
         $scope.loading = false;
     };
     $scope.viewPath = app.viewPath;
+
     if ($routeParams.uuidSlug && ! _.string.startsWith($routeParams.uuidSlug, 'offline') && app.offline) {
         $http.get(app.server + '/api/v1/survey/' + $routeParams.surveySlug + '/?format=json').success(function(data) {
             app.data = {
