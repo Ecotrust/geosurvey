@@ -8,8 +8,7 @@ angular.module('askApp')
         scope: {
             user: '=user'
         },
-        link: function postLink(scope, element, attrs) {
-            scope.user.registration = JSON.parse(scope.user.registration);
+        link: function postLink(scope, element, attrs) {            
         }
     };
 });
