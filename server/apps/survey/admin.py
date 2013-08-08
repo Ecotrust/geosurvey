@@ -7,6 +7,12 @@ class RespondantAdmin(admin.ModelAdmin):
     readonly_fields=('uuid',)
     list_display = ('uuid', 'ts', 'complete',)
 
+
+class ResponseAdmin(admin.ModelAdmin):
+    list_display = ('__str__', 'ts',)
+
+
+
 class PageInline(admin.TabularInline):
     model = Page
 
@@ -39,7 +45,7 @@ admin.site.register(Respondant, RespondantAdmin)
 admin.site.register(Question, QuestionAdmin)
 admin.site.register(Survey, SurveyAdmin)
 admin.site.register(Option, OptionAdmin)
-admin.site.register(Response)
+admin.site.register(Response, ResponseAdmin)
 admin.site.register(Page)
 admin.site.register(Location)
 admin.site.register(LocationAnswer)

@@ -26,12 +26,28 @@ input {
         <div class="row-fluid controls">
             <button class="btn" ng-click="newQuestion()">New Question</button>
         </div>
-        <ul class="nav nav-pills nav-stacked" ng-model="survey.questions" ui-sortable="{axis: 'y'}">
-            <li title="{{question.title}}"
-                ng-click="$parent.startEditingQuestion(question)"
-                ng-class="{'active': question == questionBeingEdited }"
-                ng-repeat="question in survey.questions">
-                <a style="cursor: pointer; text-decoration: none">{{question.label}} ({{question.order}})</a>
+        <!-- <ul class="nav nav-pills nav-stacked">
+            <li ng-repeat="page in survey.pages">Page {{ $index }}
+                <ul class="nav nav-pills nav-stacked" ng-model="page.questions" ui-sortable="{axis: 'y'}">
+                    <li ng-repeat="question in page.questions" title="{{question.title}}"
+                        ng-click="$parent.startEditingQuestion(question)"
+                        ng-class="{'active': question == questionBeingEdited }"
+                        ng-repeat="question in page.questions">
+                        <a style="cursor: pointer; text-decoration: none">{{question.label}} ({{question.order}})</a>
+                    </li>
+                </ul>
+            </li>
+        </ul> -->
+        <ul class="nav nav-pills nav-stacked" ng-model="survey.pages" ui-sortable="{axis: 'y'}">
+            <li ng-repeat="page in survey.pages"
+                ng-click="$parent.startEditingPage(page)"
+                ng-class="{'active': page == pageBeingEdited }">
+                <a style="cursor: pointer; text-decoration: none">Page {{ page.order }}</a>
+                <div ng-show="page == pageBeingEdited">
+                    <ul>
+                        <li ng-repeat="question in page.questions"><a ng-click="startEditingQuestion(question)">{{ question.slug }}</a></li>
+                    </ul>
+                </div>
             </li>
         </ul>
         <p ng-hide="survey.questions.length">No Questions, yet.</p>
@@ -96,7 +112,10 @@ input {
                         <select ng-model="activeQuestion.report_type"  ng-show="activeQuestion.visualize">
                             <option ng-repeat="(key, val) in activeQuestion.report_types" value="{{key}}" ng-selected="activeQuestion.report_type == key">{{val}}</option>
                         </select>
-                        
+                        <div ng-show="activeQuestion.type == 'number-with-unit'">
+                            <label>Units</label>
+                            <textarea class="input-block-level" rows="6" ng-model="activeQuestion.rows"></textarea>
+                        </div>
                         <!-- <label>
                             <input type="checkbox" ng-model="activeQuestion.filterBy"/>
                             Filter By

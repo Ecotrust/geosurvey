@@ -1,149 +1,3 @@
-//'use strict';
-
-var map = {
-    center: {
-        lat: 47,
-        lng: -124
-    },
-    zoom: 7,
-    marker: {
-        visibility: true,
-        lat: 47,
-        lng: -124,
-        icon: 'crosshair_white.png'
-
-    },
-    msg: null
-};
-
-function ZoomAlertCtrl($scope, dialog, $location) {
-    $scope.loaded = false;
-    $scope.$watch(function() {
-        return $location.path();
-    }, function() {
-        if ($scope.loaded && dialog.isOpen()) {
-            $scope.close();
-        }
-        $scope.loaded = true;
-    });
-
-    $scope.close = function(result) {
-        dialog.close(result);
-    };
-}
-
-function OutOfBoundsAlertCtrl($scope, dialog, $location) {
-    $scope.loaded = false;
-    $scope.$watch(function() {
-        return $location.path();
-    }, function() {
-        if ($scope.loaded && dialog.isOpen()) {
-            $scope.close();
-        }
-        $scope.loaded = true;
-    });
-
-    $scope.close = function(result) {
-        dialog.close(result);
-    };
-}
-
-function addMoreDialogCtrl($scope, dialog, remainingActivities, $location) {
-    $scope.loaded = false;
-    $scope.$watch(function() {
-        return $location.path();
-    }, function() {
-        if ($scope.loaded && dialog.isOpen()) {
-            $scope.close();
-        }
-        $scope.loaded = true;
-    });
-
-    $scope.remainingActivities = remainingActivities;
-    $scope.close = function(result) {
-        dialog.close(result);
-    };
-}
-
-function DoneDialogCtrl($scope, dialog, remainingActivities, $location) {
-    $scope.loaded = false;
-    $scope.$watch(function() {
-        return $location.path();
-    }, function() {
-        if ($scope.loaded && dialog.isOpen()) {
-            $scope.close();
-        }
-        $scope.loaded = true;
-    });
-
-    $scope.remainingActivities = remainingActivities;
-    $scope.close = function(result) {
-        dialog.close(result);
-    };
-}
-
-function ActivitiesCtrl($scope, dialog, $location) {
-    $scope.loaded = false;
-    $scope.$watch(function() {
-        return $location.path();
-    }, function() {
-        if ($scope.loaded && dialog.isOpen()) {
-            $scope.close();
-        }
-        $scope.loaded = true;
-    });
-
-    $scope.close = function(result) {
-        dialog.close(result);
-    };
-}
-
-function ActivitySelectorDialogCtrl($scope, dialog, $location, $window, question, activeMarker) {
-    $scope.question = question;
-    $scope.activeMarker = activeMarker;
-    $scope.dialog = dialog;
-
-    // This dialog has three panes.
-    $scope.panes = {
-        confirmPane: {},
-        activitySelectionPane: {},
-        deleteConfirmationPane: {},
-        thankYouPane: {}
-    };
-    $scope.currentPane = null;
-    $scope.show = function(paneName) {
-        if (_.has($scope.panes, paneName)) {
-            _.each($scope.panes, function(value, key, list) {
-                $scope.panes[key].showing = false;
-            });
-            $scope.panes[paneName].showing = true;
-            $scope.currentPane = $scope.panes[paneName];
-        }
-    };
-    if ($scope.question && $scope.question.update) {
-        // editing, no need to confirm location
-        $scope.show('activitySelectionPane');
-    } else {
-        // new location, let's confirm
-        $scope.show('confirmPane');
-    }
-
-
-    // Ensure modal doesn't stay open on change of URL.
-    $scope.loaded = false;
-    $scope.$watch(function() {
-        return $location.path();
-    }, function() {
-        if ($scope.loaded && dialog.isOpen()) {
-            $scope.close();
-        }
-        $scope.loaded = true;
-    });
-    $scope.close = function(result) {
-        dialog.close(result);
-    };
-}
-
 angular.module('askApp')
     .controller('SurveyDetailCtrl', function($scope, $routeParams, $http, $location, $dialog, $interpolate, $timeout) {
         $scope.loading=true;
@@ -151,7 +5,6 @@ angular.module('askApp')
         if (app.user) {
             $scope.user = app.user;
         } else if (app.offline) {
-            console.log('redirecting' + $location.path());
             if (!app) {
                 app = {};
             }
@@ -171,37 +24,6 @@ angular.module('askApp')
     // landing page view
     $scope.landingView = 'survey-pages/' + $routeParams.surveySlug + '/landing.html';
 
-    $scope.zoomModel = {
-        zoomToResult: undefined
-    };
-
-    $scope.getAnswer = function(questionSlug) {
-        var slug, gridSlug;
-        if (_.string.include(questionSlug, ":")) {
-            slug = questionSlug.split(':')[0];
-            gridSlug = questionSlug.split(':')[1].replace(/-/g, '');
-        } else {
-            slug = questionSlug;
-        }
-        
-        if ($scope.answers[slug]) {
-            if (gridSlug) {
-                return _.flatten(_.map($scope.answers[slug], function (answer) {
-                    return _.map(answer[gridSlug], function (gridAnswer){
-                        return {
-                            text: answer.text + ": " + gridAnswer,
-                            label: _.string.slugify(answer.text + ": " + gridAnswer)
-                        }
-                    });
-                }));
-            } else {
-                return $scope.answers[slug];
-            }
-        } else {
-            return false;
-        }
-    };
-
 
     $scope.gotoNextQuestion = function(numQsToSkips) {
         var nextUrl = $scope.getNextQuestionPath(numQsToSkips);
@@ -215,24 +37,24 @@ angular.module('askApp')
     }
 
     $scope.getNextQuestionPath = function(numQsToSkips) {
-        var nextQuestion = $scope.getNextQuestion(numQsToSkips);
-        
-        if (nextQuestion) {
-            return ['survey', $scope.survey.slug, nextQuestion, $routeParams.uuidSlug, $routeParams.action].join('/');
+        var nextPage = $scope.getPageFromQuestion($scope.getNextQuestion(numQsToSkips));
+    
+        if (nextPage) {
+            return ['survey', $scope.survey.slug, nextPage.order, $routeParams.uuidSlug].join('/');
         } else {
             return ['survey', $scope.survey.slug, 'complete', $routeParams.uuidSlug, $routeParams.action].join('/');
         }
     };
 
-    $scope.deleteAnswer = function (question, uuidSlug) {
+    $scope.deleteAnswer = function (questionSlug, uuidSlug) {
         var index;
         
         if (app.offline) {
-            if ($scope.answers[question.slug]) {
-                delete $scope.answers[question.slug];
+            if ($scope.answers[questionSlug]) {
+                delete $scope.answers[questionSlug];
             }
             _.each(app.respondents[uuidSlug].responses, function (response, i) {
-                if (response.question.slug === question.slug) {
+                if (response.question.slug === questionSlug) {
                     index = i;
                 }
             });
@@ -281,13 +103,52 @@ angular.module('askApp')
         return foundQuestion;
     };
 
+    $scope.getNextPageWithSkip = function(numPsToSkips) {
+        var index = _.indexOf($scope.survey.pages, $scope.page) + 1 + (numPsToSkips || 0);
+        var nextPage = $scope.survey.pages[index];
+        
+        if (nextPage) {
+            if ($scope.skipPageIf(nextPage)) {
+                _.each(nextPage.questions, function (question) {
+                    $scope.deleteAnswer(question, $routeParams.uuidSlug);
+                });
+                
+                nextPage = false;
+            }
+        } 
+
+        return nextPage ? nextPage : false;
+    };
+
+
+    $scope.getNextPage = function(numPsToSkips) {
+        var foundPage = false, index = numPsToSkips || 0;
+        while (foundPage === false && index < $scope.survey.pages.length) {
+            foundPage = $scope.getNextPageWithSkip(index);
+            index++;
+        }
+        return foundPage;
+    };
+
+    $scope.getPageFromQuestion = function(questionSlug) {
+        return _.find($scope.survey.pages, function (page) {
+            return _.findWhere(page.questions, {slug: questionSlug});
+        });
+    };
+
     $scope.getResumeQuestionPath = function(lastQuestion) {
+        
         var resumeQuestion = $scope.survey.questions[_.indexOf($scope.survey.questions, _.findWhere($scope.survey.questions, {
             slug: lastQuestion
         })) + 1];
         return ['survey', $scope.survey.slug, resumeQuestion.slug, $routeParams.uuidSlug].join('/');
     };
     
+    $scope.getResumePage = function (lastQuestion) {
+        var resumePage = $scope.getPageFromQuestion(lastQuestion);
+        return ['survey', $scope.survey.slug, resumePage.order, $routeParams.uuidSlug].join('/');
+    }
+
     /* () */ 
     $scope.shouldSkipNextQuestion = function (currentQuestionSlug, currentAnswer, callback) {
         switch(currentQuestionSlug) 
@@ -338,6 +199,70 @@ angular.module('askApp')
         return undefined;
     };
     
+    $scope.getAnswer = function(questionSlug) {
+        var slug, gridSlug;
+        if (_.string.include(questionSlug, ":")) {
+            slug = questionSlug.split(':')[0];
+            gridSlug = questionSlug.split(':')[1].replace(/-/g, '');
+        } else {
+            slug = questionSlug;
+        }
+        
+        if ($scope.answers[slug]) {
+            if (gridSlug) {
+                return _.flatten(_.map($scope.answers[slug], function (answer) {
+                    return _.map(answer[gridSlug], function (gridAnswer){
+                        return {
+                            text: answer.text + ": " + gridAnswer,
+                            label: _.string.slugify(answer.text + ": " + gridAnswer)
+                        }
+                    });
+                }));
+            } else {
+                return $scope.answers[slug];
+            }
+        } else {
+            return false;
+        }
+    };
+
+    $scope.skipPageIf = function(nextPage) {
+        var keep = true;
+        
+        if ( nextPage.blocks && nextPage.blocks.length ) {
+            var blocks = nextPage.blocks;
+        } else if ( nextPage.skip_question && nextPage.skip_condition ) {
+            var blocks = [nextPage];
+        } else {
+            var blocks = []; //(return false)
+        }
+          
+        _.each(blocks, function(block) {
+            var questionSlug = _.findWhere($scope.survey.questions, {resource_uri: block.skip_question}).slug,
+                answer = $scope.getAnswer(questionSlug),
+                condition = block.skip_condition,
+                op = condition[0],
+                testCriteria = condition.slice(1);
+                
+            if (_.isObject(answer)) {
+                if (_.isNumber(answer.answer)) {
+                    answer = answer.answer;
+                } else if (_.isArray(answer)) {
+                    answer = _.pluck(answer, "text");
+                } else if (_.isArray(answer.answer)) {
+                    answer = _.pluck(answer.answer, "text");
+                } else {
+                    answer = [answer.answer ? answer.answer.text : answer.text];    
+                }
+            }
+            
+            keep = keep && $scope.keepQuestion(op, answer, testCriteria);
+        });
+        
+        return !keep;
+    };
+
+
     $scope.skipIf = function(nextQuestion) {
         var keep = true;
         
@@ -368,7 +293,6 @@ angular.module('askApp')
                 }
             }
             
-            //answer = decodeURIComponent(answer);
             keep = keep && $scope.keepQuestion(op, answer, testCriteria);
         });
         
@@ -391,19 +315,144 @@ angular.module('askApp')
     };
 
     $scope.answerOffline = function(answer) {
-        $scope.deleteAnswer($scope.question, $routeParams.uuidSlug);
-        app.respondents[$routeParams.uuidSlug].responses.push(answer);
-        $scope.answers[$routeParams.questionSlug] = answer;
+        $scope.deleteAnswer(answer.question.slug, $routeParams.uuidSlug);
+        app.respondents[$routeParams.uuidSlug].responses.push({
+            answer: answer.answer,
+            question: answer.question
+        });
+        $scope.answers[answer.slug] = answer;
         $scope.saveState();
-        $scope.gotoNextQuestion();
-
     };
+
 
     $scope.saveState = function () {
         localStorage.setItem('hapifish', JSON.stringify(app));
     };
 
-    $scope.answerQuestion = function(answer, otherAnswer) {
+
+    $scope.submitPage = function (page) {
+        var answers = _.map(page.questions, function (question) {
+            return $scope.getAnswerOnPage(question);
+        });
+        if (app.offline) {
+            _.each(answers, function (answer){
+                $scope.answerOffline(answer);
+            });
+            $scope.gotoNextPage();
+        } else {
+            $http({
+                url: ['/respond/submitPage', $scope.survey.slug, $routeParams.uuidSlug].join('/'),
+                method: 'POST',
+                data: {
+                    'answers': _.map(answers, function (answer) {
+                        return {
+                            slug: answer.question.slug,
+                            answer: answer.answer
+                        }
+                    })
+                },
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            }).success(function (response, status, getHeaders, request) {
+                _.each(request.data.answers, function (answer){
+                    $scope.answers[answer.slug] = answer.answer;
+                    if (!app.data.responses) {
+                        app.data.responses = [];
+                    }
+
+                    app.data.responses.push({
+                        answer: answer.answer,
+                        question: _.findWhere($scope.page.questions, {slug: answer.slug})
+                    });
+                    $scope.gotoNextPage();
+                });
+                
+            });    
+        }
+        
+    };
+
+    $scope.gotoNextPage = function () {
+        var nextPage = $scope.getNextPage();
+        if (nextPage) {
+            $location.path(['survey', $scope.survey.slug, nextPage.order, $routeParams.uuidSlug].join('/'));
+        } else {
+            $location.path(['survey', $scope.survey.slug, 'complete', $routeParams.uuidSlug, $routeParams.action].join('/'));
+        }
+    }
+
+
+    $scope.gotoLastPage = function () {
+        $location.path(['survey', $scope.survey.slug, $scope.page.order - 1, $routeParams.uuidSlug].join('/'));
+    }
+
+
+
+    $scope.getAnswerOnPage = function(question) {
+        var answer = question.answer;
+
+        if (question.type === 'integer' || question.type === 'number') {
+            if (question.interger_max && question.integer_max < answer) {
+                answer = "NA";
+            }
+            if (question.integer_min || question.integer_min > answer) {
+                answer = "NA";
+            }
+            if (question.type === 'integer' && _.string.include(answer, '.')) {
+                answer = "NA";
+            }
+        }
+        
+        //var url = ['/respond/answer', survey.slug, $routeParams.questionSlug, $routeParams.uuidSlug].join('/');
+        if (question.type === 'timepicker' || question.type === 'datepicker') {
+
+            if (answer) {
+                answer = new Date();
+            }
+        }
+
+        if (question.type === 'multi-select') {
+            answer = $scope.answerMultiSelect(question);
+        }
+
+        if (question.type === 'single-select' || question.type === 'yes-no') {
+            answer = $scope.answerSingleSelect(question);
+        }
+
+        // sometimes we'll have an other field with option text box
+        if (answer === 'other' && question.otherAnswer) {
+            answer = question.otherAnswer;
+        }
+        if (question.required && (answer === undefined || answer === null)) {
+            return false;
+        } else if (!question.required && (answer === undefined || answer === null)) {
+            answer = '';
+        }
+
+
+
+        // for number with unit questions, we need to submit a unit as well
+        if (question.type === 'number-with-unit') {
+            answer = {
+                value: question.answer,
+                unit: question.unit
+            }    
+        }
+        
+        if (question.type === 'grid') {
+            answer = question.options;
+        }
+
+        if (! answer) {
+            answer = "NA";
+        }
+
+        return { question: question, answer: answer };
+    };
+    
+    /* not used, replaced by submitPage */
+    $scope.answerQuestion = function(answer, otherAnswer, unit) {
         if ($scope.question.type === 'integer' || $scope.question.type === 'number') {
             if ($scope.question.interger_max && $scope.question.integer_max < answer) {
                 return false;
@@ -417,117 +466,88 @@ angular.module('askApp')
         }
 
         var url = ['/respond/answer', $scope.survey.slug, $routeParams.questionSlug, $routeParams.uuidSlug].join('/');
-        if ($scope.dialog) {
-            if (!$scope.question.update) {
-                $scope.dialog.options.save($scope.question, answer);
-                $scope.dialog.$scope.close('askIfDone');
-            } else {
-                $scope.dialog.options.save($scope.question, answer);
-                $scope.dialog.$scope.close();
+
+        if ($scope.question.type === 'timepicker' || $scope.question.type === 'datepicker') {
+            if (! $scope.answer) {
+                answer = $scope.now;
             }
+        }
+
+        // sometimes we'll have an other field with option text box
+        if (answer === 'other' && otherAnswer) {
+            answer = otherAnswer;
+        }
+        if ($scope.question.required && (answer === undefined || answer === null)) {
+            return false;
+        } else if (!$scope.question.required && (answer === undefined || answer === null)) {
+            answer = '';
+        }
+
+        // for number with unit questions, we need to submit a unit as well
+        if ($scope.question.type === 'number-with-unit') {
+            answer = {
+                value: answer,
+                unit: unit
+            }    
+        }
+        
+
+        if (app.offline) {
+            $scope.answerOffline({
+                answer: answer,
+                question: $scope.question
+            });
         } else {
-            if ($scope.question.type === 'timepicker' || $scope.question.type === 'datepicker') {
-                if (! $scope.answer) {
-                    answer = $scope.now;
+            $http({
+                url: url,
+                method: 'POST',
+                data: {
+                    'answer': answer
+                },
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
                 }
-            }
-
-            // sometimes we'll have an other field with option text box
-            if (answer === 'other' && otherAnswer) {
-                answer = otherAnswer;
-            }
-            if ($scope.question.required && (answer === undefined || answer === null)) {
-                return false;
-            } else if (!$scope.question.required && (answer === undefined || answer === null)) {
-                answer = '';
-            }
-
-
-            if ($scope.locations && $scope.locations.length) {
-                answer = angular.toJson(_.map($scope.locations,
-
-                function(location) {
-                    var returnValue = {
-                        lat: location.lat,
-                        lng: location.lng,
-                        color: location.color,
-                        answers: location.answers
-                    };
-
-                    if (location.pennies) {
-                        returnValue.pennies = parseInt(location.pennies, 10);
-                    }
-                    return returnValue;
-                }));
-            }
-            if (app.offline) {
-
-                $scope.answerOffline({
-                    answer: answer,
-                    question: $scope.question
-                });
-            } else {
-                $http({
-                    url: url,
-                    method: 'POST',
-                    data: {
-                        'answer': answer
-                    },
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded'
-                    }
-                }).success(function(data) {
-                    if (data.complete) {
-                        $location.path(['survey', $scope.survey.slug, 'complete', $routeParams.uuidSlug].join('/'));
+            }).success(function(data) {
+                if (data.complete) {
+                    $location.path(['survey', $scope.survey.slug, 'complete', $routeParams.uuidSlug].join('/'));
+                } else {
+                  
+                    if ($scope.question.term_condition && $scope.terminateIf(answer, $scope.question.term_condition)) {
+                        $location.path(['survey', $scope.survey.slug, 'complete', $routeParams.uuidSlug, 'terminate', $routeParams.questionSlug].join('/'));
                     } else {
-                        if ($scope.dialog) {
-                            // we are in a dialog and need to handle it
-                            $scope.dialog.close();
-                            $scope.addLocation();
-                        } else {
-                            if ($scope.question.term_condition && $scope.terminateIf(answer, $scope.question.term_condition)) {
-                                $location.path(['survey', $scope.survey.slug, 'complete', $routeParams.uuidSlug, 'terminate', $routeParams.questionSlug].join('/'));
-                            } else {
-                                $scope.answers[$routeParams.questionSlug] = answer;
-                                if (!app.data.responses) {
-                                    app.data.responses = [];
-                                }
-
-                                app.data.responses.push({
-                                    answer: answer,
-                                    question: $scope.question
-                                });
-                                $scope.gotoNextQuestion();
-                            }
-
-                            app.data.responses.push({
-                                answer: answer,
-                                question: $scope.question
-                            });
-
-                            $scope.shouldSkipNextQuestion($scope.question.slug, answer, function (shouldSkip) {
-                                var numQsToSkips = shouldSkip ? 1 : 0;
-                                $scope.gotoNextQuestion(numQsToSkips);
-                            });
+                        $scope.answers[$routeParams.questionSlug] = answer;
+                        if (!app.data.responses) {
+                            app.data.responses = [];
                         }
+
+                        app.data.responses.push({
+                            answer: answer,
+                            question: $scope.question
+                        });
+                        $scope.gotoNextQuestion();
                     }
 
-                }).error(function(data, status, headers, config) {
-                    if (console) {
-                        console.log(data);
-                    }
-                });
-            }
+                    app.data.responses.push({
+                        answer: answer,
+                        question: $scope.question
+                    });
+
+                    $scope.shouldSkipNextQuestion($scope.question.slug, answer, function (shouldSkip) {
+                        var numQsToSkips = shouldSkip ? 1 : 0;
+                        $scope.gotoNextQuestion(numQsToSkips);
+                    });
+                }
+            
+
+            }).error(function(data, status, headers, config) {
+                if (console) {
+                    console.log(data);
+                }
+            });
         }
     };
     
-    $scope.onMultiSelectClicked = function(option, question) {
-        option.checked = !option.checked;
-        if (!option.checked && option.other) {
-            $scope.question.otherAnswer = null;
-        }
-        $scope.isAnswerValid = $scope.validateMultiSelect(question);
-    };
+    
 
     $scope.validateMultiSelect = function(question) {
         var hoistedAnswers,
@@ -580,9 +600,9 @@ angular.module('askApp')
     $scope.answerMultiSelect = function(question) {
         var answers;
         
-        if (!$scope.isAnswerValid) {
-            return;
-        }
+        // if (!$scope.isAnswerValid) {
+        //     return;
+        // }
 
         if (question.hoisted_options) {
             question.options = question.options.concat(question.hoisted_options);
@@ -613,34 +633,10 @@ angular.module('askApp')
         //_.each(answers, function(answer) {
             //answer.text = encodeURIComponent(answer.text);
         //});
-
-        $scope.answerQuestion(answers);
+        return answers;
     };
 
-    $scope.onSingleSelectClicked = function(option, question) {
-        // turn off all other options
-        _.each(_.without(question.options, option), function(option) {
-            option.checked = false;
-        });
-
-        if (question.otherOption && option === question.otherOption) {
-            question.otherOption.checked = !question.otherOption.checked;
-        } else {
-
-            option.checked = !option.checked;
-            if (question.otherOption) {
-                question.otherOption.checked = false;
-            }
-        }
-
-        // enable continue
-        if (!question.required || (option.checked && option !== question.otherOption)) {
-            $scope.isAnswerValid = true;
-        } else {
-            $scope.isAnswerValid = false;
-        }
-
-    };
+    
 
     $scope.$watch('question.otherAnswer', function(newValue) {
 
@@ -656,32 +652,26 @@ angular.module('askApp')
     });
 
 
-    $scope.answerSingleSelect = function(options, otherAnswer) {
-        var answer = _.find(options, function(option) {
+    $scope.answerSingleSelect = function(question) {
+        var answer = _.find(question.options, function(option) {
             return option.checked;
         });
         //var copy = {};
         //_.extend(copy, answer);
-
-        if (answer) {
-            //copy.text = encodeURIComponent(answer.text);
-            //$scope.answerQuestion(copy);
-            $scope.answerQuestion(answer);
-        } else if (otherAnswer) {
+         if (! answer && question.otherAnswer) {
             answer = {
                 checked: true,
-                label: otherAnswer,
-                text: otherAnswer,
+                label: question.otherAnswer,
+                text: question.otherAnswer,
                 other: true
             };
-            $scope.answerQuestion(answer);
-        } else if (!$scope.question.required) {
+        } else if (!question.required && question.type !== 'yes-no') {
             // No answer given. Submit empty.
-            $scope.answerQuestion({
+           answer = {
                 text: 'NO_ANSWER'
-            });
+            };
         }
-
+        return answer;
     };
 
     $scope.answerAutoSingleSelect = function(answer, otherAnswer) {
@@ -695,9 +685,6 @@ angular.module('askApp')
         }
     };
 
-    $scope.answerMapQuestion = function(locations) {
-        $scope.answerQuestion(locations);
-    };
 
 $scope.loadSurvey = function(data) {
         $scope.survey = data.survey;
@@ -715,7 +702,7 @@ $scope.loadSurvey = function(data) {
         });
 
         if (data.last_question && !data.complete) {
-            $scope.resumeQuestionPath = $scope.getResumeQuestionPath(data.last_question);
+            $scope.resumeQuestionPath = $scope.getResumePage(data.last_question);
         } else {
             $scope.resumeQuestionPath = 'NO_RESUME';
         }
@@ -723,12 +710,19 @@ $scope.loadSurvey = function(data) {
         //     $location.path(['survey', $scope.survey.slug, 'complete', $routeParams.uuidSlug].join('/'));
         // }
         // we may inject a question into the scope
-        if (!$scope.question) {
-            $scope.question = _.find($scope.survey.questions, function(question) {
-                return question.slug === $routeParams.questionSlug;
-            });
-
+        if ($routeParams.pageID) {
+            $scope.page = _.findWhere($scope.survey.pages, { order: parseInt($routeParams.pageID, 10) });
+        } else if (!$scope.question) {
+            $scope.question = _.findWhere($scope.survey.questions, { slug: $routeParams.questionSlug });
         }
+
+
+
+        _.each($scope.page.questions, function (question) {
+            if (question.rows.length && ! question.options) {
+                question.options = [];
+            }
+        });
 
         if ($scope.question && $scope.question.title) {
             $scope.question.displayTitle = $interpolate($scope.question.title)($scope);
@@ -743,43 +737,7 @@ $scope.loadSurvey = function(data) {
         $scope.isAnswerValid = $scope.question && !$scope.question.required;
 
 
-        if ($scope.question && $scope.question.type === 'integer') {
-            $scope.answer = parseInt($scope.getAnswer($routeParams.questionSlug), 10);
-        } else if ($scope.question && $scope.question.options.length) {
-            $scope.answer = $scope.getAnswer($routeParams.questionSlug);
-            // check to make sure answer is in options
-            if ($scope.answer && !_.isArray($scope.answer)) {
-                $scope.answer = [$scope.answer];
-            }
-            if ($scope.answer) {
 
-                _.each($scope.answer, function(answer) {
-                    if (!answer.other) {
-
-                        _.each($scope.question.options, function(option) {
-                            if ( (answer.text || answer.name) === (option.text || option.name) ) {
-                                option.checked = true;
-                                $scope.isAnswerValid = true;
-                            } else {
-                                option.checked = false;
-                            }
-                        });
-                    } else {
-                        // otherwise assume it is other
-                        $scope.question.otherOption = {
-                            checked: true,
-                            'other': true
-                        };
-                        $scope.question.otherAnswer = answer;
-                    }
-                });
-            }
-        } else {
-            $scope.answer = $scope.getAnswer($routeParams.questionSlug);
-            if (!$scope.answer) {
-                $scope.answer = null;
-            }
-        }
 
         // Fill options list.
         if ($scope.question && $scope.question.options_json && $scope.question.options_json.length > 0 && !$scope.question.options_from_previous_answer) {
@@ -899,45 +857,6 @@ $scope.loadSurvey = function(data) {
             });
         }
 
-        if ($scope.question && $scope.question.type === 'yes-no') {
-            if ($scope.answer && _.isArray($scope.answer)) {
-                $scope.question.options = [
-                    {'text': 'Yes', 'label': "Yes", checked: $scope.answer[0].text === 'Yes'},
-                    {'text': 'No', 'label': "No", checked: $scope.answer[0].text === 'No'}
-                ]    
-            } else if ($scope.answer && ! _.isArray($scope.answer)) {
-                $scope.question.options = [
-                    {'text': 'Yes', 'label': "Yes", checked: $scope.answer.text === 'Yes'},
-                    {'text': 'No', 'label': "No", checked: $scope.answer.text === 'No'}
-                ]    
-            } else {
-                $scope.question.options = [
-                    {'text': 'Yes', 'label': "Yes", checked: false },
-                    {'text': 'No', 'label': "No", checked: false }
-                ]
-            }
-            
-        }
-
-        if ($scope.question) {
-            if ($scope.answer && $scope.question.allow_other && $scope.answer.other || _.isArray($scope.answer) && _.findWhere($scope.answer, {
-                other: true
-            })) {
-                $scope.question.otherOption = {
-                    'checked': true,
-                    'other': true
-                };
-                $scope.question.otherAnswer = $scope.answer.text || _.findWhere($scope.answer, {
-                    other: true
-                }).text;
-            } else {
-                $scope.question.otherOption = {
-                    'checked': false,
-                    'other': true
-                };
-                $scope.question.otherAnswer = null;
-            }
-        }
 
 
         if ($scope.question && $scope.question.options_from_previous_answer) {
@@ -959,528 +878,11 @@ $scope.loadSurvey = function(data) {
             }
         }
 
-        if ($scope.question) {
-            $scope.map = map;
-            $scope.map.center.lat = $scope.question.lat || map.center.lat;
-            $scope.map.center.lng = $scope.question.lng || map.center.lng;
-            $scope.map.zoom = $scope.question.zoom || map.zoom;
-        }
-
-        // penny question controller
-        if ($scope.question && ($scope.question.type === 'pennies' || $scope.question.slug === 'pennies-intro')) {
-            if ($scope.question.options_from_previous_answer) {
-                $scope.primaryActivity = $scope.getAnswer($scope.question.options_from_previous_answer.split(',')[1]);
-                $scope.locations = _.filter(JSON.parse($scope.getAnswer($scope.question.options_from_previous_answer.split(',')[0])), function(location) {
-                    return _.some(location.answers, function(item) {
-                        return item.label === $scope.primaryActivity.label;
-                    });
-                });
-            }
-
-            $scope.question.total = 100;
-
-            _.each($scope.locations, function(location) {
-                location.pennies = null;
-                $scope.$watch(function() {
-                    return location.pennies;
-                },
-
-                function(newValue) {
-                    var timer;
-                    if (newValue) {
-                        if (timer) {
-                            timer.cancel();
-                        } else {
-                            timer = $timeout(function() {
-                                var total = _.pluck($scope.locations, 'pennies');
-                                var sum = _.reduce(total, function(memo, num) {
-                                    return parseInt(memo, 10) + parseInt(num ? num : 0, 10);
-                                }, 0);
-                                $scope.question.total = 100 - sum;
-                            }, 300);
-                        }
-
-                    }
-
-                });
-            });
-        }
-
-        // map 
-        if ($scope.question && $scope.question.type === 'map-multipoint') {
-            $scope.activeMarker = false;
-
-            if (!$scope.answer) {
-                $scope.locations = [];
-            } else {
-                $scope.locations = JSON.parse($scope.answer);
-            }
-
-            $scope.updateCrosshair = function() {
-                if ($scope.activeMarker !== false) {
-                    $scope.map.marker.icon = "crosshair_blank.png";
-
-                } else if ($scope.isCrosshairAlerting && !$scope.isZoomedIn()) {
-                    $scope.map.marker.icon = "crosshair_red.png";
-
-                } else if ($scope.isCrosshairAlerting && $scope.isZoomedIn()) {
-                    $scope.map.marker.icon = "crosshair_green.png";
-
-                } else {
-                    $scope.map.marker.icon = "crosshair_white.png";
-                }
-            };
-
-
-            $http.get("data/marco_dd.json").success(function(data) {
-                $scope.boundaryLayer = L.geoJson(data);
-            });
-
-            $scope.isOutOfBounds = function() {
-                var point, results;
-                if ($scope.boundaryLayer) {
-                    point = new L.LatLng($scope.map.marker.lat, $scope.map.marker.lng);
-                    results = leafletPip.pointInLayer(point, $scope.boundaryLayer, true);
-                    // results is an array of L.Polygon objects containing that point
-                    return results.length < 1;
-                }
-                return true; // not using a boundary layer
-            };
-
-            $scope.addMarker = function() {
-                if ($scope.activeMarker) {
-                    scope.activeMarker.marker.closePopup();
-                }
-                if (!$scope.isZoomedIn()) {
-                    $scope.isCrosshairAlerting = true;
-                    $scope.showZoomAlert();
-                } else if ($scope.isOutOfBounds()) {
-                    $scope.showOutOfBoundsAlert();
-                } else {
-                    // Add location
-                    $scope.activeMarker = {
-                        lat: $scope.map.marker.lat,
-                        lng: $scope.map.marker.lng,
-                        color: $scope.getNextColor()
-                    };
-                    $scope.locations.push($scope.activeMarker);
-                    $timeout(function() {
-                        $scope.showAddLocationDialog();
-                    }, 400);
-                    $scope.isCrosshairAlerting = false;
-                }
-                $scope.updateCrosshair();
-            };
-
-            $scope.addLocation = function(location) {
-                // var locations = _.without($scope.locations, $scope.activeMarker);
-                location.color = $scope.activeMarker.color;
-                $scope.locations[_.indexOf($scope.locations, $scope.activeMarker)] = location;
-                // $scope.locations = locations;
-                // $scope.locations.push(location);
-                $scope.activeMarker = false;
-                $scope.updateCrosshair();
-            };
-
-            $scope.cancelConfirmation = function() {
-                if ($scope.dialog) {
-                    $scope.dialog.options.cancel();
-                } else {
-                    $scope.removeLocation($scope.activeMarker);
-                    $scope.activeMarker = false;
-                }
-            }
-
-            $scope.editMarker = function(location) {
-                if (!location.question) {
-                    location.question = {};
-                    angular.extend(location.question, $scope.question.modalQuestion);
-                }
-                location.question.update = true;
-                $scope.activeMarker = location;
-                $scope.showAddLocationDialog(location.question);
-            };
-
-            $scope.removeLocation = function(location) {
-                // This is used for both canceling a new location and deleting an 
-                // existing location when in edit mode.
-                var locations = _.without($scope.locations, location);
-                $scope.locations = locations;
-            };
-
-            $scope.showLocation = function(location) {
-                $scope.zoomModel.zoomToResult = location;
-            };
-
-
-
-            $scope.showAddLocationDialog = function(question) {
-                if (_.isUndefined(question)) {
-                    question = $scope.question.modalQuestion;
-                }
-
-                $scope.dialog = $dialog.dialog({
-                    backdrop: true,
-                    keyboard: false,
-                    backdropClick: false,
-                    templateUrl: 'views/locationActivitiesModal.html',
-                    controller: 'ActivitySelectorDialogCtrl',
-                    resolve: {
-                        question: function() {
-                            return question;
-                        },
-                        activeMarker: function() {
-                            return $scope.activeMarker;
-                        }
-                    },
-                    save: function(question, answer) {
-                        if (question.update) {
-                            $scope.locations[_.indexOf($scope.locations, $scope.activeMarker)].answers = answer;
-                        } else {
-                            $scope.addLocation({
-                                lat: $scope.activeMarker.lat,
-                                lng: $scope.activeMarker.lng,
-                                color: $scope.activeMarker.color,
-                                question: question,
-                                answers: answer
-                            });
-                        }
-                        $scope.activeMarker = false;
-                        question.update = false;
-                    }
-                });
-
-                $scope.dialog.open().then(function(result) {
-                    $scope.dialog = null;
-                    if (result == 'cancel') {
-                        $scope.removeLocation($scope.activeMarker);
-                        $scope.activeMarker = false;
-                        if (question) {
-                            question.update = false;
-                        }
-                        $scope.updateCrosshair();
-
-                    } else if (result === 'askIfDone') {
-                        $scope.showAddMoreDialog();
-                    }
-                });
-            };
-
-            $scope.showZoomAlert = function() {
-                var d = $dialog.dialog({
-                    backdrop: true,
-                    keyboard: false,
-                    backdropClick: false,
-                    backdropFade: true,
-                    transitionClass: 'fade',
-                    templateUrl: 'views/zoomAlertModal.html',
-                    controller: 'ZoomAlertCtrl'
-                });
-                d.open();
-            };
-
-            $scope.showOutOfBoundsAlert = function() {
-                var d = $dialog.dialog({
-                    backdrop: true,
-                    keyboard: false,
-                    backdropClick: false,
-                    backdropFade: true,
-                    transitionClass: 'fade',
-                    templateUrl: 'views/outOfBoundsAlertModal.html',
-                    controller: 'OutOfBoundsAlertCtrl'
-                });
-                d.open();
-            };
-
-            $scope.showActivities = function() {
-                $dialog.dialog({
-                    backdrop: true,
-                    keyboard: true,
-                    backdropClick: false,
-                    templateUrl: 'views/activitiesModal.html',
-                    scope: {
-                        hoisted_options: $scope.getAnswer($scope.question.modalQuestion.hoist_answers.slug),
-                        locations: $scope.locations,
-                        editLocation: $scope.editMarker,
-                        removeLocation: $scope.removeLocation,
-                        showLocation: $scope.showLocation,
-                        remainingActivities: $scope.getRemainingActivities()
-                    },
-                    controller: 'ActivitiesCtrl'
-                }).open();
-            };
-
-            $scope.showAddMoreDialog = function() {
-                var d = $dialog.dialog({
-                    backdrop: true,
-                    keyboard: false,
-                    backdropClick: false,
-                    templateUrl: 'views/addMoreModal.html',
-                    controller: 'addMoreDialogCtrl',
-                    resolve: {
-                        remainingActivities: function() {
-                            return $scope.getRemainingActivities();
-                        }
-                    }
-                });
-
-                d.open().then(function(result) {
-                    if (result === 'doneMapping') {
-                        $scope.answerMapQuestion($scope.locations);
-
-                    } else if (result === 'addMoreLocations') {
-                        $scope.showMyActivitesPopover();
-                        $timeout(function() {
-                            // trigger the search modal to be open
-                            jQuery("div[zoomto] input").click();
-                        }, 300);
-                    }
-                });
-            };
-
-            $scope.showDoneDialog = function() {
-                var d = $dialog.dialog({
-                    backdrop: true,
-                    keyboard: false,
-                    backdropClick: false,
-                    templateUrl: 'views/doneModal.html',
-                    controller: 'DoneDialogCtrl',
-                    resolve: {
-                        remainingActivities: function() {
-                            return $scope.getRemainingActivities();
-                        }
-                    }
-                });
-
-                d.open().then(function(result) {
-                    if (result == 'yes') {
-                        $scope.answerMapQuestion($scope.locations);
-                    }
-                });
-            };
-
-            $scope.myActivitiesPopoverShown = false;
-            $scope.showMyActivitesPopover = function() {
-                // Only showing this popover once
-                if (!$scope.myActivitiesPopoverShown) {
-                    $timeout(function() {
-                        jQuery('.btn-my-activities').popover({
-                            trigger: 'manual',
-                            placement: 'bottom'
-                        });
-                        jQuery('.btn-my-activities').popover('show');
-                        $scope.myActivitiesPopoverShown = true;
-                    }, 500);
-                }
-            };
-
-            /**
-             * @return {array} Returns activities that the user had selected but has not
-             * yet mapped.
-             */
-            $scope.getRemainingActivities = function() {
-                var selectedActivities = $scope.getAnswer($scope.question.modalQuestion.hoist_answers.slug);
-                // Filter out activities that have already been mapped.
-                var remainingActivities = _.difference(
-                    _.pluck(selectedActivities, 'text'),
-                    _.flatten(_.map($scope.locations, function(location) {
-                    return _.pluck(location.answers, 'text');
-                })));
-
-                return angular.copy(remainingActivities);
-            };
-
-            /**
-             * @return {string} Returns the color to be applied to the next marker.
-             */
-            $scope.getNextColor = function() {
-                var availableColors = [],
-                    colorPalette = [
-                            'red',
-                            'orange',
-                            'green',
-                            'darkgreen',
-                            'darkred',
-                            'blue',
-                            'darkblue',
-                            'purple',
-                            'darkpurple',
-                            'cadetblue'
-                    ];
-
-                availableColors = angular.copy(colorPalette);
-                _.each($scope.locations, function(marker) {
-                    if (_.has(marker, 'color')) {
-                        availableColors = _.without(availableColors, marker.color);
-                    }
-                    if (availableColors.length == 0) {
-                        // Recyle the colors if we run out.
-                        availableColors = angular.copy(colorPalette);
-                    }
-                });
-                return _.first(availableColors);
-            };
-
-            $scope.isCrosshairAlerting = false;
-
-            $scope.isZoomedIn = function() {
-                return $scope.map.zoom >= $scope.question.min_zoom;
-            };
-
-        }
-        if ($scope.question && $scope.question.rows) {
-            $scope.question.options = [];
-            _.each($scope.question.rows.split('\n'), function (row, index) {
-                var matches = _.filter($scope.answer, function (answer) {
-                    return answer.text === row;
-                });
-                
-                $scope.question.options.push({
-                    text: _.string.startsWith(row, '*') ? row.substr(1) : row,
-                    label: _.string.slugify(row),
-                    checked: matches.length ? true: false,
-                    isGroupName: _.string.startsWith(row, '*')
-                });
-            });
-            
-            $scope.question.groupedOptions = [];
-            var groupName = "";
-            _.each($scope.question.rows.split('\n'), function (row, index) {
-                var matches = _.filter($scope.answer, function (answer) {
-                    return answer.text === row;
-                });
-                var isGroupName = _.string.startsWith(row, '*');
-                if ( isGroupName ) {
-                    groupName = row.substr(1);
-                    $scope.question.groupedOptions.push( { optionLabel: groupName, options: [] } );
-                } else if ( $scope.question.groupedOptions.length > 0 ) {
-                    _.findWhere( $scope.question.groupedOptions, { optionLabel: groupName } ).options.push({
-                        text: row,
-                        label: _.string.slugify(row),
-                        checked: matches.length ? true : false
-                    })
-                } 
-            });
-        }
-         // grid question controller
-        if ($scope.question && $scope.question.type === 'grid') {
-            // Prep row initial row data, each row containing values.
-            // for activityLabel, activityText, cost and numPeople.
-            if ($scope.question.options_from_previous_answer) {
-                $scope.question.options = $scope.getAnswer($scope.question.options_from_previous_answer);
-            }
-
-
-            if ($scope.question.options.length < 1) {
-                // Skip this question since we have no items to list.
-                $scope.gotoNextQuestion();
-            }
-
-            if ($scope.answer) {
-                $scope.answer = _.groupBy($scope.answer, 'text');
-            } else {
-                $scope.answer = {};
-            }
-            $scope.question.selectedOptions = {};
-           _.each($scope.question.options, function(value, key, list) {
-               list[key].activitySlug = value.label.replace(/-/g, '');
-               list[key].activityText = value.text;
-               _.each($scope.question.grid_cols, function(gridCol, i) {
-                    var gridLabel = gridCol.label.replace(/-/g, '');
-                    if ($scope.answer !== null && _.has($scope.answer, value.text)) {
-
-                        list[key][gridLabel] = $scope.answer[value.text][0][gridLabel];
-                        _.each($scope.answer[value.text][0][gridLabel], function (answer) {
-                            if (! $scope.question.selectedOptions[gridLabel]) {
-                                $scope.question.selectedOptions[gridLabel] = {};
-                                
-                            }
-                            if (! $scope.question.selectedOptions[gridLabel][value.activitySlug]) {
-                                $scope.question.selectedOptions[gridLabel][value.activitySlug] = {};
-                                
-                            }
-                            $scope.question.selectedOptions[gridLabel][value.activitySlug][answer] = true;
-                        });
-                    }   
-               });
-           });
-            // Configure grid.
-            var gridCellTemplateDefault = '<div class="ngCellText" ng-class="col.colIndex()"><span ng-cell-text>{{COL_FIELD CUSTOM_FILTERS}}</span></div>';
-            var costCellTemplate = '<input class="colt{{$index}} input-block-level" ng-model="row.entity[col.field]"  max="{{col.colDef.max}}" min="{{col.colDef.min}}" required="{{col.colDef.required}}" style="height: 100%;" type="number" step="any" }" value="{{row.getProperty(col.field)}}" onFocus="this.select();" onClick="this.select();"/>';
-            var integerCellTemplate = '<input class="colt{{$index}} input-block-level" required="{{col.colDef.required}}" max="{{col.colDef.max}}" min="{{col.colDef.min}}" ng-model="row.entity[col.field]" style="height: 100%;" type="number" step="1" }" value="{{row.getProperty(col.field)}}" onFocus="this.select();" onClick="this.select();"/>';
-            var nameTemplate = '<input class="colt{{$index}} input-block-level" ng-model="row.entity[col.field]" style="height: 100%;" type="text"   required="col.colDef.required" value="{{row.getProperty(col.field)}}"  }" />';
-            var checkboxTemplate = '<input class="colt{{$index}} input-block-level" ng-model="row.entity[col.field]" style="height: 100%;" type="checkbox"  required="col.colDef.required" value="{{row.getProperty(col.field)}}" />';
-            //var selectTemplate = '<select class="colt{{$index}} input-block-level" ng-model="row.entity[col.field]" style="height: 100%;" value="{{row.getProperty(col.field)}}"  }"><option ng-repeat="option in row.entity[\'rows\']">{{option}}</option></select>';
-            // var selectTemplate = '<div style="height:100%">{{col.field}}</div>'
-            var selectTemplate = '<div class="ngCellText" ng-class="col.colIndex()"><span ng-cell-text><select class="colt{{$index}} input-block-level" ng-model="row.entity[col.field]"  required="{{col.colDef.required}}" style="height: 100%;" value="{{row.getProperty(col.field)}}"  }"><option value="">select {{row.getProperty(col.field)}}</option><option ng-repeat="option in col.colDef.options">{{option}}</option></select></span></div>';
-            var multiSelectTemplate = '<div class="ngCellText" ng-class="col.colIndex()"><span ng-cell-text><select multiple="true" class="colt{{$index}} input-block-level" ng-model="row.entity[col.field]"  required="{{col.colDef.required}}" style="height: 100%;" value="{{row.getProperty(col.field)}}"  }"><option ng-repeat="option in col.colDef.options" ng-selected="question.selectedOptions[col.colDef.field][row.entity.activitySlug][option]" value="{{option}}">{{option}}</option></select></span></div>';
-            
-            $scope.gridOptions = {
-                data: 'question.options',
-                enableSorting: false,
-                enableCellSelection: true,
-                canSelectRows: false,
-                multiSelect: false,
-                rowHeight: 50,
-                plugins: [new ngGridFlexibleHeightPlugin()],
-                rowTemplate: '<div ng-style="{\'z-index\': col.zIndex() }" ng-repeat="col in renderedColumns" ng-class="col.colIndex()" class="ngCell {{col.cellClass}}" ng-cell></div>',
-                columnDefs: [{
-                        field: 'activityText',
-                        displayName: " "
-                    }
-                ]
-
-            };
-
-            _.each($scope.question.grid_cols, function(gridCol, i) {
-                var template, col = {
-                    field: gridCol.label.replace(/-/g, ''),
-                    displayName: gridCol.text,
-                    slug: gridCol.label.replace(/-/g, ''),
-                    required: gridCol.required || 'false',
-                    max: gridCol.max,
-                    min: gridCol.min
-                };
-                console.log(col);
-                if (gridCol.type === 'integer') {
-                    template = integerCellTemplate;
-                } else if (gridCol.type === 'number' || gridCol.type === 'currency') {
-                    template = costCellTemplate;
-                } else if (gridCol.type === 'yes-no') {
-                    template = checkboxTemplate;
-                } else if (gridCol.type === 'single-select') {
-                    template = selectTemplate;
-                    col.options = gridCol.rows.split('\n');
-                } else if (gridCol.type === 'multi-select') {
-                    template = multiSelectTemplate;
-                    col.options = gridCol.rows.split('\n');
-                }
-                 else {
-                    template = nameTemplate;
-                }
-                col.cellTemplate = template
-                $scope.gridOptions.columnDefs.push(col);
-            });
-        }
-
-        if ($scope.question && $scope.question.type === 'datepicker') {
-            $scope.now =  $scope.answer || (new Date()).toString("yyyy-MM-dd");
-
-        }
-        if ($scope.question && $scope.question.type === 'timepicker') {
-
-            $scope.now = $scope.answer || (new Date()).toString("HH:mm");
-        }
-        // if ($scope.question.foreach_question) {
-        //     $scope.question.foreach = true;
-        //     $scope.question.foreachAnswers = $scope.getAnswer($scope.question.foreach_question.slug);
-        // } else {
-        //     $scope.question.foreach = false;
-        // }
         $scope.nextQuestionPath = $scope.getNextQuestionPath();
         $scope.loading = false;
     };
     $scope.viewPath = app.viewPath;
+
     if ($routeParams.uuidSlug && ! _.string.startsWith($routeParams.uuidSlug, 'offline') && app.offline) {
         $http.get(app.server + '/api/v1/survey/' + $routeParams.surveySlug + '/?format=json').success(function(data) {
             app.data = {
@@ -1498,7 +900,9 @@ $scope.loadSurvey = function(data) {
         });
     } else if ($routeParams && _.string.startsWith($routeParams.uuidSlug, 'offline') && app.offline) {
         var ts = new Date();
+        // this is an offline survey
         if ($routeParams.uuidSlug === 'offline') {
+            // this is a new offline survey
             $scope.answers = [];
             if (!app.respondents) {
                 app.respondents = {};
@@ -1511,13 +915,17 @@ $scope.loadSurvey = function(data) {
                 responses: []
             }
             $scope.saveState();
+            $location.path(['survey', $routeParams.surveySlug, 1, $routeParams.uuidSlug].join('/'));
+        } else {
+            // this is an old offline survey
+            $scope.loadSurvey({
+                    survey: _.findWhere(app.surveys, {
+                        slug: $routeParams.surveySlug
+                    }),
+                    responses: app.respondents[$routeParams.uuidSlug].responses
+                });
         }
-        $scope.loadSurvey({
-            survey: _.findWhere(app.surveys, {
-                slug: $routeParams.surveySlug
-            }),
-            responses: app.respondents[$routeParams.uuidSlug].responses
-        });
+        
     } else {
         $http.get(app.server + '/api/v1/respondant/' + $routeParams.uuidSlug + '/?format=json').success(function(data) {
             app.data = data;

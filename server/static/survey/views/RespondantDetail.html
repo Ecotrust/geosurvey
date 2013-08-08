@@ -19,6 +19,7 @@
                         <span ng-switch on="response.question.type">
                             <span ng-switch-default>{{response.answer}}</span>
                             <span ng-switch-when="yes-no">{{response.answer_parsed.text}}</span>
+                            <span ng-switch-when="number-with-unit">{{response.answer}} {{response.unit}}</span>
                             <ul class="unstyled" ng-switch-when="multi-select">
                                 <li ng-repeat="answer in response.answer_parsed">{{answer.text}}</li>
                             </ul>
