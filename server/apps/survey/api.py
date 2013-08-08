@@ -183,6 +183,7 @@ class QuestionResource(SurveyModelResource):
 
 class SurveyResource(SurveyModelResource):
     questions = fields.ToManyField(QuestionResource, 'questions', full=True, null=True, blank=True)
+    question = fields.ToOneField(QuestionResource, 'question', full=True, null=True, blank=True)
     pages = fields.ToManyField(PageResource, 'page_set', full=True, null=True, blank=True)
     class Meta:
         queryset = Survey.objects.all()
