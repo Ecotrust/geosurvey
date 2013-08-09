@@ -92,6 +92,11 @@
             <!-- <button type="submit" class="btn btn-primary btn-large btn-block button-block" ng-disabled="question.required && ! answer">continue</button> -->
         </form>
     </div>
+    <div ng-switch-when="monthpicker">
+        <form class="question" ng-submit="answerQuestion(answer)">
+            <input class="input-block-level" type="month" placeholder="{{ question.label }}" ng-model="question.answer"/>
+        </form>
+    </div>
     <div ng-switch-when="datepicker">
         <form class="question" ng-submit="answerQuestion(answer)">
             <input class="input-block-level" type="date" placeholder="{{ question.label }}" ng-model="question.answer"/>
