@@ -3,9 +3,24 @@
 <div class="content">
 	<div class="content-padded">
 		<h2>Settings</h2>
-		<div ng-hide="confirmClear">
-		    <a class="btn btn-block btn-large btn-danger" ng-click="confirmClear = true">Clear Cache</a>
+
+		<div ng-show="changesSaved" class="alert alert-success">Changes saved</div>
+
+		<div ng-hide="confirmClear || editProfile">
+		    <a class="btn btn-block btn-large" ng-click="editProfile = true; changesSaved = false;">Edit Profile</a>
 		</div>
+		<div ng-hide="confirmClear || editProfile">
+		    <a class="btn btn-block btn-large btn-danger" ng-click="confirmClear = true; changesSaved = false;">Clear Cache</a>
+		</div>
+
+		<div ng-show="editProfile">
+			<form ng-submit="updateUser(user)">
+				<div profilefields user="user"></div>
+			    <button class="btn btn-block btn-large btn-primary">Save</button>
+			</form>
+		    <a class="btn btn-block btn-large" ng-tap="editProfile = false">Cancel</a>
+		</div>
+
 		<div ng-show="confirmClear">
 		 	<div class="alert alert-info">This will remove all data including surveys</div>
 		    <a class="btn btn-block btn-large btn-danger" ng-tap="clearCache()">ok</a>

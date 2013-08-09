@@ -71,54 +71,7 @@
               </div>
             </div>
             
-            <div class="input-group">
-              <div class="input-row">
-                <input type="text" placeholder="enter your first name..." data-ng-model="newUser.first_name"
-                required>
-              </div>
-              <div class="input-row">
-                <input type="text" placeholder="enter your last name..." data-ng-model="newUser.last_name"
-                required>
-              </div>
-            </div>
-            <div class="input-group">              
-              <div class="input-row">
-                <input type="text" placeholder="enter your vessel #..." data-ng-model="newUser.vessel_num"
-                required>
-              </div>
-              <div class="input-row">
-                <input type="text" placeholder="enter your license #..." data-ng-model="newUser.license_num"
-                required>
-              </div>
-              <div class="input-row">
-                <input type="text" placeholder="enter your HMS species permit #..." data-ng-model="newUser.species_permit_num"
-                required>
-              </div>
-            </div>
-            <label>Partner 1</label>
-            <div class="input-group">              
-              <div class="input-row">
-                <input type="text" placeholder="enter your partner's first name..." data-ng-model="newUser.partner1_first_name">
-              </div>
-              <div class="input-row">
-                <input type="text" placeholder="enter your partner's last name..." data-ng-model="newUser.partner1_last_name">
-              </div>
-              <div class="input-row">
-                <input type="text" placeholder="enter your partner's license #..." data-ng-model="newUser.partner1_license_num">
-              </div>
-            </div>
-            <label>Partner 2</label>
-            <div class="input-group">
-              <div class="input-row">
-                <input type="text" placeholder="enter your partner's first name..." data-ng-model="newUser.partner2_first_name">
-              </div>
-              <div class="input-row">
-                <input type="text" placeholder="enter your partner's last name..." data-ng-model="newUser.partner2_last_name">
-              </div>
-              <div class="input-row">
-                <input type="text" placeholder="enter your partner's license #..." data-ng-model="newUser.partner2_license_num">
-              </div>
-            </div>
+            <div profilefields user="newUser"> </div>
 
             <button class="btn btn-block btn-large">
               signup
