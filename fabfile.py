@@ -134,7 +134,7 @@ def dumpdata():
     set_env_for_user('vagrant')
     with cd(env.code_dir):
         with _virtualenv():
-            _manage_py('dumpdata --format=json --indent=4 survey | gzip > apps/survey/fixtures/surveys.json.gz ')
+            _manage_py('dumpdata --format=json --indent=4 survey --exclude=survey.Respondant --exclude=survey.LocationAnswer --exclude=survey.Location --exclude=survey.MultiAnswer --exclude=survey.GridAnswer --exclude=survey.Response | gzip > apps/survey/fixtures/surveys.json.gz ')
             
 @task
 def push():

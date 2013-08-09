@@ -49,7 +49,7 @@ angular.module('askApp', ['ui', 'ui.bootstrap', 'ngGrid'])
         templateUrl: app.viewPath + 'views/complete.html',
         controller: 'CompleteCtrl'
     })
-        .when('/survey/:surveySlug/:uuidSlug', {
+        .when('/survey/:surveySlug/:pageID/:uuidSlug/landing', {
         templateUrl: app.viewPath + 'views/landing.html',
         controller: 'SurveyDetailCtrl'
     })

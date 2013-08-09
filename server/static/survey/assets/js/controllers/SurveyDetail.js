@@ -406,8 +406,7 @@ angular.module('askApp')
         
         //var url = ['/respond/answer', survey.slug, $routeParams.questionSlug, $routeParams.uuidSlug].join('/');
         if (question.type === 'timepicker' || question.type === 'datepicker') {
-
-            if (answer) {
+            if ( ! answer ) {
                 answer = new Date();
             }
         }
@@ -712,6 +711,11 @@ $scope.loadSurvey = function(data) {
         // we may inject a question into the scope
         if ($routeParams.pageID) {
             $scope.page = _.findWhere($scope.survey.pages, { order: parseInt($routeParams.pageID, 10) });
+            if (!$scope.page) {
+                $scope.page = {
+                    questions: []
+                };
+            }
         } else if (!$scope.question) {
             $scope.question = _.findWhere($scope.survey.questions, { slug: $routeParams.questionSlug });
         }
