@@ -45,7 +45,9 @@ input {
                 <a style="cursor: pointer; text-decoration: none">Page {{ page.order }}</a>
                 <div ng-show="page == pageBeingEdited">
                     <ul>
-                        <li ng-repeat="question in page.questions"><a ng-click="startEditingQuestion(question)">{{ question.slug }}</a></li>
+                        <li ng-repeat="question in page.questions">
+                            <a ng-click="startEditingQuestion(question)" style="cursor: pointer; text-decoration: none">{{ question.slug }}</a>
+                        </li>
                     </ul>
                 </div>
             </li>
@@ -122,6 +124,7 @@ input {
                         </label> -->
                     </div>
                     <div class="span6">
+                        <!--
                         <a class="btn" ng-click="newBlock = {}" ng-hide="newBlock">New Block</a>
                         <div ng-show="newBlock">
                             <h4>New Conditional Block</h4>
@@ -166,7 +169,7 @@ input {
                                 </div>
                             </div>
                         </div>
-                        
+                        -->
                         
                         <div ng-show="activeQuestion.type == 'integer' || activeQuestion.type == 'number'">
                             <h3>Validation Options</h3>

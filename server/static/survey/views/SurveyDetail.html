@@ -20,12 +20,12 @@
                 <h4>{{ question.title }}</h4>
                 <div ng-switch on="question.type">
                     <div ng-switch-when="grid">
-                    Grid!
                         <div gridquestion question="question" answers="answers" pageorder="$index"  viewpath="viewPath"></div>
                     </div>
                     <div ng-switch-default>
                         <div multiquestion question="question" answers="answers" pageorder="$index"></div>
                     </div>
+                </div>
             </div>
             <a class="btn btn-block btn-large btn-primary" ng-click="submitPage(page)">continue</a>
         </div>

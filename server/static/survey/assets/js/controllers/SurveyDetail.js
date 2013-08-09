@@ -391,9 +391,9 @@ angular.module('askApp')
 
     $scope.getAnswerOnPage = function(question) {
         var answer = question.answer;
-
+        
         if (question.type === 'integer' || question.type === 'number') {
-            if (question.interger_max && question.integer_max < answer) {
+            if (question.integer_max && question.integer_max < answer) {
                 answer = "NA";
             }
             if (question.integer_min || question.integer_min > answer) {
@@ -402,6 +402,9 @@ angular.module('askApp')
             if (question.type === 'integer' && _.string.include(answer, '.')) {
                 answer = "NA";
             }
+            // if (answer === undefined) {
+                // answer = 0;
+            // }
         }
         
         //var url = ['/respond/answer', survey.slug, $routeParams.questionSlug, $routeParams.uuidSlug].join('/');
@@ -440,10 +443,16 @@ angular.module('askApp')
         }
         
         if (question.type === 'grid') {
-            answer = question.options;
+            //check for undefined answers on the grid
+            var completed = ! _.some( _.map(question.options, function(option) { return _.contains(_.values(option), undefined); }));
+            if (completed || !question.required) {
+                answer = question.options;
+            } else {
+                return false;
+            }
         }
 
-        if (! answer) {
+        if ( answer !== 0 && !answer) {
             answer = "NA";
         }
 
