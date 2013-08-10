@@ -407,7 +407,7 @@ angular.module('askApp')
         }
         
         //var url = ['/respond/answer', survey.slug, $routeParams.questionSlug, $routeParams.uuidSlug].join('/');
-        if (question.type === 'timepicker' || question.type === 'datepicker') {
+        if (question.type === 'timepicker' || question.type === 'datepicker' || question.type === 'monthpicker') {
             if ( ! answer ) {
                 answer = new Date();
             }

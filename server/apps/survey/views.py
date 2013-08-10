@@ -31,8 +31,6 @@ def survey(request, survey_slug=None, template='survey/survey.html'):
         respondant = Respondant(survey=survey)
         respondant.save()
         if request.GET.get('get-uid', None) is not None:
-            import pdb
-            pdb.set_trace()
             return HttpResponse(simplejson.dumps({'success': "true", "uuid": respondant.uuid}))
         return redirect("/respond#/survey/%s/0/%s/landing" % (survey.slug, respondant.uuid))
     context = {'ANALYTICS_ID': settings.ANALYTICS_ID}
