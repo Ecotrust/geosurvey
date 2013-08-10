@@ -36,6 +36,4 @@ angular.module('askApp')
         app.data.responses = [];
     }
     $scope.completeView = '/static/survey/survey-pages/' + $routeParams.surveySlug + '/complete.html';
-
-    Survey.someMethod();
   });

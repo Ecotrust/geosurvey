@@ -324,7 +324,6 @@ angular.module('askApp')
         $scope.saveState();
     };
 
-
     $scope.saveState = function () {
         localStorage.setItem('hapifish', JSON.stringify(app));
     };
@@ -450,6 +449,7 @@ angular.module('askApp')
             } else {
                 return false;
             }
+            delete question.gridOptions; // was causing a circular reference in 
         }
 
         if ( answer !== 0 && !answer) {
@@ -932,9 +932,9 @@ $scope.loadSurvey = function(data) {
         } else {
             // this is an old offline survey
             $scope.loadSurvey({
-                    survey: _.findWhere(app.surveys, {
+                    survey: angular.copy(_.findWhere(app.surveys, {
                         slug: $routeParams.surveySlug
-                    }),
+                    })),
                     responses: app.respondents[$routeParams.uuidSlug].responses
                 });
         }
