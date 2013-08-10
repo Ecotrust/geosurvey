@@ -1,7 +1,7 @@
 //'use strict';
 
 angular.module('askApp')
-  .controller('CompleteCtrl', function ($scope, $routeParams, $http, Survey) {
+  .controller('CompleteCtrl', function ($scope, $routeParams, $http) {
     var url = '/respond/complete/' + [$routeParams.surveySlug, $routeParams.uuidSlug].join('/');
 
     if (app.user) {
