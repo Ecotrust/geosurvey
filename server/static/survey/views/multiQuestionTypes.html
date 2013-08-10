@@ -73,7 +73,7 @@
                 </option>
                 <option selected value="other">Other</option>
             </select>
-            <input class="input-block-level" type="text" placeholder="{{ question.label }}" ng-show="answer == 'other'" ng-model="otherAnswer" autofocus/>   
+            <input class="input-block-level" type="text" placeholder="{{ question.label }}" ng-show="answer == 'other'" ng-model="otherAnswer" />   
         </form>
     </div>
     <div ng-switch-when="text">
@@ -140,7 +140,7 @@
                   </li>
                 </ul>
             </div>
-            <input class="input-block-level" type="text" placeholder="Other Option" ng-show="question.otherOption.checked" ng-model="question.otherAnswer" autofocus/>             
+            <input class="input-block-level" type="text" placeholder="Other Option" ng-show="question.otherOption.checked" ng-model="question.otherAnswer" />             
         </form>
     </div>
     <div ng-switch-when="yes-no">
@@ -159,7 +159,7 @@
                   </li>
                 </ul>
               </div>
-            <input class="input-block-level" type="text" placeholder="Other Option" ng-show="question.otherOption.checked" ng-model="question.otherAnswer" autofocus/>             
+            <input class="input-block-level" type="text" placeholder="Other Option" ng-show="question.otherOption.checked" ng-model="question.otherAnswer" />             
         </form>
     </div>
     <!-- Multi-Select -->
@@ -291,7 +291,7 @@
               </div>
               
             </div>
-            <input class="input-block-level" type="text" placeholder="Other Option" ng-show="question.allow_other && question.otherOption.checked" ng-model="question.otherAnswer" autofocus/> 
+            <input class="input-block-level" type="text" placeholder="Other Option" ng-show="question.allow_other && question.otherOption.checked" ng-model="question.otherAnswer" /> 
         </form>
     </div>
     <div ng-switch-when="map-multipoint">
