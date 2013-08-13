@@ -320,7 +320,9 @@ angular.module('askApp')
             answer: answer.answer,
             question: answer.question
         });
-        $scope.answers[answer.slug] = answer;
+
+        // this should give us pause
+        $scope.answers[answer.question.slug] = answer;
         $scope.saveState();
     };
 
@@ -364,9 +366,8 @@ angular.module('askApp')
                         answer: answer.answer,
                         question: _.findWhere($scope.page.questions, {slug: answer.slug})
                     });
-                    $scope.gotoNextPage();
                 });
-                
+                $scope.gotoNextPage();
             });    
         }
         

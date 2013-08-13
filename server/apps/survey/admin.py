@@ -17,6 +17,11 @@ class PageInline(admin.TabularInline):
     model = Page
 
 
+class PageAdmin(admin.ModelAdmin):
+    list_display = ('__str__','order',)
+
+
+
 class SurveyAdmin(admin.ModelAdmin):
     list_display = ('name','slug',)
     prepopulated_fields = {'slug':('name',),}
@@ -46,7 +51,7 @@ admin.site.register(Question, QuestionAdmin)
 admin.site.register(Survey, SurveyAdmin)
 admin.site.register(Option, OptionAdmin)
 admin.site.register(Response, ResponseAdmin)
-admin.site.register(Page)
+admin.site.register(Page, PageAdmin)
 admin.site.register(Location)
 admin.site.register(LocationAnswer)
 admin.site.register(MultiAnswer)
