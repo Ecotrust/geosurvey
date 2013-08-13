@@ -16,6 +16,8 @@ angular.module('askApp')
         $scope.pagesToBeUpdated = [];
         $scope.updatedpagesQueue = [];
 
+      
+
         if ($routeParams.surveySlug) {    
             $http.get('/api/v1/survey/' + $routeParams.surveySlug + '/?format=json').success(function(data) {
                 _.extend($scope.survey, data);
@@ -37,10 +39,15 @@ angular.module('askApp')
             //     }
             // }, true);
             $scope.$watch('survey.pages', function (newValue) {
-                if (newValue){// && ! $scope.questionsToBeUpdated.length && ! $scope.updatedQuestionQueue.length) {
-                   $scope.checkPageOrder(newValue);
-                }
+                console.log('update pages');
+                console.log(newValue);
+                // if (newValue){// && ! $scope.questionsToBeUpdated.length && ! $scope.updatedQuestionQueue.length) {
+                //    $scope.checkPageOrder(newValue);
+                // }
             }, true);
+            
+            
+
             $scope.$watch('activeQuestion.grid_cols', function (newValue) {
                 if (newValue) {
                     _.each(newValue, function (option, i) {
@@ -57,6 +64,7 @@ angular.module('askApp')
 
 
         $scope.checkPageOrder = function (pages) {
+
             _.each(pages, function (page, index) {
                 if (page.order !== index + 1) {
                     page.order = index + 1;
@@ -217,18 +225,50 @@ angular.module('askApp')
         }
 
 
+        $scope.update = function (event, ui) {
+            debugger;
+               // var root = event.target,
+               //     item = ui.item,
+               //     parent = item.parent(),
+               //     target = (parent[0] === root) ? $scope.pages : parent.scope().item,
+               //     child = item.scope().child,
+               //     index = item.index();
+
+               // target.pages || (target.pages = []);
+
+               // function walk(target, child) {
+               //     var children = target.pages || [],
+               //         i;
+               //     if (children) {
+               //         i = children.length;
+               //         while (i--) {
+               //             if (children[i] === child) {
+               //                 return children.splice(i, 1);
+               //             } else {
+               //                 walk(children[i], child);
+               //             }
+               //         }
+               //     }
+               // }
+               // walk($scope.pages, child);
+
+               // target.pages.splice(index, 0, child);
+           };
+
 
 
         $scope.savePage = function (page, deferUpdatingList) {
             var url = page.resource_uri,
                 method = 'PUT',
                 data = page;
+            page.updating = true;
             return $http({
                 method: method,
                 url: url,
                 data: { order: page.order }
             }).success(function (result, status) {
                console.log(result);
+               page.updating = false;
             });  
         };
 

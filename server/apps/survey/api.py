@@ -168,7 +168,7 @@ class QuestionResource(SurveyModelResource):
     filter_questions = fields.ToManyField('self', 'filter_questions', null=True, blank=True)
     skip_question = fields.ToOneField('self', 'skip_question', null=True, blank=True)
     blocks = fields.ToManyField('apps.survey.api.BlockResource', 'blocks', null=True, blank=True, full=True)
-    pages = fields.ToManyField('apps.survey.api.PageResource', 'page_set', null=True, blank=True)
+    # pages = fields.ToManyField('apps.survey.api.PageResource', 'page_set', null=True, blank=True)
 
 
     class Meta:

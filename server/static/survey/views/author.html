@@ -38,18 +38,27 @@ input {
                 </ul>
             </li>
         </ul> -->
-        <ul class="nav nav-pills nav-stacked" ng-model="survey.pages" ui-sortable="{axis: 'y'}">
-            <li ng-repeat="page in survey.pages"
-                ng-click="$parent.startEditingPage(page)"
-                ng-class="{'active': page == pageBeingEdited }">
-                <a style="cursor: pointer; text-decoration: none">Page {{ page.order }}</a>
-                <div ng-show="page == pageBeingEdited">
-                    <ul>
-                        <li ng-repeat="question in page.questions">
-                            <a ng-click="startEditingQuestion(question)" style="cursor: pointer; text-decoration: none">{{ question.slug }}</a>
-                        </li>
-                    </ul>
+        <ul class="nav nav-pills nav-stacked"
+            ui-nested-sortable="{
+                listType: 'ul',
+                items: 'li',
+                doNotClear: true,
+                placeholder: 'ui-state-highlight',
+                forcePlaceholderSize: true, 
+                toleranceElement: '> div',
+                protectRoot: true,
+                maxLevels: 2
+            }" ng-model="survey.pages">
+            <li ya-tree="item in survey.pages at ul" class="tree">
+                <div>
+                    <a style="cursor: pointer; text-decoration: none">
+
+                        <span ng-hide="item.slug">page ({{ item.order }})</span>
+                        <span ng-show="item.slug">{{ item.slug }} ({{ item.order }})</span>
+                    </a>
+                    <i class="icon-refresh icon-spin" ng-show="item.updating"></i>
                 </div>
+                <ul></ul>
             </li>
         </ul>
         <p ng-hide="survey.questions.length">No Questions, yet.</p>
