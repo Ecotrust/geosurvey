@@ -39,11 +39,9 @@ angular.module('askApp')
             //     }
             // }, true);
             $scope.$watch('survey.pages', function (newValue) {
-                console.log('update pages');
-                console.log(newValue);
-                // if (newValue){// && ! $scope.questionsToBeUpdated.length && ! $scope.updatedQuestionQueue.length) {
-                //    $scope.checkPageOrder(newValue);
-                // }
+                if (newValue){// && ! $scope.questionsToBeUpdated.length && ! $scope.updatedQuestionQueue.length) {
+                   $scope.checkPageOrder(newValue);
+                }
             }, true);
             
             
@@ -70,6 +68,15 @@ angular.module('askApp')
                     page.order = index + 1;
                     $scope.savePage(page);     
                 }
+                _.each(page.questions, function (question, index) {
+                    if (question.order !== index + 1) {
+                        question.order = index + 1;
+                        page.updating = true;
+                        $scope.saveQuestion(question).success(function () {
+                            page.updating = false;
+                        });     
+                    }
+                });
             });
         };
 
@@ -223,38 +230,6 @@ angular.module('askApp')
                 $scope.activeQuestion.activeOption = false;
             });
         }
-
-
-        $scope.update = function (event, ui) {
-            debugger;
-               // var root = event.target,
-               //     item = ui.item,
-               //     parent = item.parent(),
-               //     target = (parent[0] === root) ? $scope.pages : parent.scope().item,
-               //     child = item.scope().child,
-               //     index = item.index();
-
-               // target.pages || (target.pages = []);
-
-               // function walk(target, child) {
-               //     var children = target.pages || [],
-               //         i;
-               //     if (children) {
-               //         i = children.length;
-               //         while (i--) {
-               //             if (children[i] === child) {
-               //                 return children.splice(i, 1);
-               //             } else {
-               //                 walk(children[i], child);
-               //             }
-               //         }
-               //     }
-               // }
-               // walk($scope.pages, child);
-
-               // target.pages.splice(index, 0, child);
-           };
-
 
 
         $scope.savePage = function (page, deferUpdatingList) {
