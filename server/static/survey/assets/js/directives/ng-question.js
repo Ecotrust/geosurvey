@@ -94,9 +94,6 @@ angular.module('askApp')
                         matches = [true];
                     }
                     
-
-                    console.log(row);
-                    console.log(matches.length);
                     scope.question.options.push({
                         text: _.string.startsWith(row, '*') ? row.substr(1) : row,
                         label: _.string.slugify(row),
