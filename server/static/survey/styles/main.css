@@ -147,11 +147,11 @@ ul + ul {
 .todo h3 {
     padding-left: 15px;
 }
+.todo li:nth-last-child(2) {
+    border-radius: 0 0 6px 6px;
+}
 .todo li:first-child {
     border-radius: 6px 6px 0 0;
-}
-.todo li:last-child {
-    border-radius: 0 0 6px 6px;
 }
 .todo li.option-group-name {
   font-size: 24px;
