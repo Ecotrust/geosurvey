@@ -20,6 +20,11 @@ class PageInline(admin.TabularInline):
 class PageAdmin(admin.ModelAdmin):
     list_display = ('__str__','order',)
 
+    def formfield_for_manytomany(self, db_field, request, **kwargs):
+        if db_field.name == "blocks":
+            kwargs["queryset"] = Block.objects.all().order_by('name')
+        return super(PageAdmin, self).formfield_for_manytomany(db_field, request, **kwargs)
+
 
 
 class SurveyAdmin(admin.ModelAdmin):

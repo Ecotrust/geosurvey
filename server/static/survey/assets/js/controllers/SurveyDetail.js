@@ -392,7 +392,7 @@ angular.module('askApp')
     $scope.getAnswerOnPage = function(question) {
         var answer = question.answer;
         
-        if (question.type === 'integer' || question.type === 'number') {
+        if (question.type === 'integer' || question.type === 'number' || question.type === 'number-with-unit') {
             if (question.integer_max && question.integer_max < answer) {
                 answer = "NA";
             }
@@ -463,7 +463,7 @@ angular.module('askApp')
     /* not used, replaced by submitPage */
     $scope.answerQuestion = function(answer, otherAnswer, unit) {
         if ($scope.question.type === 'integer' || $scope.question.type === 'number') {
-            if ($scope.question.interger_max && $scope.question.integer_max < answer) {
+            if ($scope.question.integer_max && $scope.question.integer_max < answer) {
                 return false;
             }
             if ($scope.question.integer_min || $scope.question.integer_min > answer) {
