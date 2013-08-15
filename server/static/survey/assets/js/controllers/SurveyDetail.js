@@ -321,7 +321,7 @@ angular.module('askApp')
             question: answer.question
         });
 
-        // this should give us pause
+        // this should give us pause?
         $scope.answers[answer.question.slug] = answer;
         $scope.saveState();
     };

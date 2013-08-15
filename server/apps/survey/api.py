@@ -15,7 +15,6 @@ class SurveyModelResource(ModelResource):
             field = self.fields[field_name]
             if type(field) is fields.ToOneField and field.null and bundle.data.get(field_name, None) is None:
                 setattr(bundle.obj, field_name, None)
-
         bundle.obj.save()
 
         return bundle
@@ -42,14 +41,41 @@ class StaffUserOnlyAuthorization(Authorization):
     def delete_detail(self, object_list, bundle):
         return bundle.request.user.is_staff
 
+class UserObjectsOnlyAuthorization(Authorization):
+    def read_list(self, object_list, bundle):
+        # This assumes a ``QuerySet`` from ``ModelResource``.
+        return object_list.filter(user=bundle.request.user)
 
-# class PageResource(SurveyModelResource):
-#     question = fields.ToOneField('apps.survey.api.QuestionResource', 'question', full=True)
-#     survey = fields.ToOneField('apps.survey.api.SurveyResource', 'question')
-#     class Meta:
-#         queryset = Page.objects.all()
-#         ordering = ['order']
+    def read_detail(self, object_list, bundle):
+        # Is the requested object owned by the user?
+        return bundle.obj.user == bundle.request.user
 
+    def create_list(self, object_list, bundle):
+        # Assuming their auto-assigned to ``user``.
+        return object_list
+
+    def create_detail(self, object_list, bundle):
+        return bundle.obj.user == bundle.request.user
+
+    def update_list(self, object_list, bundle):
+        allowed = []
+
+        # Since they may not all be saved, iterate over them.
+        for obj in object_list:
+            if obj.user == bundle.request.user:
+                allowed.append(obj)
+
+        return allowed
+
+    def update_detail(self, object_list, bundle):
+        return bundle.obj.user == bundle.request.user
+
+    def delete_list(self, object_list, bundle):
+        # Sorry user, no deletes for you!
+        raise Unauthorized("Sorry, no deletes.")
+
+    def delete_detail(self, object_list, bundle):
+        raise Unauthorized("Sorry, no deletes.")
 
 class ResponseResource(SurveyModelResource):
     question = fields.ToOneField('apps.survey.api.QuestionResource', 'question', full=True)
@@ -65,24 +91,30 @@ class ResponseResource(SurveyModelResource):
 
 class OfflineResponseResource(SurveyModelResource):
     question = fields.ToOneField('apps.survey.api.QuestionResource', 'question', null=True, blank=True)
-
+    respondant = fields.ToOneField('apps.survey.api.OfflineRespondantResource', 'respondant')
     class Meta:
         queryset = Response.objects.all()
-        authorization = StaffUserOnlyAuthorization()
+        authorization = Authorization()
         authentication = Authentication()
 
+
 class OfflineRespondantResource(SurveyModelResource):
-    responses = fields.ToManyField(OfflineResponseResource, 'responses', null=True, blank=True)
+    responses = fields.ToManyField('apps.survey.api.OfflineResponseResource', 'responses', null=True, blank=True)
     survey = fields.ToOneField('apps.survey.api.SurveyResource', 'survey', null=True, blank=True)
     class Meta:
         # always_return_data = True
         queryset = Respondant.objects.all()
-        authorization = StaffUserOnlyAuthorization()
+        authorization = Authorization()
         authentication = Authentication()
         ordering = ['-ts']
     
     def obj_create(self, bundle, **kwargs):
         return super(OfflineRespondantResource, self).obj_create(bundle, surveyor=bundle.request.user)
+
+    def save_related(self, bundle):
+        resource_uri = self.get_resource_uri(bundle.obj)
+        for response in bundle.data.get('responses'):
+            response['respondant'] = resource_uri
 
 
 class ReportRespondantResource(SurveyModelResource):
