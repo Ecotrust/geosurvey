@@ -17,6 +17,16 @@ class PageInline(admin.TabularInline):
     model = Page
 
 
+class PageAdmin(admin.ModelAdmin):
+    list_display = ('__str__','order',)
+
+    def formfield_for_manytomany(self, db_field, request, **kwargs):
+        if db_field.name == "blocks":
+            kwargs["queryset"] = Block.objects.all().order_by('name')
+        return super(PageAdmin, self).formfield_for_manytomany(db_field, request, **kwargs)
+
+
+
 class SurveyAdmin(admin.ModelAdmin):
     list_display = ('name','slug',)
     prepopulated_fields = {'slug':('name',),}
@@ -46,7 +56,7 @@ admin.site.register(Question, QuestionAdmin)
 admin.site.register(Survey, SurveyAdmin)
 admin.site.register(Option, OptionAdmin)
 admin.site.register(Response, ResponseAdmin)
-admin.site.register(Page)
+admin.site.register(Page, PageAdmin)
 admin.site.register(Location)
 admin.site.register(LocationAnswer)
 admin.site.register(MultiAnswer)
