@@ -32,18 +32,13 @@ angular.module('askApp')
                 }
 
             });
-           
-            // $scope.$watch('survey.questions', function (newValue) {
-            //     if (newValue && ! $scope.questionsToBeUpdated.length && ! $scope.updatedQuestionQueue.length) {
-            //        $scope.checkQuestionOrder($scope.survey.questions);
-            //     }
-            // }, true);
+   
             $scope.$watch('survey.pages', function (newValue) {
                 if (newValue){// && ! $scope.questionsToBeUpdated.length && ! $scope.updatedQuestionQueue.length) {
                    $scope.checkPageOrder(newValue);
                 }
             }, true);
-            
+
             
 
             $scope.$watch('activeQuestion.grid_cols', function (newValue) {
@@ -62,21 +57,31 @@ angular.module('askApp')
 
 
         $scope.checkPageOrder = function (pages) {
-
+            var pagesToUpdate = [];
             _.each(pages, function (page, index) {
-                if (page.order !== index + 1) {
-                    page.order = index + 1;
-                    $scope.savePage(page);     
+                if (page.updateQuestions) {
+                    pagesToUpdate.push(page);
+                    page.updateQuestions = false;
                 }
-                _.each(page.questions, function (question, index) {
-                    if (question.order !== index + 1) {
-                        question.order = index + 1;
-                        page.updating = true;
-                        $scope.saveQuestion(question).success(function () {
-                            page.updating = false;
-                        });     
+                if (! page.updating) {
+                    _.each(page.questions, function (question, index) {
+                        $scope.checkingPages = true;
+                        if (question.order !== index + 1) {
+                            question.order = index + 1;
+                            page.updating = true;
+                            $scope.saveQuestion(question).success(function () {
+                                page.updating = false;
+                            });     
+                        }
+                    });
+                    if (page.order !== index + 1) {
+                        page.order = index + 1;
+                        $scope.savePage(page);
                     }
-                });
+                };
+            });
+            _.each(pagesToUpdate, function (page) {
+                $scope.savePage(page).success(function () { page.updating = false; });;
             });
         };
 
@@ -142,29 +147,30 @@ angular.module('askApp')
         }
 
 
-        $scope.delete = function (question) {
+        $scope.delete = function (question, page) {
             var questionToBeDeleted = question;
             $http({
                 method: 'DELETE',
                 url: question.resource_uri,
                 data: question
             }).success(function (data) {
-                $scope.survey.questions.splice(_.indexOf($scope.survey.questions,
-                    _.findWhere($scope.survey.questions, { resource_uri: questionToBeDeleted.resource_uri } )),1);
-                $scope.checkQuestionOrder($scope.survey.questions);
-                $scope.startEditingQuestion($scope.survey.questions[0]);
+                page.questions.splice(_.indexOf(page.questions,
+                    _.findWhere(page.questions, { resource_uri: questionToBeDeleted.resource_uri } )),1);
+                // $scope.checkQuestionOrder($scope.survey.questions);
+                // $scope.startEditingQuestion($scope.survey.questions[0]);
             });
         };
 
-        $scope.newQuestion = function () {
+        $scope.newQuestion = function (page) {
             var order = 0;
-            if ($scope.survey.questions.length) {
-                order = $scope.survey.questions.length + 1;
+            page.active = true;
+            if (page.questions.length) {
+                order = page.questions.length + 1;
             }
             $scope.startEditingQuestion({
                 label: null,
                 slug: null,
-                order: $scope.survey.questions.length
+                order: order
             });
         }
 
@@ -198,13 +204,30 @@ angular.module('askApp')
             });
         }
 
+        $scope.addPage = function () {
+            $scope.addingPage = true;
+            $http.post('/api/v1/page/', { survey: '/api/v1/survey/' + $scope.survey.slug + '/'}).success(function(data) {
+                $scope.survey.pages.push(data);
+                $scope.addingPage = false;
+            });
+        }
+
+
         $scope.startEditingPage = function (page) {
             $scope.pageBeingEdited = page;
             $scope.activePage = {};
             angular.extend($scope.activePage, page);
+            _.each($scope.survey.pages, function (page) {
+                if (page !== $scope.pageBeingEdited && page.active) {
+                    page.active = false;
+                }
+            });
         };
 
         $scope.startEditingQuestion = function (question) {
+            if (! question) {
+                return;
+            }
             if (question.grid_cols && question.grid_cols.length) {
                 question.grid_cols.sort(function(a, b) {return a.order - b.order});    
             }
@@ -232,17 +255,24 @@ angular.module('askApp')
         }
 
 
-        $scope.savePage = function (page, deferUpdatingList) {
+        $scope.savePage = function (page, question) {
             var url = page.resource_uri,
                 method = 'PUT',
-                data = page;
-            page.updating = true;
+                data = { 
+                    order: page.order,
+                    questions: _.map(page.questions, function (question) {
+                        return {pk: question.id}
+                    })
+                };
+            // page.updating = true;
+            if (question) {
+                data.questions.push({ pk: question.id });
+            }
             return $http({
                 method: method,
                 url: url,
-                data: { order: page.order }
+                data: data
             }).success(function (result, status) {
-               console.log(result);
                page.updating = false;
             });  
         };
@@ -256,12 +286,8 @@ angular.module('askApp')
                 question.label = question.title;
             }
             if (! url) {
-                url = '/api/v1/page/';
+                url = '/api/v1/question/';
                 method = 'POST';
-                data = {
-                    survey: { pk: $scope.survey.id },
-                    question: question
-                }
             }
             $scope.stopWatchingQuestions = true;
 
@@ -277,26 +303,19 @@ angular.module('askApp')
                 data: data
             }).success(function (result, status) {
                 var index;
-                
                 if (status === 202) {
                     if (! deferUpdatingList) {
                         result.grid_cols.sort(function(a, b) {return a.order - b.order});
-                        console.log(result.grid_cols);
                         index = _.indexOf($scope.survey.questions, $scope.questionBeingEdited);
                         $scope.survey.questions[index] = result;
                         $scope.questionBeingEdited = result;
                         $scope.stopWatchingQuestions = false;    
                     }
                     
-                } else if (status === 201) {
-                    if (!$scope.survey.questions) {
-                        $scope.survey.questions = [];
-                    }
-                    if (! deferUpdatingList) {
-                        $scope.survey.questions.push(result.question);
-                        $scope.questionBeingEdited = result.question;    
-                    }
-                    
+                } else if (status === 201) {                
+                    $scope.activePage.questions.push(result);
+                    $scope.questionBeingEdited = result;
+                    $scope.savePage($scope.activePage, result);
                 }
                 
                 $scope.startEditingQuestion($scope.questionBeingEdited);

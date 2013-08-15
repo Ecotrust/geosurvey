@@ -1,11 +1,11 @@
 /* Will be compiled down to a single stylesheet with your sass files */
 
 
-.tree.ng-scope.page {
+.page {
   margin-bottom: 10px;
   padding: 5px;
-  background-color: #f5f5f5;
-  border: 2px solid #777;
+  background-color: #eee;
+  border: 1px solid #bbb;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   border-radius: 4px;
@@ -13,6 +13,43 @@
   -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
 }
+
+.page .btn-group {
+  display: none;
+}
+
+.page:hover .btn-group {
+  display: block;
+}
+
+.page > div > a{
+  font-size: 18px;
+}
+
+.page.active {
+  background-color: rgb(230, 126, 34);
+  
+}
+.page.active > div > a{
+  color: white;
+}
+.question > div > a{
+  color: #555;
+}
+
+.author .nav {
+  padding: 5px;
+  height: 556px;
+  overflow: auto;
+  border: 2px solid #bbb;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+    -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
 body {
 padding-top: 0px;
 padding-bottom: 0px;

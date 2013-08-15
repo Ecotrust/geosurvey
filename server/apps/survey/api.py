@@ -13,7 +13,7 @@ class SurveyModelResource(ModelResource):
         bundle = super(SurveyModelResource, self).obj_update(bundle, **kwargs)
         for field_name in self.fields:
             field = self.fields[field_name]
-            if type(field) is fields.ToOneField and field.null and bundle.data[field_name] is None:
+            if type(field) is fields.ToOneField and field.null and bundle.data.get(field_name, None) is None:
                 setattr(bundle.obj, field_name, None)
 
         bundle.obj.save()
@@ -142,7 +142,40 @@ class PageResource(SurveyModelResource):
         }
 
     def save_m2m(self, bundle):
-        pass
+        for field_name, field_object in self.fields.items():
+            if not getattr(field_object, 'is_m2m', False):
+                continue
+
+            if not field_object.attribute:
+                continue
+
+            if field_object.readonly:
+                continue
+
+            # Get the manager.
+            related_mngr = getattr(bundle.obj, field_object.attribute)
+                # This is code commented out from the original function
+                # that would clear out the existing related "Person" objects
+            if hasattr(related_mngr, 'clear'):
+                #Clear it out, just to be safe.
+                related_mngr.clear()
+
+            related_objs = []
+
+            for related_bundle in bundle.data[field_name]:
+                # See if this person already exists in the database
+                try:
+                    question = Question.objects.get(id=related_bundle.obj.id)
+                # If it doesn't exist, then save and use the object TastyPie
+                # has already prepared for creation
+                except Question.DoesNotExist:
+                    question = related_bundle.obj
+                    question.save()
+
+                related_objs.append(question)
+
+            related_mngr.add(*related_objs)
+
 
 
 
