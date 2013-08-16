@@ -32,7 +32,7 @@ class Respondant(caching.base.CachingMixin, models.Model):
     ts = models.DateTimeField(default=datetime.datetime.now())
     email = models.EmailField(max_length=254, null=True, blank=True, default=None)
 
-    surveyor = models.ForeignKey(User, null=True, blank=True)
+    user = models.ForeignKey(User, null=True, blank=True)
 
     objects = caching.base.CachingManager()
 
@@ -273,6 +273,7 @@ class Response(caching.base.CachingMixin, models.Model):
     answer_raw = models.TextField(null=True, blank=True)
     unit = models.TextField(null=True, blank=True)
     ts = models.DateTimeField(default=datetime.datetime.now())
+    user = models.ForeignKey(User, null=True, blank=True)
     objects = caching.base.CachingManager()
 
     def __str__(self):

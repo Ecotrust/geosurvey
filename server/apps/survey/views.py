@@ -67,13 +67,15 @@ def submit_page(request, survey_slug, uuid): #, survey_slug, question_slug, uuid
             response, created = Response.objects.get_or_create(question=question,respondant=respondant)
             response.answer_raw = simplejson.dumps(answer)
             response.ts = datetime.datetime.now()
+            if request.user:
+                response.user = request.user
             response.save_related()
 
             if created:
                 respondant.responses.add(response)
 
         if request.user:
-            respondant.surveyor = request.user
+            respondant.user = request.user
 
         respondant.last_question = question_slug
         respondant.save()
@@ -100,7 +102,8 @@ def answer(request, survey_slug, question_slug, uuid): #, survey_slug, question_
             respondant.responses.add(response)
 
         if request.user:
-            respondant.surveyor = request.user
+            respondant.user = request.user
+            response.user = request.user
         respondant.last_question = question_slug
         respondant.save()
         return HttpResponse(simplejson.dumps({'success': "%s/%s/%s" % (survey_slug, question_slug, uuid)}))

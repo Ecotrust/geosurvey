@@ -92,35 +92,42 @@ class ResponseResource(SurveyModelResource):
 class OfflineResponseResource(SurveyModelResource):
     question = fields.ToOneField('apps.survey.api.QuestionResource', 'question', null=True, blank=True)
     respondant = fields.ToOneField('apps.survey.api.OfflineRespondantResource', 'respondant')
+    user = fields.ToOneField('apps.account.api.UserResource', 'user', null=True, blank=True)
     class Meta:
         queryset = Response.objects.all()
-        authorization = Authorization()
+        authorization = UserObjectsOnlyAuthorization()
         authentication = Authentication()
-
+    def obj_create(self, bundle, **kwargs):
+        print bundle.request.user
+        return super(OfflineResponseResource, self).obj_create(bundle, user=bundle.request.user)
 
 class OfflineRespondantResource(SurveyModelResource):
     responses = fields.ToManyField('apps.survey.api.OfflineResponseResource', 'responses', null=True, blank=True)
     survey = fields.ToOneField('apps.survey.api.SurveyResource', 'survey', null=True, blank=True)
+    user = fields.ToOneField('apps.account.api.UserResource', 'user', null=True, blank=True)
     class Meta:
         # always_return_data = True
         queryset = Respondant.objects.all()
-        authorization = Authorization()
+        authorization = UserObjectsOnlyAuthorization()
         authentication = Authentication()
         ordering = ['-ts']
     
     def obj_create(self, bundle, **kwargs):
-        return super(OfflineRespondantResource, self).obj_create(bundle, surveyor=bundle.request.user)
+        print bundle.request.user
+        return super(OfflineRespondantResource, self).obj_create(bundle, user=bundle.request.user)
 
     def save_related(self, bundle):
         resource_uri = self.get_resource_uri(bundle.obj)
+        user_uri = self.get_resource_uri(bundle.request.user)
+        print user_uri
         for response in bundle.data.get('responses'):
             response['respondant'] = resource_uri
-
+            response['user'] = user_uri
 
 class ReportRespondantResource(SurveyModelResource):
     responses = fields.ToManyField(ResponseResource, 'responses', full=True, null=True, blank=True)
     survey = fields.ToOneField('apps.survey.api.SurveyResource', 'survey', null=True, blank=True, readonly=True)
-    user = fields.ToOneField('apps.account.api.UserResource', 'surveyor', null=True, blank=True, full=True, readonly=True)
+    user = fields.ToOneField('apps.account.api.UserResource', 'user', null=True, blank=True, full=True, readonly=True)
 
     class Meta:
         queryset = Respondant.objects.all().order_by('-ts')
@@ -136,7 +143,7 @@ class ReportRespondantResource(SurveyModelResource):
 class RespondantResource(SurveyModelResource):
     responses = fields.ToManyField(ResponseResource, 'responses', full=True, null=True, blank=True)
     survey = fields.ToOneField('apps.survey.api.SurveyResource', 'survey', null=True, blank=True, full=True, readonly=True)
-    user = fields.ToOneField('apps.account.api.UserResource', 'surveyor', null=True, blank=True, full=True, readonly=True)
+    user = fields.ToOneField('apps.account.api.UserResource', 'user', null=True, blank=True, full=True, readonly=True)
     class Meta:
         queryset = Respondant.objects.all().order_by('-ts')
         filtering = {
