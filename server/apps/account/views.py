@@ -51,9 +51,8 @@ def createUser(request):
             if param.get('password1') == param.get('password2'):
                 user.set_password(param.get('password1'))
                 user.save()
-                registration = param.get('registration')
                 profile, created = UserProfile.objects.get_or_create(user=user)
-                profile.registration = simplejson.dumps(registration)
+                profile.registration = '{}'
                 profile.save()
                 user.save()
                 user = authenticate(
@@ -63,7 +62,7 @@ def createUser(request):
                     'username': user.username,
                     'name': ' '.join([user.first_name, user.last_name]),
                     'is_staff': user.is_staff,
-                    'registration': user.profile.registration
+                    'registration': profile.registration
                 }
                 return HttpResponse(simplejson.dumps({'success': True, 'user': user_dict}))
         else:

@@ -3,6 +3,8 @@ from django.db.models import Avg, Max, Min, Count
 from django.db.models import Avg, Max, Min, Count, Sum
 from django.contrib.auth.models import User
 from django.db.models import signals
+from django.shortcuts import get_object_or_404
+from account.models import UserProfile
 
 import datetime
 import uuid
@@ -152,6 +154,7 @@ class Question(caching.base.CachingMixin, models.Model):
     label = models.CharField(max_length=254)
     order = models.IntegerField(default=0)
     slug = models.SlugField(max_length=64)
+    attach_to_profile = models.BooleanField(default=False)
     type = models.CharField(max_length=20,choices=QUESTION_TYPE_CHOICES,default='text')
     options = models.ManyToManyField(Option, null=True, blank=True)
     options_json = models.TextField(null=True, blank=True)
@@ -173,6 +176,7 @@ class Question(caching.base.CachingMixin, models.Model):
     blocks = models.ManyToManyField('Block', null=True, blank=True)    
 
     randomize_groups = models.BooleanField(default=False)
+
     options_from_previous_answer = models.CharField(max_length=254, null=True, blank=True)
     allow_other = models.BooleanField(default=False)
     required = models.BooleanField(default=True)
@@ -358,6 +362,16 @@ class Response(caching.base.CachingMixin, models.Model):
             if hasattr(self.respondant, self.question.slug):
                 setattr(self.respondant, self.question.slug, self.answer)
                 self.respondant.save()
+
+            if self.question.attach_to_profile:
+                # Get this user's set of profile fields. These can be shared cross-survey.
+                profileAnswers = simplejson.loads(self.respondant.user.profile.registration)
+                # Replace existing value with new value.
+                profileAnswers[self.question.slug] = self.answer
+                profile = get_object_or_404(UserProfile, user=self.respondant.user)
+                profile.registration = simplejson.dumps(profileAnswers)
+                profile.save()
+
             self.save()
             print self.answer
 
