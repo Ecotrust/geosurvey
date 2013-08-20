@@ -321,7 +321,11 @@ angular.module('askApp')
             question: answer.question
         });
 
-        // this should give us pause
+        if (answer.question.attach_to_profile) {
+            app.user.registration[answer.question.slug] = answer.answer;
+        }
+
+        // this should give us pause?
         $scope.answers[answer.question.slug] = answer;
         $scope.saveState();
     };
@@ -358,6 +362,10 @@ angular.module('askApp')
             }).success(function (response, status, getHeaders, request) {
                 _.each(request.data.answers, function (answer){
                     $scope.answers[answer.slug] = answer.answer;
+                    // update user profile
+                    if (answer.question.attach_to_profile) {
+                        app.user.registration[answer.question.slug] = answer.answer;
+                    }
                     if (!app.data.responses) {
                         app.data.responses = [];
                     }
@@ -365,7 +373,7 @@ angular.module('askApp')
                     app.data.responses.push({
                         answer: answer.answer,
                         question: _.findWhere($scope.page.questions, {slug: answer.slug})
-                    });
+                    });                    
                 });
                 $scope.gotoNextPage();
             });    
@@ -701,6 +709,11 @@ $scope.loadSurvey = function(data) {
         if (! $routeParams.action === 'edit' && data.status === 'complete' || data.status === 'terminate') {
             $location.path(['survey', $scope.survey.slug, 'complete', $routeParams.uuidSlug].join('/'));
         }
+
+        // Get answers from user profile used to pre-populate profile questions.
+        _.each(app.user.registration, function(val, key) {
+            $scope.answers[key] = val;
+        });
 
         _.each(data.responses, function(response) {
             try {
