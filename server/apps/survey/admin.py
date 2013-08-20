@@ -9,7 +9,7 @@ class RespondantAdmin(admin.ModelAdmin):
 
 
 class ResponseAdmin(admin.ModelAdmin):
-    list_display = ('__str__', 'ts',)
+    list_display = ('__unicode__', 'ts',)
 
 
 
@@ -18,7 +18,7 @@ class PageInline(admin.TabularInline):
 
 
 class PageAdmin(admin.ModelAdmin):
-    list_display = ('__str__','order',)
+    list_display = ('__unicode__','order',)
 
     def formfield_for_manytomany(self, db_field, request, **kwargs):
         if db_field.name == "blocks":
