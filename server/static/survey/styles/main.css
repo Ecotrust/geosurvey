@@ -209,7 +209,7 @@ ul + ul {
   margin-bottom: 4px;
   margin-top: 2px; 
 }
-.question .options-list .accordion-div {
+.question .todo .accordion-div {
   border-style: solid;
   border-bottom-width: 1px;
   border-left-width: 0px;
@@ -219,14 +219,14 @@ ul + ul {
   padding-top: 5px;
   padding-bottom: 5px;
 }
-.question .options-list .accordion-other-div {
+.question .todo .accordion-other-div {
   padding-top: 5px;
   padding-bottom: 5px;
 }
-.question .options-list .accordion-group {
+.question .todo .accordion-group {
   border: 0px;
 }
-.question .options-list .accordion-toggle {
+.question .todo .accordion-toggle {
   font-size: 24px;
   font-weight: 700;
   margin-bottom: 4px;

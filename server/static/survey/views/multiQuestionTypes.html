@@ -116,6 +116,47 @@
     <div ng-switch-when="single-select">
         <form class="question" ng-submit="answerSingleSelect(question.options, question.otherAnswer)">
             <div class="todo mrm">
+            
+              <!-- with accordion (if groupOptions are present)-->
+              <accordion ng-show="question.groupedOptions.length">
+                <div ng-repeat="groupOption in question.groupedOptions" class="accordion-div">
+                    <h3 ng-show="$parent.question.hoisted_options.length > 0">Other Activities</h3>
+                    <accordion-group heading="{{groupOption.optionLabel}}">
+                        <ul class="choices">
+                          <li 
+                            ng-tap="$parent.onSingleSelectClicked(option, $parent.question)"
+                            ng-repeat="option in groupOption.options" 
+                            ng-class="{'todo-done': option.checked, 'option-group-name': option.isGroupName }">
+                            <div class="todo-content">
+                              <h4 class="todo-name">
+                                {{option.text}}
+                              </h4>
+                            </div>
+                          </li>
+                        </ul>
+                    </accordion-group>
+                </div>
+                <div ng-show="question.allow_other" class="accordion-other-div">
+                    <accordion-group heading="Other">
+                        <ul class="choices">
+                          <li 
+                            ng-tap="onSingleSelectClicked(question.otherOption, question)"
+                            ng-class="{'todo-done': question.otherOption.checked }"
+                            ng-model="question.otherAnswer.text">
+                            <div class="todo-content">
+                              <h4 class="todo-name">
+                                Other
+                              </h4>
+                              
+                            </div>
+                          </li>
+                        </ul>
+                    </accordion-group>
+                </div>
+              </accordion>
+            
+              <!-- show if groupedOptions are NOT present -->
+              <div ng-show="question.groupedOptions.length == 0">
                 <ul>
                   <li 
                     ng-tap="$parent.onSingleSelectClicked(option, $parent.question)"
@@ -139,6 +180,8 @@
                     </div>
                   </li>
                 </ul>
+              </div>
+              
             </div>
             <input class="input-block-level" type="text" placeholder="Other Option" ng-show="question.otherOption.checked" ng-model="question.otherAnswer" />             
         </form>
