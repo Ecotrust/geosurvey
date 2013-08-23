@@ -3,6 +3,10 @@ input {
     padding: 10px;
     font-size: 16px;
 }
+input[type="checkbox"] {
+    margin-right: 5px;
+    margin-top: -2px;
+}
 .controls {
     padding: 10px;
 }
@@ -118,6 +122,9 @@ input {
                         <select ng-model="activeQuestion.type">
                             <option ng-repeat="(key, val) in activeQuestion.question_types" value="{{key}}" ng-selected="activeQuestion.type == key">{{val}}</option>
                         </select>
+                        <label>
+                            <input type="checkbox" ng-model="activeQuestion.attach_to_profile" />Profile
+                        </label>
                         <label>
                             <input type="checkbox" ng-model="activeQuestion.required" />Required
                         </label>
