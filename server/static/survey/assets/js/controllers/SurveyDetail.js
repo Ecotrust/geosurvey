@@ -46,6 +46,10 @@ angular.module('askApp')
         }
     };
 
+    $scope.getNextPagePath = function(numQsToSkips) {
+        return ['survey', $scope.survey.slug, $scope.getNextPage().order, $routeParams.uuidSlug].join('/');
+    };
+
     $scope.deleteAnswer = function (questionSlug, uuidSlug) {
         var index;
         
@@ -909,8 +913,7 @@ $scope.loadSurvey = function(data) {
                 });
             }
         }
-
-        $scope.nextQuestionPath = $scope.getNextQuestionPath();
+        $scope.nextPagePath = $scope.getNextPagePath();
         $scope.loading = false;
     };
     $scope.viewPath = app.viewPath;
