@@ -322,6 +322,9 @@ angular.module('askApp')
         });
 
         if (answer.question.attach_to_profile) {
+            if ( !app.user.registration ) {
+                app.user.registration = {};
+            }
             app.user.registration[answer.question.slug] = answer.answer;
         }
 
