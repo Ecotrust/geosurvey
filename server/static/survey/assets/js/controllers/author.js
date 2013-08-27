@@ -318,6 +318,8 @@ angular.module('askApp')
                     $scope.savePage($scope.activePage, result);
                 }
                 
+                //$scope.startEditingQuestion($scope.questionBeingEdited);
+                //$scope.questionBeingEdited = result;
                 $scope.startEditingQuestion($scope.questionBeingEdited);
                 $scope.activeQuestion.updated_at = new Date();
             });
