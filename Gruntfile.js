@@ -100,6 +100,10 @@ module.exports = function (grunt) {
       washingtonoptin: {
         configFile: 'karma-washington-opt-in.conf.js',
         singleRun: false
+      },
+      usvi: {
+        configFile: 'karma-usvi.conf.js',
+        singleRun: false
       }
     },
     coffee: {
@@ -269,6 +273,11 @@ module.exports = function (grunt) {
     'clean:server',
     // 'connect:test',
     'karma:washingtonoptin'
+  ]);
+  grunt.registerTask('c-usvi', [
+    'clean:server',
+    // 'connect:test',
+    'karma:usvi'
   ]);
 
   grunt.registerTask('test', [
