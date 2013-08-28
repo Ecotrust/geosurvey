@@ -324,7 +324,7 @@ angular.module('askApp')
             answer: answer.answer,
             question: answer.question
         });
-
+        
         if (answer.question.attach_to_profile) {
             if ( !app.user.registration ) {
                 app.user.registration = {};
@@ -341,6 +341,9 @@ angular.module('askApp')
         localStorage.setItem('hapifish', JSON.stringify(app));
     };
 
+    $scope.getQuestionBySlug = function (slug) {
+        return _.findWhere($scope.page.questions, {slug: slug });
+    };
 
     $scope.submitPage = function (page) {
         var answers = _.map(page.questions, function (question) {
@@ -368,9 +371,11 @@ angular.module('askApp')
                 }
             }).success(function (response, status, getHeaders, request) {
                 _.each(request.data.answers, function (answer){
+                    var question = $scope.getQuestionBySlug(answer.slug);
                     $scope.answers[answer.slug] = answer.answer;
                     // update user profile
-                    if (answer.question.attach_to_profile) {
+    
+                    if (question.attach_to_profile) {
                         app.user.registration[answer.question.slug] = answer.answer;
                     }
                     if (!app.data.responses) {
@@ -379,7 +384,7 @@ angular.module('askApp')
 
                     app.data.responses.push({
                         answer: answer.answer,
-                        question: _.findWhere($scope.page.questions, {slug: answer.slug})
+                        question: question
                     });                    
                 });
                 $scope.gotoNextPage();
