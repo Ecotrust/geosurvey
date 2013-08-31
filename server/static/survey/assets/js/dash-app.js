@@ -42,6 +42,11 @@ angular.module('askApp', ['ui', 'ui.bootstrap', 'ngGrid'])
         templateUrl: '/static/survey/views/RespondantList.html',
         controller: 'RespondantListCtrl'
     })
+        .when('/agency-dash/:surveySlug', {
+        templateUrl: '/static/survey/views/agency-dash.html',
+        controller: 'AgencyDashCtrl'
+    })
+
         .when('/RespondantDetail/:surveySlug/:uuidSlug', {
         templateUrl: '/static/survey/views/RespondantDetail.html',
         controller: 'RespondantDetailCtrl'
