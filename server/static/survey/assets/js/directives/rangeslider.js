@@ -1,6 +1,6 @@
 
 angular.module('askApp')
-    .directive('rangeslider', function() {
+    .directive('rangeSlider', function() {
 
     return {
         template: '<div class="range-slider"></div>',
@@ -24,11 +24,11 @@ angular.module('askApp')
                 }
             });
 
-            // set default values
+            // listen from updates for the controller
             if (attrs.start) {
                 scope.$watch('start', function (newStart) {
-                    element.dateRangeSlider("max", newStart);
-                })
+                    element.dateRangeSlider("min", newStart);
+                });
             }
             if (attrs.end) {
                 scope.$watch('end', function (newEnd) {

@@ -3,12 +3,29 @@
 angular.module('askApp')
     .controller('AgencyDashCtrl', function($scope, $http, $routeParams) {
         
+        $scope.startDate = Date.today().add(-365 * 5).days();
+        $scope.endDate = Date.today();
+
         $scope.filter = {
-          endDate: Date.today(),
-          startDate: Date.today().add(-365).days(),
+          endDate: $scope.endDate,
+          startDate: $scope.startDate,
           category: null,
-          name: null
+          name: null,
+          aclYear: null
         }
+
+        $scope.selectYear = function (aclYear) {
+          if ($scope.filter.aclYear === aclYear.year) {
+            $scope.filter.aclYear = null;
+            $scope.filter.startDate = $scope.startDate;
+            $scope.filter.endDate = $scope.endDate;
+          } else {
+            $scope.filter.aclYear = aclYear.year;  
+            $scope.filter.startDate = Date.parse("January 1st " + aclYear.year).clearTime();
+            $scope.filter.endDate = Date.parse("January 1st " + aclYear.year).add(365).days().clearTime();
+          }
+          
+        };
 
         $scope.selectCategory = function (category) {
           if ($scope.filter.category === category) {
@@ -19,24 +36,24 @@ angular.module('askApp')
         };
 
         $scope.selectSeries = function (series) {
-          if ($scope.filter.name === series.name) {
-            $scope.filter.name = null;
+          series.active = ! series.active;
+          if (series.all) {
+            _.each($scope.chart.series, function (s) {
+              if (! s.all) {
+                s.active = false;  
+              }
+            })
           } else {
-            $scope.filter.name = series.name;
+            _.findWhere($scope.chart.series, { all: true }).active = false;
           }
+
         };
-        $scope.gearType = {
-          'St. Croix': {
-
-          },
-          'St. Thomas': {
-
-          },
-          'St. John': {
-            
-          }
-        }
-
+        
+        $scope.aclYears = [
+          { year: 2013 },
+          { year: 2012 },
+          { year: 2011 }
+        ]
 
         $scope.chart = {
             title: "ACL By Species",
@@ -77,18 +94,30 @@ angular.module('askApp')
             ],
             series: [
             {
-                name: 'St. John',
+                name: 'Region',
+                class: 'bar-warning',
+                data: [3, 4, 4, 2, 5],
+                all: true,
+                active: true
+            },
+            {
+                name: 'St. Croix',
+                class: 'bar-info',
+                data: [3, 4, 4, 2, 5]
+            },
+            {
+                name: 'St. Johns/St. Thomas',
+                class: 'bar-danger',
+                data: [3, 4, 4, 2, 5]
+            },
+            {
+                name: 'Puerto Rico',
                 class: 'bar-success',
                 data: [5, 3, 4, 7, 2]
-            }, {
-                name: 'St. Thomas',
-                class: 'bar-info',
-                data: [2, 2, 3, 2, 1]
-            }, {
-                name: 'St. Croix',
-                class: 'bar-warning',
-                data: [3, 4, 4, 2, 5]
             }]
+        }
+        $scope.getRandom = function (max) {
+          return _.random(1, max || 30);
         }
 
   //   $http.get('/api/v1/surveyreport/' + $routeParams.surveySlug + '/?format=json').success(function(data) {
