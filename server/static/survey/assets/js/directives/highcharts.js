@@ -78,7 +78,7 @@ angular.module('askApp')
     .directive('pieChart', function() {
 
         return {
-            template: '<div class="pie-chart" style="min-width: 100%; height: 300px; margin: 0 auto"></div>',
+            template: '<div class="pie-chart" style="min-width: 100%; height: 150px; margin: 0 auto"></div>',
             restrict: 'EA',
             replace: true,
             transclude: true,

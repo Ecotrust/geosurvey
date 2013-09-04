@@ -27,22 +27,29 @@
         <div class="span12">
             <div class="row-fluid chart">
                 <!-- <div stacked-bar filter="filter" chart="chart"></div> -->
-                <table class="table">
-                    <tr ng-repeat="category in chart.categories">
-                        <td ng-click="selectCategory(category)" width="25%">
-                            <button ng-class="{ 'selected': filter.category == category }" class="btn btn-mini">{{category }}</button>
-                        </td>
-                        <td width="50%">
-                            <div class="progress">
-                                <div class="bar bar-warning" style="width: {{ getRandom() }}%;"></div>
-                                <div class="bar bar-info" style="width: {{ getRandom() }}%;"></div>
-                                <div class="bar bar-danger" style="width: {{ getRandom() }}%;"></div>
-                                <div class="bar bar-success" style="width: {{ getRandom() }}%;"></div>
+                <div class="span12">
+                    <div ng-repeat="category in chart.categories">
+                        <div class="row-fluid">
+                            <div class="span3" ng-click="selectCategory(category)" width="25%">
+                                <i ng-class="{ 'icon-chevron-right': filter.category != category, 'icon-chevron-down': filter.category == category }"></i> <button ng-class="{ 'selected': filter.category == category }" class="btn btn-mini">{{category.name }}</button>
                             </div>
-                      </td>
-                      <td width="25%">{{ getRandom(3000) }} lbs</td>
-                    </tr>
-                </table>
+                            <div class="span8">
+                                <div class="progress">
+                                    <div class="bar bar-warning" style="width: {{ category.data[0] }}%;"></div>
+                                    <div class="bar bar-info" style="width: {{ category.data[1] }}%;"></div>
+                                    <div class="bar bar-danger" style="width: {{ category.data[2] }}%;"></div>
+                                    <div class="bar bar-success" style="width: {{ category.data[3] }}%;"></div>
+                                </div>
+                          </div>
+                          <div class="span1">{{ category.total }} lbs</div>
+                        </div>
+                        <div class="row-fluid" ng-show="filter.category == category">
+                            <div class="span4">
+                                <div pie-chart></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
