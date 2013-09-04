@@ -29,8 +29,8 @@
                 <!-- <div stacked-bar filter="filter" chart="chart"></div> -->
                 <div class="span12">
                     <div ng-repeat="category in chart.categories">
-                        <div class="row-fluid">
-                            <div class="span3" ng-click="selectCategory(category)" width="25%">
+                        <div class="row-fluid"  ng-click="selectCategory(category)" >
+                            <div class="span3" width="25%">
                                 <i ng-class="{ 'icon-chevron-right': filter.category != category, 'icon-chevron-down': filter.category == category }"></i> <button ng-class="{ 'selected': filter.category == category }" class="btn btn-mini">{{category.name }}</button>
                             </div>
                             <div class="span8">
