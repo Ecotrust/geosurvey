@@ -116,6 +116,7 @@ QUESTION_TYPE_CHOICES = (
     ('number', 'Number'),
     ('auto-single-select', 'Single Select with Autocomplete'),
     ('map-multipoint', 'Map with Multiple Points'),
+    ('map-multipolygon', 'Map with Multiple Polygons'),
     ('yes-no', 'Yes/No'),
     ('number-with-unit', 'Number with Unit'),
 )
@@ -162,6 +163,8 @@ class Question(caching.base.CachingMixin, models.Model):
     cols = models.TextField(null=True, blank=True)
     info = models.CharField(max_length=254, null=True, blank=True)
     grid_cols = models.ManyToManyField(Option, null=True, blank=True, related_name="grid_cols")
+
+    geojson = models.TextField(null=True, blank=True)
 
     zoom = models.IntegerField(null=True, blank=True)
     min_zoom = models.IntegerField(null=True, blank=True, default=10)
@@ -313,6 +316,15 @@ class Response(caching.base.CachingMixin, models.Model):
                     answers.append(answer_text)
                     answer_label = answer.get('label', None)
                     multi_answer = MultiAnswer(response=self, answer_text=answer_text, answer_label=answer_label)
+                    multi_answer.save()
+                self.answer = ", ".join(answers)
+            if self.question.type in ['map-multipolygon']:
+                answers = []
+                self.multianswer_set.all().delete()
+                for answer in simplejson.loads(self.answer_raw):
+                    answers.append(answer)
+                    answer_label = None
+                    multi_answer = MultiAnswer(response=self, answer_text=answer, answer_label=answer_label)
                     multi_answer.save()
                 self.answer = ", ".join(answers)
             if self.question.type in ['map-multipoint'] and self.id:
