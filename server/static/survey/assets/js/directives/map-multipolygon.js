@@ -47,48 +47,12 @@ angular.module('askApp')
                         $('.leaflet-label').show();
                         $('.leaflet-label').removeClass('leaflet-label-right');
                     }
-                    // scope.$apply(function(s) {
-                    //     s.zoom = map.getZoom();
-                    //     s.center.lat = map.getCenter().lat;
-                    //     s.center.lng = map.getCenter().lng;
-
-                    //     if (marker) {
-                    //         s.marker.lat = map.getCenter().lat;
-                    //         s.marker.lng = map.getCenter().lng;
-                    //         marker.setLatLng(new L.LatLng(map.getCenter().lat, map.getCenter().lng));
-                    //     }
-
-                    //     s.updateCrosshair();
-                    // });
                 });
 
                 // Layer picker init
                 var baseMaps = { "Satellite": bing, "Nautical Charts": nautical };
                 var options = { position: 'bottomleft' };
                 L.control.layers(baseMaps, null, options).addTo(map);
-
-                // Fishing Areas Grid
-                // $http.get("/static/survey/data/StThomas_GCS_WGS_1984.json").success(function(data) {
-                //     var boundaryStyle = {
-                //         "color": "#E6D845",
-                //         "weight": 3,
-                //         "opacity": 0.6,
-                //         "fillOpacity": 0.0,
-                //         "clickable": false
-                //     };
-                //     L.geoJson(data, { style: boundaryStyle })
-                //     .addTo(map);
-                //     /*.on('dblclick',
-                //         function(e) {
-                //             map.setZoom(map.getZoom() + 1);
-                //         });*/
-                // });
-                // var boundaryStyle = {
-                //     "color": "#E6D845",
-                //     "weight": 3,
-                //     "opacity": 0.6,
-                //     "fillOpacity": 0.0
-                // };
 
                 var layerClick = function(layer) {
                     var id = layer.feature.properties.ID;
@@ -105,6 +69,12 @@ angular.module('askApp')
                     }
                     //console.log(scope.question.answer);
                 }
+                
+                var labelLayer = L.tileLayer('/static/survey/data/USVI_Fishing_Grid.mbtiles', {
+                    minZoom: 11,
+                    maxZoom: 12
+                });
+                labelLayer.addTo(map);
 
                 var geojsonLayer = L.geoJson(JSON.parse(scope.question.geojson), 
                     {
@@ -119,7 +89,7 @@ angular.module('askApp')
                                     iconSize: new L.Point(40, 20),
                                     iconAnchor: new L.Point(20, 20),
                                     popupAnchor: new L.Point(0, -20),
-                                    html: '<div class="content-label">'+ feature.properties.ID +'</div>'
+                                    html: '<div class="content-label">'+ feature.properties.ET_ID +'</div>'
                                 })
                             };
                         },
@@ -133,18 +103,22 @@ angular.module('askApp')
                                 layerClick(layer);
                             });
 
-                            var label = new L.Label( {
-                                offset: [-20, -15],
-                                clickable: true,
-                                opacity: .8
-                            });
-                            label.setContent(layer.feature.properties.ID);
-                            label.setLatLng(layer.getBounds().getCenter());
-                            map.showLabel(label);
+                            // var label = new L.Label( {
+                            //     offset: [-20, -15],
+                            //     clickable: true,
+                            //     opacity: .8
+                            // });
+                            // label.setContent(layer.feature.properties.ET_ID.toString());
+                            // //label.setLatLng(layer.getBounds().getCenter());
+                            // //console.log(layer.feature.properties.centroid_y + ', ' + layer.feature.properties.centroid_x);
 
-                            label.on("click", function (e) {
-                                layerClick(layer);
-                            });
+                            // label.setLatLng(L.latLng(layer.feature.properties.centroid_y, layer.feature.properties.centroid_x));
+                            // //label.setLatLng(new L.LatLng(17.5, -65.7)); 
+                            // map.showLabel(label);
+
+                            // label.on("click", function (e) {
+                            //     layerClick(layer);
+                            // });
                         }
                     }
                 );

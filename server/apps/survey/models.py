@@ -71,6 +71,10 @@ class Page(caching.base.CachingMixin, models.Model):
     class Meta:
         ordering = ['order']
 
+    def __unicode__(self):
+        question_names = ', '.join([question.slug for question in self.questions.all()])
+        return "%s (%s)" % (self.survey.name, question_names)
+
 
 class Survey(caching.base.CachingMixin, models.Model):
     name = models.CharField(max_length=254)
