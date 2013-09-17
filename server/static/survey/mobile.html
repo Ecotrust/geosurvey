@@ -19,135 +19,97 @@
         <link rel="apple-touch-icon-precomposed" sizes="72x72" href="touch-icons/apple-touch-icon-72x72.png">
         <link rel="apple-touch-icon-precomposed" sizes="57x57" href="touch-icons/apple-touch-icon-57x57.png">
         <!-- Include the compiled Ratchet CSS -->
-        <link rel="stylesheet" href="assets/lib/css/ratchet.css">
-        <link href="assets/lib/css/font-awesome.css" rel="stylesheet">
-        <link href="assets/lib/css/bootstrap.css" rel="stylesheet">
          <link rel="stylesheet" href="assets/lib/css/ng-grid.css">
-        <link rel="stylesheet" href="assets/lib/css/flat-ui.css">
-        <link rel="stylesheet" href="styles/main.css">
+         <link rel="stylesheet" href="assets/lib/css/bootstrap.css">
         <!-- Intro paragraph styles. Delete once you start using this page -->
         <style type="text/css">
-            .welcome { line-height: 1.5; color: #555; }
-            ul {
-                margin: 0;
-             /*   background-color: #222;
-                color: white;*/
-            }
-            /*.list li {
-                background-color: #222;
-                border-top: rgba(255,255,255,5);
-                border-bottom: rgba(255,255,255,5);
-            }*/
-            h1 {
-                margin: 0;
-            }
-            /*.content {
-                background-color: #222;
-                color: white;
-            }*/
-            a,a:hover {
-                text-decoration: none;
-                color: inherit;
-            }
-            .list {
-                margin-bottom: 10px;
-            }
-            .list li a {
-                font-weight: bold;
-                font-size:  16px;
-            }
-            .list li .badge {
-                float: right;
+            body {
+                background-color: rgb(77,136,153);
             }
             
-            .list .chevron, .list [class*="button"], .list [class*="count"], .list .toggle {
-                top: 50%;
-            }
-            .bar-title .button, .bar-title .button:active {
-                padding-right: 12px;
-                padding-bottom: 4px;
-                padding-top: 4px;    
-                background-color: #E67E22;
-                background-image: none;
-                border: 0;
-            }
-            .bar-title .center  {
-                width: 70%;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                margin-left: 20%;
-            }
-            .bar-title .title {
-                line-height: 40px;
+            html,
+            body {
+              height: 100%;
+              /* The html and body elements cannot have any padding or margin. */
             }
 
-            [class*="button"], [class*="button"]:active {
-                padding: 10px 20px;
+            /* Wrapper for page content to push down footer */
+            #wrap {
+              min-height: 100%;
+              height: auto !important;
+              height: 100%;
+              /* Negative indent footer by its height */
+              /*margin: 0 auto -60px;*/
+              /* Pad bottom by footer height */
+              padding: 0 0 0;
             }
-            .btn-primary {
-                background-color: orange!important;
-            }
-            input {
-                height: 44px !important;
-                font-size: 16px !important;
-            }
-            textarea {
-                width: 100% !important;
-            }
-            .input-prepend .add-on {
-                height: 28px;
-                font-size: 35px;
-                padding-top: 10px;
-            }
-            .input-prepend input {
-                width: 97%;
-            }
-            .gridStyle {
-                border: 1px solid rgb(212,212,212);
-                width: 100%; 
-                height: 300px;
-            }
-            .info, .error {
-                margin-top: 10px;
-                font-size: 16px;
-            }
-            .error {
-                color: red;
-            }
-            /*.main .forms form {*/
-    /*            margin-top: 20px;
-                height: 260px;
-            }
-*/
-                .main ul {
-                    font-size: 18px;
-                    list-style-type: none;
-                    text-align: right;
-                    line-height: 1.5;
-                }
 
-                .main h1 {
-                    text-align: center;
-                    margin-bottom: 10px;
-                }
-        .main .segmented-controller {
-            margin-top: 20px;
-        }         
+            /* Set the fixed height of the footer here */
+            #footer {
+              height: 60px;
+              background-color: #f5f5f5;
+            }
 
-        .ngHeaderText {
-            white-space: normal;
-        }
-        .ngHeaderContainer {
-            height: inherit;
-        }
-        .ngCellText {
-            white-space: normal !important;
-        }
+            #wrap > .container {
+              padding: 60px 15px 0;
+            }
+            .container .credit {
+              margin: 20px 0;
+            }
 
-        .upgrades {
-            margin-top: 20px;
-        }
+            #footer > .container {
+              padding-left: 15px;
+              padding-right: 15px;
+            }
 
+
+            /* project styles, new skin */
+
+            img.center {
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            #wrap .page-header {
+                border-bottom: 0;
+                padding-bottom: 40px;
+            }
+
+            #wrap .navbar {
+                background-color: rgb(250,189,18);
+                border-bottom: 0;
+            }
+            .home .navbar {
+                height: 15px;
+                min-height: 15px;
+
+            }
+            .home .navbar .container > *{
+                display: none;
+            }
+            .btn {
+                text-transform: uppercase;
+                font-weight: bolder;
+                text-align: left;
+                padding: 8px 10px;
+                margin-bottom: 10px;
+                border-radius: 0;
+                font-size: 20px;
+                text-color: rgb(46,46,46);
+            }
+            .btn-default:active {
+                background-color: rgb(24,75,83);
+                border-color: rgba(0,0,0,0);
+            }
+
+            
+            #map {
+                margin-top: 80px;
+                height: 250px;
+                background-color: blue;
+                padding: 0;
+            }
         </style>
     </head>
     
@@ -185,6 +147,7 @@
     <script src="assets/js/directives/mobilemenu.js"></script>
     <script src="assets/js/directives/titlebar.js"></script>
     <script src="assets/js/directives/tap.js"></script>
+    <script src="assets/js/directives/mobilemap.js"></script>
     <script src="assets/js/directives/ng-question.js"></script>
     <script src="assets/js/directives/profilefields.js"></script>
     <script src="assets/js/directives/grid-question.js"></script>
