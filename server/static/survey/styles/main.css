@@ -1,6 +1,11 @@
 /* Will be compiled down to a single stylesheet with your sass files */
 
 
+.myLabel {
+  position: relative !important;
+
+}
+
 .dashboard {
   margin-top: 20px;
 }
