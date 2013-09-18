@@ -21,4 +21,6 @@ android/app/assets/www/views
 android/app/assets/www/index.html
 android/app/bin
 android/app/gen
-
+mobile/www/assets/
+mobile/www/index.html
+mobile/www/views/

@@ -1,0 +1,21 @@
+<header class="bar-title" ng-include="'views/mobileHeader.html'"></header>
+<mobilemenu user="user"></mobilemenu>
+    <div class="content">
+      <div class="content-padded">
+        <h3>
+            {{ respondent.survey }}
+        </h3>
+        <p>Completed on {{ respondent.ts |date: 'dd-MM-yyyy HH:mm' }}</p>
+        <div ng-hide="confirmDelete">
+            <a class="btn btn-block btn-large btn-primary" ng-click="resume(respondent)">Resume</a>
+            <a class="btn btn-block btn-large btn-danger" ng-click="confirmDelete = true">Delete</a>
+        </div>
+        <div ng-show="confirmDelete">
+            <a class="btn btn-block btn-large btn-danger" ng-tap="deleteRespondent(respondent)">ok</a>
+            <a class="btn btn-block btn-large" ng-tap="confirmDelete = false">cancel</a>
+        </div>
+        <hr/>
+        <h4>Survey Answers</h4>
+    </div>
+    <div ng-include="'views/surveyAnswers.html'"></div>
+</div>

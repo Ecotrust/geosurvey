@@ -1,0 +1,51 @@
+<div class="row-fluid">
+    <div class="span6">
+
+        <h2>Respondent Info</h2>
+        <dl>
+            <dt>surveyor</dt>
+            <dd>{{ respondent.user.username }}</dd>
+            <dt>identity</dt>
+            <dd>{{ respondent.email || respondent.uuid}}</dd>
+            <dt>timestamp</dt>
+            <dd>{{ respondent.ts  |date: 'dd-MM-yyyy HH:mm' }}</dd>
+        </dl>
+        <h2>Responses</h2>
+        <table class="table">
+            <tbody ng-repeat="response in respondent.responses">
+                <tr>
+                    <td>{{response.question.label}}:</td>
+                    <td>
+                        <span ng-switch on="response.question.type">
+                            <span ng-switch-default>{{response.answer}}</span>
+                            <span ng-switch-when="yes-no">{{response.answer_parsed.text}}</span>
+                            <span ng-switch-when="number-with-unit">{{response.answer}} {{response.unit}}</span>
+                            <ul class="unstyled" ng-switch-when="multi-select">
+                                <li ng-repeat="answer in response.answer_parsed">{{answer.text}}</li>
+                            </ul>
+                            <table class="table table-bordered" ng-switch-when="grid">
+                                <thead>
+                                    <th></th>
+                                    <th ng-repeat="grid_col in response.question.grid_cols"><strong>{{grid_col.text}}</strong></th>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="answer in response.answer_parsed">
+                                        <td>{{ answer.text }}</td>
+                                        <td ng-repeat="grid_col in response.question.grid_cols" ng-hide="grid_col.type=='multi-select'">{{answer[grid_col.label.replace('-', '')]}}</td>
+                                        <td ng-repeat="grid_col in response.question.grid_cols" ng-show="grid_col.type=='multi-select'">
+                                            <span ng-repeat="multiAnswer in answer[grid_col.label.replace('-', '')]">{{multiAnswer}}<span ng-hide="$last">,</span> </span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </span>
+                    </td>
+                    <td><a target="_blank" href="/respond#/survey/{{surveySlug}}/{{response.question.slug}}/{{ uuid }}/edit" class="btn">edit</a>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="span6">
+        <!--<div leaflet multimarkers="mapResponse" center="map.center" zoom="map.zoom" popupfield="'answers'"></div>-->
+    </div>
+</div>

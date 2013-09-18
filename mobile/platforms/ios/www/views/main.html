@@ -1,0 +1,101 @@
+<header class="bar-title" ng-include="'views/mobileHeader.html'"></header>
+<nav class="bar-tab primary-nav" ng-include="'views/mobileMenu.html'"></nav>
+<div class="content">
+  <div class="content-padded">
+    <div class="main">
+      <!--<img src="assets/img/hapifis.jpg" />-->
+      <div ng-show="user">
+        <h2>
+          You are logged in as {{ user.username }}.
+        </h2>
+        <a class="btn btn-block btn-large btn-primary" ng-click="logout()">
+      logout
+    </a>
+        <div class="row-fluid upgrades">
+       <!--    <a class="btn btn-block btn-large" href="https://simarketsurvey.herokuapp.com/static/simarket.apk">Update Prod</a>
+          <a class="btn btn-block btn-large" href="https://simarketsurvey-test.herokuapp.com/static/simarket-test.apk">Update Test</a> -->
+          </br>
+          https://usvi-survey.herokuapp.com
+        </div>
+      </div>
+      <ul class="segmented-controller" ng-hide="user">
+        <li ng-class="{'active': showForm == 'login'}">
+          <a ng-click="toggleForm('login')">login</a>
+        </li>
+        <li ng-class="{'active': showForm == 'new-user'}">
+          <a ng-click="toggleForm('new-user')">signup</a>
+        </li>
+        <li ng-class="{'active': showForm == 'forgot'}">
+          <a ng-click="toggleForm('forgot')">forgot password</a>
+        </li>
+      </ul>
+      <div class="forms" ng-switch on="showForm" data-ng-animate="'wave'" ng-hide="user">
+        <div ng-switch-default>
+          <form ng-submit="authenticateUser(authUser)">
+            <div class="input-group">
+              <div class="input-row">
+                <input type="text" class="username" placeholder="enter your username..." ng-model="authUser.username"
+                required>
+              </div>
+              <div class="input-row">
+                <input type="password" class="password" placeholder="enter your password..." ng-model="authUser.password"
+                required>
+              </div>
+            </div>
+            <button class="btn btn-block btn-large" href="#/map">
+              login
+            </button>
+            <div class="error" ng-show="showError == 'auth-error'">
+              There was a problem authenticating. Please try again.
+            </div>
+          </form>
+        </div>
+        <div class="new-user-form" ng-switch-when="new-user">
+          <form ng-submit="createUser(newUser)">
+            <div class="input-group">
+              <div class="input-row">
+                <input type="text" placeholder="enter your username..." data-ng-model="newUser.username"
+                required>
+              </div>
+              <div class="input-row">
+                <input type="email" placeholder="enter your email address..." data-ng-model="newUser.emailaddress"
+                required>
+              </div>
+              <div class="input-row">
+                <input type="password" placeholder="enter your password..." data-ng-model="newUser.password1"
+                required>
+              </div>
+              <div class="input-row">
+                <input type="password" placeholder="enter your password again..." data-ng-model="newUser.password2"
+                required>
+              </div>
+            </div>
+            <button class="btn btn-block btn-large">
+              signup
+            </button>
+            <div class="error" ng-show="showError == 'duplicate-user'">
+              That username is not available.
+            </div>
+          </form>
+        </div>
+        <div class="forgot-form" ng-switch-when="forgot">
+          <form ng-submit="forgotPassword(user)">
+            <div class="input-group">
+              <div class="input-row">
+                <input type="text" placeholder="enter your username..." ng-model="user.username">
+              </div>
+            </div>
+            <button class="btn btn-block btn-large">
+              submit
+            </button>
+            <div class="info" ng-show="showInfo == 'forgot-user'">
+              You should receive an email with instructions on how to recover your password.
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
