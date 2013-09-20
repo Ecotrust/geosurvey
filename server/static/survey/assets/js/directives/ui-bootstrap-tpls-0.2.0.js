@@ -12,7 +12,6 @@ angular.module('ui.bootstrap.accordion', ['ui.bootstrap.collapse'])
   
   // This array keeps track of the accordion groups
   this.groups = [];
-
   // Ensure that all the groups in this accordion are closed, unless close-others explicitly says not to
   this.closeOthers = function(openGroup) {
     var closeOthers = angular.isDefined($attrs.closeOthers) ? $scope.$eval($attrs.closeOthers) : accordionConfig.closeOthers;
@@ -29,7 +28,6 @@ angular.module('ui.bootstrap.accordion', ['ui.bootstrap.collapse'])
   this.addGroup = function(groupScope) {
     var that = this;
     this.groups.push(groupScope);
-
     groupScope.$on('$destroy', function (event) {
       that.removeGroup(groupScope);
     });
@@ -42,6 +40,8 @@ angular.module('ui.bootstrap.accordion', ['ui.bootstrap.collapse'])
       this.groups.splice(this.groups.indexOf(group), 1);
     }
   };
+
+
 
 }])
 
@@ -65,7 +65,7 @@ angular.module('ui.bootstrap.accordion', ['ui.bootstrap.collapse'])
     transclude:true,              // It transcludes the contents of the directive into the template
     replace: true,                // The element containing the directive will be replaced with the template
     templateUrl:'template/accordion/accordion-group.html',
-    scope:{ heading:'@' },        // Create an isolated scope and interpolate the heading attribute onto this scope
+    scope:{ heading:'@', isOpen: '=isOpen' },        // Create an isolated scope and interpolate the heading attribute onto this scope
     controller: ['$scope', function($scope) {
       this.setHeading = function(element) {
         this.heading = element;
@@ -77,7 +77,6 @@ angular.module('ui.bootstrap.accordion', ['ui.bootstrap.collapse'])
       accordionCtrl.addGroup(scope);
 
       scope.isOpen = false;
-      
       if ( attrs.isOpen ) {
         getIsOpen = $parse(attrs.isOpen);
         setIsOpen = getIsOpen.assign;
@@ -89,8 +88,9 @@ angular.module('ui.bootstrap.accordion', ['ui.bootstrap.collapse'])
         
         scope.isOpen = getIsOpen ? getIsOpen(scope.$parent) : false;
       }
-
+      
       scope.$watch('isOpen', function(value) {
+      
         if ( value ) {
           accordionCtrl.closeOthers(scope);
         }
@@ -98,6 +98,14 @@ angular.module('ui.bootstrap.accordion', ['ui.bootstrap.collapse'])
           setIsOpen(scope.$parent, value);
         }
       });
+      scope.toggle = function () {
+        
+        if (_.isString(scope.isOpen)) {
+          setIsOpen(scope.$parent, true);
+        } else {
+          setIsOpen(scope.$parent, ! scope.isOpen);
+        }
+      }
     }
   };
 }])
@@ -499,6 +507,7 @@ angular.module('ui.bootstrap.collapse',['ui.bootstrap.transition'])
             fixUpHeight(scope, element, 'auto');
           }
         } else {
+          element.addClass('in');
           doTransition({ height : element[0].scrollHeight + 'px' })
           .then(function() {
             // This check ensures that we don't accidentally update the height if the user has closed
@@ -517,6 +526,7 @@ angular.module('ui.bootstrap.collapse',['ui.bootstrap.transition'])
           initialAnimSkip = false;
           fixUpHeight(scope, element, 0);
         } else {
+          element.removeClass('in');
           fixUpHeight(scope, element, element[0].scrollHeight + 'px');
           doTransition({'height':'0'});
         }
@@ -1702,7 +1712,7 @@ angular.module('ui.bootstrap.typeahead', [])
 angular.module("template/accordion/accordion-group.html", []).run(["$templateCache", function($templateCache){
   $templateCache.put("template/accordion/accordion-group.html",
     "<div class=\"accordion-group\">" +
-    "  <div class=\"accordion-heading\" ><a class=\"accordion-toggle\" ng-click=\"isOpen = !isOpen\" accordion-transclude=\"heading\">{{heading}}</a></div>" +
+    "  <div class=\"accordion-heading\" ng-class=\"{ 'open': isOpen }\" ng-click=\"toggle()\"><a class=\"accordion-toggle\" accordion-transclude=\"heading\">{{heading}}</a></div>" +
     "  <div class=\"accordion-body\" collapse=\"!isOpen\">" +
     "    <div class=\"accordion-inner\" ng-transclude></div>  </div>" +
     "</div>");

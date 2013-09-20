@@ -1,7 +1,7 @@
 angular.module('askApp')
     .directive('multiquestion', function() {
     return {
-        templateUrl: '/static/survey/views/multiQuestionTypes.html',
+        templateUrl: app.viewPath + 'views/multiQuestionTypes.html',
         restrict: 'EA',
         // replace: true,
         transclude: true,
@@ -13,7 +13,7 @@ angular.module('askApp')
         link: function postLink(scope, element, attrs) {
 
 
-
+            
             // get previously answered questions
             scope.getAnswer = function(questionSlug) {
                 var slug, gridSlug;
@@ -49,6 +49,9 @@ angular.module('askApp')
                 if (!option.checked && option.other) {
                     $scope.question.otherAnswer = null;
                 }
+                question.answerSelected = _.some(_.pluck(_.flatten(_.map(question.groupedOptions, function (option) { return option.options })), 'checked'));
+                
+                
             };
 
             // handle single select clicks
@@ -67,6 +70,9 @@ angular.module('askApp')
                     }
                 }
 
+
+                question.answerSelected = option.checked;
+
                 // enable continue
                 // if (!question.required || (option.checked && option !== question.otherOption)) {
                 //     $scope.isAnswerValid = true;
@@ -84,7 +90,7 @@ angular.module('askApp')
             if (scope.question.rows) {
                 scope.question.options = [];
                 _.each(scope.question.rows.split('\n'), function (row, index) {
-                    var matches = [];
+                    var matches = [], option;
                     if (_.isArray(scope.question.answer)) {
                         matches = _.filter(scope.question.answer, function (answer) {
                             return answer.text === row;
@@ -93,31 +99,43 @@ angular.module('askApp')
                         // handle single selects
                         matches = [true];
                     }
-                    
-                    scope.question.options.push({
+                    option = {
                         text: _.string.startsWith(row, '*') ? row.substr(1) : row,
                         label: _.string.slugify(row),
                         checked: matches.length ? true: false,
                         isGroupName: _.string.startsWith(row, '*')
-                    });
+                    };
+                    if (option.checked) {
+                        scope.question.answerSelected = true;
+                    }
+                    scope.question.options.push(option);
                 });
                 
                 scope.question.groupedOptions = [];
+                scope.question.answerSelected = false;
                 var groupName = "";
                 _.each(scope.question.rows.split('\n'), function (row, index) {
                     var matches = _.filter(scope.question.answer, function (answer) {
                         return answer.text === row;
                     });
                     var isGroupName = _.string.startsWith(row, '*');
+                    var group;
                     if ( isGroupName ) {
                         groupName = row.substr(1);
-                        scope.question.groupedOptions.push( { optionLabel: groupName, options: [] } );
+                        group = { optionLabel: groupName, options: [], open: false };
+                        scope.question.groupedOptions.push( group );
                     } else if ( scope.question.groupedOptions.length > 0 ) {
-                        _.findWhere( scope.question.groupedOptions, { optionLabel: groupName } ).options.push({
+                        group = _.findWhere( scope.question.groupedOptions, { optionLabel: groupName } );
+                        group.options.push({
                             text: row,
                             label: _.string.slugify(row),
                             checked: matches.length ? true : false
                         })
+                        if (matches.length) {
+                            scope.question.answerSelected = true;
+                            group.open = true;
+                            console.log(group.optionLabel);
+                        }
                     } 
                 });
 

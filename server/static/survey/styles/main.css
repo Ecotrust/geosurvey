@@ -1,6 +1,11 @@
 /* Will be compiled down to a single stylesheet with your sass files */
 
 
+.myLabel {
+  position: relative !important;
+
+}
+
 .dashboard {
   margin-top: 20px;
 }
@@ -217,31 +222,7 @@ ul + ul {
   margin-bottom: 4px;
   margin-top: 2px; 
 }
-.question .todo .accordion-div {
-  border-style: solid;
-  border-bottom-width: 1px;
-  border-left-width: 0px;
-  border-right-width: 0px;
-  border-top-width: 0px;
-  border-bottom-color: rgb(229, 229, 229);
-  padding-top: 5px;
-  padding-bottom: 5px;
-}
-.question .todo .accordion-other-div {
-  padding-top: 5px;
-  padding-bottom: 5px;
-}
-.question .todo .accordion-group {
-  border: 0px;
-}
-.question .todo .accordion-toggle {
-  font-size: 24px;
-  font-weight: 700;
-  margin-bottom: 4px;
-  margin-top: 2px;
-  text-decoration: none;
-  color: rgb(98, 133, 168);
-}
+
 .modal .question {
     max-width: 100%;
 }

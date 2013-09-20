@@ -1,34 +1,51 @@
-<header class="bar-title" titlebar></header>
-<mobilemenu user="user"></mobilemenu>
-<div class="content">
-  <div class="content-padded">
-    <div class="respondant" ng-class="{mapRespondant: question.type == 'map-multipoint'}" ng-hide="loading">
-        <div ng-hide="question.type == 'map-multipoint'" class="row-fluid row-progress-bar" style="height:12px !important;">
-            <div class="offset9 span3" style="height:12px !important; line-height: 5px;">
-                <div class="progress">
-                  <div class="bar" style="width: {{ ((survey.pages.indexOf(page) + 1) / survey.pages.length) * 100 }}%;"></div>
-                </div>
-                <!-- <div class="pull-right btn-group">
-                    <a class="btn" target="_blank" href="/admin/survey/question/{{question.id}}">admin</a>
-                    <a class="btn" target="_blank" href="/dash#/author/{{survey.slug}}/?question={{question.slug}}">edit</a>
-                </div> -->
+<div id="wrap" class="menu-page">
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-default navbar-fixed-top">
+        <button type="button" class="navbar-toggle">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#"><img src="assets/img/logo.png" class="center" /></a>
             </div>
-        </div>
-        <h2 class="question-title" ng-bind-html-unsafe="question.displayTitle" ng-hide="question.type == 'info' || question.type == 'map-multipoint'" ></h2>
-        <div ng-show="page">
-            <div ng-repeat="question in page.questions">
-                <h4 class="question-title">{{ question.title }}</h4>
-                <div ng-switch on="question.type">
-                    <div ng-switch-when="grid">
-                        <div gridquestion question="question" answers="answers" pageorder="$index"  viewpath="viewPath"></div>
-                    </div>
-                    <div ng-switch-default>
-                        <div multiquestion question="question" answers="answers" pageorder="$index"></div>
-                    </div>
-                </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    
+                </ul>
             </div>
-            <a class="btn btn-block btn-large btn-primary" ng-click="submitPage(page)">continue</a>
+            <!--/.nav-collapse -->
         </div>
-        <div ng-include="viewPath + 'views/questionTypes.html'"></div>
+        <div class="progress">
+          <div class="bar" style="width: {{ ((survey.pages.indexOf(page) + 1) / survey.pages.length) * 100 }}%;"></div>
+        </div>
     </div>
+
+    <!-- Begin page content -->
+    <div class="container">
+        <div class="respondant" ng-class="{mapRespondant: question.type == 'map-multipoint'}" ng-hide="loading">
+            <div ng-hide="question.type == 'map-multipoint'" class="row-fluid row-progress-bar" style="height:12px !important;">
+            </div>
+            <h2 class="question-title" ng-bind-html-unsafe="question.displayTitle" ng-hide="question.type == 'info' || question.type == 'map-multipoint'" ></h2>
+            <div ng-show="page">
+                <div ng-repeat="question in page.questions">
+                    <h4 class="question-title">{{ question.title }}</h4>
+                    <div ng-switch on="question.type">
+                        <div ng-switch-when="grid">
+                            <div gridquestion question="question" answers="answers" pageorder="$index"  viewpath="viewPath"></div>
+                        </div>
+                        <div ng-switch-default>
+                            <div multiquestion question="question" answers="answers" pageorder="$index"></div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+<div id="footer">
+    <a class="btn pull-left" href="javascript:history.back()"><span class="glyphicon glyphicon-arrow-left"></span></a>
+    <a class="btn pull-right" ng-click="submitPage(page)"><span class="glyphicon glyphicon-arrow-right"></span></a>
 </div>

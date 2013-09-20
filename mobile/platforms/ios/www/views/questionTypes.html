@@ -1,0 +1,318 @@
+<div ng-switch on="question.type">
+    <div ng-switch-when="pennies">
+        <div ng-include="viewPath + 'views/pennies.html'"></div>
+    </div>
+    <div ng-switch-when="info">
+        
+        <div class="info-content" ng-include="viewPath + infoView"></div>
+        <button class="btn btn-primary btn-block button-block btn-large" ng-tap="gotoNextQuestion()">continue</button>
+    </div>
+    <div ng-switch-when="integer">
+        <form class="question" ng-show="survey.questions.length" ng-submit="answerQuestion(answer)">
+            <input
+                name="integerAnswer"
+                ng-model="answer"
+                class="input-block-level"
+                placeholder="{{ question.label }}"
+                type="number"
+                step="1"
+                min="{{question.integer_min}}"
+                max="{{question.integer_max}}"
+                ui-event="{ keypress : 'onlyDigits($event)' }"
+                autofocus
+                ng-required="{{question.required}}"/>
+            <button type="submit" class="btn btn-primary btn-large btn-block button-block" ng-disabled="question.required && ! answer && answer != 0">continue</button>
+        </form>
+    </div>
+    <div ng-switch-when="number-with-unit">
+        <form class="question" ng-show="survey.questions.length" ng-submit="answerQuestion(answer, null, answerUnit)">
+            <input
+                name="integerAnswer"
+                ng-model="answer"
+                class="span7"
+                placeholder="{{ question.label }}"
+                type="number"
+                min="{{question.integer_min}}"
+                max="{{question.integer_max}}"
+                step="any"
+                ui-event="{ keypress : 'onlyDigits($event)' }"
+                autofocus
+                ng-required="{{question.required}}"/>
+            <select
+                ng-model="answerUnit"
+                class="span3 unit-select"
+                placeholder="{{ question.label }}"
+                required>
+                <option value="">Select Unit</option>
+                <option ng-repeat="option in question.options">{{ option.text }}</option>
+            </select>
+        
+            <button type="submit" class="btn btn-primary btn-large btn-block button-block" ng-disabled="question.required && ! answer && answer != 0">continue</button>
+        </form>
+    </div>
+    <div ng-switch-when="number">
+        <form class="question" ng-show="survey.questions.length" ng-submit="answerQuestion(answer)">
+            <input
+                name="integerAnswer"
+                ng-model="answer"
+                class="input-block-level"
+                placeholder="{{ question.label }}"
+                type="number"
+                min="{{question.integer_min}}"
+                max="{{question.integer_max}}"
+                step="any"
+                ui-event="{ keypress : 'onlyDigits($event)' }"
+                autofocus
+                ng-required="{{question.required}}"/>
+            <button type="submit" class="btn btn-primary btn-large btn-block button-block" ng-disabled="question.required && ! answer && answer != 0">continue</button>
+        </form>
+    </div>
+    <div ng-switch-when="auto-single-select">
+        <form class="question" ng-show="survey.questions.length" ng-submit="answerAutoSingleSelect(answer, otherAnswer)">
+            <select
+                ui-select2
+                ng-model="answer"
+                class="input-block-level"
+                placeholder="{{ question.label }}"
+                autofocus
+                required>
+                <option value="">{{ question.label }}</option>
+                <option 
+                    ng-repeat="option in question.options"
+                    value="{{ $index }}">
+                        {{ option.text || option.name }}
+                </option>
+                <option selected value="other">Other</option>
+            </select>
+            <input class="input-block-level" type="text" placeholder="{{ question.label }}" ng-show="answer == 'other'" ng-model="otherAnswer" autofocus/>   
+            <button type="submit" class="btn btn-primary btn-large btn-block button-block">continue</button>
+        </form>
+    </div>
+    <div ng-switch-when="text">
+        <form class="question" ng-show="survey.questions.length" ng-submit="answerQuestion(answer)">
+            <input class="input-block-level" type="text" placeholder="{{ question.label }}" ng-model="answer" autofocus />
+            <button type="submit" class="btn btn-primary btn-large btn-block button-block" ng-disabled="question.required && ! answer">continue</button>
+        </form>
+    </div>
+    <div ng-switch-when="currency">
+        <form class="question" ng-show="survey.questions.length" ng-submit="answerQuestion(answer)">
+            
+            <div class="input-prepend">
+              <span class="add-on">$</span>
+              <input class="input-block-level" type="number" step="any" placeholder="{{ question.label }}" ng-model="answer" autofocus/>
+            </div>
+
+            <!-- <button type="submit" class="btn btn-primary btn-large btn-block button-block" ng-disabled="question.required && ! answer">continue</button> -->
+            <button type="submit" class="btn btn-primary btn-large btn-block button-block" ng-disabled="question.required && ! answer && answer != 0">continue</button>
+        </form>
+    </div>
+    <div ng-switch-when="datepicker">
+        <form class="question" ng-show="survey.questions.length" ng-submit="answerQuestion(answer)">
+            <input class="input-block-level" type="date" placeholder="{{ question.label }}" ng-model="answer"/>
+            <button type="submit" class="btn btn-primary btn-large btn-block button-block">continue</button>
+        </form>
+    </div>
+    <div ng-switch-when="timepicker">
+        <form class="question" ng-show="survey.questions.length" ng-submit="answerQuestion(answer)">
+            <input class="input-block-level" type="time" placeholder="{{ question.label }}" ng-model="answer"/>
+            <button type="submit" class="btn btn-primary btn-large btn-block button-block">continue</button>
+        </form>
+    </div>
+
+    <div ng-switch-when="textarea">
+        <form class="question" ng-show="survey.questions.length" ng-submit="answerQuestion(answer)">
+            <textarea rows="5" placeholder="{{ question.label }}" ng-model="answer" autofocus></textarea>
+            <button type="submit" class="btn btn-primary btn-large btn-block button-block" ng-disabled="question.required && ! answer">continue</button>
+        </form>
+    </div>
+    <div ng-switch-when="single-select">
+        <form class="question" ng-show="survey.questions.length" ng-submit="answerSingleSelect(question.options, question.otherAnswer)">
+            <div class="todo mrm">
+                <ul>
+                  <li 
+                    ng-tap="$parent.onSingleSelectClicked(option, $parent.question)"
+                    ng-repeat="option in question.options"
+                    ng-class="{'todo-done': option.checked }">
+                    <div class="todo-content">
+                      <h4 class="todo-name">
+                        {{ option.text || option.name }}
+                      </h4>
+                      
+                    </div>
+                  </li>
+                  <li 
+                    ng-show="question.allow_other"
+                    ng-tap="$parent.onSingleSelectClicked($parent.question.otherOption, $parent.question)"
+                    ng-class="{'todo-done': $parent.question.otherOption.checked }">
+                    <div class="todo-content">
+                      <h4 class="todo-name">
+                        Other
+                      </h4>
+                    </div>
+                  </li>
+                </ul>
+            </div>
+            <input class="input-block-level" type="text" placeholder="Other Option" ng-show="question.otherOption.checked" ng-model="question.otherAnswer" autofocus/>             
+            <button type="submit" class="btn btn-large btn-block button-block" ng-class="{'btn-primary': isAnswerValid, disabled: !isAnswerValid }">continue</button>
+        </form>
+    </div>
+    <div ng-switch-when="yes-no">
+        <form class="question" ng-show="survey.questions.length" ng-submit="answerSingleSelect(question.options, question.otherAnswer)">
+            <div class="todo mrm">
+                <ul>
+                  <li 
+                    ng-tap="$parent.onSingleSelectClicked(option, $parent.question)"
+                    ng-repeat="option in question.options"
+                    ng-class="{'todo-done': option.checked }">
+                    <div class="todo-content">
+                      <h4 class="todo-name">
+                        {{ option.text || option.name }}
+                      </h4>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            <input class="input-block-level" type="text" placeholder="Other Option" ng-show="question.otherOption.checked" ng-model="question.otherAnswer" autofocus/>             
+            <button type="submit" class="btn btn-large btn-block button-block" ng-class="{'btn-primary': isAnswerValid, disabled: !isAnswerValid }">continue</button>
+        </form>
+    </div>
+    <!-- Multi-Select -->
+    <div ng-switch-when="multi-select">
+        <form class="question" ng-submit="answerMultiSelect(question)">
+            <div class="todo mrm">
+                <div ng-show="question.hoisted_options.length" ng-cloak class="hoisted-activities">
+                    <h3>Activities You Selected</h3>
+                    <ul class="hoisted">
+                        <li 
+                          ng-tap="$parent.onMultiSelectClicked(option, $parent.question)"
+                          ng-repeat="option in question.hoisted_options"
+                          ng-class="{'todo-done': option.checked }">
+                          <div class="todo-content">
+                            <h4 class="todo-name">
+                              {{option.text}}
+                            </h4>      
+                          </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <p ng-show="question.hoisted_options.length > 0" style="margin-bottom: 20px;">Are there additional activities you conducted at this location in the last 12 months? If so, please select from below.</p>
+            
+            <div class="todo mrm options-list">
+            
+              <!-- with accordion -->
+              <accordion ng-show="question.groupedOptions.length">
+                <div ng-repeat="groupOption in question.groupedOptions" class="accordion-div">
+                    <h3 ng-show="$parent.question.hoisted_options.length > 0">Other Activities</h3>
+                    <accordion-group heading="{{groupOption.optionLabel}}">
+                        <ul class="choices">
+                          <li 
+                            ng-tap="$parent.onMultiSelectClicked(option, $parent.question)"
+                            ng-repeat="option in groupOption.options" 
+                            ng-class="{'todo-done': option.checked, 'option-group-name': option.isGroupName }">
+                            <div class="todo-content">
+                              <h4 class="todo-name">
+                                {{option.text}}
+                              </h4>
+                            </div>
+                          </li>
+                        </ul>
+                    </accordion-group>
+                </div>
+                <div ng-show="question.allow_other" class="accordion-other-div">
+                    <accordion-group heading="Other">
+                        <ul class="choices">
+                          <li 
+                            ng-tap="onMultiSelectClicked(question.otherOption, question)"
+                            ng-class="{'todo-done': question.otherOption.checked }"
+                            ng-model="question.otherAnswer.text">
+                            <div class="todo-content">
+                              <h4 class="todo-name">
+                                Other
+                              </h4>
+                              
+                            </div>
+                          </li>
+                        </ul>
+                    </accordion-group>
+                </div>
+              </accordion>
+            
+              <!-- show if groupedOptions are present 
+              <div ng-show="question.groupedOptions.length">
+                <div ng-repeat="groupOption in question.groupedOptions">
+                    <h3 ng-show="$parent.question.hoisted_options.length > 0">Other Activities</h3>
+                    <h3>{{groupOption.optionLabel}}</h3>
+                    <ul class="choices">
+                      <li 
+                        ng-tap="$parent.onMultiSelectClicked(option, $parent.question)"
+                        ng-repeat="option in groupOption.options" 
+                        ng-class="{'todo-done': option.checked, 'option-group-name': option.isGroupName }">
+                        <div class="todo-content">
+                          <h4 class="todo-name">
+                            {{option.text}}
+                          </h4>
+                        </div>
+                      </li>
+                    </ul>
+                </div>
+                <div ng-show="question.allow_other">
+                    <h3>Other</h3>
+                    <ul class="choices">
+                      <li 
+                        ng-tap="onMultiSelectClicked(question.otherOption, question)"
+                        ng-class="{'todo-done': question.otherOption.checked }"
+                        ng-model="question.otherAnswer.text">
+                        <div class="todo-content">
+                          <h4 class="todo-name">
+                            Other
+                          </h4>
+                          
+                        </div>
+                      </li>
+                    </ul>
+                </div>
+              </div> -->
+              
+              <!-- show if groupedOptions are NOT present -->
+              <div ng-show="question.groupedOptions.length == 0">
+                <h3 ng-show="question.hoisted_options.length > 0">Other Activities</h3>
+                <ul class="choices">
+                  <li 
+                    ng-tap="$parent.onMultiSelectClicked(option, $parent.question)"
+                    ng-repeat="option in question.options" 
+                    ng-class="{'todo-done': option.checked }">
+                    <div class="todo-content">
+                      <h4 class="todo-name">
+                        {{option.text}}
+                      </h4>
+                      
+                    </div>
+                  </li>
+                  <li 
+                    ng-show="question.allow_other"
+                    ng-tap="onMultiSelectClicked(question.otherOption, question)"
+                    ng-class="{'todo-done': question.otherOption.checked }"
+                    ng-model="question.otherAnswer.text">
+                    <div class="todo-content">
+                      <h4 class="todo-name">
+                        Other
+                      </h4>
+                      
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              
+            </div>
+            <input class="input-block-level" type="text" placeholder="Other Option" ng-show="question.allow_other && question.otherOption.checked" ng-model="question.otherAnswer" autofocus/> 
+            <button type="submit" class="btn btn-large btn-block button-block" ng-hide="dialog" ng-class="{'btn-primary': isAnswerValid, 'disabled': !isAnswerValid }">continue</button>
+        </form>
+    </div>
+    <div ng-switch-when="map-multipoint">
+        <div ng-include="viewPath + 'views/mapQuestion.html'"></div>
+    </div>
+    <div ng-switch-when="grid">
+        <div ng-include="viewPath + 'views/gridQuestion.html'"></div>
+    </div>
+</div>

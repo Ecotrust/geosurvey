@@ -142,3 +142,15 @@ heroku pg:info
 heroku pgbackups:restore HEROKU_POSTGRESQL_WHITE_URL 'http://www.example.org/latest.dump'
 ```
 
+#Phonegap 3.0
+Make sure that you have a recent version of node and install the phonegap node module.
+```bash
+brew upgrade node
+sudo npm install -g phonegap
+phonegap create mobile -n DigitalDeck -i com.pointnineseven.digitaldeck
+```
+
+To run the ios simulator
+```bash
+fab vagrant emulate_ios
+```

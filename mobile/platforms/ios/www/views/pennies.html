@@ -1,0 +1,22 @@
+<div class="row-fluid">
+    <div class="span4">
+        <ul class="unstyled pennies">
+            <li ng-repeat="location in locations">
+                <div class="pull-right">
+                    <span><i class="icon-circle" ng-style="{ color: location.color }"></i></span>
+                    <input class="span8" type="text" 
+                        ng-model="location.pennies" 
+                        />
+                        <strong>pennies</strong>
+                </div>
+            </li>
+        </ul>
+        <h3 ng-show="question.total >= 0">{{ question.total }} Pennies Remain</h3>
+        <h3 ng-show="question.total < 0">You have allocated too many pennies</h3>
+    </div>
+    <div class="span8">
+        <leaflet center="map.center" zoom="map.zoom" multimarkers="locations" popupfield="'answer'"></leaflet>
+    </div>
+</div>
+<br/>
+<button class="btn btn-primary btn-block btn-large" ng-disabled="question.total != 0" ng-click="answerQuestion(answer)">continue</button>

@@ -1,0 +1,34 @@
+<header class="bar-title" titlebar></header>
+<mobilemenu user="user"></mobilemenu>
+<div class="content">
+  <div class="content-padded">
+    <div class="respondant" ng-class="{mapRespondant: question.type == 'map-multipoint'}" ng-hide="loading">
+        <div ng-hide="question.type == 'map-multipoint'" class="row-fluid row-progress-bar" style="height:12px !important;">
+            <div class="offset9 span3" style="height:12px !important; line-height: 5px;">
+                <div class="progress">
+                  <div class="bar" style="width: {{ ((survey.pages.indexOf(page) + 1) / survey.pages.length) * 100 }}%;"></div>
+                </div>
+                <!-- <div class="pull-right btn-group">
+                    <a class="btn" target="_blank" href="/admin/survey/question/{{question.id}}">admin</a>
+                    <a class="btn" target="_blank" href="/dash#/author/{{survey.slug}}/?question={{question.slug}}">edit</a>
+                </div> -->
+            </div>
+        </div>
+        <h2 class="question-title" ng-bind-html-unsafe="question.displayTitle" ng-hide="question.type == 'info' || question.type == 'map-multipoint'" ></h2>
+        <div ng-show="page">
+            <div ng-repeat="question in page.questions">
+                <h4 class="question-title">{{ question.title }}</h4>
+                <div ng-switch on="question.type">
+                    <div ng-switch-when="grid">
+                        <div gridquestion question="question" answers="answers" pageorder="$index"  viewpath="viewPath"></div>
+                    </div>
+                    <div ng-switch-default>
+                        <div multiquestion question="question" answers="answers" pageorder="$index"></div>
+                    </div>
+                </div>
+            </div>
+            <a class="btn btn-block btn-large btn-primary" ng-click="submitPage(page)">continue</a>
+        </div>
+        <div ng-include="viewPath + 'views/questionTypes.html'"></div>
+    </div>
+</div>

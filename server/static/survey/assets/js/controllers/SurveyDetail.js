@@ -721,6 +721,9 @@ $scope.loadSurvey = function(data) {
         if (! $routeParams.action === 'edit' && data.status === 'complete' || data.status === 'terminate') {
             $location.path(['survey', $scope.survey.slug, 'complete', $routeParams.uuidSlug].join('/'));
         }
+        $scope.survey.questions = _.flatten(_.map($scope.survey.pages, function(page) {
+            return page.questions;
+        }));
 
         // Get answers from user profile used to pre-populate profile questions.
         if (app.user && app.user.registration) {

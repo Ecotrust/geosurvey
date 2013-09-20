@@ -19,6 +19,11 @@ env.activate = 'source %s/bin/activate ' % env.virtualenv
 env.code_dir = '%s/%s' % (env.root_dir, app)
 env.media_dir = '%s/media' % env.root_dir
 
+vars = {
+    'app_dir': '/vagrant/server',
+    'venv': '/usr/local/venv/geosurvey'
+}
+
 
 @contextmanager
 def _virtualenv():
@@ -321,3 +326,29 @@ def provision():
 def prepare():
     install_chef(latest=False)
     provision()
+
+
+@task
+def emulate_ios():
+        run("cd %s && %s/bin/python manage.py package http://localhost:8000 '../mobile/www'" % (vars['app_dir'], vars['venv']))
+        local("cd mobile && /usr/local/share/npm/bin/phonegap run -V ios")
+
+
+@task
+def package_ios_test():
+        run("cd %s && %s/bin/python manage.py package https://usvi-survey.herokuapp.com '../mobile/www'" % (vars['app_dir'], vars['venv']))
+        local("cd mobile && /usr/local/share/npm/bin/phonegap build -V ios")
+
+
+
+@task
+def package():
+        run("cd %s && %s/bin/python manage.py package hapifis.herokuapp.com '../android/app/assets/www'" % (vars['app_dir'], vars['venv']))
+        local("android/app/cordova/build --debug")
+        local("cp ./android/app/bin/HapiFis-debug.apk server/static/hapifis.apk")
+
+@task
+def package_test():
+        run("cd %s && %s/bin/python manage.py package hapifis-test.herokuapp.com '../android/app/assets/www'" % (vars['app_dir'], vars['venv']))
+        local("android/app/cordova/build --debug")
+        local("cp ./android/app/bin/HapiFis-debug.apk server/static/hapifis-test.apk")

@@ -29,8 +29,9 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         url = args[0]
+        destDir = args[1]
         print "Packaging for %s" % url
-        dest = settings.PROJECT_ROOT / '../android/app/assets/www'
+        dest = settings.PROJECT_ROOT / destDir
 
         # copy the app html
         app_src = settings.PROJECT_ROOT / 'static/survey/mobile.html'
@@ -40,5 +41,5 @@ class Command(BaseCommand):
         # copy app assets
         copy_dir('static/survey/assets', "%s/assets" % dest)
         copy_dir('static/survey/views', "%s/views" % dest)
-        os.system("sed -i -e 's/APP_SERVER/%s/' %s/assets/js/app.js" % (url, dest))
-        os.system("sed -i -e 's/APP_SERVER/%s/' %s/views/main.html" % (url, dest))
+        os.system("sed -i -e 's,APP_SERVER,%s,' %s/assets/js/app.js" % (url, dest))
+        os.system("sed -i -e 's,APP_SERVER,%s,' %s/views/main.html" % (url, dest))
