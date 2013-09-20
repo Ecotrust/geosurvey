@@ -231,47 +231,38 @@
             </div>
             <p ng-show="question.hoisted_options.length > 0" style="margin-bottom: 20px;">Are there additional activities you conducted at this location in the last 12 months? If so, please select from below.</p>
             
-            <div class="select mrm options-list">
+            <div class="panel-group">
+              <div class="panel panel-default" ng-repeat="groupOption in question.groupedOptions">
+                <div class="panel-heading" ng-tap="groupOption.open = !groupOption.open">
+                  <h4 class="panel-title">
+                    <a class="accordion-toggle">
+                      {{groupOption.optionLabel}}
+                    </a>
+                  </h4>
+                </div>
+                <div id="{{ groupOption.optionLabel }}" class="panel-collapse collapse" ng-class="{ 'in': groupOption.open }">
+                  <div class="panel-body">
+                    <ul class="choices list-unstyled">
+                        <li  class="option"
+                          ng-tap="$parent.onMultiSelectClicked(option, $parent.question)"
+                          ng-repeat="option in groupOption.options" 
+                          ng-class="{'select-checked': option.checked, 'option-group-name': option.isGroupName }">
+                          <div class="select-content">
+                            <div class="checkbox"></div>
+                            <h4 class="select-name option-name">
+                              {{option.text}}
+                            </h4>
+                          </div>
+                        </li>
+                      </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- <div class="select mrm options-list"> -->
               <!-- with accordion -->
-              <accordion ng-show="question.groupedOptions.length" close-others="false">
-                <div ng-repeat="groupOption in question.groupedOptions" class="accordion-div">
-                    <h3 ng-show="$parent.question.hoisted_options.length > 0">Other Activities</h3>
-                    <!-- we have to negate is-open??? :( -->
-                    <accordion-group heading="{{groupOption.optionLabel}} {{groupOption.open}}" is-open="!groupOption.open" ng-class="{ 'option-checked': $parent.question.answerSelected }">
-                        <ul class="choices">
-                          <li  class="option"
-                            ng-tap="$parent.onMultiSelectClicked(option, $parent.question)"
-                            ng-repeat="option in groupOption.options" 
-                            ng-class="{'select-checked': option.checked, 'option-group-name': option.isGroupName }">
-                            <div class="select-content">
-                              <div class="checkbox"></div>
-                              <h4 class="select-name option-name">
-                                {{option.text}}
-                              </h4>
-                            </div>
-                          </li>
-                        </ul>
-                    </accordion-group>
-                </div>
-                <div ng-show="question.allow_other" class="accordion-other-div">
-                    <accordion-group heading="Other">
-                        <ul class="choices">
-                          <li class="option"
-                            ng-tap="onMultiSelectClicked(question.otherOption, question)"
-                            ng-class="{'select-checked': question.otherOption.checked }"
-                            ng-model="question.otherAnswer.text">
-                            <div class="select-content">
-                              <h4 class="select-name option-name">
-                                Other
-                              </h4>
-                              
-                            </div>
-                          </li>
-                        </ul>
-                    </accordion-group>
-                </div>
-              </accordion>
-            
+       
               <!-- show if groupedOptions are present 
               <div ng-show="question.groupedOptions.length">
                 <div ng-repeat="groupOption in question.groupedOptions">
