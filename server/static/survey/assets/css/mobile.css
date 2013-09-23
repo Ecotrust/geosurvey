@@ -28,7 +28,7 @@ html, body {
     padding: 60px 15px 0;
 }
 #wrap.menu-page > .container {
-    padding: 90px 15px 100px;
+    padding: 120px 15px 100px;
 }
 .container .credit {
     margin: 20px 0;
@@ -46,6 +46,7 @@ img.center {
 #wrap .page-header {
     border-bottom: 0;
     padding-bottom: 40px;
+    margin-top: 30px;
 }
 .navbar {
     background-color: rgb(25, 25, 25);
@@ -81,7 +82,7 @@ img.center {
 .main .navbar .container > * {
     display: none;
 }
-.select-content, .btn, .accordion-heading {
+.select-content, .btn-main, .accordion-heading {
     text-transform: uppercase;
     font-weight: bolder;
     text-align: left;
@@ -91,7 +92,7 @@ img.center {
     font-size: 20px;
     text-color: rgb(46, 46, 46);
 }
-.select-content, .btn-default:active, .accordion-heading {
+.select-content, .btn-main:active, .accordion-heading {
     background-color: rgb(24, 75, 83);
     border-color: rgba(0, 0, 0, 0);
 }
@@ -107,6 +108,7 @@ img.center {
     background-color: rgb(246, 235, 194);
     
 }
+
 .select .select-content h4 {
     margin-top: 0;
     margin-bottom: 0;
@@ -312,3 +314,34 @@ img.center {
     height: 250px;
     padding: 0;
 }
+.info {
+  padding-top: 20px;
+}
+  .info h3 {
+    color: rgb(244,244,244);
+  }
+.leaflet-control-attribution,
+.leaflet-control-zoom {
+  display: none;
+}
+.alert-notice {
+  position: fixed;
+  bottom: 0;
+  padding: 20px 20px 20px 10px;
+  background-color: rgba(49, 49, 49, .8);
+  width: 100%;
+  color: rgb(244, 244, 244);
+  font-size: 18px;
+}
+    .alert-notice div {
+        margin-top: 5px;
+    }
+.btn-outline-inverse {
+color: rgb(255, 255, 255);
+background-color: rgba(250, 189, 18, 0);
+border-color: rgb(250, 189, 18);
+}
+    .btn-outline-inverse:active,.btn-outline-inverse:hover {
+        color: rgb(244,244,244);
+        background-color: rgba(250, 189, 18, .5);
+    }

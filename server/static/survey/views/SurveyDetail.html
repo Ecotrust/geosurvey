@@ -27,7 +27,6 @@
         <div class="respondant" ng-class="{mapRespondant: question.type == 'map-multipoint'}" ng-hide="loading">
             <div ng-hide="question.type == 'map-multipoint'" class="row-fluid row-progress-bar" style="height:12px !important;">
             </div>
-            <h2 class="question-title" ng-bind-html-unsafe="question.displayTitle" ng-hide="question.type == 'info' || question.type == 'map-multipoint'" ></h2>
             <div ng-show="page">
                 <div class="question-wrapper" ng-repeat="question in page.questions">
                     <h4 class="question-title">{{ question.title }}</h4>

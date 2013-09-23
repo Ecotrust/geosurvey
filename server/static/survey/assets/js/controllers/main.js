@@ -86,6 +86,28 @@ angular.module('askApp')
             });
     };
 
-    $('#map').height($(window).height() - $('#map').offset().top);
+    $scope.resizeMap = function () {
+        if ($scope.message) {
+            $('#map').height($(window).height() - $('#map').offset().top - $('.alert-notice:visible').height() - 10);    
+        } else {
+            $('#map').height($(window).height() - $('#map').offset().top);    
+        }
+        
+    }
+
+    $scope.resizeMap();
+
+    $(window).on('resize', $scope.resizeMap);
+
+    $scope.dismissMessage = function () {
+        $scope.message = false;
+        $scope.resizeMap();
+    }
+
+    if (app.message) {
+        $scope.message = app.message;
+        delete app.message;
+        $scope.resizeMap();
+    }
 
   });

@@ -1,7 +1,7 @@
 //'use strict';
 
 angular.module('askApp')
-  .controller('CompleteCtrl', function ($scope, $routeParams, $http) {
+  .controller('CompleteCtrl', function ($scope, $routeParams, $http, $location) {
     var url = '/respond/complete/' + [$routeParams.surveySlug, $routeParams.uuidSlug].join('/');
 
     if (app.user) {
@@ -24,6 +24,7 @@ angular.module('askApp')
     if (app.offline) {
         app.respondents[$routeParams.uuidSlug].complete = true;
         app.respondents[$routeParams.uuidSlug].status = 'complete';
+        app.message = "You have completed a catch report."
     } else {
         $http.post(url).success(function (data) {
             app.data.state = $routeParams.action;
@@ -36,4 +37,5 @@ angular.module('askApp')
         app.data.responses = [];
     }
     $scope.completeView = '/static/survey/survey-pages/' + $routeParams.surveySlug + '/complete.html';
+    $location.path('#/');
   });
