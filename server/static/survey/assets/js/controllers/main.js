@@ -86,4 +86,6 @@ angular.module('askApp')
             });
     };
 
+    $('#map').height($(window).height() - $('#map').offset().top);
+
   });

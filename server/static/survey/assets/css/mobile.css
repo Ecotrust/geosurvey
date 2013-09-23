@@ -1,0 +1,306 @@
+body {
+    background-color: rgb(77, 136, 153);
+}
+html, body {
+    height: 100%;
+    /* The html and body elements cannot have any padding or margin. */
+}
+/* Wrapper for page content to push down footer */
+#wrap {
+    min-height: 100%;
+    max-height: 100%;
+    height: auto !important;
+    height: 100%;
+    /* Negative indent footer by its height */
+    margin: 0 auto -80px;
+    /* Pad bottom by footer height */
+    padding: 0 0 0;
+}
+/* Set the fixed height of the footer here */
+#footer {
+    position: fixed;
+    width: 100%;
+    margin: 0 auto -60px;
+    height: 80px;
+    background-color: rgb(54, 85, 91);
+}
+#wrap > .container {
+    padding: 60px 15px 0;
+}
+#wrap.menu-page > .container {
+    padding: 90px 15px 100px;
+}
+.container .credit {
+    margin: 20px 0;
+}
+#footer > .container {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+/* project styles, new skin */
+img.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+#wrap .page-header {
+    border-bottom: 0;
+    padding-bottom: 40px;
+}
+.navbar {
+    background-color: rgb(25, 25, 25);
+    border-bottom: 0;
+}
+.navbar .navbar-toggle {
+    position: absolute;
+    padding: 15px;
+    margin-top: 19px;
+    margin-left: 15px;
+    border: 0;
+}
+.navbar .navbar-toggle:hover {
+    background-color: inherit;
+}
+.navbar .navbar-toggle .icon-bar {
+    height: 3px;
+    width: 25px;
+}
+.navbar-brand {
+    float: none;
+    margin-top: 5px;
+}
+.navbar-brand img {
+    margin-top: 10px;
+    height: 40px;
+}
+.main .navbar {
+    height: 15px;
+    min-height: 15px;
+    background-color: rgb(250, 189, 18);
+}
+.main .navbar .container > * {
+    display: none;
+}
+.select-content, .btn, .accordion-heading {
+    text-transform: uppercase;
+    font-weight: bolder;
+    text-align: left;
+    padding: 8px 10px;
+    margin-bottom: 10px;
+    border-radius: 0;
+    font-size: 20px;
+    text-color: rgb(46, 46, 46);
+}
+.select-content, .btn-default:active, .accordion-heading {
+    background-color: rgb(24, 75, 83);
+    border-color: rgba(0, 0, 0, 0);
+}
+.select ul {
+    list-style: none;
+    -webkit-margin-before: 0;
+    -webkit-margin-after: 0;
+    -webkit-margin-start: 0;
+    -webkit-margin-end: 0;
+    -webkit-padding-start: 0;
+}
+.select .select-content {
+    background-color: rgb(246, 235, 194);
+}
+.select .select-content h4 {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.select .checkbox, .option .checkbox {
+    display: none;
+    width: 20px;
+    height: 20px;
+    background-color: rgb(49, 49, 49);
+    float: right;
+    margin: 0;
+}
+.select-checked .checkbox {
+    display: block;
+}
+.select .option-checked .select-unchecked .select-content {
+    background-color: rgb(24, 75, 83);
+}
+.menu-page .progress {
+    margin-bottom: 0;
+    margin-left: -15px;
+    margin-right: -15px;
+    border-radius: 0;
+    background-color: rgb(50, 50, 50);
+    height: 15px;
+}
+.menu-page .progress .bar {
+    height: 15px;
+    background-color: rgb(250, 189, 18);
+}
+.respondant {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.question-title {
+    color: rgb(244, 244, 244);
+    text-transform: uppercase;
+    font-size: 18px;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+.form-control, .question .form-control:focus, .unit-select {
+    background-color: rgb(246, 235, 194);
+    font-size: 20px;
+    font-weight: bold;
+    padding: 0px 15px;
+    height: 40px;
+    margin-bottom: 15px;
+    border-radius: 0;
+}
+.question .panel-heading {
+    background-color: rgb(246, 235, 194);
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-radius: 0;
+    margin-bottom: 10px;
+}
+.question .panel-heading a:hover {
+    text-decoration: none;
+}
+.question .panel-group .panel-heading + .panel-collapse .panel-body {
+    padding: 0;
+    background-color: inherit;
+    border-top: 0;
+}
+.question .panel-body .checkbox {
+    margin-top: 10px;
+}
+.question .panel-body .select-content {
+    padding: 2px 10px;
+}
+.question .panel-body .select-checked .select-content {
+    background-color: rgb(244, 218, 130);
+}
+.question .panel-body .select-content .select-name {
+    padding-left: 40px;
+}
+.question .panel, .question .panel-collapse {
+    background-color: inherit;
+    border-radius: 0;
+    border: 0;
+}
+.form-control.ng-pristine, .unit-select.ng-pristine {
+    background-color: rgb(24, 75, 83);
+    border: 0;
+    color: rgb(149, 149, 149);
+}
+.number-with-unit .form-control {
+    width: 48%;
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 0;
+}
+.select-wrapper {
+    width: 48%;
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 1.5%;
+    margin-top: 0;
+    background-color: rgb(24, 75, 83);
+    height: 40px;
+}
+.unit-selected {
+    background-color: rgb(246, 235, 194);
+}
+.unit-selected .unit-select {
+    color: rgb(85, 85, 85) !important;
+}
+.number-with-unit .unit-select {
+    width: 100%;
+    background: transparent;
+    -webkit-appearance: none;
+    border: 0;
+}
+/* .question .select .accordion-body {
+  -webkit-transition: height 0.8s;
+    -moz-transition: height 0.8s;
+    transition: height 0.8s;
+}
+*/
+.question .select .accordion-div {
+    border-style: solid;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.question .select .accordion-heading {
+    margin-bottom: 0;
+}
+.question .select .accordion-other-div {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.question .select .accordion-group {
+    border: 0px;
+}
+.question .select .accordion-toggle {
+    text-decoration: none;
+    color: rgb(50, 50, 50);
+}
+/*.question .select .open {
+ color: rgb(222,222,222); 
+ background-color: rgb(246 , 235, 194);
+}*/
+.question .select .accordion-body {
+    margin-top: 10px;
+}
+.question .select .accordion-body .select-name {
+    padding-left: 20px;
+}
+
+.ngViewport {
+  height: auto !important;
+}
+.ngGrid, .ngTopPanel, .ngRow.even, .ngRow.odd, .ngCell {
+  background-color: inherit;
+  border-top: 0;
+  border-bottom: 0;
+  border-left: 0;
+  border-right: 0;
+}
+
+.ngGrid input {
+  
+  padding: 10px;
+  font-weight: bold;
+  font-size: 16px;
+}
+  .ngGrid input {
+    background-color: rgb(246,233,194);  
+  }
+  
+.ngHeaderCell {
+  border-right: 0;
+  border-left: 0;
+  background-color: inherit;
+}
+
+.ngHeaderText, .ngCellText {
+  color: rgb(244,244,244);
+}
+
+#footer .btn {
+    color: rgb(244, 244, 244);
+    font-size: 50px;
+    padding: 0 30px;
+    background-color: rgb(24, 75, 83);
+    height: 100%;
+}
+#map {
+    margin-top: 80px;
+    height: 250px;
+    padding: 0;
+}
