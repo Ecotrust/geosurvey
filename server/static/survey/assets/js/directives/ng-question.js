@@ -202,6 +202,14 @@ angular.module('askApp')
             if (! scope.question.answer) {
                 delete scope.question.answer;
             }
+
+            console.log(scope.question.type);
+            if (scope.question.type === 'single-select' || scope.question.type === 'yes-no') {
+                scope.question.answerSelected = _.some(_.pluck(scope.question.options, 'checked'));    
+            } else if (scope.question.type === 'multi-select') {
+                scope.question.answerSelected = _.some(_.pluck(_.flatten(_.map(scope.question.groupedOptions, function (option) { return option.options })), 'checked'));             
+            }
+            
         }
     };
 });

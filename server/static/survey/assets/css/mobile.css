@@ -105,6 +105,7 @@ img.center {
 }
 .select .select-content {
     background-color: rgb(246, 235, 194);
+    
 }
 .select .select-content h4 {
     margin-top: 0;
@@ -120,6 +121,9 @@ img.center {
 }
 .select-checked .checkbox {
     display: block;
+}
+.select .option-checked .select-checked .select-content {
+  color: rgb(24,24,24);
 }
 .select .option-checked .select-unchecked .select-content {
     background-color: rgb(24, 75, 83);
@@ -140,6 +144,10 @@ img.center {
     margin-left: 10px;
     margin-right: 10px;
 }
+.question-wrapper {
+  margin-bottom: 20px;
+}
+
 .question-title {
     color: rgb(244, 244, 244);
     text-transform: uppercase;

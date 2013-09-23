@@ -193,7 +193,11 @@ angular.module('askApp')
             if (! scope.question.answer) {
                 delete scope.question.answer;
             }
-
+            element.on('focus', '.ngCellText', function (e) {
+                $(e.target).closest('.ngCell').next().find('input').focus();    
+                
+                
+            })
         }
     };
 });

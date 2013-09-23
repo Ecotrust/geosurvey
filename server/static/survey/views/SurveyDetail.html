@@ -29,7 +29,7 @@
             </div>
             <h2 class="question-title" ng-bind-html-unsafe="question.displayTitle" ng-hide="question.type == 'info' || question.type == 'map-multipoint'" ></h2>
             <div ng-show="page">
-                <div ng-repeat="question in page.questions">
+                <div class="question-wrapper" ng-repeat="question in page.questions">
                     <h4 class="question-title">{{ question.title }}</h4>
 
                     <div ng-switch on="question.type">
