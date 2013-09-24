@@ -1,0 +1,121 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Digital Deck</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="{{ STATIC_URL }}survey/assets/lib/css/bootstrap.css">
+
+    <!-- Custom styles for this template -->
+    <style>
+      body {
+      
+        background-color: rgb(49,49,49);
+      }
+
+      .nav-wrapper .navbar {
+        border: 0;
+        margin-bottom: 0;
+        background-color: inherit;
+      }
+
+      .form-signin {
+        max-width: 330px;
+        padding: 15px;
+        margin: 0 auto;
+      }
+      .form-signin .form-signin-heading,
+      .form-signin .checkbox {
+        margin-bottom: 10px;
+      }
+      .form-signin .checkbox {
+        font-weight: normal;
+      }
+      .form-signin .form-control {
+        position: relative;
+        font-size: 16px;
+        height: auto;
+        padding: 10px;
+        -webkit-box-sizing: border-box;
+           -moz-box-sizing: border-box;
+                box-sizing: border-box;
+      }
+      .form-signin .form-control:focus {
+        z-index: 2;
+      }
+      .form-signin input[type="text"] {
+        margin-bottom: -1px;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+      .form-signin input[type="password"] {
+        margin-bottom: 10px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+      }
+      .navbar-brand img {
+        height: 60px;
+      }
+      .nav-wrapper {
+        background-color: rgb(244,244,244);
+      }
+      .body-wrapper {
+        padding-top: 20px;
+      }
+      .body-wrapper .container {
+        background-color: rgb(244,244,244);
+      }
+      
+    </style>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="../../assets/js/html5shiv.js"></script>
+      <script src="../../assets/js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+<div class="nav-wrapper">
+  <div class="container nav-container">
+  <!-- Static navbar -->
+  <div class="navbar navbar-default">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/fisher"><img src="{{ STATIC_URL }}/survey/assets/img/deck-logo-dark.svg"/></a>
+    </div>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+          
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+          <li><a href="{% url 'auth_logout_next' '/fisher' %}">Logout</a></li>
+      </ul>
+      
+    </div><!--/.nav-collapse -->
+  </div>
+</div>
+</div>
+  <div class="body-wrapper">
+    <div class="container">
+
+      {% block content %}{% endblock %}
+
+    </div> <!-- /container -->
+  </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+  </body>
+</html>

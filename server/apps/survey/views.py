@@ -37,16 +37,21 @@ def survey(request, survey_slug=None, template='survey/survey.html'):
     return render_to_response(template, RequestContext(request, context))
 
 @staff_member_required
-def dash(request, survey_slug=None, template='survey/dash.html'):
-    if survey_slug is not None:
-        survey = get_object_or_404(Survey, slug=survey_slug, anon=True)
-        respondant = Respondant(survey=survey)
-        respondant.save()
-        if request.GET.get('get-uid', None) is not None:
-            return HttpResponse(simplejson.dumps({'success': "true", "uuid": respondant.uuid}))
-        return redirect("/respond#/survey/%s/%s" % (survey.slug, respondant.uuid))
+def dash(request, template='survey/dash.html'):
     return render_to_response(template, RequestContext(request, {}))
 
+@login_required
+def fisher(request, uuid=None, template='survey/fisher-dash.html'):
+    if uuid is None:
+        respondents = Respondant.objects.all().order_by('-ts')
+        if not request.user.is_staff:
+            respondents.filter(user=request.user)
+        return render_to_response(template, RequestContext(request, {'respondents': respondents}))
+    else:
+        respondent = Respondant.objects.get(uuid=uuid)
+        template='survey/fisher-detail.html'
+        return render_to_response(template, RequestContext(request, {'respondent': respondent}))
+    
 
 
 def submit_page(request, survey_slug, uuid): #, survey_slug, question_slug, uuid):

@@ -190,8 +190,8 @@
     {% if user.is_authenticated %}
     var isAuthenticated = true;
     app.user = {
-        username: "{{user.username}}"
-      }
+      username: "{{user.username}}"
+    }
     {% else %}
     var isAuthenticated = false;
     {% endif %}

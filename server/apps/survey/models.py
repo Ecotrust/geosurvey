@@ -6,6 +6,7 @@ from django.db.models import signals
 from django.shortcuts import get_object_or_404
 from account.models import UserProfile
 
+import dateutil.parser
 import datetime
 import uuid
 import simplejson
@@ -305,6 +306,9 @@ class Response(caching.base.CachingMixin, models.Model):
                     self.answer = answer['text']
                 if answer.get('name'):
                     self.answer = answer['name']
+            if self.question.type in ['monthpicker']:
+                date = dateutil.parser.parse(self.answer)
+                self.answer= "%s/%s" % (date.month, date.year)
             if self.question.type in ['number-with-unit']:
                 answer = simplejson.loads(self.answer_raw)
                 self.answer = answer['value']
