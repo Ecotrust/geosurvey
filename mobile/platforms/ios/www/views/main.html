@@ -54,8 +54,7 @@
                 <div class="new-user-form" ng-switch-when="new-user">
                     <form ng-submit="createUser(newUser)">
                         
-                            
-                                <input class="form-control" type="text" placeholder="enter your username..." data-ng-model="newUser.username" required>
+                                <input class="form-control" type="text" placeholder="enter your username..." data-ng-model="newUser.username" autocapitalize="off" vprequired>
                             
                                 <input class="form-control" type="email" placeholder="enter your email address..." data-ng-model="newUser.emailaddress" required>
                             

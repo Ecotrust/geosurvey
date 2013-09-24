@@ -23,7 +23,7 @@ try:
     EMAIL_HOST_PASSWORD = os.environ['SENDGRID_PASSWORD']
 except KeyError: 
     pass
-
+redis = None
 try:
     redis_url = urlparse.urlparse(os.environ.get('REDISTOGO_URL', None))
     CACHES = {
@@ -36,9 +36,27 @@ try:
             }
         }
     }
+    redis="Redis to go"
 except AttributeError:
     print "NO REDIS!!!!!!!!!"
     pass
+
+if redis is None:
+    try:
+        redis_url = urlparse.urlparse(os.environ.get('REDISCLOUD_URL'))
+        CACHES = {
+                'default': {
+                'BACKEND': 'redis_cache.RedisCache',
+                'LOCATION': '%s:%s' % (redis_url.hostname, redis_url.port),
+                'OPTIONS': {
+                'PASSWORD': redis_url.password,
+                        'DB': 0,
+            }
+          }
+        }
+    except AttributeError:
+        print "NO BACKUP REDIS!!!!!!!!!"
+        pass
 
 # CACHES = {
 #     'default': {
