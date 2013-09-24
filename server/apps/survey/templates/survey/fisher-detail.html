@@ -12,7 +12,7 @@
                 
             </thead>
             <tbody>
-            	{% for response in respondent.responses.all %}
+            	{% for response in respondent.responses.all reversed %}
                 <tr>
                     <td>{{ response.ts }}</td>
                     <td>{{ response.question.title }}</td>
