@@ -1,16 +1,35 @@
-<header class="bar-title" titlebar></header>
-<mobilemenu user="user"></mobilemenu>
-<div class="content">
-	<div class="content-padded">
-		<h2>Settings</h2>
-
+<div id="wrap" class="menu-page">
+    <!-- Fixed navbar -->
+        <div class="navbar navbar-default navbar-fixed-top">
+        <a type="button" class="navbar-toggle" href="#/">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </a>
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#"><img src="assets/img/deck-logo.svg" class="center logo" /></a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    
+                </ul>
+            </div>
+            <!--/.nav-collapse -->
+        </div>
+        <div class="progress">
+          <div class="bar" style="width: 100%;"></div>
+        </div>
+    </div>
+    <!-- Begin page content -->
+    <div class="container">
 		<div ng-show="changesSaved" class="alert alert-success">Changes saved</div>
 
 		<!-- <div ng-hide="confirmClear || editProfile">
 		    <a class="btn btn-block btn-large" ng-click="editProfile = true; changesSaved = false;">Edit Profile</a>
 		</div> -->
 		<div ng-hide="confirmClear || editProfile">
-		    <a class="btn btn-block btn-large btn-danger" ng-click="confirmClear = true; changesSaved = false;">Clear Cache</a>
+		    <a class="btn btn-main btn-default btn-lg btn-block btn-danger" ng-click="confirmClear = true; changesSaved = false;">Clear Cache</a>
 		</div>
 
 		<div ng-show="editProfile">
@@ -23,8 +42,8 @@
 
 		<div ng-show="confirmClear">
 		 	<div class="alert alert-info">This will remove all data including surveys</div>
-		    <a class="btn btn-block btn-large btn-danger" ng-tap="clearCache()">ok</a>
-		    <a class="btn btn-block btn-large" ng-tap="confirmClear = false">cancel</a>
+		    <a class="btn btn-main btn-default btn-lg btn-block btn-danger" ng-tap="clearCache()">ok</a>
+		    <a class="btn btn-main btn-default btn-lg btn-block" ng-tap="confirmClear = false">cancel</a>
 		</div>
 	</div>
 </div>

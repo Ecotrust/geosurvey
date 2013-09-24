@@ -1,27 +1,34 @@
-<header class="bar-title" titlebar></header>
-<mobilemenu user="user"></mobilemenu>
-<div class="content">
-  <div class="content-padded">
-        <h2>
-            Surveys for {{ user.username }}
-        </h2>
-        <div ng-hide="surveys" ng-show="hideSurveys">
-            <strong>Loading Surveys</strong>
-            <!-- <a class="button button-block">Load Surveys</a> -->
+<div id="wrap" class="menu-page">
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-default navbar-fixed-top">
+        <a type="button" class="navbar-toggle" href="#/">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </a>
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#"><img src="assets/img/deck-logo.svg" class="center logo" /></a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    
+                </ul>
+            </div>
+            <!--/.nav-collapse -->
+        </div>
+        <div class="progress">
+          <div class="bar" style="width: {{ ((survey.pages.indexOf(page) + 1) / survey.pages.length) * 100 }}%;"></div>
         </div>
     </div>
-    <div ng-hide="hideSurveys">
-        <ul class="list" ng-hide="hideSurveys">
+    <!-- Begin page content -->
+    <div class="container">
+        <ul class="list-unstyled" ng-hide="hideSurveys">
             <li ng-repeat="survey in surveys">
-                <a href="#/survey/{{survey.slug}}/1/offline">
+                <a type="button" class="btn btn-main btn-default btn-lg btn-block" href="#/survey/{{survey.slug}}/1/offline">
                     {{ survey.name }}
-                    <br/><span class="label label-success">updated: {{survey.updated_at |date: 'dd-MM-yyyy HH:mm' }}</span>
-                    <span class="chevron"></span>
                 </a>
             </li>
         </ul>
-        <div>
-            <a class="btn btn-block btn-large" ng-click="updateSurveys()">update surveys</a>
-        </div>
     </div>
 </div>

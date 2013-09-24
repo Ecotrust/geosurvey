@@ -9,7 +9,7 @@ if (localStorage.getItem('hapifish') && window.location.pathname !== '/respond')
 if (_.string.startsWith(window.location.protocol, "http")) {
     app.server = window.location.protocol + "//" + window.location.host;
 } else {
-    app.server = "https://usvi-survey.herokuapp.com";
+    app.server = "http://localhost:8000";
 }
 if (window.location.pathname === '/respond') {
     app.viewPath = app.server + '/static/survey/';

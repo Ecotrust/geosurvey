@@ -25,6 +25,8 @@ angular.module('askApp')
         app.respondents[$routeParams.uuidSlug].complete = true;
         app.respondents[$routeParams.uuidSlug].status = 'complete';
         app.message = "You have completed a catch report."
+        delete app.user.resumePath;
+        localStorage.setItem('hapifish', JSON.stringify(app));
     } else {
         $http.post(url).success(function (data) {
             app.data.state = $routeParams.action;

@@ -68,3 +68,139 @@ Terminating in response to SpringBoard's termination.
 2013-09-18 10:14:46.617 DigitalDeck[24768:19103] Multi-tasking -> Device: YES, App: YES
 2013-09-18 10:14:46.676 DigitalDeck[24768:19103] Resetting plugins due to page load.
 2013-09-18 10:14:46.863 DigitalDeck[24768:19103] Finished load of: file:///Users/eknuth/Library/Application%20Support/iPhone%20Simulator/6.1/Applications/93C26CCE-34CB-4962-BB48-5D6525C0E897/DigitalDeck.app/www/index.html#/
+2013-09-23 15:53:16.245 DigitalDeck[18965:19103] Multi-tasking -> Device: YES, App: YES
+2013-09-23 15:53:17.194 DigitalDeck[18965:19103] Resetting plugins due to page load.
+2013-09-23 15:53:17.829 DigitalDeck[18965:19103] Finished load of: file:///Users/eknuth/Library/Application%20Support/iPhone%20Simulator/6.1/Applications/93C26CCE-34CB-4962-BB48-5D6525C0E897/DigitalDeck.app/www/index.html#/
+2013-09-23 15:53:17.873 DigitalDeck[18965:1b403] ERROR whitelist rejection: url='http://tilestream.apps.ecotrust.org/v2/deck/7/40/56.png'
+2013-09-23 15:53:17.874 DigitalDeck[18965:1b403] ERROR whitelist rejection: url='http://tilestream.apps.ecotrust.org/v2/deck/7/40/56.png'
+2013-09-23 15:53:17.874 DigitalDeck[18965:1b403] ERROR whitelist rejection: url='http://tilestream.apps.ecotrust.org/v2/deck/7/40/56.png'
+2013-09-23 15:53:17.876 DigitalDeck[18965:1b403] ERROR whitelist rejection: url='http://tilestream.apps.ecotrust.org/v2/deck/7/41/56.png'
+2013-09-23 15:53:17.876 DigitalDeck[18965:1b403] ERROR whitelist rejection: url='http://tilestream.apps.ecotrust.org/v2/deck/7/41/56.png'
+2013-09-23 15:53:17.877 DigitalDeck[18965:1b403] ERROR whitelist rejection: url='http://tilestream.apps.ecotrust.org/v2/deck/7/41/56.png'
+2013-09-23 15:53:17.878 DigitalDeck[18965:1b403] ERROR whitelist rejection: url='http://tilestream.apps.ecotrust.org/v2/deck/7/40/57.png'
+2013-09-23 15:53:17.878 DigitalDeck[18965:1b403] ERROR whitelist rejection: url='http://tilestream.apps.ecotrust.org/v2/deck/7/40/57.png'
+2013-09-23 15:53:17.879 DigitalDeck[18965:1b403] ERROR whitelist rejection: url='http://tilestream.apps.ecotrust.org/v2/deck/7/40/57.png'
+2013-09-23 15:53:17.880 DigitalDeck[18965:1b403] ERROR whitelist rejection: url='http://tilestream.apps.ecotrust.org/v2/deck/7/41/57.png'
+2013-09-23 15:53:17.881 DigitalDeck[18965:1b403] ERROR whitelist rejection: url='http://tilestream.apps.ecotrust.org/v2/deck/7/41/57.png'
+2013-09-23 15:53:17.881 DigitalDeck[18965:1b403] ERROR whitelist rejection: url='http://tilestream.apps.ecotrust.org/v2/deck/7/41/57.png'
+2013-09-23 15:53:26.704 DigitalDeck[18965:19103] Resetting plugins due to page load.
+2013-09-23 15:53:26.846 DigitalDeck[18965:19103] Finished load of: file:///Users/eknuth/Library/Application%20Support/iPhone%20Simulator/6.1/Applications/93C26CCE-34CB-4962-BB48-5D6525C0E897/DigitalDeck.app/www/index.html#/
+2013-09-23 15:53:26.882 DigitalDeck[18965:1b403] ERROR whitelist rejection: url='http://tilestream.apps.ecotrust.org/v2/deck/7/40/56.png'
+2013-09-23 15:53:26.882 DigitalDeck[18965:1b403] ERROR whitelist rejection: url='http://tilestream.apps.ecotrust.org/v2/deck/7/40/56.png'
+2013-09-23 15:53:26.883 DigitalDeck[18965:1b403] ERROR whitelist rejection: url='http://tilestream.apps.ecotrust.org/v2/deck/7/40/56.png'
+2013-09-23 15:53:26.884 DigitalDeck[18965:1b403] ERROR whitelist rejection: url='http://tilestream.apps.ecotrust.org/v2/deck/7/41/56.png'
+2013-09-23 15:53:26.885 DigitalDeck[18965:1b403] ERROR whitelist rejection: url='http://tilestream.apps.ecotrust.org/v2/deck/7/41/56.png'
+2013-09-23 15:53:26.885 DigitalDeck[18965:1b403] ERROR whitelist rejection: url='http://tilestream.apps.ecotrust.org/v2/deck/7/41/56.png'
+2013-09-23 15:53:26.886 DigitalDeck[18965:1b403] ERROR whitelist rejection: url='http://tilestream.apps.ecotrust.org/v2/deck/7/40/57.png'
+2013-09-23 15:53:26.887 DigitalDeck[18965:1b403] ERROR whitelist rejection: url='http://tilestream.apps.ecotrust.org/v2/deck/7/40/57.png'
+2013-09-23 15:53:26.888 DigitalDeck[18965:1b403] ERROR whitelist rejection: url='http://tilestream.apps.ecotrust.org/v2/deck/7/40/57.png'
+2013-09-23 15:53:26.889 DigitalDeck[18965:1b403] ERROR whitelist rejection: url='http://tilestream.apps.ecotrust.org/v2/deck/7/41/57.png'
+2013-09-23 15:53:26.889 DigitalDeck[18965:1b403] ERROR whitelist rejection: url='http://tilestream.apps.ecotrust.org/v2/deck/7/41/57.png'
+2013-09-23 15:53:26.890 DigitalDeck[18965:1b403] ERROR whitelist rejection: url='http://tilestream.apps.ecotrust.org/v2/deck/7/41/57.png'
+2013-09-23 15:53:50.202 DigitalDeck[18965:1b403] ERROR whitelist rejection: url='http://localhost:8000/account/authenticateUser'
+2013-09-23 15:53:50.203 DigitalDeck[18965:1b403] ERROR whitelist rejection: url='http://localhost:8000/account/authenticateUser'
+2013-09-23 15:53:50.204 DigitalDeck[18965:1b403] ERROR whitelist rejection: url='http://localhost:8000/account/authenticateUser'
+Terminating in response to SpringBoard's termination.
+2013-09-23 16:21:48.088 DigitalDeck[22364:19103] Multi-tasking -> Device: YES, App: YES
+2013-09-23 16:21:48.169 DigitalDeck[22364:19103] Resetting plugins due to page load.
+2013-09-23 16:21:48.513 DigitalDeck[22364:19103] Finished load of: file:///Users/eknuth/Library/Application%20Support/iPhone%20Simulator/6.1/Applications/93C26CCE-34CB-4962-BB48-5D6525C0E897/DigitalDeck.app/www/index.html#/
+Terminating in response to SpringBoard's termination.
+2013-09-23 16:33:30.383 DigitalDeck[26687:19103] Multi-tasking -> Device: YES, App: YES
+2013-09-23 16:33:30.440 DigitalDeck[26687:19103] Resetting plugins due to page load.
+2013-09-23 16:33:30.771 DigitalDeck[26687:19103] Finished load of: file:///Users/eknuth/Library/Application%20Support/iPhone%20Simulator/6.1/Applications/93C26CCE-34CB-4962-BB48-5D6525C0E897/DigitalDeck.app/www/index.html#/
+2013-09-23 16:37:32.035 DigitalDeck[27563:19103] Multi-tasking -> Device: YES, App: YES
+2013-09-23 16:37:32.122 DigitalDeck[27563:19103] Resetting plugins due to page load.
+2013-09-23 16:37:32.514 DigitalDeck[27563:19103] Finished load of: file:///Users/eknuth/Library/Application%20Support/iPhone%20Simulator/6.1/Applications/93C26CCE-34CB-4962-BB48-5D6525C0E897/DigitalDeck.app/www/index.html#/
+2013-09-23 16:40:12.750 DigitalDeck[28448:19103] Multi-tasking -> Device: YES, App: YES
+2013-09-23 16:40:12.824 DigitalDeck[28448:19103] Resetting plugins due to page load.
+2013-09-23 16:40:13.041 DigitalDeck[28448:19103] Finished load of: file:///Users/eknuth/Library/Application%20Support/iPhone%20Simulator/6.1/Applications/93C26CCE-34CB-4962-BB48-5D6525C0E897/DigitalDeck.app/www/index.html#/
+Terminating in response to SpringBoard's termination.
+2013-09-23 16:51:45.084 DigitalDeck[29631:19103] Multi-tasking -> Device: YES, App: YES
+2013-09-23 16:51:45.166 DigitalDeck[29631:19103] Resetting plugins due to page load.
+2013-09-23 16:51:45.368 DigitalDeck[29631:19103] Finished load of: file:///Users/eknuth/Library/Application%20Support/iPhone%20Simulator/6.1/Applications/93C26CCE-34CB-4962-BB48-5D6525C0E897/DigitalDeck.app/www/index.html#/
+Terminating in response to SpringBoard's termination.
+2013-09-23 16:54:54.292 DigitalDeck[30530:19103] Multi-tasking -> Device: YES, App: YES
+2013-09-23 16:54:54.363 DigitalDeck[30530:19103] Resetting plugins due to page load.
+2013-09-23 16:54:54.618 DigitalDeck[30530:19103] Finished load of: file:///Users/eknuth/Library/Application%20Support/iPhone%20Simulator/6.1/Applications/93C26CCE-34CB-4962-BB48-5D6525C0E897/DigitalDeck.app/www/index.html#/
+Terminating in response to SpringBoard's termination.
+2013-09-23 17:06:34.870 DigitalDeck[32638:19103] Multi-tasking -> Device: YES, App: YES
+2013-09-23 17:06:34.951 DigitalDeck[32638:19103] Resetting plugins due to page load.
+2013-09-23 17:06:35.273 DigitalDeck[32638:19103] Finished load of: file:///Users/eknuth/Library/Application%20Support/iPhone%20Simulator/6.1/Applications/93C26CCE-34CB-4962-BB48-5D6525C0E897/DigitalDeck.app/www/index.html#/
+Terminating in response to SpringBoard's termination.
+2013-09-23 17:08:39.329 DigitalDeck[33552:19103] Multi-tasking -> Device: YES, App: YES
+2013-09-23 17:08:39.371 DigitalDeck[33552:19103] Resetting plugins due to page load.
+2013-09-23 17:08:39.681 DigitalDeck[33552:19103] Finished load of: file:///Users/eknuth/Library/Application%20Support/iPhone%20Simulator/6.1/Applications/93C26CCE-34CB-4962-BB48-5D6525C0E897/DigitalDeck.app/www/index.html#/
+Terminating in response to SpringBoard's termination.
+2013-09-23 17:16:39.720 DigitalDeck[34503:19103] Multi-tasking -> Device: YES, App: YES
+2013-09-23 17:16:39.856 DigitalDeck[34503:19103] Resetting plugins due to page load.
+2013-09-23 17:16:40.193 DigitalDeck[34503:19103] Finished load of: file:///Users/eknuth/Library/Application%20Support/iPhone%20Simulator/6.1/Applications/93C26CCE-34CB-4962-BB48-5D6525C0E897/DigitalDeck.app/www/index.html#/
+Terminating in response to SpringBoard's termination.
+2013-09-23 17:32:27.615 DigitalDeck[35479:19103] Multi-tasking -> Device: YES, App: YES
+2013-09-23 17:32:28.701 DigitalDeck[35479:19103] Resetting plugins due to page load.
+2013-09-23 17:32:29.243 DigitalDeck[35479:19103] Finished load of: file:///Users/eknuth/Library/Application%20Support/iPhone%20Simulator/6.1/Applications/93C26CCE-34CB-4962-BB48-5D6525C0E897/DigitalDeck.app/www/index.html#/
+Terminating in response to SpringBoard's termination.
+2013-09-23 17:35:10.015 DigitalDeck[36420:19103] Multi-tasking -> Device: YES, App: YES
+2013-09-23 17:35:10.082 DigitalDeck[36420:19103] Resetting plugins due to page load.
+2013-09-23 17:35:10.323 DigitalDeck[36420:19103] Finished load of: file:///Users/eknuth/Library/Application%20Support/iPhone%20Simulator/6.1/Applications/93C26CCE-34CB-4962-BB48-5D6525C0E897/DigitalDeck.app/www/index.html#/
+Terminating in response to SpringBoard's termination.
+2013-09-23 17:38:50.507 DigitalDeck[37387:19103] Multi-tasking -> Device: YES, App: YES
+2013-09-23 17:38:50.572 DigitalDeck[37387:19103] Resetting plugins due to page load.
+2013-09-23 17:38:50.871 DigitalDeck[37387:19103] Finished load of: file:///Users/eknuth/Library/Application%20Support/iPhone%20Simulator/6.1/Applications/93C26CCE-34CB-4962-BB48-5D6525C0E897/DigitalDeck.app/www/index.html#/
+Terminating in response to SpringBoard's termination.
+2013-09-24 10:24:04.515 DigitalDeck[43916:19103] Multi-tasking -> Device: YES, App: YES
+2013-09-24 10:24:04.605 DigitalDeck[43916:19103] Resetting plugins due to page load.
+2013-09-24 10:24:04.886 DigitalDeck[43916:19103] Finished load of: file:///Users/eknuth/Library/Application%20Support/iPhone%20Simulator/6.1/Applications/93C26CCE-34CB-4962-BB48-5D6525C0E897/DigitalDeck.app/www/index.html#/
+2013-09-24 10:25:52.613 DigitalDeck[43916:19103] Resetting plugins due to page load.
+2013-09-24 10:25:52.781 DigitalDeck[43916:19103] Finished load of: file:///Users/eknuth/Library/Application%20Support/iPhone%20Simulator/6.1/Applications/93C26CCE-34CB-4962-BB48-5D6525C0E897/DigitalDeck.app/www/index.html#/
+Terminating in response to SpringBoard's termination.
+2013-09-24 10:27:58.579 DigitalDeck[44841:19103] Multi-tasking -> Device: YES, App: YES
+2013-09-24 10:27:58.713 DigitalDeck[44841:19103] Resetting plugins due to page load.
+2013-09-24 10:27:59.171 DigitalDeck[44841:19103] Finished load of: file:///Users/eknuth/Library/Application%20Support/iPhone%20Simulator/6.1/Applications/93C26CCE-34CB-4962-BB48-5D6525C0E897/DigitalDeck.app/www/index.html#/
+2013-09-24 10:34:05.140 DigitalDeck[45786:19103] Multi-tasking -> Device: YES, App: YES
+2013-09-24 10:34:05.255 DigitalDeck[45786:19103] Resetting plugins due to page load.
+2013-09-24 10:34:05.694 DigitalDeck[45786:19103] Finished load of: file:///Users/eknuth/Library/Application%20Support/iPhone%20Simulator/6.1/Applications/93C26CCE-34CB-4962-BB48-5D6525C0E897/DigitalDeck.app/www/index.html#/
+Terminating in response to SpringBoard's termination.
+2013-09-24 11:26:17.319 DigitalDeck[47018:19103] Multi-tasking -> Device: YES, App: YES
+2013-09-24 11:26:17.417 DigitalDeck[47018:19103] Resetting plugins due to page load.
+2013-09-24 11:26:18.139 DigitalDeck[47018:19103] Finished load of: file:///Users/eknuth/Library/Application%20Support/iPhone%20Simulator/6.1/Applications/93C26CCE-34CB-4962-BB48-5D6525C0E897/DigitalDeck.app/www/index.html#/
+Terminating in response to SpringBoard's termination.
+2013-09-24 11:32:58.701 DigitalDeck[47966:19103] Multi-tasking -> Device: YES, App: YES
+2013-09-24 11:32:58.990 DigitalDeck[47966:19103] Resetting plugins due to page load.
+2013-09-24 11:33:00.691 DigitalDeck[47966:19103] Finished load of: file:///Users/eknuth/Library/Application%20Support/iPhone%20Simulator/6.1/Applications/93C26CCE-34CB-4962-BB48-5D6525C0E897/DigitalDeck.app/www/index.html#/
+Terminating in response to SpringBoard's termination.
+2013-09-24 11:34:57.633 DigitalDeck[48894:19103] Multi-tasking -> Device: YES, App: YES
+2013-09-24 11:34:57.724 DigitalDeck[48894:19103] Resetting plugins due to page load.
+2013-09-24 11:34:58.080 DigitalDeck[48894:19103] Finished load of: file:///Users/eknuth/Library/Application%20Support/iPhone%20Simulator/6.1/Applications/93C26CCE-34CB-4962-BB48-5D6525C0E897/DigitalDeck.app/www/index.html#/
+Terminating in response to SpringBoard's termination.
+2013-09-24 11:37:06.924 DigitalDeck[49805:19103] Multi-tasking -> Device: YES, App: YES
+2013-09-24 11:37:07.001 DigitalDeck[49805:19103] Resetting plugins due to page load.
+2013-09-24 11:37:07.322 DigitalDeck[49805:19103] Finished load of: file:///Users/eknuth/Library/Application%20Support/iPhone%20Simulator/6.1/Applications/93C26CCE-34CB-4962-BB48-5D6525C0E897/DigitalDeck.app/www/index.html#/
+Terminating in response to SpringBoard's termination.
+2013-09-24 11:55:31.510 DigitalDeck[50769:19103] Multi-tasking -> Device: YES, App: YES
+2013-09-24 11:55:31.600 DigitalDeck[50769:19103] Resetting plugins due to page load.
+2013-09-24 11:55:32.120 DigitalDeck[50769:19103] Finished load of: file:///Users/eknuth/Library/Application%20Support/iPhone%20Simulator/6.1/Applications/93C26CCE-34CB-4962-BB48-5D6525C0E897/DigitalDeck.app/www/index.html#/
+Terminating in response to SpringBoard's termination.
+2013-09-24 11:59:38.409 DigitalDeck[51670:19103] Multi-tasking -> Device: YES, App: YES
+2013-09-24 11:59:38.551 DigitalDeck[51670:19103] Resetting plugins due to page load.
+2013-09-24 11:59:39.425 DigitalDeck[51670:19103] Finished load of: file:///Users/eknuth/Library/Application%20Support/iPhone%20Simulator/6.1/Applications/93C26CCE-34CB-4962-BB48-5D6525C0E897/DigitalDeck.app/www/index.html#/
+Terminating in response to SpringBoard's termination.
+2013-09-24 12:04:09.086 DigitalDeck[52574:19103] Multi-tasking -> Device: YES, App: YES
+2013-09-24 12:04:09.255 DigitalDeck[52574:19103] Resetting plugins due to page load.
+2013-09-24 12:04:10.165 DigitalDeck[52574:19103] Finished load of: file:///Users/eknuth/Library/Application%20Support/iPhone%20Simulator/6.1/Applications/93C26CCE-34CB-4962-BB48-5D6525C0E897/DigitalDeck.app/www/index.html#/
+Terminating in response to SpringBoard's termination.
+2013-09-24 12:08:28.706 DigitalDeck[53548:19103] Multi-tasking -> Device: YES, App: YES
+2013-09-24 12:08:28.795 DigitalDeck[53548:19103] Resetting plugins due to page load.
+2013-09-24 12:08:29.421 DigitalDeck[53548:19103] Finished load of: file:///Users/eknuth/Library/Application%20Support/iPhone%20Simulator/6.1/Applications/93C26CCE-34CB-4962-BB48-5D6525C0E897/DigitalDeck.app/www/index.html#/
+2013-09-24 12:09:05.752 DigitalDeck[53548:19103] Resetting plugins due to page load.
+2013-09-24 12:09:05.882 DigitalDeck[53548:19103] Finished load of: file:///Users/eknuth/Library/Application%20Support/iPhone%20Simulator/6.1/Applications/93C26CCE-34CB-4962-BB48-5D6525C0E897/DigitalDeck.app/www/index.html#/settings
+2013-09-24 12:09:14.701 DigitalDeck[53548:19103] Resetting plugins due to page load.
+2013-09-24 12:09:14.834 DigitalDeck[53548:19103] Finished load of: file:///Users/eknuth/Library/Application%20Support/iPhone%20Simulator/6.1/Applications/93C26CCE-34CB-4962-BB48-5D6525C0E897/DigitalDeck.app/www/index.html#/
+Terminating in response to SpringBoard's termination.
+2013-09-24 12:12:50.504 DigitalDeck[54473:19103] Multi-tasking -> Device: YES, App: YES
+2013-09-24 12:12:50.660 DigitalDeck[54473:19103] Resetting plugins due to page load.
+2013-09-24 12:12:51.077 DigitalDeck[54473:19103] Finished load of: file:///Users/eknuth/Library/Application%20Support/iPhone%20Simulator/6.1/Applications/93C26CCE-34CB-4962-BB48-5D6525C0E897/DigitalDeck.app/www/index.html#/
+Terminating in response to SpringBoard's termination.
+2013-09-24 12:14:52.537 DigitalDeck[55405:19103] Multi-tasking -> Device: YES, App: YES
+2013-09-24 12:14:52.695 DigitalDeck[55405:19103] Resetting plugins due to page load.
+2013-09-24 12:14:53.178 DigitalDeck[55405:19103] Finished load of: file:///Users/eknuth/Library/Application%20Support/iPhone%20Simulator/6.1/Applications/93C26CCE-34CB-4962-BB48-5D6525C0E897/DigitalDeck.app/www/index.html#/
+Terminating in response to SpringBoard's termination.

@@ -28,7 +28,7 @@ angular.module('askApp')
 
                 map.addLayer(layer);
                 map.setView([18.35, -64.85], 7);
-
+                window.map = map;
             }
         }
     });

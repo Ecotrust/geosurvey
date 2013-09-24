@@ -5,6 +5,44 @@ html, body {
     height: 100%;
     /* The html and body elements cannot have any padding or margin. */
 }
+
+a {
+    color: rgb(244,244,244);
+    font-size: 16px;
+}
+
+::-webkit-input-placeholder {
+   color: rgb(179,213,222) !important;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+ color: rgb(179,213,222) !important;
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: rgb(179,213,222) !important;
+}
+
+:-ms-input-placeholder {  
+   color: rgb(179,213,222) !important;
+}
+
+input.datepicker {
+    -webkit-appearance: textfield;
+}
+
+.table, .table td {
+    border-top: 0!important;
+}
+
+.table .label {
+    font-size: 16px;
+}
+
+.error {
+    color: red;
+}
+
 /* Wrapper for page content to push down footer */
 #wrap {
     min-height: 100%;
@@ -25,10 +63,10 @@ html, body {
     background-color: rgb(54, 85, 91);
 }
 #wrap > .container {
-    padding: 60px 15px 0;
+    padding: 40px 15px 20px;
 }
 #wrap.menu-page > .container {
-    padding: 120px 15px 100px;
+    padding: 90px 15px 100px;
 }
 .container .credit {
     margin: 20px 0;
@@ -42,21 +80,25 @@ img.center {
     display: block;
     margin-left: auto;
     margin-right: auto;
+    height: 90px;
 }
 #wrap .page-header {
     border-bottom: 0;
-    padding-bottom: 40px;
-    margin-top: 30px;
+    padding-bottom: 0x;
+    margin-top: 0;
 }
 .navbar {
     background-color: rgb(25, 25, 25);
     border-bottom: 0;
 }
+.navbar .container {
+    height: 60px;
+}
 .navbar .navbar-toggle {
     position: absolute;
-    padding: 15px;
-    margin-top: 19px;
-    margin-left: 15px;
+    padding: 10px;
+    margin-top: 10px;
+    margin-left: 10px;
     border: 0;
 }
 .navbar .navbar-toggle:hover {
@@ -71,12 +113,12 @@ img.center {
     margin-top: 5px;
 }
 .navbar-brand img {
-    margin-top: 10px;
-    height: 40px;
+    margin-top: -24px;
+    height: 65px;
 }
 .main .navbar {
-    height: 15px;
-    min-height: 15px;
+    height: 10px;
+    min-height: 10px;
     background-color: rgb(250, 189, 18);
 }
 .main .navbar .container > * {
@@ -86,11 +128,14 @@ img.center {
     text-transform: uppercase;
     font-weight: bolder;
     text-align: left;
-    padding: 8px 10px;
+    padding: 2px 10px;
     margin-bottom: 10px;
     border-radius: 0;
-    font-size: 20px;
+    font-size: 16px;
     text-color: rgb(46, 46, 46);
+}
+.question .select-content {
+    padding: 8px 10px;
 }
 .select-content, .btn-main:active, .accordion-heading {
     background-color: rgb(24, 75, 83);
@@ -115,8 +160,8 @@ img.center {
 }
 .select .checkbox, .option .checkbox {
     display: none;
-    width: 20px;
-    height: 20px;
+    width: 15px;
+    height: 15px;
     background-color: rgb(49, 49, 49);
     float: right;
     margin: 0;
@@ -136,10 +181,10 @@ img.center {
     margin-right: -15px;
     border-radius: 0;
     background-color: rgb(50, 50, 50);
-    height: 15px;
+    height: 10px;
 }
 .menu-page .progress .bar {
-    height: 15px;
+    height: 10px;
     background-color: rgb(250, 189, 18);
 }
 .respondant {
@@ -165,6 +210,9 @@ img.center {
     height: 40px;
     margin-bottom: 15px;
     border-radius: 0;
+}
+.question .panel-group {
+    margin-top: 10px;
 }
 .question .panel-heading {
     background-color: rgb(246, 235, 194);
@@ -310,8 +358,7 @@ img.center {
     height: 100%;
 }
 #map {
-    margin-top: 80px;
-    height: 250px;
+    height: 300px;
     padding: 0;
 }
 .info {
@@ -331,7 +378,7 @@ img.center {
   background-color: rgba(49, 49, 49, .8);
   width: 100%;
   color: rgb(244, 244, 244);
-  font-size: 18px;
+  font-size: 12px;
 }
     .alert-notice div {
         margin-top: 5px;

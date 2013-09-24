@@ -333,6 +333,7 @@ angular.module('askApp')
         }
 
         // this should give us pause?
+        app.respondents[$routeParams.uuidSlug].resumePath = app.user.resumePath = window.location.hash;
         $scope.answers[answer.question.slug] = answer;
         $scope.saveState();
     };

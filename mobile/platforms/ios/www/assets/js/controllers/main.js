@@ -67,7 +67,8 @@ angular.module('askApp')
                     delete app.next;
                     $location.path(app.next);
                 } else {
-                    $location.path('/surveys');    
+                    $scope.user = app.user;
+                    $scope.resizeMap();
                 }
                 
             })
@@ -85,5 +86,32 @@ angular.module('askApp')
                 $scope.showInfo = 'forgot-user';
             });
     };
+
+    $scope.resizeMap = function () {
+        // if ($scope.message) {
+        //     $('#map').height($(window).height() - $('#map').offset().top - $('.alert-notice:visible').height() - 10);    
+        // } else {
+        //     $('#map').height($(window).height() - $('#map').offset().top);    
+        // }
+        
+    }
+    // setTimeout( function () {
+    //     $scope.resizeMap();
+    //     map.setView([18.35, -66.85], 7);  
+    // }, 0)
+    
+
+    $(window).on('resize', $scope.resizeMap);
+
+    $scope.dismissMessage = function () {
+        $scope.message = false;
+        $scope.resizeMap();
+    }
+
+    if (app.message) {
+        $scope.message = app.message;
+        delete app.message;
+        $scope.resizeMap();
+    }
 
   });

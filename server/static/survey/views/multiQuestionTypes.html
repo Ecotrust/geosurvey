@@ -56,17 +56,17 @@
     </div>
     <div ng-switch-when="monthpicker">
         <form class="question" ng-submit="answerQuestion(answer)">
-            <input class="form-control" type="month" placeholder="{{ question.label }}" ng-model="question.answer" />
+            <input class="form-control datepicker" type="month" placeholder="{{ question.label }}" ng-model="question.answer" />
         </form>
     </div>
     <div ng-switch-when="datepicker">
-        <form class="question" ng-submit="answerQuestion(answer)">
-            <input class="form-control" type="date" placeholder="{{ question.label }}" ng-model="question.answer" />
+        <form class="question"ng-submit="answerQuestion(answer)">
+            <input class="form-control datepicker" type="date" placeholder="{{ question.label }}" ng-model="question.answer" />
         </form>
     </div>
     <div ng-switch-when="timepicker">
         <form class="question" ng-submit="answerQuestion(answer)">
-            <input class="form-control" type="time" placeholder="{{ question.label }}" ng-model="question.answer" />
+            <input class="form-control datepicker" type="time" placeholder="{{ question.label }}" ng-model="question.answer" />
         </form>
     </div>
 

@@ -107,18 +107,12 @@ angular.module('askApp')
         $scope.resume = function(respondent) {
             var url;
             if (respondent.responses.length) {
-                url = [
-                    '/survey',
-                    respondent.survey,
-                    _.last(respondent.responses).question.slug,
-                    respondent.uuid
-                ].join('/');
-
+                url = respondent.resumePath.replace('#', '');
             } else {
                 url = [
                     '/survey',
                     respondent.survey,
-                    _.first(_.findWhere(app.surveys, {slug: respondent.survey}).questions).slug,
+                    1,
                     respondent.uuid
                 ].join('/');
             }
