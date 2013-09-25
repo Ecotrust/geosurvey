@@ -346,6 +346,10 @@ angular.module('askApp')
         return _.findWhere($scope.page.questions, {slug: slug });
     };
 
+    $scope.validatePage = function (page) {
+        
+    };
+
     $scope.submitPage = function (page) {
         var answers = _.map(page.questions, function (question) {
             return $scope.getAnswerOnPage(question);
@@ -932,6 +936,11 @@ $scope.loadSurvey = function(data) {
         }
         $scope.nextPagePath = $scope.getNextPagePath();
         $scope.loading = false;
+
+        $scope.$watch('page', function (newPage) {
+            $scope.validatePage(newPage);
+        }, true);
+
     };
     $scope.viewPath = app.viewPath;
 

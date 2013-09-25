@@ -26,19 +26,20 @@
     <div class="container">
         <div class="respondant" ng-class="{mapRespondant: question.type == 'map-multipoint'}" ng-hide="loading">
             <div ng-show="page">
-                <div class="question-wrapper" ng-repeat="question in page.questions">
-                    <h4 class="question-title">{{ question.title }}</h4>
+                <form ng-submit="submitPage(page)">
+                    <div class="question-wrapper" ng-repeat="question in page.questions">
+                        <h4 class="question-title">{{ question.title }}</h4>
 
-                    <div ng-switch on="question.type">
-                        <div ng-switch-when="grid">
-                            <div gridquestion question="question" answers="answers" pageorder="$index"  viewpath="viewPath"></div>
-                        </div>
-                        <div ng-switch-default>
-                            <div multiquestion question="question" answers="answers" pageorder="$index"></div>
+                        <div ng-switch on="question.type">
+                            <div ng-switch-when="grid">
+                                <div gridquestion question="question" answers="answers" pageorder="$index"  viewpath="viewPath"></div>
+                            </div>
+                            <div ng-switch-default>
+                                <div multiquestion question="question" answers="answers" pageorder="$index"></div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                
+                </form>
             </div>
         </div>
     </div>
