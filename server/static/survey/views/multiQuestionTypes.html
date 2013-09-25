@@ -79,7 +79,6 @@
     <div ng-switch-when="single-select">
         <form class="question" ng-submit="answerSingleSelect(question.options, question.otherAnswer)">
             <div class="select mrm">
-
                 <!-- with accordion (if groupOptions are present)-->
                 <accordion ng-show="question.groupedOptions.length">
                     <div ng-repeat="groupOption in question.groupedOptions" class="accordion-div">
@@ -114,7 +113,7 @@
 
                 <!-- show if groupedOptions are NOT present -->
                 <div ng-show="question.groupedOptions.length == 0">
-                    <ul class="unstyled" ng-class="{'option-checked': $parent.question.answerSelected }">
+                    <ul class="list-unstyled" ng-class="{'option-checked': $parent.question.answerSelected }">
                         <li class="option" ng-tap="$parent.onSingleSelectClicked(option, $parent.question)" ng-repeat="option in question.options" ng-class="{'select-checked': option.checked, 'select-unchecked': ! option.checked  }">
                             <div class="select-content">
                                 <div class="checkbox"></div>
@@ -188,12 +187,13 @@
             <!-- show if groupedOptions are NOT present -->
             <div ng-show="question.groupedOptions.length == 0">
                 <h3 ng-show="question.hoisted_options.length > 0">Other Activities</h3>
-                <ul class="choices">
-                    <li class="option" ng-tap="$parent.onMultiSelectClicked(option, $parent.question)" ng-repeat="option in question.options" ng-class="{'select-checked': option.checked }">
+                <ul  ng-class="{'option-checked': question.answerSelected }" class="select choices list-unstyled">
+                    <li class="option" ng-tap="$parent.onMultiSelectClicked(option, $parent.question)" ng-repeat="option in question.options" ng-class="{'select-checked': option.checked, 'select-unchecked': ! option.checked  }">
                         <div class="select-content">
+                            <div class="checkbox"></div>
                             <h4 class="select-name option-name">
                                 {{option.text}}
-                            </h4>
+                            </h4>   
 
                         </div>
                     </li>
