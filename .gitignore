@@ -24,3 +24,5 @@ android/app/gen
 mobile/www/assets/
 mobile/www/index.html
 mobile/www/views/
+mobile/platforms/ios/www/
+mobile/platforms/ios/cordova/console.log

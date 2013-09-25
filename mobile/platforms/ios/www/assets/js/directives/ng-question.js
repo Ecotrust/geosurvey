@@ -24,7 +24,7 @@ angular.module('askApp')
                     slug = questionSlug;
                 }
                 
-                if (scope.answers[slug]) {
+                if (scope.answers[slug] || scope.answers[slug] === 0) {
                     if (gridSlug) {
                         return _.flatten(_.map(scope.answers[slug], function (answer) {
                             return _.map(answer[gridSlug], function (gridAnswer){
@@ -199,7 +199,8 @@ angular.module('askApp')
             // end of getting answers
 
             // remove false answers
-            if (! scope.question.answer) {
+            
+            if (! scope.question.answer && scope.question.answer !== 0) {
                 delete scope.question.answer;
             }
 

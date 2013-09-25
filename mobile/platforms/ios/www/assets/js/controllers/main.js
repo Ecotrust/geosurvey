@@ -10,7 +10,7 @@ angular.module('askApp')
     } else {
         $scope.user = false;
     }
-
+    $scope.server = app.server;
     // showForm can be in ['login', 'new-user', 'forgot'];
     $scope.showForm = 'login';
 

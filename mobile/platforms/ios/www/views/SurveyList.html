@@ -17,12 +17,13 @@
             </div>
             <!--/.nav-collapse -->
         </div>
-        <div class="progress">
-          <div class="bar" style="width: {{ ((survey.pages.indexOf(page) + 1) / survey.pages.length) * 100 }}%;"></div>
+        <div class="progress" ng-class="{'active progress-striped': hideSurveys}">
+          <div class="progress-bar" style="width: 100%;"></div>
         </div>
     </div>
     <!-- Begin page content -->
     <div class="container">
+        <p ng-show="hideSurveys">Loading Surveys...</p>
         <ul class="list-unstyled" ng-hide="hideSurveys">
             <li ng-repeat="survey in surveys">
                 <a type="button" class="btn btn-main btn-default btn-lg btn-block" href="#/survey/{{survey.slug}}/1/offline">

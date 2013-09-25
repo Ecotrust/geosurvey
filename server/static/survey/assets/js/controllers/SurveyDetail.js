@@ -412,7 +412,6 @@ angular.module('askApp')
 
     $scope.getAnswerOnPage = function(question) {
         var answer = question.answer;
-        
         if (question.type === 'integer' || question.type === 'number') {
             if (question.integer_max && question.integer_max < answer) {
                 answer = "NA";
@@ -768,6 +767,7 @@ $scope.loadSurvey = function(data) {
         } else if (!$scope.question) {
             $scope.question = _.findWhere($scope.survey.questions, { slug: $routeParams.questionSlug });
         }
+        $scope.surveyProgress = ($scope.survey.pages.indexOf($scope.page)  /  $scope.survey.pages.length) * 100;
 
 
 
@@ -977,7 +977,6 @@ $scope.loadSurvey = function(data) {
                     responses: app.respondents[$routeParams.uuidSlug].responses
                 });
         }
-        
     } else {
         $http.get(app.server + '/api/v1/respondant/' + $routeParams.uuidSlug + '/?format=json').success(function(data) {
             app.data = data;

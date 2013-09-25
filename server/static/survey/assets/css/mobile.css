@@ -128,14 +128,15 @@ img.center {
     text-transform: uppercase;
     font-weight: bolder;
     text-align: left;
-    padding: 2px 10px;
+    padding: 10px 10px;
     margin-bottom: 10px;
     border-radius: 0;
     font-size: 16px;
-    text-color: rgb(46, 46, 46);
+    color: rgb(46, 46, 46) !important;
 }
 .question .select-content {
     padding: 8px 10px;
+    color: rgb(150,150,150);
 }
 .select-content, .btn-main:active, .accordion-heading {
     background-color: rgb(24, 75, 83);
@@ -169,23 +170,42 @@ img.center {
 .select-checked .checkbox {
     display: block;
 }
-.select .option-checked .select-checked .select-content {
-  color: rgb(24,24,24);
+
+/* nothing select, beige boxes */
+.select .option-unchecked .select-content {
+  color: rgb(0,0,0);
+  background-color: rgb(246, 236, 194) !important;
 }
+
+
+/* option selected, selected is beige others are blue */
+.select .option-checked .select-checked .select-content {
+  color: rgb(0,0,0);
+  background-color: rgb(246, 236, 194) !important;
+}
+
 .select .option-checked .select-unchecked .select-content {
-    background-color: rgb(24, 75, 83);
+  color: rgb(0,0,0);
+  background-color: rgb(24, 75, 83) !important;
+}
+
+
+.question .panel-body .select-unchecked .select-content .select-name {
+
+    color: rgb(244, 244, 244);
 }
 .menu-page .progress {
     margin-bottom: 0;
-    margin-left: -15px;
-    margin-right: -15px;
+    
     border-radius: 0;
     background-color: rgb(50, 50, 50);
     height: 10px;
 }
-.menu-page .progress .bar {
+.menu-page .progress .progress-bar {
     height: 10px;
     background-color: rgb(250, 189, 18);
+    -webkit-transition: width 0s ease;
+    transition: width 0s ease;
 }
 .respondant {
     margin-left: 10px;
@@ -201,6 +221,7 @@ img.center {
     font-size: 18px;
     margin-bottom: 5px;
     font-weight: bold;
+    text-align: center;
 }
 .form-control, .question .form-control:focus, .unit-select {
     background-color: rgb(246, 235, 194);
@@ -336,7 +357,9 @@ img.center {
   border-left: 0;
   border-right: 0;
 }
-
+.ngCellText {
+    white-space: normal;
+}
 .ngGrid input {
   
   padding: 10px;
@@ -399,3 +422,11 @@ border-color: rgb(250, 189, 18);
         color: rgb(244,244,244);
         background-color: rgba(250, 189, 18, .5);
     }
+.forms .submit-action { 
+        
+        margin-bottom: 5px;
+}
+.forms  a{
+    float: right;
+
+}

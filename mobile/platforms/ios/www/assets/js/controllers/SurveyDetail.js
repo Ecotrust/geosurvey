@@ -412,8 +412,7 @@ angular.module('askApp')
 
     $scope.getAnswerOnPage = function(question) {
         var answer = question.answer;
-        
-        if (question.type === 'integer' || question.type === 'number' || question.type === 'number-with-unit') {
+        if (question.type === 'integer' || question.type === 'number') {
             if (question.integer_max && question.integer_max < answer) {
                 answer = "NA";
             }
@@ -428,6 +427,13 @@ angular.module('askApp')
             // }
         }
         
+        if (question.type === 'number-with-unit') {
+            if (! answer || ! question.unit) {
+                return false;    
+            }
+        }
+
+
         //var url = ['/respond/answer', survey.slug, $routeParams.questionSlug, $routeParams.uuidSlug].join('/');
         if (question.type === 'timepicker' || question.type === 'datepicker' || question.type === 'monthpicker') {
             if ( ! answer ) {
@@ -495,6 +501,7 @@ angular.module('askApp')
             }
         }
 
+        
         var url = ['/respond/answer', $scope.survey.slug, $routeParams.questionSlug, $routeParams.uuidSlug].join('/');
 
         if ($scope.question.type === 'timepicker' || $scope.question.type === 'datepicker') {
@@ -760,6 +767,7 @@ $scope.loadSurvey = function(data) {
         } else if (!$scope.question) {
             $scope.question = _.findWhere($scope.survey.questions, { slug: $routeParams.questionSlug });
         }
+        $scope.surveyProgress = ($scope.survey.pages.indexOf($scope.page)  /  $scope.survey.pages.length) * 100;
 
 
 
@@ -969,7 +977,6 @@ $scope.loadSurvey = function(data) {
                     responses: app.respondents[$routeParams.uuidSlug].responses
                 });
         }
-        
     } else {
         $http.get(app.server + '/api/v1/respondant/' + $routeParams.uuidSlug + '/?format=json').success(function(data) {
             app.data = data;
