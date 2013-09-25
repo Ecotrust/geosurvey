@@ -62,6 +62,9 @@ input.datepicker {
     height: 80px;
     background-color: rgb(54, 85, 91);
 }
+.keyboard-open #footer {
+    display: none;
+}
 #wrap > .container {
     padding: 40px 15px 20px;
 }

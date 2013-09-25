@@ -347,7 +347,7 @@ angular.module('askApp')
     };
 
     $scope.validatePage = function (page) {
-        
+
     };
 
     $scope.submitPage = function (page) {
@@ -941,6 +941,16 @@ $scope.loadSurvey = function(data) {
             $scope.validatePage(newPage);
         }, true);
 
+        // hack to prevent keyboard scroll;
+        $('input').live('focus', function (e) {
+            $('body').addClass("keyboard-open");
+            console.log('focus');
+            e.preventDefault(); e.stopPropagation();
+            window.scrollTo(0,0); //the second 0 marks the Y scroll pos. Setting this to i.e. 100 will push the screen up by 100px. 
+        });
+        $('input').live('blur', function (e) {
+            $('body').removeClass("keyboard-open");
+        });
     };
     $scope.viewPath = app.viewPath;
 
