@@ -197,6 +197,15 @@ input[type="checkbox"] {
                             <input class="span12" ng-model="activeQuestion.integer_min" />
                             <label>Maximum Value</label>
                             <input class="span12" ng-model="activeQuestion.integer_max" />
+                        </div>                      
+                        <div ng-show="activeQuestion.type == 'map-multipolygon'">
+                            <h3>Map Settings</h3>
+                            <label>Latitude</label>
+                            <input class="span12" ng-model="activeQuestion.lat" />
+                            <label>Longitude</label>
+                            <input class="span12" ng-model="activeQuestion.lng" />
+                            <label>Zoom Level</label>
+                            <input class="span12" ng-model="activeQuestion.zoom" />
                         </div>
                     </div>
                 </div>

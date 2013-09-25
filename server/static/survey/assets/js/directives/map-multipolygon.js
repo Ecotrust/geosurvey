@@ -31,9 +31,16 @@ angular.module('askApp')
 
                 // Map init
                 var initPoint = new L.LatLng(18.35, -64.85);
+                if (scope.question.lat && scope.question.lng) {
+                    initPoint = new L.LatLng(scope.question.lat, scope.question.lng);
+                }
+                var initialZoom = 11;
+                if (scope.question.zoom) {
+                    initialZoom = scope.question.zoom;
+                }
                 var map = new L.Map($el, {
                     inertia: false
-                }).addLayer(bing).setView(initPoint, 11);
+                }).addLayer(bing).setView(initPoint, initialZoom);
 
                 map.attributionControl.setPrefix('');
                 map.zoomControl.options.position = 'bottomleft';
