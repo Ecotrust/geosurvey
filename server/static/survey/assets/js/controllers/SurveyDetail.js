@@ -235,6 +235,9 @@ angular.module('askApp')
         
         if ( nextPage.blocks && nextPage.blocks.length ) {
             var blocks = nextPage.blocks;
+            if ( _.contains( _.pluck(blocks, 'name'), 'Placeholder') ) {
+                return true;
+            }
         } else if ( nextPage.skip_question && nextPage.skip_condition ) {
             var blocks = [nextPage];
         } else {
