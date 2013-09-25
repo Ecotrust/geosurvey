@@ -253,19 +253,26 @@ img.center {
     color: rgb(149, 149, 149);
 }
 .number-with-unit .form-control {
-    width: 48%;
+    /*width: 48%;
     display: inline-block;
     vertical-align: top;
-    margin-top: 0;
+    margin-top: 0;*/
 }
 .select-wrapper {
-    width: 48%;
+ /*   width: 100%;
     display: inline-block;
     vertical-align: top;
     margin-left: 1.5%;
-    margin-top: 0;
+    margin-top: 0;*/
+    position: relative;
     background-color: rgb(24, 75, 83);
     height: 40px;
+}
+.select-wrapper .down {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 20px;
 }
 .unit-selected {
     background-color: rgb(246, 235, 194);

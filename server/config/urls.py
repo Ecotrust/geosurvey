@@ -54,7 +54,7 @@ urlpatterns = patterns('',
 
 
     url(r'^dash', 'apps.survey.views.dash'),
-    
+    url(r'^dash/', 'apps.survey.views.dash'),
     # (r'^register', survey_urls.register),
     #(r'^survey/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.SURVEY_ROOT}),
     # (r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
