@@ -125,10 +125,37 @@ angular.module('askApp')
     };
 
 
+    $scope.getLastPageWithSkip = function(numPsToSkips) {
+        var index = _.indexOf($scope.survey.pages, $scope.page) - 1 - (numPsToSkips || 0);
+        var nextPage = $scope.survey.pages[index];
+        
+        if (nextPage) {
+            if ($scope.skipPageIf(nextPage)) {
+                _.each(nextPage.questions, function (question) {
+                    $scope.deleteAnswer(question, $routeParams.uuidSlug);
+                });
+                
+                nextPage = false;
+            }
+        } 
+
+        return nextPage ? nextPage : false;
+    };
+
+
+
     $scope.getNextPage = function(numPsToSkips) {
         var foundPage = false, index = numPsToSkips || 0;
         while (foundPage === false && index < $scope.survey.pages.length) {
             foundPage = $scope.getNextPageWithSkip(index);
+            index++;
+        }
+        return foundPage;
+    };
+    $scope.getLastPage = function(numPsToSkips) {
+        var foundPage = false, index = numPsToSkips || 0;
+        while (foundPage === false && index < $scope.survey.pages.length) {
+            foundPage = $scope.getLastPageWithSkip(index);
             index++;
         }
         return foundPage;
@@ -725,6 +752,18 @@ angular.module('askApp')
             $scope.answerQuestion($scope.question.options[answer]);
         }
     };
+
+   
+
+    $scope.skipBack = function () {
+        debugger;
+        var lastPage = $scope.getLastPage();
+
+        $location.path(['survey', $routeParams.surveySlug, lastPage.order, $routeParams.uuidSlug].join('/'));
+
+    };
+
+
 
 
 $scope.loadSurvey = function(data) {
