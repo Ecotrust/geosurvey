@@ -3,6 +3,31 @@
 angular.module('askApp')
   .controller('CompleteCtrl', function ($scope, $routeParams, $http, $location) {
     var url = '/respond/complete/' + [$routeParams.surveySlug, $routeParams.uuidSlug].join('/');
+    $http.defaults.headers.post['Content-Type'] = 'application/json';
+
+
+    $scope.sendRespondent = function (respondent) {
+        var url = app.server + '/api/v1/offlinerespondant/';
+        var responses = angular.copy(respondent.responses);
+        _.each(responses, function (response) {
+            var question_uri = response.question.resource_uri;
+            response.question = question_uri;
+            response.answer_raw = JSON.stringify(response.answer);
+        });
+        var newRespondent = {
+            ts: respondent.ts,
+            uuid: respondent.uuid.replace(':', '_'),
+            responses: responses,
+            status: respondent.status,
+            complete: respondent.complete,
+            survey: '/api/v1/survey/' + respondent.survey + '/'
+        };
+        return $http.post(url, newRespondent).error(function (err) {
+            console.log(JSON.stringify(err));
+        });
+        
+    }   
+
 
     if (app.user) {
         $scope.user = app.user;
@@ -20,13 +45,23 @@ angular.module('askApp')
         $scope.surveys = app.surveys;
     }
     $scope.survey = _.findWhere($scope.surveys, { slug: $routeParams.surveySlug});
-    
     if (app.offline) {
         app.respondents[$routeParams.uuidSlug].complete = true;
         app.respondents[$routeParams.uuidSlug].status = 'complete';
         app.message = "You have completed a catch report."
-        delete app.user.resumePath;
-        localStorage.setItem('hapifish', JSON.stringify(app));
+        localStorage.setItem('hapifish', JSON.stringify(app));    
+        $scope.sendRespondent(app.respondents[$routeParams.uuidSlug]).success(function () {
+            
+            delete app.user.resumePath;
+            delete app.respondents[$routeParams.uuidSlug]
+            app.message = "You catch report was successfully submitted."
+            localStorage.setItem('hapifish', JSON.stringify(app));
+            $location.path('#/');
+        }).error(function () {
+            app.message = "You catch report was saved and can be submitted later."
+            localStorage.setItem('hapifish', JSON.stringify(app));
+            $location.path('#/');
+        });
     } else {
         $http.post(url).success(function (data) {
             app.data.state = $routeParams.action;
@@ -39,5 +74,5 @@ angular.module('askApp')
         app.data.responses = [];
     }
     $scope.completeView = '/static/survey/survey-pages/' + $routeParams.surveySlug + '/complete.html';
-    $location.path('#/');
+    
   });

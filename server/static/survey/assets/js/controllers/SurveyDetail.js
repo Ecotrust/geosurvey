@@ -354,7 +354,6 @@ angular.module('askApp')
             answer: answer.answer,
             question: answer.question
         });
-        
         if (answer.question.attach_to_profile) {
             if ( !app.user.registration ) {
                 app.user.registration = {};
@@ -759,7 +758,6 @@ angular.module('askApp')
    
 
     $scope.skipBack = function () {
-        debugger;
         var lastPage = $scope.getLastPage();
 
         $location.path(['survey', $routeParams.surveySlug, lastPage.order, $routeParams.uuidSlug].join('/'));

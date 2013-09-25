@@ -385,7 +385,10 @@ class Response(caching.base.CachingMixin, models.Model):
 
             if self.question.attach_to_profile:
                 # Get this user's set of profile fields. These can be shared cross-survey (...is this still the case?)
-                profileAnswers = simplejson.loads(self.respondant.user.profile.registration)
+                if self.respondant.user.profile.registration:
+                    profileAnswers = simplejson.loads(self.respondant.user.profile.registration)
+                else:
+                    profileAnswers = {}
                 # Replace existing value with new value.
                 profileAnswers[self.question.slug] = self.answer
                 profile = get_object_or_404(UserProfile, user=self.respondant.user)
