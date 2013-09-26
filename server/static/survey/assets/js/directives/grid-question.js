@@ -1,5 +1,4 @@
-angular.module('askApp')
-    .directive('gridquestion', function() {
+angular.module('askApp').directive('gridquestion', function() {
     return {
         templateUrl: app.viewPath + 'views/multiQuestionTypes.html',
         restrict: 'EA',
@@ -43,7 +42,6 @@ angular.module('askApp')
             // get simple answers
             scope.question.answer = scope.getAnswer(scope.question.slug);
 
-
             // set up rows for selects
             if (scope.question.rows) {
                 scope.question.options = [];
@@ -85,7 +83,6 @@ angular.module('askApp')
                 });
 
             }
-
              // grid question controller
             if (scope.question.type === 'grid') {
                 // Prep row initial row data, each row containing values.
@@ -156,8 +153,9 @@ angular.module('askApp')
                     ]
 
                 };
-
+                
                 _.each(scope.question.grid_cols, function(gridCol, i) {
+                    alert('grid-col');
                     var template, col = {
                         field: gridCol.label.replace(/-/g, ''),
                         displayName: gridCol.text,
@@ -178,12 +176,12 @@ angular.module('askApp')
                     } else if (gridCol.type === 'multi-select') {
                         template = multiSelectTemplate;
                         col.options = gridCol.rows.split('\n');
-                    }
-                     else {
+                    } else {
                         template = nameTemplate;
                     }
                     col.cellTemplate = template
                     scope.question.gridOptions.columnDefs.push(col);
+                    alert(col.slug);
                 });
             }
 
@@ -193,11 +191,11 @@ angular.module('askApp')
             if (! scope.question.answer) {
                 delete scope.question.answer;
             }
-            element.on('focus', '.ngCellText', function (e) {
-                $(e.target).closest('.ngCell').next().find('input').focus();    
+            // element.on('focus', '.ngCellText', function (e) {
+            //     $(e.target).closest('.ngCell').next().find('input').focus();    
                 
                 
-            })
+            // })
         }
     };
 });

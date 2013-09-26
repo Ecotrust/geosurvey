@@ -245,21 +245,21 @@ angular.module('askApp')
       }],
       series: [{
         name: 'Region',
-        class: 'bar-warning',
+        'class': 'bar-warning',
         data: [3, 4, 4, 2, 5],
         all: true,
         active: true
       }, {
         name: 'St. Croix',
-        class: 'bar-info',
+        'class': 'bar-info',
         data: [3, 4, 4, 2, 5]
       }, {
         name: 'St. Johns/St. Thomas',
-        class: 'bar-danger',
+        'class': 'bar-danger',
         data: [3, 4, 4, 2, 5]
       }, {
         name: 'Puerto Rico',
-        class: 'bar-success',
+        'class': 'bar-success',
         data: [5, 3, 4, 7, 2]
       }]
     }
