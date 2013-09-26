@@ -476,6 +476,7 @@
 		1D6058940D05DD3E006BFB54 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALTERNATE_GROUP = everyone;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				COPY_PHASE_STRIP = NO;
@@ -486,6 +487,7 @@
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "DigitalDeck/DigitalDeck-Info.plist";
+				INSTALL_GROUP = admin;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = (
 					"-weak_framework",
@@ -509,6 +511,7 @@
 		1D6058950D05DD3E006BFB54 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALTERNATE_GROUP = everyone;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				COPY_PHASE_STRIP = YES;
@@ -517,6 +520,7 @@
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "DigitalDeck/DigitalDeck-Info.plist";
+				INSTALL_GROUP = admin;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = (
 					"-weak_framework",

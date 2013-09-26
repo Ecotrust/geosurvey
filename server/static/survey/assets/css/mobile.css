@@ -433,3 +433,26 @@ border-color: rgb(250, 189, 18);
     float: right;
 
 }
+.spinner {
+    display: none;
+}
+.working {
+    
+    position: relative;
+}
+.working .forms {
+    opacity: .2;
+}
+.working .spinner {
+    display: block;
+     width: 32px;
+     height: 32px;
+    overflow: auto;
+    margin: auto;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+
+}
+.working a {
+    display: none;
+}

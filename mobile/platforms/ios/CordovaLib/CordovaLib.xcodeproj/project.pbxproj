@@ -377,6 +377,7 @@
 		1DEB921F08733DC00010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALTERNATE_GROUP = everyone;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				"ARCHS[sdk=iphoneos*]" = armv7;
 				"ARCHS[sdk=iphoneos6.*]" = (
@@ -399,6 +400,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "";
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INSTALL_GROUP = admin;
 				INSTALL_PATH = /usr/local/lib;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = Cordova;
@@ -410,6 +412,7 @@
 		1DEB922008733DC00010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALTERNATE_GROUP = everyone;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				"ARCHS[sdk=iphoneos*]" = armv7;
 				"ARCHS[sdk=iphoneos6.*]" = (
@@ -429,6 +432,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "";
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INSTALL_GROUP = admin;
 				INSTALL_PATH = /usr/local/lib;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = Cordova;

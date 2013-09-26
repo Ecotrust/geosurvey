@@ -66,6 +66,8 @@ def createUser(request):
                     'registration': profile.registration
                 }
                 return HttpResponse(simplejson.dumps({'success': True, 'user': user_dict}))
+            else:
+                return HttpResponse("password-mismatch", status=500)
         else:
             return HttpResponse("duplicate-user", status=500)
     else:

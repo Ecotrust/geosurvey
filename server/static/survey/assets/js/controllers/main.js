@@ -15,6 +15,7 @@ angular.module('askApp')
     $scope.showForm = 'login';
 
     $scope.toggleForm = function (form) {
+        $scope.showError = false;
         $scope.showForm = form;
 
     };
@@ -31,7 +32,7 @@ angular.module('askApp')
 
     $scope.createUser = function (user) {
         var url = app.server + "/account/createUser";
-
+        $scope.working = true;
         $http.post(url, user)
             .success(function (data) {
                 app.user = data.user;
@@ -39,7 +40,13 @@ angular.module('askApp')
                 $location.path('/surveys');
             })
         .error(function (data) {
-          $scope.showError = data;
+            $scope.working = false;
+            if (data) {
+                $scope.showError = data;    
+            } else {
+                $scope.showError = "There was a problem creating an account.  Please try again later."
+            }
+            
         });
     };
 
@@ -47,9 +54,10 @@ angular.module('askApp')
 
     $scope.showError = false;
     $scope.showInfo = false;
+    $scope.working = false;
     $scope.authenticateUser = function (user) {
         var url = app.server + "/account/authenticateUser";
-
+        $scope.working = true;
         $http({
             method: 'POST',
             url: url,
@@ -74,6 +82,7 @@ angular.module('askApp')
             })
             .error(function (data) {
                 $scope.showError = data;
+                $scope.working = false;
             });
 
     };

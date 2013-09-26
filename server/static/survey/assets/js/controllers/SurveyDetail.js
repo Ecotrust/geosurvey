@@ -977,18 +977,23 @@ $scope.loadSurvey = function(data) {
         $scope.nextPagePath = $scope.getNextPagePath();
         $scope.loading = false;
 
-        $scope.$watch('page', function (newPage) {
-            $scope.validatePage(newPage);
-        }, true);
+        // $scope.$watch('page', function (newPage) {
+        //     $scope.validatePage(newPage);
+        // }, true);
 
         // hack to prevent keyboard scroll;
         $('input').live('focus', function (e) {
-            $('body').addClass("keyboard-open");
-            e.preventDefault(); e.stopPropagation();
-            window.scrollTo(0,0); //the second 0 marks the Y scroll pos. Setting this to i.e. 100 will push the screen up by 100px. 
+            if (!$(this).hasClass('datepicker')) {
+                $('body').addClass("keyboard-open");
+                e.preventDefault(); e.stopPropagation();
+                window.scrollTo(0,0); //the second 0 marks the Y scroll pos. Setting this to i.e. 100 will push the screen up by 100px. 
+            }
+            
         });
         $('input').live('blur', function (e) {
-            $('body').removeClass("keyboard-open");
+            if (!$(this).hasClass('datepicker')) {
+                $('body').removeClass("keyboard-open");
+            }
         });
     };
     $scope.viewPath = app.viewPath;
