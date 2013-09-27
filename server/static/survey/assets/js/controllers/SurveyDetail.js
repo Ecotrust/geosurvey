@@ -469,6 +469,11 @@ angular.module('askApp')
         }
 
 
+
+        if (question.type === 'monthpicker' && ! answer) {
+            return false;
+        }
+
         //var url = ['/respond/answer', survey.slug, $routeParams.questionSlug, $routeParams.uuidSlug].join('/');
         if (question.type === 'timepicker' || question.type === 'datepicker' || question.type === 'monthpicker') {
             if ( ! answer ) {

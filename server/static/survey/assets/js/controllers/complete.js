@@ -50,18 +50,6 @@ angular.module('askApp')
         app.respondents[$routeParams.uuidSlug].status = 'complete';
         app.message = "You have completed a catch report."
         localStorage.setItem('hapifish', JSON.stringify(app));    
-        $scope.sendRespondent(app.respondents[$routeParams.uuidSlug]).success(function () {
-            
-            delete app.user.resumePath;
-            delete app.respondents[$routeParams.uuidSlug]
-            app.message = "You catch report was successfully submitted."
-            localStorage.setItem('hapifish', JSON.stringify(app));
-            $location.path('#/');
-        }).error(function () {
-            app.message = "You catch report was saved and can be submitted later."
-            localStorage.setItem('hapifish', JSON.stringify(app));
-            $location.path('#/');
-        });
     } else {
         $http.post(url).success(function (data) {
             app.data.state = $routeParams.action;
@@ -74,5 +62,23 @@ angular.module('askApp')
         app.data.responses = [];
     }
     $scope.completeView = '/static/survey/survey-pages/' + $routeParams.surveySlug + '/complete.html';
+
+    $scope.submitReport = function () {
+        $scope.working = true;
+        $scope.sendRespondent(app.respondents[$routeParams.uuidSlug]).success(function () {
+            
+            delete app.user.resumePath;
+            delete app.respondents[$routeParams.uuidSlug]
+            app.message = "You catch report was successfully submitted."
+            localStorage.setItem('hapifish', JSON.stringify(app));
+            $location.path('#/');
+            $scope.working = true;
+        }).error(function () {
+            app.message = "You catch report was saved and can be submitted later."
+            localStorage.setItem('hapifish', JSON.stringify(app));
+            $location.path('#/');
+        });
+
+    };
     
   });

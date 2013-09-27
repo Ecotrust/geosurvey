@@ -352,7 +352,7 @@ def package():
         local("cp ./android/app/bin/HapiFis-debug.apk server/static/hapifis.apk")
 
 @task
-def package_test():
-        run("cd %s && %s/bin/python manage.py package hapifis-test.herokuapp.com '../android/app/assets/www'" % (vars['app_dir'], vars['venv']))
+def package_android_test():
+        run("cd %s && %s/bin/python manage.py package https://usvi-survey.herokuapp.com '../android/app/assets/www'" % (vars['app_dir'], vars['venv']))
         local("android/app/cordova/build --debug")
-        local("cp ./android/app/bin/HapiFis-debug.apk server/static/hapifis-test.apk")
+        local("cp ./android/app/bin/HapiFis-debug.apk server/static/usvi.apk")
