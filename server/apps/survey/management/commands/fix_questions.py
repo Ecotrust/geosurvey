@@ -38,7 +38,7 @@ class Command(BaseCommand):
                 #page.blocks.clear()
                 page.blocks.add(Block.objects.get(name="Spear or By Hand"))
                 page.save()
-            if question.slug.find('nets') != -1:
+            if question.slug.find('net') != -1:
                 page = Page.objects.get(questions=question)
                 #page.blocks.clear()
                 page.blocks.add(Block.objects.get(name="Nets"))
