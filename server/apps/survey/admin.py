@@ -27,6 +27,9 @@ class PageAdmin(admin.ModelAdmin):
 
 
 
+class BlockAdmin(admin.ModelAdmin):
+    list_display = ('__unicode__', 'skip_question')
+
 class SurveyAdmin(admin.ModelAdmin):
     list_display = ('name','slug',)
     prepopulated_fields = {'slug':('name',),}
@@ -61,4 +64,4 @@ admin.site.register(Location)
 admin.site.register(LocationAnswer)
 admin.site.register(MultiAnswer)
 admin.site.register(GridAnswer)
-admin.site.register(Block)
+admin.site.register(Block, BlockAdmin)

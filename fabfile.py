@@ -341,7 +341,7 @@ def package_vagrant():
 @task
 def package_ios_test():
         run("cd %s && %s/bin/python manage.py package https://usvi-survey.herokuapp.com '../mobile/www'" % (vars['app_dir'], vars['venv']))
-     #   local("cd mobile && /usr/local/share/npm/bin/phonegap build -V ios")
+        local("cd mobile && /usr/local/share/npm/bin/phonegap build -V ios")
 
 
 

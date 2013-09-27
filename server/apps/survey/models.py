@@ -64,6 +64,7 @@ class Page(caching.base.CachingMixin, models.Model):
     order = models.IntegerField(default=1)
     objects = caching.base.CachingManager()
 
+
     @property
     def block_name(self):
         if self.blocks.all():
@@ -158,7 +159,7 @@ class Block(caching.base.CachingMixin, models.Model):
     name = models.CharField(max_length=254, null=True, blank=True)
     skip_question = models.ForeignKey('Question', null=True, blank=True)
     skip_condition = models.CharField(max_length=254, null=True, blank=True)
-    
+
     def __unicode__(self):
         return "%s" % self.name
 
