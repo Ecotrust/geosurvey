@@ -45,7 +45,7 @@ def fisher(request, uuid=None, template='survey/fisher-dash.html'):
     if uuid is None:
         respondents = Respondant.objects.all().order_by('-ts')
         if not request.user.is_staff:
-            respondents.filter(user=request.user)
+            respondents = respondents.filter(user=request.user)
         return render_to_response(template, RequestContext(request, {'respondents': respondents}))
     else:
         respondent = Respondant.objects.get(uuid=uuid)
