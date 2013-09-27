@@ -146,8 +146,9 @@ heroku pgbackups:restore HEROKU_POSTGRESQL_WHITE_URL 'http://www.example.org/lat
 Make sure that you have a recent version of node and install the phonegap node module.
 ```bash
 brew upgrade node
-sudo npm install -g phonegap
+sudo npm install -g https://github.com/phonegap/phonegap-cli/tarball/master
 phonegap create mobile -n DigitalDeck -i com.pointnineseven.digitaldeck
+cd mobile && phonegap local plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-console.git
 ```
 
 To run the ios simulator

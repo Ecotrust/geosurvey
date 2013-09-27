@@ -8,6 +8,40 @@ from django.db.models import Avg, Max, Min, Count
 
 from survey.models import Survey, Question, Option, Respondant, Response, Page, Block
 
+def main_save_m2m(self, bundle):
+    for field_name, field_object in self.fields.items():
+        if not getattr(field_object, 'is_m2m', False):
+            continue
+
+        if not field_object.attribute:
+            continue
+
+        if field_object.readonly:
+            continue
+
+        # Get the manager.
+        related_mngr = getattr(bundle.obj, field_object.attribute)
+            # This is code commented out from the original function
+            # that would clear out the existing related "Person" objects
+        if hasattr(related_mngr, 'clear'):
+            #Clear it out, just to be safe.
+            related_mngr.clear()
+
+        related_objs = []
+
+        for related_bundle in bundle.data[field_name]:
+            try:
+                obj = related_mngr.model.objects.get(id=related_bundle.obj.id)
+            except related_mngr.model.DoesNotExist:
+                print "could not get object"
+                obj = related_bundle.obj
+                obj.save()
+
+            related_objs.append(obj)
+
+        related_mngr.add(*related_objs)
+
+
 class SurveyModelResource(ModelResource):
     def obj_update(self, bundle, request=None, **kwargs):
         bundle = super(SurveyModelResource, self).obj_update(bundle, **kwargs)
@@ -163,8 +197,7 @@ class OptionResource(SurveyModelResource):
         authentication = Authentication()
 
 
-    def save_m2m(self, bundle):
-        pass
+    save_m2m = main_save_m2m
 
 
 class PageResource(SurveyModelResource):
@@ -180,40 +213,7 @@ class PageResource(SurveyModelResource):
             'survey': ALL_WITH_RELATIONS
         }
 
-    def save_m2m(self, bundle):
-        for field_name, field_object in self.fields.items():
-            if not getattr(field_object, 'is_m2m', False):
-                continue
-
-            if not field_object.attribute:
-                continue
-
-            if field_object.readonly:
-                continue
-
-            # Get the manager.
-            related_mngr = getattr(bundle.obj, field_object.attribute)
-                # This is code commented out from the original function
-                # that would clear out the existing related "Person" objects
-            if hasattr(related_mngr, 'clear'):
-                #Clear it out, just to be safe.
-                related_mngr.clear()
-
-            related_objs = []
-
-            for related_bundle in bundle.data[field_name]:
-                # See if this person already exists in the database
-                try:
-                    question = Question.objects.get(id=related_bundle.obj.id)
-                # If it doesn't exist, then save and use the object TastyPie
-                # has already prepared for creation
-                except Question.DoesNotExist:
-                    question = related_bundle.obj
-                    question.save()
-
-                related_objs.append(question)
-
-            related_mngr.add(*related_objs)
+    save_m2m = main_save_m2m
 
 
 
@@ -252,6 +252,8 @@ class QuestionResource(SurveyModelResource):
             'slug': ALL,
             'surveys': ALL_WITH_RELATIONS
         }
+
+    save_m2m = main_save_m2m
 
 class SurveyResource(SurveyModelResource):
     questions = fields.ToManyField(QuestionResource, 'questions', full=True, null=True, blank=True)

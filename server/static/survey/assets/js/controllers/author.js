@@ -33,6 +33,8 @@ angular.module('askApp')
 
             });
    
+
+            
             $scope.$watch('survey.pages', function (newValue) {
                 if (newValue){// && ! $scope.questionsToBeUpdated.length && ! $scope.updatedQuestionQueue.length) {
                    $scope.checkPageOrder(newValue);
@@ -113,7 +115,8 @@ angular.module('askApp')
         $scope.updateQuestions = function (questions) {
             var questionToBeUpdated = _.first(questions),
                 rest = _.rest(questions);
-            $scope.saveQuestion(questionToBeUpdated, true).success(function (newQuestion, status){
+            // save questions, defer updates and perform a patch
+            $scope.saveQuestion(questionToBeUpdated, true, true).success(function (newQuestion, status){
                 $scope.updatedQuestionQueue.push(newQuestion);
                 if (rest.length) {
                     $scope.updateQuestions(rest);    
@@ -262,6 +265,9 @@ angular.module('askApp')
                     order: page.order,
                     questions: _.map(page.questions, function (question) {
                         return {pk: question.id}
+                    }),
+                    blocks: _.map(page.blocks, function (block) {
+                        return {pk: block.id}
                     })
                 };
             // page.updating = true;
@@ -278,9 +284,9 @@ angular.module('askApp')
         };
 
 
-        $scope.saveQuestion = function (question, deferUpdatingList) {
+        $scope.saveQuestion = function (question, deferUpdatingList, patch) {
             var url = question.resource_uri,
-                method = 'PUT',
+                method = patch ? 'PATH': 'PUT',
                 data = question;
             if (! question.label) {
                 question.label = question.title;
@@ -297,6 +303,11 @@ angular.module('askApp')
                     question[key] = null;
                 }
             });
+
+            data.grid_cols = _.map(question.grid_cols, function (grid_col) {
+                return { pk: grid_col.id }
+            });
+
             return $http({
                 method: method,
                 url: url,

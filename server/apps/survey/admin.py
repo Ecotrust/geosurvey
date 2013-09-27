@@ -18,7 +18,7 @@ class PageInline(admin.TabularInline):
 
 
 class PageAdmin(admin.ModelAdmin):
-    list_display = ('__unicode__','order',)
+    list_display = ('__unicode__','order', 'block_name')
 
     def formfield_for_manytomany(self, db_field, request, **kwargs):
         if db_field.name == "blocks":
@@ -33,7 +33,7 @@ class SurveyAdmin(admin.ModelAdmin):
 
 class QuestionAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug':('label',),'info':('label',),}
-    list_display = ('survey_slug','slug','type', 'title',  )
+    list_display = ('survey_slug','slug','type', 'title', '__unicode__' )
     
     def formfield_for_manytomany(self, db_field, request, **kwargs):
         if db_field.name == "blocks":

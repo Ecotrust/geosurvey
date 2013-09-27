@@ -1,5 +1,4 @@
-angular.module('askApp')
-    .directive('multiquestion', function() {
+angular.module('askApp').directive('multiquestion', function() {
     return {
         templateUrl: app.viewPath + 'views/multiQuestionTypes.html',
         restrict: 'EA',
@@ -31,7 +30,7 @@ angular.module('askApp')
                                 return {
                                     text: answer.text + ": " + gridAnswer,
                                     label: _.string.slugify(answer.text + ": " + gridAnswer)
-                                }
+                                };
                             });
                         }));
                     } else {
@@ -49,7 +48,7 @@ angular.module('askApp')
                 if (!option.checked && option.other) {
                     $scope.question.otherAnswer = null;
                 }
-                question.answerSelected = _.some(_.pluck(_.flatten(_.map(question.groupedOptions, function (option) { return option.options })), 'checked'));
+                question.answerSelected = _.some(_.pluck(_.flatten(_.map(question.groupedOptions, function (option) { return option.options; })), 'checked'));
                 
                 
             };
@@ -130,7 +129,7 @@ angular.module('askApp')
                             text: row,
                             label: _.string.slugify(row),
                             checked: matches.length ? true : false
-                        })
+                        });
                         if (matches.length) {
                             scope.question.answerSelected = true;
                             group.open = true;
@@ -166,17 +165,17 @@ angular.module('askApp')
                     scope.question.options = [
                         {'text': 'Yes', 'label': "Yes", checked: scope.question.answer[0].text === 'Yes'},
                         {'text': 'No', 'label': "No", checked: scope.question.answer[0].text === 'No'}
-                    ]    
+                    ];    
                 } else if (scope.question.answer && ! _.isArray(scope.question.answer)) {
                     scope.question.options = [
                         {'text': 'Yes', 'label': "Yes", checked: scope.question.answer.text === 'Yes'},
                         {'text': 'No', 'label': "No", checked: scope.question.answer.text === 'No'}
-                    ]    
+                    ];    
                 } else {
                     scope.question.options = [
                         {'text': 'Yes', 'label': "Yes", checked: false },
                         {'text': 'No', 'label': "No", checked: false }
-                    ]
+                    ];
                 }
                 
             }
@@ -208,7 +207,7 @@ angular.module('askApp')
             if (scope.question.type === 'single-select' || scope.question.type === 'yes-no') {
                 scope.question.answerSelected = _.some(_.pluck(scope.question.options, 'checked'));    
             } else if (scope.question.type === 'multi-select') {
-                scope.question.answerSelected = _.some(_.pluck(_.flatten(_.map(scope.question.groupedOptions, function (option) { return option.options })), 'checked'));             
+                scope.question.answerSelected = _.some(_.pluck(_.flatten(_.map(scope.question.groupedOptions, function (option) { return option.options; })), 'checked'));             
             }
             
         }

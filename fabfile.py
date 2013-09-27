@@ -330,14 +330,18 @@ def prepare():
 
 @task
 def emulate_ios():
-        run("cd %s && %s/bin/python manage.py package http://localhost:8000 '../mobile/www'" % (vars['app_dir'], vars['venv']))
-        local("cd mobile && /usr/local/share/npm/bin/phonegap run -V ios")
+    run("cd %s && %s/bin/python manage.py package http://localhost:8000 '../mobile/www'" % (vars['app_dir'], vars['venv']))
+    #local("cd mobile && /usr/local/share/npm/bin/phonegap run -V ios")
+
+@task
+def package_vagrant():
+    run("cd %s && %s/bin/python manage.py package http://localhost:8000 '../mobile/www'" % (vars['app_dir'], vars['venv']))
 
 
 @task
 def package_ios_test():
         run("cd %s && %s/bin/python manage.py package https://usvi-survey.herokuapp.com '../mobile/www'" % (vars['app_dir'], vars['venv']))
-        local("cd mobile && /usr/local/share/npm/bin/phonegap build -V ios")
+     #   local("cd mobile && /usr/local/share/npm/bin/phonegap build -V ios")
 
 
 

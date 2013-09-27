@@ -32,6 +32,12 @@
         <style type="text/css">
 
         </style>
+        <script type="text/javascript">
+            console.log('load');
+            window.onerror = function(message, url, lineNumber) {
+                console.log("Error: "+message+" in "+url+" at line "+lineNumber);
+            }
+        </script>
     </head>
     
     <body ng-app="askApp"  ng-view></body>

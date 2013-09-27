@@ -17,6 +17,8 @@ angular.module('askApp')
         state: 'loading'
     };
 
+    console.log('loading');
+
     $scope.answers = {};
 
     $scope.isAuthenticated = isAuthenticated;
