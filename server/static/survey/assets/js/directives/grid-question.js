@@ -155,7 +155,6 @@ angular.module('askApp').directive('gridquestion', function() {
                 };
                 
                 _.each(scope.question.grid_cols, function(gridCol, i) {
-                    alert('grid-col');
                     var template, col = {
                         field: gridCol.label.replace(/-/g, ''),
                         displayName: gridCol.text,
@@ -181,7 +180,6 @@ angular.module('askApp').directive('gridquestion', function() {
                     }
                     col.cellTemplate = template
                     scope.question.gridOptions.columnDefs.push(col);
-                    alert(col.slug);
                 });
             }
 

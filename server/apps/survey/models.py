@@ -64,6 +64,13 @@ class Page(caching.base.CachingMixin, models.Model):
     order = models.IntegerField(default=1)
     objects = caching.base.CachingManager()
 
+    @property
+    def block_name(self):
+        if self.blocks.all():
+            return ", ".join([block.name for block in self.blocks.all()])
+        else:
+            return None
+
     def __unicode__(self):
         if self.survey is not None and self.question is not None:
             return "%s (%s)" % (self.survey.name, ", ".join([question.slug for question in self.questions.all()]))
@@ -241,7 +248,8 @@ class Question(caching.base.CachingMixin, models.Model):
         return REPORT_TYPE_CHOICES
 
     def __unicode__(self):
-        return "%s/%s/%s (%d)" % (self.survey_slug, self.title, self.type, self.order)
+        return "%s/%s/%s" % (self.survey_slug, self.title, self.type)
+    
     #    #return "%s/%s" % (self.survey_set.all()[0].slug, self.label)
 
 class LocationAnswer(caching.base.CachingMixin, models.Model):
