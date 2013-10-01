@@ -136,6 +136,7 @@ img.center {
     border-radius: 0;
     font-size: 16px;
     color: rgb(46, 46, 46) !important;
+    min-width: 100px;
 }
 .question .select-content {
     padding: 8px 10px;
@@ -382,6 +383,7 @@ img.center {
 .ngHeaderText, .ngCellText {
   color: rgb(244,244,244);
 }
+
 
 #footer .btn {
     color: rgb(244, 244, 244);

@@ -38,7 +38,6 @@ angular.module('askApp').directive('multiquestion', function() {
                         return false;
                     }
                 }
-                
                 if (question.type === 'single-select' || question.type === 'multi-select' || question.type === 'yes-no') {                
                     if (question.allow_other && question.otherOption.checked && ! question.otherAnswer) {
                         return false;
@@ -54,7 +53,7 @@ angular.module('askApp').directive('multiquestion', function() {
                     }
                 }
 
-                if (question.type === 'monthpicker' && ! question.answer) {
+                if ((question.type === 'monthpicker' || question.type == 'datepicker' || question.type === 'timepicker') && ! question.answer) {
                     return false;
                 }
 
@@ -221,7 +220,7 @@ angular.module('askApp').directive('multiquestion', function() {
             }
 
             // set up other option
-            if (scope.question.allow_other && scope.question.answer.other || _.isArray(scope.question.answer) && _.findWhere(scope.question.answer, {
+            if (scope.question.allow_other && scope.question.answer && scope.question.answer.other || _.isArray(scope.question.answer) && _.findWhere(scope.question.answer, {
                 other: true
             })) {
                 scope.question.otherOption = {
@@ -304,7 +303,7 @@ angular.module('askApp').directive('multiquestion', function() {
 
             if (scope.question.type === 'single-select' || scope.question.type === 'yes-no') {
                 scope.question.answerSelected = _.some(_.pluck(scope.question.options, 'checked'));
-                if (scope.question.allow_other && scope.question.answer.other || _.isArray(scope.question.answer) && _.findWhere(scope.question.answer, {other: true })) {
+                if (scope.question.allow_other && scope.question.answer && scope.question.answer.other || _.isArray(scope.question.answer) && _.findWhere(scope.question.answer, {other: true })) {
                     scope.question.answerSelected = true;
                 }
             } else if (scope.question.type === 'multi-select') {
