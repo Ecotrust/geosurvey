@@ -271,11 +271,57 @@ img.center {
     border-radius: 0;
     border: 0;
 }
+.question .multi-select-other {
+    background-color: rgb(24, 75, 83) !important;
+    font-size: 18px;
+    font-weight: 500;
+    padding-left: 50px;
+    color: rgb(46, 46, 46);
+    border: 0px;
+}
+.question .multi-select-other.with-text {
+    background-color: rgb(244, 218, 130) !important;
+    padding-left: 50px;
+    color: rgb(46, 46, 46);
+}
+.question .multi-select-other:focus {
+    background-color: rgb(244, 218, 130) !important;
+    font-size: 18px;
+    font-weight: 500;
+    padding-left: 50px;
+    color: rgb(46, 46, 46);
+}
+.question .other-input-selected {
+    margin-top: -20px;
+}
+.question .other-checkbox {
+    background-color: rgb(49, 49, 49);
+    position: relative;
+    width: 20px;
+    height: 20px;
+    top: 30px;
+    float: right;
+    right: 10px;
+}
+
+input.multi-select-other::-webkit-input-placeholder {
+   color: rgb(244, 244, 244) !important;
+}
+input.multi-select-other:-moz-placeholder { /* Firefox 18- */
+   color: rgb(244, 244, 244) !important;  
+}
+input.multi-select-other::-moz-placeholder  {  /* Firefox 19+ */
+   color: rgb(244, 244, 244) !important;  
+}
+input.multi-select-other:-ms-input-placeholder {  
+   color: rgb(244, 244, 244) !important;  
+}
 .form-control.ng-pristine, .unit-select.ng-pristine {
     background-color: rgb(24, 75, 83);
     border: 0;
     color: rgb(149, 149, 149);
 }
+
 .number-with-unit .form-control {
     /*width: 48%;
     display: inline-block;
