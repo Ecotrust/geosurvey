@@ -50,6 +50,7 @@ angular.module('askApp').directive('multiquestion', function() {
                 //split the string
                 var slugList = slugPackage.split(',');
                 //map to get the answer for each slug
+                //reduce to get the sum
                 return _.reduce(_.flatten(_.map(slugList, function(slug) {
                     return scope.getAnswer(slug);
                 })), function(sum, value) {                    
@@ -58,7 +59,6 @@ angular.module('askApp').directive('multiquestion', function() {
                     }
                     return sum + value;
                 });
-                //reduce to get the sum
 
             };
 
@@ -91,7 +91,6 @@ angular.module('askApp').directive('multiquestion', function() {
                         question.otherOption.checked = false;
                     }
                 }
-
 
                 question.answerSelected = option.checked;
 
@@ -256,6 +255,9 @@ angular.module('askApp').directive('multiquestion', function() {
             console.log(scope.question.type);
             if (scope.question.type === 'single-select' || scope.question.type === 'yes-no') {
                 scope.question.answerSelected = _.some(_.pluck(scope.question.options, 'checked'));
+                if (scope.question.allow_other && scope.question.answer.other || _.isArray(scope.question.answer) && _.findWhere(scope.question.answer, {other: true })) {
+                    scope.question.answerSelected = true;
+                }
             } else if (scope.question.type === 'multi-select') {
                 scope.question.answerSelected = _.some(_.pluck(_.flatten(_.map(scope.question.groupedOptions, function(option) {
                     return option.options;
