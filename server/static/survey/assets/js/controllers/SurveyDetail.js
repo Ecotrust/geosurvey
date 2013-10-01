@@ -377,11 +377,21 @@ angular.module('askApp')
         return _.findWhere($scope.page.questions, {slug: slug });
     };
 
-    $scope.validatePage = function (page) {
+    
 
+    $scope.validatePage = function (page) {
+        var result = _.chain(page.questions || [])
+            .map(function (question) {
+                return $scope.validateQuestion(question);    
+            })
+            .every().value();
+        $scope.pageIsValid = result;
     };
 
     $scope.submitPage = function (page) {
+        if (! $scope.pageIsValid) {
+            return false;
+        }
         var answers = _.map(page.questions, function (question) {
             return $scope.getAnswerOnPage(question);
         });
@@ -447,32 +457,7 @@ angular.module('askApp')
 
     $scope.getAnswerOnPage = function(question) {
         var answer = question.answer;
-        if (question.type === 'integer' || question.type === 'number') {
-            if (question.integer_max && question.integer_max < answer) {
-                answer = "NA";
-            }
-            if (question.integer_min || question.integer_min > answer) {
-                answer = "NA";
-            }
-            if (question.type === 'integer' && _.string.include(answer, '.')) {
-                answer = "NA";
-            }
-            // if (answer === undefined) {
-                // answer = 0;
-            // }
-        }
-        
-        if (question.type === 'number-with-unit') {
-            if (! answer || ! question.unit) {
-                return false;    
-            }
-        }
 
-
-
-        if (question.type === 'monthpicker' && ! answer) {
-            return false;
-        }
 
         //var url = ['/respond/answer', survey.slug, $routeParams.questionSlug, $routeParams.uuidSlug].join('/');
         if (question.type === 'timepicker' || question.type === 'datepicker' || question.type === 'monthpicker') {
@@ -984,9 +969,20 @@ $scope.loadSurvey = function(data) {
         $scope.nextPagePath = $scope.getNextPagePath();
         $scope.loading = false;
 
-        // $scope.$watch('page', function (newPage) {
-        //     $scope.validatePage(newPage);
-        // }, true);
+        $scope.validity = {};
+        
+        $scope.$watch('validity', function (newValidity) {
+            // if (newPage) {
+            //     $scope.validatePage(newPage);    
+            // }
+            if (newValidity) {
+                $scope.pageIsValid = _.every(_.values($scope.validity));
+            }
+            
+        }, true);    
+        
+        
+        
 
         // hack to prevent keyboard scroll;
         $('input').live('focus', function (e) {

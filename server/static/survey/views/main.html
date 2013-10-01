@@ -30,9 +30,21 @@
             <a type="button" class="btn btn-main btn-default btn-lg btn-block" href="#/settings">Settings</a>
             <button type="button" class="btn btn-main btn-default btn-lg btn-block" ng-click="logout()">Logout</button>
         </div>
-
+        
         <div ng-hide="user" ng-class="{ 'working': working }">
-            <img class="spinner" src="assets/img/ajax-loader.gif"/>
+            <div class="spinner">
+                <div class="wrapper">
+                    <div class="inner">
+                        <!-- <span>L</span>
+                        <span>o</span>
+                        <span>a</span>
+                        <span>d</span>
+                        <span>i</span>
+                        <span>n</span>
+                        <span>g</span> -->
+                    </div>
+                </div>
+            </div>
             <div class="forms" ng-switch on="showForm">
                 <div ng-switch-default>
                     <form ng-submit="authenticateUser(authUser)" disabled>

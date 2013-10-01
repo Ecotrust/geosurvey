@@ -127,6 +127,10 @@ heroku open
 ```
 
 #manage the heroku database
+There is now a management command to capture a backup from heroku and restore it to the vagrant instance.  This will get your development environment up to date with what is currently running on heroku.
+```bash
+fab vagrant transfer_db
+```
 
 ##dump a backup
 This will dump a compressed binary backup of the current database to a file that can be retrieved as "latest.dump".

@@ -7,10 +7,62 @@ angular.module('askApp').directive('multiquestion', function() {
         scope: {
             question: '=question',
             pageorder: '=pageorder',
-            answers: '=answers'
+            answers: '=answers',
+            validity: '=validity'
         },
         link: function postLink(scope, element, attrs) {
 
+
+            scope.validateQuestion = function (question) {
+                // if the question is not required it is good to go
+                if (! question.required) {
+                    return true;
+                }
+                
+                if (question.type === 'integer' || question.type === 'number') {
+                    if (! question.answer) {
+                        return false;
+                    }
+                    if (question.integer_max && question.integer_max < question.answer) {
+                        return false;
+                    }
+                    if (question.integer_min || question.integer_min > question.answer) {
+                        return false;
+                    }
+                    if (question.type === 'integer' && _.string.include(question.answer, '.')) {
+                        return false;
+                    }
+                }
+
+                if (question.type === 'text' || question.type === 'textarea') {
+                    if (! question.answer) {
+                        return false;
+                    }
+                }
+                debugger;
+                if (question.type === 'single-select' || question.type === 'multi-select' || question.type === 'yes-no') {                
+                    if (question.allow_other && question.otherOption.checked && ! question.otherAnswer) {
+                        return false;
+                    } else if (! question.otherOption.checked) {
+                        return _.some(_.pluck(question.options, 'checked'));    
+                    }
+                    
+                }
+                
+                if (question.type === 'number-with-unit') {
+                    if (! question.answer || ! question.unit) {
+                        return false;    
+                    }
+                }
+
+                if (question.type === 'monthpicker' && ! question.answer) {
+                    return false;
+                }
+
+
+                // default case
+                return true;
+            };
 
             
             // get previously answered questions
@@ -203,13 +255,16 @@ angular.module('askApp').directive('multiquestion', function() {
                 delete scope.question.answer;
             }
 
-            console.log(scope.question.type);
             if (scope.question.type === 'single-select' || scope.question.type === 'yes-no') {
                 scope.question.answerSelected = _.some(_.pluck(scope.question.options, 'checked'));    
             } else if (scope.question.type === 'multi-select') {
                 scope.question.answerSelected = _.some(_.pluck(_.flatten(_.map(scope.question.groupedOptions, function (option) { return option.options; })), 'checked'));             
             }
             
+
+            scope.$watch('question', function () {
+                scope.validity[scope.question.slug] = scope.validateQuestion(scope.question);
+            }, true);
         }
     };
 });

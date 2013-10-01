@@ -31,10 +31,10 @@
                         <h4 class="question-title">{{ question.title }}</h4>
                         <div ng-switch on="question.type">
                             <div ng-switch-when="grid">
-                                <div gridquestion question="question" answers="answers" pageorder="$index"  viewpath="viewPath"></div>
+                                <div gridquestion question="question" answers="answers" validity="validity" pageorder="$index"  viewpath="viewPath"></div>
                             </div>
                             <div ng-switch-default>
-                                <div multiquestion question="question" answers="answers" pageorder="$index"></div>
+                                <div multiquestion question="question" answers="answers" validity="validity" pageorder="$index"></div>
                             </div>
                         </div>
                     </div>
@@ -45,5 +45,5 @@
 </div>
 <div id="footer">
     <a class="btn pull-left" ng-click="skipBack()"><span class="glyphicon glyphicon-arrow-left"></span></a>
-    <a class="btn pull-right" ng-click="submitPage(page)"><span class="glyphicon glyphicon-arrow-right"></span></a>
+    <a class="btn pull-right" ng-class="{ 'valid': pageIsValid }" ng-click="submitPage(page)"><span class="glyphicon glyphicon-arrow-right"></span></a>
 </div>

@@ -23,7 +23,19 @@
     </div>
     <!-- Begin page content -->
     <div class="container">
-        <p ng-show="hideSurveys">Loading Surveys...</p>
+        <div class="spinner" ng-show="hideSurveys">
+            <div class="wrapper">
+                <div class="inner">
+                    <span>L</span>
+                    <span>o</span>
+                    <span>a</span>
+                    <span>d</span>
+                    <span>i</span>
+                    <span>n</span>
+                    <span>g</span>
+                </div>
+            </div>
+        </div>
         <ul class="list-unstyled" ng-hide="hideSurveys">
             <li ng-repeat="survey in surveys">
                 <a type="button" class="btn btn-main btn-default btn-lg btn-block" href="#/survey/{{survey.slug}}/1/offline">

@@ -8,9 +8,25 @@ angular.module('askApp').directive('gridquestion', function() {
             question: '=question',
             pageorder: '=pageorder',
             answers: '=answers',
-            viewPath: '=viewpath'
+            viewPath: '=viewpath',
+            validity: "=validity"
         },
         link: function postLink(scope, element, attrs) {
+
+
+            scope.validateQuestion = function (question) {
+                var overallValidity = true, currentRow;
+                _.each(question.options, function (row) {
+                    currentRow = row;
+                    _.each(question.grid_cols, function (col) {
+                        var answer = currentRow[col.label];
+                        if (col.required && ! answer) {
+                            overallValidity = false;
+                        }
+                    });
+                });
+                return overallValidity;
+            };
             // get previously answered questions
             scope.getAnswer = function(questionSlug) {
                 var slug, gridSlug;
@@ -189,11 +205,16 @@ angular.module('askApp').directive('gridquestion', function() {
             if (! scope.question.answer) {
                 delete scope.question.answer;
             }
-            // element.on('focus', '.ngCellText', function (e) {
-            //     $(e.target).closest('.ngCell').next().find('input').focus();    
-                
-                
-            // })
+            
+            scope.$watch('question.options', function (newAnswer) {
+                if (newAnswer) {
+                    scope.validity[scope.question.slug] = scope.validateQuestion(scope.question);    
+                }
+            }, true);
+
+            element.on('focus', '.ngCellText', function (e) {
+                $(e.target).closest('.ngCell').next().find('input').focus();      
+            });
         }
     };
 });
