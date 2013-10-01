@@ -12,7 +12,7 @@ angular.module('askApp').directive('multiquestion', function() {
         link: function postLink(scope, element, attrs) {
 
 
-            
+
             // get previously answered questions
             scope.getAnswer = function(questionSlug) {
                 var slug, gridSlug;
@@ -22,16 +22,21 @@ angular.module('askApp').directive('multiquestion', function() {
                 } else {
                     slug = questionSlug;
                 }
-                
+
                 if (scope.answers[slug] || scope.answers[slug] === 0) {
                     if (gridSlug) {
-                        return _.flatten(_.map(scope.answers[slug], function (answer) {
-                            return _.map(answer[gridSlug], function (gridAnswer){
-                                return {
-                                    text: answer.text + ": " + gridAnswer,
-                                    label: _.string.slugify(answer.text + ": " + gridAnswer)
-                                };
-                            });
+                        return _.flatten(_.map(scope.answers[slug], function(answer) {
+                            if (_.isArray(answer[gridSlug])) {
+                                return _.map(answer[gridSlug], function(gridAnswer) {
+                                    return {
+                                        text: answer.text + ": " + gridAnswer,
+                                        label: _.string.slugify(answer.text + ": " + gridAnswer),
+                                        value: gridAnswer
+                                    };
+                                });   
+                            } else {
+                                return answer[gridSlug];
+                            }
                         }));
                     } else {
                         return scope.answers[slug];
@@ -41,6 +46,22 @@ angular.module('askApp').directive('multiquestion', function() {
                 }
             };
 
+            scope.getSum = function(slugPackage) {
+                //split the string
+                var slugList = slugPackage.split(',');
+                //map to get the answer for each slug
+                return _.reduce(_.flatten(_.map(slugList, function(slug) {
+                    return scope.getAnswer(slug);
+                })), function(sum, value) {                    
+                    if (_.isObject(value)) {
+                        value = value.value;
+                    }
+                    return sum + value;
+                });
+                //reduce to get the sum
+
+            };
+
 
             // handle clicked multiselects
             scope.onMultiSelectClicked = function(option, question) {
@@ -48,9 +69,11 @@ angular.module('askApp').directive('multiquestion', function() {
                 if (!option.checked && option.other) {
                     $scope.question.otherAnswer = null;
                 }
-                question.answerSelected = _.some(_.pluck(_.flatten(_.map(question.groupedOptions, function (option) { return option.options; })), 'checked'));
-                
-                
+                question.answerSelected = _.some(_.pluck(_.flatten(_.map(question.groupedOptions, function(option) {
+                    return option.options;
+                })), 'checked'));
+
+
             };
 
             // handle single select clicks
@@ -88,12 +111,13 @@ angular.module('askApp').directive('multiquestion', function() {
             // set up rows for selects
             if (scope.question.rows) {
                 scope.question.options = [];
-                _.each(scope.question.rows.split('\n'), function (row, index) {
-                    var matches = [], option;
+                _.each(scope.question.rows.split('\n'), function(row, index) {
+                    var matches = [],
+                        option;
                     if (_.isArray(scope.question.answer)) {
-                        matches = _.filter(scope.question.answer, function (answer) {
+                        matches = _.filter(scope.question.answer, function(answer) {
                             return answer.text === row;
-                        });    
+                        });
                     } else if (row === scope.question.answer.text) {
                         // handle single selects
                         matches = [true];
@@ -101,7 +125,7 @@ angular.module('askApp').directive('multiquestion', function() {
                     option = {
                         text: _.string.startsWith(row, '*') ? row.substr(1) : row,
                         label: _.string.slugify(row),
-                        checked: matches.length ? true: false,
+                        checked: matches.length ? true : false,
                         isGroupName: _.string.startsWith(row, '*')
                     };
                     if (option.checked) {
@@ -109,22 +133,28 @@ angular.module('askApp').directive('multiquestion', function() {
                     }
                     scope.question.options.push(option);
                 });
-                
+
                 scope.question.groupedOptions = [];
                 scope.question.answerSelected = false;
                 var groupName = "";
-                _.each(scope.question.rows.split('\n'), function (row, index) {
-                    var matches = _.filter(scope.question.answer, function (answer) {
+                _.each(scope.question.rows.split('\n'), function(row, index) {
+                    var matches = _.filter(scope.question.answer, function(answer) {
                         return answer.text === row;
                     });
                     var isGroupName = _.string.startsWith(row, '*');
                     var group;
-                    if ( isGroupName ) {
+                    if (isGroupName) {
                         groupName = row.substr(1);
-                        group = { optionLabel: groupName, options: [], open: false };
-                        scope.question.groupedOptions.push( group );
-                    } else if ( scope.question.groupedOptions.length > 0 ) {
-                        group = _.findWhere( scope.question.groupedOptions, { optionLabel: groupName } );
+                        group = {
+                            optionLabel: groupName,
+                            options: [],
+                            open: false
+                        };
+                        scope.question.groupedOptions.push(group);
+                    } else if (scope.question.groupedOptions.length > 0) {
+                        group = _.findWhere(scope.question.groupedOptions, {
+                            optionLabel: groupName
+                        });
                         group.options.push({
                             text: row,
                             label: _.string.slugify(row),
@@ -135,7 +165,7 @@ angular.module('askApp').directive('multiquestion', function() {
                             group.open = true;
                             console.log(group.optionLabel);
                         }
-                    } 
+                    }
                 });
 
             }
@@ -162,22 +192,37 @@ angular.module('askApp').directive('multiquestion', function() {
             // set up the options for a yes-no question
             if (scope.question.type === 'yes-no') {
                 if (scope.question.answer && _.isArray(scope.question.answer)) {
-                    scope.question.options = [
-                        {'text': 'Yes', 'label': "Yes", checked: scope.question.answer[0].text === 'Yes'},
-                        {'text': 'No', 'label': "No", checked: scope.question.answer[0].text === 'No'}
-                    ];    
-                } else if (scope.question.answer && ! _.isArray(scope.question.answer)) {
-                    scope.question.options = [
-                        {'text': 'Yes', 'label': "Yes", checked: scope.question.answer.text === 'Yes'},
-                        {'text': 'No', 'label': "No", checked: scope.question.answer.text === 'No'}
-                    ];    
+                    scope.question.options = [{
+                        'text': 'Yes',
+                        'label': "Yes",
+                        checked: scope.question.answer[0].text === 'Yes'
+                    }, {
+                        'text': 'No',
+                        'label': "No",
+                        checked: scope.question.answer[0].text === 'No'
+                    }];
+                } else if (scope.question.answer && !_.isArray(scope.question.answer)) {
+                    scope.question.options = [{
+                        'text': 'Yes',
+                        'label': "Yes",
+                        checked: scope.question.answer.text === 'Yes'
+                    }, {
+                        'text': 'No',
+                        'label': "No",
+                        checked: scope.question.answer.text === 'No'
+                    }];
                 } else {
-                    scope.question.options = [
-                        {'text': 'Yes', 'label': "Yes", checked: false },
-                        {'text': 'No', 'label': "No", checked: false }
-                    ];
+                    scope.question.options = [{
+                        'text': 'Yes',
+                        'label': "Yes",
+                        checked: false
+                    }, {
+                        'text': 'No',
+                        'label': "No",
+                        checked: false
+                    }];
                 }
-                
+
             }
 
 
@@ -194,22 +239,29 @@ angular.module('askApp').directive('multiquestion', function() {
                 if (scope.question.answer && !_.isArray(scope.question.answer)) {
                     scope.question.answer = [scope.question.answer];
                 }
-            } 
+            }
             // end of getting answers
 
+            if (scope.question.pre_calculated && !scope.question.answer) {
+                debugger;
+                scope.question.answer = scope.getSum(scope.question.pre_calculated);
+            }
+
             // remove false answers
-            
-            if (! scope.question.answer && scope.question.answer !== 0) {
+
+            if (!scope.question.answer && scope.question.answer !== 0) {
                 delete scope.question.answer;
             }
 
             console.log(scope.question.type);
             if (scope.question.type === 'single-select' || scope.question.type === 'yes-no') {
-                scope.question.answerSelected = _.some(_.pluck(scope.question.options, 'checked'));    
+                scope.question.answerSelected = _.some(_.pluck(scope.question.options, 'checked'));
             } else if (scope.question.type === 'multi-select') {
-                scope.question.answerSelected = _.some(_.pluck(_.flatten(_.map(scope.question.groupedOptions, function (option) { return option.options; })), 'checked'));             
+                scope.question.answerSelected = _.some(_.pluck(_.flatten(_.map(scope.question.groupedOptions, function(option) {
+                    return option.options;
+                })), 'checked'));
             }
-            
+
         }
     };
 });
