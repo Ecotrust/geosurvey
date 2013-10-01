@@ -5,6 +5,8 @@ from contextlib import contextmanager
 from fabric.operations import put
 from fabric.api import env, local, sudo, run, cd, prefix, task, settings
 
+import datetime
+
 branch = 'master'
 
 CHEF_VERSION = '10.20.0'
@@ -356,3 +358,11 @@ def package_android_test():
         run("cd %s && %s/bin/python manage.py package https://usvi-survey.herokuapp.com '../android/app/assets/www'" % (vars['app_dir'], vars['venv']))
         local("android/app/cordova/build --debug")
         local("cp ./android/app/bin/HapiFis-debug.apk server/static/usvi.apk")
+
+@task
+def transfer_db():
+    date = datetime.datetime.now().strftime("%Y-%m-%d:%H%M")
+    db_url = local("heroku pgbackups:url", capture=True)
+    local("heroku pgbackups:capture --expire")
+    run("curl -o /tmp/%s.dump \"%s\"" % (date, db_url))
+    run("pg_restore --verbose --clean --no-acl --no-owner -U vagrant -d geosurvey /tmp/%s.dump" % date)

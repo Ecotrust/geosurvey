@@ -27,3 +27,5 @@ mobile/www/views/
 mobile/platforms/ios/www/
 mobile/platforms/ios/cordova/console.log
 mobile/platforms/ios/DigitalDeck.xcodeproj/project.xcworkspace/xcuserdata/eknuth.xcuserdatad/UserInterfaceState.xcuserstate
+server/static/usvi.apk
+*.dump
