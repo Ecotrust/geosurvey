@@ -347,17 +347,17 @@ def package_ios_test():
 
 
 
-@task
-def package():
-        run("cd %s && %s/bin/python manage.py package hapifis.herokuapp.com '../android/app/assets/www'" % (vars['app_dir'], vars['venv']))
-        local("android/app/cordova/build --debug")
-        local("cp ./android/app/bin/HapiFis-debug.apk server/static/hapifis.apk")
+# @task
+# def package():
+#         run("cd %s && %s/bin/python manage.py package hapifis.herokuapp.com '../android/app/assets/www'" % (vars['app_dir'], vars['venv']))
+#         local("android/app/cordova/build --debug")
+#         local("cp ./android/app/bin/HapiFis-debug.apk server/static/hapifis.apk")
 
 @task
 def package_android_test():
         run("cd %s && %s/bin/python manage.py package https://usvi-survey.herokuapp.com '../android/app/assets/www'" % (vars['app_dir'], vars['venv']))
         local("android/app/cordova/build --debug")
-        local("cp ./android/app/bin/HapiFis-debug.apk server/static/usvi.apk")
+        local("Scp ./android/app/bin/HapiFis-debug.apk ninkasi:/var/www/usvi/usvi.apk")
 
 @task
 def transfer_db():

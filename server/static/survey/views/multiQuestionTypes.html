@@ -160,13 +160,7 @@
 
     <!-- Multi-Select -->
     <div ng-switch-when="multi-select">
-<<<<<<< HEAD
         <div class="question">
-=======
-        <form class="question" ng-submit="answerMultiSelect(question)">  
-
-            <!-- if groupOptions are present --> 
->>>>>>> origin/usvi
             <div class="panel-group">
                 <div class="panel panel-default" ng-repeat="groupOption in question.groupedOptions">
                     <div class="panel-heading" ng-click="groupOption.open = !groupOption.open">
@@ -237,16 +231,7 @@
                 <div ng-show="question.otherAnswer" class="other-checkbox"></div>
                 <input class="form-control multi-select-other" type="text" ng-class="{'with-text': question.otherAnswer}" placeholder="Enter Other Option Here" ng-model="question.otherAnswer" />
             </div>
-            
-            <!--<div ng-show="question.allow_other && question.otherOption.checked" ng-class="{'select-checked': question.allow_other && question.otherOption.checked && question.otherAnswer, 'select-unchecked': question.allow_other && question.otherOption.checked && !question.otherAnswer}">
-                <div class="checkbox"></div>
-                <input class="form-control multi-select-other" ng-class="{'with-text': question.otherAnswer}" type="text" placeholder="Enter Other Option Here" ng-model="question.otherAnswer" />
-            </div>-->
-            <!--
-            <input class="form-control multi-select-other" type="text" placeholder="Other Option" ng-show="question.allow_other && question.otherOption.checked" ng-model="question.otherAnswer" />
-            -->
-        </form>
-
+        </div>
     </div>
     <div ng-switch-when="map-multipoint">
         <div ng-include="viewPath + 'views/mapQuestion.html'"></div>

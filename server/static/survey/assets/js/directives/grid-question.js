@@ -107,7 +107,6 @@ angular.module('askApp').directive('gridquestion', function() {
                     scope.question.options = scope.getAnswer(scope.question.options_from_previous_answer);
                 }
 
-
                 if (scope.question.options.length < 1) {
                     // Skip this question since we have no items to list.
                     // $scope.gotoNextQuestion();
@@ -200,7 +199,6 @@ angular.module('askApp').directive('gridquestion', function() {
             }
 
 
-
             // remove false answers
             if (! scope.question.answer) {
                 delete scope.question.answer;
@@ -212,9 +210,9 @@ angular.module('askApp').directive('gridquestion', function() {
                 }
             }, true);
 
-            element.on('focus', '.ngCellText', function (e) {
-                $(e.target).closest('.ngCell').next().find('input').focus();      
-            });
+            // element.on('focus', '.ngCellText', function (e) {
+            //     $(e.target).closest('.ngCell').next().find('input').focus();      
+            // });
         }
     };
 });

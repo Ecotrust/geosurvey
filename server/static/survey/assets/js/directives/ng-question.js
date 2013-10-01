@@ -19,7 +19,7 @@ angular.module('askApp').directive('multiquestion', function() {
                 }
                 
                 if (question.type === 'integer' || question.type === 'number') {
-                    if (! question.answer) {
+                    if (! _.isNumber(question.answer)) {
                         return false;
                     }
                     if (question.integer_max && question.integer_max < question.answer) {
@@ -48,7 +48,7 @@ angular.module('askApp').directive('multiquestion', function() {
                 }
                 
                 if (question.type === 'number-with-unit') {
-                    if (! question.answer || ! question.unit) {
+                    if (! _.isNumber(question.answer) || ! question.unit) {
                         return false;    
                     }
                 }
