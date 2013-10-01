@@ -199,8 +199,7 @@ class Question(caching.base.CachingMixin, models.Model):
     modalQuestion = models.ForeignKey('self', null=True, blank=True, related_name="modal_question")
     hoist_answers = models.ForeignKey('self', null=True, blank=True, related_name="hoisted")
     foreach_question = models.ForeignKey('self', null=True, blank=True, related_name="foreach")
-
-
+    pre_calculated = models.TextField(null=True, blank=True)
 
 
     # backend stuff

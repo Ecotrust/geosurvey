@@ -197,6 +197,8 @@ input[type="checkbox"] {
                             <input class="span12" ng-model="activeQuestion.integer_min" />
                             <label>Maximum Value</label>
                             <input class="span12" ng-model="activeQuestion.integer_max" />
+                            <label>Pre-Calculated</label>
+                            <textarea class="span12" ng-model="activeQuestion.pre_calculated" />
                         </div>                      
                         <div ng-show="activeQuestion.type == 'map-multipolygon'">
                             <h3>Map Settings</h3>

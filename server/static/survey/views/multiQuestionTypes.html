@@ -123,8 +123,9 @@
 
                             </div>
                         </li>
-                        <li class="option" ng-show="question.allow_other" ng-click="$parent.onSingleSelectClicked($parent.question.otherOption, $parent.question)" ng-class="{'select-checked': $parent.question.otherOption.checked }">
+                        <li class="option" ng-show="question.allow_other" ng-click="$parent.onSingleSelectClicked($parent.question.otherOption, $parent.question)" ng-class="{'select-checked': $parent.question.otherOption.checked, 'select-unchecked': ! $parent.question.otherOption.checked }">
                             <div class="select-content">
+                                <div class="checkbox"></div>
                                 <h4 class="select-name option-name">
                                     Other
                                 </h4>
@@ -197,7 +198,7 @@
 
                         </div>
                     </li>
-                    <li ng-show="question.allow_other" ng-click="onMultiSelectClicked(question.otherOption, question)" ng-class="{'select-checked': question.otherOption.checked }" ng-model="question.otherAnswer.text">
+                    <li ng-show="question.allow_other" ng-click="onMultiSelectClicked(question.otherOption, question)" ng-class="{'select-checked': question.otherOption.checked, 'select-unchecked': ! question.otherOption.checked }" ng-model="question.otherAnswer.text">
                         <div class="select-content">
                             <h4 class="select-name option-name">
                                 Other
