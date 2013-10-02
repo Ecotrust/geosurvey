@@ -97,12 +97,18 @@ img.center {
 .navbar .container {
     height: 60px;
 }
+
 .navbar .navbar-toggle {
     position: absolute;
     padding: 10px;
-    margin-top: 10px;
+    margin-top: 0;
     margin-left: 10px;
     border: 0;
+    font-size: 32px;
+}
+.navbar .navbar-toggle:hover {
+    text-decoration: none;
+    background-color: rgba(0,0,0,0);
 }
 .navbar .navbar-toggle:hover {
     background-color: inherit;

@@ -42,7 +42,12 @@ angular.module('askApp').directive('multiquestion', function() {
                     if (question.allow_other && question.otherOption.checked && ! question.otherAnswer) {
                         return false;
                     } else if (! question.otherOption.checked) {
-                        return _.some(_.pluck(question.options, 'checked'));    
+                        if (question.groupedOptions.length) {   
+
+                            return _.some(_.pluck(_.flatten(_.map(question.groupedOptions, function (group) { return group.options })), 'checked'));
+                        } else {
+                            return _.some(_.pluck(question.options, 'checked'));        
+                        }
                     }
                     
                 }

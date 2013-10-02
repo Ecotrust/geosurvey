@@ -160,7 +160,7 @@ To run the ios simulator
 fab vagrant emulate_ios
 ```
 
-To build and stagethe android app
+To build and stage the android app
 ```bash
 fab vagrant package_android_test
 ```

@@ -1,28 +1,21 @@
-<nav class="bar-tab primary-nav">
-  <ul class="tab-inner" ng-cloak ng-show="user">
-    <li class="tab-item" ng-class="{'active': path == 'home'}">
-      <a href="#/SurveyList">
-              <img class="tab-icon" src="assets/img/icon-home.png">
-              <div class="tab-label">Home</div>
+<div class="navbar navbar-default navbar-fixed-top">
+    <a type="button" class="navbar-toggle" href="#/">
+        <i class="icon-home"></i>
+    </a>
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">
+                <img src="assets/img/deck-logo.svg" class="center logo" />
             </a>
-    </li>
-    <li class="tab-item"  ng-class="{'active': path == 'surv'}">
-      <a href="#/surveys">
-                  <img class="tab-icon" src="assets/img/store.png">
-                  <div class="tab-label">Surveys</div>
-                </a>
-    </li>
-    <li class="tab-item" ng-class="{'active': path == 'resp'}">
-      <a href="#/respondents">
-              <img class="tab-icon" src="assets/img/market.png">
-              <div class="tab-label">My Surveys</div>
-            </a>
-    </li>
-    <li class="tab-item" ng-class="{'active': path == 'sett'}">
-      <a href="#/settings">
-              <img class="tab-icon" src="assets/img/icon-settings.png">
-              <div class="tab-label">Settings</div>
-            </a>
-    </li>
-  </ul>
-</nav>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+
+            </ul>
+        </div>
+        <!--/.nav-collapse -->
+    </div>
+    <div class="progress">
+        <div class=" progress-bar" style="width: {{ surveyProgress }}%;"></div>
+    </div>
+</div>
