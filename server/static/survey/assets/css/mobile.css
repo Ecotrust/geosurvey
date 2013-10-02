@@ -101,17 +101,15 @@ img.center {
 .navbar .navbar-toggle {
     position: absolute;
     padding: 10px;
-    margin-top: 0;
+    margin-top: -5px;
     margin-left: 10px;
     border: 0;
-    font-size: 32px;
+    font-size: 36px;
 }
 .navbar .navbar-toggle:hover {
     text-decoration: none;
     background-color: rgba(0,0,0,0);
-}
-.navbar .navbar-toggle:hover {
-    background-color: inherit;
+    color: rgb(100,100,100);
 }
 .navbar .navbar-toggle .icon-bar {
     height: 3px;
