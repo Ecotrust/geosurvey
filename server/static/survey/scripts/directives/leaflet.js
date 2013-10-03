@@ -53,7 +53,7 @@
                 var options = { position: 'bottomleft' };
                 // L.control.layers(baseMaps, null, options).addTo(map);
 
-                L.control.layersToggle("View Satellite Imagery", bing, "View Nautical Charts", nautical, options).addTo(map);
+                //L.control.layersToggle("View Satellite Imagery", bing, "View Nautical Charts", nautical, options).addTo(map);
 
                 // Study area boundary
                 $http.get("/static/survey/data/marco_dd.json?v=2").success(function(data) {
