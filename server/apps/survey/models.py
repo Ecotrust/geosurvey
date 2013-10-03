@@ -140,9 +140,11 @@ class Option(caching.base.CachingMixin, models.Model):
     type = models.CharField(max_length=20,choices=QUESTION_TYPE_CHOICES,default='integer')
     rows = models.TextField(null=True, blank=True)
     required = models.BooleanField(default=True)
+    either_or = models.SlugField(max_length=64, null=True, blank=True)
     order = models.IntegerField(null=True, blank=True)
     min = models.IntegerField(default=None, null=True, blank=True)
     max = models.IntegerField(default=None, null=True, blank=True)    
+
     objects = caching.base.CachingManager()
 
 

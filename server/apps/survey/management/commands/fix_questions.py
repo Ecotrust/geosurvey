@@ -13,6 +13,8 @@ class Command(BaseCommand):
             page.blocks.clear()
             page.save()
         for question in Question.objects.all():
+            if question.page_set.all().count() == 0:
+                continue
             if question.slug.find('lobster') != -1:
                 page = Page.objects.get(questions=question)
                 #page.blocks.clear()

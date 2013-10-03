@@ -264,6 +264,8 @@ input[type="checkbox"] {
                                     Required
                                     <input type="checkbox" ng-model="activeQuestion.activeOption.required" />
                                 </label>
+                                <label>Slug for Either/Or Required Field</label>
+                                <input type="text" class="span8" rows=5 ng-model="activeQuestion.activeOption.either_or">
                                 <div ng-show="activeQuestion.activeOption && activeQuestion.activeOption.type == 'integer' || activeQuestion.activeOption.type == 'number'">
                                     <label>Min</label>
                                     <input class="span12" type="text" ng-model="activeQuestion.activeOption.min">

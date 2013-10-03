@@ -38,7 +38,7 @@
                             <input type="text" class="form-control username" placeholder="enter your username..." ng-model="authUser.username" autocapitalize="off" required>
                             <input type="password" class="form-control password" placeholder="enter your password..." ng-model="authUser.password" required>
                             <button class="btn btn-main btn-default btn-block" ng-disabled="! (authUser.username &&  authUser.password)">login</button>
-                            <a class="btn btn-main btn-default btn-block" ng-class="{'active': showForm == 'new-user'}" ng-click="toggleForm('new-user')">signup</a>
+                            <button class="btn btn-main btn-default btn-block" ng-class="{'active': showForm == 'new-user'}" ng-click="toggleForm('new-user')">signup</button>
                             <div class="error" ng-show="showError == 'auth-error'">
                                 There was a problem authenticating. Please try again.
                             </div>

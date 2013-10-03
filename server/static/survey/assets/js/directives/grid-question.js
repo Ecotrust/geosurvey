@@ -21,7 +21,10 @@ angular.module('askApp').directive('gridquestion', function() {
                     _.each(question.grid_cols, function (col) {
                         var answer = currentRow[col.label];
                         if (col.required && ! answer) {
-                            overallValidity = false;
+                            if (col.either_or && ! currentRow[col.either_or]) {
+                                overallValidity = false;
+                            }
+                            
                         }
                     });
                 });
@@ -210,8 +213,16 @@ angular.module('askApp').directive('gridquestion', function() {
                 }
             }, true);
 
+            // $(element.find('.ngCellText')).attr('tabindex', -1);
+
             // element.on('focus', '.ngCellText', function (e) {
-            //     $(e.target).closest('.ngCell').next().find('input').focus();      
+            //     if ($(e.target).closest('.ngRow')[0] === $(e.relatedTarget).closest('.ngRow')[0]) {
+            //         // coming from the same row, move back
+            //         $($(e.target).closest('.ngRow').prev().find('.ngCell:last-child').children()[0]).focus();
+            //     } else {
+            //         $(e.target).closest('.ngCell').next().find('input').focus();    
+            //     }
+                
             // });
         }
     };
