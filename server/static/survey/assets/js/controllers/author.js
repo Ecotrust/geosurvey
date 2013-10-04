@@ -236,9 +236,8 @@ angular.module('askApp')
             }
             $scope.newBlock = false;
             $scope.confirmDelete = false;
-            $scope.activeQuestion = {};
             $scope.questionBeingEdited = question;
-            angular.extend($scope.activeQuestion, question);
+            $scope.activeQuestion = angular.copy(question);
             $location.search({question:question.slug});
         };
 
@@ -327,6 +326,8 @@ angular.module('askApp')
                     $scope.activePage.questions.push(result);
                     $scope.questionBeingEdited = result;
                     $scope.savePage($scope.activePage, result);
+                } else if (status === 200) {
+                    angular.extend($scope.questionBeingEdited, result);
                 }
                 
                 //$scope.startEditingQuestion($scope.questionBeingEdited);
