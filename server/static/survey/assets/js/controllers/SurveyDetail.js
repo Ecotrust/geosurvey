@@ -749,9 +749,14 @@ angular.module('askApp')
    
 
     $scope.skipBack = function () {
+        
         var lastPage = $scope.getLastPage();
-
-        $location.path(['survey', $routeParams.surveySlug, lastPage.order, $routeParams.uuidSlug].join('/'));
+        if (lastPage) {
+            $location.path(['survey', $routeParams.surveySlug, lastPage.order, $routeParams.uuidSlug].join('/'));    
+        } else {
+            $location.path('/surveys');
+        }
+        
 
     };
 
