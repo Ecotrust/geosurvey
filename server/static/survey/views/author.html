@@ -237,7 +237,7 @@ input[type="checkbox"] {
                         <h3>Column Options</h3>
                         <div class="row-fluid">
                             <div class="span4">
-                                <ul class="nav nav-pills nav-stacked" ng-model="activeQuestion.grid_cols" ui-sortable="{axis: 'y'}">
+                                <ul class="nav nav-pills nav-stacked col-options" ng-model="activeQuestion.grid_cols" ui-sortable="{axis: 'y'}">
                                     <li ng-class="{'active': grid_col == activeQuestion.activeOption }" ng-repeat="grid_col in activeQuestion.grid_cols">
                                         <a ng-click="activeQuestion.activeOption=grid_col">{{grid_col.text}}</a>
                                     </li>
