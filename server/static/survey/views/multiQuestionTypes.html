@@ -13,9 +13,9 @@
     <div ng-switch-when="number-with-unit">
         <div class="question number-with-unit">
             <input name="integerAnswer" ng-model="question.answer" class="form-control" placeholder="{{ question.label }}" type="number" min="{{question.integer_min}}" max="{{question.integer_max}}" step="any" ui-event="{ keypress : 'onlyDigits($event)' }" ng-required="{{question.required}}" />
-            <div class="select-wrapper" ng-class="{ 'unit-selected': question.unit }">
+            <div class="select-wrapper form-control" ng-class="{ 'unit-selected': question.unit }">
                 <select ng-model="question.unit" class="unit-select" placeholder="{{ question.label }}">
-                    <option value="">Select Unit</option>
+                    <option value="">Select Units</option>
                     <option ng-repeat="option in question.options">{{ option.text }}</option>
                 </select>
                 <span class="down glyphicon glyphicon-chevron-down"></span>

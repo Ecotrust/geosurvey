@@ -30,6 +30,11 @@ class PageAdmin(admin.ModelAdmin):
 class BlockAdmin(admin.ModelAdmin):
     list_display = ('__unicode__', 'skip_question')
 
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == "skip_question":
+            kwargs["queryset"] = Question.objects.all().order_by('title')
+        return super(BlockAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
+
 class SurveyAdmin(admin.ModelAdmin):
     list_display = ('name','slug',)
     prepopulated_fields = {'slug':('name',),}
