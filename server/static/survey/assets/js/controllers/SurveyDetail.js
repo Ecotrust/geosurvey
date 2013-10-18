@@ -356,7 +356,7 @@ angular.module('askApp')
             answer: answer.answer,
             question: answer.question
         });
-        if (answer.question.attach_to_profile) {
+        if (answer.question.attach_to_profile || answer.question.persistent) {
             if ( !app.user.registration ) {
                 app.user.registration = {};
             }
@@ -418,9 +418,9 @@ angular.module('askApp')
                 _.each(request.data.answers, function (answer){
                     var question = $scope.getQuestionBySlug(answer.slug);
                     $scope.answers[answer.slug] = answer.answer;
+
                     // update user profile
-    
-                    if (question.attach_to_profile) {
+                    if (question.attach_to_profile || question.persistent) {
                         app.user.registration[answer.question.slug] = answer.answer;
                     }
                     if (!app.data.responses) {
@@ -762,7 +762,7 @@ angular.module('askApp')
 
 
 
-
+// gets called whenever new page is loaded...?
 $scope.loadSurvey = function(data) {
         $scope.survey = data.survey;
         $scope.survey.status = data.status;

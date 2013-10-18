@@ -171,6 +171,7 @@ class Question(caching.base.CachingMixin, models.Model):
     order = models.IntegerField(default=0)
     slug = models.SlugField(max_length=64)
     attach_to_profile = models.BooleanField(default=False)
+    persistent = models.BooleanField(default=False)
     type = models.CharField(max_length=20,choices=QUESTION_TYPE_CHOICES,default='text')
     options = models.ManyToManyField(Option, null=True, blank=True)
     options_json = models.TextField(null=True, blank=True)
@@ -393,7 +394,7 @@ class Response(caching.base.CachingMixin, models.Model):
                 setattr(self.respondant, self.question.slug, self.answer)
                 self.respondant.save()
 
-            if self.question.attach_to_profile:
+            if self.question.attach_to_profile or self.question.persistent:
                 # Get this user's set of profile fields. These can be shared cross-survey (...is this still the case?)
                 if self.respondant.user.profile.registration:
                     profileAnswers = simplejson.loads(self.respondant.user.profile.registration)
@@ -404,6 +405,7 @@ class Response(caching.base.CachingMixin, models.Model):
                 profile = get_object_or_404(UserProfile, user=self.respondant.user)
                 profile.registration = simplejson.dumps(profileAnswers)
                 profile.save()
+
 
             self.save()
             print self.answer
