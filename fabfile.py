@@ -7,7 +7,7 @@ from fabric.api import env, local, sudo, run, cd, prefix, task, settings
 
 import datetime
 
-branch = 'master'
+branch = 'sprint-1018'
 
 CHEF_VERSION = '10.20.0'
 
@@ -181,14 +181,14 @@ def push():
 
     with cd(env.root_dir):
         # Really, git?  Really?
+        run('git reset HEAD --hard')
         run('git checkout %s' % env.branch)
-        run('git reset HEAD')
-        run('git checkout .')
+        #run('git checkout .')
         run('git checkout %s' % env.branch)
 
         sudo('chown -R www-data:deploy *')
         sudo('chown -R www-data:deploy /usr/local/venv')
-        sudo('chmod -R 0770 *')
+        sudo('chmod -R g+w *')
 
 
 @task
@@ -201,12 +201,12 @@ def deploy():
     with cd(env.code_dir):
         with _virtualenv():
             run('pip install -r requirements.txt')
-            _manage_py('collectstatic --noinput')
-            _manage_py('syncdb --noinput')
+            _manage_py('collectstatic --noinput --settings=config.environments.staging')
+            _manage_py('syncdb --noinput --settings=config.environments.staging')
             # _manage_py('add_srid 99996')
-            _manage_py('migrate')
+            _manage_py('migrate --settings=config.environments.staging')
             # _manage_py('enable_sharing')
-            sudo('chown -R www-data:deploy %s/public/static' % env.root_dir)
+            sudo('chown -R www-data:deploy %s/public/static --settings=config.environments.staging' % env.root_dir)
 
 
     restart()
@@ -355,9 +355,11 @@ def package_ios_test():
 
 @task
 def package_android_test():
-        run("cd %s && %s/bin/python manage.py package https://usvi-survey.herokuapp.com '../android/app/assets/www'" % (vars['app_dir'], vars['venv']))
-        local("android/app/cordova/build --debug")
-        local("Scp ./android/app/bin/HapiFis-debug.apk ninkasi:/var/www/usvi/usvi.apk")
+        #run("cd %s && %s/bin/python manage.py package https://usvi-survey.herokuapp.com '../android/app/assets/www'" % (vars['app_dir'], vars['venv']))
+        run("cd %s && %s/bin/python manage.py package https://usvi-survey.herokuapp.com '../mobile/www'" % (vars['app_dir'], vars['venv']))
+        local("cd mobile && /usr/local/share/npm/bin/phonegap build -V android")
+        #local("android/app/cordova/build --debug")
+        #local("Scp ./android/app/bin/HapiFis-debug.apk ninkasi:/var/www/usvi/usvi.apk")
 
 @task
 def transfer_db():
