@@ -65,6 +65,10 @@ angular.module('askApp')
 
     $scope.submitReport = function () {
         $scope.working = true;
+
+        //verify report (delete any necessary questions) 
+        // call function within survey service...
+        
         $scope.sendRespondent(app.respondents[$routeParams.uuidSlug]).success(function () {
             
             delete app.user.resumePath;
