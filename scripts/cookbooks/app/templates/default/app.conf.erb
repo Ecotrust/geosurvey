@@ -1,7 +1,9 @@
 [program:app]
-command=/usr/local/venv/<%= node[:project] %>/bin/gunicorn_django -b 0.0.0.0:8888 /usr/local/apps/marine-planner/mp/settings.py
+command=/usr/local/venv/<%= node[:project] %>/bin/gunicorn_django -b 0.0.0.0:8888 /usr/local/apps/<%= node[:project] %>/<%= node[:app] %>/config/environments/staging.py
 user=www-data
 directory=/usr/local/apps/<%= node[:project] %>
 autostart=true
 autorestart=true
 killasgroup=true
+
+

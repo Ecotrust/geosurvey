@@ -113,7 +113,7 @@ def bootstrap(username=None):
     #run('test -e %s || ln -s /vagrant/marco %s' % (env.code_dir, env.code_dir))
     with cd(env.code_dir):
         with _virtualenv():
-            run('pip install -r requirements.txt')
+            run('pip install -r server/requirements.txt')
             _manage_py('syncdb --noinput')
             # _manage_py('add_srid 99996')
             _manage_py('migrate')
@@ -200,13 +200,14 @@ def deploy():
 
     with cd(env.code_dir):
         with _virtualenv():
+            print env.code_dir
             run('pip install -r requirements.txt')
             _manage_py('collectstatic --noinput --settings=config.environments.staging')
             _manage_py('syncdb --noinput --settings=config.environments.staging')
             # _manage_py('add_srid 99996')
             _manage_py('migrate --settings=config.environments.staging')
             # _manage_py('enable_sharing')
-            sudo('chown -R www-data:deploy %s/public/static --settings=config.environments.staging' % env.root_dir)
+            sudo('chown -R www-data:deploy %s/public/static' % env.code_dir)
 
 
     restart()
@@ -355,11 +356,9 @@ def package_ios_test():
 
 @task
 def package_android_test():
-        #run("cd %s && %s/bin/python manage.py package https://usvi-survey.herokuapp.com '../android/app/assets/www'" % (vars['app_dir'], vars['venv']))
         run("cd %s && %s/bin/python manage.py package https://usvi-survey.herokuapp.com '../mobile/www'" % (vars['app_dir'], vars['venv']))
         local("cd mobile && /usr/local/share/npm/bin/phonegap build -V android")
-        #local("android/app/cordova/build --debug")
-        #local("Scp ./android/app/bin/HapiFis-debug.apk ninkasi:/var/www/usvi/usvi.apk")
+        local("scp ./mobile/platforms/android/bin/DigitalDeck-debug.apk ninkasi:/var/www/usvi/usvi.apk")
 
 @task
 def transfer_db():

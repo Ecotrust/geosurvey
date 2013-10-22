@@ -2,12 +2,11 @@ from config.settings import *
 
 DATABASES = {
     'default': {
-        'ENGINE': '',
-        'NAME': '',
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': '',
-        'PORT': '',
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'NAME': 'geosurvey',
+        'USER': 'postgres',
+#        'HOST': 'localhost',
+#        'PORT': '5432'
     }
 }
 
