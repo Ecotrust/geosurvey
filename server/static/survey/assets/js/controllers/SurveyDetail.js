@@ -635,19 +635,19 @@ $scope.loadSurvey = function(data) {
         
 
         // hack to prevent keyboard scroll;
-        $('input').live('focus', function (e) {
-            if (!$(this).hasClass('datepicker')) {
-                $('body').addClass("keyboard-open");
-                e.preventDefault(); e.stopPropagation();
-                window.scrollTo(0,0); //the second 0 marks the Y scroll pos. Setting this to i.e. 100 will push the screen up by 100px. 
-            }
+        // $('input').live('focus', function (e) {
+        //     if (!$(this).hasClass('datepicker')) {
+        //         $('body').addClass("keyboard-open");
+        //         e.preventDefault(); e.stopPropagation();
+        //         window.scrollTo(0,0); //the second 0 marks the Y scroll pos. Setting this to i.e. 100 will push the screen up by 100px. 
+        //     }
             
-        });
-        $('input').live('blur', function (e) {
-            if (!$(this).hasClass('datepicker')) {
-                $('body').removeClass("keyboard-open");
-            }
-        });
+        // });
+        // $('input').live('blur', function (e) {
+        //     if (!$(this).hasClass('datepicker')) {
+        //         $('body').removeClass("keyboard-open");
+        //     }
+        // });
 
     };
     $scope.viewPath = app.viewPath;
