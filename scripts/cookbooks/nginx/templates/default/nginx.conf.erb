@@ -20,6 +20,8 @@ http {
   sendfile on;
   tcp_nopush on;
   tcp_nodelay on;
+  
+  types_hash_bucket_size 64;
 
   <% if node[:nginx][:keepalive] == "on" %>
   keepalive_timeout  <%= node[:nginx][:keepalive_timeout] %>;
