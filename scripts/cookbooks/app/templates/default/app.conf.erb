@@ -1,7 +1,7 @@
 [program:app]
-command=/usr/local/venv/<%= node[:project] %>/bin/gunicorn_django -b 0.0.0.0:8888 /usr/local/apps/<%= node[:project] %>/<%= node[:app] %>/config/environments/staging.py
+command=/usr/local/venv/<%= node[:project] %>/bin/gunicorn -b 0.0.0.0:8888 wsgi
 user=www-data
-directory=/usr/local/apps/<%= node[:project] %>
+directory=/usr/local/apps/<%= node[:project] %>/<%= node[:app] %>
 autostart=true
 autorestart=true
 killasgroup=true

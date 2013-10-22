@@ -4,7 +4,7 @@ import os
 
 project = '/usr/local/apps/geosurvey/server'
 ve = '/usr/local/apps/geosurvey/geosurvey_env'
-vepath = os.path.join(ve, 'lib/python2.6/site-packages')
+vepath = os.path.join(ve, 'lib/python2.7/site-packages')
 
 prev_sys_path = list(sys.path)
 # add the site-packages of our virtualenv as a site dir
