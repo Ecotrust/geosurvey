@@ -342,7 +342,7 @@ def package_vagrant():
 
 @task
 def package_ios_test():
-        run("cd %s && %s/bin/python manage.py package https://usvi-survey.herokuapp.com '../mobile/www'" % (env.app_dir, env.venv))
+        run("cd %s && %s/bin/python manage.py package http://usvi-test.pointnineseven.com '../mobile/www'" % (env.app_dir, env.venv))
         local("cd mobile && /usr/local/share/npm/bin/phonegap build -V ios")
 
 
@@ -355,15 +355,15 @@ def package_ios_test():
 
 @task
 def package_android_test():
-        run("cd %s && %s/bin/python manage.py package https://usvi-survey.herokuapp.com '../mobile/www'" % (env.app_dir, env.venv))
+        run("cd %s && %s/bin/python manage.py package http://usvi-test.pointnineseven.com '../mobile/www'" % (env.app_dir, env.venv))
         local("cd mobile && /usr/local/share/npm/bin/phonegap build -V android")
         local("scp ./mobile/platforms/android/bin/DigitalDeck-debug.apk ninkasi:/var/www/usvi/usvi.apk")
 
 @task
 def transfer_db():
-    date = datetime.datetime.now().strftime("%Y-%m-%d:%H%M")
-    db_url = local("heroku pgbackups:url", capture=True)
-    local("heroku pgbackups:capture --expire")
-    run("curl -o /tmp/%s.dump \"%s\"" % (date, db_url))
-    run("pg_restore --verbose --clean --no-acl --no-owner -U postgres -d geosurvey /tmp/%s.dump" % date)
-    run("cd %s && %s/bin/python manage.py migrate" % (env.app_dir, env.venv))
+    # date = datetime.datetime.now().strftime("%Y-%m-%d:%H%M")
+    # db_url = local("heroku pgbackups:url", capture=True)
+    # local("heroku pgbackups:capture --expire")
+    # run("curl -o /tmp/%s.dump \"%s\"" % (date, db_url))
+    # run("pg_restore --verbose --clean --no-acl --no-owner -U postgres -d geosurvey /tmp/%s.dump" % date)
+    run("cd %s && %s/bin/python manage.py migrate --settings=config.environments.staging" % (env.app_dir, env.venv))
