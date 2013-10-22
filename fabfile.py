@@ -21,12 +21,6 @@ env.activate = 'source %s/bin/activate ' % env.virtualenv
 env.code_dir = '%s/%s' % (env.root_dir, app)
 env.media_dir = '%s/media' % env.root_dir
 
-vars = {
-    'app_dir': '/vagrant/server',
-    'venv': '/usr/local/venv/geosurvey'
-}
-
-
 @contextmanager
 def _virtualenv():
     with prefix(env.activate):
@@ -229,6 +223,7 @@ def restore(file=None):
 @task
 def vagrant(username='vagrant'):
     # set ssh key file for vagrant
+    
     set_env_for_user(username)
     result = local('vagrant ssh-config', capture=True)
     data = parse_ssh_config(result)
@@ -237,6 +232,8 @@ def vagrant(username='vagrant'):
     env.host = '127.0.0.1'
     env.port = data['Port']
     env.code_dir = '/vagrant/%s' % app
+    env.venv = '/usr/local/venv/geosurvey'
+    env.app_dir = '/vagrant/server'
 
     try:
         env.host_string = '%s@127.0.0.1:%s' % (username, data['Port'])
@@ -246,6 +243,8 @@ def vagrant(username='vagrant'):
 
 @task
 def staging(connection):
+    env.app_dir = '/usr/local/apps/geosurvey/server'
+    env.venv = '/usr/local/venv/geosurvey'
     env.remote = 'staging'
     env.role = 'staging'
     env.branch = branch
@@ -333,30 +332,30 @@ def prepare():
 
 @task
 def emulate_ios():
-    run("cd %s && %s/bin/python manage.py package http://localhost:8000 '../mobile/www'" % (vars['app_dir'], vars['venv']))
+    run("cd %s && %s/bin/python manage.py package http://localhost:8000 '../mobile/www'" % (env.app_dir, env.venv))
     #local("cd mobile && /usr/local/share/npm/bin/phonegap run -V ios")
 
 @task
 def package_vagrant():
-    run("cd %s && %s/bin/python manage.py package http://localhost:8000 '../mobile/www'" % (vars['app_dir'], vars['venv']))
+    run("cd %s && %s/bin/python manage.py package http://localhost:8000 '../mobile/www'" % (env.app_dir, env.venv))
 
 
 @task
 def package_ios_test():
-        run("cd %s && %s/bin/python manage.py package https://usvi-survey.herokuapp.com '../mobile/www'" % (vars['app_dir'], vars['venv']))
+        run("cd %s && %s/bin/python manage.py package https://usvi-survey.herokuapp.com '../mobile/www'" % (env.app_dir, env.venv))
         local("cd mobile && /usr/local/share/npm/bin/phonegap build -V ios")
 
 
 
 # @task
 # def package():
-#         run("cd %s && %s/bin/python manage.py package hapifis.herokuapp.com '../android/app/assets/www'" % (vars['app_dir'], vars['venv']))
+#         run("cd %s && %s/bin/python manage.py package hapifis.herokuapp.com '../android/app/assets/www'" % (env.app_dir, env.venv))
 #         local("android/app/cordova/build --debug")
 #         local("cp ./android/app/bin/HapiFis-debug.apk server/static/hapifis.apk")
 
 @task
 def package_android_test():
-        run("cd %s && %s/bin/python manage.py package https://usvi-survey.herokuapp.com '../mobile/www'" % (vars['app_dir'], vars['venv']))
+        run("cd %s && %s/bin/python manage.py package https://usvi-survey.herokuapp.com '../mobile/www'" % (env.app_dir, env.venv))
         local("cd mobile && /usr/local/share/npm/bin/phonegap build -V android")
         local("scp ./mobile/platforms/android/bin/DigitalDeck-debug.apk ninkasi:/var/www/usvi/usvi.apk")
 
@@ -366,4 +365,5 @@ def transfer_db():
     db_url = local("heroku pgbackups:url", capture=True)
     local("heroku pgbackups:capture --expire")
     run("curl -o /tmp/%s.dump \"%s\"" % (date, db_url))
-    run("pg_restore --verbose --clean --no-acl --no-owner -U vagrant -d geosurvey /tmp/%s.dump" % date)
+    run("pg_restore --verbose --clean --no-acl --no-owner -U postgres -d geosurvey /tmp/%s.dump" % date)
+    run("cd %s && %s/bin/python manage.py migrate" % (env.app_dir, env.venv))
