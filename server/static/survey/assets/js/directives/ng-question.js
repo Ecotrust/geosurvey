@@ -191,10 +191,14 @@ angular.module('askApp').directive('multiquestion', function() {
                 scope.question.groupedOptions = [];
                 scope.question.answerSelected = false;
                 var groupName = "";
+                
                 _.each(scope.question.rows.split('\n'), function(row, index) {
-                    var matches = _.filter(scope.question.answer, function(answer) {
-                        return answer.text === row;
-                    });
+                    var matches = [];
+                    if (scope.question.answer && scope.question.answer.length) {
+                        matches = _.filter(scope.question.answer, function(answer) {
+                            return answer.text === row;
+                        });                        
+                    } 
                     var isGroupName = _.string.startsWith(row, '*');
                     var group;
                     if (isGroupName) {
