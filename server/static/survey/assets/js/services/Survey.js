@@ -15,45 +15,27 @@ angular.module('askApp')
         answers = thisAnswers;
     };
 
-    // replace with a function that verifies the survey
-    var deleteAnswer = function (questionSlug, uuidSlug) {
-        var index;
-        
-        console.log('deleteAnswer');
-        console.log(questionSlug);
-        console.log('app.offLine === ' + app.offLine);
-        var start = new Date().getTime();
-
-        if (app.offline) {
-            if (answers[questionSlug]) {
-                delete answers[questionSlug];
-            }
-            console.log(app.respondents[uuidSlug]);
-            console.log(new Date().getTime() - start);
-            // _.each(app.respondents[uuidSlug].responses, function (response, i) {
-            //     if (response.question === questionSlug) {
-            //         index = i;
-            //     }
-            // });
-            for (var i = 0; i < app.respondents[uuidSlug].responses.length; i+=1) {
-                if (app.respondents[uuidSlug].responses[i].question === questionSlug) {
-                    index = i;
-                    //debugger;
-                    break;
-                }
-            }
-            console.log(new Date().getTime() - start);
-            if (index) {
-                app.respondents[uuidSlug].responses.splice(index, 1);
-            }
-            $scope.saveState();
-            console.log(new Date().getTime() - start);
-        }
-
-        console.log(new Date().getTime() - start);
-        
+    var getPageFromQuestion = function(questionSlug) {
+        return _.find(survey.pages, function (page) {
+            return _.findWhere(page.questions, {slug: questionSlug});
+        });
     };
 
+    var cleanSurvey = function(respondent) {
+        var goodResponses = [];
+        _.each(respondent.responses, function(response, i) {
+            var page = getPageFromQuestion(response.question);
+            if ( !skipPageIf(page)) {
+                goodResponses.push(response);
+            } 
+        });
+        if (goodResponses.length) {
+            return goodResponses;
+        }
+        return respondent.responses;
+    };
+
+    
     // var getNextPagePath = function(numQsToSkips) {
     //     console.log('getNextPagePath');
     //     var start = new Date().getTime();
@@ -64,8 +46,6 @@ angular.module('askApp')
     // };
 
     var getNextPageWithSkip = function(numPsToSkips) {
-        console.log('getNextPageWithSkip');
-        var start = new Date().getTime();
 
         var index = _.indexOf(survey.pages, page) + 1 + (numPsToSkips || 0);
         var nextPage = survey.pages[index];
@@ -81,8 +61,6 @@ angular.module('askApp')
             }
         } 
         
-        console.log(new Date().getTime() - start);
-
         return nextPage ? nextPage : false;
     };
     
@@ -181,9 +159,6 @@ angular.module('askApp')
 
     var skipPageIf = function(nextPage) {
         var keep = true;
-        console.log('skipPageIf');
-
-        var start = new Date().getTime();
 
         //console.log(nextPage);
         if ( nextPage.blocks && nextPage.blocks.length ) {
@@ -220,8 +195,6 @@ angular.module('askApp')
             keep = keep && keepQuestion(op, answer, testCriteria);
         });
         
-        console.log(new Date().getTime() - start);
-
         return !keep;
     };
 
@@ -234,6 +207,7 @@ angular.module('askApp')
       'getNextPage': getNextPage,
       'getLastPage': getLastPage,
       'initializeSurvey': initializeSurvey,
-      'getAnswer': getAnswer
+      'getAnswer': getAnswer,
+      'cleanSurvey': cleanSurvey
     };
   });

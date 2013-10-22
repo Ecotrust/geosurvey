@@ -26,11 +26,11 @@ angular.module('askApp')
     // landing page view
     $scope.landingView = 'survey-pages/' + $routeParams.surveySlug + '/landing.html';
 
-    $scope.getPageFromQuestion = function(questionSlug) {
-        return _.find($scope.survey.pages, function (page) {
-            return _.findWhere(page.questions, {slug: questionSlug});
-        });
-    };
+    // $scope.getPageFromQuestion = function(questionSlug) {
+    //     return _.find($scope.survey.pages, function (page) {
+    //         return _.findWhere(page.questions, {slug: questionSlug});
+    //     });
+    // };
 
     $scope.getResumeQuestionPath = function(lastQuestion) {
         
@@ -40,10 +40,10 @@ angular.module('askApp')
         return ['survey', $scope.survey.slug, resumeQuestion.slug, $routeParams.uuidSlug].join('/');
     };
     
-    $scope.getResumePage = function (lastQuestion) {
-        var resumePage = $scope.getPageFromQuestion(lastQuestion);
-        return ['survey', $scope.survey.slug, resumePage.order, $routeParams.uuidSlug].join('/');
-    }
+    // $scope.getResumePage = function (lastQuestion) {
+    //     var resumePage = survey.getPageFromQuestion(lastQuestion);
+    //     return ['survey', $scope.survey.slug, resumePage.order, $routeParams.uuidSlug].join('/');
+    // }
 
     $scope.terminateIf = function(answer, condition) {
         var op = condition[0],
@@ -60,12 +60,36 @@ angular.module('askApp')
         return terminate;
     };
 
+    $scope.deleteAnswer = function (questionSlug, uuidSlug) {
+        var index;
+        
+        if (app.offline) {
+            if ($scope.answers[questionSlug]) {
+                delete $scope.answers[questionSlug];
+            }
+            // _.each(app.respondents[uuidSlug].responses, function (response, i) {
+            //     if (response.question === questionSlug) {
+            //         index = i;
+            //     }
+            // });
+            for (var i = 0; i < app.respondents[uuidSlug].responses.length; i+=1) {
+                if (app.respondents[uuidSlug].responses[i].question === questionSlug) {
+                    index = i;
+                    //debugger;
+                    break;
+                }
+            }
+            if (index) {
+                app.respondents[uuidSlug].responses.splice(index, 1);
+            }
+            $scope.saveState();
+        }
+    };
+
     $scope.answerOffline = function(answer) {
-        console.log('called deleteAnswer from answerOffLine');
-        // console.log(answer);
-        // console.log(app.respondents[$routeParams.uuidSlug].responses);
-        // $scope.deleteAnswer(answer.question.slug, $routeParams.uuidSlug);
-        // console.log(app.respondents[$routeParams.uuidSlug].responses);
+
+        $scope.deleteAnswer(answer.question.slug, $routeParams.uuidSlug);
+
         app.respondents[$routeParams.uuidSlug].responses.push({
             answer: answer.answer,
             question: answer.question.slug
@@ -407,11 +431,11 @@ $scope.loadSurvey = function(data) {
             }
         });
 
-        if (data.last_question && !data.complete) {
-            $scope.resumeQuestionPath = $scope.getResumePage(data.last_question);
-        } else {
-            $scope.resumeQuestionPath = 'NO_RESUME';
-        }
+        // if (data.last_question && !data.complete) {
+        //     $scope.resumeQuestionPath = $scope.getResumePage(data.last_question);
+        // } else {
+        //     $scope.resumeQuestionPath = 'NO_RESUME';
+        // }
         // if (data.complete) {
         //     $location.path(['survey', $scope.survey.slug, 'complete', $routeParams.uuidSlug].join('/'));
         // }
@@ -648,7 +672,7 @@ $scope.loadSurvey = function(data) {
         // this is an offline survey
         if ($routeParams.uuidSlug === 'offline') {
             // this is a new offline survey
-            $scope.answers = [];
+            $scope.answers = {};
             if (!app.respondents) {
                 app.respondents = {};
             }

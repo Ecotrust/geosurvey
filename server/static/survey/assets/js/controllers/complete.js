@@ -1,7 +1,7 @@
 //'use strict';
 
 angular.module('askApp')
-  .controller('CompleteCtrl', function ($scope, $routeParams, $http, $location) {
+  .controller('CompleteCtrl', function ($scope, $routeParams, $http, $location, survey) {
     var url = '/respond/complete/' + [$routeParams.surveySlug, $routeParams.uuidSlug].join('/');
     $http.defaults.headers.post['Content-Type'] = 'application/json';
 
@@ -65,11 +65,19 @@ angular.module('askApp')
 
     $scope.submitReport = function () {
         $scope.working = true;
-
+        var newRespondent = app.respondents[$routeParams.uuidSlug];
+        
         //verify report (delete any necessary questions) 
         // call function within survey service...
+        var answers = _.indexBy(newRespondent.responses, function(item) {
+            return item.question;
+        });
+
+        //clean survey of any unncecessary question/answers 
+        survey.initializeSurvey($scope.survey, null, answers);
+        newRespondent.responses = survey.cleanSurvey(newRespondent);
         
-        $scope.sendRespondent(app.respondents[$routeParams.uuidSlug]).success(function () {
+        $scope.sendRespondent(newRespondent).success(function () {
             
             delete app.user.resumePath;
             delete app.respondents[$routeParams.uuidSlug]
