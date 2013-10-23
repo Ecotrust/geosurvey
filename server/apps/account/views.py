@@ -88,9 +88,12 @@ def forgotPassword(request):
 def updateUser(request):
     if request.method == "POST":
         param = simplejson.loads(request.body)
-        user = get_object_or_404(User,
-            username=param.get('username', None))
-        if user:
+        user = get_object_or_404( User, username=param.get('username', None) )
+        print user.username
+        print request.user.username
+        if request.user.username != user.username:
+            return HttpResponse("You cannot access another user's profile.", status=401)
+        else:
             profile, created = UserProfile.objects.get_or_create(user=user)
             profile.registration = simplejson.dumps(param.get('registration'))
             profile.save()
@@ -102,7 +105,5 @@ def updateUser(request):
                 'registration': user.profile.registration
             }
             return HttpResponse(simplejson.dumps({'success': True, 'user': user_dict}))
-        else:
-            return HttpResponse("user-not-found", status=500)
     else:
         return HttpResponse("error", status=500)
