@@ -132,6 +132,7 @@ def complete(request, survey_slug, uuid, action=None, question_slug=None):
         respondant.save()
         return HttpResponse(simplejson.dumps({'success': True}))
     return HttpResponse(simplejson.dumps({'success': False}))
+
 def send_email(email, uuid):
     from django.contrib.sites.models import Site
 

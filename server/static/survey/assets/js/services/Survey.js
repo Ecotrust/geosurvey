@@ -29,10 +29,17 @@ angular.module('askApp')
                 goodResponses.push(response);
             } 
         });
+        
         if (goodResponses.length) {
             return goodResponses;
         }
+
         return respondent.responses;
+    };
+
+    var getQuestionUriFromSlug = function(slug) {
+        var page = getPageFromQuestion(slug);
+        return _.findWhere(page.questions, {slug: slug}).resource_uri;
     };
 
     
@@ -208,6 +215,7 @@ angular.module('askApp')
       'getLastPage': getLastPage,
       'initializeSurvey': initializeSurvey,
       'getAnswer': getAnswer,
-      'cleanSurvey': cleanSurvey
+      'cleanSurvey': cleanSurvey,
+      'getQuestionUriFromSlug': getQuestionUriFromSlug
     };
   });

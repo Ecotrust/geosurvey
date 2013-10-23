@@ -134,18 +134,30 @@ angular.module('askApp').directive('gridquestion', function() {
 
                             // the following loop was failing, not sure why it was a loop to begin with...
                             // this change appears to work for both single and multi column grids
-                            //_.each(scope.question.answer[value.text][0][gridLabel], function (answer) {
-                            var answer = scope.question.answer[value.text][0][gridLabel];
-                            if (! scope.question.selectedOptions[gridLabel]) {
-                                scope.question.selectedOptions[gridLabel] = {};
-                                
+                            if (_.isArray(scope.question.answer[value.text][0][gridLabel])) {
+                                _.each(scope.question.answer[value.text][0][gridLabel], function (answer) {
+                                    if (! scope.question.selectedOptions[gridLabel]) {
+                                        scope.question.selectedOptions[gridLabel] = {};
+                                        
+                                    }
+                                    if (! scope.question.selectedOptions[gridLabel][value.activitySlug]) {
+                                        scope.question.selectedOptions[gridLabel][value.activitySlug] = {};
+                                        
+                                    }
+                                    scope.question.selectedOptions[gridLabel][value.activitySlug][answer] = true;
+                                });
+                            } else {
+                                var answer = scope.question.answer[value.text][0][gridLabel];
+                                if (! scope.question.selectedOptions[gridLabel]) {
+                                    scope.question.selectedOptions[gridLabel] = {};
+                                    
+                                }
+                                if (! scope.question.selectedOptions[gridLabel][value.activitySlug]) {
+                                    scope.question.selectedOptions[gridLabel][value.activitySlug] = {};
+                                    
+                                }
+                                scope.question.selectedOptions[gridLabel][value.activitySlug][answer] = true;
                             }
-                            if (! scope.question.selectedOptions[gridLabel][value.activitySlug]) {
-                                scope.question.selectedOptions[gridLabel][value.activitySlug] = {};
-                                
-                            }
-                            scope.question.selectedOptions[gridLabel][value.activitySlug][answer] = true;
-                            //});
                         }   
                     });
                 });

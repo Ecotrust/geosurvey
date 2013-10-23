@@ -35,11 +35,11 @@ angular.module('askApp')
    
 
             
-            // $scope.$watch('survey.pages', function (newValue) {
-            //     if (newValue){// && ! $scope.questionsToBeUpdated.length && ! $scope.updatedQuestionQueue.length) {
-            //        $scope.checkPageOrder(newValue);
-            //     }
-            // }, true);
+            $scope.$watch('survey.pages', function (newValue) {
+                if (newValue){// && ! $scope.questionsToBeUpdated.length && ! $scope.updatedQuestionQueue.length) {
+                   $scope.checkPageOrder(newValue);
+                }
+            }, true);
 
             
 
