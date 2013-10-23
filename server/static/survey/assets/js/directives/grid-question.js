@@ -123,28 +123,32 @@ angular.module('askApp').directive('gridquestion', function() {
                     scope.question.answer = {};
                 }
                 scope.question.selectedOptions = {};
-               _.each(scope.question.options, function(value, key, list) {
-                   list[key].activitySlug = value.label.replace(/-/g, '');
-                   list[key].activityText = value.text;
-                   _.each(scope.question.grid_cols, function(gridCol, i) {
+                _.each(scope.question.options, function(value, key, list) {
+                    list[key].activitySlug = value.label.replace(/-/g, '');
+                    list[key].activityText = value.text;
+                    _.each(scope.question.grid_cols, function(gridCol, i) {
                         var gridLabel = gridCol.label.replace(/-/g, '');
                         if (scope.question.answer !== null && _.has(scope.question.answer, value.text)) {
 
                             list[key][gridLabel] = scope.question.answer[value.text][0][gridLabel];
-                            _.each(scope.question.answer[value.text][0][gridLabel], function (answer) {
-                                if (! scope.question.selectedOptions[gridLabel]) {
-                                    scope.question.selectedOptions[gridLabel] = {};
-                                    
-                                }
-                                if (! scope.question.selectedOptions[gridLabel][value.activitySlug]) {
-                                    scope.question.selectedOptions[gridLabel][value.activitySlug] = {};
-                                    
-                                }
-                                scope.question.selectedOptions[gridLabel][value.activitySlug][answer] = true;
-                            });
+
+                            // the following loop was failing, not sure why it was a loop to begin with...
+                            // this change appears to work for both single and multi column grids
+                            //_.each(scope.question.answer[value.text][0][gridLabel], function (answer) {
+                            var answer = scope.question.answer[value.text][0][gridLabel];
+                            if (! scope.question.selectedOptions[gridLabel]) {
+                                scope.question.selectedOptions[gridLabel] = {};
+                                
+                            }
+                            if (! scope.question.selectedOptions[gridLabel][value.activitySlug]) {
+                                scope.question.selectedOptions[gridLabel][value.activitySlug] = {};
+                                
+                            }
+                            scope.question.selectedOptions[gridLabel][value.activitySlug][answer] = true;
+                            //});
                         }   
-                   });
-               });
+                    });
+                });
                 // Configure grid.
                 var gridCellTemplateDefault = '<div class="ngCellText" ng-class="col.colIndex()"><span ng-cell-text>{{COL_FIELD CUSTOM_FILTERS}}</span></div>';
                 var costCellTemplate = '<input class="colt{{$index}} input-block-level" ng-model="row.entity[col.field]"  max="{{col.colDef.max}}" min="{{col.colDef.min}}" required="{{col.colDef.required}}" style="height: 100%;" type="number" step="any" }" value="{{row.getProperty(col.field)}}" onFocus="this.select();" onClick="this.select();"/>';
