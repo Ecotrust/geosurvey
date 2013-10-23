@@ -7,7 +7,7 @@ from fabric.api import env, local, sudo, run, cd, prefix, task, settings
 
 import datetime
 
-branch = 'sprint-1018'
+branch = 'next-release'
 
 CHEF_VERSION = '10.20.0'
 
