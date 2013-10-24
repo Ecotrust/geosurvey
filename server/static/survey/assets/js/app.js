@@ -82,6 +82,10 @@ angular.module('askApp', ['ui', 'ui.bootstrap', 'ngGrid'])
         templateUrl: app.viewPath + 'views/survey.html',
         controller: 'SurveyCtrl'
     })
+        .when('/profile', {
+        templateUrl: app.viewPath + 'views/profile.html',
+        controller: 'ProfileCtrl'
+    })
         .when('/settings', {
         templateUrl: app.viewPath + 'views/settings.html',
         controller: 'SettingsCtrl'

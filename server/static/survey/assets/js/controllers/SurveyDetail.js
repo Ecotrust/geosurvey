@@ -177,9 +177,6 @@ angular.module('askApp')
     };
 
     $scope.gotoNextPage = function () {
-        console.log('gotoNextPage');
-
-        var start = new Date().getTime();
 
         var nextPage = survey.getNextPage($scope.survey.pages.length);
         if (nextPage) {
@@ -187,8 +184,6 @@ angular.module('askApp')
         } else {
             $location.path(['survey', $scope.survey.slug, 'complete', $routeParams.uuidSlug, $routeParams.action].join('/'));
         }
-
-        console.log(new Date().getTime() - start);
 
     };
 

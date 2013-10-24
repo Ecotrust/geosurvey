@@ -7,12 +7,12 @@
     </div>
     <div ng-switch-when="integer">
         <div class="question">
-            <input name="integerAnswer" ng-model="question.answer" class="form-control" placeholder="{{ question.label }}" type="number" step="1" min="{{question.integer_min}}" max="{{question.integer_max}}" ui-event="{ keypress : 'onlyDigits($event)' }" ng-required="{{question.required}}" />
+            <input name="integerAnswer" ng-model="question.answer" class="form-control" placeholder="{{ question.label }}" type="number" step="1" min="{{question.integer_min}}" max="{{question.integer_max}}" ui-event="{ keypress : 'onlyDigits($event)' }" ng-required="question.required" />
         </div>
     </div>
     <div ng-switch-when="number-with-unit">
         <div class="question number-with-unit">
-            <input name="integerAnswer" ng-model="question.answer" class="form-control" placeholder="{{ question.label }}" type="number" min="{{question.integer_min}}" max="{{question.integer_max}}" step="any" ui-event="{ keypress : 'onlyDigits($event)' }" ng-required="{{question.required}}" />
+            <input name="integerAnswer" ng-model="question.answer" class="form-control" placeholder="{{ question.label }}" type="number" min="{{question.integer_min}}" max="{{question.integer_max}}" step="any" ui-event="{ keypress : 'onlyDigits($event)' }" ng-required="question.required" />
             <div class="select-wrapper form-control" ng-class="{ 'unit-selected': question.unit }">
                 <select ng-model="question.unit" class="unit-select" placeholder="{{ question.label }}">
                     <option value="">Select Units</option>
@@ -24,7 +24,7 @@
     </div>
     <div ng-switch-when="number">
         <div class="question">
-            <input name="integerAnswer" ng-model="question.answer" class="form-control" placeholder="{{ question.label }}" type="number" min="{{question.integer_min}}" max="{{question.integer_max}}" step="any" ui-event="{ keypress : 'onlyDigits($event)' }" ng-required="{{question.required}}" />
+            <input name="integerAnswer" ng-model="question.answer" class="form-control" placeholder="{{ question.label }}" type="number" min="{{question.integer_min}}" max="{{question.integer_max}}" step="any" ui-event="{ keypress : 'onlyDigits($event)' }" ng-required="question.required" />
         </div>
     </div>
     <div ng-switch-when="auto-single-select">

@@ -11,7 +11,6 @@ angular.module('askApp').directive('multiquestion', function() {
             validity: '=validity'
         },
         link: function postLink(scope, element, attrs) {
-
             scope.validateQuestion = function (question) {
                 // if the question is not required it is good to go
                 if (! question.required) {

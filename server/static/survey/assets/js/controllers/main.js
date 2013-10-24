@@ -37,7 +37,8 @@ angular.module('askApp')
             .success(function (data) {
                 app.user = data.user;
                 $scope.saveState();
-                $location.path('/surveys');
+                // $location.path('/surveys');
+                $location.path('/profile');
             })
         .error(function (data) {
             $scope.working = false;

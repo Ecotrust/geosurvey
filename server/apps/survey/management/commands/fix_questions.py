@@ -8,7 +8,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         colA = Option.objects.get(pk=1)
-        colB = Option.objects.get(pk=2) 
+        # colB = Option.objects.get(pk=2) 
         for page in Page.objects.all():
             page.blocks.clear()
             page.save()
@@ -68,5 +68,5 @@ class Command(BaseCommand):
             if question.type == 'grid':
                 question.options.clear()
                 question.grid_cols.add(colA)
-                question.grid_cols.add(colB)
+                # question.grid_cols.add(colB)
                 question.save()

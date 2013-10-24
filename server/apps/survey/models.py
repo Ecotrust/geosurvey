@@ -251,7 +251,7 @@ class Question(caching.base.CachingMixin, models.Model):
         return REPORT_TYPE_CHOICES
 
     def __unicode__(self):
-        return "%s/%s/%s" % (self.survey_slug, self.title, self.type)
+        return "%s/%s/%s" % (self.survey_slug, self.slug, self.type)
     
     #    #return "%s/%s" % (self.survey_set.all()[0].slug, self.label)
 

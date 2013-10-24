@@ -1,0 +1,63 @@
+<div id="wrap" class="main">
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-default navbar-fixed-top">
+
+    </div>
+
+    <!-- Begin page content -->
+    <div class="container">
+        <div class="page-header">
+            <img src="assets/img/deck-logo.svg" class="center logo" />
+        </div>
+
+        <div ng-show="user" ng-class="{ 'working': working }">
+            <div class="spinner">
+                <div class="wrapper">
+                    <div class="inner">
+                    </div>
+                </div>
+            </div>
+
+            <div class="forms">
+                <div class="new-user-form">
+                    <form ng-submit="updateProfile(profileQuestions)">
+                        <div class="question-wrapper" ng-repeat="question in profileQuestions">
+                            <h4 class="question-title">{{ question.title }}</h4>
+                            <div ng-switch on="question.type">
+                                <div ng-switch-when="grid">
+                                    <form ng-submit="$parent.submitPage(page)">
+                                        <div gridquestion question="question" answers="answers" validity="validity" pageorder="$index"  viewpath="viewPath"></div>
+                                    </form>
+                                </div>
+                                <div ng-switch-default>
+                                    <div multiquestion question="question" answers="answers" validity="validity"></div>
+                                </div>
+                            </div>
+                        </div>
+
+<!-- 
+                        <input class="form-control" type="text" placeholder="enter your username..." data-ng-model="profileQuestions.username" autocapitalize="off" required>
+
+                        <input class="form-control" type="email" placeholder="enter your email address..." data-ng-model="profileQuestions.emailaddress" required>
+ -->
+                        <button class="btn btn-main btn-default btn-block" ng-click="updateProfile(profileQuestions)">submit</button>
+                        <a type="button" class="btn btn-main btn-default btn-lg btn-block" href="#/">cancel</a>
+                                                
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div class="alert-notice" ng-show="message">
+        <div class="pull-left">{{ message }}</div>
+        <button class="btn btn-default btn-outline-inverse pull-right" ng-tap="message = false">ok</button>
+    </div> -->
+
+</div>
+<!-- <div id="footer">
+    <div class="container">
+        <p class="text-muted credit">Example courtesy <a href="http://martinbean.co.uk">Martin Bean</a> and <a href="http://ryanfait.com/sticky-footer/">Ryan Fait</a>.</p>
+    </div>
+</div>
+ -->

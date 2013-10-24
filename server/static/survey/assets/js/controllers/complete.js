@@ -5,12 +5,13 @@ angular.module('askApp')
     var url = '/respond/complete/' + [$routeParams.surveySlug, $routeParams.uuidSlug].join('/');
     $http.defaults.headers.post['Content-Type'] = 'application/json';
 
-
     $scope.sendRespondent = function (respondent) {
         var url = app.server + '/api/v1/offlinerespondant/';
         var responses = angular.copy(respondent.responses);
+        
         _.each(responses, function (response) {
-            var question_uri = response.question.resource_uri;
+            // var question_uri = response.question.resource_uri;
+            var question_uri = survey.getQuestionUriFromSlug(response.question);
             response.question = question_uri;
             response.answer_raw = JSON.stringify(response.answer);
         });
@@ -26,7 +27,7 @@ angular.module('askApp')
             console.log(JSON.stringify(err));
         });
         
-    }   
+    };       
 
 
     if (app.user) {
