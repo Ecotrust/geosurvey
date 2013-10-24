@@ -29,6 +29,8 @@ a {
 
 input.datepicker {
     -webkit-appearance: textfield;
+    padding-top: 5px;
+
 }
 
 .table, .table td {
