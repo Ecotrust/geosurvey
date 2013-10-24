@@ -119,6 +119,18 @@ angular.module('askApp')
         return _.findWhere($scope.page.questions, {slug: slug });
     };
 
+    $scope.getPageBlockTitle = function () {
+        var title = "";
+        _.each($scope.page.blocks, function(block, i) {
+            if (title === "") {
+                title = block.name;    
+            } else {
+                title = title + " - " + block.name;
+            }
+            
+        });
+        return title;
+    };
     
 
     $scope.validatePage = function (page) {

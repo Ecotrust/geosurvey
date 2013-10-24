@@ -7,6 +7,7 @@
         <div class="respondant" ng-hide="loading">
             <div ng-show="page">
                 <div>
+                    <div class="question-title"> {{ getPageBlockTitle() }} </div>
                     <div class="question-wrapper" ng-repeat="question in page.questions">
                         <h4 class="question-title">{{ question.title }}</h4>
                         <div ng-switch on="question.type">
