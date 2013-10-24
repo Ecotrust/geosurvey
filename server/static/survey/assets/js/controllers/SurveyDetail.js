@@ -1,5 +1,10 @@
 angular.module('askApp')
     .controller('SurveyDetailCtrl', function($scope, $routeParams, $http, $location, $dialog, $interpolate, $timeout, survey) {
+        // $('#wrap').css({ 'min-height': initialHeight -80});
+        // $('#wrap').css({ 'min-height': initialHeight -80});
+        // $(window).on('resize', function () {
+        //     $('#wrap').css({ 'min-height': $(window).height() -80});
+        // })
         $scope.loading=true;
         $scope.path = $location.path().slice(1,5);
         if (app.user) {
@@ -627,22 +632,21 @@ $scope.loadSurvey = function(data) {
         }, true);    
         
         
-        
+    $('input').live('focus', function (e) {
+        if (!$(this).hasClass('datepicker')) {
+            $('body').addClass("keyboard-open");
+            e.preventDefault(); e.stopPropagation();
+            // window.scrollTo(0,0); //the second 0 marks the Y scroll pos. Setting this to i.e. 100 will push the screen up by 100px.
+        }
 
-        // hack to prevent keyboard scroll;
-        $('input').live('focus', function (e) {
-            if (!$(this).hasClass('datepicker')) {
-                $('body').addClass("keyboard-open");
-                e.preventDefault(); e.stopPropagation();
-                window.scrollTo(0,0); //the second 0 marks the Y scroll pos. Setting this to i.e. 100 will push the screen up by 100px. 
-            }
-            
-        });
-        $('input').live('blur', function (e) {
-            if (!$(this).hasClass('datepicker')) {
-                $('body').removeClass("keyboard-open");
-            }
-        });
+    });
+    $('input').live('blur', function (e) {
+        if (!$(this).hasClass('datepicker')) {
+            $('body').removeClass("keyboard-open");
+        }
+    });        
+
+    
 
     };
     $scope.viewPath = app.viewPath;

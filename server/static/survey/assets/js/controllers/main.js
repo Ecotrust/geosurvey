@@ -124,4 +124,8 @@ angular.module('askApp')
         $scope.resizeMap();
     }
 
+    
+    
+    
+
   });
