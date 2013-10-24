@@ -18,6 +18,9 @@ if (_.string.startsWith(window.location.protocol, "http")) {
 } else {
     app.server = "APP_SERVER";
 }
+
+app.version = "APP_VERSION";
+
 if (window.location.pathname === '/respond') {
     app.viewPath = app.server + '/static/survey/';
     app.offline = false;

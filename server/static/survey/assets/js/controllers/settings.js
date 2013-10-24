@@ -9,6 +9,7 @@ angular.module('askApp')
         $location.path('/');
     }
     $scope.server = app.server;
+    
     $scope.path = 'sett';
     $scope.clearCache = function () {
         localStorage.removeItem('hapifish');

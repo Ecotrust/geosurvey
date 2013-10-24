@@ -4,13 +4,14 @@ angular.module('askApp')
     $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
 
     $scope.path = 'home';
+    $scope.version = app.version;
     
     if (app.user) {
         $scope.user = app.user;
     } else {
         $scope.user = false;
     }
-    $scope.server = app.server;
+    $scope.version = app.version;
     // showForm can be in ['login', 'new-user', 'forgot'];
     $scope.showForm = 'login';
 
