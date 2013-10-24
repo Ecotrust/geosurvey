@@ -6,5 +6,6 @@ urlpatterns = patterns('',
 	(r'^authenticateUser', authenticateUser),
 	(r'^createUser', createUser),
 	(r'^updateUser', updateUser),
+	(r'^sendFeedback', sendFeedback),
 	(r'^forgotPassword', forgotPassword),
 )

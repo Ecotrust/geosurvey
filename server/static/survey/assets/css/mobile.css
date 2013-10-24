@@ -108,7 +108,19 @@ img.center {
     border: 0;
     font-size: 36px;
 }
-.navbar .navbar-toggle:hover {
+.navbar .navbar-comment {
+    position: absolute;
+    padding: 10px;
+    margin-top: -10px;
+    right: 10px;
+    border: 0;
+    font-size: 36px;
+    background-color: inherit;
+    color: white;
+    
+}
+
+.navbar .navbar-comment:hover, .navbar .navbar-toggle:hover {
     text-decoration: none;
     background-color: rgba(0,0,0,0);
     color: rgb(100,100,100);
@@ -309,6 +321,11 @@ img.center {
     top: 30px;
     float: right;
     right: 10px;
+}
+
+.feedback textarea {
+    width: 100%;
+    margin-bottom: 10px;
 }
 
 input.multi-select-other::-webkit-input-placeholder {

@@ -2,6 +2,9 @@
     <a type="button" class="navbar-toggle" href="#/">
         <i class="icon-home"></i>
     </a>
+    <a type="button" class="navbar-comment" ng-click="sendingFeedback = ! sendingFeedback">
+        <i class="icon-comment"></i>
+    </a>
     <div class="container">
         <div class="navbar-header">
             <a class="navbar-brand" href="#">
@@ -14,6 +17,7 @@
             </ul>
         </div>
         <!--/.nav-collapse -->
+
     </div>
     <div class="progress">
         <div class=" progress-bar" style="width: {{ surveyProgress }}%;"></div>

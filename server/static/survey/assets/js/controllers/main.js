@@ -63,7 +63,7 @@ angular.module('askApp')
         $http({
             method: 'POST',
             url: url,
-            data: user,
+            data: user
 
         })
             .success(function (data) {

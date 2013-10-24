@@ -7,10 +7,10 @@ from django.shortcuts import redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User, check_password
 from django.contrib.auth.forms import PasswordResetForm
-from account.models import UserProfile
+from account.models import UserProfile, Feedback
 
 import simplejson
-
+import datetime
 
 @csrf_exempt
 def authenticateUser(request):
@@ -77,12 +77,23 @@ def createUser(request):
 def forgotPassword(request):
     if request.POST:
         param = simplejson.loads(request.POST.keys()[0])
+        user = get_object_or_404( User, username=param.get('username', None) )
         # email = param.get('email', None)
         # form = PasswordResetForm({'email': email})
         # form.save(from_email='eknuth@ecotrust.org', email_template_name='registration/password_reset_email.html')
         return HttpResponse(simplejson.dumps({'success': True}))
     else:
         return HttpResponse("error", status=500)
+
+
+@csrf_exempt
+def sendFeedback(request):
+    if request.POST:
+        param = simplejson.loads(request.POST.keys()[0])
+        feedback_message = param.get('feedback', None)
+        feedback = Feedback(user=request.user, message=feedback_message, ts=datetime.datetime.now())
+        feedback.save()
+    return HttpResponse(simplejson.dumps({'success': True }))
 
 @csrf_exempt
 def updateUser(request):

@@ -49,6 +49,19 @@ angular.module('askApp')
     //     var resumePage = survey.getPageFromQuestion(lastQuestion);
     //     return ['survey', $scope.survey.slug, resumePage.order, $routeParams.uuidSlug].join('/');
     // }
+    $scope.sendingFeedback = true;
+    $scope.submitFeedback = function (feedback) {
+        var url = app.server + "/account/sendFeedback";
+        $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
+        $http({
+            method: 'POST',
+            url: url,
+            data: { feedback: feedback, username: app.user.username }
+        }).success(function () {
+            $scope.feedback = null;    
+        })
+        $scope.sendingFeedback = false;
+    }
 
     $scope.terminateIf = function(answer, condition) {
         var op = condition[0],

@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+import datetime
 
 class UserProfile(models.Model):
     user = models.ForeignKey(User, unique=True)
@@ -10,3 +10,12 @@ class UserProfile(models.Model):
         return "%s" % (self.user.username)
 
 User.profile = property(lambda u: UserProfile.objects.get_or_create(user=u)[0])
+
+
+class Feedback(models.Model):
+	user = models.ForeignKey(User)
+	message = models.TextField(null=True, blank=True, default=None)
+	ts = models.DateTimeField(default=datetime.datetime.now())
+
+	def __unicode__(self):
+	    return "%s" % (self.user.username)
