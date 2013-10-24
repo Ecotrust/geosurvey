@@ -20,12 +20,12 @@ class Command(BaseCommand):
                 #page.blocks.clear()
                 page.blocks.add(Block.objects.get(name="Lobster Traps"))
                 page.save()
-            elif question.slug.find('fish-traps') != -1:
+            if question.slug.find('fish-traps') != -1:
                 page = Page.objects.get(questions=question)
                 #page.blocks.clear()
                 page.blocks.add(Block.objects.get(name="Fish Traps"))
                 page.save()
-            elif question.slug.find('traps') != -1:
+            if question.slug.find('traps') != -1:
                 page = Page.objects.get(questions=question)
                 #page.blocks.clear()
                 page.blocks.add(Block.objects.get(name="Traps"))
@@ -50,17 +50,17 @@ class Command(BaseCommand):
                 #page.blocks.clear()
                 page.blocks.add(Block.objects.get(name="St. Thomas or St. John"))
                 page.save()
-            elif question.slug.endswith('st-croix'):
+            if question.slug.endswith('st-croix'):
                 page = Page.objects.get(questions=question)
                 page.blocks.add(Block.objects.get(name="St. Croix"))
                 #page.blocks.clear()
                 page.save()
-            elif question.slug.endswith('st-thomas'):
+            if question.slug.endswith('st-thomas'):
                 page = Page.objects.get(questions=question)
                 #page.blocks.clear()
                 page.blocks.add(Block.objects.get(name="St. Thomas"))
                 page.save()
-            elif question.slug.endswith('st-john'):
+            if question.slug.endswith('st-john'):
                 page = Page.objects.get(questions=question)
                 #page.blocks.clear()
                 page.blocks.add(Block.objects.get(name="St. John"))
