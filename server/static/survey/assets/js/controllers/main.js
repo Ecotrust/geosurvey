@@ -15,13 +15,13 @@ angular.module('askApp')
     if (app.version !== "APP_VERSION") {
         
     }
-    app.version = "1.2.41";
     $scope.update = false;
     $http({
         method: 'GET',
         url: app.server + "/mobile/getVersion"
     })
     .success(function (data) {
+        $scope.newVersion = data.version;
         if (app.version < data.version) {
             $scope.update = "An update is available for Digital Deck."
         } else {
