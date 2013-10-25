@@ -4,7 +4,7 @@
 
     <!-- Begin page content -->
     <div class="container">
-        <div class="feedback" ng-show="sendingFeedback">
+        <div class="feedback" ng-show="sendingFeedback" ng-cloak>
             <form ng-submit="submitFeedback(feedback)">    
                 <textarea rows="5" placeholder="{{ question.label }}" ng-model="feedback"></textarea>
                 <button type="button" class="btn btn-main btn-default btn-lg btn-block" ng-click="submitFeedback(feedback)">Submit</button>
