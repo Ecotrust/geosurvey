@@ -201,7 +201,8 @@ def deploy():
             # _manage_py('add_srid 99996')
             _manage_py('migrate --settings=config.environments.staging')
             # _manage_py('enable_sharing')
-            sudo('chown -R www-data:deploy %s/public/static' % env.code_dir)
+            sudo('chown -R www-data:deploy %s' % env.root_dir)
+            sudo('chown -R g+w %s' % env.root_dir)
 
 
     restart()
