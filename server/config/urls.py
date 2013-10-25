@@ -41,6 +41,7 @@ urlpatterns = patterns('',
     (r'^api/', include(v1_api.urls)),
 
     url(r'^account/', include('apps.account.urls')),
+    url(r'^mobile/', include('apps.mobile.urls')),
     url(r'^report', include(report_urls)),
     #anon survey user for specific survey
     url(r'^respond/(?P<survey_slug>[\w\d-]+)$', 'apps.survey.views.survey'),

@@ -12,6 +12,32 @@ angular.module('askApp')
         $scope.user = false;
     }
     $scope.version = app.version;
+    if (app.version !== "APP_VERSION") {
+        
+    }
+    app.version = "1.2.41";
+    $scope.update = false;
+    $http({
+        method: 'GET',
+        url: app.server + "/mobile/getVersion"
+    })
+    .success(function (data) {
+        if (app.version < data.version) {
+            $scope.update = "An update is available for Digital Deck."
+        } else {
+            $scope.update = false;
+        }
+    })
+    .error(function (data) {
+        debugger;
+    });
+    
+
+
+    $scope.updateApp = function () {
+        var ref = window.open('http://www.labs.ecotrust.org/usvi/update.html', '_blank', 'location=yes');
+    }
+
     // showForm can be in ['login', 'new-user', 'forgot'];
     $scope.showForm = 'login';
 
