@@ -37,15 +37,23 @@ angular.module('askApp').directive('multiquestion', function() {
                         return false;
                     }
                 }
-                if (question.type === 'single-select' || question.type === 'multi-select' || question.type === 'yes-no') {                
-                    if (question.allow_other && question.otherOption.checked && ! question.otherAnswer) {
-                        return false;
-                    } else if (! question.otherOption.checked) {
-                        if (question.groupedOptions && question.groupedOptions.length) {   
+                if (question.type === 'single-select') {
 
+                    return _.some(_.pluck(question.options, 'checked')) || question.otherAnswers.length;  
+
+                } else if ( question.type === 'multi-select' || question.type === 'yes-no' ) {                
+                    
+                    if (question.allow_other && question.otherOption.checked && ! question.otherAnswers) {
+                        return false;
+                    }
+                    if (question.allow_other && ! question.otherAnswers ) {
+                        return false;                        
+                    } else if (! question.otherOption.checked) {
+
+                        if (question.groupedOptions && question.groupedOptions.length) {  
                             return _.some(_.pluck(_.flatten(_.map(question.groupedOptions, function (group) { return group.options })), 'checked'));
                         } else {
-                            return _.some(_.pluck(question.options, 'checked'));        
+                            return _.some(_.pluck(question.options, 'checked')) || question.otherAnswers.length;        
                         }
                     }
                     
@@ -117,17 +125,21 @@ angular.module('askApp').directive('multiquestion', function() {
             };
 
 
+            // scope.question.otherAnswers = [];
             // handle clicked multiselects
             scope.onMultiSelectClicked = function(option, question) {
                 option.checked = !option.checked;
-                if (!option.checked && option.other) {
-                    $scope.question.otherAnswer = null;
-                }
+                // if (!option.checked && option.other) {
+                //     // $scope.question.otherAnswer1 = null;
+                //     // $scope.question.otherAnswer2 = null;                    
+                //     // $scope.question.otherAnswer = null;
+                //     // $scope.question.otherAnswers[0] = null;
+                //     // $scope.question.otherAnswers[1] = null;
+                //     // $scope.question.otherAnswers[2] = null;
+                // }
                 question.answerSelected = _.some(_.pluck(_.flatten(_.map(question.groupedOptions, function(option) {
                     return option.options;
                 })), 'checked'));
-
-
             };
 
             // handle single select clicks
@@ -140,13 +152,21 @@ angular.module('askApp').directive('multiquestion', function() {
                 if (question.otherOption && option === question.otherOption) {
                     question.otherOption.checked = !question.otherOption.checked;
                 } else {
-                    option.checked = !option.checked;
                     if (question.otherOption) {
                         question.otherOption.checked = false;
                     }
                 }
+                option.checked = !option.checked;
 
+                if (option.checked && option.label) { // if option is checked but it's not an other option, then clear out other option
+                    question.otherAnswers = [];
+                }
+
+                // if (question.otherAnswers.length) {
+                //     option.checked = true;
+                // }
                 question.answerSelected = option.checked;
+
 
                 // enable continue
                 // if (!question.required || (option.checked && option !== question.otherOption)) {
@@ -220,7 +240,7 @@ angular.module('askApp').directive('multiquestion', function() {
                         if (matches.length) {
                             scope.question.answerSelected = true;
                             group.open = true;
-                            console.log(group.optionLabel);
+                            // console.log(group.optionLabel);
                         }
                     }
                 });
@@ -228,23 +248,34 @@ angular.module('askApp').directive('multiquestion', function() {
             }
 
             // set up other option
-            if (scope.question.allow_other && scope.question.answer && scope.question.answer.other || _.isArray(scope.question.answer) && _.findWhere(scope.question.answer, {
-                other: true
-            })) {
+            if (scope.question.allow_other && scope.question.answer && scope.question.answer.other || _.isArray(scope.question.answer) && _.findWhere(scope.question.answer, { other: true }) ) {
                 scope.question.otherOption = {
                     'checked': true,
                     'other': true
                 };
-                scope.question.otherAnswer = scope.question.answer.text || _.findWhere(scope.question.answer, {
-                    other: true
-                }).text;
+
+                if (scope.question.answer.other) {
+                    scope.question.otherAnswers = [];
+                    scope.question.otherAnswers[0] = scope.question.answer.text;
+                } else {
+                    scope.question.otherAnswers = _.where(scope.question.answer, { other: true });
+                    _.each(scope.question.otherAnswers, function(answer, i) {
+                        scope.question.otherAnswers[i] = answer.text;
+                    });
+                }
+
+                
+                // scope.question.otherAnswer = scope.question.answer.text || _.findWhere(scope.question.answer, {
+                //     other: true
+                // }).text;
             } else {
                 scope.question.otherOption = {
                     'checked': false,
                     'other': true
                 };
-                scope.question.otherAnswer = null;
-            }
+                // scope.question.otherAnswer = null;
+                scope.question.otherAnswers = [];
+            }        
 
             // set up the options for a yes-no question
             if (scope.question.type === 'yes-no') {
@@ -322,6 +353,15 @@ angular.module('askApp').directive('multiquestion', function() {
 
             scope.$watch('question', function () {
                 scope.validity[scope.question.slug] = scope.validateQuestion(scope.question);
+            }, true);
+
+
+            scope.$watch('question.otherAnswers', function () {
+                if (scope.question.type == 'single-select' && scope.question.allow_other && scope.question.otherAnswers.length && scope.question.otherAnswers[0] !== "") {
+                    scope.onSingleSelectClicked({checked: false}, scope.question);
+                } else if (scope.question.type == 'single-select' && scope.question.allow_other) {
+                    scope.onSingleSelectClicked({checked: true}, scope.question);
+                }
             }, true);
 
         }
