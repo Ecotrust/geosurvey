@@ -49,6 +49,7 @@ angular.module('askApp')
     //     var resumePage = survey.getPageFromQuestion(lastQuestion);
     //     return ['survey', $scope.survey.slug, resumePage.order, $routeParams.uuidSlug].join('/');
     // }
+    $scope.showFeedback = true;
     $scope.sendingFeedback = false;
     $scope.submitFeedback = function (feedback) {
         var url = app.server + "/account/sendFeedback";

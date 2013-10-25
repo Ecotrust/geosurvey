@@ -49,7 +49,8 @@ angular.module('askApp')
     if (app.offline) {
         app.respondents[$routeParams.uuidSlug].complete = true;
         app.respondents[$routeParams.uuidSlug].status = 'complete';
-        app.message = "You have completed a catch report."
+        app.message = "You have completed a catch report.";
+
         localStorage.setItem('hapifish', JSON.stringify(app));    
     } else {
         $http.post(url).success(function (data) {
@@ -77,10 +78,10 @@ angular.module('askApp')
         //clean survey of any unncecessary question/answers 
         survey.initializeSurvey($scope.survey, null, answers);
         newRespondent.responses = survey.cleanSurvey(newRespondent);
-        
+        delete app.user.resumePath;
         $scope.sendRespondent(newRespondent).success(function () {
             
-            delete app.user.resumePath;
+            
             delete app.respondents[$routeParams.uuidSlug]
             app.message = "You catch report was successfully submitted."
             localStorage.setItem('hapifish', JSON.stringify(app));

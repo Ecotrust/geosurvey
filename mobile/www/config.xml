@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.pointnineseven.digitaldeck" version="1.2.27" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+<widget id="com.pointnineseven.digitaldeck" version="1.2.29" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>DigitalDeck</name>
     <description>
         Hello World sample application that responds to the deviceready event.
@@ -51,7 +51,7 @@
     <content src="index.html" />
 </widget>
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.pointnineseven.digitaldeck" version="1.2.27" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+<widget id="com.pointnineseven.digitaldeck" version="1.2.29" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>DigitalDeck</name>
     <description>
         Hello World sample application that responds to the deviceready event.
@@ -103,7 +103,7 @@
     <content src="index.html" />
 </widget>
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.pointnineseven.digitaldeck" version="1.2.27" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+<widget id="com.pointnineseven.digitaldeck" version="1.2.29" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>DigitalDeck</name>
     <description>
         Hello World sample application that responds to the deviceready event.
@@ -155,7 +155,7 @@
     <content src="index.html" />
 </widget>
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.pointnineseven.digitaldeck" version="1.2.27" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+<widget id="com.pointnineseven.digitaldeck" version="1.2.29" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>DigitalDeck</name>
     <description>
         Hello World sample application that responds to the deviceready event.
@@ -207,7 +207,7 @@
     <content src="index.html" />
 </widget>
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.pointnineseven.digitaldeck" version="1.2.27" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+<widget id="com.pointnineseven.digitaldeck" version="1.2.29" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>DigitalDeck</name>
     <description>
         Hello World sample application that responds to the deviceready event.
@@ -259,7 +259,7 @@
     <content src="index.html" />
 </widget>
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.pointnineseven.digitaldeck" version="1.2.27" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+<widget id="com.pointnineseven.digitaldeck" version="1.2.29" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>DigitalDeck</name>
     <description>
         Hello World sample application that responds to the deviceready event.
@@ -311,7 +311,7 @@
     <content src="index.html" />
 </widget>
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.pointnineseven.digitaldeck" version="1.2.27" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+<widget id="com.pointnineseven.digitaldeck" version="1.2.29" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>DigitalDeck</name>
     <description>
         Hello World sample application that responds to the deviceready event.
@@ -363,7 +363,7 @@
     <content src="index.html" />
 </widget>
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.pointnineseven.digitaldeck" version="1.2.27" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+<widget id="com.pointnineseven.digitaldeck" version="1.2.29" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>DigitalDeck</name>
     <description>
         Hello World sample application that responds to the deviceready event.
