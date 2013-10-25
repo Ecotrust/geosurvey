@@ -15,6 +15,7 @@ User.profile = property(lambda u: UserProfile.objects.get_or_create(user=u)[0])
 class Feedback(models.Model):
 	user = models.ForeignKey(User)
 	message = models.TextField(null=True, blank=True, default=None)
+	data = models.TextField(null=True, blank=True, default=None)
 	ts = models.DateTimeField(default=datetime.datetime.now())
 
 	def __unicode__(self):

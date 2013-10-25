@@ -91,7 +91,8 @@ def sendFeedback(request):
     if request.POST:
         param = simplejson.loads(request.POST.keys()[0])
         feedback_message = param.get('feedback', None)
-        feedback = Feedback(user=request.user, message=feedback_message, ts=datetime.datetime.now())
+        data = param.get('data', None)
+        feedback = Feedback(user=request.user, message=feedback_message, ts=datetime.datetime.now(), data=data)
         feedback.save()
     return HttpResponse(simplejson.dumps({'success': True }))
 
