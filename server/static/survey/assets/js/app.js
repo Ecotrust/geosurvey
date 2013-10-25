@@ -104,3 +104,14 @@ angular.module('askApp', ['ui', 'ui.bootstrap', 'ngGrid'])
         redirectTo: '/'
     });
 });
+
+
+$(document).ready(function () {
+    $('input').live('focus', function (e) { 
+        $('body').addClass("keyboard-open");
+            // window.scrollTo(0,0); //the second 0 marks the Y scroll pos. Setting this to i.e. 100 will push the screen up by 100px.
+    });
+    $('input').live('blur', function (e) {
+        $('body').removeClass("keyboard-open");
+    });        
+});

@@ -92,7 +92,11 @@ def sendFeedback(request):
         param = simplejson.loads(request.POST.keys()[0])
         feedback_message = param.get('feedback', None)
         data = param.get('data', None)
-        feedback = Feedback(user=request.user, message=feedback_message, ts=datetime.datetime.now(), data=data)
+        feedback = Feedback(message=feedback_message, ts=datetime.datetime.now(), data=data)
+        if request.user.is_authenticated():
+            feedback.user = request.user
+        else:
+            feedback.message = "%s\n%s" %(feedback.message, param.get('username', None))
         feedback.save()
     return HttpResponse(simplejson.dumps({'success': True }))
 
