@@ -64,7 +64,7 @@ input.datepicker {
     height: 80px;
     background-color: rgb(54, 85, 91);
 }
-.keyboard-open #footer {
+.keyboard-open #footer, .keyboard-open .navbar {
     display: none;
 }
 #wrap > .container {
