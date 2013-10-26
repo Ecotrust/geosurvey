@@ -181,7 +181,7 @@ img.center {
     margin-top: 0;
     margin-bottom: 0;
 }
-.select .checkbox, .option .checkbox {
+.select .checkbox, .option .checkbox, .select-unchecked .other-checkbox  {
     display: none;
     width: 15px;
     height: 15px;
@@ -216,6 +216,22 @@ img.center {
 
     color: rgb(244, 244, 244);
 }
+
+.question .single-select-other {
+    /*background-color: rgb(24, 75, 83) !important;*/
+    background-color: rgb(246, 235, 194);
+    font-size: 18px;
+    font-weight: 500;
+    /*padding-left: 50px;*/
+    color: rgb(46, 46, 46);
+    border: 0px;
+    width: 100%;
+}
+
+.question .other-option.select-checked {
+    margin-top: -20px;
+}
+
 .menu-page .progress {
     margin-bottom: 0;
     
@@ -291,19 +307,33 @@ img.center {
     border: 0;
 }
 .question .multi-select-other {
-    background-color: rgb(24, 75, 83) !important;
+    /*background-color: rgb(24, 75, 83) !important;*/
+    background-color: rgb(246, 235, 194);
+    font-size: 18px;
+    font-weight: 500;
+    /*padding-left: 50px;*/
+    color: rgb(46, 46, 46);
+    border: 0px;
+    width: 100%;
+}
+.question .multi-select-grouped-other {
+    background-color: rgb(24, 75, 83) !important;*/
+    /*background-color: rgb(246, 235, 194);*/
     font-size: 18px;
     font-weight: 500;
     padding-left: 50px;
     color: rgb(46, 46, 46);
     border: 0px;
+    width: 100%;
 }
-.question .multi-select-other.with-text {
+.question .multi-select-grouped-other.with-text {
     background-color: rgb(244, 218, 130) !important;
+    font-size: 18px;
+    font-weight: 500;
     padding-left: 50px;
     color: rgb(46, 46, 46);
 }
-.question .multi-select-other:focus {
+.question .multi-select-grouped-other:focus {
     background-color: rgb(244, 218, 130) !important;
     font-size: 18px;
     font-weight: 500;
@@ -331,10 +361,10 @@ img.center {
 input.multi-select-other::-webkit-input-placeholder {
    color: rgb(244, 244, 244) !important;
 }
-input.multi-select-other:-moz-placeholder { /* Firefox 18- */
+input.multi-select-other:-moz-placeholder { 
    color: rgb(244, 244, 244) !important;  
 }
-input.multi-select-other::-moz-placeholder  {  /* Firefox 19+ */
+input.multi-select-other::-moz-placeholder  {  
    color: rgb(244, 244, 244) !important;  
 }
 input.multi-select-other:-ms-input-placeholder {  

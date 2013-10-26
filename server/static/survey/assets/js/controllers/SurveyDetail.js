@@ -135,6 +135,9 @@ angular.module('askApp')
 
     $scope.getPageBlockTitle = function () {
         var title = "";
+        if ( ! $scope.page ) {
+            return title;
+        }
         _.each($scope.page.blocks, function(block, i) {
             if (title === "") {
                 title = block.name;    
@@ -243,8 +246,11 @@ angular.module('askApp')
         }
 
         // sometimes we'll have an other field with option text box
-        if (answer === 'other' && question.otherAnswer) {
-            answer = question.otherAnswer;
+        // if (answer === 'other' && question.otherAnswer) {
+        //     answer = question.otherAnswer;
+        // }
+        if (answer === 'other' && question.otherAnswers.length) {
+            answer = question.otherAnswers[0];
         }
         if (question.required && (answer === undefined || answer === null)) {
             return false;
@@ -311,11 +317,27 @@ angular.module('askApp')
         }
 
         if (question.allow_other && question.otherOption && question.otherOption.checked) {
-            if (question.otherAnswer === null || question.otherAnswer.length < 1) {
+        // if (question.allow_other) {
+            // if (question.otherAnswer === null || question.otherAnswer.length < 1) {
+            //     // other answer is blank, report back as invalid
+            //     isOtherAnswerValid = false;
+            // } else {
+            //     answers.push(question.otherAnswer);
+            // }
+            if (question.otherAnswers.length < 1) {
                 // other answer is blank, report back as invalid
                 isOtherAnswerValid = false;
             } else {
-                answers.push(question.otherAnswer);
+                _.each(question.otherAnswers, function(otherAnswer, i) {
+                    if (otherAnswer !== "") {
+                        answers.push({
+                            text: otherAnswer,
+                            label: otherAnswer,
+                            checked: true,
+                            other: true
+                        });
+                    }
+                });
             }
         }
         
@@ -352,27 +374,26 @@ angular.module('askApp')
             });
         }
 
-        if (question.otherAnswer) {
-            answers.push({
-                text: question.otherAnswer,
-                label: question.otherAnswer,
-                checked: true,
-                other: true
-            });
-        }
+        _.each(question.otherAnswers, function(otherAnswer, i) {
+            if (otherAnswer !== "") {
+                answers.push({
+                    text: otherAnswer,
+                    label: otherAnswer,
+                    checked: true,
+                    other: true
+                });
+            }
+        });
         
-        //_.each(answers, function(answer) {
-            //answer.text = encodeURIComponent(answer.text);
-        //});
         return answers;
     };
 
     
-
-    $scope.$watch('question.otherAnswer', function(newValue) {
+    $scope.$watch('question.otherAnswers', function(newValue) {
 
         if ($scope.question && $scope.question.required && !$scope.answer) {
-            if ($scope.question.allow_other && $scope.question.otherOption && $scope.question.otherOption.checked && $scope.question.otherAnswer && $scope.question.otherAnswer.length > 0) {
+            if ($scope.question.allow_other && $scope.question.otherOption && $scope.question.otherOption.checked && $scope.question.otherAnswers && $scope.question.otherAnswers.length) {
+            //if ($scope.question.allow_other && $scope.question.otherAnswers && $scope.question.otherAnswers.length) {
                 $scope.isAnswerValid = true;
             } else {
                 $scope.isAnswerValid = false;
@@ -387,13 +408,11 @@ angular.module('askApp')
         var answer = _.find(question.options, function(option) {
             return option.checked;
         });
-        //var copy = {};
-        //_.extend(copy, answer);
-         if (! answer && question.otherAnswer) {
+        if (! answer && question.otherAnswers.length) {
             answer = {
                 checked: true,
-                label: question.otherAnswer,
-                text: question.otherAnswer,
+                label: question.otherAnswers[0],
+                text: question.otherAnswers[0],
                 other: true
             };
         } else if (!question.required && question.type !== 'yes-no') {
