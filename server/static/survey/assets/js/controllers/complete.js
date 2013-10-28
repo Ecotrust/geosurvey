@@ -83,7 +83,7 @@ angular.module('askApp')
             
             
             delete app.respondents[$routeParams.uuidSlug]
-            app.message = "You catch report was successfully submitted."
+            app.message = "You catch report was submitted successfully."
             localStorage.setItem('hapifish', JSON.stringify(app));
             $location.path('#/');
             $scope.working = true;
