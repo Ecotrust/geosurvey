@@ -376,6 +376,10 @@ input.multi-select-other:-ms-input-placeholder {
     color: rgb(149, 149, 149);
 }
 
+
+.number-with-unit select {
+    padding-left: 0px;
+}
 .number-with-unit .form-control {
     /*width: 48%;
     display: inline-block;
