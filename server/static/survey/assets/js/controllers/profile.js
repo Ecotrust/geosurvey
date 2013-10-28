@@ -75,7 +75,7 @@ angular.module('askApp')
 
     
     $scope.updateProfile = function (profileQuestions) {
-        var url = '/account/updateUser/',
+        var url = app.server + '/account/updateUser/',
             registration = {};
 
         _.each(profileQuestions, function(item, i) {
