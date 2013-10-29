@@ -11,7 +11,7 @@ angular.module('askApp').directive('multiquestion', function() {
             validity: '=validity'
         },
         link: function postLink(scope, element, attrs) {
-            scope.validateQuestion = function (question) {
+                scope.validateQuestion = function (question) {
                 // if the question is not required it is good to go
                 if (! question.required) {
                     return true;
@@ -37,25 +37,39 @@ angular.module('askApp').directive('multiquestion', function() {
                         return false;
                     }
                 }
+                var otherAnswers = question.otherAnswers && question.otherAnswers.length && ( ! (question.otherAnswers.length === 1 && question.otherAnswers[0] === "") );
                 if (question.type === 'single-select') {
 
-                    return _.some(_.pluck(question.options, 'checked')) || question.otherAnswers.length;  
+                    return _.some(_.pluck(question.options, 'checked')) || otherAnswers;  
 
                 } else if ( question.type === 'multi-select' || question.type === 'yes-no' ) {                
                     
-                    if (question.allow_other && question.otherOption.checked && ! question.otherAnswers) {
-                        return false;
-                    }
-                    if (question.allow_other && ! question.otherAnswers ) {
-                        return false;                        
-                    } else if (! question.otherOption.checked) {
-
+                    var otherEntry = otherAnswers, 
+                        standardEntry = false;
+                    
+                    if (otherEntry) {
+                        return true;
+                    } else {
                         if (question.groupedOptions && question.groupedOptions.length) {  
                             return _.some(_.pluck(_.flatten(_.map(question.groupedOptions, function (group) { return group.options })), 'checked'));
                         } else {
                             return _.some(_.pluck(question.options, 'checked')) || question.otherAnswers.length;        
                         }
                     }
+
+                    // if ( question.allow_other && question.otherOption.checked && ! otherAnswers ) {
+                    //     return false;
+                    // }
+                    // if ( question.allow_other && ! question.otherAnswers ) {
+                    //     return false;                        
+                    // } else if (! question.otherOption.checked) {
+
+                    //     if (question.groupedOptions && question.groupedOptions.length) {  
+                    //         return _.some(_.pluck(_.flatten(_.map(question.groupedOptions, function (group) { return group.options })), 'checked'));
+                    //     } else {
+                    //         return _.some(_.pluck(question.options, 'checked')) || question.otherAnswers.length;        
+                    //     }
+                    // }
                     
                 }
                 
