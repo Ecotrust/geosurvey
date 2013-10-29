@@ -7,8 +7,13 @@
             <button class="btn btn-main btn-default btn-lg btn-block" ng-click="submitReport()">Submit Report</button>
 
 	    </div>
-            <div class="info respondant" ng-show="working">
-                <h3>Submitting Report.</h3>
+            
+            <div class="loading-indicator" ng-show="working">
+                <h3>Submitting Report...</h3>
+                <div class="bar">
+                    <i class="sphere"></i>
+                </div>
+
             </div>
 	</div>
 </div>

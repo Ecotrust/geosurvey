@@ -9,6 +9,11 @@
         <div class="page-header">
             <img src="assets/img/deck-logo.svg" class="center logo" />
         </div>
+        <div class="loading-indicator" ng-show="working">
+            <div class="bar">
+                <i class="sphere"></i>
+            </div>
+        </div>
         <div ng-show="user">
             <a type="button" class="btn btn-main btn-default btn-lg btn-block" ng-show="user.resumePath" href="{{user.resumePath}}">Resume</a>
             <a type="button" class="btn btn-main btn-default btn-lg btn-block" href="#/surveys">New Report</a>
@@ -18,20 +23,7 @@
             <button type="button" class="btn btn-main btn-default btn-lg btn-block" ng-click="logout()">Logout</button>
         </div>
 
-        <div ng-hide="user" ng-class="{ 'working': working }">
-            <div class="spinner">
-                <div class="wrapper">
-                    <div class="inner">
-                        <!-- <span>L</span>
-                        <span>o</span>
-                        <span>a</span>
-                        <span>d</span>
-                        <span>i</span>
-                        <span>n</span>
-                        <span>g</span> -->
-                    </div>
-                </div>
-            </div>
+        <div ng-hide="user || working">
             <div class="forms" ng-switch on="showForm">
                 <div ng-switch-default>
                     <form ng-submit="authenticateUser(authUser)" disabled>
@@ -75,7 +67,6 @@
         <p class="pull-right">{{version}}</p>
     </div>
     <div id="map" mobile-map ng-show="user"></div>
-
     <div class="alert-notice" ng-show="message">
         <div class="pull-left">{{ message }}</div>
         <button class="btn btn-default btn-outline-inverse pull-right" ng-tap="message = false">ok</button>
