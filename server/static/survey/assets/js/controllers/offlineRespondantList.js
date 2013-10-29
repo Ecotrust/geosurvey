@@ -27,6 +27,49 @@ angular.module('askApp')
             });
         }
 
+        $scope.getTitle = function() {
+            try {
+                var island = _.findWhere($scope.respondent.responses, {'question': 'island'}).answer.text,
+                    title = 'USVI Commercial Catch Report Form - ' + island;  
+            } catch(e) {
+                var title = 'USVI Commercial Catch Report Form';
+            }
+            return title;
+        };
+
+        $scope.getGearType = function() {
+            try { 
+                var gearType = _.findWhere($scope.respondent.responses, {'question': 'gear-type'}).answer[0].label;  
+                if ( gearType.indexOf('hook') !== -1 ) {
+                    return 'hook';
+                } else if ( gearType.indexOf('traps') !== -1 ) {
+                    return 'traps';
+                } else if (gearType.indexOf('nets') !== -1 ) {
+                    return 'nets';
+                } else {
+                    return 'hand';
+                }
+            } catch(e) {
+                return '';
+            }
+        };
+
+        $scope.getAnswer = function(questionSlug) {
+            try {
+                if (questionSlug === 'trip-landing-site' || questionSlug === 'weight-line-or-reel') {
+                    var island = _.findWhere($scope.respondent.responses, {'question': 'island'}).answer.label,
+                        answer = _.findWhere($scope.respondent.responses, {'question': questionSlug + '-' + island}).answer;
+                } else {
+                    var answer = _.findWhere($scope.respondent.responses, {'question': questionSlug}).answer;
+                }
+            } catch(e) {
+                var answer = '';
+            }
+            if (answer === 'NA') {
+                answer = '';
+            }
+            return answer;
+        };
 
 
         $scope.deleteRespondent = function (respondent) {
