@@ -1,4 +1,5 @@
-#next-release
+#1.2.51
+return of icons and updated splash screen
 increase size of grid container to show more species: #139
 
 #1.2.50
