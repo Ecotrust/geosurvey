@@ -634,7 +634,6 @@ $scope.loadSurvey = function(data) {
                         $scope.isAnswerValid = true;
                     }
                 });    
-                $('#wrap').css({ 'min-height': initialHeight - 80});
             }).error(function(data, status, headers, config) {
                 $scope.gotoNextQuestion();
             });

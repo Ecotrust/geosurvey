@@ -2,8 +2,8 @@
 
 
 var initialHeight = $(window).height();
-$('html').css({ 'min-height': initialHeight });
-$('body').css({ 'min-height': initialHeight });
+$('html').css({ 'min-height': initialHeight});
+$('body').css({ 'min-height': initialHeight});
 
 
 
