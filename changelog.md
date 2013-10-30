@@ -1,8 +1,6 @@
 #1.2.51
 return of icons and updated splash screen
 increase size of grid container to show more species: #139
-
-#1.2.5?
 addressing the following tickets: #72, #88, #133, #138, #139, #140, #157, #160
 
 - [x] #72 - updating spinners
