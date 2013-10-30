@@ -1,0 +1,34 @@
+<div id="wrap" class="main">
+    <!-- Fixed navbar -->
+    <!-- Begin page content -->
+    <div class="navbar navbar-default navbar-fixed-top"></div>        
+
+
+        <div class="container">
+            <div class="page-header">
+                <img src="assets/img/deck-logo.svg" class="center logo" />
+            </div>
+            <div class="loading-indicator" ng-show="working">
+                <div class="bar">
+                    <i class="sphere"></i>
+                </div>
+            </div>
+                <div class="new-user-form">
+                    <form ng-submit="authenticateUser(authUser)" disabled>
+                        <fieldset ng-disabled="working">
+                            <input type="text" class="form-control username" placeholder="enter your username..." ng-model="authUser.username" autocapitalize="off" required>
+                            <input type="password" class="form-control password" placeholder="enter your password..." ng-model="authUser.password" required>
+                            <button class="btn btn-main btn-default btn-block" ng-disabled="! (authUser.username &&  authUser.password)">login</button>
+                            <a class="btn btn-main btn-default btn-block" ng-class="{'active': showForm == 'new-user'}" href="#/">cancel</a>
+                            <div class="error" ng-show="showError == 'auth-error'">
+                                There was a problem authenticating. Please try again.
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+            <p class="pull-right">{{version}}</p>
+        </div>
+    </div>
+</div>
+

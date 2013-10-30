@@ -1,10 +1,10 @@
 <div id="wrap" class="main">
     <!-- Fixed navbar -->
+    <!-- Begin page content -->
     <div class="navbar navbar-default navbar-fixed-top">
 
     </div>
 
-    <!-- Begin page content -->
     <div class="container">
         <div class="page-header">
             <img src="assets/img/deck-logo.svg" class="center logo" />
@@ -22,50 +22,9 @@
             <a type="button" class="btn btn-main btn-default btn-lg btn-block" href="#/settings">Settings</a>
             <button type="button" class="btn btn-main btn-default btn-lg btn-block" ng-click="logout()">Logout</button>
         </div>
-
-        <div ng-hide="user || working">
-            <div class="forms" ng-switch on="showForm">
-                <div ng-switch-default>
-                    <form ng-submit="authenticateUser(authUser)" disabled>
-                        <fieldset ng-disabled="working">
-                            <input type="text" class="form-control username" placeholder="enter your username..." ng-model="authUser.username" autocapitalize="off" required>
-                            <input type="password" class="form-control password" placeholder="enter your password..." ng-model="authUser.password" required>
-                            <button class="btn btn-main btn-default btn-block" ng-disabled="! (authUser.username &&  authUser.password)">login</button>
-                            <button class="btn btn-main btn-default btn-block" ng-class="{'active': showForm == 'new-user'}" ng-click="toggleForm('new-user')">signup</button>
-                            <div class="error" ng-show="showError == 'auth-error'">
-                                There was a problem authenticating. Please try again.
-                            </div>
-                        </fieldset>
-                    </form>
-                </div>
-                <div class="new-user-form" ng-switch-when="new-user">
-                    <form ng-submit="createUser(newUser)">
-
-                        <input class="form-control" type="text" placeholder="enter your username..." data-ng-model="newUser.username" autocapitalize="off" required>
-
-                        <input class="form-control" type="email" placeholder="enter your email address..." data-ng-model="newUser.emailaddress" required>
-
-                        <input class="form-control" type="password" placeholder="enter your password..." data-ng-model="newUser.password1" required>
-
-                        <input class="form-control" type="password" placeholder="enter your password again..." data-ng-model="newUser.password2" required>
-
-                        
-                                <button class="btn btn-main btn-default btn-block" ng-disabled="! newUser.password2">New User</button>
-                                <button class="btn btn-main btn-default btn-block" ng-click="toggleForm('login')">login</button>
-                        
-                        
-                        <div class="error" ng-show="showError == 'duplicate-user'">
-                            That username is already registered. Please try another.
-                        </div>
-                        <div class="error" ng-show="showError == 'password-mismatch'">
-                            Passwords do not match. Please try again.
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
         <p class="pull-right">{{version}}</p>
     </div>
+
     <div id="map" mobile-map ng-show="user"></div>
     <div class="alert-notice" ng-show="message">
         <div class="pull-left">{{ message }}</div>

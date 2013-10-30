@@ -10,6 +10,14 @@ angular.module('askApp')
         $scope.user = app.user;
     } else {
         $scope.user = false;
+        console.log($location.path() !== '/signin')
+        if ($location.path() === '/signin' || $location.path() === '/signup') {
+            console.log('re')
+            
+        } else {
+            $location.path('/');
+        }
+        
     }
     $scope.version = app.version;
     if (app.version !== "APP_VERSION") {
@@ -29,7 +37,6 @@ angular.module('askApp')
         }
     })
     .error(function (data) {
-        debugger;
     });
     
 
@@ -104,8 +111,8 @@ angular.module('askApp')
                     delete app.next;
                     $location.path(app.next);
                 } else {
-                    $scope.user = app.user;
-                    $scope.resizeMap();
+                    console.log('logging in');
+                    $location.path("/main");
                 }
                 
             })
@@ -140,6 +147,8 @@ angular.module('askApp')
     
 
     $(window).on('resize', $scope.resizeMap);
+
+    
 
     $scope.dismissMessage = function () {
         $scope.message = false;

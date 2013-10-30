@@ -33,6 +33,39 @@ a {
    color: rgb(179,213,222) !important;
 }
 
+#wrap {
+    min-height: 100%;
+}
+.splash {
+    width: 100%;
+    height: 100%;
+}
+
+    .splash .btn {
+        position: absolute;
+        bottom: 60px;
+        font-size: 24px;
+        color: rgb(250, 189, 18);
+        background-color: rgba(250, 189, 18, .2);
+        border-color: rgb(250, 189, 18);
+    }
+    .splash {
+        position: relative;
+    }
+    .splash .sign-up {
+        left: 40px;
+    }
+    .splash .sign-in {
+        right: 40px;
+    }
+    .splash .p97 {
+        height: 50px;
+        position: absolute;
+        top: 67%;
+        left: 50%;
+        margin-left: -53px;
+   }
+
 input.datepicker {
     -webkit-appearance: textfield;
     padding-top: 5px;
@@ -930,4 +963,14 @@ border-color: rgb(250, 189, 18);
 
 @keyframes slide {
     to { margin-left: 90%; }
+}
+
+.animate-enter {
+    -webkit-transition: .2s linear all; /* Chrome */
+    transition: .2s linear all;
+    opacity: 0;
+}
+ 
+.animate-enter.animate-enter-active {
+    opacity: 1;
 }

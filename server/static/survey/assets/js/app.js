@@ -37,11 +37,22 @@ angular.module('askApp', ['ui', 'ui.bootstrap', 'ngGrid'])
 
     $httpProvider.defaults.headers.post['Content-Type'] = 'application/json';
     $routeProvider.when('/', {
-        templateUrl: app.viewPath + 'views/main.html',
-        controller: 'MainCtrl',
-        reloadOnSearch: false
-
+        templateUrl: app.viewPath + 'views/splash.html',
+        controller: 'SplashCtrl',
     })
+    .when('/signup', {
+            templateUrl: app.viewPath + 'views/signup.html',
+            controller: 'MainCtrl'
+        })
+    .when('/signin', {
+            templateUrl: app.viewPath + 'views/signin.html',
+            controller: 'MainCtrl'
+        })
+    .when('/main', {
+            templateUrl: app.viewPath + 'views/main.html',
+            controller: 'MainCtrl',
+            reloadOnSearch: false
+        })
         .when('/author/:surveySlug', {
         templateUrl: app.viewPath + 'views/author.html',
         controller: 'AuthorCtrl'
