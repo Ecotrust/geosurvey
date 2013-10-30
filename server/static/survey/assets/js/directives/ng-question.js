@@ -249,6 +249,7 @@ angular.module('askApp').directive('multiquestion', function() {
                         group.options.push({
                             text: row,
                             label: _.string.slugify(row),
+                            groupName: groupName,
                             checked: matches.length ? true : false
                         });
                         if (matches.length) {
