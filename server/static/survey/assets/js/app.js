@@ -2,8 +2,8 @@
 
 
 var initialHeight = $(window).height();
-// $('html').css({ 'min-height': initialHeight });
-// $('body').css({ 'min-height': initialHeight });
+$('html').css({ 'min-height': initialHeight });
+$('body').css({ 'min-height': initialHeight });
 // $('#wrap').css({ 'min-height': initialHeight -80});
 
 
@@ -106,19 +106,19 @@ angular.module('askApp', ['ui', 'ui.bootstrap', 'ngGrid'])
 });
 
 
-$(document).ready(function () {
-    $('input').live('focus', function (e) { 
-        $('body').addClass("keyboard-open");
-            // window.scrollTo(0,0); //the second 0 marks the Y scroll pos. Setting this to i.e. 100 will push the screen up by 100px.
-    });
-    $('select').live('focus', function (e) { 
-        $('body').addClass("keyboard-open");
-            // window.scrollTo(0,0); //the second 0 marks the Y scroll pos. Setting this to i.e. 100 will push the screen up by 100px.
-    });
-    $('input').live('blur', function (e) {
-        $('body').removeClass("keyboard-open");
-    });        
-    $('select').live('change', function (e) {
-        $('body').removeClass("keyboard-open");
-    });        
-});
+// $(document).ready(function () {
+//     $('input').live('focus', function (e) { 
+//         $('body').addClass("keyboard-open");
+//             // window.scrollTo(0,0); //the second 0 marks the Y scroll pos. Setting this to i.e. 100 will push the screen up by 100px.
+//     });
+//     $('select').live('focus', function (e) { 
+//         $('body').addClass("keyboard-open");
+//             // window.scrollTo(0,0); //the second 0 marks the Y scroll pos. Setting this to i.e. 100 will push the screen up by 100px.
+//     });
+//     $('input').live('blur', function (e) {
+//         $('body').removeClass("keyboard-open");
+//     });        
+//     $('select').live('change', function (e) {
+//         $('body').removeClass("keyboard-open");
+//     });        
+// });

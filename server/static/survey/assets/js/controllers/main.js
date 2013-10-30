@@ -94,6 +94,7 @@ angular.module('askApp')
         })
             .success(function (data) {
                 var next;
+                $scope.working=false;
                 app.user = data.user;
                 app.user.registration = JSON.parse(app.user.registration);
                 $scope.saveState();
