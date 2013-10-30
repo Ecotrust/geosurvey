@@ -457,6 +457,9 @@ input.multi-select-other:-ms-input-placeholder {
 .ngViewport {
   height: auto !important;
 }
+.ngGrid {
+    height: 1000px;
+}
 .ngGrid, .ngTopPanel, .ngRow.even, .ngRow.odd, .ngCell {
   background-color: inherit;
   border-top: 0;

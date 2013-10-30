@@ -60,7 +60,6 @@ angular.module('askApp').directive('gridquestion', function() {
 
             // get simple answers
             scope.question.answer = scope.getAnswer(scope.question.slug);
-
             // set up rows for selects
             if (scope.question.rows) {
                 scope.question.options = [];
@@ -74,6 +73,7 @@ angular.module('askApp').directive('gridquestion', function() {
                         // handle single selects
                         matches = [true];
                     }
+
                     scope.question.options.push({
                         text: _.string.startsWith(row, '*') ? row.substr(1) : row,
                         label: _.string.slugify(row),
@@ -84,6 +84,7 @@ angular.module('askApp').directive('gridquestion', function() {
                 
                 scope.question.groupedOptions = [];
                 var groupName = "";
+
                 _.each(scope.question.rows.split('\n'), function (row, index) {
                     var matches = _.filter(scope.question.answer, function (answer) {
                         return answer.text === row;
@@ -161,6 +162,7 @@ angular.module('askApp').directive('gridquestion', function() {
                         }   
                     });
                 });
+            
                 // Configure grid.
                 var gridCellTemplateDefault = '<div class="ngCellText" ng-class="col.colIndex()"><span ng-cell-text>{{COL_FIELD CUSTOM_FILTERS}}</span></div>';
                 var costCellTemplate = '<input class="colt{{$index}} input-block-level" ng-model="row.entity[col.field]"  max="{{col.colDef.max}}" min="{{col.colDef.min}}" required="{{col.colDef.required}}" style="height: 100%;" type="number" step="any" }" value="{{row.getProperty(col.field)}}" onFocus="this.select();" onClick="this.select();"/>';
@@ -175,6 +177,7 @@ angular.module('askApp').directive('gridquestion', function() {
                     data: 'question.options',
                     enableSorting: false,
                     enableCellSelection: true,
+                    enablePaging: false,
                     canSelectRows: false,
                     multiSelect: false,
                     rowHeight: 50,
