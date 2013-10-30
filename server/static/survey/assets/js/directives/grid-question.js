@@ -115,8 +115,7 @@ angular.module('askApp').directive('gridquestion', function() {
                     // Skip this question since we have no items to list.
                     // $scope.gotoNextQuestion();
                     alert('no rows');
-
-                }
+                } 
 
                 if (scope.question.answer) {
                     scope.question.answer = _.groupBy(scope.question.answer, 'text');
@@ -125,8 +124,12 @@ angular.module('askApp').directive('gridquestion', function() {
                 }
                 scope.question.selectedOptions = {};
                 _.each(scope.question.options, function(value, key, list) {
+                    var groupString = "";
+                    if (value.groupName && value.groupName !== 'Lobsters\r') {
+                        groupString = ' (' + value.groupName + ')';
+                    }
                     list[key].activitySlug = value.label.replace(/-/g, '');
-                    list[key].activityText = value.text;
+                    list[key].activityText = value.text + groupString;
                     _.each(scope.question.grid_cols, function(gridCol, i) {
                         var gridLabel = gridCol.label.replace(/-/g, '');
                         if (scope.question.answer !== null && _.has(scope.question.answer, value.text)) {
