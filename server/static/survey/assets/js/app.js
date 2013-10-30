@@ -4,7 +4,7 @@
 var initialHeight = $(window).height();
 $('html').css({ 'min-height': initialHeight });
 $('body').css({ 'min-height': initialHeight });
-// $('#wrap').css({ 'min-height': initialHeight -80});
+
 
 
 if (localStorage.getItem('hapifish') && window.location.pathname !== '/respond') {
