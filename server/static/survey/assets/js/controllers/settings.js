@@ -15,6 +15,19 @@ angular.module('askApp')
         localStorage.removeItem('hapifish');
         window.location.reload();
     }
+
+    $scope.updatePassword = function (passwords) {
+        var url = app.server + "/account/updatePassword";
+        $scope.showError = false;
+        $http.post(url, {username: app.user.username, passwords: passwords})
+            .success(function (data) {
+                $scope.passwords = null;
+                $scope.changingPassword = false;
+            })
+            .error(function (data) {
+              $scope.showError = data;
+            });
+    }
     
     $scope.updateUser = function (user) {
         var url = app.server + "/account/updateUser";
@@ -26,9 +39,9 @@ angular.module('askApp')
                 $scope.editProfile = false;
                 $scope.changesSaved = true;
             })
-        .error(function (data) {
-          $scope.showError = data;
-        });
+            .error(function (data) {
+              $scope.showError = data;
+            });
     };
 
     $scope.saveState = function () {

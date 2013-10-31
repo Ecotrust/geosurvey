@@ -8,13 +8,17 @@ angular.module('askApp')
         transclude: true,
         replace: true,
         scope: {
-            passwordText: "=passwordText"
+            passwordText: "=passwordText",
+            placeholderText: "=placeholderText"
         },
         link: function (scope, element, attrs) {
             scope.visible = false;
             scope.element = element;
+            
             scope.toggleVisible = function () {
                 scope.visible = ! scope.visible;
+
+                // this should set focus, but doesn't work :()
                 if (scope.visible) {
                     scope.element.find('input.text')[0].focus();
                 } else {

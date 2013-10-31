@@ -120,3 +120,27 @@ def updateUser(request):
             return HttpResponse(simplejson.dumps({'success': True, 'user': user_dict}))
     else:
         return HttpResponse("error", status=500)
+
+
+@csrf_exempt
+def updatePassword(request):
+    if request.method == "POST":
+        param = simplejson.loads(request.body)
+        user = get_object_or_404( User, username=param.get('username', None) )
+        if request.user.username != user.username:
+            return HttpResponse("You are not logged in as that user.", status=401)
+        else:
+            passwords = param.get('passwords', None)
+            if passwords:
+                password_old = passwords.get('old')
+                password_new1 = passwords.get('new1')
+                password_new2 = passwords.get('new2')
+                if password_new1 == password_new2:
+                    auth_user = authenticate(username=user.username, password=password_old)
+                    if auth_user is not None:
+                        user.set_password(password_new1)
+                        user.save()
+                        return HttpResponse(simplejson.dumps({'success': True}))
+                    return HttpResponse("Old password is incorrect.", status=401)
+                return HttpResponse("Passwords do not match.", status=401)
+    return HttpResponse("error", status=500)

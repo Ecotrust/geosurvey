@@ -67,6 +67,10 @@ a {
         margin-left: -34px;
    }
 
+.password-update .input-group {
+    margin-bottom: 10px;
+}
+
 input.datepicker {
     -webkit-appearance: textfield;
     padding-top: 5px;
@@ -83,6 +87,7 @@ input.datepicker {
 
 .error {
     color: red;
+    font-size: 24px;
 }
 
 /* Wrapper for page content to push down footer */
