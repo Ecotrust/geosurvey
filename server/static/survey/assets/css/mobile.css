@@ -43,27 +43,28 @@ a {
 
     .splash .btn {
         position: absolute;
-        bottom: 60px;
+        bottom: 20px;
         font-size: 24px;
         color: rgb(250, 189, 18);
-        background-color: rgba(250, 189, 18, .2);
+        background-color: rgba(250, 189, 18, .1);
         border-color: rgb(250, 189, 18);
+        width: 120px;
     }
     .splash {
         position: relative;
     }
     .splash .sign-up {
-        left: 40px;
+        left: 20px;
     }
     .splash .sign-in {
-        right: 40px;
+        right: 20px;
     }
     .splash .p97 {
-        height: 50px;
+        height: 30px;
         position: absolute;
-        top: 67%;
+        top: 60%;
         left: 50%;
-        margin-left: -53px;
+        margin-left: -34px;
    }
 
 input.datepicker {
@@ -177,8 +178,8 @@ img.center {
     height: 65px;
 }
 .main .navbar {
-    height: 10px;
-    min-height: 10px;
+    height: 20px;
+    min-height: 20px;
     background-color: rgb(250, 189, 18);
 }
 .main .navbar .container > * {
