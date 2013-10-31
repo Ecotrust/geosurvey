@@ -47,27 +47,24 @@ def createUser(request):
     if request.POST:
         param = simplejson.loads(request.POST.keys()[0])
         user, created = User.objects.get_or_create(
-            username=param.get('username', None))
+            username=param.get('username', None), email=param.get('emailaddress1'))
         if created:
-            if param.get('password1') == param.get('password2'):
-                user.set_password(param.get('password1'))
-                user.save()
-                profile, created = UserProfile.objects.get_or_create(user=user)
-                profile.registration = '{}'
-                profile.save()
-                user.save()
-                user = authenticate(
-                    username=user.username, password=param.get('password1'))
-                login(request, user)
-                user_dict = {
-                    'username': user.username,
-                    'name': ' '.join([user.first_name, user.last_name]),
-                    'is_staff': user.is_staff,
-                    'registration': profile.registration
-                }
-                return HttpResponse(simplejson.dumps({'success': True, 'user': user_dict}))
-            else:
-                return HttpResponse("password-mismatch", status=500)
+            user.set_password(param.get('password'))
+            user.save()
+            profile, created = UserProfile.objects.get_or_create(user=user)
+            profile.registration = '{}'
+            profile.save()
+            user.save()
+            user = authenticate(
+                username=user.username, password=param.get('password'))
+            login(request, user)
+            user_dict = {
+                'username': user.username,
+                'name': ' '.join([user.first_name, user.last_name]),
+                'is_staff': user.is_staff,
+                'registration': profile.registration
+            }
+            return HttpResponse(simplejson.dumps({'success': True, 'user': user_dict}))
         else:
             return HttpResponse("duplicate-user", status=500)
     else:

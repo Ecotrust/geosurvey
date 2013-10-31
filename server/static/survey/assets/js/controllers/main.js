@@ -39,7 +39,7 @@ angular.module('askApp')
     .error(function (data) {
     });
     
-
+    $scope.passwordType = "password";
 
     $scope.updateApp = function () {
         var ref = window.open('http://www.labs.ecotrust.org/usvi/update.html', '_blank', 'location=yes');
@@ -66,23 +66,29 @@ angular.module('askApp')
 
     $scope.createUser = function (user) {
         var url = app.server + "/account/createUser";
-        $scope.working = true;
-        $http.post(url, user)
-            .success(function (data) {
-                app.user = data.user;
-                $scope.saveState();
-                // $location.path('/surveys');
-                $location.path('/profile');
-            })
-        .error(function (data) {
-            $scope.working = false;
-            if (data) {
-                $scope.showError = data;    
-            } else {
-                $scope.showError = "There was a problem creating an account.  Please try again later."
-            }
-            
-        });
+        if (user.emailaddress1 === user.emailaddress2) {
+            $scope.working = true;
+            $scope.showError = false;
+            $http.post(url, user)
+                .success(function (data) {
+                    app.user = data.user;
+                    $scope.saveState();
+                    // $location.path('/surveys');
+                    $location.path('/profile');
+                })
+            .error(function (data) {
+                $scope.working = false;
+                if (data) {
+                    $scope.showError = data;    
+                } else {
+                    $scope.showError = "There was a problem creating an account.  Please try again later."
+                }
+                
+            });    
+        } else {
+            $scope.showError = "email-mismatch"
+        }
+        
     };
 
     $scope.authUser = {};

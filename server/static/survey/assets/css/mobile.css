@@ -300,6 +300,25 @@ img.center {
     font-weight: bold;
     text-align: center;
 }
+
+.signin-form .eye, .new-user-form .eye {
+    background-color: rgb(24, 75, 83);
+    padding: 9px 15px;
+    
+}
+    .signin-form .eye:hover, .new-user-form .eye:hover {
+        color: white;
+    }
+    .signin-form .eye:active, .new-user-form .eye:active {
+        background-color: white;
+        color: rgb(24, 75, 83);
+    }
+.signin-form fieldset, .new-user-form fieldset {
+    margin-bottom: 30px;
+}
+
+
+
 .form-control, .question .form-control:focus, .unit-select {
     background-color: rgb(246, 235, 194);
     font-size: 20px;

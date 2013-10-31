@@ -13,19 +13,16 @@
                     <i class="sphere"></i>
                 </div>
             </div>
-                <div class="new-user-form">
+                <div class="new-user-form" ng-hide="working">
                     <form ng-submit="createUser(newUser)">
-
+                    <fieldset>
                         <input class="form-control" type="text" placeholder="enter your username..." data-ng-model="newUser.username" autocapitalize="off" required>
 
-                        <input class="form-control" type="email" placeholder="enter your email address..." data-ng-model="newUser.emailaddress" required>
-
-                        <input class="form-control" type="password" placeholder="enter your password..." data-ng-model="newUser.password1" required>
-
-                        <input class="form-control" type="password" placeholder="enter your password again..." data-ng-model="newUser.password2" required>
-
-                
-                        <button class="btn btn-main btn-default btn-block" ng-disabled="! newUser.password2">New User</button>
+                        <input class="form-control" type="email" placeholder="enter your email address..." data-ng-model="newUser.emailaddress1" required>
+                        <input class="form-control" type="email" placeholder="confirm your email address..." data-ng-model="newUser.emailaddress2" required>
+                        <password password-text="newUser.password"></password>
+                    </fieldset>
+                        <button class="btn btn-main btn-default btn-block" ng-disabled="! newUser.password">New User</button>
                         <a class="btn btn-main btn-default btn-block" href="#/">cancel</a>
                         
                         
@@ -34,6 +31,9 @@
                         </div>
                         <div class="error" ng-show="showError == 'password-mismatch'">
                             Passwords do not match. Please try again.
+                        </div>
+                        <div class="error" ng-show="showError == 'email-mismatch'">
+                            Email addresses do not match. Please try again.
                         </div>
                     </form>
                 </div>
