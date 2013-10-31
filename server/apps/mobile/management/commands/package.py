@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand, CommandError
 from django.conf import settings
 from apps.survey.api import *
-
+from optparse import make_option
 from subprocess import call
 import os, errno
 import re
@@ -27,11 +27,17 @@ def copy_dir(src, dst):
 
 
 class Command(BaseCommand):
-
+    option_list = BaseCommand.option_list + (
+            make_option('--test-run',
+                action='store_true',
+                dest='delete',
+                default=False,
+                help='Delete poll instead of closing it'),
+            )
     def handle(self, *args, **options):
         url = args[0]
         destDir = args[1]
-        release = options.get('release', None)
+        test = options.get('test-run', None)
         print "Packaging for %s" % url
         dest = settings.PROJECT_ROOT / destDir
 
@@ -39,7 +45,7 @@ class Command(BaseCommand):
         app_src = settings.PROJECT_ROOT / 'static/survey/mobile.html'
         app_dest = "%s/index.html" % dest
         shutil.copyfile(app_src, app_dest)
-        if release is not None:
+        if test is not None:
             with open(dest / 'config.xml') as f:
                 content = f.read()
                 version = re.search('version="(\d+)\.(\d+)\.(\d+)"', content)
@@ -57,5 +63,5 @@ class Command(BaseCommand):
         os.system("sed -i -e 's,APP_SERVER,%s,' %s/assets/js/app.js" % (url, dest))
         
         os.system("sed -i -e 's,APP_SERVER,%s,' %s/views/main.html" % (url, dest))
-        if release is not None:
+        if test is not None:
             os.system("sed -i -e 's,APP_VERSION,%s,' %s/assets/js/app.js" % (new_version, dest))    

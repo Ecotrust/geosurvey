@@ -333,7 +333,7 @@ def prepare():
 
 @task
 def emulate_ios():
-    run("cd %s && %s/bin/python manage.py package http://localhost:8000 '../mobile/www'" % (env.app_dir, env.venv))
+    run("cd %s && %s/bin/python manage.py package http://localhost:8000 '../mobile/www' --test-run" % (env.app_dir, env.venv))
     local("cd mobile && /usr/local/share/npm/bin/phonegap run -V ios")
 
 @task

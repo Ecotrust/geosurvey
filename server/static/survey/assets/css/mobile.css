@@ -116,7 +116,7 @@ input.datepicker {
     padding: 40px 15px 20px;
 }
 #wrap.menu-page > .container {
-    padding: 90px 15px 100px;
+    padding: 110px 15px 100px;
 }
 .container .credit {
     margin: 20px 0;
@@ -137,6 +137,10 @@ img.center {
     padding-bottom: 0x;
     margin-top: 0;
 }
+.status-bar {
+    height: 20px;
+    background-color: rgb(250, 189, 18);
+}
 .navbar {
     background-color: rgb(25, 25, 25);
     border-bottom: 0;
@@ -155,8 +159,7 @@ img.center {
 }
 .navbar .navbar-comment {
     position: absolute;
-    padding: 10px;
-    margin-top: -10px;
+    padding: 0 5px;
     right: 10px;
     border: 0;
     font-size: 36px;
