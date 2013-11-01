@@ -62,21 +62,28 @@ angular.module('askApp')
 
         $scope.getAnswer = function(questionSlug) {
             try {
-                if (questionSlug === 'trip-landing-site') {
+                if (questionSlug === 'weight-line-or-reel' || questionSlug === 'weight-traps' || questionSlug === 'weight-nets' || questionSlug === 'weight-spear-or-by-hand') {
+                    var island = _.findWhere($scope.respondent.responses, {question: 'island'}).answer.label,
+                        islandSlug = (island === 'st-thomas') ? 'st-thomas-st-john' : island,
+                        answer = _.findWhere($scope.respondent.responses, {question: questionSlug + '-' + islandSlug}).answer;
+
+                    // TODO: currently no way of determining definitively whether answers are from a grouped multi-select or an ungrouped multi-select
+                    // (no groupName may present because either just Others were selected, or no groups were present)
+                    // seems like solution would be to ensure selections that were grouped under Other heading should be marked as such...                    
+                    _.each(answer, function(obj, index) {
+                        if (index === 0 && obj.groupName) {
+                            obj.showGroupName = obj.groupName;
+                        } else if (obj.groupName && obj.groupName !== answer[index-1].showGroupName) {
+                            obj.showGroupName = obj.groupName;
+                        } else if (obj.other && answer[index-1].showGroupName !== 'Other') {
+                            obj.showGroupName = 'Other';
+                        } else {
+                            obj.showGroupName = undefined;
+                        }
+                    });
+                } else if (questionSlug === 'trip-landing-site') {
                     var island = _.findWhere($scope.respondent.responses, {question: 'island'}).answer.label,
                         answer = _.findWhere($scope.respondent.responses, {question: questionSlug + '-' + island}).answer;                    
-                } else if (questionSlug === 'weight-line-or-reel') {
-                    var island = _.findWhere($scope.respondent.responses, {question: 'island'}).answer.label,
-                        islandSlug = (island === 'st-thomas') ? 'st-thomas-st-john' : island,
-                        answer = _.findWhere($scope.respondent.responses, {question: questionSlug + '-' + islandSlug}).answer;
-                } else if (questionSlug === 'weight-traps') {
-                    var island = _.findWhere($scope.respondent.responses, {question: 'island'}).answer.label,
-                        islandSlug = (island === 'st-thomas') ? 'st-thomas-st-john' : island,
-                        answer = _.findWhere($scope.respondent.responses, {question: questionSlug + '-' + islandSlug}).answer;
-                } else if (questionSlug === 'weight-nets') {
-                    var island = _.findWhere($scope.respondent.responses, {question: 'island'}).answer.label,
-                        islandSlug = (island === 'st-thomas') ? 'st-thomas-st-john' : island,
-                        answer = _.findWhere($scope.respondent.responses, {question: questionSlug + '-' + islandSlug}).answer;
                 } else if (questionSlug === 'days-soaked-lobster-traps') {                    
                     var unit = _.findWhere($scope.respondent.responses, {question: 'time-soaked-lobster-traps'}).answer.unit,
                         value = _.findWhere($scope.respondent.responses, {question: 'time-soaked-lobster-traps'}).answer.value;
@@ -112,22 +119,7 @@ angular.module('askApp')
                 } else {
                     var answer = _.findWhere($scope.respondent.responses, {question: questionSlug}).answer;
                 }
-                if (questionSlug.indexOf('weight') !== -1) {
-                    // TODO: currently no way of determining definitively whether answers are from a grouped multi-select or an ungrouped multi-select
-                    // (no groupName may present because either just Others were selected, or no groups were present)
-                    // seems like solution would be to ensure selections that were grouped under Other heading should be marked as such...                    
-                    _.each(answer, function(obj, index) {
-                        if (index === 0 && obj.groupName) {
-                            obj.showGroupName = obj.groupName;
-                        } else if (obj.groupName && obj.groupName !== answer[index-1].showGroupName) {
-                            obj.showGroupName = obj.groupName;
-                        } else if (obj.other && answer[index-1].showGroupName !== 'Other') {
-                            obj.showGroupName = 'Other';
-                        } else {
-                            obj.showGroupName = undefined;
-                        }
-                    });
-                }
+                
             } catch(e) {
                 var answer = '';
             }
@@ -142,7 +134,7 @@ angular.module('askApp')
             $scope.respondents = _.without($scope.respondents, respondent);
             $scope.saveState();
             $location.path('/respondents');
-        }
+        };
 
         $scope.sendRespondent = function (respondent) {
             var url = app.server + '/api/v1/offlinerespondant/';
@@ -163,7 +155,7 @@ angular.module('askApp')
                 console.log(JSON.stringify(err));
             });
             
-        }   
+        }; 
 
         $scope.synchronized = [];
         $scope.busy = false;
@@ -201,7 +193,7 @@ angular.module('askApp')
                 });    
             }
             
-        }
+        };
 
 
         $scope.saveState = function () {
@@ -210,7 +202,7 @@ angular.module('askApp')
                 app.respondents[respondent.uuid] = respondent;
             });
             localStorage.setItem('hapifish', JSON.stringify(app));
-        }
+        };
 
 
         $scope.resume = function(respondent) {
@@ -227,5 +219,6 @@ angular.module('askApp')
             }
             
            $location.path(url);
-        }
+        };
+
 });
