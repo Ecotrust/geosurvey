@@ -187,7 +187,7 @@ COMPRESS_CSS_FILTERS = ['compressor.filters.cssmin.CSSMinFilter']
 COMPRESS_JS_FILTERS = ['compressor.filters.jsmin.JSMinFilter']
 
 # django-grappelli
-GRAPPELLI_ADMIN_TITLE = "Geosurvey Admin"
+GRAPPELLI_ADMIN_TITLE = "Digital Deck"
 
 HEROKU = False
 

@@ -74,10 +74,10 @@ def createUser(request):
 def forgotPassword(request):
     if request.POST:
         param = simplejson.loads(request.POST.keys()[0])
-        user = get_object_or_404( User, username=param.get('username', None) )
-        # email = param.get('email', None)
-        # form = PasswordResetForm({'email': email})
-        # form.save(from_email='eknuth@ecotrust.org', email_template_name='registration/password_reset_email.html')
+        form = PasswordResetForm({'email': param.get('email', None)})
+        setattr(form, 'users_cache', [])
+        print form
+        form.save(from_email='edwin@pointnineseven.com', email_template_name='registration/password_reset_email.html')
         return HttpResponse(simplejson.dumps({'success': True}))
     else:
         return HttpResponse("error", status=500)

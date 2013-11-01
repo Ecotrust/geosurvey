@@ -325,7 +325,10 @@ img.center {
 .signin-form fieldset, .new-user-form fieldset {
     margin-bottom: 30px;
 }
-
+    .signin-form .forgot-password {
+        margin-top: 20px;
+        font-size: 16px;
+    }
 
 
 .form-control, .question .form-control:focus, .unit-select {

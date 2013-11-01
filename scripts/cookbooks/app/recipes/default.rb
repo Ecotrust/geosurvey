@@ -122,6 +122,7 @@ package "csstidy"
 package "unzip"
 package "python-pip"
 package "python-dev"
+package "mailutils"
 
 include_recipe "openssl"
 include_recipe "build-essential"

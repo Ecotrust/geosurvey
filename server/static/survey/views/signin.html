@@ -13,21 +13,31 @@
                     <i class="sphere"></i>
                 </div>
             </div>
-                <div class="new-user-form signin-form" ng-hide="working">
-                    <form ng-submit="authenticateUser(authUser)" disabled>
-                        <fieldset ng-disabled="working">
-                            <input type="text" class="form-control username" placeholder="enter your username..." ng-model="authUser.username" autocapitalize="off" required>
-                            <password password-text="authUser.password"></password>
-                            
-                        </fieldset>
-                        <button class="btn btn-main btn-default btn-block" ng-disabled="! (authUser.username &&  authUser.password)">login</button>
-                        <a class="btn btn-main btn-default btn-block" ng-class="{'active': showForm == 'new-user'}" href="#/">cancel</a>
-                        <div class="error" ng-show="showError == 'auth-error'">
-                            There was a problem authenticating. Please try again.
-                        </div>
+            <div class="new-user-form signin-form" ng-show="showForgotPassword">
+                <form ng-submit="forgotPassword(forgotUser)">
+                    <fieldset ng-disabled="working">
+                        <input type="email" class="form-control username" placeholder="enter your email..." ng-model="forgotUser.email" autocapitalize="off">
+                    </fieldset>
+                    <button class="btn btn-main btn-default btn-block">forgot password</button>
+                    <a class="btn btn-main btn-default btn-block" ng-click="showForgotPassword = false">cancel</a>
+                </form>
+                <a class="forgot-password pull-right" ng-click="showForgotPassword = true">Forgot Password</a>
+            </div>
+            <div class="new-user-form signin-form" ng-hide="working || showForgotPassword">
+                <form ng-submit="authenticateUser(authUser)">
+                    <fieldset ng-disabled="working">
+                        <input type="text" class="form-control username" placeholder="enter your username..." ng-model="authUser.username" autocapitalize="off" required>
+                        <password password-text="authUser.password"></password>
                         
-                    </form>
-                </div>
+                    </fieldset>
+                    <button class="btn btn-main btn-default btn-block" ng-disabled="! (authUser.username &&  authUser.password)">login</button>
+                    <a class="btn btn-main btn-default btn-block" ng-class="{'active': showForm == 'new-user'}" href="#/">cancel</a>
+                    <div class="error" ng-show="showError == 'auth-error'">
+                        There was a problem authenticating. Please try again.
+                    </div>
+                    
+                </form>
+                <a class="forgot-password pull-right" ng-click="showForgotPassword = true">Forgot Password</a>
             </div>
             <p class="pull-right">{{version}}</p>
         </div>

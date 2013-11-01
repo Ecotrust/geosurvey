@@ -92,7 +92,7 @@ angular.module('askApp')
     };
 
     $scope.authUser = {};
-
+    $scope.showForgotPassword = false;
     $scope.showError = false;
     $scope.showInfo = false;
     $scope.working = false;
