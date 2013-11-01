@@ -221,4 +221,41 @@ angular.module('askApp')
            $location.path(url);
         };
 
+        // $scope.getSubmittedSurveys = function (respondents) {
+            
+        //     //var url = app.server + '/api/v1/offlinerespondant/';
+        //     var url = app.server + '/api/v1/reportrespondant/?user__username__exact=sfletche&format=json&survey__slug__exact=did-not-fish&limit=1';
+            
+        //     debugger;
+
+        //     var responses = angular.copy(respondent.responses);
+            
+        //     _.each(responses, function (response) {
+        //         // var question_uri = response.question.resource_uri;
+        //         var question_uri = survey.getQuestionUriFromSlug(response.question);
+        //         response.question = question_uri;
+        //         response.answer_raw = JSON.stringify(response.answer);
+        //     });
+        //     var newRespondent = {
+        //         ts: respondent.ts,
+        //         uuid: respondent.uuid.replace(':', '_')
+        //     };
+        //     return $http.post(url, newRespondent).error(function (err) {
+        //         console.log(JSON.stringify(err));
+        //     });
+            
+        // };       
+
+
+        // $scope.showSubmittedSurveys = function(respondents) {
+            
+        //     $scope.getSubmittedSurveys(respondents)
+        //         .success(function (data) {
+        //             debugger;
+        //         }).error(function (data) {
+        //             debugger;
+        //         });    
+
+        // };
+
 });
