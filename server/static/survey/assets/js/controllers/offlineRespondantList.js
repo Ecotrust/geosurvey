@@ -29,7 +29,7 @@ angular.module('askApp')
 
         $scope.getTitle = function() {
             try {
-                var island = _.findWhere($scope.respondent.responses, {'question': 'island'}).answer.text,
+                var island = _.findWhere($scope.respondent.responses, {question: 'island'}).answer.text,
                     title = 'USVI Commercial Catch Report Form - ' + island;  
             } catch(e) {
                 var title = 'USVI Commercial Catch Report Form';
@@ -37,18 +37,24 @@ angular.module('askApp')
             return title;
         };
 
-        $scope.getGearType = function() {
+        $scope.gearTypeIncludes = function(type) {
             try { 
-                var gearType = _.findWhere($scope.respondent.responses, {'question': 'gear-type'}).answer[0].label;  
-                if ( gearType.indexOf('hook') !== -1 ) {
-                    return 'hook';
-                } else if ( gearType.indexOf('traps') !== -1 ) {
-                    return 'traps';
-                } else if (gearType.indexOf('nets') !== -1 ) {
-                    return 'nets';
-                } else {
-                    return 'hand';
-                }
+                var gearTypes = _.pluck(_.findWhere($scope.respondent.responses, {question: 'gear-type'}).answer, 'label');
+
+                if ( gearTypes.join().indexOf(type) !== -1 ) {
+                    return true;
+                } 
+            } catch(e) {
+                return '';
+            }
+        };
+
+        $scope.trapTypeIncludes = function(type) {
+            try { 
+                var gearTypes = _.pluck(_.findWhere($scope.respondent.responses, {question: 'gear-type'}).answer, 'label');  
+                if ( gearTypes.join().indexOf(type) !== -1 ) {
+                    return true;
+                } 
             } catch(e) {
                 return '';
             }
@@ -56,11 +62,71 @@ angular.module('askApp')
 
         $scope.getAnswer = function(questionSlug) {
             try {
-                if (questionSlug === 'trip-landing-site' || questionSlug === 'weight-line-or-reel') {
-                    var island = _.findWhere($scope.respondent.responses, {'question': 'island'}).answer.label,
-                        answer = _.findWhere($scope.respondent.responses, {'question': questionSlug + '-' + island}).answer;
+                if (questionSlug === 'trip-landing-site') {
+                    var island = _.findWhere($scope.respondent.responses, {question: 'island'}).answer.label,
+                        answer = _.findWhere($scope.respondent.responses, {question: questionSlug + '-' + island}).answer;                    
+                } else if (questionSlug === 'weight-line-or-reel') {
+                    var island = _.findWhere($scope.respondent.responses, {question: 'island'}).answer.label,
+                        islandSlug = (island === 'st-thomas') ? 'st-thomas-st-john' : island,
+                        answer = _.findWhere($scope.respondent.responses, {question: questionSlug + '-' + islandSlug}).answer;
+                } else if (questionSlug === 'weight-traps') {
+                    var island = _.findWhere($scope.respondent.responses, {question: 'island'}).answer.label,
+                        islandSlug = (island === 'st-thomas') ? 'st-thomas-st-john' : island,
+                        answer = _.findWhere($scope.respondent.responses, {question: questionSlug + '-' + islandSlug}).answer;
+                } else if (questionSlug === 'weight-nets') {
+                    var island = _.findWhere($scope.respondent.responses, {question: 'island'}).answer.label,
+                        islandSlug = (island === 'st-thomas') ? 'st-thomas-st-john' : island,
+                        answer = _.findWhere($scope.respondent.responses, {question: questionSlug + '-' + islandSlug}).answer;
+                } else if (questionSlug === 'days-soaked-lobster-traps') {                    
+                    var unit = _.findWhere($scope.respondent.responses, {question: 'time-soaked-lobster-traps'}).answer.unit,
+                        value = _.findWhere($scope.respondent.responses, {question: 'time-soaked-lobster-traps'}).answer.value;
+                    if (unit.toLowerCase().trim() === 'days') {
+                        return value;
+                    } else {
+                        return  Math.floor(value / 24);
+                    }
+                } else if (questionSlug === 'hours-soaked-lobster-traps') {                    
+                    var unit = _.findWhere($scope.respondent.responses, {question: 'time-soaked-lobster-traps'}).answer.unit,
+                        value = _.findWhere($scope.respondent.responses, {question: 'time-soaked-lobster-traps'}).answer.value;
+                    if (unit.toLowerCase().trim() === 'hours') {
+                        return value % 24;
+                    } else {
+                        return  0;
+                    }
+                } else if (questionSlug === 'days-soaked-fish-traps') {                    
+                    var unit = _.findWhere($scope.respondent.responses, {question: 'time-soaked-fish-traps'}).answer.unit,
+                        value = _.findWhere($scope.respondent.responses, {question: 'time-soaked-fish-traps'}).answer.value;
+                    if (unit.toLowerCase().trim() === 'days') {
+                        return value;
+                    } else {
+                        return  Math.floor(value / 24);
+                    }
+                } else if (questionSlug === 'hours-soaked-fish-traps') {                    
+                    var unit = _.findWhere($scope.respondent.responses, {question: 'time-soaked-fish-traps'}).answer.unit,
+                        value = _.findWhere($scope.respondent.responses, {question: 'time-soaked-fish-traps'}).answer.value;
+                    if (unit.toLowerCase().trim() === 'hours') {
+                        return value % 24;
+                    } else {
+                        return  0;
+                    }
                 } else {
-                    var answer = _.findWhere($scope.respondent.responses, {'question': questionSlug}).answer;
+                    var answer = _.findWhere($scope.respondent.responses, {question: questionSlug}).answer;
+                }
+                if (questionSlug.indexOf('weight') !== -1) {
+                    // TODO: currently no way of determining definitively whether answers are from a grouped multi-select or an ungrouped multi-select
+                    // (no groupName may present because either just Others were selected, or no groups were present)
+                    // seems like solution would be to ensure selections that were grouped under Other heading should be marked as such...                    
+                    _.each(answer, function(obj, index) {
+                        if (index === 0 && obj.groupName) {
+                            obj.showGroupName = obj.groupName;
+                        } else if (obj.groupName && obj.groupName !== answer[index-1].showGroupName) {
+                            obj.showGroupName = obj.groupName;
+                        } else if (obj.other && answer[index-1].showGroupName !== 'Other') {
+                            obj.showGroupName = 'Other';
+                        } else {
+                            obj.showGroupName = undefined;
+                        }
+                    });
                 }
             } catch(e) {
                 var answer = '';

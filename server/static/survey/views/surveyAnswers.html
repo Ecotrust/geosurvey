@@ -27,327 +27,50 @@
     </span></td>
 </tr>
 </table> -->
-<div class="span12 text-center"><h3>{{getTitle()}}</h3></div>
-<div class="span12 text-center margin-bottom-20"><h4>A separate form must be completed for each trip or month of no fishing</h4></div>
 
-<!-- DID NOT FISH -->
-<div ng-show="respondent.survey == 'did-not-fish'">
-    <div class="row">
-        <div class="col-xs-12 col-md-4">
-            <div class="col-md-12">
-                <span class="question">LAST NAME: </span>
-                <span class="answer">{{ getAnswer('last-name') }}</span>
-            </div>
-            <div class="col-md-12">
-                <span class="question">FIRST NAME: </span>
-                <span>{{ getAnswer('first-name') }}</span>
-            </div>
-        </div>
-        <div class="col-xs-12 col-md-6">
-            <div class-"col-md-12">
-                <div class="col-md-5">
-                    <span class="question">DID NOT FISH FOR MONTH OF: </span>
-                </div>
-                <div class="col-md-7">
-                    <span class="question">Month: </span>
-                    <span class="pink-bordered-cells">{{ getAnswer('did-not-fish-for-month-of')[5] }}</span><!--
-                    --><span class="pink-bordered-cells">{{ getAnswer('did-not-fish-for-month-of')[6] }}</span><!--
-                    <span>{{ getAnswer('did-not-fish-for-month-of') }}</span>  -->  
-                    <span class="question">Year: </span>
-                    <span class="pink-bordered-cells">{{ getAnswer('did-not-fish-for-month-of')[2] }}</span><!--
-                    --><span class="pink-bordered-cells">{{ getAnswer('did-not-fish-for-month-of')[3] }}</span>
-                    
-                </div>        
-            </div>
-        </div>
-        <div class="col-xs-12 col-md-2">
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="span12 text-center"><h3>{{getTitle()}}</h3></div>
+        <div class="span12 text-center margin-bottom-20"><h4>A separate form must be completed for each trip or month of no fishing</h4></div>
+    </div>
+    <div class="panel-body">
+
+
+        <!-- DID NOT FISH Report -->
+        <div ng-show="respondent.survey == 'did-not-fish'" ng-include="'views/didNotFishAnswers.html'"></div>
+
+        <!-- CATCH REPORT -->
+
+        <div ng-show="respondent.survey == 'catch-report'">
+            
+            <!-- HEADER -->
+            <div ng-include="'views/headerAnswers.html'"></div>
+
+            <!-- HOOK & LINE -->
+            <div ng-show="gearTypeIncludes('hook')" ng-include="'views/hookAndLineAnswers.html'"></div>
+            
+            <!-- TRAPS -->
+            <div ng-show="gearTypeIncludes('traps')" ng-include="'views/trapsAnswers.html'"></div>
+                
+            <!-- NETS -->
+            <div ng-show="gearTypeIncludes('nets')" ng-include="'views/netsAnswers.html'"></div>
+
+            <!-- SPEAR OR BY HAND -->
+            <div ng-show="gearTypeIncludes('hand')" ng-include="'views/spearOrByHandAnswers.html'"></div>
+
         </div>
     </div>
-
-    <div class="row margin-top-10">
-        <div class="col-xs-12 col-md-3">
-            <div class="col-md-12">
-                <span class="question">Vessel #: </span>
-                    <span class="pink-bordered-cells">{{ getAnswer('vessel')[0] }}</span><!--
-                --><span class="pink-bordered-cells">{{ getAnswer('vessel')[1] }}</span><!--
-                --><span class="pink-bordered-cells">{{ getAnswer('vessel')[2] }}</span><!--
-                --><span class="pink-bordered-cells">{{ getAnswer('vessel')[3] }}</span><!--
-                --><span ng-show="getAnswer('vessel')[4]" class="pink-bordered-cells">{{ getAnswer('vessel')[4] }}</span><!--
-                --><span ng-show="getAnswer('vessel')[5]" class="pink-bordered-cells">{{ getAnswer('vessel')[5] }}</span><!--
-                --><span ng-show="getAnswer('vessel')[6]" class="pink-bordered-cells">{{ getAnswer('vessel')[6] }}</span><!--
-                --><span ng-show="getAnswer('vessel')[7]" class="pink-bordered-cells">{{ getAnswer('vessel')[7] }}</span>
-            </div>
-        </div>
-        <div class="col-xs-12 col-md-3"></div>
-        <div class="col-xs-12 col-md-3"></div>
-    </div>
-
-    <div class="row margin-top-10">
-        <div class="col-xs-12 col-md-3">
-            <div class="col-md-12">
-                <span class="question">License #: </span>
-                <span class="pink-bordered-cells">{{ getAnswer('license')[0] }}</span><!--
-                --><span class="pink-bordered-cells">{{ getAnswer('license')[1] }}</span><!--
-                --><span class="pink-bordered-cells">{{ getAnswer('license')[2] }}</span><!--
-                --><span class="pink-bordered-cells">{{ getAnswer('license')[3] }}</span><!--
-                --><span ng-show="getAnswer('license')[4]" class="pink-bordered-cells">{{ getAnswer('license')[4] }}</span><!--
-                --><span ng-show="getAnswer('license')[5]" class="pink-bordered-cells">{{ getAnswer('license')[5] }}</span><!--
-                --><span ng-show="getAnswer('license')[6]" class="pink-bordered-cells">{{ getAnswer('license')[6] }}</span><!--
-                --><span ng-show="getAnswer('license')[7]" class="pink-bordered-cells">{{ getAnswer('license')[7] }}</span>
-            </div>
-        </div>
-        <div class="col-xs-12 col-md-3"></div>
-        <div class="col-xs-12 col-md-3"></div>
-    </div>
-</div>  
-
-<!-- CATCH REPORT -->
-<div ng-show="respondent.survey == 'catch-report'">
-    
-    <div class="row">
-        <div class="col-xs-12 col-md-3">
-            <div class="col-md-12">
-                <span class="question">LAST NAME: </span>
-                <span>{{ getAnswer('last-name') }}</span>
-            </div>
-            <div class="col-md-12">
-                <span class="question">FIRST NAME: </span>
-                <span>{{ getAnswer('first-name') }}</span>
-            </div>
-        </div>
-        <div class="col-xs-12 col-md-5">
-            <div class-"col-md-12">
-                <div class="col-md-3">
-                    <span class="question">LANDED DATE: </span>
-                </div>
-                <div class="col-md-9">
-                    <span class="question">Month: </span>
-                    <span>{{ getAnswer('landed-date')[5] }}</span><!--
-                    --><span>{{ getAnswer('landed-date')[6] }}</span><!--
-                    <span>{{ getAnswer('did-not-fish-for-month-of') }}</span>  -->  
-                    <span class="question margin-left-5">Day: </span>
-                    <span>{{ getAnswer('landed-date')[8] }}</span><!--
-                    --><span>{{ getAnswer('landed-date')[9] }}</span>
-                    
-                    <span class="question margin-left-5">Year: </span>
-                    <span>{{ getAnswer('landed-date')[2] }}</span><!--
-                    --><span>{{ getAnswer('landed-date')[3] }}</span>
-                    
-                </div>        
-            </div>
-        </div>
-        <div class="col-xs-12 col-md-4">
-            <div class="col-md-12">
-                <span class="question">Total # Traps in Water:</span>
-                <span>{{ getAnswer('total-traps-in-water') }}</span>
-            </div>
-        </div>
-    </div>
-
-    <div class="row margin-top-10">
-        <div class="col-xs-12 col-md-4">
-            <div class="col-md-12">
-                <span class="question">Vessel #: </span>
-                <span>{{ getAnswer('vessel') }}</span>
-            </div>
-        </div>
-        <div class="col-xs-12 col-md-4">
-            <div class="col-md-12">
-                <span class="question"># of Helpers:</span>
-                <span>{{ getAnswer('helpers') }}</span>
-            </div>
-        </div>
-        <div class="col-xs-12 col-md-4">
-            <div class="col-md-12">
-                <span class="question">Total Trip Pounds:</span>
-                <span>{{ getAnswer('total-trip-whole-pounds') }}</span>
-            </div>
-        </div>
-    </div>
-
-    <div class="row margin-top-10">
-        <div class="col-xs-12 col-md-4">
-            <div class="col-md-12">
-                <span class="question">License #: </span>
-                <span>{{ getAnswer('license') }}</span>
-            </div>
-        </div>
-        <div class="col-xs-12 col-md-4">
-            <div class="col-md-12">
-                <span class="question">Trip Landing Site:</span>
-                <span>{{ getAnswer('trip-landing-site')['text'] }}</span>
-            </div>
-        </div>
-        <div class="col-xs-12 col-md-4">
-            <div class="col-md-12">
-                <span class="question">Trip Port Sampled:</span>
-                <span>{{ getAnswer('port-sampled-by-dfw')['text'] }}</span>
-            </div>
-        </div>
-    </div>
-
-    <div class="row margin-top-10">
-        <div class="col-xs-12 col-md-6">
-            <div class="col-md-12">
-                <span class="question">Did Other Permit Holders Split Catch: </span>
-                <span>{{ getAnswer('did-other-permit-holders-split-catch')['text'] }}</span>
-            </div>
-        </div>
-        <div class="col-xs-12 col-md-2"></div>
-        <div class="col-xs-12 col-md-4">
-            <div class="col-md-12">
-                <span class="question">Fishing Mainly at Night:</span>
-                <span>{{ getAnswer('fishing-mainly-at-night')['text']}}</span>
-            </div>
-        </div>
-    </div>
-
-    <div class="row margin-top-10">
-        <div class="col-xs-12 col-md-4">
-            <div class="col-md-12">
-                <span class="question">Partner #1 License #: </span>
-                <span>{{ getAnswer('license-number-partner-1') }}</span>
-            </div>
-        </div>
-        <div class="col-xs-12 col-md-4">
-            <div class="col-md-12">
-                <span class="question">Partner #2 License #: </span>
-                <span>{{ getAnswer('license-number-partner-2') }}</span>
-            </div>
-        </div>
-        <div class="col-xs-12 col-md-4">
-            <div class="col-md-12">
-                <span class="question">Paying Customers Aboard:</span>
-                <span>{{ getAnswer('paying-customers-aboard')['text'] }}</span>
-            </div>
-        </div>
-    </div>
-
-    <div class="row margin-top-10">
-        <div class="col-xs-12 col-md-4">
-            <div class="col-md-12">
-                <span class="question">Partner #1 Name: </span>
-                <span>{{ getAnswer('last-name-partner-1') }}, </span>
-                <span>{{ getAnswer('first-name-partner-1') }}</span>
-            </div>
-        </div>
-        <div class="col-xs-12 col-md-4">
-            <div class="col-md-12">
-                <span class="question">Partner #2 Name: </span>
-                <span>{{ getAnswer('last-name-partner-2') }}, </span>
-                <span>{{ getAnswer('first-name-partner-2') }}</span>
-            </div>
-        </div>
-        <div class="col-xs-12 col-md-4">
-            <div class="col-md-12">
-                <span class="question">Fished 3 or more miles from Shore:</span>
-                <span>{{ getAnswer('fished-3-or-miles-from-shore')['text'] }}</span>
-            </div>
-        </div>
-    </div>
-
-    <div class="row margin-top-10">
-        <div class="col-xs-12 col-md-6">
-            <div ng-show="getGearType() == 'hook'" class="col-md-12">
-                <div class="col-md-12">
-                    <span><b>Hook & Line / Rod & Reel</b></span>
-                </div>  
-
-                <div class="col-md-12">
-                    <span class="question">Gear Type: </span>
-                    <span class="answer">{{ getAnswer('type-line-or-reel')['text'] }}</span>
-                </div> 
-
-                <div class="col-md-6">
-                    <span class="question"># Lines: </span>
-                    <span class="answer">{{ getAnswer('lines') }}</span>
-                </div>  
-                <div class="col-md-6">
-                    <span class="question">Hooks / Line: </span>
-                    <span class="answer">{{ getAnswer('hooks-per-line') }}</span>
-                </div>  
-
-                <div class="col-md-12">
-                    <span class="question">FAD Fished Name: </span>
-                    <span class="answer">{{ getAnswer('fad-fished-name') }}</span>
-                </div> 
-
-                <div class="col-md-6">
-                    <span class="question">Hours Fished: </span>
-                    <span class="answer">{{ getAnswer('hours-fished') }}</span>
-                </div> 
-                <div class="col-md-6">
-                    <span class="question">Area 1 Fished: </span>
-                    <span class="answer">{{ getAnswer('area-1-fished-line-or-reel') }}</span>
-                </div>  
-
-                <div class="col-md-6">
-                    <span class="question">Bottom Depth: </span>
-                    <span class="answer">{{ getAnswer('bottom-depth-line-or-reel')['value'] }}</span>
-                    <span class="answer">{{ getAnswer('bottom-depth-line-or-reel')['unit'] }}</span>
-                </div> 
-                <div class="col-md-6">
-                    <span class="question">Area 2 Fished: </span>
-                    <span class="answer">{{ getAnswer('area-2-fished-line-or-reel') }}</span>
-                </div>  
-
-                <div class="col-md-6"></div> 
-                <div class="col-md-6">
-                    <span class="question">Area 3 Fished: </span>
-                    <span class="answer">{{ getAnswer('area-3-fished-line-or-reel') }}</span>
-                </div>  
-
-                <div class="col-md-6">
-                    <span class="question">Hook & Line Species </span>
-                </div> 
-                <div class="col-md-4">
-                    <span class="question">Whole Pounds: </span>
-                </div>  
-                <div class="col-md-2"></div>
-
-                <div ng-repeat="answers in getAnswer('weight-line-or-reel')">
-                    <div class="col-md-6">
-                        <span class="answer">{{ answers.text }}</span>
-                    </div> 
-                    <div class="col-md-4">
-                        <span class="answer">{{ answers.wholepounds }}</span>
-                    </div>  
-                    <div class="col-md-2"></div>
-                </div>
-
-            </div>
-
-            <div ng-show="getGearType() == 'traps'" class="col-md-12">
-                <span><b>Traps</b></span>
-            </div>
-
-            <div ng-show="getGearType() == 'nets'" class="col-md-12">
-                <span><b>Nets</b></span>
-            </div>
-
-            <div ng-show="getGearType() == 'hand'" class="col-md-12">
-                <span><b>Spear or By Hand</b></span>
-            </div>
-        </div>
-        <div class="col-xs-12 col-md-6">
-        </div>
-    </div>
-
-
-
 </div>
 
 
 <style type="text/css">
 
-.pink-bordered-cells {
-    border-width: 1px;
-    border-color: pink;
-    border-style: solid;
-    padding: 4px;
-}
 .margin-left-5 {
     margin-left: 5px;
+}
+.margin-left-10 {
+    margin-left: 10px;
 }
 .margin-top-10 {
     margin-top: 10px;
