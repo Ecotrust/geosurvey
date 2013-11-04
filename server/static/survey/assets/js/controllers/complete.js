@@ -5,31 +5,7 @@ angular.module('askApp')
     var url = '/respond/complete/' + [$routeParams.surveySlug, $routeParams.uuidSlug].join('/');
     $http.defaults.headers.post['Content-Type'] = 'application/json';
 
-    $scope.sendRespondent = function (respondent) {
-        var url = app.server + '/api/v1/offlinerespondant/';
-        var responses = angular.copy(respondent.responses);
-        
-        _.each(responses, function (response) {
-            // var question_uri = response.question.resource_uri;
-            var question_uri = survey.getQuestionUriFromSlug(response.question);
-            response.question = question_uri;
-            response.answer_raw = JSON.stringify(response.answer);
-        });
-        var newRespondent = {
-            ts: respondent.ts,
-            uuid: respondent.uuid.replace(':', '_'),
-            responses: responses,
-            status: respondent.status,
-            complete: respondent.complete,
-            survey: '/api/v1/survey/' + respondent.survey + '/'
-        };
-        return $http.post(url, newRespondent).error(function (err) {
-            console.log(JSON.stringify(err));
-        });
-        
-    };       
-
-
+   
     if (app.user) {
         $scope.user = app.user;
     } else {
@@ -69,17 +45,8 @@ angular.module('askApp')
         $scope.working = true;
         var newRespondent = app.respondents[$routeParams.uuidSlug];
         
-        //verify report (delete any necessary questions) 
-        // call function within survey service...
-        var answers = _.indexBy(newRespondent.responses, function(item) {
-            return item.question;
-        });
-
-        //clean survey of any unncecessary question/answers 
-        survey.initializeSurvey($scope.survey, null, answers);
-        newRespondent.responses = survey.cleanSurvey(newRespondent);
         delete app.user.resumePath;
-        $scope.sendRespondent(newRespondent).success(function () {
+        survey.submitSurvey(newRespondent, $scope.survey).success(function () {
             delete app.respondents[$routeParams.uuidSlug]
             app.message = "You catch report was submitted successfully."
             localStorage.setItem('hapifish', JSON.stringify(app));

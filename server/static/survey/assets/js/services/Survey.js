@@ -1,7 +1,7 @@
 //'use strict';
 
 angular.module('askApp')
-  .factory('survey', function () {
+  .factory('survey', function ($http) {
     // Service logic
     // ...
 
@@ -205,9 +205,43 @@ angular.module('askApp')
         return !keep;
     };
 
+    $http.defaults.headers.post['Content-Type'] = 'application/json';
 
+    var sendRespondent = function (respondent) {
+        var url = app.server + '/api/v1/offlinerespondant/';
+        var responses = angular.copy(respondent.responses);
+        
+        _.each(responses, function (response) {
+            // var question_uri = response.question.resource_uri;
+            var question_uri = getQuestionUriFromSlug(response.question);
+            response.question = question_uri;
+            response.answer_raw = JSON.stringify(response.answer);
+        });
+        var newRespondent = {
+            ts: respondent.ts,
+            uuid: respondent.uuid.replace(':', '_'),
+            responses: responses,
+            status: respondent.status,
+            complete: respondent.complete,
+            survey: '/api/v1/survey/' + respondent.survey + '/'
+        };
+        return $http.post(url, newRespondent).error(function (err) {
+            console.log(JSON.stringify(err));
+        });
+        
+    };       
 
-    var meaningOfLife = 42;
+    var submitSurvey = function (respondent, survey) {
+        //verify report (delete any necessary questions) 
+        // call function within survey service...
+        var answers = _.indexBy(respondent.responses, function(item) {
+            return item.question;
+        });
+        //clean survey of any unncecessary question/answers 
+        initializeSurvey(survey, null, answers);
+        respondent.responses = cleanSurvey(respondent);
+        return sendRespondent(respondent);
+    }
 
     // Public API here
     return {
@@ -216,6 +250,7 @@ angular.module('askApp')
       'initializeSurvey': initializeSurvey,
       'getAnswer': getAnswer,
       'cleanSurvey': cleanSurvey,
-      'getQuestionUriFromSlug': getQuestionUriFromSlug
+      'getQuestionUriFromSlug': getQuestionUriFromSlug,
+      'submitSurvey': submitSurvey
     };
   });

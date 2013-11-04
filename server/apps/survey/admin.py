@@ -4,8 +4,9 @@ from survey.models import Survey, Question, Option, Response, Respondant, Page, 
 
 
 class RespondantAdmin(admin.ModelAdmin):
-    readonly_fields=('uuid',)
+    readonly_fields=('uuid', 'responses')
     list_display = ('uuid', 'ts', 'complete',)
+
 
 
 class ResponseAdmin(admin.ModelAdmin):
