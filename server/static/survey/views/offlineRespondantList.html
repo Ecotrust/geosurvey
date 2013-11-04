@@ -2,8 +2,12 @@
     <div mobilemenu></div>
     <!-- Begin page content -->
     <div class="container">
-        <p ng-hide="respondents.length">This device has no completed surveys.</p>
+        <div ng-hide="respondents.length">
+            <p>This device has no completed reports.</p>
+            <a class="btn btn-main btn-default btn-lg btn-block" href="#/main">return to main menu</a>
+        </div>
         <div ng-show="confirmSubmit">
+            <h3>Submit Reports</h3>
             <a class="btn btn-main btn-default btn-lg btn-block btn-danger" ng-click="syncronize(respondents)">ok</a>
             <a class="btn btn-main btn-default btn-lg btn-block" ng-tap="confirmSubmit = false">cancel</a>
         </div>
