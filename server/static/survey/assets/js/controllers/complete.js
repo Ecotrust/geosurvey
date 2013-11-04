@@ -80,19 +80,24 @@ angular.module('askApp')
         newRespondent.responses = survey.cleanSurvey(newRespondent);
         delete app.user.resumePath;
         $scope.sendRespondent(newRespondent).success(function () {
-            
-            
             delete app.respondents[$routeParams.uuidSlug]
             app.message = "You catch report was submitted successfully."
             localStorage.setItem('hapifish', JSON.stringify(app));
-            $location.path('#/');
+            $location.path('/main');
             $scope.working = true;
         }).error(function () {
             app.message = "You catch report was saved and can be submitted later."
             localStorage.setItem('hapifish', JSON.stringify(app));
-            $location.path('#/');
+            $location.path('/main');
         });
 
     };
+
+    $scope.continueOffline = function () {
+        app.message = "You catch report was saved and can be submitted later."
+        delete app.user.resumePath;
+        localStorage.setItem('hapifish', JSON.stringify(app));
+        $location.path('/main');
+    }   
     
   });

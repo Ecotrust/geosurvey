@@ -5,7 +5,7 @@ from optparse import make_option
 from subprocess import call
 import os, errno
 import re
-import requests
+import urllib
 import simplejson
 import path
 import shutil
@@ -64,4 +64,7 @@ class Command(BaseCommand):
         
         os.system("sed -i -e 's,APP_SERVER,%s,' %s/views/main.html" % (url, dest))
         if test is not None:
-            os.system("sed -i -e 's,APP_VERSION,%s,' %s/assets/js/app.js" % (new_version, dest))    
+            os.system("sed -i -e 's,APP_VERSION,%s,' %s/assets/js/app.js" % (new_version, dest))
+        survey_url = "%s/api/v1/survey/?format=json" % url
+        local_filename, headers = urllib.urlretrieve(survey_url)
+        shutil.copyfile(local_filename, dest / 'assets/surveys.json')

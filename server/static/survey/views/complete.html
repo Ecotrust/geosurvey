@@ -2,18 +2,23 @@
     <!-- Fixed navbar -->
     <div mobilemenu></div>
 	<div class="container">
-	    <div class="info respondant" ng-hide="working">
+	    <div class="info respondant" ng-hide="working || user.offline">
 	        <h3>You have completed the catch report.</h3>
             <button class="btn btn-main btn-default btn-lg btn-block" ng-click="submitReport()">Submit Report</button>
-
 	    </div>
-            
-            <div class="loading-indicator" ng-show="working">
-                <h3>Submitting Report...</h3>
-                <div class="bar">
-                    <i class="sphere"></i>
-                </div>
-
+        <div ng-show="user.offline">
+            <h3>You are currently offline.</h3>
+            <p>Please complete your registration before submitting your report.</p>
+            <a class="btn btn-main btn-default btn-lg btn-block" href="#/signup" ng-show="user.status == 'signup'">Finish Signing Up</a>
+            <a class="btn btn-main btn-default btn-lg btn-block" href="#/signin" ng-show="user.status == 'signin'">Finish Signing In</a>
+            <a class="btn btn-main btn-default btn-lg btn-block" ng-click="continueOffline()">Continue Offline</a>
+        </div>
+        <div class="loading-indicator" ng-show="working">
+            <h3>Submitting Report...</h3>
+            <div class="bar">
+                <i class="sphere"></i>
             </div>
+
+        </div>
 	</div>
 </div>

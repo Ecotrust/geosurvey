@@ -10,14 +10,18 @@ angular.module('askApp')
         $scope.user = app.user;
     } else {
         $scope.user = false;
-        console.log($location.path() !== '/signin')
         if ($location.path() === '/signin' || $location.path() === '/signup') {
-            console.log('re')
             
         } else {
             $location.path('/');
         }
         
+    }
+
+    if ($location.path() === '/signup' && $scope.user.status === 'signup') {
+        $scope.newUser = app.offlineUser;
+    } else if ($location.path() === '/signin' && $scope.user.status === 'signin') {
+        $scope.authUser = app.offlineUser;
     }
     $scope.version = app.version;
     if (app.version !== "APP_VERSION") {
@@ -64,6 +68,17 @@ angular.module('askApp')
         localStorage.setItem('hapifish', JSON.stringify(app));
     }
 
+    $scope.offline = function (user, status) {
+        app.user = {
+            username: user.username,
+            status: status,
+            offline: true
+        }
+        app.offlineUser = user;
+        $scope.saveState();
+        $location.path('/main');
+    };
+
     $scope.createUser = function (user) {
         var url = app.server + "/account/createUser";
         if (user.emailaddress1 === user.emailaddress2) {
@@ -72,13 +87,17 @@ angular.module('askApp')
             $http.post(url, user)
                 .success(function (data) {
                     app.user = data.user;
+                    app.user.registration = $scope.user.registration;
                     $scope.saveState();
                     // $location.path('/surveys');
                     $location.path('/profile');
                 })
-            .error(function (data) {
+            .error(function (data, status) {
                 $scope.working = false;
-                if (data) {
+                if (status === 0) {
+                    app.tempuser = $scope.newUser;
+                    $scope.showTempUser = true;
+                } else if (data) {
                     $scope.showError = data;    
                 } else {
                     $scope.showError = "There was a problem creating an account.  Please try again later."
@@ -91,7 +110,6 @@ angular.module('askApp')
         
     };
 
-    $scope.authUser = {};
     $scope.showForgotPassword = false;
     $scope.showError = false;
     $scope.showInfo = false;
@@ -122,9 +140,17 @@ angular.module('askApp')
                 }
                 
             })
-            .error(function (data) {
-                $scope.showError = data;
-                $scope.working = false;
+            .error(function (data, status) {
+                console.log(status);
+                if (status === 0) {
+                    app.tempuser = $scope.authUser;
+                    $scope.working = false;
+                    $scope.showTempUser = true;
+                } else {
+                    $scope.showError = data;
+                    $scope.working = false;    
+                }
+                
             });
 
     };

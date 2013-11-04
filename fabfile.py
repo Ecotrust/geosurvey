@@ -38,12 +38,12 @@ def install_chef(latest=True):
     Install chef-solo on the server
     """
     sudo('apt-get update', pty=True)
-    sudo('apt-get install -y git-core rubygems ruby ruby-dev', pty=True)
+    sudo('apt-get install -y git-core rubygems1.9.1 ruby1.9.1 ruby1.9.1-dev', pty=True)
 
     if latest:
-        sudo('gem install chef --no-ri --no-rdoc', pty=True)
+        sudo('gem1.9.1 install chef --no-ri --no-rdoc', pty=True)
     else:
-        sudo('gem install chef --no-ri --no-rdoc --version {0}'.format(CHEF_VERSION), pty=True)
+        sudo('gem1.9.1 install chef --no-ri --no-rdoc --version {0}'.format(CHEF_VERSION), pty=True)
 
 def parse_ssh_config(text):
     """
@@ -362,9 +362,12 @@ def package_android_test():
 
 @task
 def transfer_db():
+	pass
     # date = datetime.datetime.now().strftime("%Y-%m-%d:%H%M")
     # db_url = local("heroku pgbackups:url", capture=True)
     # local("heroku pgbackups:capture --expire")
     # run("curl -o /tmp/%s.dump \"%s\"" % (date, db_url))
     # run("pg_restore --verbose --clean --no-acl --no-owner -U postgres -d geosurvey /tmp/%s.dump" % date)
-    run("cd %s && %s/bin/python manage.py migrate --settings=config.environments.staging" % (env.app_dir, env.venv))
+    #run("pg_dump geosurvey -n public -c -f /tmp/geosurvey.dump -Fc -O -no-acl -U postgres")
+    #get("/tmp/geosurvey.dump")
+    #run("cd %s && %s/bin/python manage.py migrate --settings=config.environments.staging" % (env.app_dir, env.venv))
