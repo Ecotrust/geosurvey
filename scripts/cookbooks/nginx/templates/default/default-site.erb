@@ -8,8 +8,8 @@ server {
     listen 80;
     server_name <%= node[:servername] %>;
 
-    access_log /usr/local/apps/<%= node[:servername] %>/access.log;
-    error_log /usr/local/apps/<%= node[:servername] %>/error.log;
+    access_log /usr/local/apps/<%= node[:project] %>/access.log;
+    error_log /usr/local/apps/<%= node[:project] %>/error.log;
     location / {
         <% if node[:user] == "vagrant" %>
         proxy_pass http://example-vagrant;
