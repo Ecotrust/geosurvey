@@ -1,0 +1,15 @@
+<div class="acitivty-locations-intro">
+	<p class="info">
+		You will now be asked to map <strong>all</strong> of the locations at which you participated in the recreation activities listed below from the <strong>last 12 months</strong>.
+	</p>
+	<div class="inset-info-section">
+		<p class="selected-activites-label"><strong>Recreation Activities you Selected</strong></p>
+		<ul>
+			<li style="margin-bottom: 15px;" ng-repeat="option in question.options">{{ option.text || '' }}</li>
+		</ul>
+	</div>
+	<div class="inset-info-section">
+		<p class="selected-activites-label"><strong>Example of mapped activity markers</strong></p>
+		<img src="/static/survey/img/marco-activity-locations-intro.png">
+	</div>
+</div>

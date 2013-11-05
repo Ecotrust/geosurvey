@@ -1,0 +1,9 @@
+[program:app]
+command=/usr/local/venv/<%= node[:project] %>/bin/gunicorn -b 0.0.0.0:8888 wsgi
+user=www-data
+directory=/usr/local/apps/<%= node[:project] %>/<%= node[:app] %>
+autostart=true
+autorestart=true
+killasgroup=true
+
+

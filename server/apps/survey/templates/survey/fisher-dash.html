@@ -1,0 +1,30 @@
+{% extends "dash-base.html" %} {% block content %}
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Submitted At</th>
+                    {% if user.is_staff %}
+                    <th>Username</th>
+                    {% endif %}
+                    <th>Report</th>
+                </tr>
+            </thead>
+            <tbody>
+            	{% for respondent in respondents %}
+                <tr>
+                    <td><a href="{% url 'fisher-dash' %}/{{ respondent.uuid }}">{{ respondent.ts }}</a></td>
+                    {% if user.is_staff %}
+                    <td>{{ respondent.user.username}}</td>
+                    {% endif %}
+                    <td><a href="{% url 'fisher-dash' %}/{{ respondent.uuid }}">{{ respondent.survey.name }}</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

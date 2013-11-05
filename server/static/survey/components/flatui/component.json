@@ -1,0 +1,9 @@
+{
+  "name": "flatui",
+  "version": "0.0.0",
+  "commit": "3ecc43aeb7b7401d982e032b46544ba8540ba14e",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/paulovitin/Flat-UI.git"
+  }
+}

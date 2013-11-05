@@ -1,0 +1,1 @@
+web: python manage.py collectstatic --noinput --settings=config.environments.heroku; DJANGO_SETTINGS_MODULE=config.environments.heroku gunicorn config.heroku_wsgi:application -b 0.0.0.0:$PORT -w 4

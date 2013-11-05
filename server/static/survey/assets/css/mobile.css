@@ -1,0 +1,927 @@
+body {
+    background-color: rgb(77, 136, 153);
+}
+html, body {
+    height: 100%;
+    /* The html and body elements cannot have any padding or margin. */
+}
+
+a {
+    color: rgb(244,244,244);
+    font-size: 16px;
+}
+
+::-webkit-input-placeholder {
+   color: rgb(179,213,222) !important;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+ color: rgb(179,213,222) !important;
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: rgb(179,213,222) !important;
+}
+
+:-ms-input-placeholder {  
+   color: rgb(179,213,222) !important;
+}
+
+input.datepicker {
+    -webkit-appearance: textfield;
+    padding-top: 5px;
+
+}
+
+.table, .table td {
+    border-top: 0!important;
+}
+
+.table .label {
+    font-size: 16px;
+}
+
+.error {
+    color: red;
+}
+
+/* Wrapper for page content to push down footer */
+#wrap {
+    min-height: 100%;
+    max-height: 100%;
+    height: auto !important;
+    height: 100%;
+    /* Negative indent footer by its height */
+    margin: 0 auto -80px;
+    /* Pad bottom by footer height */
+    padding: 0 0 0;
+}
+/* Set the fixed height of the footer here */
+#footer {
+    position: fixed;
+    width: 100%;
+    margin: 0 auto -60px;
+    height: 80px;
+    background-color: rgb(54, 85, 91);
+}
+.keyboard-open #footer, .keyboard-open .navbar {
+    display: none;
+}
+#wrap > .container {
+    padding: 40px 15px 20px;
+}
+#wrap.menu-page > .container {
+    padding: 90px 15px 100px;
+}
+.container .credit {
+    margin: 20px 0;
+}
+#footer > .container {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+/* project styles, new skin */
+img.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 90px;
+}
+#wrap .page-header {
+    border-bottom: 0;
+    padding-bottom: 0x;
+    margin-top: 0;
+}
+.navbar {
+    background-color: rgb(25, 25, 25);
+    border-bottom: 0;
+}
+.navbar .container {
+    height: 60px;
+}
+
+.navbar .navbar-toggle {
+    position: absolute;
+    padding: 10px;
+    margin-top: -5px;
+    margin-left: 10px;
+    border: 0;
+    font-size: 36px;
+}
+.navbar .navbar-comment {
+    position: absolute;
+    padding: 10px;
+    margin-top: -10px;
+    right: 10px;
+    border: 0;
+    font-size: 36px;
+    background-color: inherit;
+    color: white;
+    
+}
+
+.navbar .navbar-comment:hover, .navbar .navbar-toggle:hover {
+    text-decoration: none;
+    background-color: rgba(0,0,0,0);
+    color: rgb(100,100,100);
+}
+.navbar .navbar-toggle .icon-bar {
+    height: 3px;
+    width: 25px;
+}
+.navbar-brand {
+    float: none;
+    margin-top: 5px;
+}
+.navbar-brand img {
+    margin-top: -24px;
+    height: 65px;
+}
+.main .navbar {
+    height: 10px;
+    min-height: 10px;
+    background-color: rgb(250, 189, 18);
+}
+.main .navbar .container > * {
+    display: none;
+}
+.select-content, .btn-main, .accordion-heading {
+    text-transform: uppercase;
+    font-weight: bolder;
+    text-align: left;
+    padding: 10px 10px;
+    margin-bottom: 10px;
+    border-radius: 0;
+    font-size: 16px;
+    color: rgb(46, 46, 46) !important;
+    min-width: 100px;
+}
+.question .select-content {
+    padding: 8px 10px;
+    color: rgb(150,150,150);
+}
+.select-content, .btn-main:active, .accordion-heading {
+    background-color: rgb(24, 75, 83);
+    border-color: rgba(0, 0, 0, 0);
+}
+.select ul {
+    list-style: none;
+    -webkit-margin-before: 0;
+    -webkit-margin-after: 0;
+    -webkit-margin-start: 0;
+    -webkit-margin-end: 0;
+    -webkit-padding-start: 0;
+}
+.select .select-content {
+    background-color: rgb(246, 235, 194);
+    
+}
+
+.select .select-content h4 {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.select .checkbox, .option .checkbox, .select-unchecked .other-checkbox  {
+    display: none;
+    width: 15px;
+    height: 15px;
+    background-color: rgb(49, 49, 49);
+    float: right;
+    margin: 0;
+}
+.select-checked .checkbox {
+    display: block;
+}
+
+/* nothing select, beige boxes */
+.select .option-unchecked .select-content {
+  color: rgb(0,0,0);
+  background-color: rgb(246, 236, 194) !important;
+}
+
+
+/* option selected, selected is beige others are blue */
+.select .option-checked .select-checked .select-content {
+  color: rgb(0,0,0);
+  background-color: rgb(246, 236, 194) !important;
+}
+
+.select .option-checked .select-unchecked .select-content {
+  color: rgb(0,0,0);
+  background-color: rgb(24, 75, 83) !important;
+}
+
+
+.question .panel-body .select-unchecked .select-content .select-name {
+
+    color: rgb(244, 244, 244);
+}
+
+.question .single-select-other {
+    /*background-color: rgb(24, 75, 83) !important;*/
+    background-color: rgb(246, 235, 194);
+    font-size: 18px;
+    font-weight: 500;
+    /*padding-left: 50px;*/
+    color: rgb(46, 46, 46);
+    border: 0px;
+    width: 100%;
+}
+
+.question .other-option.select-checked {
+    margin-top: -20px;
+}
+
+.menu-page .progress {
+    margin-bottom: 0;
+    
+    border-radius: 0;
+    background-color: rgb(50, 50, 50);
+    height: 10px;
+}
+.menu-page .progress .progress-bar {
+    height: 10px;
+    background-color: rgb(250, 189, 18);
+    -webkit-transition: width 0s ease;
+    transition: width 0s ease;
+}
+.respondant {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.question-wrapper {
+  margin-bottom: 20px;
+}
+
+.question-title {
+    color: rgb(244, 244, 244);
+    text-transform: uppercase;
+    font-size: 18px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    text-align: center;
+}
+.form-control, .question .form-control:focus, .unit-select {
+    background-color: rgb(246, 235, 194);
+    font-size: 20px;
+    font-weight: bold;
+    padding: 0px 15px;
+    height: 40px;
+    margin-bottom: 15px;
+    border-radius: 0;
+}
+.question .panel-group {
+    margin-top: 10px;
+}
+.question .panel-heading {
+    background-color: rgb(246, 235, 194);
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-radius: 0;
+    margin-bottom: 10px;
+}
+.question .panel-heading a:hover {
+    text-decoration: none;
+}
+.question .panel-group .panel-heading + .panel-collapse .panel-body {
+    padding: 0;
+    background-color: inherit;
+    border-top: 0;
+}
+.question .panel-body .checkbox {
+    margin-top: 10px;
+}
+.question .panel-body .select-content {
+    padding: 2px 10px;
+}
+.question .panel-body .select-checked .select-content {
+    background-color: rgb(244, 218, 130);
+}
+.question .panel-body .select-content .select-name {
+    padding-left: 40px;
+}
+.question .panel, .question .panel-collapse {
+    background-color: inherit;
+    border-radius: 0;
+    border: 0;
+}
+.question .multi-select-other {
+    /*background-color: rgb(24, 75, 83) !important;*/
+    background-color: rgb(246, 235, 194);
+    font-size: 18px;
+    font-weight: 500;
+    /*padding-left: 50px;*/
+    color: rgb(46, 46, 46);
+    border: 0px;
+    width: 100%;
+}
+.question .multi-select-grouped-other {
+    background-color: rgb(24, 75, 83) !important;*/
+    /*background-color: rgb(246, 235, 194);*/
+    font-size: 18px;
+    font-weight: 500;
+    padding-left: 50px;
+    color: rgb(46, 46, 46);
+    border: 0px;
+    width: 100%;
+}
+.question .multi-select-grouped-other.with-text {
+    background-color: rgb(244, 218, 130) !important;
+    font-size: 18px;
+    font-weight: 500;
+    padding-left: 50px;
+    color: rgb(46, 46, 46);
+}
+.question .multi-select-grouped-other:focus {
+    background-color: rgb(244, 218, 130) !important;
+    font-size: 18px;
+    font-weight: 500;
+    padding-left: 50px;
+    color: rgb(46, 46, 46);
+}
+.question .other-input-selected {
+    margin-top: -20px;
+}
+.question .other-checkbox {
+    background-color: rgb(49, 49, 49);
+    position: relative;
+    width: 20px;
+    height: 20px;
+    top: 30px;
+    float: right;
+    right: 10px;
+}
+
+.feedback textarea {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+input.multi-select-other::-webkit-input-placeholder {
+   color: rgb(244, 244, 244) !important;
+}
+input.multi-select-other:-moz-placeholder { 
+   color: rgb(244, 244, 244) !important;  
+}
+input.multi-select-other::-moz-placeholder  {  
+   color: rgb(244, 244, 244) !important;  
+}
+input.multi-select-other:-ms-input-placeholder {  
+   color: rgb(244, 244, 244) !important;  
+}
+.form-control.ng-pristine, .unit-select.ng-pristine {
+    background-color: rgb(24, 75, 83);
+    border: 0;
+    color: rgb(149, 149, 149);
+}
+
+
+.number-with-unit select {
+    padding-left: 0px;
+}
+.number-with-unit .form-control {
+    /*width: 48%;
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 0;*/
+}
+.select-wrapper {
+ /*   width: 100%;
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 1.5%;
+    margin-top: 0;*/
+    position: relative;
+    background-color: rgb(24, 75, 83);
+    height: 40px;
+}
+.select-wrapper .down {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 20px;
+}
+.unit-selected {
+    background-color: rgb(246, 235, 194);
+}
+.unit-selected .unit-select {
+    color: rgb(85, 85, 85) !important;
+}
+.number-with-unit .unit-select {
+    width: 100%;
+    background: transparent;
+    -webkit-appearance: none;
+    border: 0;
+}
+/* .question .select .accordion-body {
+  -webkit-transition: height 0.8s;
+    -moz-transition: height 0.8s;
+    transition: height 0.8s;
+}
+*/
+.question .select .accordion-div {
+    border-style: solid;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.question .select .accordion-heading {
+    margin-bottom: 0;
+}
+.question .select .accordion-other-div {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.question .select .accordion-group {
+    border: 0px;
+}
+.question .select .accordion-toggle {
+    text-decoration: none;
+    color: rgb(50, 50, 50);
+}
+/*.question .select .open {
+ color: rgb(222,222,222); 
+ background-color: rgb(246 , 235, 194);
+}*/
+.question .select .accordion-body {
+    margin-top: 10px;
+}
+.question .select .accordion-body .select-name {
+    padding-left: 20px;
+}
+
+.ngViewport {
+  height: auto !important;
+}
+.ngGrid {
+    height: 1000px;
+}
+.ngGrid, .ngTopPanel, .ngRow.even, .ngRow.odd, .ngCell {
+  background-color: inherit;
+  border-top: 0;
+  border-bottom: 0;
+  border-left: 0;
+  border-right: 0;
+}
+.ngCellText {
+    white-space: normal;
+}
+.ngGrid input {
+  
+  padding: 10px;
+  font-weight: bold;
+  font-size: 16px;
+}
+  .ngGrid input {
+    background-color: rgb(246,233,194);  
+  }
+  
+.ngHeaderCell {
+  border-right: 0;
+  border-left: 0;
+  background-color: inherit;
+}
+
+.ngHeaderText, .ngCellText {
+  color: rgb(244,244,244);
+}
+
+
+#footer .btn {
+    color: rgb(244, 244, 244);
+    font-size: 50px;
+    padding: 0 30px;
+    background-color: rgb(24, 75, 83);
+    height: 100%;
+    border-radius: 0;
+}
+    #footer .valid {
+        background-color: rgb(250, 189, 18);
+    }
+    #footer .valid span {
+        color: rgb(0,0,0);
+    }
+#map {
+    height: 300px;
+    padding: 0;
+}
+.info {
+  padding-top: 20px;
+}
+  .info h3 {
+    color: rgb(244,244,244);
+  }
+.leaflet-control-attribution,
+.leaflet-control-zoom {
+  display: none;
+}
+.alert-notice {
+  position: fixed;
+  bottom: 0;
+  padding: 20px 20px 20px 10px;
+  background-color: rgba(49, 49, 49, .8);
+  width: 100%;
+  color: rgb(244, 244, 244);
+  font-size: 12px;
+}
+    .alert-notice div {
+        margin-top: 5px;
+    }
+.btn-outline-inverse {
+color: rgb(255, 255, 255);
+background-color: rgba(250, 189, 18, 0);
+border-color: rgb(250, 189, 18);
+}
+    .btn-outline-inverse:active,.btn-outline-inverse:hover {
+        color: rgb(244,244,244);
+        background-color: rgba(250, 189, 18, .5);
+    }
+.forms .submit-action { 
+        
+        margin-bottom: 5px;
+}
+.forms  a{
+    float: right;
+
+}
+.main .spinner {
+    display: none;
+}
+.working {
+    
+    position: relative;
+}
+.working .forms {
+    opacity: .2;
+}
+.working .spinner {
+    display: block;
+     width: 32px;
+     height: 32px;
+    overflow: auto;
+    margin: auto;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+
+}
+.working a {
+    display: none;
+}
+
+
+
+.spinner .wrapper {
+    font-size: 25px; /* 1em */
+
+    width: 8em;
+    height: 8em;
+    position: relative;
+    margin: 100px auto;
+
+    border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+    border: 1em dashed rgba(138,189,195,0.5);
+    box-shadow: 
+        inset 0 0 2em rgba(255,255,255,0.3),
+        0 0 0 0.7em rgba(255,255,255,0.3);
+
+    line-height: 6em;
+    text-align: center;
+    font-family: 'Racing Sans One', "HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue","Helvetica","Arial","Lucida Grande",sans-serif;
+    color: #444;
+    text-shadow: 0 .04em rgba(255,255,255,0.9);
+
+    -webkit-animation: steam 3.5s linear infinite;
+    -moz-animation: steam 3.5s linear infinite;
+    -ms-animation: steam 3.5s linear infinite;
+    -o-animation: steam 3.5s linear infinite;
+    animation: steam 3.5s linear infinite;
+}
+
+.spinner .wrapper:after, 
+.spinner .wrapper:before {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; top: 0; bottom: 0;
+    z-index: -1;
+    border-radius: inherit;
+    box-shadow: inset 0 0 2em rgba(255,255,255,0.3);
+    border: 1em dashed rgba(138,189,195,0.2);
+}
+
+.spinner .wrapper:before {
+    top: 1em; bottom: 1em; right: 1em; left: 1em; 
+    border: 1em dashed rgba(138,189,195,0.4);
+}
+
+.spinner .inner {
+    width: 100%;
+    height: 100%;
+    -webkit-animation: steam 3.5s linear reverse infinite;
+    -moz-animation: steam 3.5s linear reverse infinite;
+    -ms-animation: steam 3.5s linear reverse infinite;
+    -o-animation: steam 3.5s linear reverse infinite;
+    animation: steam 3.5s linear reverse infinite;
+}
+
+.spinner .inner span {
+    display: inline-block;
+
+    -webkit-animation: loading-1 1.5s ease-out infinite;
+    -moz-animation: loading-1 1.5s ease-out infinite;
+    -ms-animation: loading-1 1.5s ease-out infinite;
+    -o-animation: loading-1 1.5s ease-out infinite;
+    animation: loading-1 1.5s ease-out infinite;
+}
+
+.spinner .inner span:nth-child(1)  { 
+    -webkit-animation-name: loading-1;
+    -moz-animation-name: loading-1;
+    -ms-animation-name: loading-1;
+    -o-animation-name: loading-1;
+    animation-name: loading-1;
+}
+
+.spinner .inner span:nth-child(2)  { 
+    -webkit-animation-name: loading-2;
+    -moz-animation-name: loading-2;
+    -ms-animation-name: loading-2;
+    -o-animation-name: loading-2;
+    animation-name: loading-2;
+}
+
+.spinner .inner span:nth-child(3)  { 
+    -webkit-animation-name: loading-3;
+    -moz-animation-name: loading-3;
+    -ms-animation-name: loading-3;
+    -o-animation-name: loading-3;
+    animation-name: loading-3;
+}
+
+.spinner .inner span:nth-child(4)  { 
+    -webkit-animation-name: loading-4;
+    -moz-animation-name: loading-4;
+    -ms-animation-name: loading-4;
+    -o-animation-name: loading-4;
+    animation-name: loading-4;
+}
+
+.spinner .inner span:nth-child(5)  { 
+    -webkit-animation-name: loading-5;
+    -moz-animation-name: loading-5;
+    -ms-animation-name: loading-5;
+    -o-animation-name: loading-5;
+    animation-name: loading-5;
+}
+
+.spinner .inner span:nth-child(6)  { 
+    -webkit-animation-name: loading-6;
+    -moz-animation-name: loading-6;
+    -ms-animation-name: loading-6;
+    -o-animation-name: loading-6;
+    animation-name: loading-6;
+}
+
+.spinner .inner span:nth-child(7)  { 
+    -webkit-animation-name: loading-7;
+    -moz-animation-name: loading-7;
+    -ms-animation-name: loading-7;
+    -o-animation-name: loading-7;
+    animation-name: loading-7;
+}
+
+@-webkit-keyframes steam {
+    to { -webkit-transform: rotate(360deg); }
+}
+
+@-moz-keyframes steam {
+    to { -moz-transform: rotate(360deg); }
+}
+
+@-ms-keyframes steam {
+    to { -ms-transform: rotate(360deg); }
+}
+
+@-o-keyframes steam {
+    to { -o-transform: rotate(360deg); }
+}
+
+@keyframes steam {
+    to { transform: rotate(360deg); }
+}
+
+@-webkit-keyframes loading-1 {
+    14.28% { opacity: 0.3; }
+}
+
+@-webkit-keyframes loading-2 {
+    28.57% { opacity: 0.3; }
+}
+
+@-webkit-keyframes loading-3 {
+    42.86% { opacity: 0.3; }
+}
+
+@-webkit-keyframes loading-4 {
+    57.14% { opacity: 0.3; }
+}
+
+@-webkit-keyframes loading-5 {
+    71.43% { opacity: 0.3; }
+}
+
+@-webkit-keyframes loading-6 {
+    85.71% { opacity: 0.3; }
+}
+
+@-webkit-keyframes loading-7 {
+    100% { opacity: 0.3; }
+}
+
+@-moz-keyframes loading-1 {
+    14.28% { opacity: 0.3; }
+}
+
+@-moz-keyframes loading-2 {
+    28.57% { opacity: 0.3; }
+}
+
+@-moz-keyframes loading-3 {
+    42.86% { opacity: 0.3; }
+}
+
+@-moz-keyframes loading-4 {
+    57.14% { opacity: 0.3; }
+}
+
+@-moz-keyframes loading-5 {
+    71.43% { opacity: 0.3; }
+}
+
+@-moz-keyframes loading-6 {
+    85.71% { opacity: 0.3; }
+}
+
+@-moz-keyframes loading-7 {
+    100% { opacity: 0.3; }
+}
+
+@-ms-keyframes loading-1 {
+    14.28% { opacity: 0.3; }
+}
+
+@-ms-keyframes loading-2 {
+    28.57% { opacity: 0.3; }
+}
+
+@-ms-keyframes loading-3 {
+    42.86% { opacity: 0.3; }
+}
+
+@-ms-keyframes loading-4 {
+    57.14% { opacity: 0.3; }
+}
+
+@-ms-keyframes loading-5 {
+    71.43% { opacity: 0.3; }
+}
+
+@-ms-keyframes loading-6 {
+    85.71% { opacity: 0.3; }
+}
+
+@-ms-keyframes loading-7 {
+    100% { opacity: 0.3; }
+}
+
+@-o-keyframes loading-1 {
+    14.28% { opacity: 0.3; }
+}
+
+@-o-keyframes loading-2 {
+    28.57% { opacity: 0.3; }
+}
+
+@-o-keyframes loading-3 {
+    42.86% { opacity: 0.3; }
+}
+
+@-o-keyframes loading-4 {
+    57.14% { opacity: 0.3; }
+}
+
+@-o-keyframes loading-5 {
+    71.43% { opacity: 0.3; }
+}
+
+@-o-keyframes loading-6 {
+    85.71% { opacity: 0.3; }
+}
+
+@-o-keyframes loading-7 {
+    100% { opacity: 0.3; }
+}
+
+@keyframes loading-1 {
+    14.28% { opacity: 0.3; }
+}
+
+@keyframes loading-2 {
+    28.57% { opacity: 0.3; }
+}
+
+@keyframes loading-3 {
+    42.86% { opacity: 0.3; }
+}
+
+@keyframes loading-4 {
+    57.14% { opacity: 0.3; }
+}
+
+@keyframes loading-5 {
+    71.43% { opacity: 0.3; }
+}
+
+@keyframes loading-6 {
+    85.71% { opacity: 0.3; }
+}
+
+@keyframes loading-7 {
+    100% { opacity: 0.3; }
+}
+
+.loading-indicator h3 {
+    color: rgb(244,244,244);
+}
+
+.loading-indicator body:after {
+    content: "";
+    z-index: -1;
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    background: -webkit-radial-gradient(center center, circle cover, rgba(0,0,0,0), rgba(0,0,0,0.5));
+    background: -moz-radial-gradient(center center, circle cover, rgba(0,0,0,0), rgba(0,0,0,0.5));
+    background: -ms-radial-gradient(center center, circle cover, rgba(0,0,0,0), rgba(0,0,0,0.5));
+    background: -o-radial-gradient(center center, circle cover, rgba(0,0,0,0), rgba(0,0,0,0.5));
+    background: radial-gradient(center center, circle cover, rgba(0,0,0,0), rgba(0,0,0,0.5));
+}
+
+.loading-indicator .bar {
+    font-size: 20px;
+    width: 10em;
+    height: 1em;
+    position: relative;
+    margin: 100px auto;
+    border-radius: .5em;
+    background: rgba(255,255,255,0.6);
+    box-shadow: 
+        0 0 0 .05em rgba(100,100,100,0.075),
+        0 0 0 .25em rgba(0,0,0,0.1),
+        inset 0 .1em .05em rgba(0,0,0,0.1),
+        0 .05em rgba(255,255,255,0.7);
+}
+
+.loading-indicator .bar .sphere {
+    border-radius: 50%;
+    width: 1em;
+    height: 100%;
+    background: -webkit-linear-gradient(#eee, #ddd);
+    background: -moz-linear-gradient(#eee, #ddd);
+    background: -ms-linear-gradient(#eee, #ddd);
+    background: -o-linear-gradient(#eee, #ddd);
+    background: linear-gradient(#eee, #ddd);
+    box-shadow:
+        inset 0 .15em .1em rgba(255,255,255,0.3),
+        inset 0 -.1em .15em rgba(0,0,0,0.15),
+        0 0 .25em rgba(0,0,0,0.3);
+    display: block;
+    -webkit-animation: slide 1.75s ease-in-out infinite alternate;
+    -moz-animation: slide 1.75s ease-in-out infinite alternate;
+    -ms-animation: slide 1.75s ease-in-out infinite alternate;
+    -o-animation: slide 1.75s ease-in-out infinite alternate;
+    animation: slide 1.75s ease-in-out infinite alternate;
+}
+
+@-webkit-keyframes slide {
+    to { margin-left: 90%; }
+}
+
+@-moz-keyframes slide {
+    to { margin-left: 90%; }
+}
+
+@-ms-keyframes slide {
+    to { margin-left: 90%; }
+}
+
+@-o-keyframes slide {
+    to { margin-left: 90%; }
+}
+
+@keyframes slide {
+    to { margin-left: 90%; }
+}

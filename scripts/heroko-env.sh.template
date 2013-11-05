@@ -1,0 +1,1 @@
+heroku config:add DJANGO_SECRET_KEY={{ SECRET_KEY }}

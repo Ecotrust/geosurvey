@@ -1,0 +1,32 @@
+{% extends "dash-base.html" %} {% block content %}
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Submitted At</th>
+                    <th>Question</th>
+                    <th>Value</th>
+                </tr>
+                
+            </thead>
+            <tbody>
+            	{% for response in respondent.responses.all reversed %}
+                <tr>
+                    <td>{{ response.ts }}</td>
+                    <td>{{ response.question.title }}</td>
+                    {% if response.question.type == 'multi-select' %}
+                    <td>{% for ma in response.answer %}{{ma.text}}{% endfor %}</td>
+                    {% else %}
+                    <td>{{ response.answer }}</td>
+                    {% endif %}
+                </tr>
+                
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

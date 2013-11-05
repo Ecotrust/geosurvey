@@ -1,0 +1,57 @@
+<div id="wrap" class="menu-page">
+    <div mobilemenu></div>
+    <!-- Begin page content -->
+    <div class="container">
+        <p ng-hide="respondents.length">This device has no completed surveys.</p>
+        <div ng-show="confirmSubmit">
+            <a class="btn btn-main btn-default btn-lg btn-block btn-danger" ng-click="syncronize(respondents)">ok</a>
+            <a class="btn btn-main btn-default btn-lg btn-block" ng-tap="confirmSubmit = false">cancel</a>
+        </div>
+        <div ng-hide="confirmSubmit" ng-show="respondents.length">
+            <a class="btn btn-main btn-default btn-lg btn-block" ng-click="confirmSubmit = true">submit surveys</a>
+        </div>
+        <table class="table">
+            <tr ng-repeat="respondent in respondents| orderBy: 'ts':true">
+                <td>
+                    <a href="#/respondent/{{ respondent.uuid }}/" class="btn btn-default">{{ respondent.survey }}</a>
+                </td>
+                <td>
+                    <span class="label label-success" ng-show="respondent.complete">{{ respondent.ts |date: 'dd-MM-yyyy HH:mm' }}</span>
+                    <span class="label label-default" ng-hide="respondent.complete">{{ respondent.ts |date: 'dd-MM-yyyy HH:mm' }} incomplete</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<!-- 
+<div class="content">
+  <div class="content-padded">
+    <h2>
+        Surveys taken by {{ user.username }}
+    </h2>
+    <p ng-hide="respondents.length">This device has no completed surveys.</p>
+    <div ng-show="busy">
+        <h1>Submitting Surveys</h1>
+        <div class="progress" style="width: 100%">
+          <div class="bar" style="width: {{ synchronized.length/respondents.length * 100 }}%;"></div>
+        </div>
+    </div>
+    <div ng-show="confirmSubmit">
+        <a class="btn btn-block btn-large btn-danger" ng-click="syncronize(respondents)">ok</a>
+        <a class="btn btn-block btn-large" ng-tap="confirmSubmit = false">cancel</a>
+    </div>
+    <div ng-show="respondents.length > 0 && ! (busy || confirmSubmit)">
+        <ul class="list" ng-show="respondents">
+            <li ng-repeat="respondent in respondents| orderBy: 'ts':true">
+                <a href="#/respondent/{{ respondent.uuid }}/">
+                    {{ respondent.survey }}
+                    <span class="chevron"></span>
+                    <span class="label label-success" ng-show="respondent.complete">{{ respondent.ts |date: 'dd-MM-yyyy HH:mm' }}</span>
+                    <span class="label" ng-hide="respondent.complete">{{ respondent.ts |date: 'dd-MM-yyyy HH:mm' }} incomplete</span>
+                </a>
+            </li>
+        </ul>
+        <a class="btn btn-block btn-large" ng-click="confirmSubmit = true">submit surveys</a>
+    </div>
+</div> -->

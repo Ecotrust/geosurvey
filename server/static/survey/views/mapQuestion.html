@@ -1,0 +1,60 @@
+<div class="map-multipoint">
+    <div leaflet 
+        center="map.center" 
+        zoom="map.zoom" 
+        requiredzoom="question.min_zoom"
+        
+        marker="map.marker" 
+        multimarkers="locations" 
+        popupfield="'answers'" 
+        
+        
+        iscrosshairalerting="isCrosshairAlerting"
+        multimarkersedit="true"
+        editmarker="editMarker"
+        deletemarker="removeLocation"
+        zoomtoresult="zoomModel.zoomToResult"></div>
+
+
+    <div class="map-controls map-controls-top-left">
+        
+        <div zoomto onload="openModal()" states="survey.states" zoomtoresult="zoomModel.zoomToResult" numlocations="locations.length"></div>
+
+        <div class="btn-group">
+            <a  class="btn btn-large btn-inverse btn-my-activities" 
+                ng-click="showActivities()"
+                href="javascript:void(0)"
+                data-html="true"
+                data-content="<script type='text/javascript'>function hideMe() {jQuery('.btn-my-activities').popover('hide');} </script><p>Go here for a list of your <strong>activities from the last 12 months</strong> or to review and edit your activity markers.</p><p>You can also <strong>click markers in the map to make changes</strong>.</p><a class='btn btn-block' href='javascript:void(0)' onclick='hideMe()'>OK</a>">
+                <i class="icon-list"></i> <span class="map-control-label">My Activities</span>
+            </a>
+        </div>
+
+    </div>
+
+    <div class="map-controls map-controls-top-right">
+        <div class="btn-group">
+            <a  class="btn btn-large btn-primary btn-add-marker"
+                ng-class="{'btn-danger': !isZoomedIn() && isCrosshairAlerting, 'btn-primary': isZoomedIn() || !isCrosshairAlerting }"
+                ng-click="addMarker()"
+                href="javascript:void(0)">
+                <i class="icon-map-marker icon-large"></i><span class="map-control-label"></span>&nbsp;Add
+            </a>
+        </div>
+
+        <a  type="submit"
+            class="btn btn-large btn-done-mapping"
+            ng-show="locations.length > 0"
+            ng-click="showDoneDialog()"
+            href="javascript:void(0)">
+            Done
+        </a>
+    </div>
+
+    <div style="display:none">
+        <!-- testing controls -->
+        <input ng-model="map.zoom" />
+        <input ng-model="map.marker.lat" />
+        <input ng-model="map.marker.lng" />
+    </div>
+</div>

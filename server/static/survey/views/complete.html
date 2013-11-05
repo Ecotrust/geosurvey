@@ -1,0 +1,19 @@
+<div id="wrap" class="menu-page">
+    <!-- Fixed navbar -->
+    <div mobilemenu></div>
+	<div class="container">
+	    <div class="info respondant" ng-hide="working">
+	        <h3>You have completed the catch report.</h3>
+            <button class="btn btn-main btn-default btn-lg btn-block" ng-click="submitReport()">Submit Report</button>
+
+	    </div>
+            
+            <div class="loading-indicator" ng-show="working">
+                <h3>Submitting Report...</h3>
+                <div class="bar">
+                    <i class="sphere"></i>
+                </div>
+
+            </div>
+	</div>
+</div>

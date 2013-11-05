@@ -1,0 +1,41 @@
+<div id="wrap" class="menu-page">
+    <!-- Fixed navbar -->
+    <div mobilemenu></div>
+
+    <!-- Begin page content -->
+    <div class="container">
+        <div class="feedback" ng-show="sendingFeedback" ng-cloak>
+            <form ng-submit="submitFeedback(feedback)">    
+                <textarea rows="5" placeholder="{{ question.label }}" ng-model="feedback"></textarea>
+                <button type="button" class="btn btn-main btn-default btn-lg btn-block" ng-click="submitFeedback(feedback)">Submit</button>
+                <a type="button" class="btn btn-main btn-default btn-lg btn-block" ng-click="sendingFeedback = false">Cancel</a>
+            </form>
+        </div>
+        <div class="respondant" ng-hide="loading || sendingFeedback">
+            <div ng-show="page">
+                <div>
+                    <div class="question-title"> {{ getPageBlockTitle() }} </div>
+                    <div class="question-wrapper" ng-repeat="question in page.questions">
+                        <h4 class="question-title">{{ question.title }}</h4>
+                        <div ng-switch on="question.type">
+                            <div ng-switch-when="grid">
+                                <form ng-submit="$parent.submitPage(page)">
+                                    <div gridquestion question="question" answers="answers" validity="validity" pageorder="$index"  viewpath="viewPath"></div>
+                                </form>
+                            </div>
+                            <div ng-switch-default>
+                                <form ng-submit="$parent.submitPage(page)">
+                                    <div multiquestion question="question" answers="answers" validity="validity" pageorder="$index"></div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="footer" ng-hide="sendingFeedback">
+    <a class="btn pull-left" ng-click="skipBack()"><span class="glyphicon glyphicon-arrow-left"></span></a>
+    <a class="btn pull-right" ng-class="{ 'valid': pageIsValid }" ng-click="submitPage(page)"><span class="glyphicon glyphicon-arrow-right"></span></a>
+</div>

@@ -1,0 +1,23 @@
+<div id="wrap" class="menu-page">
+    <!-- Fixed navbar -->
+    <div mobilemenu></div>
+    <!-- Begin page content -->
+    <div class="container">
+      <div class="content-padded">
+        <h3>
+            {{ respondent.survey }}
+        </h3>
+        <p>Completed on {{ respondent.ts |date: 'dd-MM-yyyy HH:mm' }}</p>
+        <div ng-hide="confirmDelete">
+            <a class="btn btn-main btn-default btn-lg btn-block" ng-click="resume(respondent)">Resume</a>
+            <a class="btn btn-main btn-danger btn-lg btn-block" ng-click="confirmDelete = true">Delete</a>
+        </div>
+        <div ng-show="confirmDelete">
+            <a class="btn btn-main btn-danger btn-lg btn-block" ng-tap="deleteRespondent(respondent)">ok</a>
+            <a class="btn btn-main btn-default btn-lg btn-block" ng-tap="confirmDelete = false">cancel</a>
+        </div>
+        <hr/>
+        <h4>Survey Answers</h4>
+    </div>
+    <div ng-include="'views/surveyAnswers.html'"></div>
+</div>

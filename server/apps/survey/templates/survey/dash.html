@@ -1,0 +1,208 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <!--[if lt IE 9]>
+     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+     <script>var L_DISABLE_3D=true;</script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+      <script src="{{ STATIC_URL }}survey/lib/js/json3.min.js"></script>
+      <link href="//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome-ie7.min.css" rel="stylesheet">
+    <![endif]-->
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <link href="{{ STATIC_URL }}survey/components/flatui/css/bootstrap.css" rel="stylesheet">
+    <link href="https://netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ STATIC_URL }}survey/components/flatui/css/flat-ui.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}survey/components/select2/select2.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}survey/components/angular-grid/ng-grid.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}survey/styles/main.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}survey/styles/map.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}survey/components/leaflet/dist/leaflet.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}survey/lib/css/leaflet.awesome-markers.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}survey/assets/lib/css/iThing.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}survey/components/jquery-ui-bootstrap/jquery.ui.theme.font-awesome.css">
+
+
+    <!--[if lt IE 9]>
+    <link rel="stylesheet" href="{{ STATIC_URL }}survey/components/leaflet/dist/leaflet.ie.css">
+    <![endif]-->
+    
+    <!--[if lt IE 8]>
+      <link href="//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome-ie7.min.css" rel="stylesheet">
+      <link rel="stylesheet" href="{{ STATIC_URL }}survey/styles/main.ie7.css">
+
+    <![endif]-->
+
+  </head>7
+  <body xmlns:ng="http://angularjs.org" id="ng-app" ng-app="askApp">
+
+    <!--[if lt IE 7]>
+      <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
+    <![endif]-->
+
+    <!--[if lt IE 9]>
+      <script src="{{ STATIC_URL }}survey/components/es5-shim/es5-shim.js"></script>
+      <script src="{{ STATIC_URL }}survey/components/json3/lib/json3.min.js"></script>
+    <![endif]-->
+
+    <!-- Add your site or application content here -->
+    {% if user.is_authenticated %}
+    <div class="navbar .navbar-static-top navbar-inverse hidden"  ng-controller="SurveyListMenuCtrl" ng-cloak>
+      <div class="container-fluid" ng-show="loaded">
+        <div class="navbar-inner">
+          <div class="container"> 
+            <div>
+              {% verbatim %}
+              <ul class="nav">
+                <li>
+                  <a href="#/">
+                    Home
+                  </a>
+                </li>
+                <li>
+                  <a href="#/author">
+                    Create a Survey
+                  </a>
+                </li>
+                <li>
+                  <a>
+                    Edit Surveys
+                  </a>
+                  <ul class="survey-list"> 
+                    <li ng-repeat="survey in surveys">
+                      <a href="#/author/{{ survey.slug }}">{{ survey.name }}</a>
+                    </li>  
+                  </ul>
+                </li>
+                <li>
+                  <a>
+                    Take Survey
+                  </a>
+                  <ul class="survey-list"> 
+                    <li ng-repeat="survey in surveys">
+                      <a target="_blank" href="/respond/{{survey.slug}}">{{ survey.name }}</a>
+                    </li>  
+                  </ul>
+                </li>
+                <li>
+                  <a>
+                    Completed Surveys
+                    <!--<span class="navbar-unread">1</span>-->
+                  </a>
+                  <ul class="survey-list"> 
+                    <li ng-repeat="survey in surveys">
+                      <a href="#/RespondantList/{{ survey.slug }}">{{ survey.name }}</a>
+                    </li>  
+                  </ul>
+                </li>
+              </ul>
+             <!-- <ul class="nav pull-right">
+                <li>
+                  <a href="#">
+                    User
+                  </a>
+                  <ul>
+                    <li><a href="#">Element One</a></li>
+                    <li>
+                      <a href="#">Sub menu</a>
+                      <ul>
+                        <li><a href="#">Element One</a></li>
+                        <li><a href="#">Element Two</a></li>
+                        <li><a href="#">Element Three</a></li>
+                      </ul> 
+                    </li>
+                    <li><a href="#">Element Three</a></li>
+                  </ul> 
+                </li>
+              </ul>-->
+              {% endverbatim %}
+            </div><!--/.nav-collapse -->
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+    <div class="container-fluid dashboard" ng-view></div>
+    <script src="{{ STATIC_URL }}survey/components/flatui/js/jquery-1.8.2.min.js"></script>
+    <script src="{{ STATIC_URL }}survey/components/jquery-ui/ui/jquery-ui.js"></script>
+    <script src="{{ STATIC_URL }}javascripts/libs/jquery.mjs.nestedSortable.js"></script>
+    <script src="{{ STATIC_URL }}survey/components/angular/angular.js"></script>
+    <script src="{{ STATIC_URL }}survey/components/angular-ui/build/angular-ui.js"></script>
+    <script src="{{ STATIC_URL }}survey/assets/js/directives/ui-bootstrap-tpls-0.2.0.js"></script>
+    <script src="{{ STATIC_URL }}survey/components/angular-ui/build/angular-ui.js"></script>
+    <script src="{{ STATIC_URL }}survey/components/select2/select2.js"></script>
+    <script src="{{ STATIC_URL }}survey/components/underscore/underscore.js"></script>
+    <script src="{{ STATIC_URL }}survey/assets/lib/js/underscore.string.js"></script>
+    
+    <script src="{{ STATIC_URL }}survey/assets/lib/js/leaflet-src.js"></script>
+    <script src="{{ STATIC_URL }}survey/assets/lib/js/highcharts.js"></script>
+    <script src="{{ STATIC_URL }}survey/lib/js/Bing.js"></script>
+    <script src="{{ STATIC_URL }}survey/lib/js/leaflet.awesome-markers.min.js"></script>
+    <script src="{{ STATIC_URL }}survey/assets/lib/js/jQDateRangeSlider-min.js"></script>
+    <script src="{{ STATIC_URL }}survey/assets/lib/js/date.js"></script>
+    <!--<script src="{{ STATIC_URL }}survey/lib/js/heatmap.js"></script>
+    <script src="{{ STATIC_URL }}survey/lib/js/heatmap-leaflet.js"></script>
+    <script src="{{ STATIC_URL }}survey/lib/js/QuadTree.js"></script>-->
+    <script src="{{ STATIC_URL }}survey/components/angular-grid/build/ng-grid.min.js"></script>
+    <script src="{{ STATIC_URL }}survey/components/angular-grid/plugins/ng-grid-flexible-height.js"></script>
+    <!--<script src="http://maps.google.com/maps/api/js?v=3.2&sensor=false"></script>
+     <script src="https://raw.github.com/gist/2197042/2b90c41b39b7d5b3a851d8f256de2ebd3fe1fb74/leaflet-google.js"></script>-->
+    <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.js"></script>
+    <!-- build:js scripts/scripts.js -->
+    <script src="{{ STATIC_URL }}survey/assets/js/dash-app.js"></script>
+
+
+    <script src="{{ STATIC_URL }}survey/assets/js/controllers/main.js"></script>
+    <script src="{{ STATIC_URL }}survey/assets/js/controllers/menu.js"></script>
+    <script src="{{ STATIC_URL }}survey/assets/js/controllers/agency-dash.js"></script>
+    <script src="{{ STATIC_URL }}survey/assets/js/controllers/SurveyList.js"></script>
+    <script src="{{ STATIC_URL }}survey/assets/js/controllers/SurveyListMenu.js"></script>
+    <script src="{{ STATIC_URL }}survey/assets/js/controllers/SurveyDetail.js"></script>
+    <script src="{{ STATIC_URL }}survey/assets/js/services/offlineSurvey.js"></script>
+    <script src="{{ STATIC_URL }}survey/assets/js/controllers/mapView.js"></script>
+
+    <script src="{{ STATIC_URL }}survey/assets/js/controllers/RespondantList.js"></script>
+    <script src="{{ STATIC_URL }}survey/assets/js/controllers/RespondantDetail.js"></script>
+    <script src="{{ STATIC_URL }}survey/assets/js/controllers/complete.js"></script>
+    <!-- // <script src="{{ STATIC_URL }}survey/assets/js/directives/leaflet.js"></script>
+    // <script src="{{ STATIC_URL }}survey/assets/js/directives/heatmap.js"></script>
+    // <script src="{{ STATIC_URL }}survey/assets/js/directives/zoomTo.js"></script> -->
+    <script src="{{ STATIC_URL }}survey/assets/js/controllers/author.js"></script>
+    <script src="{{ STATIC_URL }}survey/assets/js/directives/distribution.js"></script>
+    <script src="{{ STATIC_URL }}survey/assets/js/directives/rangeslider.js"></script>
+    <script src="{{ STATIC_URL }}survey/assets/js/directives/highcharts.js"></script>
+    <script src="{{ STATIC_URL }}survey/assets/js/directives/yatree.js"></script>
+    <script src="{{ STATIC_URL }}survey/assets/js/directives/dash-map.js"></script>
+    <script src="{{ STATIC_URL }}survey/assets/js/directives/map-multipolygon.js"></script>
+
+    <!-- endbuild -->
+
+    <script>
+    var token = "{{csrf_token}}";
+    {% if user.is_authenticated %}
+    var isAuthenticated = true;
+    app.user = {
+      username: "{{user.username}}"
+    }
+    {% else %}
+    var isAuthenticated = false;
+    {% endif %}
+    </script>
+
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+    <script>
+      var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+      (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+      g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+      s.parentNode.insertBefore(g,s)}(document,'script'));
+    </script>
+  </body>
+</html>
