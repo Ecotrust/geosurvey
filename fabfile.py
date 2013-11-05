@@ -186,9 +186,9 @@ def push():
 
 
 @task
-def deploy():
+def deploy(branch="master"):
     set_env_for_user(env.user)
-
+    env.branch = branch
     push()
     sudo('chmod -R 0770 %s' % env.virtualenv)
 
