@@ -1,0 +1,97 @@
+
+<!-- SPEAR OR BY HAND -->
+
+<div class="margin-top-10">
+    <div class="col-xs-12 col-md-6">
+        <div class="well">
+            <div class="row">
+                <div class="col-sm-12">
+                    <strong>SPEAR OR BY HAND</strong>
+                </div> 
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12 margin-top-10">
+                    <strong>Gear Type: </strong>
+                    <!-- TODO: need to account for this now being a multi-select rather than single-select -->
+                    <span class="answer">{{ getAnswer('type-spear-or-by-hand')['text'] }}</span>
+                </div> 
+            </div>
+
+            <div class="row">
+                <div class="col-xs-6 margin-top-10">
+                    <strong># Divers: </strong>
+                    <span class="answer">{{ getAnswer('number-of-divers') }}</span>
+                </div>  
+                <div class="col-xs-6 margin-top-10">
+                    <strong># Dives: </strong>
+                    <span class="answer">{{ getAnswer('number-of-dives') }}</span>
+                </div>  
+            </div>
+
+            <div class="row">
+                <div class="col-xs-6 margin-top-10">
+                    <strong>Hours Diving: </strong>
+                    <span class="answer">{{ getAnswer('hours-diving') }}</span>
+                </div>  
+                <div class="col-xs-6"></div>  
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="margin-top-10">
+                        <strong>Bottom Depth: </strong>
+                        <span class="answer">{{ getAnswer('bottom-depth-nets')['value'] }}</span>
+                        <span class="answer">{{ getAnswer('bottom-depth-nets')['unit'] }}</span>
+                    </div>
+                </div> 
+                <div class="col-sm-6 margin-top-10">
+                    <div>
+                        <strong>Area 1 Fished: </strong>
+                        <span class="answer">{{ getAnswer('area-1-fished-spear-or-by-hand') }}</span>
+                    </div>
+                    <div>
+                        <strong>Area 2 Fished: </strong>
+                        <span class="answer">{{ getAnswer('area-2-fished-spear-or-by-hand') }}</span>
+                    </div> 
+                    <div>
+                        <strong>Area 3 Fished: </strong>
+                        <span class="answer">{{ getAnswer('area-3-fished-spear-or-by-hand') }}</span>
+                    </div>
+                </div>  
+            </div>           
+
+            <div class="row margin-top-10">
+                <div class="col-xs-7 margin-top-10">
+                    <strong>SPEAR OR BY HAND SPECIES </strong>
+                </div> 
+                <div class="col-xs-5 margin-top-10">
+                    <strong>WHOLE POUNDS</strong>
+                </div>  
+            </div>
+
+            <div ng-repeat="answer in getAnswer('weight-spear-or-by-hand')">
+                <div ng-show="answer.showGroupName">        
+                    <div class="row margin-top-10">
+                        <div class="col-xs-7">
+                            <span>{{answer.showGroupName | uppercase}}</span>
+                        </div>
+                        <div class="col-xs-5">
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-7">
+                        <span class="margin-left-10">{{ answer.text }}</span>
+                    </div>
+                    <div class="col-xs-4">
+                        <span class="pull-right">{{ answer.wholepounds }}</span>    
+                    </div>
+                    <div class="col-xs-1"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end SPEAR OR BY HAND Report --> 

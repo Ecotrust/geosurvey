@@ -1,0 +1,109 @@
+
+<!-- TRAPS -->
+
+<div class="margin-top-10">
+    <div class="col-xs-12 col-md-6">  
+        <div class="well">
+            <div class="row">
+                <div class="col-sm-12">
+                    <strong>TRAPS</strong>
+                </div>
+            </div> 
+            
+            <div class="row">
+                <div class="col-xs-6 margin-top-10">
+                    <div>
+                        <strong style="text-decoration: underline">Lobster Traps</strong>
+                    </div>
+                    <div ng-show="trapTypeIncludes('lobster')" class="well well-sm">
+                        <div>
+                            <strong># of Trap Hauls: </strong>
+                            <span class="answer">{{ getAnswer('lobster-traps-hauled') }}</span>
+                        </div> 
+                        <div>
+                            <strong>Days Soaked: </strong>
+                            <span class="answer">{{ getAnswer('days-soaked-lobster-traps')}}</span>
+                        </div>
+                        <div>
+                            <strong>Hours Soaked: </strong>
+                            <span class="answer">{{ getAnswer('hours-soaked-lobster-traps')}}</span>
+                        </div>
+                    </div>
+                </div> 
+                <div class="col-xs-6 margin-top-10">
+                    <div>
+                        <strong style="text-decoration: underline">Fish Traps</strong>
+                    </div>
+                    <div ng-show="trapTypeIncludes('fish')" class="well well-sm">
+                        <div>
+                            <strong># of Trap Hauls: </strong>
+                            <span class="answer">{{ getAnswer('fish-traps-hauled') }}</span>
+                        </div>
+                        <div>
+                            <strong>Days Soaked: </strong>
+                            <span class="answer">{{ getAnswer('days-soaked-fish-traps')}}</span>
+                        </div>
+                        <div>
+                            <strong>Hours Soaked: </strong>
+                            <span class="answer">{{ getAnswer('hours-soaked-fish-traps')}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="margin-top-10">
+                        <strong>Bottom Depth: </strong>
+                        <span class="answer">{{ getAnswer('bottom-depth-traps')['value'] }}</span>
+                        <span class="answer">{{ getAnswer('bottom-depth-traps')['unit'] }}</span>
+                    </div>
+                </div> 
+                <div class="col-sm-6 margin-top-10">
+                    <div>
+                        <strong>Area 1 Fished: </strong>
+                        <span class="answer">{{ getAnswer('area-1-fished-traps') }}</span>
+                    </div>
+                    <div>
+                        <strong>Area 2 Fished: </strong>
+                        <span class="answer">{{ getAnswer('area-2-fished-traps') }}</span>
+                    </div>
+                    <div>
+                        <strong>Area 3 Fished: </strong>
+                        <span class="answer">{{ getAnswer('area-3-fished-traps') }}</span>
+                    </div>
+                </div>  
+            </div>                
+
+            <div class="row margin-top-10">
+                <div class="col-xs-7 margin-top-10">
+                    <strong>TRAP SPECIES </strong>
+                </div> 
+                <div class="col-xs-5 margin-top-10">
+                    <strong>WHOLE POUNDS</strong>
+                </div>  
+            </div>
+
+            <div ng-repeat="answer in getAnswer('weight-traps')">
+                <div ng-show="answer.showGroupName">        
+                    <div class="row margin-top-10">
+                        <div class="col-xs-7">
+                            <span>{{answer.showGroupName | uppercase}}</span>
+                        </div>
+                        <div class="col-xs-5"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-7">
+                        <span class="margin-left-10">{{ answer.text }}</span>
+                    </div>
+                    <div class="col-xs-4">
+                        <span class="pull-right">{{ answer.wholepounds }}</span>    
+                    </div>
+                    <div class="col-xs-1"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end Traps Report --> 

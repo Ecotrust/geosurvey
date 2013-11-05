@@ -27,14 +27,142 @@ angular.module('askApp')
             });
         }
 
+        $scope.showingSubmittedSurveys = false;
+
+        $scope.getTitle = function() {
+            try {
+                var island = _.findWhere($scope.respondent.responses, {question: 'island'}).answer.text,
+                    title = 'USVI Commercial Catch Report Form - ' + island;  
+            } catch(e) {
+                var title = 'USVI Commercial Catch Report Form';
+            }
+            return title;
+        };
+
+        $scope.gearTypeIncludes = function(type) {
+            try { 
+                var gearTypes = _.pluck(_.findWhere($scope.respondent.responses, {question: 'gear-type'}).answer, 'label');
+
+                if ( gearTypes.join().indexOf(type) !== -1 ) {
+                    return true;
+                } 
+            } catch(e) {
+                return '';
+            }
+        };
+
+        $scope.trapTypeIncludes = function(type) {
+            try { 
+                var gearTypes = _.pluck(_.findWhere($scope.respondent.responses, {question: 'gear-type'}).answer, 'label');  
+                if ( gearTypes.join().indexOf(type) !== -1 ) {
+                    return true;
+                } 
+            } catch(e) {
+                return '';
+            }
+        };
+
+        $scope.getAnswer = function(questionSlug) {
+            try {
+                if (questionSlug === 'weight-line-or-reel' || questionSlug === 'weight-traps' || questionSlug === 'weight-nets' || questionSlug === 'weight-spear-or-by-hand') {
+                    var island = _.findWhere($scope.respondent.responses, {question: 'island'}).answer.label,
+                        islandSlug = (island === 'st-thomas') ? 'st-thomas-st-john' : island,
+                        answer = _.findWhere($scope.respondent.responses, {question: questionSlug + '-' + islandSlug}).answer;
+
+                    // TODO: currently no way of determining definitively whether answers are from a grouped multi-select or an ungrouped multi-select
+                    // (no groupName may present because either just Others were selected, or no groups were present)
+                    // seems like solution would be to ensure selections that were grouped under Other heading should be marked as such...                    
+                    _.each(answer, function(obj, index) {
+                        if (index === 0 && obj.groupName) {
+                            obj.showGroupName = obj.groupName;
+                        } else if (obj.groupName && obj.groupName !== answer[index-1].groupName) {
+                            obj.showGroupName = obj.groupName;
+                        } else if (obj.other && answer[index-1].showGroupName !== 'Other') {
+                            obj.showGroupName = 'Other';
+                        } else {
+                            obj.showGroupName = undefined;
+                        }
+                    });
+                } else if (questionSlug === 'trip-landing-site') {
+                    var island = _.findWhere($scope.respondent.responses, {question: 'island'}).answer.label,
+                        answer = _.findWhere($scope.respondent.responses, {question: questionSlug + '-' + island}).answer;                    
+                } else if (questionSlug === 'days-soaked-lobster-traps') {                    
+                    var unit = _.findWhere($scope.respondent.responses, {question: 'time-soaked-lobster-traps'}).answer.unit,
+                        value = _.findWhere($scope.respondent.responses, {question: 'time-soaked-lobster-traps'}).answer.value;
+                    if (unit.toLowerCase().trim() === 'days') {
+                        return value;
+                    } else {
+                        return  Math.floor(value / 24);
+                    }
+                } else if (questionSlug === 'hours-soaked-lobster-traps') {                    
+                    var unit = _.findWhere($scope.respondent.responses, {question: 'time-soaked-lobster-traps'}).answer.unit,
+                        value = _.findWhere($scope.respondent.responses, {question: 'time-soaked-lobster-traps'}).answer.value;
+                    if (unit.toLowerCase().trim() === 'hours') {
+                        return value % 24;
+                    } else {
+                        return  0;
+                    }
+                } else if (questionSlug === 'days-soaked-fish-traps') {                    
+                    var unit = _.findWhere($scope.respondent.responses, {question: 'time-soaked-fish-traps'}).answer.unit,
+                        value = _.findWhere($scope.respondent.responses, {question: 'time-soaked-fish-traps'}).answer.value;
+                    if (unit.toLowerCase().trim() === 'days') {
+                        return value;
+                    } else {
+                        return  Math.floor(value / 24);
+                    }
+                } else if (questionSlug === 'hours-soaked-fish-traps') {                    
+                    var unit = _.findWhere($scope.respondent.responses, {question: 'time-soaked-fish-traps'}).answer.unit,
+                        value = _.findWhere($scope.respondent.responses, {question: 'time-soaked-fish-traps'}).answer.value;
+                    if (unit.toLowerCase().trim() === 'hours') {
+                        return value % 24;
+                    } else {
+                        return  0;
+                    }
+                } else {
+                    var answer = _.findWhere($scope.respondent.responses, {question: questionSlug}).answer;
+                }
+                
+            } catch(e) {
+                var answer = '';
+            }
+            if (answer === 'NA') {
+                answer = '';
+            }
+            
+            return answer;
+        };
 
 
         $scope.deleteRespondent = function (respondent) {
             $scope.respondents = _.without($scope.respondents, respondent);
             $scope.saveState();
             $location.path('/respondents');
-        }
+        };
 
+<<<<<<< HEAD
+=======
+        $scope.sendRespondent = function (respondent) {
+            var url = app.server + '/api/v1/offlinerespondant/';
+            _.each(respondent.responses, function (response) {
+                var question_uri = response.question.resource_uri;
+                response.question = question_uri;
+                response.answer_raw = JSON.stringify(response.answer);
+            });
+            var newRespondent = {
+                ts: respondent.ts,
+                uuid: respondent.uuid.replace(':', '_'),
+                responses: respondent.responses,
+                status: respondent.status,
+                complete: respondent.complete,
+                survey: '/api/v1/survey/' + respondent.survey + '/'
+            };
+            return $http.post(url, newRespondent).error(function (err) {
+                console.log(JSON.stringify(err));
+            });
+            
+        }; 
+
+>>>>>>> origin/next-release
         $scope.synchronized = [];
         $scope.busy = false;
         $scope.syncronize = function(respondents) {
@@ -63,7 +191,7 @@ angular.module('askApp')
                 });    
             }
             
-        }
+        };
 
 
         $scope.saveState = function () {
@@ -72,7 +200,7 @@ angular.module('askApp')
                 app.respondents[respondent.uuid] = respondent;
             });
             localStorage.setItem('hapifish', JSON.stringify(app));
-        }
+        };
 
 
         $scope.resume = function(respondent) {
@@ -89,5 +217,82 @@ angular.module('askApp')
             }
             
            $location.path(url);
+        };
+
+        $scope.closeRespondents = function () {
+            _.each($scope.respondentList, function(respondent, index) {
+                respondent.open = false;
+            });
         }
+
+        $scope.openRespondent = function (respondent) {
+            if (respondent.open) {
+                respondent.open = false;
+            } else {
+                $scope.closeRespondents();
+                respondent.open = true;
+            }
+            // respondent.open = !respondent.open;
+            $scope.respondent = respondent;
+        };
+
+        $scope.getSubmittedSurveys = function () {
+            //debugger;
+            //var url = app.server + '/api/v1/offlinerespondant/';
+            var url = app.server 
+                      + '/api/v1/reportrespondant/?user__username__exact=' 
+                      + $scope.user.username 
+                      + '&format=json';
+            
+            $scope.loading = true;
+
+            return $http.get(url).error(function (err) {
+                console.log(JSON.stringify(err));
+                debugger;
+            });
+            
+        };       
+
+
+        $scope.showSubmittedSurveys = function() {
+            
+            $scope.getSubmittedSurveys()
+                .success(function (data) {
+                    //debugger;
+                    $scope.respondentList = [];
+                    _.each(data.objects, function(respondent, index) {
+                        try {
+                            if (typeof(respondent.responses.question) !== 'string') {
+                                _.each(respondent.responses, function(response, index) {
+                                    var questionSlug = response.question.slug;
+                                    try {
+                                        answer_raw = JSON.parse(response.answer_raw);
+                                        // console.log('parsed answer_raw: ' + answer_raw);
+                                    } catch(e) {
+                                        console.log('failed to parse answer_raw');
+                                        answer_raw = response.answer;
+                                    }
+                                    response.question = questionSlug;
+                                    response.answer = answer_raw;
+                                });
+                            }
+                            respondent.survey = respondent.survey_slug;
+                            respondent.open = false;
+                            $scope.respondentList.push(respondent);
+                        }
+                        catch(e) {
+                            debugger;
+                        }
+                    });
+
+                    $scope.loading = false;
+
+                    //$scope.respondent = respondent;
+                    $scope.showingSubmittedSurveys = true;
+                }).error(function (data) {
+                    debugger;
+                });    
+
+        };
+
 });

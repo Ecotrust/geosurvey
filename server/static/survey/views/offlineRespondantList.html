@@ -25,6 +25,26 @@
                 </td>
             </tr>
         </table>
+        <div>
+            <a class="btn btn-main btn-default btn-lg btn-block" ng-click="showSubmittedSurveys()">show submitted surveys</a>
+        </div>
+        <div ng-show="showingSubmittedSurveys">
+            
+            <div class="panel panel-default" ng-repeat="respondent in respondentList | orderBy: 'ts':true">
+                <div class="panel-heading" style="cursor: pointer; cursor: hand" ng-click="openRespondent(respondent)">
+                    <h4 class="panel-title">
+                        {{respondent.survey_title}}
+                    </h4>
+                </div>
+                <div id="{{ respondent.survey_title }}" class="panel-collapse collapse" ng-class="{ 'in': respondent.open }">
+                    <div class="panel-body">
+                        <div ng-include="'views/surveyAnswers.html'"></div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>  
     </div>
 </div>
 

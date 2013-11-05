@@ -39,6 +39,22 @@ class Respondant(caching.base.CachingMixin, models.Model):
 
     objects = caching.base.CachingManager()
 
+    @property
+    def survey_title(self):
+        try:
+            if self.survey.slug == 'catch-report':
+                date = self.responses.filter(question__slug='landed-date')[0].answer
+            else:
+                date = self.responses.filter(question__slug='did-not-fish-for-month-of')[0].answer    
+        except:
+            date = 'unknown'
+        return '%s -- %s' %(self.survey.name, date)
+    
+    @property
+    def survey_slug(self):
+        return self.survey.slug
+    
+
     def __unicode__(self):
         if self.email:
             return "%s" % self.email
