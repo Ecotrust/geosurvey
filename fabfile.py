@@ -3,7 +3,7 @@ from tempfile import mkdtemp
 from contextlib import contextmanager
 
 from fabric.operations import put
-from fabric.api import env, local, sudo, run, cd, prefix, task, settings
+from fabric.api import env, local, sudo, run, cd, prefix, task, settings, get, put
 
 import datetime
 
@@ -331,10 +331,17 @@ def prepare():
     provision()
 
 
+
 @task
-def emulate_ios():
+def emulate_ios_vagrant():
     run("cd %s && %s/bin/python manage.py package http://localhost:8000 '../mobile/www' --test-run" % (env.app_dir, env.venv))
     local("cd mobile && /usr/local/share/npm/bin/phonegap run -V ios")
+
+@task
+def emulate_ios_dev():
+    run("cd %s && %s/bin/python manage.py package http://162.243.141.120 '../mobile/www' --test-run" % (env.app_dir, env.venv))
+    local("cd mobile && /usr/local/share/npm/bin/phonegap run -V ios")
+
 
 @task
 def package_vagrant():
@@ -344,6 +351,11 @@ def package_vagrant():
 @task
 def package_ios_test():
         run("cd %s && %s/bin/python manage.py package http://usvi-test.pointnineseven.com '../mobile/www'" % (env.app_dir, env.venv))
+        local("cd mobile && /usr/local/share/npm/bin/phonegap build -V ios")
+
+@task
+def package_ios_dev():
+        run("cd %s && %s/bin/python manage.py package http://162.243.141.120 '../mobile/www' --id='com.pointnineseven.digitaldeck-dev'" % (env.app_dir, env.venv))
         local("cd mobile && /usr/local/share/npm/bin/phonegap build -V ios")
 
 
@@ -361,13 +373,14 @@ def package_android_test():
         local("scp ./mobile/platforms/android/bin/DigitalDeck-debug.apk ninkasi:/var/www/usvi/usvi.apk")
 
 @task
-def transfer_db():
-	pass
-    # date = datetime.datetime.now().strftime("%Y-%m-%d:%H%M")
-    # db_url = local("heroku pgbackups:url", capture=True)
-    # local("heroku pgbackups:capture --expire")
-    # run("curl -o /tmp/%s.dump \"%s\"" % (date, db_url))
-    # run("pg_restore --verbose --clean --no-acl --no-owner -U postgres -d geosurvey /tmp/%s.dump" % date)
-    #run("pg_dump geosurvey -n public -c -f /tmp/geosurvey.dump -Fc -O -no-acl -U postgres")
-    #get("/tmp/geosurvey.dump")
+def backup_db():
+    date = datetime.datetime.now().strftime("%Y-%m-%d%H%M")
+    dump_name = "%s-geosurvey.dump" % date
+    run("pg_dump geosurvey -n public -c -f /tmp/%s -Fc -O -no-acl -U postgres" % dump_name)
+    get("/tmp/%s" % dump_name, "backups/%s" % dump_name)
+
+@task
+def restore_db(dump_name):
+    put(dump_name, "/tmp/%s" % dump_name.split('/')[-1])
+    run("pg_restore --verbose --clean --no-acl --no-owner -U postgres -d geosurvey /tmp/%s" % dump_name.split('/')[-1])
     #run("cd %s && %s/bin/python manage.py migrate --settings=config.environments.staging" % (env.app_dir, env.venv))
