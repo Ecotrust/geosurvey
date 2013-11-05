@@ -50,6 +50,10 @@ class Respondant(caching.base.CachingMixin, models.Model):
             date = 'unknown'
         return '%s -- %s' %(self.survey.name, date)
     
+    @property
+    def survey_slug(self):
+        return self.survey.slug
+    
 
     def __unicode__(self):
         if self.email:

@@ -27,6 +27,8 @@ angular.module('askApp')
             });
         }
 
+        $scope.showingSubmittedSurveys = false;
+
         $scope.getTitle = function() {
             try {
                 var island = _.findWhere($scope.respondent.responses, {question: 'island'}).answer.text,
@@ -73,7 +75,7 @@ angular.module('askApp')
                     _.each(answer, function(obj, index) {
                         if (index === 0 && obj.groupName) {
                             obj.showGroupName = obj.groupName;
-                        } else if (obj.groupName && obj.groupName !== answer[index-1].showGroupName) {
+                        } else if (obj.groupName && obj.groupName !== answer[index-1].groupName) {
                             obj.showGroupName = obj.groupName;
                         } else if (obj.other && answer[index-1].showGroupName !== 'Other') {
                             obj.showGroupName = 'Other';
@@ -126,6 +128,7 @@ angular.module('askApp')
             if (answer === 'NA') {
                 answer = '';
             }
+            
             return answer;
         };
 
@@ -221,41 +224,80 @@ angular.module('askApp')
            $location.path(url);
         };
 
-        // $scope.getSubmittedSurveys = function (respondents) {
-            
-        //     //var url = app.server + '/api/v1/offlinerespondant/';
-        //     var url = app.server + '/api/v1/reportrespondant/?user__username__exact=sfletche&format=json&survey__slug__exact=did-not-fish&limit=1';
-            
-        //     debugger;
+        $scope.closeRespondents = function () {
+            _.each($scope.respondentList, function(respondent, index) {
+                respondent.open = false;
+            });
+        }
 
-        //     var responses = angular.copy(respondent.responses);
+        $scope.openRespondent = function (respondent) {
+            if (respondent.open) {
+                respondent.open = false;
+            } else {
+                $scope.closeRespondents();
+                respondent.open = true;
+            }
+            // respondent.open = !respondent.open;
+            $scope.respondent = respondent;
+        };
+
+        $scope.getSubmittedSurveys = function () {
+            //debugger;
+            //var url = app.server + '/api/v1/offlinerespondant/';
+            var url = app.server 
+                      + '/api/v1/reportrespondant/?user__username__exact=' 
+                      + $scope.user.username 
+                      + '&format=json';
             
-        //     _.each(responses, function (response) {
-        //         // var question_uri = response.question.resource_uri;
-        //         var question_uri = survey.getQuestionUriFromSlug(response.question);
-        //         response.question = question_uri;
-        //         response.answer_raw = JSON.stringify(response.answer);
-        //     });
-        //     var newRespondent = {
-        //         ts: respondent.ts,
-        //         uuid: respondent.uuid.replace(':', '_')
-        //     };
-        //     return $http.post(url, newRespondent).error(function (err) {
-        //         console.log(JSON.stringify(err));
-        //     });
+            $scope.loading = true;
+
+            return $http.get(url).error(function (err) {
+                console.log(JSON.stringify(err));
+                debugger;
+            });
             
-        // };       
+        };       
 
 
-        // $scope.showSubmittedSurveys = function(respondents) {
+        $scope.showSubmittedSurveys = function() {
             
-        //     $scope.getSubmittedSurveys(respondents)
-        //         .success(function (data) {
-        //             debugger;
-        //         }).error(function (data) {
-        //             debugger;
-        //         });    
+            $scope.getSubmittedSurveys()
+                .success(function (data) {
+                    //debugger;
+                    $scope.respondentList = [];
+                    _.each(data.objects, function(respondent, index) {
+                        try {
+                            if (typeof(respondent.responses.question) !== 'string') {
+                                _.each(respondent.responses, function(response, index) {
+                                    var questionSlug = response.question.slug;
+                                    try {
+                                        answer_raw = JSON.parse(response.answer_raw);
+                                        // console.log('parsed answer_raw: ' + answer_raw);
+                                    } catch(e) {
+                                        console.log('failed to parse answer_raw');
+                                        answer_raw = response.answer;
+                                    }
+                                    response.question = questionSlug;
+                                    response.answer = answer_raw;
+                                });
+                            }
+                            respondent.survey = respondent.survey_slug;
+                            respondent.open = false;
+                            $scope.respondentList.push(respondent);
+                        }
+                        catch(e) {
+                            debugger;
+                        }
+                    });
 
-        // };
+                    $scope.loading = false;
+
+                    //$scope.respondent = respondent;
+                    $scope.showingSubmittedSurveys = true;
+                }).error(function (data) {
+                    debugger;
+                });    
+
+        };
 
 });
