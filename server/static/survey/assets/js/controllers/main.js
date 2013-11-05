@@ -158,6 +158,8 @@ angular.module('askApp')
     $scope.forgotPassword = function (user) {
         var url = app.server + "/account/forgotPassword";
         $scope.showInfo = false;
+        $scope.showForgotPassword = false;
+        $scope.showForgotPasswordDone = true;
         $http.post(url, user)
             .success(function () {
                 $scope.showInfo = 'forgot-user';
