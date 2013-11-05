@@ -153,7 +153,7 @@ def push():
         remote_result = local('git remote | grep %s' % env.remote)
         if not remote_result.succeeded:
             local('git remote add %s ssh://%s@%s:%s%s' %
-                (env.remote, env.user, env.host, env.port,env.root_dir))
+                (env.host, env.user, env.host, env.port,env.root_dir))
 
         result = local("git push %s %s" % (env.remote, env.branch))
 
@@ -167,7 +167,6 @@ def push():
             # result2 = run("ls %s" % env.code_dir)
             # if not result2.succeeded:
             #     run('mkdir %s' % env.code_dir)
-            print "Creating remote repo, now."
             with cd(env.root_dir):
                 run("git init")
                 run("git config --bool receive.denyCurrentBranch false")
