@@ -150,12 +150,12 @@ def push():
     Update application code on the server
     """
     with settings(warn_only=True):
-        remote_result = local('git remote | grep %s' % env.remote)
+        remote_result = local('git remote | grep %s' % env.host)
         if not remote_result.succeeded:
             local('git remote add %s ssh://%s@%s:%s%s' %
                 (env.host, env.user, env.host, env.port,env.root_dir))
 
-        result = local("git push %s %s" % (env.remote, env.branch))
+        result = local("git push %s %s" % (env.host, env.branch))
 
         # if push didn't work, the repository probably doesn't exist
         # 1. create an empty repo

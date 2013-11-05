@@ -139,30 +139,6 @@ angular.module('askApp')
             $location.path('/respondents');
         };
 
-<<<<<<< HEAD
-=======
-        $scope.sendRespondent = function (respondent) {
-            var url = app.server + '/api/v1/offlinerespondant/';
-            _.each(respondent.responses, function (response) {
-                var question_uri = response.question.resource_uri;
-                response.question = question_uri;
-                response.answer_raw = JSON.stringify(response.answer);
-            });
-            var newRespondent = {
-                ts: respondent.ts,
-                uuid: respondent.uuid.replace(':', '_'),
-                responses: respondent.responses,
-                status: respondent.status,
-                complete: respondent.complete,
-                survey: '/api/v1/survey/' + respondent.survey + '/'
-            };
-            return $http.post(url, newRespondent).error(function (err) {
-                console.log(JSON.stringify(err));
-            });
-            
-        }; 
-
->>>>>>> origin/next-release
         $scope.synchronized = [];
         $scope.busy = false;
         $scope.syncronize = function(respondents) {
