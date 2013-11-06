@@ -35,7 +35,11 @@ class Command(BaseCommand):
         make_option('-I', '--id',
             action='store',
             default="com.pointnineseven.digitaldeck",
-            help='Specify the app id.')
+            help='Specify the app id.'),
+        make_option('-S', '--stage',
+            action='store',
+            default="dev",
+            help='Specify the app stage (dev, text, etc).')
         )
     def handle(self, *args, **options):
         url = args[0]

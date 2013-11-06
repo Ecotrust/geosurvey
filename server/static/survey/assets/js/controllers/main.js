@@ -34,6 +34,7 @@ angular.module('askApp')
     })
         .success(function (data) {
             $scope.newVersion = data.version;
+            alert(data.version);
             if (app.version < data.version) {
                 $scope.update = "An update is available for Digital Deck."
             } else {
@@ -44,7 +45,7 @@ angular.module('askApp')
         });
     
     $scope.updateApp = function () {
-        var ref = window.open('http://www.labs.ecotrust.org/usvi/update.html', '_blank', 'location=yes');
+        var ref = window.open(app.server + '/downloads/update.html', '_blank', 'location=yes');
     }
 
     $scope.logout = function () {
