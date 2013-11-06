@@ -1,6 +1,6 @@
 
 angular.module('askApp')
-  .controller('MainCtrl', function ($scope, $location, $http) {
+  .controller('MainCtrl', ['$scope', '$location', '$http', function MainCtrl($scope, $location, $http) {
     $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
 
     $scope.path = 'home';
@@ -32,31 +32,20 @@ angular.module('askApp')
         method: 'GET',
         url: app.server + "/mobile/getVersion"
     })
-    .success(function (data) {
-        $scope.newVersion = data.version;
-        if (app.version < data.version) {
-            $scope.update = "An update is available for Digital Deck."
-        } else {
-            $scope.update = false;
-        }
-    })
-    .error(function (data) {
-    });
+        .success(function (data) {
+            $scope.newVersion = data.version;
+            if (app.version < data.version) {
+                $scope.update = "An update is available for Digital Deck."
+            } else {
+                $scope.update = false;
+            }
+        })
+        .error(function (data) {
+        });
     
-    $scope.passwordType = "password";
-
     $scope.updateApp = function () {
         var ref = window.open('http://www.labs.ecotrust.org/usvi/update.html', '_blank', 'location=yes');
     }
-
-    // showForm can be in ['login', 'new-user', 'forgot'];
-    $scope.showForm = 'login';
-
-    $scope.toggleForm = function (form) {
-        $scope.showError = false;
-        $scope.showForm = form;
-
-    };
 
     $scope.logout = function () {
         app.user = false;
@@ -131,17 +120,14 @@ angular.module('askApp')
                 $scope.saveState();
                 if (app.next) {
                     next = app.next;
-                    console.log(next);
                     delete app.next;
                     $location.path(app.next);
                 } else {
-                    console.log('logging in');
                     $location.path("/main");
                 }
                 
             })
             .error(function (data, status) {
-                console.log(status);
                 if (status === 0) {
                     app.tempuser = $scope.authUser;
                     $scope.working = false;
@@ -199,4 +185,4 @@ angular.module('askApp')
     
     
 
-  });
+  }]);

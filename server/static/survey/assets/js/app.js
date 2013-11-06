@@ -9,7 +9,6 @@ $('body').css({ 'min-height': initialHeight});
 
 if (localStorage.getItem('hapifish') && window.location.pathname !== '/respond') {
     app = JSON.parse(localStorage.getItem('hapifish'));
-    console.log(app);
 } else {
     var app = {};    
 }
