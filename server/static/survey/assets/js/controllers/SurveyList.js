@@ -18,14 +18,14 @@ angular.module('askApp')
         $scope.loaded = true;
         clearInterval($scope.timer);
     }
-
+    $scope.showUpdateSurveys = true;
     $scope.updateSurveys = function () {
         $scope.hideSurveys = true;
         $scope.width = 0;
         $scope.timer = setInterval(function () {
             $scope.width = $scope.width + 10;
         }, 500);
-        $http.get(app.server + '/api/v1/survey1/?format=json').success(function(data) {
+        $http.get(app.server + '/api/v1/survey/?format=json').success(function(data) {
             $scope.useSurveys(data.objects);
         }).error(function (data, status) {
             
