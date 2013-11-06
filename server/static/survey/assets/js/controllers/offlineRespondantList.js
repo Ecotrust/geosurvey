@@ -1,7 +1,7 @@
 //'use strict';
 
 angular.module('askApp')
-    .controller('offlineRespondantListCtrl', function($scope, $http, $routeParams, $location) {
+    .controller('offlineRespondantListCtrl', function($scope, $http, $routeParams, $location, survey) {
         $http.defaults.headers.post['Content-Type'] = 'application/json';
 
         $scope.respondents = _.toArray(app.respondents);
@@ -139,27 +139,6 @@ angular.module('askApp')
             $location.path('/respondents');
         };
 
-        $scope.sendRespondent = function (respondent) {
-            var url = app.server + '/api/v1/offlinerespondant/';
-            _.each(respondent.responses, function (response) {
-                var question_uri = response.question.resource_uri;
-                response.question = question_uri;
-                response.answer_raw = JSON.stringify(response.answer);
-            });
-            var newRespondent = {
-                ts: respondent.ts,
-                uuid: respondent.uuid.replace(':', '_'),
-                responses: respondent.responses,
-                status: respondent.status,
-                complete: respondent.complete,
-                survey: '/api/v1/survey/' + respondent.survey + '/'
-            };
-            return $http.post(url, newRespondent).error(function (err) {
-                console.log(JSON.stringify(err));
-            });
-            
-        }; 
-
         $scope.synchronized = [];
         $scope.busy = false;
         $scope.syncronize = function(respondents) {
@@ -169,28 +148,20 @@ angular.module('askApp')
             $scope.confirmSubmit = false;
             if (completed.length) {
                 $scope.busy = true;
-
-                _.each(first.responses, function (response) {
-                    if (response.question.grid_cols) {
-                        _.each(response.question.grid_cols, function (grid_col) {
-                            grid_col.label = grid_col.label.replace(/-/g, '');
-                        });
-                    }
-                });
-
-                $scope.sendRespondent(first).success(function (data) {
+                survey.submitSurvey(first, _.findWhere(app.surveys, { slug: first.survey})).success(function (data) {
                     $scope.synchronized.push(data);
                     if (rest.length) {
                         $scope.syncronize(rest);
                     } else {
                         $scope.busy = false;
+
                         _.each($scope.synchronized, function (synced) {
                             var original = _.findWhere($scope.respondents, { uuid: synced.uuid})
                             $scope.respondents.splice(_.indexOf($scope.respondents, original));
                             $scope.saveState();
                         })
                         $scope.synchronized = [];
-
+                        delete app.message;
                     }
                     
                 });    

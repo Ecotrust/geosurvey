@@ -86,6 +86,11 @@ directory "/usr/local/apps/#{node[:project]}" do
     mode 0770
 end
 
+directory "/usr/local/apps/#{node[:project]}/logs" do
+    owner "www-data"
+    group "deploy"
+    mode 0770
+end
 
 directory "/usr/local/apps/#{node[:project]}/#{node[:app]}" do
     owner "www-data"

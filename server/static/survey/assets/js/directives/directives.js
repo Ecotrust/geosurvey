@@ -18,12 +18,7 @@ angular.module('askApp')
             scope.toggleVisible = function () {
                 scope.visible = ! scope.visible;
 
-                // this should set focus, but doesn't work :()
-                if (scope.visible) {
-                    scope.element.find('input.text')[0].focus();
-                } else {
-                    scope.element.find('input.dots')[0].focus();
-                }
+                
                 
             }
         }

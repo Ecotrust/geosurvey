@@ -1,6 +1,6 @@
 
 angular.module('askApp')
-  .controller('MainCtrl', function ($scope, $location, $http) {
+  .controller('MainCtrl', ['$scope', '$location', '$http', function MainCtrl($scope, $location, $http) {
     $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
 
     $scope.path = 'home';
@@ -10,14 +10,18 @@ angular.module('askApp')
         $scope.user = app.user;
     } else {
         $scope.user = false;
-        console.log($location.path() !== '/signin')
         if ($location.path() === '/signin' || $location.path() === '/signup') {
-            console.log('re')
             
         } else {
             $location.path('/');
         }
         
+    }
+
+    if ($location.path() === '/signup' && $scope.user.status === 'signup') {
+        $scope.newUser = app.offlineUser;
+    } else if ($location.path() === '/signin' && $scope.user.status === 'signin') {
+        $scope.authUser = app.offlineUser;
     }
     $scope.version = app.version;
     if (app.version !== "APP_VERSION") {
@@ -28,31 +32,20 @@ angular.module('askApp')
         method: 'GET',
         url: app.server + "/mobile/getVersion"
     })
-    .success(function (data) {
-        $scope.newVersion = data.version;
-        if (app.version < data.version) {
-            $scope.update = "An update is available for Digital Deck."
-        } else {
-            $scope.update = false;
-        }
-    })
-    .error(function (data) {
-    });
+        .success(function (data) {
+            $scope.newVersion = data.version;
+            if (app.version < data.version) {
+                $scope.update = "An update is available for Digital Deck."
+            } else {
+                $scope.update = false;
+            }
+        })
+        .error(function (data) {
+        });
     
-    $scope.passwordType = "password";
-
     $scope.updateApp = function () {
         var ref = window.open('http://www.labs.ecotrust.org/usvi/update.html', '_blank', 'location=yes');
     }
-
-    // showForm can be in ['login', 'new-user', 'forgot'];
-    $scope.showForm = 'login';
-
-    $scope.toggleForm = function (form) {
-        $scope.showError = false;
-        $scope.showForm = form;
-
-    };
 
     $scope.logout = function () {
         app.user = false;
@@ -64,6 +57,17 @@ angular.module('askApp')
         localStorage.setItem('hapifish', JSON.stringify(app));
     }
 
+    $scope.offline = function (user, status) {
+        app.user = {
+            username: user.username,
+            status: status,
+            offline: true
+        }
+        app.offlineUser = user;
+        $scope.saveState();
+        $location.path('/main');
+    };
+
     $scope.createUser = function (user) {
         var url = app.server + "/account/createUser";
         if (user.emailaddress1 === user.emailaddress2) {
@@ -72,13 +76,17 @@ angular.module('askApp')
             $http.post(url, user)
                 .success(function (data) {
                     app.user = data.user;
+                    app.user.registration = $scope.user.registration;
                     $scope.saveState();
                     // $location.path('/surveys');
                     $location.path('/profile');
                 })
-            .error(function (data) {
+            .error(function (data, status) {
                 $scope.working = false;
-                if (data) {
+                if (status === 0) {
+                    app.tempuser = $scope.newUser;
+                    $scope.showTempUser = true;
+                } else if (data) {
                     $scope.showError = data;    
                 } else {
                     $scope.showError = "There was a problem creating an account.  Please try again later."
@@ -91,7 +99,6 @@ angular.module('askApp')
         
     };
 
-    $scope.authUser = {};
     $scope.showForgotPassword = false;
     $scope.showError = false;
     $scope.showInfo = false;
@@ -113,18 +120,23 @@ angular.module('askApp')
                 $scope.saveState();
                 if (app.next) {
                     next = app.next;
-                    console.log(next);
                     delete app.next;
                     $location.path(app.next);
                 } else {
-                    console.log('logging in');
                     $location.path("/main");
                 }
                 
             })
-            .error(function (data) {
-                $scope.showError = data;
-                $scope.working = false;
+            .error(function (data, status) {
+                if (status === 0) {
+                    app.tempuser = $scope.authUser;
+                    $scope.working = false;
+                    $scope.showTempUser = true;
+                } else {
+                    $scope.showError = data;
+                    $scope.working = false;    
+                }
+                
             });
 
     };
@@ -132,6 +144,8 @@ angular.module('askApp')
     $scope.forgotPassword = function (user) {
         var url = app.server + "/account/forgotPassword";
         $scope.showInfo = false;
+        $scope.showForgotPassword = false;
+        $scope.showForgotPasswordDone = true;
         $http.post(url, user)
             .success(function () {
                 $scope.showInfo = 'forgot-user';
@@ -171,4 +185,4 @@ angular.module('askApp')
     
     
 
-  });
+  }]);

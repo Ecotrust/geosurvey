@@ -3,6 +3,7 @@
 vagrant up
 fab vagrant bootstrap
 fab vagrant createsuperuser
+fab vagrand loaddata
 fab vagrant runserver
 ```
 

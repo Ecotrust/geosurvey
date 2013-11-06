@@ -3,7 +3,7 @@ from tempfile import mkdtemp
 from contextlib import contextmanager
 
 from fabric.operations import put
-from fabric.api import env, local, sudo, run, cd, prefix, task, settings
+from fabric.api import env, local, sudo, run, cd, prefix, task, settings, get, put
 
 import datetime
 
@@ -38,12 +38,12 @@ def install_chef(latest=True):
     Install chef-solo on the server
     """
     sudo('apt-get update', pty=True)
-    sudo('apt-get install -y git-core rubygems ruby ruby-dev', pty=True)
+    sudo('apt-get install -y git-core rubygems1.9.1 ruby1.9.1 ruby1.9.1-dev', pty=True)
 
     if latest:
-        sudo('gem install chef --no-ri --no-rdoc', pty=True)
+        sudo('gem1.9.1 install chef --no-ri --no-rdoc', pty=True)
     else:
-        sudo('gem install chef --no-ri --no-rdoc --version {0}'.format(CHEF_VERSION), pty=True)
+        sudo('gem1.9.1 install chef --no-ri --no-rdoc --version {0}'.format(CHEF_VERSION), pty=True)
 
 def parse_ssh_config(text):
     """
@@ -136,7 +136,7 @@ def dumpdata():
     with cd(env.code_dir):
         with _virtualenv():
             _manage_py('dumpdata --format=json --indent=4 survey --exclude=survey.Respondant --exclude=survey.LocationAnswer --exclude=survey.Location --exclude=survey.MultiAnswer --exclude=survey.GridAnswer --exclude=survey.Response | gzip > apps/survey/fixtures/surveys.json.gz ')
-              
+            get('apps/survey/fixtures/surveys.json.gz', 'backups/surveys.json.gz')
 @task
 def loaddata():
     set_env_for_user('vagrant')
@@ -150,12 +150,12 @@ def push():
     Update application code on the server
     """
     with settings(warn_only=True):
-        remote_result = local('git remote | grep %s' % env.remote)
+        remote_result = local('git remote | grep %s' % env.host)
         if not remote_result.succeeded:
             local('git remote add %s ssh://%s@%s:%s%s' %
-                (env.remote, env.user, env.host, env.port,env.root_dir))
+                (env.host, env.user, env.host, env.port,env.root_dir))
 
-        result = local("git push %s %s" % (env.remote, env.branch))
+        result = local("git push %s %s" % (env.host, env.branch))
 
         # if push didn't work, the repository probably doesn't exist
         # 1. create an empty repo
@@ -167,7 +167,6 @@ def push():
             # result2 = run("ls %s" % env.code_dir)
             # if not result2.succeeded:
             #     run('mkdir %s' % env.code_dir)
-            print "Creating remote repo, now."
             with cd(env.root_dir):
                 run("git init")
                 run("git config --bool receive.denyCurrentBranch false")
@@ -186,9 +185,9 @@ def push():
 
 
 @task
-def deploy():
+def deploy(branch="master"):
     set_env_for_user(env.user)
-
+    env.branch = branch
     push()
     sudo('chmod -R 0770 %s' % env.virtualenv)
 
@@ -331,10 +330,17 @@ def prepare():
     provision()
 
 
+
 @task
-def emulate_ios():
+def emulate_ios_vagrant():
     run("cd %s && %s/bin/python manage.py package http://localhost:8000 '../mobile/www' --test-run" % (env.app_dir, env.venv))
     local("cd mobile && /usr/local/share/npm/bin/phonegap run -V ios")
+
+@task
+def emulate_ios_dev():
+    run("cd %s && %s/bin/python manage.py package http://162.243.141.120 '../mobile/www' --test-run" % (env.app_dir, env.venv))
+    local("cd mobile && /usr/local/share/npm/bin/phonegap run -V ios")
+
 
 @task
 def package_vagrant():
@@ -344,6 +350,11 @@ def package_vagrant():
 @task
 def package_ios_test():
         run("cd %s && %s/bin/python manage.py package http://usvi-test.pointnineseven.com '../mobile/www'" % (env.app_dir, env.venv))
+        local("cd mobile && /usr/local/share/npm/bin/phonegap build -V ios")
+
+@task
+def package_ios_dev():
+        run("cd %s && %s/bin/python manage.py package http://162.243.141.120 '../mobile/www' --id='com.pointnineseven.digitaldeck-dev'" % (env.app_dir, env.venv))
         local("cd mobile && /usr/local/share/npm/bin/phonegap build -V ios")
 
 
@@ -361,10 +372,14 @@ def package_android_test():
         local("scp ./mobile/platforms/android/bin/DigitalDeck-debug.apk ninkasi:/var/www/usvi/usvi.apk")
 
 @task
-def transfer_db():
-    # date = datetime.datetime.now().strftime("%Y-%m-%d:%H%M")
-    # db_url = local("heroku pgbackups:url", capture=True)
-    # local("heroku pgbackups:capture --expire")
-    # run("curl -o /tmp/%s.dump \"%s\"" % (date, db_url))
-    # run("pg_restore --verbose --clean --no-acl --no-owner -U postgres -d geosurvey /tmp/%s.dump" % date)
-    run("cd %s && %s/bin/python manage.py migrate --settings=config.environments.staging" % (env.app_dir, env.venv))
+def backup_db():
+    date = datetime.datetime.now().strftime("%Y-%m-%d%H%M")
+    dump_name = "%s-geosurvey.dump" % date
+    run("pg_dump geosurvey -n public -c -f /tmp/%s -Fc -O -no-acl -U postgres" % dump_name)
+    get("/tmp/%s" % dump_name, "backups/%s" % dump_name)
+
+@task
+def restore_db(dump_name):
+    put(dump_name, "/tmp/%s" % dump_name.split('/')[-1])
+    run("pg_restore --verbose --clean --no-acl --no-owner -U postgres -d geosurvey /tmp/%s" % dump_name.split('/')[-1])
+    #run("cd %s && %s/bin/python manage.py migrate --settings=config.environments.staging" % (env.app_dir, env.venv))
