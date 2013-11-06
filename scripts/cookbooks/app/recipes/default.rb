@@ -86,7 +86,7 @@ directory "/usr/local/apps/#{node[:project]}" do
     mode 0770
 end
 
-directory "/usr/local/apps/#{node[:project]}/logs" do
+directory "/srv/downloads" do
     owner "www-data"
     group "deploy"
     mode 0770
