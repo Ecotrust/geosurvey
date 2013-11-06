@@ -674,11 +674,6 @@ $scope.loadSurvey = function(data) {
             }
             
         }, true);    
-        
-        
-    
-    
-
     };
     $scope.viewPath = app.viewPath;
 
