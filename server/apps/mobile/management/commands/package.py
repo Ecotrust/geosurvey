@@ -46,6 +46,7 @@ class Command(BaseCommand):
         destDir = args[1]
         test = options.get('test_run', None)
         ident = options.get('id')
+        stage = options.get('stage')
         print "Packaging for %s" % url
         dest = settings.PROJECT_ROOT / destDir
 
@@ -75,6 +76,7 @@ class Command(BaseCommand):
         copy_dir('static/survey/assets', "%s/assets" % dest)
         copy_dir('static/survey/views', "%s/views" % dest)
         os.system("sed -i -e 's,APP_SERVER,%s,' %s/assets/js/app.js" % (url, dest))
+        os.system("sed -i -e 's,APP_STAGE,%s,' %s/assets/js/app.js" % (stage, dest))
         
         os.system("sed -i -e 's,APP_SERVER,%s,' %s/views/main.html" % (url, dest))
         if test is False:
