@@ -90,6 +90,56 @@ input.datepicker {
     font-size: 18px;
 }
 
+.btn .badge {
+    font-size: 16px;
+    padding: 4px 9px;   
+    background-color: rgb(77,136,153);
+}
+
+.blue-btn {
+    background-color: rgb(77,136,153);
+    color: white !important;
+}
+
+#history-wrap {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    /* Negative indent footer by its height */
+    margin: 0px auto -40px;
+    /* Pad bottom by footer height */
+    padding-top: 80px;
+    background-color: rgb(231, 232, 234);
+}
+#history-wrap .panel-heading {
+    background-color: rgb(251, 169, 152);
+    border-radius: 3px;
+    cursor: pointer; 
+    cursor: hand
+}
+#history-wrap .panel-default {
+    margin-bottom: 10px;
+}
+#history-wrap .form-control {
+    background-color: white;
+}
+#history-footer {
+    position: fixed;
+    width: 100%;
+    margin: 0 auto -60px;
+    height: 40px;
+    background-color: rgb(64, 64, 66);
+    bottom: 60px;
+}
+#history-footer a {
+    margin-top: 5px;
+}
+
+#history-wrap > .container {
+    padding: 20px 15px 50px;
+    background-color: rgb(231, 232, 234);
+}
+
 /* Wrapper for page content to push down footer */
 #wrap {
     min-height: 100%;

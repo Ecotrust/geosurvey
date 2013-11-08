@@ -6,11 +6,13 @@
             <p>This device has no completed reports.</p>
             <a class="btn btn-main btn-default btn-lg btn-block" href="#/main">return to main menu</a>
         </div>
+
         <div ng-show="confirmSubmit">
             <h3>Submit Reports</h3>
             <a class="btn btn-main btn-default btn-lg btn-block btn-danger" ng-click="syncronize(respondents)">ok</a>
             <a class="btn btn-main btn-default btn-lg btn-block" ng-tap="confirmSubmit = false">cancel</a>
         </div>
+
         <div ng-hide="confirmSubmit" ng-show="respondents.length">
             <a class="btn btn-main btn-default btn-lg btn-block" ng-click="confirmSubmit = true">submit surveys</a>
         </div>
@@ -25,8 +27,9 @@
                 </td>
             </tr>
         </table>
+
         <div>
-            <a class="btn btn-main btn-default btn-lg btn-block" ng-click="showSubmittedSurveys()">show submitted surveys</a>
+            <a class="btn btn-main btn-default btn-lg btn-block" ng-click="showSubmittedSurveys()">view un-submitted surveys</a>
         </div>
         <div ng-show="showingSubmittedSurveys">
             
@@ -42,9 +45,27 @@
                     </div>
                 </div>
             </div>
-
-
         </div>  
+        
+        <div>
+            <a class="btn btn-main btn-default btn-lg btn-block" ng-click="showSubmittedSurveys()">view submitted surveys</a>
+        </div>
+        <div ng-show="showingSubmittedSurveys">
+            
+            <div class="panel panel-default" ng-repeat="respondent in respondentList | orderBy: 'ts':true">
+                <div class="panel-heading" style="cursor: pointer; cursor: hand" ng-click="openRespondent(respondent)">
+                    <h4 class="panel-title">
+                        {{respondent.survey_title}}
+                    </h4>
+                </div>
+                <div id="{{ respondent.survey_title }}" class="panel-collapse collapse" ng-class="{ 'in': respondent.open }">
+                    <div class="panel-body">
+                        <div ng-include="'views/surveyAnswers.html'"></div>
+                    </div>
+                </div>
+            </div>
+        </div>  
+
     </div>
 </div>
 

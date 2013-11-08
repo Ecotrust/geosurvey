@@ -1,7 +1,7 @@
 //'use strict';
 
 angular.module('askApp')
-  .factory('survey', function ($http) {
+  .factory('survey', function ($http, $location) {
     // Service logic
     // ...
 
@@ -243,6 +243,23 @@ angular.module('askApp')
         return sendRespondent(respondent);
     }
 
+
+    var resume = function(respondent) {
+        var url;
+        if (respondent.responses.length) {
+            url = respondent.resumePath.replace('#', '');
+        } else {
+            url = [
+                '/survey',
+                respondent.survey,
+                1,
+                respondent.uuid
+            ].join('/');
+        }
+        
+       $location.path(url);
+    };
+
     // Public API here
     return {
       'getNextPage': getNextPage,
@@ -251,6 +268,7 @@ angular.module('askApp')
       'getAnswer': getAnswer,
       'cleanSurvey': cleanSurvey,
       'getQuestionUriFromSlug': getQuestionUriFromSlug,
-      'submitSurvey': submitSurvey
+      'submitSurvey': submitSurvey,
+      'resume': resume
     };
   });

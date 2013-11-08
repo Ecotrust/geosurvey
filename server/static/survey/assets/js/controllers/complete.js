@@ -25,6 +25,7 @@ angular.module('askApp')
     if (app.offline) {
         app.respondents[$routeParams.uuidSlug].complete = true;
         app.respondents[$routeParams.uuidSlug].status = 'complete';
+        delete app.user.resumePath;
         app.message = "You have completed a catch report.";
 
         localStorage.setItem('hapifish', JSON.stringify(app));    

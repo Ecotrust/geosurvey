@@ -8,6 +8,10 @@ import simplejson
 from apps.survey.models import Survey, Question, Response, Respondant, Location, LocationAnswer
 from apps.reports.models import QuestionReport
 
+def get_respondants_summary(request):
+    start_time = Respondant.objects.filter(user=request.user).aggregate(lowest=Min('ts'))['lowest']
+    return HttpResponse(simplejson.dumps( { 'start_time': start_time.strftime('%Y-%m-%d') } ) )
+
 @staff_member_required
 def get_geojson(request, survey_slug, question_slug):
     survey = get_object_or_404(Survey, slug=survey_slug)

@@ -25,7 +25,7 @@ angular.module('askApp')
         $scope.timer = setInterval(function () {
             $scope.width = $scope.width + 10;
         }, 500);
-        $http.get(app.server + '/api/v1/survey1/?format=json').success(function(data) {
+        $http.get(app.server + '/api/v1/survey/?format=json').success(function(data) {
             $scope.useSurveys(data.objects);
         }).error(function (data, status) {
             

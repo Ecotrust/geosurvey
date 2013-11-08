@@ -14,8 +14,13 @@ angular.module('askApp')
             
         } else {
             $location.path('/');
+        }        
+    }
+
+    if (app.user && app.user.resumePath) {
+        if ( ! _.has(app.respondents, _.last(app.user.resumePath.split('/'))) ) {
+            delete $scope.user.resumePath;
         }
-        
     }
 
     if ($location.path() === '/signup' && $scope.user.status === 'signup') {

@@ -82,9 +82,21 @@ angular.module('askApp', ['ui', 'ui.bootstrap', 'ngGrid'])
         controller: 'SurveyDetailCtrl',
         edit: true
     })
-        .when('/respondents', {
-        templateUrl: app.viewPath + 'views/offlineRespondantList.html',
-        controller: 'offlineRespondantListCtrl'
+    //     .when('/respondents', {
+    //     templateUrl: app.viewPath + 'views/offlineRespondantList.html',
+    //     controller: 'offlineRespondantListCtrl'
+    // })
+        .when('/history', {
+        templateUrl: app.viewPath + 'views/history.html',
+        controller: 'HistoryCtrl'
+    })
+        .when('/unSubmittedSurveyList', {
+        templateUrl: app.viewPath + 'views/unSubmittedSurveyList.html',
+        controller: 'unSubmittedSurveyListCtrl'
+    })
+        .when('/submittedSurveyList', {
+        templateUrl: app.viewPath + 'views/submittedSurveyList.html',
+        controller: 'submittedSurveyListCtrl'
     })
         .when('/respondent/:uuidSlug', {
         templateUrl: app.viewPath + 'views/completedSurveys.html',
