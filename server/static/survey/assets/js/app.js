@@ -92,6 +92,10 @@ angular.module('askApp', ['ui', 'ui.bootstrap', 'ngGrid'])
         templateUrl: app.viewPath + 'views/history.html',
         controller: 'HistoryCtrl'
     })
+        .when('/fisher-summary', {
+        templateUrl: app.viewPath + 'views/fisher-summary.html',
+        controller: 'SummaryCtrl'
+    })
         .when('/unSubmittedSurveyList', {
         templateUrl: app.viewPath + 'views/unSubmittedSurveyList.html',
         controller: 'unSubmittedSurveyListCtrl'

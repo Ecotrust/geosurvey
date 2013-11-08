@@ -106,7 +106,7 @@ def get_distribution(request, survey_slug, question_slug):
     else:
         answer_domain = answers.values('answer').annotate(locations=Sum('respondant__locations'), surveys=Count('answer'))
 
-    return HttpResponse(simplejson.dumps({'success': "true", "answer_domain": list(answer_domain)}))
+    return HttpResponse(simplejson.dumps({'success': "true", "results": list(answer_domain)}))
 
 @staff_member_required
 def get_crosstab(request, survey_slug, question_a_slug, question_b_slug):

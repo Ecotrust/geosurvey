@@ -8,7 +8,9 @@
         <div ng-hide="respondents.length">
             <p>This device has no completed reports.</p>
         </div>
-
+        <div>
+            <a class="btn btn-main btn-default btn-lg btn-block panel-heading" href="#/fisher-summary">Overall Summary</a>
+        </div>
         <div>
             <a class="btn btn-main btn-default btn-lg btn-block panel-heading" href="#/unSubmittedSurveyList">view un-submitted surveys <span class="badge pull-right" style="top: 0px">{{respondents.length}}</span></a>
         </div>
@@ -22,5 +24,6 @@
                 </span>
             </a>
         </div>
+
     </div>
 </div>

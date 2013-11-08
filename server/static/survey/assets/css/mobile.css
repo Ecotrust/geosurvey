@@ -355,6 +355,21 @@ img.center {
     -webkit-transition: width 0s ease;
     transition: width 0s ease;
 }
+.summary li {
+    margin-bottom: 20px;
+}
+.summary .progress {
+    background-color: white;
+    height: 15px;
+}
+.summary h5 {
+    margin-top: 2px;
+}
+.summary .progress .progress-bar {
+    background-color: rgb(77, 136, 153); 
+    height: 100%;
+}
+
 .respondant {
     margin-left: 10px;
     margin-right: 10px;
