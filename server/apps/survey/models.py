@@ -300,6 +300,7 @@ class GridAnswer(caching.base.CachingMixin, models.Model):
     col_text = models.TextField(null=True, blank=True)
     col_label = models.TextField(null=True, blank=True)
     answer_text = models.TextField(null=True, blank=True)
+    answer_number = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
 
     def __unicode__(self):
         return "%s: %s" % (self.row_text, self.col_text)
@@ -334,24 +335,36 @@ class Response(caching.base.CachingMixin, models.Model):
                 if answer.get('name'):
                     self.answer = answer['name']
             if self.question.type in ['monthpicker']:
-                date = dateutil.parser.parse(self.answer)
-                self.answer= "%s/%s" % (date.month, date.year)
+                try:
+                    date = dateutil.parser.parse(self.answer)
+                    self.answer= "%s/%s" % (date.month, date.year)
+                except Exception as e:
+                    self.answer = self.answer_raw
             if self.question.type in ['number-with-unit']:
-                answer = simplejson.loads(self.answer_raw)
-                self.answer = answer['value']
-                self.unit = answer['unit']
+                try: 
+                    answer = simplejson.loads(self.answer_raw)
+                    self.answer = answer.get('value', answer)
+                    self.unit = answer.get('unit', 'Unknown')
+                except Exception as e:
+                    self.answer = self.answer_raw
             if self.question.type in ['auto-multi-select', 'multi-select']:
                 answers = []
                 self.multianswer_set.all().delete()
-                for answer in simplejson.loads(self.answer_raw):
-                    if answer.get('text'):
-                        answer_text = answer['text']
-                    if answer.get('name'):
-                        answer_text = answer['name']
-                    answers.append(answer_text)
-                    answer_label = answer.get('label', None)
-                    multi_answer = MultiAnswer(response=self, answer_text=answer_text, answer_label=answer_label)
-                    multi_answer.save()
+                answer_list = simplejson.loads(self.answer_raw)
+                if type(answer_list) is dict:
+                    answer_list = [answer_list]
+                for answer in answer_list:
+                    try:
+                        if answer.get('text'):
+                            answer_text = answer['text']
+                        if answer.get('name'):
+                            answer_text = answer['name']
+                        answers.append(answer_text)
+                        answer_label = answer.get('label', None)
+                        multi_answer = MultiAnswer(response=self, answer_text=answer_text, answer_label=answer_label)
+                        multi_answer.save()
+                    except Exception as e:
+                        pass
                 self.answer = ", ".join(answers)
             if self.question.type in ['map-multipolygon']:
                 answers = []
@@ -382,6 +395,7 @@ class Response(caching.base.CachingMixin, models.Model):
                             try:
                                 grid_answer = GridAnswer(response=self,
                                     answer_text=answer[grid_col.label.replace('-', '')],
+                                    answer_number=answer[grid_col.label.replace('-', '')],
                                     row_label=answer['label'], row_text=answer['text'],
                                     col_label=grid_col.label, col_text=grid_col.text)
                                 grid_answer.save()
@@ -410,19 +424,19 @@ class Response(caching.base.CachingMixin, models.Model):
                 setattr(self.respondant, self.question.slug, self.answer)
                 self.respondant.save()
 
-            if self.question.attach_to_profile or self.question.persistent:
-                # Get this user's set of profile fields. These can be shared cross-survey (...is this still the case?)
-                if self.respondant.user.profile.registration and self.respondant.user.profile.registration != 'null':
-                    profileAnswers = simplejson.loads(self.respondant.user.profile.registration)
-                else:
-                    profileAnswers = {}
-                # Replace existing value with new value.
-                profileAnswers[self.question.slug] = self.answer
-                profile = get_object_or_404(UserProfile, user=self.respondant.user)
-                profile.registration = simplejson.dumps(profileAnswers)
-                profile.save()
-
-
+            if self.respondant is not None and self.respondant.user is not None:
+                if self.question.attach_to_profile or self.question.persistent:
+                    # Get this user's set of profile fields. These can be shared cross-survey (...is this still the case?)
+                    if self.respondant.user.profile.registration and self.respondant.user.profile.registration != 'null':
+                        profileAnswers = simplejson.loads(self.respondant.user.profile.registration)
+                    else:
+                        profileAnswers = {}
+                    # Replace existing value with new value.
+                    profileAnswers[self.question.slug] = self.answer
+                    profile = get_object_or_404(UserProfile, user=self.respondant.user)
+                    profile.registration = simplejson.dumps(profileAnswers)
+                    profile.save()
+            
             self.save()
             print self.answer
 

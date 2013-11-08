@@ -16,6 +16,7 @@
                 <div>
                     <div class="question-title"> {{ getPageBlockTitle() }} </div>
                     <div class="question-wrapper" ng-repeat="question in page.questions">
+                        {{ question.slug }}
                         <h4 class="question-title">{{ question.title }}</h4>
                         <div ng-switch on="question.type">
                             <div ng-switch-when="grid">
