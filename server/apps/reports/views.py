@@ -2,11 +2,16 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.db.models import Avg, Max, Min, Count, Sum
 from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib.auth.decorators import login_required
 
 import simplejson
 
 from apps.survey.models import Survey, Question, Response, Respondant, Location, LocationAnswer, GridAnswer
 from apps.reports.models import QuestionReport
+
+def get_respondants_summary(request):
+    start_time = Respondant.objects.filter(user=request.user).aggregate(lowest=Min('ts'))['lowest']
+    return HttpResponse(simplejson.dumps( { 'start_time': start_time.strftime('%Y-%m-%d') } ) )
 
 @staff_member_required
 def get_geojson(request, survey_slug, question_slug):
@@ -48,10 +53,9 @@ def get_geojson(request, survey_slug, question_slug):
     
     return HttpResponse(simplejson.dumps({'success': "true", 'geojson': geojson}))
 
-@staff_member_required
+@login_required
 def get_distribution(request, survey_slug, question_slug):
     survey = get_object_or_404(Survey, slug=survey_slug)
-    print question_slug
     if question_slug.find('*') == -1:
         question = get_object_or_404(QuestionReport, slug=question_slug, survey=survey)
         answers = question.response_set.filter(respondant__complete=True)
@@ -61,6 +65,7 @@ def get_distribution(request, survey_slug, question_slug):
         answers = Response.objects.filter(question__in=questions)
         question_type = questions.values('type').distinct()[0]['type']
 
+    answers = answers.filter(user=request.user)
     filter_question_slug = None
     filter_value = None
 

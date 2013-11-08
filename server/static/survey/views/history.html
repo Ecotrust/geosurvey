@@ -1,0 +1,26 @@
+<div id="history-wrap" class="menu-page">
+    <div mobilemenu></div>
+    <!-- Begin page content -->
+    <div class="container">
+
+        <h4>History</h4>
+
+        <div ng-hide="respondents.length">
+            <p>This device has no completed reports.</p>
+        </div>
+
+        <div>
+            <a class="btn btn-main btn-default btn-lg btn-block panel-heading" href="#/unSubmittedSurveyList">view un-submitted surveys <span class="badge pull-right" style="top: 0px">{{respondents.length}}</span></a>
+        </div>
+        
+        <div>
+            <a class="btn btn-main btn-default btn-lg btn-block panel-heading" href="#/submittedSurveyList" ng-class="{ 'disabled': !respondentList }">
+                view submitted surveys 
+                <span class="badge pull-right" style="top: 0px">
+                    {{respondentList.length}}
+                    <i class="icon-spinner icon-spin" ng-hide="respondentList"></i>
+                </span>
+            </a>
+        </div>
+    </div>
+</div>

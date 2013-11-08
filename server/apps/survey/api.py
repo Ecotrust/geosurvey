@@ -159,9 +159,9 @@ class OfflineRespondantResource(SurveyModelResource):
             response['user'] = user_uri
 
 class ReportRespondantResource(SurveyModelResource):
-    responses = fields.ToManyField(ResponseResource, 'responses', full=True, null=True, blank=True)
+    responses = fields.ToManyField(ResponseResource, 'responses', full=False, null=True, blank=True)
     survey = fields.ToOneField('apps.survey.api.SurveyResource', 'survey', null=True, blank=True, readonly=True)
-    user = fields.ToOneField('apps.account.api.UserResource', 'user', null=True, blank=True, full=True, readonly=True)
+    user = fields.ToOneField('apps.account.api.UserResource', 'user', null=True, blank=True, full=False, readonly=True)
     survey_title = fields.CharField(attribute='survey_title', readonly=True)
     survey_slug = fields.CharField(attribute='survey_slug', readonly=True)
 
@@ -170,13 +170,18 @@ class ReportRespondantResource(SurveyModelResource):
         filtering = {
             'survey': ALL_WITH_RELATIONS,
             'responses': ALL_WITH_RELATIONS,
-            'user': ALL_WITH_RELATIONS
+            'user': ALL_WITH_RELATIONS,
+            'ts': ['gte','lte']
         }
         ordering = ['-ts']
         authorization = StaffUserOnlyAuthorization()
         authentication = Authentication()
 
 
+class ReportRespondantDetailsResource(ReportRespondantResource):
+    responses = fields.ToManyField(ResponseResource, 'responses', full=True, null=True, blank=True)
+    user = fields.ToOneField('apps.account.api.UserResource', 'user', null=True, blank=True, full=True, readonly=True)
+    
 class RespondantResource(SurveyModelResource):
     responses = fields.ToManyField(ResponseResource, 'responses', full=True, null=True, blank=True)
     survey = fields.ToOneField('apps.survey.api.SurveyResource', 'survey', null=True, blank=True, full=True, readonly=True)
@@ -186,7 +191,8 @@ class RespondantResource(SurveyModelResource):
         queryset = Respondant.objects.all().order_by('-ts')
         filtering = {
             'survey': ALL_WITH_RELATIONS,
-            'responses': ALL_WITH_RELATIONS
+            'responses': ALL_WITH_RELATIONS,
+            'ts': ['gte','lte']
         }
         ordering = ['-ts']
         authorization = StaffUserOnlyAuthorization()

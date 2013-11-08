@@ -1,0 +1,48 @@
+<div id="history-wrap" class="menu-page">
+    <div mobilemenu></div>
+    <!-- Begin page content -->
+    <div class="container">
+        
+        <div ng-show="showSurveyList">
+            <h4>Submitted Reports</h4>
+
+            <h4>From:</h4>
+            <div class="input-group">
+                <input class="form-control datepicker" type="date" ng-model="surveyFilter.start" />
+                <span class="input-group-btn btn-lg"><span class="glyphicon glyphicon-calendar"></span></span>
+            </div>
+            
+            <h4>To:</h4>
+            <div class="input-group">
+                <input class="form-control datepicker" type="date" ng-model="surveyFilter.end" />
+                <span class="input-group-btn btn-lg"><span class="glyphicon glyphicon-calendar"></span></span>
+            </div>
+            
+            <div style="margin-top: 20px">
+
+                <div class="panel panel-default" ng-repeat="respondent in respondentList | orderBy: 'ts':true">
+                    <div class="panel-heading" ng-click="openRespondent(respondent)">
+                        <h4 class="panel-title">
+                            {{respondent.survey_title}}
+                        </h4>
+                    </div>
+                    <div id="{{ respondent.survey_title }}" class="panel-collapse collapse" ng-class="{ 'in': respondent.open }">
+                        <div class="panel-body">
+                            <div ng-include="'views/surveyAnswers.html'"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>  
+
+    </div>
+
+    <div ng-hide="showSurveyList" ng-include="viewPath + 'views/spinner.html'"></div>
+
+</div>
+
+
+<div id="history-footer">
+    <a class="btn pull-left" href="#/history"><span class="glyphicon glyphicon-chevron-left"></span></a>
+</div>
