@@ -99,7 +99,6 @@ def get_distribution(request, survey_slug, question_slug):
                 answers = answers.filter(respondant__responses__in=filter_question.response_set.filter(answer__in=value))
     if question_type in ['grid']:
         answer_domain =  GridAnswer.objects.filter(response__in=answers).values('row_text', 'col_text').annotate(total=Sum('answer_number')).order_by('row_text')
-        print GridAnswer.objects.filter(response__in=answers).values('row_label', 'col_label').annotate(total=Sum('answer_number')).order_by('row_label').query
         # return answers.values('answer').annotate(locations=Sum('respondant__locations'), surveys=Count('answer'))
     elif question_type in ['map-multipoint']:
         answer_domain = locations.values('answer').annotate(locations=Count('answer'), surveys=Count('location__respondant', distinct=True))
