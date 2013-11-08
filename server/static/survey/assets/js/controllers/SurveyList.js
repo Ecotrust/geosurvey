@@ -18,7 +18,7 @@ angular.module('askApp')
         $scope.loaded = true;
         clearInterval($scope.timer);
     }
-
+    $scope.showUpdateSurveys = true;
     $scope.updateSurveys = function () {
         $scope.hideSurveys = true;
         $scope.width = 0;
