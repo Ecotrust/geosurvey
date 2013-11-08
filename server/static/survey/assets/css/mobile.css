@@ -101,6 +101,10 @@ input.datepicker {
     color: white !important;
 }
 
+.panel-heading .survey-title h3 {
+    color: rgb(51, 51, 51);
+}
+
 #history-wrap {
     min-height: 100%;
     height: auto !important;

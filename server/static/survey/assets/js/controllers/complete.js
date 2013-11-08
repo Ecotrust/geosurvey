@@ -1,7 +1,7 @@
 //'use strict';
 
 angular.module('askApp')
-  .controller('CompleteCtrl', function ($scope, $routeParams, $http, $location, survey) {
+  .controller('CompleteCtrl', function ($scope, $routeParams, $http, $location, survey, history) {
     var url = '/respond/complete/' + [$routeParams.surveySlug, $routeParams.uuidSlug].join('/');
     $http.defaults.headers.post['Content-Type'] = 'application/json';
 
@@ -34,6 +34,8 @@ angular.module('askApp')
             app.data.state = $routeParams.action;
         });    
     }
+
+    $scope.respondent = app.respondents[$routeParams.uuidSlug];
     
     
     if (app.data) {
@@ -41,6 +43,26 @@ angular.module('askApp')
         app.data.responses = [];
     }
     $scope.completeView = '/static/survey/survey-pages/' + $routeParams.surveySlug + '/complete.html';
+
+
+
+    $scope.skipBack = function () {
+        var lastPage = survey.getLastPage();
+        if (lastPage) {
+            $location.path(['survey', $routeParams.surveySlug, lastPage.order, $routeParams.uuidSlug].join('/'));    
+        } else {
+            $location.path('/surveys');
+        }
+
+    };
+
+    $scope.getTitle = function() {
+        return history.getTitle($scope.respondent);
+    };
+
+    $scope.getAnswer = function(questionSlug) {
+        return history.getAnswer(questionSlug, $scope.respondent);
+    };
 
     $scope.submitReport = function () {
         $scope.working = true;
