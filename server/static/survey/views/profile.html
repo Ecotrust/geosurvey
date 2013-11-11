@@ -1,22 +1,9 @@
-<div id="wrap" class="main">
-    <!-- Fixed navbar -->
-    <div class="navbar navbar-default navbar-fixed-top">
-
-    </div>
-
+<div id="wrap" class="menu-page">
+    <div mobilemenu></div>
+    
     <!-- Begin page content -->
     <div class="container">
-        <div class="page-header">
-            <img src="assets/img/deck-logo.svg" class="center logo" />
-        </div>
-
-        <div ng-show="user" ng-class="{ 'working': working }">
-            <div class="spinner">
-                <div class="wrapper">
-                    <div class="inner">
-                    </div>
-                </div>
-            </div>
+        <div ng-show="user" ng-hide="loading">
 
             <div class="forms">
                 <div class="new-user-form">
@@ -41,12 +28,21 @@
                         <input class="form-control" type="email" placeholder="enter your email address..." data-ng-model="profileQuestions.emailaddress" required>
  -->
                         <button class="btn btn-main btn-default btn-block" ng-click="updateProfile(profileQuestions)">submit</button>
-                        <a type="button" class="btn btn-main btn-default btn-lg btn-block" href="#/">cancel</a>
+                        <a type="button" class="btn btn-main btn-default btn-lg btn-block" href="#/main">cancel</a>
                                                 
                     </form>
                 </div>
             </div>
         </div>
+
+        <div class="loading-indicator" ng-show="loading">
+            <h3>Loading...</h3>
+            <div class="bar">
+                <i class="sphere"></i>
+            </div>
+
+        </div>
+
     </div>
 
     <!-- <div class="alert-notice" ng-show="message">
