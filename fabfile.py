@@ -366,6 +366,13 @@ def package_ios_dev():
 #         local("cp ./android/app/bin/HapiFis-debug.apk server/static/hapifis.apk")
 
 @task
+def package_android_dev():
+        run("cd %s && %s/bin/python manage.py package http://usvi-dev.pointnineseven.com '../mobile/www'" % (env.app_dir, env.venv))
+        local("cd mobile && /usr/local/share/npm/bin/phonegap build -V android")
+        local("scp ./mobile/platforms/android/bin/DigitalDeck-debug.apk usvi-dev.pointnineseven.com:/srv/downloads")
+
+
+@task
 def package_android_test():
         run("cd %s && %s/bin/python manage.py package http://usvi-test.pointnineseven.com '../mobile/www'" % (env.app_dir, env.venv))
         local("cd mobile && /usr/local/share/npm/bin/phonegap build -V android")
