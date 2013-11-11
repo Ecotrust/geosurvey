@@ -24,8 +24,13 @@ class PageAdmin(admin.ModelAdmin):
     def formfield_for_manytomany(self, db_field, request, **kwargs):
         if db_field.name == "blocks":
             kwargs["queryset"] = Block.objects.all().order_by('name')
+        if db_field.name == "questions":
+            kwargs["queryset"] = Question.objects.all().order_by('slug')
         return super(PageAdmin, self).formfield_for_manytomany(db_field, request, **kwargs)
-
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == "question":
+            kwargs["queryset"] = Question.objects.all().order_by('slug')
+        return super(PageAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
 
 
 class BlockAdmin(admin.ModelAdmin):
