@@ -1,6 +1,7 @@
 var app = {
-	version: '1.2.2',
+	version: '1.2.61',
 	server: 'http://localhost:8000',
+	stage: 'dev',
 	user: {
 		username: 'fish',
 		registration: {
@@ -41,7 +42,7 @@ describe('Controller: MainCtrl', function() {
 	});
 
 	it('should set up some items on the scope', function() {
-		expect(scope.version).toBe('1.2.2');
+		expect(scope.version).toBe('1.2.61');
 		expect(scope.user.username).toBe('fish');
 	});
 
@@ -124,6 +125,6 @@ describe('Controller: MainCtrl', function() {
 	it('updateApp: should open the a window to update the app', function () {
 		window.open = jasmine.createSpy("open() spy");
 		scope.updateApp();
-		expect(window.open).toHaveBeenCalledWith('http://www.labs.ecotrust.org/usvi/update.html', '_blank', 'location=yes');
+		expect(window.open).toHaveBeenCalledWith('http://localhost:8000/downloads/update.html', '_blank', 'location=yes');
 	});
 });

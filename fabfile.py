@@ -333,28 +333,28 @@ def prepare():
 
 @task
 def emulate_ios_vagrant():
-    run("cd %s && %s/bin/python manage.py package http://localhost:8000 '../mobile/www' --test-run" % (env.app_dir, env.venv))
+    run("cd %s && %s/bin/python manage.py package http://localhost:8000 '../mobile/www' --stage=vagrant --test-run" % (env.app_dir, env.venv))
     local("cd mobile && /usr/local/share/npm/bin/phonegap run -V ios")
 
 @task
 def emulate_ios_dev():
-    run("cd %s && %s/bin/python manage.py package http://162.243.141.120 '../mobile/www' --test-run" % (env.app_dir, env.venv))
+    run("cd %s && %s/bin/python manage.py package http://usvi-dev.pointnineseven.com '../mobile/www' --stage=dev --test-run" % (env.app_dir, env.venv))
     local("cd mobile && /usr/local/share/npm/bin/phonegap run -V ios")
 
 
 @task
 def package_vagrant():
-    run("cd %s && %s/bin/python manage.py package http://localhost:8000 '../mobile/www'" % (env.app_dir, env.venv))
-
+    run("cd %s && %s/bin/python manage.py package http://localhost:8000 '../mobile/www' --test-run --stage=vagrant" % (env.app_dir, env.venv))
+    local("cd mobile && /usr/local/share/npm/bin/phonegap build -V ios")
 
 @task
 def package_ios_test():
-        run("cd %s && %s/bin/python manage.py package http://usvi-test.pointnineseven.com '../mobile/www'" % (env.app_dir, env.venv))
+        run("cd %s && %s/bin/python manage.py package http://usvi-test.pointnineseven.com '../mobile/www' --stage=test" % (env.app_dir, env.venv))
         local("cd mobile && /usr/local/share/npm/bin/phonegap build -V ios")
 
 @task
 def package_ios_dev():
-        run("cd %s && %s/bin/python manage.py package http://162.243.141.120 '../mobile/www' --id='com.pointnineseven.digitaldeck-dev'" % (env.app_dir, env.venv))
+        run("cd %s && %s/bin/python manage.py package http://usvi-dev.pointnineseven.com '../mobile/www' --stage=dev --id='com.pointnineseven.digitaldeck-dev'" % (env.app_dir, env.venv))
         local("cd mobile && /usr/local/share/npm/bin/phonegap build -V ios")
 
 

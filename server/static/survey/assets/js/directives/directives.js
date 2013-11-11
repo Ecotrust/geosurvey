@@ -24,3 +24,22 @@ angular.module('askApp')
         }
     }
 });
+
+angular.module('askApp')
+    .directive('progress', function() {
+
+    return {
+        templateUrl: app.viewPath + 'views/progress.html',
+        restrict: 'EA',
+        transclude: true,
+        replace: true,
+        scope: {
+            value: "=value",
+            max: "=max"
+        },
+        link: function (scope, element, attrs) {
+            scope.percent = (scope.value/scope.max) * 100;
+            console.log(scope.percent);
+        }
+    }
+});

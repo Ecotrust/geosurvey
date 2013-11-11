@@ -4,7 +4,6 @@ angular.module('askApp')
     $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
 
     $scope.path = 'home';
-    $scope.version = app.version;
     
     if (app.user) {
         $scope.user = app.user;
@@ -28,10 +27,10 @@ angular.module('askApp')
     } else if ($location.path() === '/signin' && $scope.user.status === 'signin') {
         $scope.authUser = app.offlineUser;
     }
+    
     $scope.version = app.version;
-    if (app.version !== "APP_VERSION") {
-        
-    }
+    $scope.stage = app.stage;
+    
     $scope.update = false;
     $http({
         method: 'GET',
@@ -49,7 +48,7 @@ angular.module('askApp')
         });
     
     $scope.updateApp = function () {
-        var ref = window.open('http://www.labs.ecotrust.org/usvi/update.html', '_blank', 'location=yes');
+        var ref = window.open(app.server + '/downloads/update.html', '_blank', 'location=yes');
     }
 
     $scope.logout = function () {

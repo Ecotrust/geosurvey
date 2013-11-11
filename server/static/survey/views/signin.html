@@ -47,9 +47,11 @@
                     </div>
                     
                 </form>
-                <a class="forgot-password pull-right" ng-click="showForgotPassword = true">Forgot Password</a>
+                <div class="pull-right">
+                    <p>{{stage}}/{{version}}</p>
+                    <a class="forgot-password" ng-click="showForgotPassword = true">Forgot Password</a>
+                </div>
             </div>
-            <p class="pull-right">{{version}}</p>
         </div>
     </div>
 </div>

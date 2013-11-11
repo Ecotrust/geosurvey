@@ -20,6 +20,8 @@ if (_.string.startsWith(window.location.protocol, "http")) {
 
 app.version = "APP_VERSION";
 
+app.stage = "APP_STAGE";
+
 if (window.location.pathname === '/respond') {
     app.viewPath = app.server + '/static/survey/';
     app.offline = false;
@@ -89,6 +91,10 @@ angular.module('askApp', ['ui', 'ui.bootstrap', 'ngGrid'])
         .when('/history', {
         templateUrl: app.viewPath + 'views/history.html',
         controller: 'HistoryCtrl'
+    })
+        .when('/fisher-summary', {
+        templateUrl: app.viewPath + 'views/fisher-summary.html',
+        controller: 'SummaryCtrl'
     })
         .when('/unSubmittedSurveyList', {
         templateUrl: app.viewPath + 'views/unSubmittedSurveyList.html',
