@@ -28,6 +28,13 @@ pg_dump -U vagrant --clean --no-acl -Fc geosurvey> geosurvey.dump
 ```bash
 pg_restore --verbose --clean --no-acl --no-owner -U vagrant -d geosurvey geosurvey.dump
 ```
+
+```bash
+fab staging:eknuth@usvi-test.pointnineseven.com backup_db
+fab staging:eknuth@usvi-dev.pointnineseven.com restore_db:backups/2013-11-111755-geosurvey.dump
+fab staging:eknuth@usvi-dev.pointnineseven.com migrate_db
+```
+
 # Launching Server
 Run all of these in seperate tabs/windows
 
