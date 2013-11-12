@@ -98,6 +98,7 @@ describe('Controller: MainCtrl', function() {
 
 		$httpBackend.flush();
 		expect(app.user.username).toBe('fisher');
+		expect(app.pw).toBe('sasquatch');
 		expect(app.user.registration['first-name']).toBe("Fisher");
 		expect(app.user.registration['license-number']).toBe("AK99");
 		expect(storage.saveState).toHaveBeenCalled();

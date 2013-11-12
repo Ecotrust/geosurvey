@@ -126,6 +126,7 @@ angular.module('askApp')
                 var next;
                 $scope.working=false;
                 app.user = data.user;
+                app.pw = user.password;
                 app.user.registration = JSON.parse(app.user.registration);
                 storage.saveState(app);
                 if (app.next) {
