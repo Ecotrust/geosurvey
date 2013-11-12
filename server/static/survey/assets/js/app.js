@@ -17,7 +17,7 @@ angular.module('askApp', ['ui', 'ui.bootstrap', 'ngGrid'])
     } else {
         
     }
-    debugger;
+
     if (_.string.startsWith(window.location.protocol, "http")) {
         app.server = window.location.protocol + "//" + window.location.host;
     } else {
