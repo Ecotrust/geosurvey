@@ -1,3 +1,7 @@
+#1.2.68
+fixing bugs
+addressing the following tickets: #166, #169, #175, #177, #181, #196, #199, #205, #206
+
 #1.2.51
 return of icons and updated splash screen
 increase size of grid container to show more species: #139
