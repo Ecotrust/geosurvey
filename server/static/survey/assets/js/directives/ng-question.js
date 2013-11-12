@@ -164,7 +164,7 @@ angular.module('askApp').directive('multiquestion', function() {
             // handle single select clicks
             scope.onSingleSelectClicked = function(option, question) {
                 // turn off all other options
-                if (question.groupedOptions) {
+                if (question.groupedOptions && question.groupedOptions.length) {
                     var groupedOptions = _.flatten(_.map(question.groupedOptions, function(option) {
                         return option.options;
                     }));
