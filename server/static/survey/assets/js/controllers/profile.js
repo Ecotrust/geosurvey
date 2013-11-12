@@ -76,12 +76,11 @@ angular.module('askApp')
         _.each(profileQuestions, function(item, i) {
             registration[item.slug] = item.answer;
         });
-
         $http.post(url, {username: app.user.username, registration: registration})
             .success(function (data) {
                 app.user.registration = registration;
-                storage.saveState();
-                $location.path('#/main');
+                storage.saveState(app);
+                $location.path('/main');
             })
             .error(function (data) {
                 if (data) {
