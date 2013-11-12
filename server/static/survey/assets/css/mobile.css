@@ -129,6 +129,9 @@ input.datepicker {
     cursor: pointer; 
     cursor: hand
 }
+#history-wrap .panel-heading.darkSalmonBackground {
+    background-color: rgb(239, 94, 70);
+}
 #history-wrap .panel-default {
     margin-bottom: 10px;
 }
@@ -446,7 +449,7 @@ img.center {
     background-color: rgb(244, 218, 130);
 }
 .question .panel-body .select-content .select-name {
-    padding-left: 40px;
+    padding-left: 20px;
 }
 .question .panel, .question .panel-collapse {
     background-color: inherit;

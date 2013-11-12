@@ -11,7 +11,7 @@ angular.module('askApp').directive('multiquestion', function() {
             validity: '=validity'
         },
         link: function postLink(scope, element, attrs) {
-                scope.validateQuestion = function (question) {
+            scope.validateQuestion = function (question) {
                 // if the question is not required it is good to go
                 if (! question.required) {
                     return true;
@@ -39,9 +39,14 @@ angular.module('askApp').directive('multiquestion', function() {
                 }
                 var otherAnswers = question.otherAnswers && question.otherAnswers.length && ( ! (question.otherAnswers.length === 1 && question.otherAnswers[0] === "") );
                 if (question.type === 'single-select') {
-
-                    return _.some(_.pluck(question.options, 'checked')) || otherAnswers;  
-
+                    if (question.groupedOptions.length) {
+                        var groupedOptions = _.flatten(_.map(question.groupedOptions, function(option) {
+                            return option.options;
+                        }));
+                        return _.some(_.pluck(groupedOptions, 'checked')) || otherAnswers;      
+                    } else {
+                        return _.some(_.pluck(question.options, 'checked')) || otherAnswers;      
+                    }                    
                 } else if ( question.type === 'multi-select' || question.type === 'yes-no' ) {                
                     
                     var otherEntry = otherAnswers, 
@@ -159,9 +164,18 @@ angular.module('askApp').directive('multiquestion', function() {
             // handle single select clicks
             scope.onSingleSelectClicked = function(option, question) {
                 // turn off all other options
-                _.each(_.without(question.options, option), function(option) {
-                    option.checked = false;
-                });
+                if (question.groupedOptions) {
+                    var groupedOptions = _.flatten(_.map(question.groupedOptions, function(option) {
+                        return option.options;
+                    }));
+                    _.each(_.without(groupedOptions, option), function(option) {
+                        option.checked = false;
+                    });
+                } else {
+                    _.each(_.without(question.options, option), function(option) {
+                        option.checked = false;
+                    });
+                }
 
                 if (question.otherOption && option === question.otherOption) {
                     question.otherOption.checked = !question.otherOption.checked;
@@ -170,6 +184,7 @@ angular.module('askApp').directive('multiquestion', function() {
                         question.otherOption.checked = false;
                     }
                 }
+
                 option.checked = !option.checked;
 
                 if (option.checked && option.label) { // if option is checked but it's not an other option, then clear out other option
@@ -190,7 +205,6 @@ angular.module('askApp').directive('multiquestion', function() {
                 // }
 
             };
-
 
             // get simple answers
             scope.question.answer = scope.getAnswer(scope.question.slug);
@@ -231,7 +245,10 @@ angular.module('askApp').directive('multiquestion', function() {
                         matches = _.filter(scope.question.answer, function(answer) {
                             return answer.text === row;
                         });                        
-                    } 
+                    } else if (scope.question.answer.text === row) {
+                        matches = [row];
+                    }
+
                     var isGroupName = _.string.startsWith(row, '*');
                     var group;
                     if (isGroupName) {
@@ -375,7 +392,7 @@ angular.module('askApp').directive('multiquestion', function() {
                 if (scope.question.type == 'single-select' && scope.question.allow_other && scope.question.otherAnswers.length && scope.question.otherAnswers[0] !== "") {
                     scope.onSingleSelectClicked({checked: false}, scope.question);
                 } else if (scope.question.type == 'single-select' && scope.question.allow_other) {
-                    scope.onSingleSelectClicked({checked: true}, scope.question);
+                    // scope.onSingleSelectClicked({checked: true}, scope.question);
                 }
             }, true);
 

@@ -8,11 +8,12 @@
         <div ng-hide="confirmSubmit">
         
             <div ng-hide="respondents.length">
-                <p>This device has no un-submitted reports.</p>
+                <p>All reports have been submitted.</p>
+                <a class="btn btn-main btn-default btn-lg btn-block blue-btn" href="#/history">return to history page</a>
             </div>
 
             <div class="panel panel-default" ng-repeat="respondent in respondents track by $index">  <!-- track by $index is present to prevent 'Duplicates in repeater' error -->
-                <div class="panel-heading" ng-click="openRespondent(respondent)">
+                <div class="panel-heading" ng-click="openRespondent(respondent)" ng-class="{ 'darkSalmonBackground': respondent.open }">
                     <h4 class="panel-title">
                         {{ respondent.survey_title }} -- 
                         <span ng-show="respondent.complete">{{ respondent.ts | date: 'MM-dd-yyyy HH:mm' }}</span>
