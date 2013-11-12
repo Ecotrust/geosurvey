@@ -5,7 +5,7 @@
         <h4>History</h4>
         <div ng-hide="summary" ng-include="viewPath + 'views/spinner.html'"></div>
         <ul class="list-unstyled">
-            <li ng-repeat="fish in summary">
+            <li ng-repeat="fish in summary" ng-show="fish.total">
                 
                 <progress value="fish.total" max="max"></progress>
                 <h5>

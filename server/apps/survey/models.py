@@ -44,10 +44,15 @@ class Respondant(caching.base.CachingMixin, models.Model):
         try:
             if self.survey.slug == 'catch-report':
                 date = self.responses.filter(question__slug='landed-date')[0].answer
-            else:
-                date = self.responses.filter(question__slug='did-not-fish-for-month-of')[0].answer    
+                dateItems = date.split('-')
+                date = '%s/%s/%s' %(dateItems[1], dateItems[2], dateItems[0])
+            else:  
+                date = self.responses.filter(question__slug='did-not-fish-for-month-of')[0].answer 
+                # dateItems = date.split('/')
+                # date = '%s-%s' %(dateItems[0], dateItems[1])
         except:
             date = 'unknown'
+
         return '%s -- %s' %(self.survey.name, date)
     
     @property

@@ -76,8 +76,9 @@ angular.module('askApp')
                     }
                 });
             } else if (questionSlug === 'trip-landing-site') {
-                var island = _.findWhere(respondent.responses, {question: 'island'}).answer.label,
-                    answer = _.findWhere(respondent.responses, {question: questionSlug + '-' + island}).answer;                    
+                // var island = _.findWhere(respondent.responses, {question: 'island'}).answer.label,
+                //     answer = _.findWhere(respondent.responses, {question: questionSlug + '-' + island}).answer;       
+                var answer = _.findWhere(respondent.responses, {question: questionSlug}).answer; 
             } else if (questionSlug === 'days-soaked-lobster-traps') {                    
                 var unit = _.findWhere(respondent.responses, {question: 'time-soaked-lobster-traps'}).answer.unit,
                     value = _.findWhere(respondent.responses, {question: 'time-soaked-lobster-traps'}).answer.value;

@@ -63,6 +63,15 @@ angular.module('askApp')
     $scope.getAnswer = function(questionSlug) {
         return history.getAnswer(questionSlug, $scope.respondent);
     };
+    
+    $scope.gearTypeIncludes = function(type) {
+        return history.gearTypeIncludes(type, $scope.respondent);
+    };
+
+    $scope.trapTypeIncludes = function(type) {
+        return history.trapTypeIncludes(type, $scope.respondent);
+    };
+
 
     $scope.submitReport = function () {
         $scope.working = true;

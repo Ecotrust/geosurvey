@@ -106,7 +106,6 @@ angular.module('askApp')
     };
 
     $scope.answerOffline = function(answer) {
-
         $scope.deleteAnswer(answer.question.slug, $routeParams.uuidSlug);
 
         app.respondents[$routeParams.uuidSlug].responses.push({
@@ -401,9 +400,18 @@ angular.module('askApp')
 
 
     $scope.answerSingleSelect = function(question) {
-        var answer = _.find(question.options, function(option) {
-            return option.checked;
-        });
+        if (question.groupedOptions && question.groupedOptions.length) {
+            var groupedOptions = _.flatten(_.map(question.groupedOptions, function(option) {
+                return option.options;
+            }));
+            var answer = _.find(groupedOptions, function(option) {
+                return option.checked;
+            });
+        } else {
+            var answer = _.find(question.options, function(option) {
+                return option.checked;
+            });
+        }
         if (! answer && question.otherAnswers.length) {
             answer = {
                 checked: true,

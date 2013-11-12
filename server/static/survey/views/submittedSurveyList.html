@@ -21,7 +21,7 @@
             <div style="margin-top: 20px">
 
                 <div class="panel panel-default" ng-repeat="respondent in respondentList | orderBy: 'ts':true">
-                    <div class="panel-heading" ng-click="openRespondent(respondent)">
+                    <div class="panel-heading" ng-click="openRespondent(respondent)" ng-class="{ 'darkSalmonBackground': respondent.open }">
                         <h4 class="panel-title">
                             {{respondent.survey_title}}
                         </h4>
