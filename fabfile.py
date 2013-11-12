@@ -379,6 +379,12 @@ def package_android_test():
         local("scp ./mobile/platforms/android/bin/DigitalDeck-debug.apk ninkasi:/var/www/usvi/usvi.apk")
 
 @task
+def migrate_db():
+    with cd(env.code_dir):
+        with _virtualenv():
+            _manage_py('migrate --settings=config.environments.staging')
+
+@task
 def backup_db():
     date = datetime.datetime.now().strftime("%Y-%m-%d%H%M")
     dump_name = "%s-geosurvey.dump" % date
