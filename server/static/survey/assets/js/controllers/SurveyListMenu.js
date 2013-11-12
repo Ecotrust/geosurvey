@@ -18,7 +18,6 @@ angular.module('askApp')
                     survey.updated_at = new Date();
                 });
                 app.surveys = $scope.surveys;
-                $scope.saveState();
                 $scope.hideSurveys = false;
                 $scope.loaded = true;
                 clearInterval($scope.timer);
