@@ -1,14 +1,6 @@
 #1.2.68
-
-- [x] #166 - 
-- [x] #169 - 
-- [x] #175 - 
-- [x] #177 -
-- [x] #181 -
-- [x] #196 -
-- [x] #199 - 
-- [x] #205 - 
-- [x] #206 - 
+fixing bugs
+addressing the following tickets: #166, #169, #175, #177, #181, #196, #199, #205, #206
 
 #1.2.51
 return of icons and updated splash screen
