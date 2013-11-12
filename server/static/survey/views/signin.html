@@ -26,6 +26,9 @@
                     </fieldset>
                     <button class="btn btn-main btn-default btn-block" ng-disable="forgotUser.email">forgot password</button>
                     <a class="btn btn-main btn-default btn-block" ng-click="showForgotPassword = false">cancel</a>
+                    <div class="error" ng-show="showError == 'user-not-found'">
+                        No user found for that email address.
+                    </div>
                 </form>
             </div>
             <div class="new-user-form signin-form" ng-show="showForgotPasswordDone">
@@ -48,8 +51,8 @@
                     
                 </form>
                 <div class="pull-right">
+                    <a class="forgot-password pull-right" ng-click="showForgotPassword = true">Forgot Password</a>
                     <p>{{stage}}/{{version}}</p>
-                    <a class="forgot-password" ng-click="showForgotPassword = true">Forgot Password</a>
                 </div>
             </div>
         </div>

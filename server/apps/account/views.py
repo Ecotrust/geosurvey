@@ -74,9 +74,13 @@ def createUser(request):
 def forgotPassword(request):
     if request.POST:
         param = simplejson.loads(request.POST.keys()[0])
-        form = PasswordResetForm({'email': param.get('email', None)})
+        email = param.get('email', None)
+        try:
+            user = User.objects.get(email=email)
+        except User.DoesNotExist:
+            return HttpResponse("user-not-found", status=401)    
+        form = PasswordResetForm({'email': email})
         setattr(form, 'users_cache', [])
-        print form
         form.save(from_email='edwin@pointnineseven.com', email_template_name='registration/password_reset_email.html')
         return HttpResponse(simplejson.dumps({'success': True}))
     else:
