@@ -65,11 +65,17 @@ angular.module('askApp')
         app.user = {
             username: user.username,
             status: status,
-            offline: true
+            offline: true,
+            registration: {}
         }
         app.offlineUser = user;
         storage.saveState(app);
-        $location.path('/main');
+        if (status === 'signin') {
+            $location.path('/main');    
+        } else {
+            $location.path('/profile');
+        }
+        
     };
 
     $scope.createUser = function (user) {
