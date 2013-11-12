@@ -1,7 +1,7 @@
 //'use strict';
 
 angular.module('askApp')
-  .controller('CompleteCtrl', function ($scope, $routeParams, $http, $location, survey, history) {
+  .controller('CompleteCtrl', function ($scope, $routeParams, $http, $location, survey, history, storage) {
     var url = '/respond/complete/' + [$routeParams.surveySlug, $routeParams.uuidSlug].join('/');
     $http.defaults.headers.post['Content-Type'] = 'application/json';
 
@@ -28,7 +28,7 @@ angular.module('askApp')
         delete app.user.resumePath;
         app.message = "You have completed a catch report.";
 
-        localStorage.setItem('hapifish', JSON.stringify(app));    
+        storage.saveState(app);       
     } else {
         $http.post(url).success(function (data) {
             app.data.state = $routeParams.action;
@@ -72,12 +72,12 @@ angular.module('askApp')
         survey.submitSurvey(newRespondent, $scope.survey).success(function () {
             delete app.respondents[$routeParams.uuidSlug]
             app.message = "You catch report was submitted successfully."
-            localStorage.setItem('hapifish', JSON.stringify(app));
+            storage.saveState(app);
             $location.path('/main');
             $scope.working = true;
         }).error(function () {
             app.message = "You catch report was saved and can be submitted later."
-            localStorage.setItem('hapifish', JSON.stringify(app));
+            storage.saveState(app);
             $location.path('/main');
         });
 
@@ -86,7 +86,7 @@ angular.module('askApp')
     $scope.continueOffline = function () {
         app.message = "You catch report was saved and can be submitted later."
         delete app.user.resumePath;
-        localStorage.setItem('hapifish', JSON.stringify(app));
+        storage.saveState(app);
         $location.path('/main');
     }   
     

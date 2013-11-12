@@ -1,7 +1,7 @@
 //'use strict';
 
 angular.module('askApp')
-    .controller('offlineRespondantListCtrl', function($scope, $http, $routeParams, $location, survey) {
+    .controller('offlineRespondantListCtrl', function($scope, $http, $routeParams, $location, survey, storage) {
         $http.defaults.headers.post['Content-Type'] = 'application/json';
 
         $scope.respondents = _.toArray(app.respondents);
@@ -175,7 +175,7 @@ angular.module('askApp')
             _.each($scope.respondents, function (respondent) {
                 app.respondents[respondent.uuid] = respondent;
             });
-            localStorage.setItem('hapifish', JSON.stringify(app));
+            storage.saveState(app);
         };
 
 

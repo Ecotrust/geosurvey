@@ -1,7 +1,7 @@
 //'use strict';
 
 angular.module('askApp')
-  .controller('SettingsCtrl', function ($scope, $location, $http) {
+  .controller('SettingsCtrl', function ($scope, $location, $http, storage) {
 
     if (app.user) {
         $scope.user = app.user;
@@ -12,7 +12,7 @@ angular.module('askApp')
     
     $scope.path = 'sett';
     $scope.clearCache = function () {
-        localStorage.removeItem('hapifish');
+        storage.clearCache();
         window.location.reload();
     }
 
@@ -35,7 +35,7 @@ angular.module('askApp')
         $http.post(url, user)
             .success(function (data) {
                 app.user = data.user;
-                $scope.saveState();
+                storage.saveState();
                 $scope.editProfile = false;
                 $scope.changesSaved = true;
             })
@@ -44,8 +44,5 @@ angular.module('askApp')
             });
     };
 
-    $scope.saveState = function () {
-        localStorage.setItem('hapifish', JSON.stringify(app));
-    };
 
   });

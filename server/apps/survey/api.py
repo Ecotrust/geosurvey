@@ -132,7 +132,6 @@ class OfflineResponseResource(SurveyModelResource):
         authorization = UserObjectsOnlyAuthorization()
         authentication = Authentication()
     def obj_create(self, bundle, **kwargs):
-        print bundle.request.user
         return super(OfflineResponseResource, self).obj_create(bundle, user=bundle.request.user)
 
 class OfflineRespondantResource(SurveyModelResource):
@@ -147,13 +146,11 @@ class OfflineRespondantResource(SurveyModelResource):
         ordering = ['-ts']
     
     def obj_create(self, bundle, **kwargs):
-        print bundle.request.user
         return super(OfflineRespondantResource, self).obj_create(bundle, user=bundle.request.user)
 
     def save_related(self, bundle):
         resource_uri = self.get_resource_uri(bundle.obj)
         user_uri = self.get_resource_uri(bundle.request.user)
-        print user_uri
         for response in bundle.data.get('responses'):
             response['respondant'] = resource_uri
             response['user'] = user_uri

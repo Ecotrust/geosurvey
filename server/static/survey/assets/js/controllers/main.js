@@ -1,6 +1,6 @@
 
 angular.module('askApp')
-  .controller('MainCtrl', ['$scope', '$location', '$http', function MainCtrl($scope, $location, $http) {
+  .controller('MainCtrl', ['$scope', '$location', '$http', 'storage', function MainCtrl($scope, $location, $http, storage) {
     $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
 
     $scope.path = 'home';
@@ -53,13 +53,13 @@ angular.module('askApp')
 
     $scope.logout = function () {
         app.user = false;
-        $scope.saveState();
+        storage.saveState(app);
         window.location.reload();
     }
 
-    $scope.saveState = function () {
-        localStorage.setItem('hapifish', JSON.stringify(app));
-    }
+    // $scope.saveState = function () {
+    //     localStorage.setItem('hapifish', JSON.stringify(app));
+    // }
 
     $scope.offline = function (user, status) {
         app.user = {
@@ -68,7 +68,7 @@ angular.module('askApp')
             offline: true
         }
         app.offlineUser = user;
-        $scope.saveState();
+        storage.saveState(app);
         $location.path('/main');
     };
 
@@ -81,7 +81,7 @@ angular.module('askApp')
                 .success(function (data) {
                     app.user = data.user;
                     app.user.registration = $scope.user.registration;
-                    $scope.saveState();
+                    storage.saveState(app);
                     // $location.path('/surveys');
                     $location.path('/profile');
                 })
@@ -121,7 +121,7 @@ angular.module('askApp')
                 $scope.working=false;
                 app.user = data.user;
                 app.user.registration = JSON.parse(app.user.registration);
-                $scope.saveState();
+                storage.saveState(app);
                 if (app.next) {
                     next = app.next;
                     delete app.next;

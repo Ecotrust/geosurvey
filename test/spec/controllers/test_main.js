@@ -5,7 +5,7 @@ var app = {
 	user: {
 		username: 'fish',
 		registration: {
-			'first-name': "Fisher Man"
+			'first-name': "Fisher Person"
 		}
 	}
 }
@@ -15,19 +15,21 @@ describe('Controller: MainCtrl', function() {
 	beforeEach(module('askApp'));
 
 
-	var MainCtrl, $httpBackend, $location, scope;
+	var MainCtrl, $httpBackend, $location, storage, scope;
 
-	beforeEach(inject(function(_$location_, _$httpBackend_, $rootScope, $controller) {
+	beforeEach(inject(function(_$location_, _$httpBackend_, $rootScope, $controller, _storage_) {
 
+		
 		$httpBackend = _$httpBackend_;
 		$location = _$location_;
 		scope = $rootScope.$new();
+		storage = _storage_;
+		storage.saveState = jasmine.createSpy("saveState() spy");
 
 		MainCtrl = $controller('MainCtrl', {
 			$scope: scope
 		});
 
-		scope.saveState = jasmine.createSpy("saveState() spy");
 		$httpBackend.expectGET('http://localhost:8000/mobile/getVersion').respond({
 			version: "1.2.62",
 			success: true
@@ -72,7 +74,7 @@ describe('Controller: MainCtrl', function() {
 
 		$httpBackend.flush();
 		expect(app.user.username).toBe('test');
-		expect(scope.saveState).toHaveBeenCalled();
+		expect(storage.saveState).toHaveBeenCalled();
 	});
 
 	it('authenticateUser: should auth a user', function() {
@@ -98,7 +100,7 @@ describe('Controller: MainCtrl', function() {
 		expect(app.user.username).toBe('fisher');
 		expect(app.user.registration['first-name']).toBe("Fisher");
 		expect(app.user.registration['license-number']).toBe("AK99");
-		expect(scope.saveState).toHaveBeenCalled();
+		expect(storage.saveState).toHaveBeenCalled();
 	});
 
 	it('logout: should logout a user', function() {
@@ -108,7 +110,7 @@ describe('Controller: MainCtrl', function() {
 		scope.logout();
 
 		expect(app.user).toBe(false);
-		expect(scope.saveState).toHaveBeenCalled();
+		expect(storage.saveState).toHaveBeenCalled();
 		expect(window.location.reload).toHaveBeenCalled();
 	});
 

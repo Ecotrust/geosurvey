@@ -1,7 +1,7 @@
 //'use strict';
 
 angular.module('askApp')
-    .controller('unSubmittedSurveyListCtrl', function($scope, $http, $routeParams, $location, survey, history) {
+    .controller('unSubmittedSurveyListCtrl', function($scope, $http, $routeParams, $location, survey, history, storage) {
         $http.defaults.headers.post['Content-Type'] = 'application/json';
 
         $scope.respondents = _.toArray(app.respondents).sort( function(a,b) { return new Date(b.ts).getTime() - new Date(a.ts).getTime();});
@@ -94,7 +94,7 @@ angular.module('askApp')
             _.each($scope.respondents, function (respondent) {
                 app.respondents[respondent.uuid] = respondent;
             });
-            localStorage.setItem('hapifish', JSON.stringify(app));
+            storage.saveState(app);
         };
 
         $scope.deleteSurvey = function(respondent) {

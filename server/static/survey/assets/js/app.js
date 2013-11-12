@@ -1,36 +1,40 @@
 //'use strict';
+var app = {};
 
-
-var initialHeight = $(window).height();
-$('html').css({ 'min-height': initialHeight});
-$('body').css({ 'min-height': initialHeight});
-
-
-
-if (localStorage.getItem('hapifish') && window.location.pathname !== '/respond') {
-    app = JSON.parse(localStorage.getItem('hapifish'));
-} else {
-    var app = {};    
-}
-if (_.string.startsWith(window.location.protocol, "http")) {
-    app.server = window.location.protocol + "//" + window.location.host;
-} else {
-    app.server = "APP_SERVER";
-}
-
-app.version = "APP_VERSION";
-
-app.stage = "APP_STAGE";
-
-if (window.location.pathname === '/respond') {
-    app.viewPath = app.server + '/static/survey/';
-    app.offline = false;
-} else {
-    app.viewPath = '';
-    app.offline = true;
-}
 angular.module('askApp', ['ui', 'ui.bootstrap', 'ngGrid'])
     .config(function($routeProvider, $httpProvider) {
+
+    var initialHeight = $(window).height();
+    $('html').css({ 'min-height': initialHeight});
+    $('body').css({ 'min-height': initialHeight});
+
+    if (localStorage.getItem('hapifis') && window.location.pathname !== '/respond') {
+        app.username = JSON.parse(localStorage.getItem('hapifis')).currentUser;
+        app.key = localStorage.getItem('hapifis-' + app.username);
+        if (localStorage.getItem('hapifis-' + app.username)) {
+            app = JSON.parse(localStorage.getItem('hapifis-' + app.username));
+        }
+    } else {
+        
+    }
+    debugger;
+    if (_.string.startsWith(window.location.protocol, "http")) {
+        app.server = window.location.protocol + "//" + window.location.host;
+    } else {
+        app.server = "APP_SERVER";
+    }
+
+    app.version = "APP_VERSION";
+
+    app.stage = "APP_STAGE";
+
+    if (window.location.pathname === '/respond') {
+        app.viewPath = app.server + '/static/survey/';
+        app.offline = false;
+    } else {
+        app.viewPath = '';
+        app.offline = true;
+    }
 
     if (typeof token != 'undefined') {
         $httpProvider.defaults.headers.post['X-CSRFToken'] = token;

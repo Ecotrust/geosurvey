@@ -1,5 +1,5 @@
 angular.module('askApp')
-    .controller('SurveyDetailCtrl', function($scope, $routeParams, $http, $location, $dialog, $interpolate, $timeout, survey) {
+    .controller('SurveyDetailCtrl', function($scope, $routeParams, $http, $location, $dialog, $interpolate, $timeout, survey, storage) {
         // $('#wrap').css({ 'min-height': initialHeight -80});
         // $('#wrap').css({ 'min-height': initialHeight -80});
         // $(window).on('resize', function () {
@@ -101,7 +101,7 @@ angular.module('askApp')
             if (index) {
                 app.respondents[uuidSlug].responses.splice(index, 1);
             }
-            $scope.saveState();
+            storage.saveState(app);
         }
     };
 
@@ -122,11 +122,7 @@ angular.module('askApp')
 
         app.respondents[$routeParams.uuidSlug].resumePath = app.user.resumePath = window.location.hash;
         $scope.answers[answer.question.slug] = answer;
-        $scope.saveState();
-    };
-
-    $scope.saveState = function () {
-        localStorage.setItem('hapifish', JSON.stringify(app));
+        storage.saveState(app);
     };
 
     $scope.getQuestionBySlug = function (slug) {
@@ -708,7 +704,7 @@ $scope.loadSurvey = function(data) {
                 ts: ts,
                 responses: []
             }
-            $scope.saveState();
+            storage.saveState(app);
             $location.path(['survey', $routeParams.surveySlug, 1, $routeParams.uuidSlug].join('/'));
         } else {
             // this is an old offline survey

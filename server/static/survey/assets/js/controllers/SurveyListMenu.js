@@ -26,19 +26,5 @@ angular.module('askApp')
 
     }
 
-    $scope.saveState = function () {
-        localStorage.setItem('hapifish', JSON.stringify(app));
-    }
 
-    if (app.user) {
-        $scope.user = app.user;
-    } else {
-        $location.path('/');
-    }
-    
-    if (app.surveys) {
-        $scope.surveys = app.surveys;
-    } else {
-        $scope.updateSurveys();
-    }
 });

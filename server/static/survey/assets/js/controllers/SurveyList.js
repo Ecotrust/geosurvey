@@ -1,7 +1,7 @@
 //'use strict';
 
 angular.module('askApp')
-    .controller('SurveyListCtrl', function($scope, $http, $routeParams, $location) {
+    .controller('SurveyListCtrl', function($scope, $http, $routeParams, $location, storage) {
 
     $scope.path = $location.path().slice(1,5);
     $scope.loaded=false;
@@ -13,7 +13,7 @@ angular.module('askApp')
             survey.updated_at = new Date();
         });
         app.surveys = $scope.surveys;
-        $scope.saveState();
+        storage.saveState(app);
         $scope.hideSurveys = false;
         $scope.loaded = true;
         clearInterval($scope.timer);
@@ -34,10 +34,6 @@ angular.module('askApp')
             });
         });
 
-    }
-
-    $scope.saveState = function () {
-        localStorage.setItem('hapifish', JSON.stringify(app));
     }
 
     if (app.user) {

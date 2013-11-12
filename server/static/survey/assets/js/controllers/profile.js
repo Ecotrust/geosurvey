@@ -1,7 +1,7 @@
 //'use strict';
 
 angular.module('askApp')
-  .controller('ProfileCtrl', function ($scope, $routeParams, $http, $location) {
+  .controller('ProfileCtrl', function ($scope, $routeParams, $http, $location, storage) {
     //$http.defaults.headers.post['Content-Type'] = 'application/json';
     $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
 
@@ -23,7 +23,7 @@ angular.module('askApp')
                 survey.updated_at = new Date();
             });
             app.surveys = $scope.surveys;
-            $scope.saveState();
+            storage.saveState(app);
             $scope.hideSurveys = false;
             clearInterval($scope.timer);
             $scope.profileQuestions = getProfileQuestions();
@@ -68,13 +68,6 @@ angular.module('askApp')
     } else {
         updateSurveys();
     }
-
-
-
-    $scope.saveState = function () {
-        localStorage.setItem('hapifish', JSON.stringify(app));
-    };
-
     
     $scope.updateProfile = function (profileQuestions) {
         var url = app.server + '/account/updateUser/',
@@ -87,7 +80,7 @@ angular.module('askApp')
         $http.post(url, {username: app.user.username, registration: registration})
             .success(function (data) {
                 app.user.registration = registration;
-                $scope.saveState();
+                storage.saveState();
                 $location.path('#/main');
             })
             .error(function (data) {
