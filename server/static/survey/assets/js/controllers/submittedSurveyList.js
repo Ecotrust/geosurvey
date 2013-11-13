@@ -29,7 +29,12 @@ angular.module('askApp')
 
         $http.get(app.server + '/reports/respondants_summary')
             .success( function (data) {
-                $scope.surveyFilter = {start: data.start_time};
+                $scope.start_time = data.start_time;
+                var date = new Date(),
+                    firstDayOfCurrentMonth = new Date(date.getFullYear(), date.getMonth(), 1),
+                    start_date = firstDayOfCurrentMonth.toString('yyyy-MM-dd');
+
+                $scope.surveyFilter = {start: start_date};
             }).error(function (err) {
                 console.log(JSON.stringify(err));
                 debugger;
@@ -118,7 +123,8 @@ angular.module('askApp')
         };
 
         $scope.getSubmittedSurveysListFromServer = function(surveyFilter) {
-            var url = app.server 
+            var url = $scope.next20 ? $scope.next20 : 
+                      app.server 
                       + '/api/v1/reportrespondant/?user__username__exact=' 
                       + $scope.user.username 
                       + '&format=json';
@@ -134,9 +140,29 @@ angular.module('askApp')
             return $http.get(url).error(function (err) {
                 console.log(JSON.stringify(err));
                 debugger;
-            });            
+            }).success(function (callback) { $scope.next20 = callback.meta.next; });            
         };
 
+        $scope.showNext20 = function(surveyFilter) {
+            $scope.gettingNext20 = true;
+            $scope.getSubmittedSurveysListFromServer(surveyFilter)
+                .success(function (data) {
+                    _.each(data.objects, function(respondent, index) {
+                        try {
+                            respondent.survey = respondent.survey_slug;
+                            respondent.open = false;
+                            $scope.respondentList.push(respondent);
+                        }
+                        catch(e) {
+                            debugger;
+                        }
+                    });
+                    $scope.gettingNext20 = true;
+                    // console.log($scope.respondentList);
+                }).error(function (data) {
+                    debugger;
+                }); 
+        };
 
         $scope.getSubmittedSurveysList = function(surveyFilter) {
 

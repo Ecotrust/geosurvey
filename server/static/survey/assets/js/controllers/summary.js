@@ -5,7 +5,7 @@ angular.module('askApp')
 
     	$http.get(url)
     		.success(function (data) {
-    			$scope.summary = data.results;
+    			$scope.summary = data.results.length ? data.results : 'none';
     			$scope.max = _.max($scope.summary, function (item) {
     				return item.total 
     			}).total;

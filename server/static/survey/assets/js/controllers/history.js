@@ -18,6 +18,7 @@ angular.module('askApp')
             var url = app.server 
                       + '/api/v1/reportrespondant/?user__username__exact=' 
                       + $scope.user.username 
+                      + '&limit=0'
                       + '&format=json';
             
             return $http.get(url).error(function (err) {

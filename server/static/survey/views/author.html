@@ -88,7 +88,7 @@ input[type="checkbox"] {
         </div>
         <div class="well" ng-hide="newSurvey">
             <h1>
-                {{ survey.name }}
+                {{ survey.name }} <small> -- Page {{getPageFromQuestion(activeQuestion.slug).order}}</small>
                 <div class="btn-group pull-right" ng-hide="confirmDelete">
                     <a class="btn" target="_blank" href="/admin/survey/question/{{activeQuestion.id}}/">edit</a>
                     <a class="btn" target="_blank" href="/static/survey/mobile.html#/survey/{{survey.slug}}/{{activeQuestion.slug}}/offline">survey</a>

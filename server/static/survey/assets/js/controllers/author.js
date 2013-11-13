@@ -57,6 +57,11 @@ angular.module('askApp')
             $scope.newSurvey = true;
         }
 
+        $scope.getPageFromQuestion = function(questionSlug) {
+            return _.find($scope.survey.pages, function (page) {
+                return _.findWhere(page.questions, {slug: questionSlug});
+            });
+        };
 
         $scope.checkPageOrder = function (pages) {
             var pagesToUpdate = [];
