@@ -1,6 +1,6 @@
 #1.2.69
 fixing bugs
-addressing the following tickets: 
+addressing the following tickets: #208, #198, #195, #194, #192, #191, #186, #185, #178, #176, #168, #92
 
 #1.2.68
 fixing bugs
