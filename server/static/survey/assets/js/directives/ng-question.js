@@ -39,7 +39,7 @@ angular.module('askApp').directive('multiquestion', function() {
                 }
                 var otherAnswers = question.otherAnswers && question.otherAnswers.length && ( ! (question.otherAnswers.length === 1 && question.otherAnswers[0] === "") );
                 if (question.type === 'single-select') {
-                    if (question.groupedOptions.length) {
+                    if (question.groupedOptions && question.groupedOptions.length) {
                         var groupedOptions = _.flatten(_.map(question.groupedOptions, function(option) {
                             return option.options;
                         }));
@@ -166,7 +166,7 @@ angular.module('askApp').directive('multiquestion', function() {
             // handle single select clicks
             scope.onSingleSelectClicked = function(option, question) {
                 // turn off all other options
-                if (question.groupedOptions) {
+                if (question.groupedOptions && question.groupedOptions.length) {
                     var groupedOptions = _.flatten(_.map(question.groupedOptions, function(option) {
                         return option.options;
                     }));

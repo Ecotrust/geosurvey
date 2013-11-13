@@ -9,16 +9,14 @@
             <a class="btn btn-main btn-default btn-lg btn-block panel-heading" href="#/fisher-summary">Overall Summary</a>
         </div>
         <div>
-            <a class="btn btn-main btn-default btn-lg btn-block panel-heading" href="#/unSubmittedSurveyList">view un-submitted surveys <span class="badge pull-right" style="top: 0px">{{respondents.length}}</span></a>
+            <a class="btn btn-main btn-default btn-lg btn-block panel-heading" href="#/unSubmittedSurveyList">
+                un-submitted surveys <span class="badge pull-right" style="top: 0px">{{respondents.length}}</span>
+            </a>
         </div>
         
         <div>
             <a class="btn btn-main btn-default btn-lg btn-block panel-heading" href="#/submittedSurveyList" ng-class="{ 'disabled': !respondentList }">
-                view submitted surveys 
-                <span class="badge pull-right" style="top: 0px">
-                    {{respondentList.length}}
-                    <i class="icon-spinner icon-spin" ng-hide="respondentList"></i>
-                </span>
+                submitted surveys <span class="badge pull-right" style="top: 0px">{{respondentList.length}}<i class="icon-spinner icon-spin" ng-hide="respondentList"></i></span>
             </a>
         </div>
 

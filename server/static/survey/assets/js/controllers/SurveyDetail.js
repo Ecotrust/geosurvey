@@ -295,7 +295,7 @@ angular.module('askApp')
         });
         
         // in case of multiselect containing groups 
-        if (question.groupedOptions.length) {
+        if (question.groupedOptions && question.groupedOptions.length) {
             answers = [];
             _.each(question.groupedOptions, function(groupedOption) {
                 answers = answers.concat(_.filter(groupedOption.options, function(option) {
@@ -360,7 +360,7 @@ angular.module('askApp')
         });
         
         // in case of multiselect containing groups 
-        if (question.groupedOptions.length) {
+        if (question.groupedOptions && question.groupedOptions.length) {
             answers = [];
             _.each(question.groupedOptions, function(groupedOption) {
                 answers = answers.concat(_.filter(groupedOption.options, function(option) {

@@ -16,8 +16,8 @@
                 <div class="panel-heading" ng-click="openRespondent(respondent)" ng-class="{ 'darkSalmonBackground': respondent.open }">
                     <h4 class="panel-title">
                         {{ respondent.survey_title }} -- 
-                        <span ng-show="respondent.complete">{{ respondent.ts | date: 'MM-dd-yyyy HH:mm' }}</span>
-                        <span ng-hide="respondent.complete">{{ respondent.ts | date: 'MM-dd-yyyy HH:mm' }} incomplete</span>
+                        <span ng-show="respondent.complete">{{ respondent.ts | date: 'MM/dd/yyyy HH:mm' }}</span>
+                        <span ng-hide="respondent.complete">{{ respondent.ts | date: 'MM/dd/yyyy HH:mm' }} -- incomplete</span>
                     </h4>
                 </div>
                 <div id="{{ respondent.survey_title }}" class="panel-collapse collapse" ng-class="{ 'in': respondent.open }">
