@@ -1,6 +1,6 @@
-#1.2.70
+#1.2.71
 fixing bugs
-addressing the following issues: #185, #209, #219
+addressing the following issues: #173, #185, #209, #219
 
 #1.2.69
 fixing bugs
