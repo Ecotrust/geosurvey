@@ -236,7 +236,7 @@ angular.module('askApp').directive('multiquestion', function() {
                 });
 
                 scope.question.groupedOptions = [];
-                scope.question.answerSelected = false;
+                // scope.question.answerSelected = false;
                 var groupName = "";
                 
                 _.each(scope.question.rows.split('\n'), function(row, index) {
@@ -374,7 +374,8 @@ angular.module('askApp').directive('multiquestion', function() {
 
             if (scope.question.type === 'single-select' || scope.question.type === 'yes-no') {
                 scope.question.answerSelected = _.some(_.pluck(scope.question.options, 'checked'));
-                if (scope.question.allow_other && scope.question.answer && scope.question.answer.other || _.isArray(scope.question.answer) && _.findWhere(scope.question.answer, {other: true })) {
+                // if (scope.question.allow_other && scope.question.answer && scope.question.answer.other || _.isArray(scope.question.answer) && _.findWhere(scope.question.answer, {other: true })) {
+                if (scope.question.answer)  {
                     scope.question.answerSelected = true;
                 }
             } else if (scope.question.type === 'multi-select') {
@@ -387,12 +388,16 @@ angular.module('askApp').directive('multiquestion', function() {
                 scope.validity[scope.question.slug] = scope.validateQuestion(scope.question);
             }, true);
 
-
-            scope.$watch('question.otherAnswers', function () {
+            scope.$watch('question.otherAnswers', function (newVal, oldVal) {
                 if (scope.question.type == 'single-select' && scope.question.allow_other && scope.question.otherAnswers.length && scope.question.otherAnswers[0] !== "") {
                     scope.onSingleSelectClicked({checked: false}, scope.question);
                 } else if (scope.question.type == 'single-select' && scope.question.allow_other) {
                     // scope.onSingleSelectClicked({checked: true}, scope.question);
+                    // argh...basically: if there is not an other answer and no regular answer is checked, then answerSelected should be false
+                    // i believe the original intention of this was to ensure that when a user removed an other option the selectable items were styled correctly
+                    if ( (!newVal.length || newVal[0]==="") && !_.some(_.pluck(scope.question.options, 'checked')) ) {  
+                        scope.question.answerSelected = false;    
+                    }                    
                 }
             }, true);
 
