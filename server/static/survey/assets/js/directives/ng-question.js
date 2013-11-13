@@ -85,7 +85,7 @@ angular.module('askApp').directive('multiquestion', function() {
                 }
         
                if ((question.type === 'monthpicker' || question.type == 'datepicker' || question.type === 'timepicker')) {
-                    if (! question.answer || new Date(scope.question.answer) > new Date()) {
+                    if (! question.answer || (new Date(scope.question.answer)).add(1).day().clearTime() > (new Date()).clearTime()) {
                         return false;    
                     }
                 }
