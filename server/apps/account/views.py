@@ -8,6 +8,9 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User, check_password
 from django.contrib.auth.forms import PasswordResetForm
 from account.models import UserProfile, Feedback
+from django.db import IntegrityError
+from django.core.validators import validate_email
+from django.core.exceptions import ValidationError
 
 import simplejson
 import datetime
@@ -46,8 +49,17 @@ def authenticateUser(request):
 def createUser(request):
     if request.POST:
         param = simplejson.loads(request.POST.keys()[0])
-        user, created = User.objects.get_or_create(
-            username=param.get('username', None), email=param.get('emailaddress1'))
+        email = param.get('emailaddress1')
+        try:
+            validate_email( email )
+        except ValidationError:
+            print "invalid?"
+            return HttpResponse("invalid-email", status=500)    
+        try:
+            user, created = User.objects.get_or_create(
+                username=param.get('username', None), email=email)
+        except IntegrityError:
+            return HttpResponse("duplicate-user", status=500)
         if created:
             user.set_password(param.get('password'))
             user.save()

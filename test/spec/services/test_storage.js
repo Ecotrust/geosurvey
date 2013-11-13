@@ -49,4 +49,14 @@ describe('Storage Service', function() {
         expect(localStorage.getItem).toHaveBeenCalledWith('hapifis');
         expect(user).toBe('testUser');
     });
+
+
+
+    it('getStateForUser: Should get the state for a specific user.', function() {
+        localStorage.getItem = jasmine.createSpy("localStorage getItem spy").andReturn(JSON.stringify({ user: { username: "testUserPerson" }}));
+
+        var state = service.getStateForUser('testUserPerson');
+        expect(localStorage.getItem).toHaveBeenCalledWith('hapifis-testUserPerson');
+        expect(state.user.username).toBe("testUserPerson");
+    });
 });

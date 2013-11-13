@@ -82,8 +82,13 @@ angular.module('askApp')
                 storage.saveState(app);
                 $location.path('/main');
             })
-            .error(function (data) {
-                if (data) {
+            .error(function (data, status) {
+                if (status === 0) {
+                    app.user.registration = registration;
+                    storage.saveState(app);
+                    $location.path('/main');      
+                }
+                else if (data) {
                     $scope.showError = data;    
                 } else {
                     $scope.showError = "There was a problem creating an account.  Please try again later."

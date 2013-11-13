@@ -250,6 +250,14 @@ img.center {
     margin-top: -24px;
     height: 65px;
 }
+
+
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) and (orientation : portrait) { 
+    .navbar-brand img {
+        margin-top: 0;
+    }
+    
+}
 .main .navbar {
     height: 20px;
     min-height: 20px;

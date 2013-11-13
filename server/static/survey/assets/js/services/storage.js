@@ -22,10 +22,15 @@ angular.module('askApp').service('storage', function() {
 		return JSON.parse(localStorage.getItem('hapifis')).currentUser;
 	}
 
+	var getStateForUser = function (username) {
+		return JSON.parse(localStorage.getItem('hapifis-' + username));
+	}
+
 	return {
 		saveState: saveState,
 		getState: getState,
 		clearCache: clearCache,
-		getCurrentUser: getCurrentUser
+		getCurrentUser: getCurrentUser,
+		getStateForUser: getStateForUser
 	};
 });
