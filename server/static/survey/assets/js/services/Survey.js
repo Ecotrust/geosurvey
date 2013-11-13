@@ -119,7 +119,10 @@ angular.module('askApp')
                 // keep if intersection of condition list and answer list is empty
                 return _.intersection( testCriteria.split('|'), answer ).length === 0;
             } else { // otherwise, condition is a string, keep if condition string is NOT contained in the answer
-                return ! _.contains(answer, testCriteria);
+                var trimmedAnswer = _.map(answer, function(item) { return item.trim(); }),
+                    trimmedCriteria = testCriteria.trim();
+                return ! _.contains(trimmedAnswer, testCriteria);
+                // return ! _.contains(answer, testCriteria);
             }
         } else if (op === '!') {  
             if ( !isNaN(answer) ) { // if it is a number
@@ -129,7 +132,10 @@ angular.module('askApp')
                 // keep if intersection of condition list and answer list is populated
                 return _.intersection( testCriteria.split('|'), answer ).length > 0 ;
             } else { // otherwise, condition is a string, keep if condition string is contained in the answer
-                return _.contains(answer, testCriteria);
+                var trimmedAnswer = _.map(answer, function(item) { return item.trim(); }),
+                    trimmedCriteria = testCriteria.trim();
+                return _.contains(trimmedAnswer, trimmedCriteria);
+                // return _.contains(answer, testCriteria);
             }
         }
         return undefined;
