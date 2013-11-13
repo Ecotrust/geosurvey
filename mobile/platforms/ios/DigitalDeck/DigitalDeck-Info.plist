@@ -15,7 +15,7 @@
     <key>CFBundleIcons~ipad</key>
     <dict/>
     <key>CFBundleIdentifier</key>
-    <string>com.pointnineseven.digitaldeck-dev</string>
+    <string>com.pointnineseven.digitaldeck</string>
     <key>CFBundleInfoDictionaryVersion</key>
     <string>6.0</string>
     <key>CFBundleName</key>

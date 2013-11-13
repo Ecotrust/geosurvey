@@ -247,17 +247,21 @@ img.center {
     margin-top: 5px;
 }
 .navbar-brand img {
-    margin-top: -24px;
+    margin-top: 0;
     height: 65px;
 }
 
 
-@media only screen and (min-device-width : 320px) and (max-device-width : 480px) and (orientation : portrait) { 
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) { 
+    /* Retina-specific stuff here */
     .navbar-brand img {
-        margin-top: 0;
+        margin-top: -24px;
     }
     
+
 }
+
+
 .main .navbar {
     height: 20px;
     min-height: 20px;

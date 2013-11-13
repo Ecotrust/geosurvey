@@ -345,7 +345,7 @@ def emulate_ios_dev():
 @task
 def package_vagrant():
     run("cd %s && %s/bin/python manage.py package http://localhost:8000 '../mobile/www' --test-run --stage=vagrant" % (env.app_dir, env.venv))
-
+    local("cd mobile && /usr/local/share/npm/bin/phonegap build -V ios")
 @task
 def package_ios_test():
         run("cd %s && %s/bin/python manage.py package http://usvi-test.pointnineseven.com '../mobile/www' --stage=test" % (env.app_dir, env.venv))
