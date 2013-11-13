@@ -244,15 +244,6 @@ angular.module('askApp')
         // if (answer === 'other' && question.otherAnswer) {
         //     answer = question.otherAnswer;
         // }
-        if (answer === 'other' && question.otherAnswers.length) {
-            answer = question.otherAnswers[0];
-        }
-        if (question.required && (answer === undefined || answer === null)) {
-            return false;
-        } else if (!question.required && (answer === undefined || answer === null)) {
-            answer = '';
-        }
-
 
 
         // for number with unit questions, we need to submit a unit as well
@@ -265,7 +256,8 @@ angular.module('askApp')
         
         if (question.type === 'grid') {
             //check for undefined answers on the grid
-            var completed = ! _.some( _.map(question.options, function(option) { return _.contains(_.values(option), undefined); }));
+            //var completed = ! _.some( _.map(question.options, function(option) { return _.contains(_.values(option), undefined); }));
+            var completed = $scope.validateGridQuestion(question);
             if (completed || !question.required) {
                 answer = question.options;
             } else {
@@ -274,12 +266,39 @@ angular.module('askApp')
             delete question.gridOptions; // was causing a circular reference in 
         }
 
+        if (answer === 'other' && question.otherAnswers.length) {
+            answer = question.otherAnswers[0];
+        }
+        if (question.required && (answer === undefined || answer === null)) {
+            return false;
+        } else if (!question.required && (answer === undefined || answer === null)) {
+            answer = '';
+        }
+
         if ( answer !== 0 && !answer) {
             answer = "NA";
         }
 
         return { question: question, answer: answer };
     };
+
+    // might be better to use the validateQuestion in the Grid Question directive...but this will have to do for now...
+    $scope.validateGridQuestion = function(question) {
+        var overallValidity = true, currentRow;
+        _.each(question.options, function (row) {
+            currentRow = row;
+            _.each(question.grid_cols, function (col) {
+                var answer = currentRow[col.label];
+                if (col.required && ! answer) {
+                    if (col.either_or && ! currentRow[col.either_or]) {
+                        overallValidity = false;
+                    }
+                    
+                }
+            });
+        });
+        return overallValidity;
+    }
     
     $scope.validateMultiSelect = function(question) {
         var hoistedAnswers,
