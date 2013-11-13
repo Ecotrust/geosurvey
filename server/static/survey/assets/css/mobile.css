@@ -277,6 +277,9 @@ img.center {
     color: rgb(46, 46, 46) !important;
     min-width: 100px;
 }
+.btn-lg {
+    border-radius: 0px;
+}
 .question .select-content {
     padding: 8px 10px;
     color: rgb(150,150,150);
