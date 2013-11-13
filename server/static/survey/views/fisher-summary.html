@@ -4,6 +4,8 @@
     <div class="container summary">
         <h4>History</h4>
         <div ng-hide="summary" ng-include="viewPath + 'views/spinner.html'"></div>
+        <div ng-show="summary == 'none'">No Summary Data was Found</div>
+        <div ng-show="summary == 'none'">Either you have no submitted reports, or you need to log out and log back in.</div>
         <ul class="list-unstyled">
             <li ng-repeat="fish in summary" ng-show="fish.total">
                 
