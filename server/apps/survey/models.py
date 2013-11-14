@@ -336,9 +336,9 @@ class Response(caching.base.CachingMixin, models.Model):
             if self.question.type in ['auto-single-select', 'single-select', 'yes-no']:
                 answer = simplejson.loads(self.answer_raw)
                 if answer.get('text'):
-                    self.answer = answer['text']
+                    self.answer = answer['text'].strip()
                 if answer.get('name'):
-                    self.answer = answer['name']
+                    self.answer = answer['name'].strip()
             if self.question.type in ['monthpicker']:
                 try:
                     date = dateutil.parser.parse(self.answer)
@@ -361,9 +361,9 @@ class Response(caching.base.CachingMixin, models.Model):
                 for answer in answer_list:
                     try:
                         if answer.get('text'):
-                            answer_text = answer['text']
+                            answer_text = answer['text'].strip()
                         if answer.get('name'):
-                            answer_text = answer['name']
+                            answer_text = answer['name'].strip()
                         answers.append(answer_text)
                         answer_label = answer.get('label', None)
                         multi_answer = MultiAnswer(response=self, answer_text=answer_text, answer_label=answer_label)
