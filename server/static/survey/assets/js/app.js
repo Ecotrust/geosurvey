@@ -146,22 +146,13 @@ $(document).ready(function () {
             $wrapper.addClass('active');
             $('body').addClass("keyboard-open");
         }
-        
-        // $('#footer').offset({top: $this.offset().top+$this.outerHeight(true)})
-            // window.scrollTo(0,0); //the second 0 marks the Y scroll pos. Setting this to i.e. 100 will push the screen up by 100px.
     });
-    // $('select').live('focus', function (e) { 
-    //     $('body').addClass("keyboard-open");
-    //         // window.scrollTo(0,0); //the second 0 marks the Y scroll pos. Setting this to i.e. 100 will push the screen up by 100px.
-    // });
+    
     $('input').live('blur', function (e) {
         var $this = $(this);
         $('body').removeClass("keyboard-open");
         $this.closest('.question-wrapper').removeClass('active');
-        $('#footer').attr('style', null);
     });        
-    // $('select').live('change', function (e) {
-    //     $('body').removeClass("keyboard-open");
-    // });
+    
     
 });
