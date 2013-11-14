@@ -143,7 +143,7 @@ $(document).ready(function () {
         var $this = $(this),
             $wrapper = $this.closest('.question-wrapper');
 
-        if (! $wrapper.hasClass('grid-question')) {
+        if ($wrapper.length && ! $wrapper.hasClass('grid-question')) {
             $('body').addClass("keyboard-open");
             $wrapper.addClass('active');
             if (e.type === 'touchstart') {
