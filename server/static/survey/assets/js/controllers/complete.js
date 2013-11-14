@@ -22,6 +22,8 @@ angular.module('askApp')
         $scope.surveys = app.surveys;
     }
     $scope.survey = _.findWhere($scope.surveys, { slug: $routeParams.surveySlug});
+    survey.initializeSurvey($scope.survey);
+
     if (app.offline) {
         app.respondents[$routeParams.uuidSlug].complete = true;
         app.respondents[$routeParams.uuidSlug].status = 'complete';
@@ -47,12 +49,7 @@ angular.module('askApp')
 
 
     $scope.skipBack = function () {
-        var lastPage = survey.getLastPage();
-        if (lastPage) {
-            $location.path(['survey', $routeParams.surveySlug, lastPage.order, $routeParams.uuidSlug].join('/'));    
-        } else {
-            $location.path('/surveys');
-        }
+        $location.path($scope.respondent.resumePath.replace('#', ''));
 
     };
 
