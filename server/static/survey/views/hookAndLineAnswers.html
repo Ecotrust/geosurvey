@@ -65,7 +65,7 @@
 
             <div class="row margin-top-10">
                 <div class="col-xs-7 margin-top-10">
-                    <strong>HOOK & LINE SPECIES </strong>
+                    <strong>SPECIES CAUGHT</strong>
                 </div> 
                 <div class="col-xs-5 margin-top-10">
                     <strong>WHOLE POUNDS</strong>
@@ -75,22 +75,28 @@
             <div ng-repeat="answer in getAnswer('weight-line-or-reel')">
                 <div ng-show="answer.showGroupName">        
                     <div class="row margin-top-10">
-                        <div class="col-xs-7">
+                        <div class="col-xs-4">
                             <span>{{answer.showGroupName | uppercase}}</span>
                         </div>
-                        <div class="col-xs-5"></div>
+                        <div class="col-xs-4">
+                            <span></span>
+                        </div>
+                        <div class="col-xs-4">
+                            <span></span>
+                        </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-xs-7">
-                        <span class="answer margin-left-10">{{ answer.text }}</span>
+                <div class="row" style="border-bottom: solid 1px; border-color: rgb(200, 200, 200);">
+                    <div class="col-xs-4">
+                        <span class="margin-left-10">{{ answer.text }}</span>
                     </div>
                     <div class="col-xs-4">
                         <span class="pull-right">{{ answer.wholepounds }}</span>    
                     </div>
-                    <div class="col-xs-1"></div>
+                    <div class="col-xs-4">
+                        <span class="pull-right">{{ answer.guttedpounds }}</span>    
+                    </div>
                 </div>
-
             </div>
 
         </div> 

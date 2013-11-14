@@ -139,6 +139,8 @@ angular.module('askApp').directive('multiquestion', function() {
                 })), function(sum, value) {                    
                     if (_.isObject(value)) {
                         value = value.value;
+                    } else if (! value) {
+                        value = 0;
                     }
                     return sum + value;
                 });
