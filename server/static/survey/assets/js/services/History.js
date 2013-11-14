@@ -58,7 +58,7 @@ angular.module('askApp')
         try {
             if (questionSlug === 'weight-line-or-reel' || questionSlug === 'weight-traps' || questionSlug === 'weight-nets' || questionSlug === 'weight-spear-or-by-hand') {
                 var island = _.findWhere(respondent.responses, {question: 'island'}).answer.label,
-                    islandSlug = (island === 'st-thomas') ? 'st-thomas-st-john' : island,
+                    islandSlug = (island === 'st-thomas' || island === 'st-john') ? 'st-thomas-st-john' : island,
                     answer = _.findWhere(respondent.responses, {question: questionSlug + '-' + islandSlug}).answer;
 
                 // TODO: currently no way of determining definitively whether answers are from a grouped multi-select or an ungrouped multi-select

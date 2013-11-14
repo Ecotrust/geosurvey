@@ -11,6 +11,7 @@ angular.module('askApp')
         } else {
             $location.path('/');
         }
+        $scope.showErrorMessage = false;
 
         $scope.path = $location.path().slice(1,5);
         $scope.viewPath = app.viewPath;
@@ -39,7 +40,9 @@ angular.module('askApp')
                 $scope.getSubmittedSurveysList($scope.surveyFilter);
             }).error(function (err) {
                 console.log(JSON.stringify(err));
-                debugger;
+                // debugger;
+                $scope.showSurveyList = false;
+                $scope.showErrorMessage = true;
             });
 
         $scope.$watch('surveyFilter', function(newValue) {
