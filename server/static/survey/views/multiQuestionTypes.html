@@ -58,7 +58,7 @@
     <div ng-switch-when="monthpicker">
         <div class="question">
             <input class="form-control datepicker" type="month" placeholder="{{ question.label }}" ng-model="question.answer" />
-            <label class="control-label" ng-hide="validity[question.slug] || ! question.answer">Date is not valid or in the future.</label>
+            <label class="control-label error" ng-hide="validity[question.slug] || ! question.answer">Date is not valid or in the future.</label>
         </div>
     </div>
     <div ng-switch-when="datepicker">

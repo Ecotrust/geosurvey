@@ -177,7 +177,10 @@ input.datepicker {
 .keyboard-open #footer, .keyboard-open .navbar {
     /*display: none;*/
 }
+.keyboard-open .question-wrapper {
+    opacity: 0;
 
+}
 .keyboard-open .question-wrapper.active {
     position: absolute;
     height: 100%;
@@ -186,11 +189,14 @@ input.datepicker {
     background-color: rgb(77, 136, 153);
     left: 10px;
     top: 130px;
+    opacity: 1 !important;
 }
 
+
 .keyboard-open #footer {
-    top: 210px;
-    z-index: 2001;
+    /*top: 210px;
+    z-index: 2001;*/
+    display: none;
 }
 
 #wrap > .container {

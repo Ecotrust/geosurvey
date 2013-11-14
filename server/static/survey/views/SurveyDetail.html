@@ -18,7 +18,7 @@
                     <div class="question-wrapper" ng-repeat="question in page.questions">
                         <h4 class="question-title">{{ question.title }}</h4>
                         <div ng-switch on="question.type">
-                            <div ng-switch-when="grid">
+                            <div ng-switch-when="grid" class="grid-question">
                                 <form ng-submit="$parent.submitPage(page)">
                                     <div gridquestion question="question" answers="answers" validity="validity" pageorder="$index"  viewpath="viewPath"></div>
                                 </form>

@@ -141,9 +141,13 @@ angular.module('askApp', ['ui', 'ui.bootstrap', 'ngGrid'])
 $(document).ready(function () {
     $('input').live('focus', function (e) { 
         var $this = $(this);
-        $('body').addClass("keyboard-open");
-        $this.closest('.question-wrapper').addClass('active');
-        $('#footer').offset({top: $this.offset().top+$this.outerHeight(true)})
+        var $wrapper = $this.closest('.question-wrapper');
+        if (! $this.closest('.grid-question').length) {
+            $wrapper.addClass('active');
+            $('body').addClass("keyboard-open");
+        }
+        
+        // $('#footer').offset({top: $this.offset().top+$this.outerHeight(true)})
             // window.scrollTo(0,0); //the second 0 marks the Y scroll pos. Setting this to i.e. 100 will push the screen up by 100px.
     });
     // $('select').live('focus', function (e) { 
