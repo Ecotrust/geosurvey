@@ -44,16 +44,15 @@ angular.module('askApp')
     }
     $scope.completeView = '/static/survey/survey-pages/' + $routeParams.surveySlug + '/complete.html';
 
+    $scope.surveyProgress = 100;
 
-
-    $scope.skipBack = function () {
-        var lastPage = survey.getLastPage();
+    $scope.getLastPageOfSurvey = function() {
+        var lastPage = survey.getLastPageOfSurvey($scope.survey);
         if (lastPage) {
             $location.path(['survey', $routeParams.surveySlug, lastPage.order, $routeParams.uuidSlug].join('/'));    
-        } else {
+        } else {    
             $location.path('/surveys');
         }
-
     };
 
     $scope.getTitle = function() {
