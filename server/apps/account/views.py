@@ -9,7 +9,8 @@ from django.contrib.auth.models import User, check_password
 from django.contrib.auth.forms import PasswordResetForm
 from account.models import UserProfile, Feedback
 from django.db import IntegrityError
-from django.core.validators import validate_email
+
+from django.core.validators import email_re
 from django.core.exceptions import ValidationError
 
 import simplejson
@@ -49,12 +50,14 @@ def authenticateUser(request):
 def createUser(request):
     if request.POST:
         param = simplejson.loads(request.POST.keys()[0])
-        email = param.get('emailaddress1')
-        try:
-            validate_email( email )
-        except ValidationError:
-            print "invalid?"
-            return HttpResponse("invalid-email", status=500)    
+        email = param.get('emailaddress1', None)
+        if email is not None:
+            email = email.replace(' ', '+')
+            if email_re.match(email) is None:
+                if email.find('+') == -1:
+                    return HttpResponse("invalid-email", status=500)
+        else:
+            return HttpResponse("invalid-email", status=500)
         try:
             user, created = User.objects.get_or_create(
                 username=param.get('username', None), email=email)

@@ -28,6 +28,7 @@ server {
 
     location /downloads/ {
         alias /srv/downloads/;
+        index index.html;
     }
 
     <% if node[:staticfiles] %>

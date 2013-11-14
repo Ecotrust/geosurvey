@@ -80,18 +80,6 @@ angular.module('askApp')
         return foundPage;
     };
 
-    var getLastPageOfSurvey = function(thisSurvey) {
-        var lastPage = false, survey = thisSurvey || survey, index = survey.pages.length-1;
-        while (lastPage === false && index >= 0) {
-            var page = survey.pages[index];
-            if (page && !skipPageIf(page)) {
-                return page;
-            }
-            index--;
-        }
-        return survey.pages[0];
-    };
-
     // NOTE:  In order for this function to work, controller must first call initializeSurvey to initialize survey, page, and answers
     //        perhaps a better strategy would be to pass in those values...?
     var getLastPage = function(numPsToSkips) {
@@ -284,7 +272,6 @@ angular.module('askApp')
     return {
       'getNextPage': getNextPage,
       'getLastPage': getLastPage,
-      'getLastPageOfSurvey': getLastPageOfSurvey,
       'initializeSurvey': initializeSurvey,
       'getAnswer': getAnswer,
       'cleanSurvey': cleanSurvey,

@@ -4,9 +4,9 @@ var app = {};
 angular.module('askApp', ['ui', 'ui.bootstrap', 'ngGrid'])
     .config(function($routeProvider, $httpProvider) {
 
-    var initialHeight = $(window).height();
-    $('html').css({ 'min-height': initialHeight});
-    $('body').css({ 'min-height': initialHeight});
+    // var initialHeight = $(window).height();
+    // $('html').css({ 'min-height': initialHeight});
+    // $('body').css({ 'min-height': initialHeight});
 
     if (localStorage.getItem('hapifis') && window.location.pathname !== '/respond') {
         app.username = JSON.parse(localStorage.getItem('hapifis')).currentUser;
@@ -43,7 +43,7 @@ angular.module('askApp', ['ui', 'ui.bootstrap', 'ngGrid'])
     $httpProvider.defaults.headers.post['Content-Type'] = 'application/json';
     $routeProvider.when('/', {
         templateUrl: app.viewPath + 'views/splash.html',
-        controller: 'SplashCtrl',
+        controller: 'SplashCtrl'
     })
     .when('/signup', {
             templateUrl: app.viewPath + 'views/signup.html',
@@ -139,19 +139,23 @@ angular.module('askApp', ['ui', 'ui.bootstrap', 'ngGrid'])
 
 
 $(document).ready(function () {
-    $('input').live('focus', function (e) { 
-        $('body').addClass("keyboard-open");
-            // window.scrollTo(0,0); //the second 0 marks the Y scroll pos. Setting this to i.e. 100 will push the screen up by 100px.
+    $(document).on('focusin touchstart', 'input', function (e) { 
+        var $this = $(this),
+            $wrapper = $this.closest('.question-wrapper');
+
+        if ($wrapper.length && ! $wrapper.hasClass('grid-question')) {
+            $('body').addClass("keyboard-open");
+            $wrapper.addClass('active');
+            if (e.type === 'touchstart') {
+                $this.focus();    
+            }
+            
+        }
     });
-    // $('select').live('focus', function (e) { 
-    //     $('body').addClass("keyboard-open");
-    //         // window.scrollTo(0,0); //the second 0 marks the Y scroll pos. Setting this to i.e. 100 will push the screen up by 100px.
-    // });
-    $('input').live('blur', function (e) {
-        $('body').removeClass("keyboard-open");
-    });        
-    // $('select').live('change', function (e) {
-    //     $('body').removeClass("keyboard-open");
-    // });
     
+    $(document).on('focusout', 'input', function (e) { 
+        var $this = $(this);
+        $('body').removeClass("keyboard-open");
+        $this.closest('.question-wrapper').removeClass('active');
+    });        
 });
