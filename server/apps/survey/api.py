@@ -174,6 +174,13 @@ class ReportRespondantResource(SurveyModelResource):
         authorization = StaffUserOnlyAuthorization()
         authentication = Authentication()
 
+class DashRespondantResource(ReportRespondantResource):
+    user = fields.ToOneField('apps.account.api.UserResource', 'user', null=True, blank=True, full=True, readonly=True)
+
+class DashRespondantDetailsResource(ReportRespondantResource):
+    responses = fields.ToManyField(ResponseResource, 'responses', full=True, null=True, blank=True)
+    user = fields.ToOneField('apps.account.api.UserResource', 'user', null=True, blank=True, full=True, readonly=True)
+
 
 class ReportRespondantDetailsResource(ReportRespondantResource):
     responses = fields.ToManyField(ResponseResource, 'responses', full=True, null=True, blank=True)
