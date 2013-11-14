@@ -43,7 +43,7 @@ angular.module('askApp', ['ui', 'ui.bootstrap', 'ngGrid'])
     $httpProvider.defaults.headers.post['Content-Type'] = 'application/json';
     $routeProvider.when('/', {
         templateUrl: app.viewPath + 'views/splash.html',
-        controller: 'SplashCtrl',
+        controller: 'SplashCtrl'
     })
     .when('/signup', {
             templateUrl: app.viewPath + 'views/signup.html',
@@ -139,20 +139,19 @@ angular.module('askApp', ['ui', 'ui.bootstrap', 'ngGrid'])
 
 
 $(document).ready(function () {
-    $('input').live('focus', function (e) { 
-        var $this = $(this);
-        var $wrapper = $this.closest('.question-wrapper');
-        if (! $this.closest('.grid-question').length) {
-            $wrapper.addClass('active');
+    $(document).on('touchstart focus', 'input', function (e) { 
+        var $this = $(this),
+            $wrapper = $this.closest('.question-wrapper');
+
+        if (! $wrapper.hasClass('grid-question')) {
             $('body').addClass("keyboard-open");
+            $wrapper.addClass('active');
         }
     });
     
-    $('input').live('blur', function (e) {
+    $(document).on('blur', 'input', function (e) { 
         var $this = $(this);
         $('body').removeClass("keyboard-open");
         $this.closest('.question-wrapper').removeClass('active');
     });        
-    
-    
 });
