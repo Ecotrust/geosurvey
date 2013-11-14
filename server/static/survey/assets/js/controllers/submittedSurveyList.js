@@ -33,8 +33,10 @@ angular.module('askApp')
                 var date = new Date(),
                     firstDayOfCurrentMonth = new Date(date.getFullYear(), date.getMonth(), 1),
                     start_date = firstDayOfCurrentMonth.toString('yyyy-MM-dd');
+                    today = date.toString('yyyy-MM-dd');
 
-                $scope.surveyFilter = {start: start_date};
+                $scope.surveyFilter = {start: start_date, end: today};
+                $scope.getSubmittedSurveysList($scope.surveyFilter);
             }).error(function (err) {
                 console.log(JSON.stringify(err));
                 debugger;
@@ -42,12 +44,18 @@ angular.module('askApp')
 
         $scope.$watch('surveyFilter', function(newValue) {
             if (newValue) {
-                $scope.getSubmittedSurveysList(newValue);
+                // $scope.getSubmittedSurveysList(newValue);
+                $scope.updateEnabled = true;
             }
         }, true);
 
         $scope.showSurveyList = false;
 
+        $scope.updateSurveyList = function() {
+            $scope.updateEnabled = false;
+
+            $scope.getSubmittedSurveysList($scope.surveyFilter);
+        };
         
         $scope.getTitle = function() {
             return history.getTitle($scope.respondent);
@@ -140,7 +148,7 @@ angular.module('askApp')
             return $http.get(url).error(function (err) {
                 console.log(JSON.stringify(err));
                 debugger;
-            }).success(function (callback) { $scope.next20 = callback.meta.next; });            
+            }).success(function (callback) { $scope.next20 = callback.meta.next; $scope.updateEnabled = false;  });  
         };
 
         $scope.showNext20 = function(surveyFilter) {
