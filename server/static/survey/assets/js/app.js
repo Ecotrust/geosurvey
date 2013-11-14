@@ -154,7 +154,7 @@ $(document).ready(function () {
         var $this = $(this);
         $('body').removeClass("keyboard-open");
         $this.closest('.question-wrapper').removeClass('active');
-        $('#footer').attr('style', null)
+        $('#footer').attr('style', null);
     });        
     // $('select').live('change', function (e) {
     //     $('body').removeClass("keyboard-open");
