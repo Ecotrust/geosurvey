@@ -161,6 +161,7 @@ angular.module('askApp')
         var answers = _.map(page.questions, function (question) {
             return $scope.getAnswerOnPage(question);
         });
+        $('#footer').attr('style', null);
         if (app.offline) {
             _.each(answers, function (answer){
                 $scope.answerOffline(answer);

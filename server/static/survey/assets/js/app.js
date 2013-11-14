@@ -4,9 +4,9 @@ var app = {};
 angular.module('askApp', ['ui', 'ui.bootstrap', 'ngGrid'])
     .config(function($routeProvider, $httpProvider) {
 
-    var initialHeight = $(window).height();
-    $('html').css({ 'min-height': initialHeight});
-    $('body').css({ 'min-height': initialHeight});
+    // var initialHeight = $(window).height();
+    // $('html').css({ 'min-height': initialHeight});
+    // $('body').css({ 'min-height': initialHeight});
 
     if (localStorage.getItem('hapifis') && window.location.pathname !== '/respond') {
         app.username = JSON.parse(localStorage.getItem('hapifis')).currentUser;
@@ -140,7 +140,10 @@ angular.module('askApp', ['ui', 'ui.bootstrap', 'ngGrid'])
 
 $(document).ready(function () {
     $('input').live('focus', function (e) { 
+        var $this = $(this);
         $('body').addClass("keyboard-open");
+        $this.closest('.question-wrapper').addClass('active');
+        $('#footer').offset({top: $this.offset().top+$this.outerHeight(true)})
             // window.scrollTo(0,0); //the second 0 marks the Y scroll pos. Setting this to i.e. 100 will push the screen up by 100px.
     });
     // $('select').live('focus', function (e) { 
@@ -148,7 +151,10 @@ $(document).ready(function () {
     //         // window.scrollTo(0,0); //the second 0 marks the Y scroll pos. Setting this to i.e. 100 will push the screen up by 100px.
     // });
     $('input').live('blur', function (e) {
+        var $this = $(this);
         $('body').removeClass("keyboard-open");
+        $this.closest('.question-wrapper').removeClass('active');
+        $('#footer').attr('style', null)
     });        
     // $('select').live('change', function (e) {
     //     $('body').removeClass("keyboard-open");

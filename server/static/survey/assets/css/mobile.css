@@ -175,8 +175,23 @@ input.datepicker {
     background-color: rgb(54, 85, 91);
 }
 .keyboard-open #footer, .keyboard-open .navbar {
-    display: none;
+    /*display: none;*/
 }
+
+.keyboard-open .question-wrapper.active {
+    position: absolute;
+    height: 50%;
+    z-index: 2000;
+    width: 95%;
+    background-color: rgb(77, 136, 153);
+    left: 10px;
+}
+
+.keyboard-open #footer {
+    top: 210px;
+    z-index: 2001;
+}
+
 #wrap > .container {
     padding: 40px 15px 20px;
 }
