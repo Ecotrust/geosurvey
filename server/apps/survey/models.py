@@ -305,7 +305,7 @@ class GridAnswer(caching.base.CachingMixin, models.Model):
     col_text = models.TextField(null=True, blank=True)
     col_label = models.TextField(null=True, blank=True)
     answer_text = models.TextField(null=True, blank=True)
-    answer_number = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
+    answer_number = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
 
     def __unicode__(self):
         return "%s: %s" % (self.row_text, self.col_text)
