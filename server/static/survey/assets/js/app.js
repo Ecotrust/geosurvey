@@ -147,7 +147,7 @@ $(document).ready(function () {
             return true;
         }
         if ($wrapper.length) {
-            if (! $wrapper.hasClass('grid-question')) {
+            if (! $wrapper.hasClass('non-focus-question')) {
                 $('body').addClass("keyboard-open");    
                 $wrapper.addClass('active');
                 if (e.type === 'touchstart') {
