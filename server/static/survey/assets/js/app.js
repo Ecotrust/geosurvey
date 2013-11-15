@@ -145,10 +145,13 @@ $(document).ready(function () {
             // && ! $wrapper.hasClass('grid-question')
         if ($wrapper.length) {
             $('body').addClass("keyboard-open");
-            $wrapper.addClass('active');
-            if (e.type === 'touchstart' && ! $wrapper.hasClass('grid-question')) {
-                $this.focus();    
+            if (! $wrapper.hasClass('grid-question')) {
+                $wrapper.addClass('active');
+                if (e.type === 'touchstart') {
+                    $this.focus();    
+                }    
             }
+            
             
         }
     });
