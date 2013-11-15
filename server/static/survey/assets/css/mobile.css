@@ -314,14 +314,7 @@ img.center {
 .btn-lg {
     border-radius: 0px;
 }
-.question .select-content {
-    padding: 8px 10px;
-    color: rgb(150,150,150);
-}
-.select-content, .btn-main:active, .accordion-heading {
-    background-color: rgb(24, 75, 83);
-    border-color: rgba(0, 0, 0, 0);
-}
+
 .select ul {
     list-style: none;
     -webkit-margin-before: 0;
@@ -473,8 +466,23 @@ img.center {
     font-weight: bold;
     text-transform: uppercase;
     border-radius: 0;
-    margin-bottom: 10px;
+    margin-bottom: 5px !important;
 }
+
+.question .select-content {
+    padding: 10px 15px;
+    color: rgb(150,150,150);
+   
+}
+
+.question .option {
+     margin-bottom: 10px !important;
+}
+.select-content, .btn-main:active, .accordion-heading {
+    background-color: rgb(24, 75, 83);
+    border-color: rgba(0, 0, 0, 0);
+}
+
 .question .panel-heading a:hover {
     text-decoration: none;
 }
@@ -589,6 +597,7 @@ input.multi-select-other:-ms-input-placeholder {
     position: relative;
     background-color: rgb(24, 75, 83);
     height: 40px;
+
 }
 .select-wrapper .down {
     position: absolute;
@@ -614,6 +623,9 @@ input.multi-select-other:-ms-input-placeholder {
     transition: height 0.8s;
 }
 */
+.question .select {
+    margin-top: 10px;
+}
 .question .select .accordion-div {
     border-style: solid;
     border-bottom-width: 0;
@@ -641,6 +653,7 @@ input.multi-select-other:-ms-input-placeholder {
  color: rgb(222,222,222); 
  background-color: rgb(246 , 235, 194);
 }*/
+
 .question .select .accordion-body {
     margin-top: 10px;
 }
