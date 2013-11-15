@@ -29,7 +29,7 @@ angular.module('askApp')
             $scope.profileQuestions = getProfileQuestions();
         });
 
-    }
+    };
 
     var getProfileQuestions = function () {
         var profileQuestions = [];
@@ -68,6 +68,7 @@ angular.module('askApp')
     } else {
         updateSurveys();
     }
+    $scope.userEmail = $scope.user.email;
     
     $scope.updateProfile = function (profileQuestions) {
         var url = app.server + '/account/updateUser/',
@@ -76,7 +77,7 @@ angular.module('askApp')
         _.each(profileQuestions, function(item, i) {
             registration[item.slug] = item.answer;
         });
-        $http.post(url, {username: app.user.username, registration: registration})
+        $http.post(url, {username: app.user.username, registration: registration, email: $scope.userEmail})
             .success(function (data) {
                 app.user.registration = registration;
                 storage.saveState(app);
