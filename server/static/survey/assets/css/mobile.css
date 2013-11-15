@@ -336,7 +336,7 @@ img.center {
     display: none;
     width: 15px;
     height: 15px;
-    background-color: rgb(49, 49, 49);
+    background-image: url(../img/checkbox.png);
     float: right;
     margin: 0;
 }
