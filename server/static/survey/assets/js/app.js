@@ -139,11 +139,11 @@ angular.module('askApp', ['ui', 'ui.bootstrap', 'ngGrid'])
 
 
 $(document).ready(function () {
-    $(document).on('focusin touchstart', '.question input', function (e) { 
+    $(document).on('focusin touchstart', '.question input, .question select', function (e) { 
         var $this = $(this),
             $wrapper = $this.closest('.question-wrapper');
-
-        if ($wrapper.length && ! $wrapper.hasClass('grid-question')) {
+            // && ! $wrapper.hasClass('grid-question')
+        if ($wrapper.length) {
             $('body').addClass("keyboard-open");
             $wrapper.addClass('active');
             if (e.type === 'touchstart') {
@@ -153,7 +153,7 @@ $(document).ready(function () {
         }
     });
     
-    $(document).on('focusout', '.question input', function (e) { 
+    $(document).on('blur', '.question input, .question select', function (e) { 
         var $this = $(this);
         $('body').removeClass("keyboard-open");
         $this.closest('.question-wrapper').removeClass('active');
