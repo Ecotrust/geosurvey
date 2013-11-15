@@ -139,7 +139,7 @@ angular.module('askApp', ['ui', 'ui.bootstrap', 'ngGrid'])
 
 
 $(document).ready(function () {
-    $(document).on('focusin touchstart', 'input', function (e) { 
+    $(document).on('focusin touchstart', '.question input', function (e) { 
         var $this = $(this),
             $wrapper = $this.closest('.question-wrapper');
 
@@ -153,7 +153,7 @@ $(document).ready(function () {
         }
     });
     
-    $(document).on('focusout', 'input', function (e) { 
+    $(document).on('focusout', '.question input', function (e) { 
         var $this = $(this);
         $('body').removeClass("keyboard-open");
         $this.closest('.question-wrapper').removeClass('active');
