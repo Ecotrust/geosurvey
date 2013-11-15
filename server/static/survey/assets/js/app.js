@@ -144,12 +144,14 @@ $(document).ready(function () {
             $wrapper = $this.closest('.question-wrapper');
             // && ! $wrapper.hasClass('grid-question')
         if ($wrapper.length) {
-            $('body').addClass("keyboard-open");
             if (! $wrapper.hasClass('grid-question')) {
+                $('body').addClass("keyboard-open");    
                 $wrapper.addClass('active');
                 if (e.type === 'touchstart') {
                     $this.focus();    
                 }    
+            } else {
+                $('body').addClass("grid-keyboard-open");    
             }
             
             
@@ -159,6 +161,7 @@ $(document).ready(function () {
     $(document).on('blur', '.question input, .question select', function (e) { 
         var $this = $(this);
         $('body').removeClass("keyboard-open");
+        $('body').removeClass("grid-keyboard-open");
         $this.closest('.question-wrapper').removeClass('active');
     });        
 });

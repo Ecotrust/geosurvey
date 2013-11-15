@@ -193,7 +193,7 @@ input.datepicker {
 }
 
 
-.keyboard-open #footer {
+.keyboard-open #footer, .grid-keyboard-open #footer {
     /*top: 210px;
     z-index: 2001;*/
     display: none;
