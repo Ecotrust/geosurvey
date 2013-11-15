@@ -1,56 +1,60 @@
 <div id="history-wrap" class="menu-page">
     <div mobilemenu></div>
     <!-- Begin page content -->
-    <div class="container" ng-show="showSurveyList">
-        
-        <h4>Un-Submitted Reports</h4>
-
-        <div ng-hide="confirmSubmit">
-        
-            <div ng-hide="respondents.length">
-                <p>All reports have been submitted.</p>
-                <a class="btn btn-main btn-default btn-lg btn-block blue-btn" href="#/history">return to history page</a>
+    
+    <div class="container">
+        <div ng-show="showErrorMessage">
+            <div class="error">Problem</div>
+            <div>There was a problem loading your surveys.</div>
+            <div>Please sign in again.</div>
+            <a class="btn btn-default btn-lg btn-block panel-heading" href="#/signin">Sign In</a>
+        </div>
+        <div ng-show="showSurveyList">
+            <h4>Un-Submitted Reports</h4>
+            <div ng-show="respondents.length && ! hasReportsToSubmit">This device has no completed reports.</div>
+            <div ng-hide="confirmSubmit || showSubmitDone">
+                <div ng-hide="respondents.length">This device has no un-submitted reports.</div>
+                <a class="btn btn-main btn-default btn-lg btn-block blue-btn" ng-show="hasReportsToSubmit" ng-click="confirmSubmit = true">submit all reports</a>
             </div>
-
-            <div class="panel panel-default" ng-repeat="respondent in respondents track by $index">  <!-- track by $index is present to prevent 'Duplicates in repeater' error -->
-                <div class="panel-heading" ng-click="openRespondent(respondent)" ng-class="{ 'darkSalmonBackground': respondent.open }">
-                    <h4 class="panel-title">
-                        {{ respondent.survey_title }} -- 
-                        <span ng-show="respondent.complete">{{ respondent.ts | date: 'MM/dd/yyyy HH:mm' }}</span>
-                        <span ng-hide="respondent.complete">{{ respondent.ts | date: 'MM/dd/yyyy HH:mm' }} -- incomplete</span>
-                    </h4>
-                </div>
-                <div id="{{ respondent.survey_title }}" class="panel-collapse collapse" ng-class="{ 'in': respondent.open }">
-                    <div class="panel-body">
-                        <div ng-include="'views/surveyAnswers.html'"></div>
+            <div ng-show="showSubmitDone">
+                <p>All completed reports have been submitted.</p>
+                <a class="btn btn-main btn-default btn-lg btn-block blue-btn" ng-click="showSubmitDone = false">return to dashboard</a>
+            </div>
+            <div ng-hide="confirmSubmit || showSubmitDone">
+                <div class="panel panel-default" ng-repeat="respondent in respondents track by $index">  <!-- track by $index is present to prevent 'Duplicates in repeater' error -->
+                    <div class="panel-heading" ng-click="openRespondent(respondent)" ng-class="{ 'darkSalmonBackground': respondent.open }">
+                        <h4 class="panel-title">
+                            {{ respondent.survey_title }} -- 
+                            <span ng-show="respondent.complete">{{ respondent.ts | date: 'MM/dd/yyyy HH:mm' }}</span>
+                            <span ng-hide="respondent.complete">{{ respondent.ts | date: 'MM/dd/yyyy HH:mm' }} -- incomplete</span>
+                        </h4>
                     </div>
-                    <div style="padding-left: 15px; padding-right: 15px; padding-bottom: 15px">
-                        <div class="clearfix row">
-                            <span class="col-xs-4"><a type="button" class="btn btn-default btn-lg btn-block blue-btn" ng-show="respondent.complete" ng-click="submitSurvey(respondent)">Submit</a></span>
-                            <span class="col-xs-4"><a type="button" class="btn btn-default btn-lg btn-block blue-btn" ng-click="resumeSurvey(respondent)">Edit</a></span>
-                            <span class="col-xs-4"><a type="button" class="btn btn-default btn-lg btn-block blue-btn" ng-click="deleteSurvey(respondent)">Delete</a></span>
+                    <div id="{{ respondent.survey_title }}" class="panel-collapse collapse" ng-class="{ 'in': respondent.open }">
+                        <div class="panel-body">
+                            <div ng-include="'views/surveyAnswers.html'"></div>
+                        </div>
+                        <div style="padding-left: 15px; padding-right: 15px; padding-bottom: 15px">
+                            <div class="clearfix row">
+                                <span class="col-xs-4"><a type="button" class="btn btn-default btn-lg btn-block blue-btn" ng-show="respondent.complete" ng-click="submitSurvey(respondent)">Submit</a></span>
+                                <span class="col-xs-4"><a type="button" class="btn btn-default btn-lg btn-block blue-btn" ng-click="resumeSurvey(respondent)">Edit</a></span>
+                                <span class="col-xs-4"><a type="button" class="btn btn-default btn-lg btn-block blue-btn" ng-click="deleteSurvey(respondent)">Delete</a></span>
+                            </div>
                         </div>
                     </div>
                 </div>
+
             </div>
 
-            <div ng-hide="confirmSubmit" ng-show="respondents.length">
-                <a class="btn btn-main btn-default btn-lg btn-block blue-btn" ng-click="confirmSubmit = true">submit all reports</a>
+            <div ng-show="confirmSubmit">
+                <h3>Submit Reports</h3>
+                <a class="btn btn-main btn-default btn-lg btn-block btn-danger" ng-click="syncronize(respondents)">ok</a>
+                <a class="btn btn-main btn-default btn-lg btn-block" ng-tap="confirmSubmit = false">cancel</a>
             </div>
-        
         </div>
-
-        <div ng-show="confirmSubmit">
-            <h3>Submit Reports</h3>
-            <a class="btn btn-main btn-default btn-lg btn-block btn-danger" ng-click="syncronize(respondents)">ok</a>
-            <a class="btn btn-main btn-default btn-lg btn-block" ng-tap="confirmSubmit = false">cancel</a>
-        </div>
-
-
     </div>
 
 
-    <div ng-hide="showSurveyList" ng-include="viewPath + 'views/spinner.html'"></div>
+    <div ng-show="busy" ng-include="viewPath + 'views/spinner.html'"></div>
 
 </div>
 

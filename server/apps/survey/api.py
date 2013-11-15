@@ -85,7 +85,7 @@ class UserObjectsOnlyAuthorization(Authorization):
         return bundle.obj.user == bundle.request.user
 
     def create_list(self, object_list, bundle):
-        # Assuming their auto-assigned to ``user``.
+        # Assuming their auto-assigned to ``user`
         return object_list
 
     def create_detail(self, object_list, bundle):
@@ -139,13 +139,15 @@ class OfflineRespondantResource(SurveyModelResource):
     survey = fields.ToOneField('apps.survey.api.SurveyResource', 'survey', null=True, blank=True)
     user = fields.ToOneField('apps.account.api.UserResource', 'user', null=True, blank=True)
     class Meta:
-        # always_return_data = True
+        always_return_data = True
         queryset = Respondant.objects.all()
         authorization = UserObjectsOnlyAuthorization()
         authentication = Authentication()
         ordering = ['-ts']
     
     def obj_create(self, bundle, **kwargs):
+        if not bundle.request.user.is_authenticated():
+            return None
         return super(OfflineRespondantResource, self).obj_create(bundle, user=bundle.request.user)
 
     def save_related(self, bundle):

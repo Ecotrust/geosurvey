@@ -233,9 +233,7 @@ angular.module('askApp')
             complete: respondent.complete,
             survey: '/api/v1/survey/' + respondent.survey + '/'
         };
-        return $http.post(url, newRespondent).error(function (err) {
-            console.log(JSON.stringify(err));
-        });
+        return $http.post(url, newRespondent);
         
     };       
 

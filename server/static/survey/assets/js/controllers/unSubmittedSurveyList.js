@@ -65,25 +65,33 @@ angular.module('askApp')
 
             $scope.showSurveyList = false;            
             $scope.confirmSubmit = false;
-
+            $scope.busy = true;
             if (completed.length) {
                 survey.submitSurvey(first, _.findWhere(app.surveys, { slug: first.survey })).success(function (data) {
+                    if (! data) {
+                        $scope.showErrorMessage = true;
+                        return false;
+                    }
                     $scope.synchronized.push(data);
                     if (rest.length) {
                         $scope.syncronize(rest);
                     } else {
                         $scope.showSurveyList = true;
-
+                        $scope.busy = false;
+                        $scope.showSubmitDone = true;
                         _.each($scope.synchronized, function (synced) {
                             var original = _.findWhere($scope.respondents, { uuid: synced.uuid})
-                            $scope.respondents.splice(_.indexOf($scope.respondents, original));
+                            $scope.respondents.splice(_.indexOf($scope.respondents, original), 1);
                             $scope.saveState();
                         })
                         $scope.synchronized = [];
                         delete app.message;
                     }
                     
-                });    
+                })
+                .error(function (err) {
+                    debugger;
+                });
             }
             
         };
@@ -111,6 +119,7 @@ angular.module('askApp')
                 .success( function(data) {
                     //remove from app.respondents and save state
                     $scope.deleteRespondent(respondent);
+                    debugger
                     $scope.showSurveyList = true;
                 }).error( function(err) {
                     debugger;
@@ -134,5 +143,8 @@ angular.module('askApp')
             }
         };
 
+        $scope.$watch('respondents', function (newValue) {
+            $scope.hasReportsToSubmit = _.any(_.pluck(newValue, 'complete'));
+        }, true);
 
 });

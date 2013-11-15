@@ -149,21 +149,23 @@ angular.module('askApp')
             if (completed.length) {
                 $scope.busy = true;
                 survey.submitSurvey(first, _.findWhere(app.surveys, { slug: first.survey})).success(function (data) {
+                    debugger;
                     $scope.synchronized.push(data);
                     if (rest.length) {
                         $scope.syncronize(rest);
                     } else {
                         $scope.busy = false;
-
                         _.each($scope.synchronized, function (synced) {
-                            var original = _.findWhere($scope.respondents, { uuid: synced.uuid})
-                            $scope.respondents.splice(_.indexOf($scope.respondents, original));
+                            $scope.respondents = _.without($scope.respondents,
+                                _.findWhere($scope.respondents, { uuid: synced.uuid }));
                             $scope.saveState();
                         })
                         $scope.synchronized = [];
                         delete app.message;
                     }
-                    
+                })
+                .error(function (err) {
+                    debugger;
                 });    
             }
             

@@ -4,9 +4,10 @@
     <div class="container">
         
         <div ng-show="showErrorMessage">
-            <div>Crap.</div>
+            <div class="error">Problem</div>
             <div>There was a problem loading your surveys.</div>
-            <div>Try logging out and logging back on...?</div>
+            <div>Please sign in again.</div>
+            <a class="btn btn-default btn-lg btn-block panel-heading" href="#/signin">Sign In</a>
         </div>
 
         <div ng-show="showSurveyList">
