@@ -11,11 +11,11 @@
             </div> 
             
             <div class="row">
-                <div class="col-xs-6 margin-top-10">
+                <div ng-show="trapTypeIncludes('lobster')" class="col-sm-6 margin-top-10">
                     <div>
                         <strong style="text-decoration: underline">Lobster Traps</strong>
                     </div>
-                    <div ng-show="trapTypeIncludes('lobster')" class="well well-sm">
+                    <div class="well well-sm">
                         <div>
                             <strong># of Trap Hauls: </strong>
                             <span class="answer">{{ getAnswer('lobster-traps-hauled') }}</span>
@@ -30,11 +30,11 @@
                         </div>
                     </div>
                 </div> 
-                <div class="col-xs-6 margin-top-10">
+                <div ng-show="trapTypeIncludes('fish')" class="col-sm-6 margin-top-10">
                     <div>
                         <strong style="text-decoration: underline">Fish Traps</strong>
                     </div>
-                    <div ng-show="trapTypeIncludes('fish')" class="well well-sm">
+                    <div class="well well-sm">
                         <div>
                             <strong># of Trap Hauls: </strong>
                             <span class="answer">{{ getAnswer('fish-traps-hauled') }}</span>
