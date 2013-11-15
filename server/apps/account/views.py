@@ -11,7 +11,7 @@ from account.models import UserProfile, Feedback
 from django.db import IntegrityError
 
 from django.core.validators import email_re
-from django.core.exceptions import ValidationError
+from django.core.exceptions import ValidationError, MultipleObjectsReturned
 
 import simplejson
 import datetime
@@ -95,7 +95,9 @@ def forgotPassword(request):
         try:
             user = User.objects.get(email=email)
         except User.DoesNotExist:
-            return HttpResponse("user-not-found", status=401)    
+            return HttpResponse("user-not-found", status=401)  
+        except MultipleObjectsReturned:
+            return HttpResponse("multiple-users-found", status=500)  
         form = PasswordResetForm({'email': email})
         setattr(form, 'users_cache', [])
         form.save(from_email='edwin@pointnineseven.com', email_template_name='registration/password_reset_email.html')
@@ -123,7 +125,7 @@ def updateUser(request):
     if request.method == "POST":
         param = simplejson.loads(request.body)
         user = get_object_or_404( User, username=param.get('username', None) )
-        
+
         if request.user.username != user.username:
             return HttpResponse("You cannot access another user's profile.", status=401)
         else:

@@ -29,6 +29,9 @@
                 <div class="error" ng-show="showError == 'user-not-found'">
                     No user found for that email address.
                 </div>
+                <div class="error" ng-show="showError == 'multiple-users-found'">
+                    Multiple users found with that email address. 
+                </div>
             </form>
         </div>
         <div class="new-user-form signin-form" ng-show="showForgotPasswordDone">
