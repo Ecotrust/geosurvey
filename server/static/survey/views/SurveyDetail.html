@@ -15,7 +15,7 @@
             <div ng-show="page">
                 <div>
                     <div class="question-title"> {{ getPageBlockTitle() }} </div>
-                    <div class="question-wrapper" ng-repeat="question in page.questions">
+                    <div class="question-wrapper" ng-class="{ 'grid-question': question.type == 'grid', 'non-focus-question': question.type == 'grid' || question.type=='number-with-unit' }" ng-repeat="question in page.questions">
                         <h4 class="question-title">{{ question.title }}</h4>
                         <div ng-switch on="question.type">
                             <div ng-switch-when="grid">

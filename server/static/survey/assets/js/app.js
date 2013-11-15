@@ -1,35 +1,40 @@
 //'use strict';
+var app = {};
 
-
-var initialHeight = $(window).height();
-$('html').css({ 'min-height': initialHeight });
-$('body').css({ 'min-height': initialHeight });
-// $('#wrap').css({ 'min-height': initialHeight -80});
-
-
-if (localStorage.getItem('hapifish') && window.location.pathname !== '/respond') {
-    app = JSON.parse(localStorage.getItem('hapifish'));
-    console.log(app);
-} else {
-    var app = {};    
-}
-if (_.string.startsWith(window.location.protocol, "http")) {
-    app.server = window.location.protocol + "//" + window.location.host;
-} else {
-    app.server = "APP_SERVER";
-}
-
-app.version = "APP_VERSION";
-
-if (window.location.pathname === '/respond') {
-    app.viewPath = app.server + '/static/survey/';
-    app.offline = false;
-} else {
-    app.viewPath = '';
-    app.offline = true;
-}
 angular.module('askApp', ['ui', 'ui.bootstrap', 'ngGrid'])
     .config(function($routeProvider, $httpProvider) {
+
+    // var initialHeight = $(window).height();
+    // $('html').css({ 'min-height': initialHeight});
+    // $('body').css({ 'min-height': initialHeight});
+
+    if (localStorage.getItem('hapifis') && window.location.pathname !== '/respond') {
+        app.username = JSON.parse(localStorage.getItem('hapifis')).currentUser;
+        app.key = localStorage.getItem('hapifis-' + app.username);
+        if (localStorage.getItem('hapifis-' + app.username)) {
+            app = JSON.parse(localStorage.getItem('hapifis-' + app.username));
+        }
+    } else {
+        
+    }
+
+    if (_.string.startsWith(window.location.protocol, "http")) {
+        app.server = window.location.protocol + "//" + window.location.host;
+    } else {
+        app.server = "APP_SERVER";
+    }
+
+    app.version = "APP_VERSION";
+
+    app.stage = "APP_STAGE";
+
+    if (window.location.pathname === '/respond') {
+        app.viewPath = app.server + '/static/survey/';
+        app.offline = false;
+    } else {
+        app.viewPath = '';
+        app.offline = true;
+    }
 
     if (typeof token != 'undefined') {
         $httpProvider.defaults.headers.post['X-CSRFToken'] = token;
@@ -37,11 +42,22 @@ angular.module('askApp', ['ui', 'ui.bootstrap', 'ngGrid'])
 
     $httpProvider.defaults.headers.post['Content-Type'] = 'application/json';
     $routeProvider.when('/', {
-        templateUrl: app.viewPath + 'views/main.html',
-        controller: 'MainCtrl',
-        reloadOnSearch: false
-
+        templateUrl: app.viewPath + 'views/splash.html',
+        controller: 'SplashCtrl'
     })
+    .when('/signup', {
+            templateUrl: app.viewPath + 'views/signup.html',
+            controller: 'MainCtrl'
+        })
+    .when('/signin', {
+            templateUrl: app.viewPath + 'views/signin.html',
+            controller: 'MainCtrl'
+        })
+    .when('/main', {
+            templateUrl: app.viewPath + 'views/main.html',
+            controller: 'MainCtrl',
+            reloadOnSearch: false
+        })
         .when('/author/:surveySlug', {
         templateUrl: app.viewPath + 'views/author.html',
         controller: 'AuthorCtrl'
@@ -72,9 +88,25 @@ angular.module('askApp', ['ui', 'ui.bootstrap', 'ngGrid'])
         controller: 'SurveyDetailCtrl',
         edit: true
     })
-        .when('/respondents', {
-        templateUrl: app.viewPath + 'views/offlineRespondantList.html',
-        controller: 'offlineRespondantListCtrl'
+    //     .when('/respondents', {
+    //     templateUrl: app.viewPath + 'views/offlineRespondantList.html',
+    //     controller: 'offlineRespondantListCtrl'
+    // })
+        .when('/history', {
+        templateUrl: app.viewPath + 'views/history.html',
+        controller: 'HistoryCtrl'
+    })
+        .when('/fisher-summary', {
+        templateUrl: app.viewPath + 'views/fisher-summary.html',
+        controller: 'SummaryCtrl'
+    })
+        .when('/unSubmittedSurveyList', {
+        templateUrl: app.viewPath + 'views/unSubmittedSurveyList.html',
+        controller: 'unSubmittedSurveyListCtrl'
+    })
+        .when('/submittedSurveyList', {
+        templateUrl: app.viewPath + 'views/submittedSurveyList.html',
+        controller: 'submittedSurveyListCtrl'
     })
         .when('/respondent/:uuidSlug', {
         templateUrl: app.viewPath + 'views/completedSurveys.html',
@@ -106,19 +138,33 @@ angular.module('askApp', ['ui', 'ui.bootstrap', 'ngGrid'])
 });
 
 
-// $(document).ready(function () {
-//     $('input').live('focus', function (e) { 
-//         $('body').addClass("keyboard-open");
-//             // window.scrollTo(0,0); //the second 0 marks the Y scroll pos. Setting this to i.e. 100 will push the screen up by 100px.
-//     });
-//     $('select').live('focus', function (e) { 
-//         $('body').addClass("keyboard-open");
-//             // window.scrollTo(0,0); //the second 0 marks the Y scroll pos. Setting this to i.e. 100 will push the screen up by 100px.
-//     });
-//     $('input').live('blur', function (e) {
-//         $('body').removeClass("keyboard-open");
-//     });        
-//     $('select').live('change', function (e) {
-//         $('body').removeClass("keyboard-open");
-//     });        
-// });
+$(document).ready(function () {
+    $(document).on('focusin touchstart', '.question input, .question select', function (e) { 
+        var $this = $(this),
+            $wrapper = $this.closest('.question-wrapper');
+            // && ! $wrapper.hasClass('grid-question')
+        if ($this.closest('.menu-page').hasClass('profile')) {
+            return true;
+        }
+        if ($wrapper.length) {
+            if (! $wrapper.hasClass('non-focus-question')) {
+                $('body').addClass("keyboard-open");    
+                $wrapper.addClass('active');
+                if (e.type === 'touchstart') {
+                    $this.focus();    
+                }    
+            } else {
+                $('body').addClass("grid-keyboard-open");    
+            }
+            
+            
+        }
+    });
+    
+    $(document).on('blur', '.question input, .question select', function (e) { 
+        var $this = $(this);
+        $('body').removeClass("keyboard-open");
+        $('body').removeClass("grid-keyboard-open");
+        $this.closest('.question-wrapper').removeClass('active');
+    });        
+});

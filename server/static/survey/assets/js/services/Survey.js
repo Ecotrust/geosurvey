@@ -1,7 +1,7 @@
 //'use strict';
 
 angular.module('askApp')
-  .factory('survey', function () {
+  .factory('survey', function ($http, $location) {
     // Service logic
     // ...
 
@@ -80,6 +80,8 @@ angular.module('askApp')
         return foundPage;
     };
 
+    // NOTE:  In order for this function to work, controller must first call initializeSurvey to initialize survey, page, and answers
+    //        perhaps a better strategy would be to pass in those values...?
     var getLastPage = function(numPsToSkips) {
         var foundPage = false, index = numPsToSkips || 0;
         while (foundPage === false && index < survey.pages.length) {
@@ -119,7 +121,10 @@ angular.module('askApp')
                 // keep if intersection of condition list and answer list is empty
                 return _.intersection( testCriteria.split('|'), answer ).length === 0;
             } else { // otherwise, condition is a string, keep if condition string is NOT contained in the answer
-                return ! _.contains(answer, testCriteria);
+                var trimmedAnswer = _.map(answer, function(item) { return item.trim(); }),
+                    trimmedCriteria = testCriteria.trim();
+                return ! _.contains(trimmedAnswer, testCriteria);
+                // return ! _.contains(answer, testCriteria);
             }
         } else if (op === '!') {  
             if ( !isNaN(answer) ) { // if it is a number
@@ -129,7 +134,10 @@ angular.module('askApp')
                 // keep if intersection of condition list and answer list is populated
                 return _.intersection( testCriteria.split('|'), answer ).length > 0 ;
             } else { // otherwise, condition is a string, keep if condition string is contained in the answer
-                return _.contains(answer, testCriteria);
+                var trimmedAnswer = _.map(answer, function(item) { return item.trim(); }),
+                    trimmedCriteria = testCriteria.trim();
+                return _.contains(trimmedAnswer, trimmedCriteria);
+                // return _.contains(answer, testCriteria);
             }
         }
         return undefined;
@@ -205,9 +213,58 @@ angular.module('askApp')
         return !keep;
     };
 
+    $http.defaults.headers.post['Content-Type'] = 'application/json';
+
+    var sendRespondent = function (respondent) {
+        var url = app.server + '/api/v1/offlinerespondant/';
+        var responses = angular.copy(respondent.responses);
+        
+        _.each(responses, function (response) {
+            // var question_uri = response.question.resource_uri;
+            var question_uri = getQuestionUriFromSlug(response.question);
+            response.question = question_uri;
+            response.answer_raw = JSON.stringify(response.answer);
+        });
+        var newRespondent = {
+            ts: respondent.ts,
+            uuid: respondent.uuid.replace(':', '_'),
+            responses: responses,
+            status: respondent.status,
+            complete: respondent.complete,
+            survey: '/api/v1/survey/' + respondent.survey + '/'
+        };
+        return $http.post(url, newRespondent);
+        
+    };       
+
+    var submitSurvey = function (respondent, survey) {
+        //verify report (delete any necessary questions) 
+        // call function within survey service...
+        var answers = _.indexBy(respondent.responses, function(item) {
+            return item.question;
+        });
+        //clean survey of any unncecessary question/answers 
+        initializeSurvey(survey, null, answers);
+        respondent.responses = cleanSurvey(respondent);
+        return sendRespondent(respondent);
+    }
 
 
-    var meaningOfLife = 42;
+    var resume = function(respondent) {
+        var url;
+        if (respondent.responses.length) {
+            url = respondent.resumePath.replace('#', '');
+        } else {
+            url = [
+                '/survey',
+                respondent.survey,
+                1,
+                respondent.uuid
+            ].join('/');
+        }
+        
+       $location.path(url);
+    };
 
     // Public API here
     return {
@@ -216,6 +273,8 @@ angular.module('askApp')
       'initializeSurvey': initializeSurvey,
       'getAnswer': getAnswer,
       'cleanSurvey': cleanSurvey,
-      'getQuestionUriFromSlug': getQuestionUriFromSlug
+      'getQuestionUriFromSlug': getQuestionUriFromSlug,
+      'submitSurvey': submitSurvey,
+      'resume': resume
     };
   });

@@ -1,13 +1,17 @@
 <div class="navbar navbar-default navbar-fixed-top">
-    <a type="button" class="navbar-toggle" href="#/">
+    <div class="status-bar"></div>
+    <a type="button" class="navbar-toggle" href="#/main">
         <i class="icon-home"></i>
     </a>
     <a type="button" class="navbar-comment" ng-show="showFeedback" ng-click="sendingFeedback = ! sendingFeedback">
         <i class="icon-comment"></i>
     </a>
+    <a type="button" class="navbar-comment" ng-show="showUpdateSurveys" ng-click="updateSurveys()">
+        <i class="icon-refresh"></i>
+    </a>
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="#/main">
                 <img src="assets/img/deck-logo.svg" class="center logo" />
             </a>
         </div>

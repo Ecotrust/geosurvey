@@ -1,0 +1,120 @@
+
+<!-- HEADER -->
+
+<div class="row">
+    <div class="col-xs-12 col-sm-4 margin-top-10">
+        <div>
+            <strong>LAST NAME: </strong>
+            <span>{{ getAnswer('last-name') }}</span>
+        </div>
+        <div>
+            <strong>FIRST NAME: </strong>
+            <span>{{ getAnswer('first-name') }}</span>
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-4 margin-top-10">
+        <div>
+            <div>
+                <strong>LANDED DATE: </strong>
+            </div>
+            <div>
+                <strong>Month: </strong>
+                <span>{{ getAnswer('landed-date')[5] }}{{ getAnswer('landed-date')[6] }}</span>
+                <strong class="margin-left-5">Day: </strong>
+                <span>{{ getAnswer('landed-date')[8] }}{{ getAnswer('landed-date')[9] }}</span>
+                <strong class="margin-left-5">Year: </strong>
+                <span>{{ getAnswer('landed-date')[2] }}{{ getAnswer('landed-date')[3] }}</span>
+            </div>        
+        </div>
+    </div>
+    
+    <div class="col-xs-12 col-sm-4 margin-top-10">
+        <div>
+            <strong>Total Trip Pounds:</strong>
+            <span>{{ getAnswer('total-trip-whole-pounds') }}</span>
+        </div>
+        <div>
+            <strong>Total # Traps in Water:</strong>
+            <span>{{ getAnswer('total-traps-in-water') }}</span>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12 col-sm-4">
+        <div class="margin-top-10">
+            <strong>Vessel #: </strong>
+            <span>{{ getAnswer('vessel-number') }}</span>
+        </div>
+        <div class="margin-top-10">
+            <strong>License #: </strong>
+            <span>{{ getAnswer('license-number') }}</span>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-4">
+        <div class="margin-top-10">
+            <strong># of Helpers:</strong>
+            <span>{{ getAnswer('helpers') }}</span>
+        </div>
+        <div class="margin-top-10">
+            <strong>Trip Landing Site:</strong>
+            <span>{{ getAnswer('trip-landing-site')['text'] }} ({{ getAnswer('trip-landing-site')['groupName'] }} )</span>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-4">
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="margin-top-10">
+            <strong>Did Other Permit Holders Split Catch: </strong>
+            <span>{{ getAnswer('did-other-permit-holders-split-catch')['text'] }}</span>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12 col-sm-4">
+        <div class="margin-top-10">
+            <strong>Partner #1 License #: </strong>
+            <span>{{ getAnswer('license-number-partner-1') }}</span>
+        </div>
+        <div>
+            <strong>Partner #1 Name: </strong>
+            <span ng-show="getAnswer('last-name-partner-1') != ''">{{ getAnswer('last-name-partner-1') }}, </span>
+            <span>{{ getAnswer('first-name-partner-1') }}</span>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-4">
+        <div class="margin-top-10">
+            <strong>Partner #2 License #: </strong>
+            <span>{{ getAnswer('license-number-partner-2') }}</span>
+        </div>
+        <div>
+            <strong>Partner #2 Name: </strong>
+            <span ng-show="getAnswer('last-name-partner-2') != ''">{{ getAnswer('last-name-partner-2') }}, </span>
+            <span>{{ getAnswer('first-name-partner-2') }}</span>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-4">
+        <div class="margin-top-10">
+            <strong>Trip Port Sampled:</strong>
+            <span>{{ getAnswer('port-sampled-by-dfw')['text'] }}</span>
+        </div>
+        <div>
+            <strong>Fishing Mainly at Night:</strong>
+            <span>{{ getAnswer('fishing-mainly-at-night')['text']}}</span>
+        </div>
+        <div>
+            <strong>Paying Customers Aboard:</strong>
+            <span>{{ getAnswer('paying-customers-aboard')['text'] }}</span>
+        </div>
+        <div>
+            <strong>Fished 3 or more miles from Shore:</strong>
+            <span>{{ getAnswer('fished-3-or-miles-from-shore')['text'] }}</span>
+        </div>
+    </div>
+</div>
+<!-- end Header -->

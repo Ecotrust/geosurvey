@@ -1,0 +1,26 @@
+<div id="history-wrap" class="menu-page">
+    <div mobilemenu></div>
+    <!-- Begin page content -->
+    <div class="container summary">
+        <h4>History</h4>
+        <div ng-hide="summary" ng-include="viewPath + 'views/spinner.html'"></div>
+        <div ng-show="summary == 'none'">No Summary Data was Found</div>
+        <div ng-show="summary == 'none'">Either you have no submitted reports, or you need to log out and log back in.</div>
+        <ul class="list-unstyled">
+            <li ng-repeat="fish in summary" ng-show="fish.total">
+                
+                <progress value="fish.total" max="max"></progress>
+                <h5>
+                    {{fish.row_text}}
+                    <p class="pull-right">{{fish.total}} lbs</p>
+                </h5>
+                
+
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div id="history-footer">
+    <a class="btn pull-left" href="#/history"><span class="glyphicon glyphicon-chevron-left"></span></a>
+</div>

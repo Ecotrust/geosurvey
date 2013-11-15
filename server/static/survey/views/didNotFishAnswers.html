@@ -1,0 +1,45 @@
+
+<!-- DID NOT FISH -->
+
+<div class="row">
+    <div class="col-xs-12 col-sm-4 margin-top-10">
+        <div>
+            <strong>LAST NAME: </strong>
+            <span>{{ getAnswer('last-name') }}</span>
+        </div>
+        <div>
+            <strong>FIRST NAME: </strong>
+            <span>{{ getAnswer('first-name') }}</span>
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-4 margin-top-10">
+        <div>
+            <strong>DID NOT FISH FOR MONTH OF </strong>
+        </div>
+        <div>
+            <strong>Month: </strong>
+            <span>{{ getAnswer('did-not-fish-for-month-of')[5] }}{{ getAnswer('did-not-fish-for-month-of')[6] }}</span>
+            <strong class="margin-left-5">Year: </strong>
+            <span>{{ getAnswer('did-not-fish-for-month-of')[2] }}{{ getAnswer('did-not-fish-for-month-of')[3] }}</span>
+        </div> 
+    </div>
+</div>
+
+<div class="row margin-top-10">
+    <div class="col-xs-12 col-sm-4">
+        <div>
+            <strong>Vessel #: </strong>
+                <span >{{ getAnswer('vessel-number')}}</span>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-4">
+        <div>
+            <strong>License #: </strong>
+            <span>{{ getAnswer('license-number') }}</span>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-4"></div>
+</div>
+
+

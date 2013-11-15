@@ -8,7 +8,8 @@
 		<!-- <div ng-hide="confirmClear || editProfile">
 		    <a class="btn btn-block btn-large" ng-click="editProfile = true; changesSaved = false;">Edit Profile</a>
 		</div> -->
-		<div ng-hide="confirmClear || editProfile">
+		<div ng-hide="confirmClear || editProfile || changingPassword">
+			<a class="btn btn-main btn-default btn-lg btn-block btn-main" ng-click="changingPassword=true">Change Password</a>
 		    <a class="btn btn-main btn-default btn-lg btn-block btn-danger" ng-click="confirmClear = true; changesSaved = false;">Clear Cache</a>
 		</div>
 
@@ -19,7 +20,16 @@
 			</form>
 		    <a class="btn btn-block btn-large" ng-tap="editProfile = false">Cancel</a>
 		</div>
-
+		<div ng-show="changingPassword" class="password-update">
+			<form ng-submit="updatePassword(passwords)">
+				<password password-text="passwords.old" placeholder-text="'enter your old password...'"></password>
+				<password password-text="passwords.new1" placeholder-text="'enter your new password...'"></password>
+				<password password-text="passwords.new2" placeholder-text="'confirm your old password...'"></password>
+				<button class="btn btn-main btn-default btn-lg btn-block">ok</button>
+				<a class="btn btn-main btn-default btn-lg btn-block" ng-tap="changingPassword = false">cancel</a>
+			</form>
+			<p class="error" ng-show="showError">{{ showError }}</p>
+		</div>
 		<div ng-show="confirmClear">
 		 	<div class="alert alert-info">This will remove all data including surveys</div>
 		    <a class="btn btn-main btn-default btn-lg btn-block btn-danger" ng-tap="clearCache()">ok</a>

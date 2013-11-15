@@ -86,6 +86,11 @@ directory "/usr/local/apps/#{node[:project]}" do
     mode 0770
 end
 
+directory "/srv/downloads" do
+    owner "www-data"
+    group "deploy"
+    mode 0770
+end
 
 directory "/usr/local/apps/#{node[:project]}/#{node[:app]}" do
     owner "www-data"
@@ -122,6 +127,7 @@ package "csstidy"
 package "unzip"
 package "python-pip"
 package "python-dev"
+package "mailutils"
 
 include_recipe "openssl"
 include_recipe "build-essential"

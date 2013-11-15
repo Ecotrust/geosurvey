@@ -1,3 +1,9 @@
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
+
 body {
     background-color: rgb(77, 136, 153);
 }
@@ -8,7 +14,7 @@ html, body {
 
 a {
     color: rgb(244,244,244);
-    font-size: 16px;
+    font-size: 18px;
 }
 
 ::-webkit-input-placeholder {
@@ -27,6 +33,52 @@ a {
    color: rgb(179,213,222) !important;
 }
 
+#wrap {
+    min-height: 100%;
+}
+.splash {
+    width: 100%;
+    height: 100%;
+}
+    .splash .splash-version {
+        position: absolute;
+        top: 25px;
+        right: 10px;
+    }
+    .splash .btn {
+        position: absolute;
+        bottom: 20px;
+        font-size: 24px;
+        color: rgb(250, 189, 18);
+        background-color: rgba(250, 189, 18, 0);
+        border-color: rgb(250, 189, 18);
+        border-radius: 0;
+        width: 120px;
+        border-width: 4px;
+        text-transform: uppercase;
+        padding: 7px 10px;
+    }
+    .splash {
+        position: relative;
+    }
+    .splash .sign-up {
+        left: 20px;
+    }
+    .splash .sign-in {
+        right: 20px;
+    }
+    .splash .p97 {
+        height: 30px;
+        position: absolute;
+        top: 60%;
+        left: 50%;
+        margin-left: -34px;
+   }
+
+.password-update .input-group {
+    margin-bottom: 10px;
+}
+
 input.datepicker {
     -webkit-appearance: textfield;
     padding-top: 5px;
@@ -43,6 +95,64 @@ input.datepicker {
 
 .error {
     color: red;
+    font-size: 18px;
+}
+
+.btn .badge {
+    font-size: 16px;
+    padding: 4px 9px;   
+    background-color: rgb(77,136,153);
+}
+
+.blue-btn {
+    background-color: rgb(77,136,153);
+    color: white !important;
+}
+
+.panel-heading .survey-title h3 {
+    color: rgb(51, 51, 51);
+}
+
+#history-wrap {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    /* Negative indent footer by its height */
+    margin: 0px auto -40px;
+    /* Pad bottom by footer height */
+    padding-top: 80px;
+    background-color: rgb(231, 232, 234);
+}
+#history-wrap .panel-heading {
+    background-color: rgb(251, 169, 152);
+    border-radius: 3px;
+    cursor: pointer; 
+    cursor: hand
+}
+#history-wrap .panel-heading.darkSalmonBackground {
+    background-color: rgb(239, 94, 70);
+}
+#history-wrap .panel-default {
+    margin-bottom: 10px;
+}
+#history-wrap .form-control {
+    background-color: white;
+}
+#history-footer {
+    position: fixed;
+    width: 100%;
+    margin: 0 auto -60px;
+    height: 40px;
+    background-color: rgb(64, 64, 66);
+    bottom: 60px;
+}
+#history-footer a {
+    margin-top: 5px;
+}
+
+#history-wrap > .container {
+    padding: 20px 15px 50px;
+    background-color: rgb(231, 232, 234);
 }
 
 /* Wrapper for page content to push down footer */
@@ -65,13 +175,35 @@ input.datepicker {
     background-color: rgb(54, 85, 91);
 }
 .keyboard-open #footer, .keyboard-open .navbar {
+    /*display: none;*/
+}
+.keyboard-open .question-wrapper {
+    opacity: 0;
+
+}
+.keyboard-open .question-wrapper.active {
+    position: absolute;
+    height: 100%;
+    z-index: 2000;
+    width: 95%;
+    background-color: rgb(77, 136, 153);
+    left: 10px;
+    top: 130px;
+    opacity: 1 !important;
+}
+
+
+.keyboard-open #footer, .grid-keyboard-open #footer {
+    /*top: 210px;
+    z-index: 2001;*/
     display: none;
 }
+
 #wrap > .container {
     padding: 40px 15px 20px;
 }
 #wrap.menu-page > .container {
-    padding: 90px 15px 100px;
+    padding: 110px 15px 100px;
 }
 .container .credit {
     margin: 20px 0;
@@ -92,6 +224,10 @@ img.center {
     padding-bottom: 0x;
     margin-top: 0;
 }
+.status-bar {
+    height: 20px;
+    background-color: rgb(250, 189, 18);
+}
 .navbar {
     background-color: rgb(25, 25, 25);
     border-bottom: 0;
@@ -110,8 +246,7 @@ img.center {
 }
 .navbar .navbar-comment {
     position: absolute;
-    padding: 10px;
-    margin-top: -10px;
+    padding: 0 5px;
     right: 10px;
     border: 0;
     font-size: 36px;
@@ -137,9 +272,29 @@ img.center {
     margin-top: -24px;
     height: 65px;
 }
+
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+ /* STYLES GO HERE */
+    .navbar-brand img {
+        margin-top: 0;
+    }
+    
+
+}
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) { 
+    /* Retina-specific stuff here */
+    .navbar-brand img {
+        margin-top: -24px;
+    }
+    
+
+}
+
+
 .main .navbar {
-    height: 10px;
-    min-height: 10px;
+    height: 20px;
+    min-height: 20px;
     background-color: rgb(250, 189, 18);
 }
 .main .navbar .container > * {
@@ -156,14 +311,10 @@ img.center {
     color: rgb(46, 46, 46) !important;
     min-width: 100px;
 }
-.question .select-content {
-    padding: 8px 10px;
-    color: rgb(150,150,150);
+.btn-lg {
+    border-radius: 0px;
 }
-.select-content, .btn-main:active, .accordion-heading {
-    background-color: rgb(24, 75, 83);
-    border-color: rgba(0, 0, 0, 0);
-}
+
 .select ul {
     list-style: none;
     -webkit-margin-before: 0;
@@ -185,7 +336,7 @@ img.center {
     display: none;
     width: 15px;
     height: 15px;
-    background-color: rgb(49, 49, 49);
+    background-image: url(../img/checkbox.png);
     float: right;
     margin: 0;
 }
@@ -245,6 +396,21 @@ img.center {
     -webkit-transition: width 0s ease;
     transition: width 0s ease;
 }
+.summary li {
+    margin-bottom: 20px;
+}
+.summary .progress {
+    background-color: white;
+    height: 15px;
+}
+.summary h5 {
+    margin-top: 2px;
+}
+.summary .progress .progress-bar {
+    background-color: rgb(77, 136, 153); 
+    height: 100%;
+}
+
 .respondant {
     margin-left: 10px;
     margin-right: 10px;
@@ -261,6 +427,27 @@ img.center {
     font-weight: bold;
     text-align: center;
 }
+
+.signin-form .eye, .new-user-form .eye {
+    background-color: rgb(24, 75, 83);
+    padding: 9px 15px;
+    
+}
+    .signin-form .eye:hover, .new-user-form .eye:hover {
+        color: white;
+    }
+    .signin-form .eye:active, .new-user-form .eye:active {
+        background-color: white;
+        color: rgb(24, 75, 83);
+    }
+.signin-form fieldset, .new-user-form fieldset {
+    margin-bottom: 30px;
+}
+    .signin-form .forgot-password {
+        font-size: 16px;
+    }
+
+
 .form-control, .question .form-control:focus, .unit-select {
     background-color: rgb(246, 235, 194);
     font-size: 20px;
@@ -279,8 +466,23 @@ img.center {
     font-weight: bold;
     text-transform: uppercase;
     border-radius: 0;
-    margin-bottom: 10px;
+    margin-bottom: 5px !important;
 }
+
+.question .select-content {
+    padding: 10px 15px;
+    color: rgb(150,150,150);
+   
+}
+
+.question .option {
+     margin-bottom: 10px !important;
+}
+.select-content, .btn-main:active, .accordion-heading {
+    background-color: rgb(24, 75, 83);
+    border-color: rgba(0, 0, 0, 0);
+}
+
 .question .panel-heading a:hover {
     text-decoration: none;
 }
@@ -299,7 +501,7 @@ img.center {
     background-color: rgb(244, 218, 130);
 }
 .question .panel-body .select-content .select-name {
-    padding-left: 40px;
+    padding-left: 20px;
 }
 .question .panel, .question .panel-collapse {
     background-color: inherit;
@@ -395,6 +597,7 @@ input.multi-select-other:-ms-input-placeholder {
     position: relative;
     background-color: rgb(24, 75, 83);
     height: 40px;
+
 }
 .select-wrapper .down {
     position: absolute;
@@ -420,6 +623,9 @@ input.multi-select-other:-ms-input-placeholder {
     transition: height 0.8s;
 }
 */
+.question .select {
+    margin-top: 10px;
+}
 .question .select .accordion-div {
     border-style: solid;
     border-bottom-width: 0;
@@ -447,6 +653,7 @@ input.multi-select-other:-ms-input-placeholder {
  color: rgb(222,222,222); 
  background-color: rgb(246 , 235, 194);
 }*/
+
 .question .select .accordion-body {
     margin-top: 10px;
 }
@@ -924,4 +1131,14 @@ border-color: rgb(250, 189, 18);
 
 @keyframes slide {
     to { margin-left: 90%; }
+}
+
+.animate-enter {
+    -webkit-transition: .2s linear all; /* Chrome */
+    transition: .2s linear all;
+    opacity: 0;
+}
+ 
+.animate-enter.animate-enter-active {
+    opacity: 1;
 }

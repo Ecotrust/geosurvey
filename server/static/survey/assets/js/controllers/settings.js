@@ -1,7 +1,7 @@
 //'use strict';
 
 angular.module('askApp')
-  .controller('SettingsCtrl', function ($scope, $location, $http) {
+  .controller('SettingsCtrl', function ($scope, $location, $http, storage) {
 
     if (app.user) {
         $scope.user = app.user;
@@ -12,8 +12,21 @@ angular.module('askApp')
     
     $scope.path = 'sett';
     $scope.clearCache = function () {
-        localStorage.removeItem('hapifish');
+        storage.clearCache();
         window.location.reload();
+    }
+
+    $scope.updatePassword = function (passwords) {
+        var url = app.server + "/account/updatePassword";
+        $scope.showError = false;
+        $http.post(url, {username: app.user.username, passwords: passwords})
+            .success(function (data) {
+                $scope.passwords = null;
+                $scope.changingPassword = false;
+            })
+            .error(function (data) {
+              $scope.showError = data;
+            });
     }
     
     $scope.updateUser = function (user) {
@@ -22,17 +35,14 @@ angular.module('askApp')
         $http.post(url, user)
             .success(function (data) {
                 app.user = data.user;
-                $scope.saveState();
+                storage.saveState();
                 $scope.editProfile = false;
                 $scope.changesSaved = true;
             })
-        .error(function (data) {
-          $scope.showError = data;
-        });
+            .error(function (data) {
+              $scope.showError = data;
+            });
     };
 
-    $scope.saveState = function () {
-        localStorage.setItem('hapifish', JSON.stringify(app));
-    };
 
   });

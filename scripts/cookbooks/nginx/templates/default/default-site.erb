@@ -8,6 +8,9 @@ server {
     listen 80;
     server_name <%= node[:servername] %>;
 
+    access_log /var/log/nginx/<%= node[:project] %>-access.log;
+    error_log /var/log/nginx/<%= node[:project] %>-error.log;
+    
     location / {
         <% if node[:user] == "vagrant" %>
         proxy_pass http://example-vagrant;
@@ -21,6 +24,11 @@ server {
         proxy_redirect off;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+
+    location /downloads/ {
+        alias /srv/downloads/;
+        index index.html;
     }
 
     <% if node[:staticfiles] %>

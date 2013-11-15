@@ -1,29 +1,52 @@
-<table class="table">
-<tr ng-repeat="response in respondent.responses">
-    <td><strong>{{response.question.label}}:</strong></td>
-    <td><span ng-switch on="response.question.type">
-        <span ng-switch-default>{{response.answer}}</span>
-        <span ng-switch-when="single-select">{{response.answer.text}}</span>
-        <span ng-switch-when="yes-no">{{response.answer.text}}</span>
-        <span ng-switch-when="datepicker">{{response.answer| date: 'dd-MM-yyyy HH:mm'  }}</span>
-        <ul class="list" ng-switch-when="multi-select">
-            <li ng-repeat="answer in response.answer">{{answer.text}}</li>
-        </ul>
-        <table class="table" ng-switch-when="grid">
-            <thead>
-                <th></th>
-                <th ng-repeat="grid_col in response.question.grid_cols"><strong>{{grid_col.text}}</strong></th>
-            </thead>
-            <tbody>
-                <tr ng-repeat="answer in response.answer">
-                    <td>{{ answer.text }}</td>
-                    <td ng-repeat="grid_col in response.question.grid_cols" ng-hide="grid_col.type=='multi-select'">{{answer[grid_col.label.replace('-', '')]}}{{grid_col.label.replace('-', '')}}</td>
-                    <td ng-repeat="grid_col in response.question.grid_cols" ng-show="grid_col.type=='multi-select'">
-                        <span ng-repeat="multiAnswer in answer[grid_col.label.replace(''-'', '')]">{{multiAnswer}}<span ng-hide="$last">,</span> </span>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </span></td>
-</tr>
-</table>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="span12 text-center survey-title"><h3 style="margin-top: 10px">{{getTitle()}}</h3></div>
+        <!-- <div class="span12 text-center margin-bottom-20"><h4>A separate form must be completed for each trip or month of no fishing</h4></div> -->
+    </div>
+    <div class="panel-body">
+
+
+        <!-- DID NOT FISH Report -->
+        <div ng-show="respondent.survey == 'did-not-fish'" ng-include="'views/didNotFishAnswers.html'"></div>
+
+        <!-- CATCH REPORT -->
+
+        <div ng-show="respondent.survey == 'catch-report'">
+            
+            <!-- HEADER -->
+            <div ng-include="'views/headerAnswers.html'"></div>
+
+            <!-- HOOK & LINE -->
+            <div ng-show="gearTypeIncludes('hook')" ng-include="'views/hookAndLineAnswers.html'"></div>
+            
+            <!-- TRAPS -->
+            <div ng-show="gearTypeIncludes('traps')" ng-include="'views/trapsAnswers.html'"></div>
+                
+            <!-- NETS -->
+            <div ng-show="gearTypeIncludes('nets')" ng-include="'views/netsAnswers.html'"></div>
+
+            <!-- SPEAR OR BY HAND -->
+            <div ng-show="gearTypeIncludes('hand')" ng-include="'views/spearOrByHandAnswers.html'"></div>
+
+        </div>
+    </div>
+</div>
+
+
+<style type="text/css">
+
+.margin-left-5 {
+    margin-left: 5px;
+}
+.margin-left-10 {
+    margin-left: 10px;
+}
+.margin-top-10 {
+    margin-top: 10px;
+}
+.margin-bottom-20 {
+    margin-bottom: 20px;
+}
+</style>
+

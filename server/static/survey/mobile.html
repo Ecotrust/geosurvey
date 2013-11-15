@@ -40,7 +40,7 @@
         </script>
     </head>
     
-    <body ng-app="askApp"  ng-view></body>
+    <body ng-app="askApp"  ng-view ng-animate="'animate'"></body>
     <script src="assets/lib/js/date.min.js"></script>
     <script src="assets/lib/js/jquery-1.8.2.min.js"></script>
     <script src="assets/lib/js/jquery-ui.min.js"></script>
@@ -60,7 +60,7 @@
     <script src="assets/lib/js/Bing.js"></script>
     <script src="assets/lib/js/leaflet.awesome-markers.min.js"></script>
     <script src="assets/lib/js/leaflet.label.js"></script>
-
+    <script src="assets/lib/js/backstretch.js"></script>
      <script>
      window.isAuthenticated = false;
      </script>
@@ -68,11 +68,16 @@
 
     <!-- build:js scripts/scripts.js -->
     <script src="assets/js/app.js"></script>
-
+    <script src="assets/js/controllers/splash.js"></script>
     <script src="assets/js/controllers/SurveyList.js"></script>
     <script src="assets/js/controllers/offlineRespondantList.js"></script>
+    <script src="assets/js/controllers/history.js"></script>
+    <script src="assets/js/controllers/unSubmittedSurveyList.js"></script>
+    <script src="assets/js/controllers/submittedSurveyList.js"></script>
+    <script src="assets/js/controllers/summary.js"></script>
     <script src="assets/js/controllers/SurveyDetail.js"></script>
     <script src="assets/js/controllers/mobileMenu.js"></script>
+    <script src="assets/js/services/storage.js"></script>
     <script src="assets/js/controllers/main.js"></script>
     <script src="assets/js/controllers/settings.js"></script>
     <script src="assets/js/controllers/complete.js"></script>
@@ -84,9 +89,10 @@
     <script src="assets/js/directives/ng-question.js"></script>
     <script src="assets/js/directives/profilefields.js"></script>
     <script src="assets/js/directives/grid-question.js"></script>
-    <script src="assets/js/directives/spinner.js"></script>
+    <script src="assets/js/directives/directives.js"></script>
     <script src="assets/js/directives/map-multipolygon.js"></script>
     <script src="assets/js/services/Survey.js"></script>
+    <script src="assets/js/services/History.js"></script>
     <!-- endbuild -->
 
 </html>

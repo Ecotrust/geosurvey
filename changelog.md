@@ -1,3 +1,22 @@
+#1.2.82
+fixing a bunch of bugs
+
+#1.2.76
+fixing bugs
+addressing the following issues: #237, #236, #234, #230, #233, #227, #221
+
+#1.2.71
+fixing bugs
+addressing the following issues: #173, #209, #219
+
+#1.2.69
+fixing bugs
+addressing the following issues: #208, #198, #195, #194, #192, #191, #186, #185, #178, #176, #168, #92
+
+#1.2.68
+fixing bugs
+addressing the following issues: #166, #169, #175, #177, #181, #196, #199, #205, #206
+
 #1.2.51
 return of icons and updated splash screen
 increase size of grid container to show more species: #139

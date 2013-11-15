@@ -1,0 +1,51 @@
+<div id="wrap" class="main">
+    <!-- Fixed navbar -->
+    <!-- Begin page content -->
+    <div class="navbar navbar-default navbar-fixed-top"></div>        
+
+
+        <div class="container">
+            <div class="page-header">
+                <img src="assets/img/deck-logo.svg" class="center logo" />
+            </div>
+            <div class="loading-indicator" ng-show="working">
+                <div class="bar">
+                    <i class="sphere"></i>
+                </div>
+            </div>
+                <div ng-show="showTempUser">
+                    <h2>No Connection</h2>
+                    <p>Can't reach the server.  Do you want to continue offline?</p>
+                    <button class="btn btn-main btn-default btn-block" ng-click="offline(newUser, 'signup')">Use Digital Deck Offline</button>
+                    <a class="btn btn-main btn-default btn-block" href="#/">cancel</a>
+                </div>
+                <div class="new-user-form" ng-hide="working || showTempUser">
+                    <form ng-submit="createUser(newUser)">
+                    <fieldset>
+                        <input class="form-control" type="text" placeholder="enter your username..." data-ng-model="newUser.username" autocapitalize="off" required>
+
+                        <input class="form-control" type="email" placeholder="enter your email address..." data-ng-model="newUser.emailaddress1" required>
+                        <input class="form-control" type="email" placeholder="confirm your email address..." data-ng-model="newUser.emailaddress2" required>
+                        <password password-text="newUser.password"></password>
+                    </fieldset>
+                        <button class="btn btn-main btn-default btn-block" ng-disabled="! newUser.password">New User</button>
+                        <a class="btn btn-main btn-default btn-block" href="#/">cancel</a>
+                        <div class="error" ng-show="showError == 'duplicate-user'">
+                            That username is already registered. Please try another.
+                        </div>
+                        <div class="error" ng-show="showError == 'password-mismatch'">
+                            Passwords do not match. Please try again.
+                        </div>
+                        <div class="error" ng-show="showError == 'email-mismatch'">
+                            Email addresses do not match. Please try again.
+                        </div>
+                        <div class="error" ng-show="showError == 'invalid-email'">
+                            Invalid email address. Please try again.
+                        </div>
+                    </form>
+                    <p class="pull-right">{{stage}}/{{version}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

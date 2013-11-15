@@ -8,6 +8,10 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User, check_password
 from django.contrib.auth.forms import PasswordResetForm
 from account.models import UserProfile, Feedback
+from django.db import IntegrityError
+
+from django.core.validators import email_re
+from django.core.exceptions import ValidationError, MultipleObjectsReturned
 
 import simplejson
 import datetime
@@ -30,6 +34,7 @@ def authenticateUser(request):
             user_dict = {
                 'username': user.username,
                 'name': ' '.join([user.first_name, user.last_name]),
+                'email': user.email,
                 'is_staff': user.is_staff,
                 'registration': user.profile.registration
             }
@@ -46,28 +51,37 @@ def authenticateUser(request):
 def createUser(request):
     if request.POST:
         param = simplejson.loads(request.POST.keys()[0])
-        user, created = User.objects.get_or_create(
-            username=param.get('username', None))
+        email = param.get('emailaddress1', None)
+        if email is not None:
+            email = email.replace(' ', '+')
+            if email_re.match(email) is None:
+                if email.find('+') == -1:
+                    return HttpResponse("invalid-email", status=500)
+        else:
+            return HttpResponse("invalid-email", status=500)
+        try:
+            user, created = User.objects.get_or_create(
+                username=param.get('username', None), email=email)
+        except IntegrityError:
+            return HttpResponse("duplicate-user", status=500)
         if created:
-            if param.get('password1') == param.get('password2'):
-                user.set_password(param.get('password1'))
-                user.save()
-                profile, created = UserProfile.objects.get_or_create(user=user)
-                profile.registration = '{}'
-                profile.save()
-                user.save()
-                user = authenticate(
-                    username=user.username, password=param.get('password1'))
-                login(request, user)
-                user_dict = {
-                    'username': user.username,
-                    'name': ' '.join([user.first_name, user.last_name]),
-                    'is_staff': user.is_staff,
-                    'registration': profile.registration
-                }
-                return HttpResponse(simplejson.dumps({'success': True, 'user': user_dict}))
-            else:
-                return HttpResponse("password-mismatch", status=500)
+            user.set_password(param.get('password'))
+            user.save()
+            profile, created = UserProfile.objects.get_or_create(user=user)
+            profile.registration = '{}'
+            profile.save()
+            user.save()
+            user = authenticate(
+                username=user.username, password=param.get('password'))
+            login(request, user)
+            user_dict = {
+                'username': user.username,
+                'name': ' '.join([user.first_name, user.last_name]),
+                'email': user.email,
+                'is_staff': user.is_staff,
+                'registration': profile.registration
+            }
+            return HttpResponse(simplejson.dumps({'success': True, 'user': user_dict}))
         else:
             return HttpResponse("duplicate-user", status=500)
     else:
@@ -77,10 +91,16 @@ def createUser(request):
 def forgotPassword(request):
     if request.POST:
         param = simplejson.loads(request.POST.keys()[0])
-        user = get_object_or_404( User, username=param.get('username', None) )
-        # email = param.get('email', None)
-        # form = PasswordResetForm({'email': email})
-        # form.save(from_email='eknuth@ecotrust.org', email_template_name='registration/password_reset_email.html')
+        email = param.get('email', None)
+        try:
+            user = User.objects.get(email=email)
+        except User.DoesNotExist:
+            return HttpResponse("user-not-found", status=401)  
+        except MultipleObjectsReturned:
+            return HttpResponse("multiple-users-found", status=500)  
+        form = PasswordResetForm({'email': email})
+        setattr(form, 'users_cache', [])
+        form.save(from_email='edwin@pointnineseven.com', email_template_name='registration/password_reset_email.html')
         return HttpResponse(simplejson.dumps({'success': True}))
     else:
         return HttpResponse("error", status=500)
@@ -105,14 +125,14 @@ def updateUser(request):
     if request.method == "POST":
         param = simplejson.loads(request.body)
         user = get_object_or_404( User, username=param.get('username', None) )
-        print user.username
-        print request.user.username
+
         if request.user.username != user.username:
             return HttpResponse("You cannot access another user's profile.", status=401)
         else:
             profile, created = UserProfile.objects.get_or_create(user=user)
             profile.registration = simplejson.dumps(param.get('registration'))
             profile.save()
+            user.email = param.get('email', None)
             user.save()
             user_dict = {
                 'username': user.username,
@@ -123,3 +143,27 @@ def updateUser(request):
             return HttpResponse(simplejson.dumps({'success': True, 'user': user_dict}))
     else:
         return HttpResponse("error", status=500)
+
+
+@csrf_exempt
+def updatePassword(request):
+    if request.method == "POST":
+        param = simplejson.loads(request.body)
+        user = get_object_or_404( User, username=param.get('username', None) )
+        if request.user.username != user.username:
+            return HttpResponse("You are not logged in as that user.", status=401)
+        else:
+            passwords = param.get('passwords', None)
+            if passwords:
+                password_old = passwords.get('old')
+                password_new1 = passwords.get('new1')
+                password_new2 = passwords.get('new2')
+                if password_new1 == password_new2:
+                    auth_user = authenticate(username=user.username, password=password_old)
+                    if auth_user is not None:
+                        user.set_password(password_new1)
+                        user.save()
+                        return HttpResponse(simplejson.dumps({'success': True}))
+                    return HttpResponse("Old password is incorrect.", status=401)
+                return HttpResponse("Passwords do not match.", status=401)
+    return HttpResponse("error", status=500)

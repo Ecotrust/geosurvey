@@ -1,5 +1,5 @@
 angular.module('askApp')
-    .controller('SurveyDetailCtrl', function($scope, $routeParams, $http, $location, $dialog, $interpolate, $timeout, survey) {
+    .controller('SurveyDetailCtrl', function($scope, $routeParams, $http, $location, $dialog, $interpolate, $timeout, survey, storage) {
         // $('#wrap').css({ 'min-height': initialHeight -80});
         // $('#wrap').css({ 'min-height': initialHeight -80});
         // $(window).on('resize', function () {
@@ -101,12 +101,11 @@ angular.module('askApp')
             if (index) {
                 app.respondents[uuidSlug].responses.splice(index, 1);
             }
-            $scope.saveState();
+            storage.saveState(app);
         }
     };
 
     $scope.answerOffline = function(answer) {
-
         $scope.deleteAnswer(answer.question.slug, $routeParams.uuidSlug);
 
         app.respondents[$routeParams.uuidSlug].responses.push({
@@ -122,11 +121,7 @@ angular.module('askApp')
 
         app.respondents[$routeParams.uuidSlug].resumePath = app.user.resumePath = window.location.hash;
         $scope.answers[answer.question.slug] = answer;
-        $scope.saveState();
-    };
-
-    $scope.saveState = function () {
-        localStorage.setItem('hapifish', JSON.stringify(app));
+        storage.saveState(app);
     };
 
     $scope.getQuestionBySlug = function (slug) {
@@ -166,6 +161,7 @@ angular.module('askApp')
         var answers = _.map(page.questions, function (question) {
             return $scope.getAnswerOnPage(question);
         });
+        $('#footer').attr('style', null);
         if (app.offline) {
             _.each(answers, function (answer){
                 $scope.answerOffline(answer);
@@ -249,15 +245,6 @@ angular.module('askApp')
         // if (answer === 'other' && question.otherAnswer) {
         //     answer = question.otherAnswer;
         // }
-        if (answer === 'other' && question.otherAnswers.length) {
-            answer = question.otherAnswers[0];
-        }
-        if (question.required && (answer === undefined || answer === null)) {
-            return false;
-        } else if (!question.required && (answer === undefined || answer === null)) {
-            answer = '';
-        }
-
 
 
         // for number with unit questions, we need to submit a unit as well
@@ -270,7 +257,8 @@ angular.module('askApp')
         
         if (question.type === 'grid') {
             //check for undefined answers on the grid
-            var completed = ! _.some( _.map(question.options, function(option) { return _.contains(_.values(option), undefined); }));
+            //var completed = ! _.some( _.map(question.options, function(option) { return _.contains(_.values(option), undefined); }));
+            var completed = $scope.validateGridQuestion(question);
             if (completed || !question.required) {
                 answer = question.options;
             } else {
@@ -279,12 +267,39 @@ angular.module('askApp')
             delete question.gridOptions; // was causing a circular reference in 
         }
 
+        if (answer === 'other' && question.otherAnswers.length) {
+            answer = question.otherAnswers[0];
+        }
+        if (question.required && (answer === undefined || answer === null)) {
+            return false;
+        } else if (!question.required && (answer === undefined || answer === null)) {
+            answer = '';
+        }
+
         if ( answer !== 0 && !answer) {
             answer = "NA";
         }
 
         return { question: question, answer: answer };
     };
+
+    // might be better to use the validateQuestion in the Grid Question directive...but this will have to do for now...
+    $scope.validateGridQuestion = function(question) {
+        var overallValidity = true, currentRow;
+        _.each(question.options, function (row) {
+            currentRow = row;
+            _.each(question.grid_cols, function (col) {
+                var answer = currentRow[col.label];
+                if (col.required && ! answer) {
+                    if (col.either_or && ! currentRow[col.either_or]) {
+                        overallValidity = false;
+                    }
+                    
+                }
+            });
+        });
+        return overallValidity;
+    }
     
     $scope.validateMultiSelect = function(question) {
         var hoistedAnswers,
@@ -300,7 +315,7 @@ angular.module('askApp')
         });
         
         // in case of multiselect containing groups 
-        if (question.groupedOptions.length) {
+        if (question.groupedOptions && question.groupedOptions.length) {
             answers = [];
             _.each(question.groupedOptions, function(groupedOption) {
                 answers = answers.concat(_.filter(groupedOption.options, function(option) {
@@ -365,7 +380,7 @@ angular.module('askApp')
         });
         
         // in case of multiselect containing groups 
-        if (question.groupedOptions.length) {
+        if (question.groupedOptions && question.groupedOptions.length) {
             answers = [];
             _.each(question.groupedOptions, function(groupedOption) {
                 answers = answers.concat(_.filter(groupedOption.options, function(option) {
@@ -405,9 +420,18 @@ angular.module('askApp')
 
 
     $scope.answerSingleSelect = function(question) {
-        var answer = _.find(question.options, function(option) {
-            return option.checked;
-        });
+        if (question.groupedOptions && question.groupedOptions.length) {
+            var groupedOptions = _.flatten(_.map(question.groupedOptions, function(option) {
+                return option.options;
+            }));
+            var answer = _.find(groupedOptions, function(option) {
+                return option.checked;
+            });
+        } else {
+            var answer = _.find(question.options, function(option) {
+                return option.checked;
+            });
+        }
         if (! answer && question.otherAnswers.length) {
             answer = {
                 checked: true,
@@ -634,7 +658,6 @@ $scope.loadSurvey = function(data) {
                         $scope.isAnswerValid = true;
                     }
                 });    
-                
             }).error(function(data, status, headers, config) {
                 $scope.gotoNextQuestion();
             });
@@ -675,11 +698,6 @@ $scope.loadSurvey = function(data) {
             }
             
         }, true);    
-        
-        
-    
-    
-
     };
     $scope.viewPath = app.viewPath;
 
@@ -714,7 +732,7 @@ $scope.loadSurvey = function(data) {
                 ts: ts,
                 responses: []
             }
-            $scope.saveState();
+            storage.saveState(app);
             $location.path(['survey', $routeParams.surveySlug, 1, $routeParams.uuidSlug].join('/'));
         } else {
             // this is an old offline survey
