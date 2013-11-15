@@ -8,6 +8,11 @@
             <div class="forms">
                 <div class="new-user-form">
                     <form ng-submit="updateProfile(profileQuestions)">
+                        
+                        <div class="question">
+                            <h4 class="question-title">Email Address</h4>
+                            <input class="form-control" type="email" placeholder="Email Address" ng-model="userEmail" />
+                        </div>
                         <div class="question-wrapper" ng-repeat="question in profileQuestions">
                             <h4 class="question-title">{{ question.title }}</h4>
                             <div ng-switch on="question.type">

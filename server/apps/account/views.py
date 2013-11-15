@@ -34,6 +34,7 @@ def authenticateUser(request):
             user_dict = {
                 'username': user.username,
                 'name': ' '.join([user.first_name, user.last_name]),
+                'email': user.email,
                 'is_staff': user.is_staff,
                 'registration': user.profile.registration
             }
@@ -76,6 +77,7 @@ def createUser(request):
             user_dict = {
                 'username': user.username,
                 'name': ' '.join([user.first_name, user.last_name]),
+                'email': user.email,
                 'is_staff': user.is_staff,
                 'registration': profile.registration
             }
@@ -121,14 +123,14 @@ def updateUser(request):
     if request.method == "POST":
         param = simplejson.loads(request.body)
         user = get_object_or_404( User, username=param.get('username', None) )
-        print user.username
-        print request.user.username
+        
         if request.user.username != user.username:
             return HttpResponse("You cannot access another user's profile.", status=401)
         else:
             profile, created = UserProfile.objects.get_or_create(user=user)
             profile.registration = simplejson.dumps(param.get('registration'))
             profile.save()
+            user.email = param.get('email', None)
             user.save()
             user_dict = {
                 'username': user.username,
