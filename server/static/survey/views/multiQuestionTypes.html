@@ -105,7 +105,8 @@
             <div ng-show="question.groupedOptions">
                 <div class="panel-group">
                     <div class="panel panel-default" ng-repeat="groupOption in question.groupedOptions">
-                        <div class="panel-heading" ng-click="groupOption.open = !groupOption.open">
+                        <!-- <div class="panel-heading" ng-click="groupOption.open = !groupOption.open"> -->
+                        <div class="panel-heading" ng-click="$parent.openOption(groupOption)">
                             <h4 class="panel-title">
                                 <a class="accordion-toggle">
                                   {{groupOption.optionLabel}}
