@@ -130,6 +130,8 @@ angular.module('askApp').directive('gridquestion', function() {
                     }
                     list[key].activitySlug = value.label.replace(/-/g, '');
                     list[key].activityText = value.text + groupString;
+                    
+                    scope.question.grid_cols = _.sortBy(scope.question.grid_cols, function(obj) { return obj.order; });
                     _.each(scope.question.grid_cols, function(gridCol, i) {
                         var gridLabel = gridCol.label.replace(/-/g, '');
                         if (scope.question.answer !== null && _.has(scope.question.answer, value.text)) {
