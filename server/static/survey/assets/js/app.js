@@ -143,6 +143,9 @@ $(document).ready(function () {
         var $this = $(this),
             $wrapper = $this.closest('.question-wrapper');
             // && ! $wrapper.hasClass('grid-question')
+        if ($this.closest('.menu-page').hasClass('profile')) {
+            return true;
+        }
         if ($wrapper.length) {
             if (! $wrapper.hasClass('grid-question')) {
                 $('body').addClass("keyboard-open");    
