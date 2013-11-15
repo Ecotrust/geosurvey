@@ -215,7 +215,7 @@ angular.module('askApp').directive('multiquestion', function() {
                     if (groupedOption.optionLabel !== option.optionLabel) {
                         groupedOption.open = false;
                     } else {
-                        groupedOption.open = true;
+                        groupedOption.open = !option.open;
                     }
                 });
             }
