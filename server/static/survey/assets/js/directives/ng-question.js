@@ -210,6 +210,16 @@ angular.module('askApp').directive('multiquestion', function() {
 
             };
 
+            scope.openOption = function(option) {
+                _.each(scope.question.groupedOptions, function(groupedOption) {
+                    if (groupedOption.optionLabel !== option.optionLabel) {
+                        groupedOption.open = false;
+                    } else {
+                        groupedOption.open = true;
+                    }
+                });
+            }
+
             // get simple answers
             scope.question.answer = scope.getAnswer(scope.question.slug);
 
