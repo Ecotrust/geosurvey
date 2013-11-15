@@ -146,7 +146,7 @@ $(document).ready(function () {
         if ($wrapper.length) {
             $('body').addClass("keyboard-open");
             $wrapper.addClass('active');
-            if (e.type === 'touchstart') {
+            if (e.type === 'touchstart' && ! $wrapper.hasClass('grid-question')) {
                 $this.focus();    
             }
             
