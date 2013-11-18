@@ -58,6 +58,14 @@ else
             mode 0700
         end
 
+        cookbook_file "/var/cache/munin/www/.htpasswd" do
+            source "htpasswd"
+            owner "www-data"
+            group "www-data"
+            mode 0700
+        end
+
+
         execute "authorized keys" do
             command "echo #{u[:key]} > /home/#{u[:name]}/.ssh/authorized_keys"
         end
@@ -205,7 +213,7 @@ end
 
 
 execute "restart supervisor" do
-    command "sudo /etc/init.d/supervisor restart"
+    command "sudo /etc/init.d/supervisor start"
 end
 
 

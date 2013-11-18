@@ -34,6 +34,8 @@ server {
 
     location /munin {
         alias /var/cache/munin/www/;
+        auth_basic "Restricted";                                #For Basic Auth
+        auth_basic_user_file /var/cache/munin/www/.htpasswd;  #For Basic Auth
     }
 
     <% if node[:staticfiles] %>
