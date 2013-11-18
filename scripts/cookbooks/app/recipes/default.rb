@@ -128,6 +128,8 @@ package "unzip"
 package "python-pip"
 package "python-dev"
 package "mailutils"
+package "munin"
+
 
 include_recipe "openssl"
 include_recipe "build-essential"
@@ -195,6 +197,17 @@ end
 execute "restart postgres" do
     command "sudo /etc/init.d/postgresql restart"
 end
+
+
+execute "restart nginx" do
+    command "sudo /etc/init.d/nginx restart"
+end
+
+
+execute "restart supervisor" do
+    command "sudo /etc/init.d/supervisor restart"
+end
+
 
 # psql -d template_postgis -f /usr/share/postgresql/9.1/contrib/postgis-1.5/postgis.sql
 # psql -d template_postgis -f /usr/share/postgresql/9.1/contrib/postgis-1.5/spatial_ref_sys.sql

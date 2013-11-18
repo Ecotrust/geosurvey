@@ -11,6 +11,8 @@ server {
     access_log /var/log/nginx/<%= node[:project] %>-access.log;
     error_log /var/log/nginx/<%= node[:project] %>-error.log;
     
+    index index.html;
+
     location / {
         <% if node[:user] == "vagrant" %>
         proxy_pass http://example-vagrant;
@@ -28,7 +30,10 @@ server {
 
     location /downloads/ {
         alias /srv/downloads/;
-        index index.html;
+    }
+
+    location /munin {
+        alias /var/cache/munin/www/;
     }
 
     <% if node[:staticfiles] %>

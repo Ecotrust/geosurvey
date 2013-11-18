@@ -7,6 +7,7 @@ Vagrant.configure("2") do |config|
 
     config.vm.network :forwarded_port, guest: 8000, host: 8000  # django dev server
     config.vm.network :forwarded_port, guest: 5432, host: 15432  # postgresql
+    config.vm.network :forwarded_port, guest: 80, host: 8080  # nginx
 
     config.vm.hostname = "geosurvey"
 
