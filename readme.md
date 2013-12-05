@@ -44,41 +44,16 @@ fab staging:username@hostname deploy
 
 After the prepare command runs you will no longer be able to login as root with a password.  The prepare command creates one or more users with sudo access based on the list of users specified in the json file.
 
-
-# Install Requirements
-From the geosurvey project directory
-```bash
-sudo npm install -g yo grunt-cli bower
-npm install && bower install --dev
-npm install generator-angular generator-karma
-```
-
 # Backing up and restoring databases
-
-```bash
-pg_dump -U vagrant --clean --no-acl -Fc geosurvey> geosurvey.dump
-```
-
-```bash
-pg_restore --verbose --clean --no-acl --no-owner -U vagrant -d geosurvey geosurvey.dump
-```
 
 ```bash
 fab staging:eknuth@usvi-test.pointnineseven.com backup_db
 fab staging:eknuth@usvi-dev.pointnineseven.com restore_db:backups/2013-11-111755-geosurvey.dump
+fab vagrant restore_db:backups/2013-11-111755-geosurvey.dump
 fab staging:eknuth@usvi-dev.pointnineseven.com migrate_db
 ```
 
-# Launching Server
-Run all of these in seperate tabs/windows
-
-The app will be served on port 9000.  A browser window will open automatically.
-```bash
-grunt server
-```
 # Running Tests
-
-With the server running in port 9000, run the following commands for continuous test running.
 
 Unit tests will run whenever you save a file:
 
@@ -91,23 +66,6 @@ End to end tests will run whenever you save a file:
 
 ```bash
 grunt c-e2e
-```
-
-
-# Using the angular app generator
-
-Add a new route, view, controller, unit test:
-```bash
-yo angular:route myRoute
-```
-
-Because the app is being served out of the django app we need to specify a path for the controls and templates.  Here is an axample route:
-
-```javascript
-.when('/RespondantDetail', {
-  templateUrl: '/static/survey/views/RespondantDetail.html',
-  controller: 'RespondantDetailCtrl'
-})
 ```
 
 #Heroku
