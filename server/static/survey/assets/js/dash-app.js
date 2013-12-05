@@ -7,6 +7,8 @@ angular.module('askApp', ['ui', 'ui.bootstrap', 'ngGrid'])
     .config(function($routeProvider, $httpProvider) {
 
     $httpProvider.defaults.headers.post['Content-Type'] = 'application/json';
+    $httpProvider.defaults.xsrfCookieName = 'csrftoken';
+    $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
 
     $routeProvider.when('/author/:surveySlug', {
         templateUrl: '/static/survey/views/author.html',

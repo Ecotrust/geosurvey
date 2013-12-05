@@ -224,7 +224,7 @@ class PageResource(SurveyModelResource):
         queryset = Page.objects.all().order_by('order')
         always_return_data = True
         authorization = StaffUserOnlyAuthorization()
-        authentication = SessionAuthentication()
+        authentication = Authentication()
         filtering = {
             'survey': ALL_WITH_RELATIONS
         }
@@ -288,12 +288,6 @@ class SurveyResource(SurveyModelResource):
 
     def save_m2m(self, bundle):
         pass
-
-
-    def prepend_urls(self):
-        return [
-            url(r"^(?P<resource_name>%s)/(?P<slug>[\w\d_.-]+)/$" % self._meta.resource_name, self.wrap_view('dispatch_detail'), name="api_dispatch_detail"),
-        ]
 
 class SurveyReportResource(SurveyResource):
     questions = fields.ToManyField(QuestionResource, 'questions', null=True, blank=True)

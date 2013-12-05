@@ -25,7 +25,7 @@ input[type="checkbox"] {
     <div class="span3">
         <div class="row-fluid controls">
             <!-- <button class="btn" ng-click="newQuestion()">New Question</button> -->
-            <a class="btn btn-large" ng-click="addPage()" ng-hide="addingPage">
+            <a class="btn btn-large" ng-click="addPage()" ng-hide="addingPage" ng-disabled="! survey.slug">
                 <i class="icon-plus"></i> Page
             </a>
             <a class="btn btn-large" ng-click="addPage()" ng-show="addingPage" disabled>

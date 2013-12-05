@@ -35,11 +35,11 @@ angular.module('askApp')
    
 
             
-            // $scope.$watch('survey.pages', function (newValue) {
-            //     if (newValue){// && ! $scope.questionsToBeUpdated.length && ! $scope.updatedQuestionQueue.length) {
-            //        $scope.checkPageOrder(newValue);
-            //     }
-            // }, true);
+            $scope.$watch('survey.pages', function (newValue) {
+                if (newValue){// && ! $scope.questionsToBeUpdated.length && ! $scope.updatedQuestionQueue.length) {
+                   $scope.checkPageOrder(newValue);
+                }
+            }, true);
 
             
 
@@ -290,7 +290,7 @@ angular.module('askApp')
 
         $scope.saveQuestion = function (question, deferUpdatingList, patch) {
             var url = question.resource_uri,
-                method = patch ? 'PATH': 'PUT',
+                method = patch ? 'PATCH': 'PUT',
                 data = question;
             if (! question.label) {
                 question.label = question.title;
