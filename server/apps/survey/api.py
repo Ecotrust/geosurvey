@@ -224,7 +224,7 @@ class PageResource(SurveyModelResource):
         queryset = Page.objects.all().order_by('order')
         always_return_data = True
         authorization = StaffUserOnlyAuthorization()
-        authentication = Authentication()
+        authentication = SessionAuthentication()
         filtering = {
             'survey': ALL_WITH_RELATIONS
         }
@@ -276,6 +276,7 @@ class SurveyResource(SurveyModelResource):
     #question = fields.ToOneField(QuestionResource, 'question', full=True, null=True, blank=True)
     pages = fields.ToManyField(PageResource, 'page_set', full=True, null=True, blank=True)
     class Meta:
+        detail_uri_name = 'slug'
         queryset = Survey.objects.all()
         always_return_data = True
         authorization = StaffUserOnlyAuthorization()

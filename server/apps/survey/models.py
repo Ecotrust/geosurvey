@@ -443,7 +443,6 @@ class Response(caching.base.CachingMixin, models.Model):
                     profile.save()
             
             self.save()
-            print self.answer
 
 
     def save(self, *args, **kwargs):

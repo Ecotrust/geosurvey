@@ -37,14 +37,7 @@ def install_chef(latest=True):
     """
     Install chef-solo on the server
     """
-    sudo('apt-get update', pty=True)
-    sudo('apt-get install -y git-core rubygems1.9.1 ruby1.9.1 ruby1.9.1-dev', pty=True)
-
-    if latest:
-        sudo('gem1.9.1 install chef --no-ri --no-rdoc', pty=True)
-    else:
-        sudo('gem1.9.1 install chef --no-ri --no-rdoc --version {0}'.format(CHEF_VERSION), pty=True)
-
+    sudo('curl -LO https://www.opscode.com/chef/install.sh && sudo bash ./install.sh -v 10.20.0 && rm install.sh')
 def parse_ssh_config(text):
     """
     Parse an ssh-config output into a Python dict.
@@ -213,7 +206,7 @@ def restart():
     Reload nginx/gunicorn
     """
     with settings(warn_only=True):
-        sudo('supervisorctl restart app')
+        sudo('initctl restart app')
         sudo('/etc/init.d/nginx reload')
 @task
 def restore(file=None):

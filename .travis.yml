@@ -1,0 +1,15 @@
+language: python
+python:
+  - "2.6"
+  - "2.7"
+env:
+  - DJANGO=1.5
+install:
+- npm install
+- pip install -r server/requirements.txt --use-mirrors
+before_script:
+  - npm install -g grunt-cli
+  - psql -c 'create database geosurvey;' -U postgres
+script:
+ - "grunt karma:unit"
+ - "python server/manage.py test --settings=config.environments.staging"

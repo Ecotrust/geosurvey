@@ -4,7 +4,7 @@ from config.settings import *
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'geosurvey',
         'USER': 'vagrant',
 #        'HOST': 'localhost',

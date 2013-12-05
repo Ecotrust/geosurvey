@@ -107,7 +107,7 @@ def answer(request, survey_slug, question_slug, uuid): #, survey_slug, question_
         if created:
             respondant.responses.add(response)
 
-        if request.user.is_authenticated():
+        if request.user and not respondant.user:
             respondant.user = request.user
             response.user = request.user
         respondant.last_question = question_slug

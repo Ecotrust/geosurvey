@@ -12,7 +12,7 @@ Vagrant.configure("2") do |config|
     config.vm.hostname = "geosurvey"
 
     config.vm.provider :virtualbox do |vb|
-        vb.customize ["modifyvm", :id, "--memory", 256]
+        vb.customize ["modifyvm", :id, "--memory", 512]
     end
 
     config.vm.provision :chef_solo do |chef|
