@@ -183,7 +183,6 @@ angular.module('askApp').directive('yaTree', function() {
 
                 options.start = function(e, ui) {
                     // Save position of dragged item
-                    console.log('start');
                     var index = ui.item.index(),
                         $parent = $(ui.item).parent().closest('.tree')
                     ui.item.sortable = {

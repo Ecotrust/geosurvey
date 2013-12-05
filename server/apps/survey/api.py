@@ -8,38 +8,38 @@ from django.db.models import Avg, Max, Min, Count
 
 from survey.models import Survey, Question, Option, Respondant, Response, Page, Block
 
-def main_save_m2m(self, bundle):
-    for field_name, field_object in self.fields.items():
-        if not getattr(field_object, 'is_m2m', False):
-            continue
+# def main_save_m2m(self, bundle):
+#     for field_name, field_object in self.fields.items():
+#         if not getattr(field_object, 'is_m2m', False):
+#             continue
 
-        if not field_object.attribute:
-            continue
+#         if not field_object.attribute:
+#             continue
 
-        if field_object.readonly:
-            continue
+#         if field_object.readonly:
+#             continue
 
-        # Get the manager.
-        related_mngr = getattr(bundle.obj, field_object.attribute)
-            # This is code commented out from the original function
-            # that would clear out the existing related "Person" objects
-        if hasattr(related_mngr, 'clear'):
-            #Clear it out, just to be safe.
-            related_mngr.clear()
+#         # Get the manager.
+#         related_mngr = getattr(bundle.obj, field_object.attribute)
+#             # This is code commented out from the original function
+#             # that would clear out the existing related "Person" objects
+#         if hasattr(related_mngr, 'clear'):
+#             #Clear it out, just to be safe.
+#             related_mngr.clear()
 
-        related_objs = []
+#         related_objs = []
 
-        for related_bundle in bundle.data[field_name]:
-            try:
-                obj = related_mngr.model.objects.get(id=related_bundle.obj.id)
-            except related_mngr.model.DoesNotExist:
-                print "could not get object"
-                obj = related_bundle.obj
-                obj.save()
+#         for related_bundle in bundle.data[field_name]:
+#             try:
+#                 obj = related_mngr.model.objects.get(id=related_bundle.obj.id)
+#             except related_mngr.model.DoesNotExist:
+#                 print "could not get object"
+#                 obj = related_bundle.obj
+#                 obj.save()
 
-            related_objs.append(obj)
+#             related_objs.append(obj)
 
-        related_mngr.add(*related_objs)
+#         related_mngr.add(*related_objs)
 
 
 class SurveyModelResource(ModelResource):
@@ -213,7 +213,7 @@ class OptionResource(SurveyModelResource):
         authentication = Authentication()
 
 
-    save_m2m = main_save_m2m
+    # save_m2m = main_save_m2m
 
 
 class PageResource(SurveyModelResource):
@@ -229,7 +229,7 @@ class PageResource(SurveyModelResource):
             'survey': ALL_WITH_RELATIONS
         }
 
-    save_m2m = main_save_m2m
+    # save_m2m = main_save_m2m
 
 
 
@@ -269,7 +269,7 @@ class QuestionResource(SurveyModelResource):
             'surveys': ALL_WITH_RELATIONS
         }
 
-    save_m2m = main_save_m2m
+    # save_m2m = main_save_m2m
 
 class SurveyResource(SurveyModelResource):
     questions = fields.ToManyField(QuestionResource, 'questions', full=True, null=True, blank=True)
@@ -286,8 +286,8 @@ class SurveyResource(SurveyModelResource):
         }
 
 
-    def save_m2m(self, bundle):
-        pass
+    # def save_m2m(self, bundle):
+    #     pass
 
 class SurveyReportResource(SurveyResource):
     questions = fields.ToManyField(QuestionResource, 'questions', null=True, blank=True)
