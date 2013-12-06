@@ -56,15 +56,16 @@ input[type="checkbox"] {
             }" ng-model="survey.pages">
             <li ya-tree="item in survey.pages at ul" class="tree" ng-class="{ 'active': item.active, 'question': item.slug, 'page': !item.slug }" ng-click="startEditingPage(item)">
                 <div>
-                    <a ng-hide="item.slug" style="cursor: pointer; text-decoration: none">
+                    <a ng-hide="item.slug" style="cursor: pointer; text-decoration: none" ng-class="{'active': item == pageBeingEdited }">
                         <span>page ({{ item.order }})</span>
                     </a>
-                    <a ng-show="item.slug" ng-click="startEditingQuestion(item)" style="cursor: pointer; text-decoration: none">
+                    <a ng-show="item.slug" ng-click="startEditingQuestion(item)" style="cursor: pointer; text-decoration: none" ng-class="{'active': item == questionBeingEdited }">
                         <span>{{ item.slug }}</span>
                     </a>
                     <i class="icon-refresh icon-spin" ng-show="item.updating"></i>
                     <div ng-hide="item.slug" class="btn-group pull-right" style="line-height: 16px">
-                        <a class="btn btn-mini" ng-click="newQuestion(item)">add question</a>
+                        <a class="btn btn-mini" ng-click="newQuestion(item)"><i class="icon-plus"></i></a>
+                        <a class="btn btn-mini btn-danger" ng-click="deletePage(item)" ng-show="item.questions.length == 0"><i class="icon-remove"></i></a>
 <!--                         <a class="btn btn-mini" ng-click="editPage(item)">edit page</a>
  -->                    </div>
                 </div>
@@ -86,7 +87,7 @@ input[type="checkbox"] {
             <div class="clearfix">
             </div>
         </div>
-        <div class="well" ng-hide="newSurvey">
+        <div class="well" ng-hide="newSurvey" ng-show="activeQuestion">
             <h1>
                 {{ survey.name }} <small> -- Page {{getPageFromQuestion(activeQuestion.slug).order}}</small>
                 <div class="btn-group pull-right" ng-hide="confirmDelete">
@@ -100,8 +101,8 @@ input[type="checkbox"] {
                 </div>
             </h1>
             <div class="row-fluid clearfix"></div>
-            <h3 ng-hide="activeQuestion.resource_uri">Adding Question to page {{ activeQuestion.page.order }}</h3>
-            <form ng-submit="saveQuestion(activeQuestion)">
+            <h3 ng-hide="activeQuestion.resource_uri" ng-show="addingNewQuestion">Adding Question to page {{ activeQuestion.page.order }}</h3>
+            <form ng-submit="saveQuestion(activeQuestion)" ng-show="activeQuestion">
                 <div class="row-fluid">
                     <label>Title</label>
                     <input class="span12" ng-model="activeQuestion.title" />
@@ -293,7 +294,7 @@ input[type="checkbox"] {
             <div ng-show="activeQuestion.updated_at" class="pull-left">
                 Updated at {{ activeQuestion.updated_at |date: 'dd-MM-yyyy HH:mm'}}
             </div>
-            <div class="buttons pull-right">
+            <div class="buttons pull-right" ng-show="activeQuestion">
                 <button class="btn btn-danger btn-large" ng-click="startEditingQuestion(questionBeingEdited)">
                     reset
                 </button>

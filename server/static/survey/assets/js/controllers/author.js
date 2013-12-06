@@ -155,6 +155,18 @@ angular.module('askApp')
         }
 
 
+        $scope.deletePage = function (page) {
+            var pageToBeDeleted = page;
+            $http({
+                method: 'DELETE',
+                url: page.resource_uri,
+                data: page
+            }).success(function (data) {
+                debugger;
+            });
+        };
+
+
         $scope.delete = function (question, page) {
             var questionToBeDeleted = question;
             $http({
@@ -175,6 +187,7 @@ angular.module('askApp')
             if (page.questions.length) {
                 order = page.questions.length + 1;
             }
+            $scope.addingNewQuestion = true;
             $scope.startEditingQuestion({
                 label: null,
                 slug: null,
@@ -243,6 +256,7 @@ angular.module('askApp')
             $scope.confirmDelete = false;
             $scope.questionBeingEdited = question;
             $scope.activeQuestion = angular.copy(question);
+
             $location.search({question:question.slug});
         };
 

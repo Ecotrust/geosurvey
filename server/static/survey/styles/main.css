@@ -335,3 +335,7 @@ form .btn-block {
 table {
   table-layout: fixed;
 }
+
+.tree .active {
+  font-weight: bold;
+}
