@@ -7,7 +7,10 @@ angular.module('askApp')
         $scope.respondents = _.toArray(app.respondents).sort( function(a,b) { return new Date(b.ts).getTime() - new Date(a.ts).getTime();});
         _.each($scope.respondents, function(respondent) {
             respondent.open = false;
-            respondent.survey_title = _.findWhere(app.surveys, {slug: respondent.survey}).name;
+            if (respondent.survey) {
+                respondent.survey_title = _.findWhere(app.surveys, {slug: respondent.survey}).name;    
+            }
+            
         });
         $scope.respondentIndex = app.respondents;        
         if (app.user) {

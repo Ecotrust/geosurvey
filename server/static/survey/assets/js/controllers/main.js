@@ -54,7 +54,7 @@ angular.module('askApp')
     $scope.logout = function () {
         app.user = false;
         storage.saveState(app);
-        window.location.reload();
+        $location.path('/splash');
     }
 
     // $scope.saveState = function () {

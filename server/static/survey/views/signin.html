@@ -46,7 +46,7 @@
                     <password password-text="authUser.password"></password>
 
                 </fieldset>
-                <button class="btn btn-main btn-default btn-block" ng-disabled="! (authUser.username &&  authUser.password)">login</button>
+                <button class="btn btn-main btn-block" ng-disabled="! (authUser.username &&  authUser.password)">login</button>
                 <a class="btn btn-main btn-default btn-block" ng-class="{'active': showForm == 'new-user'}" href="#/">cancel</a>
                 <div class="error" ng-show="showError == 'auth-error'">
                     There was a problem authenticating. Please try again.
