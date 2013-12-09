@@ -18,19 +18,23 @@ a {
 }
 
 ::-webkit-input-placeholder {
-   color: rgb(179,213,222) !important;
+   color: rgb(22, 59, 66) !important;
+   font-weight: normal;
 }
 
 :-moz-placeholder { /* Firefox 18- */
- color: rgb(179,213,222) !important;
+ color: rgb(22, 59, 66) !important;
+ font-weight: normal;
 }
 
 ::-moz-placeholder {  /* Firefox 19+ */
-   color: rgb(179,213,222) !important;
+   color: rgb(22, 59, 66) !important;
+   font-weight: normal;
 }
 
 :-ms-input-placeholder {  
-   color: rgb(179,213,222) !important;
+   color: rgb(22, 59, 66) !important;
+   font-weight: normal;
 }
 
 #wrap {
@@ -38,15 +42,21 @@ a {
 }
 
 .btn-main {
-    font-size: 24px;
-    color: rgb(250, 189, 18);
-    background-color: rgba(250, 189, 18, 0);
-    border-color: rgb(250, 189, 18);
-    border-radius: 0;
-    border-width: 4px;
-    text-transform: uppercase;
-    padding: 7px 10px;
-    margin-bottom: 5px;
+font-size: 20px;
+color: rgb(17, 27, 29);
+background-color: rgba(250, 189, 18, 0.4);
+border-color: rgb(250, 189, 18);
+border-width: 2px;
+text-transform: uppercase;
+padding: 7px 10px;
+margin-bottom: 10px;
+border-radius: 3px !important;
+
+}
+.btn-main.btn-block {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
 }
 .btn-main:hover, .btn-main:active {
     background-color: rgba(250, 189, 18, .2);
@@ -67,6 +77,7 @@ a {
         position: absolute;
         bottom: 20px;
         width: 120px;
+        font-size: 24px;
     }
     .splash {
         position: relative;
@@ -121,6 +132,7 @@ input.datepicker {
 
 .panel-heading .survey-title h3 {
     color: rgb(51, 51, 51);
+    font-size: 18px;
 }
 
 #history-wrap {
@@ -142,10 +154,13 @@ input.datepicker {
     text-transform: uppercase;
     text-align: left;
     font-weight: bold;
+
 }
 #history-wrap .panel-heading.darkSalmonBackground {
     background-color: rgb(239, 94, 70);
+
 }
+
 #history-wrap .panel-default {
     margin-bottom: 10px;
 }
@@ -379,7 +394,7 @@ img.center {
 
 .question .panel-body .select-unchecked .select-content .select-name {
 
-    color: rgb(244, 244, 244);
+    color: rgb(22, 59, 66);
 }
 
 .question .single-select-other {
@@ -434,7 +449,7 @@ img.center {
 }
 
 .question-title {
-    color: rgb(244, 244, 244);
+    color: rgb(22, 59, 66);
     text-transform: uppercase;
     font-size: 18px;
     margin-bottom: 5px;
@@ -466,7 +481,6 @@ img.center {
 .form-control, .question .form-control:focus, .unit-select {
     background-color: rgb(246, 235, 194);
     font-size: 20px;
-    font-weight: bold;
     padding: 0px 15px;
     height: 40px;
     margin-bottom: 15px;
@@ -576,21 +590,21 @@ img.center {
 }
 
 input.multi-select-other::-webkit-input-placeholder {
-   color: rgb(244, 244, 244) !important;
+   color: rgb(22, 59, 66) !important;
 }
 input.multi-select-other:-moz-placeholder { 
-   color: rgb(244, 244, 244) !important;  
+   color: rgb(22, 59, 66) !important;  
 }
 input.multi-select-other::-moz-placeholder  {  
-   color: rgb(244, 244, 244) !important;  
+   color: rgb(22, 59, 66) !important;  
 }
 input.multi-select-other:-ms-input-placeholder {  
-   color: rgb(244, 244, 244) !important;  
+   color: rgb(22, 59, 66) !important;  
 }
 .form-control.ng-pristine, .unit-select.ng-pristine {
-    background-color: rgb(24, 75, 83);
+    background-color: rgb(255,255,255);
     border: 0;
-    color: rgb(149, 149, 149);
+    color: rgb(22, 59, 66);
 }
 
 
@@ -714,7 +728,7 @@ input.multi-select-other:-ms-input-placeholder {
 
 
 #footer .btn {
-    color: rgb(244, 244, 244);
+    color: rgb(22, 59, 66);
     font-size: 50px;
     padding: 0 30px;
     background-color: rgb(24, 75, 83);
@@ -747,7 +761,7 @@ input.multi-select-other:-ms-input-placeholder {
   padding: 20px 20px 20px 10px;
   background-color: rgba(49, 49, 49, .8);
   width: 100%;
-  color: rgb(244, 244, 244);
+  color: rgb(22, 59, 66);
   font-size: 12px;
 }
     .alert-notice div {
