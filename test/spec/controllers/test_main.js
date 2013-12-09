@@ -105,14 +105,14 @@ describe('Controller: MainCtrl', function() {
 	});
 
 	it('logout: should logout a user', function() {
-		spyOn(window.location, 'reload');
+		spyOn($location, 'path');
 		expect(app.user.username).toBe('fisher');
 
 		scope.logout();
 
 		expect(app.user).toBe(false);
 		expect(storage.saveState).toHaveBeenCalled();
-		expect(window.location.reload).toHaveBeenCalled();
+		expect($location.path).toHaveBeenCalledWith('/');
 	});
 
 	it('offline: should let a user operate offline', function() {
