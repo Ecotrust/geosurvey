@@ -14,11 +14,11 @@
             <div ng-show="respondents.length && ! hasReportsToSubmit">This device has no completed reports.</div>
             <div ng-hide="confirmSubmit || showSubmitDone">
                 <div ng-hide="respondents.length">This device has no un-submitted reports.</div>
-                <a class="btn btn-main btn-default btn-lg btn-block blue-btn" ng-show="hasReportsToSubmit" ng-click="confirmSubmit = true">submit all reports</a>
+                <a class="btn btn-main btn-default btn-block blue-btn" ng-show="hasReportsToSubmit" ng-click="confirmSubmit = true">submit all reports</a>
             </div>
             <div ng-show="showSubmitDone">
                 <p>All completed reports have been submitted.</p>
-                <a class="btn btn-main btn-default btn-lg btn-block blue-btn" ng-click="showSubmitDone = false">return to dashboard</a>
+                <a class="btn btn-main btn-default btn-block blue-btn" ng-click="showSubmitDone = false">return to dashboard</a>
             </div>
             <div ng-hide="confirmSubmit || showSubmitDone">
                 <div class="panel panel-default" ng-repeat="respondent in respondents track by $index">  <!-- track by $index is present to prevent 'Duplicates in repeater' error -->
