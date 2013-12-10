@@ -2,23 +2,23 @@
 <div class="panel panel-default">
 
     <div class="panel-heading">
-        <div class="span12 text-center survey-title"><h3 style="margin-top: 10px">{{getTitle()}}</h3></div>
+        <h3 style="margin-top: 10px">{{getTitle()}}</h3>
         <!-- <div class="span12 text-center margin-bottom-20"><h4>A separate form must be completed for each trip or month of no fishing</h4></div> -->
     </div>
 
     <div class="panel-body">
 
         <!-- DID NOT FISH Report -->
-        <div ng-show="respondent.survey == 'did-not-fish' || respondent.survey_slug == 'did-not-fish'" ng-include="viewPath + 'views/didNotFishAnswers.html'"></div>
+        <div ng-show="respondent.survey_slug == 'did-not-fish'" ng-include="viewPath + 'views/didNotFishAnswers.html'"></div>
 
         <!-- CATCH REPORT -->
-        <div ng-show="respondent.survey == 'catch-report' || respondent.survey_slug == 'catch-report'">
+        <div ng-show="respondent.survey_slug == 'catch-report'">
             
             <!-- HEADER -->
             <div ng-include="viewPath + 'views/headerAnswers.html'"></div>
 
             <!-- HOOK & LINE -->
-            <div ng-show="gearTypeIncludes('hook')" ng-include="viewPath + 'views/hookAndLineAnswers.html'"></div>
+            <div class="margin-top-10 col-md-6" ng-show="gearTypeIncludes('hook')" ng-include="viewPath + 'views/hookAndLineAnswers.html'"></div>
             
             <!-- TRAPS -->
             <div ng-show="gearTypeIncludes('traps')" ng-include="viewPath + 'views/trapsAnswers.html'"></div>

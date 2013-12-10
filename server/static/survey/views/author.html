@@ -14,16 +14,20 @@ input[type="checkbox"] {
     height: 500px;
     overflow: auto;
 }
+label {
+    display: block;
+}
 </style>
-<div class="row-fluid question-nav" ng-show="questionsToBeUpdated.length">
+<div class="row question-nav" ng-show="questionsToBeUpdated.length">
     <h1>Updating Question Order</h1>
     <div class="progress" style="width: 100%">
         <div class="bar" style="width: {{ ((updateTotal-updateCounter)/updateTotal) * 100 }}%;"></div>
     </div>
 </div>
-<div class="row-fluid author" ng-hide="questionsToBeUpdated.length">
-    <div class="span3">
-        <div class="row-fluid controls">
+<div class="row author" ng-hide="questionsToBeUpdated.length">
+    <div class="col-md-1"></div>
+    <div class="col-md-3">
+        <div class="row controls">
             <!-- <button class="btn" ng-click="newQuestion()">New Question</button> -->
             <a class="btn btn-large" ng-click="addPage()" ng-hide="addingPage" ng-disabled="! survey.slug">
                 <i class="icon-plus"></i> Page
@@ -74,11 +78,11 @@ input[type="checkbox"] {
         </ul>
         <p ng-hide="survey.questions.length">No Questions, yet.</p>
     </div>
-    <div class="span9">
+    <div class="col-md-7">
         <div class="well" ng-show="newSurvey">
             <h1>New Survey</h1>
             <label>Name</label>
-            <input ng-model="survey.name" class="span12" placeholder="Survey Name" />
+            <input ng-model="survey.name" class="col-md-12" placeholder="Survey Name" />
             <div class="buttons pull-right">
                 <button class="btn btn-primary btn-large" ng-click="createSurvey(survey)">
                     save
@@ -100,29 +104,33 @@ input[type="checkbox"] {
                     <a class="btn" target="_blank" ng-click="confirmDelete = false">cancel</a>
                 </div>
             </h1>
-            <div class="row-fluid clearfix"></div>
+            <div class="row clearfix"></div>
             <h3 ng-hide="activeQuestion.resource_uri" ng-show="addingNewQuestion">Adding Question to page {{ activeQuestion.page.order }}</h3>
             <form ng-submit="saveQuestion(activeQuestion)" ng-show="activeQuestion">
-                <div class="row-fluid">
-                    <label>Title</label>
-                    <input class="span12" ng-model="activeQuestion.title" />
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>Title</label>
+                        <input class="col-md-12" ng-model="activeQuestion.title" />
+                    </div>
                 </div>
-                <div class="row-fluid">
-                    <div class="span6">
+                <div class="row">
+                    <div class="col-md-6">
                         <label>Label</label>
-                        <input class="span12" ng-model="activeQuestion.label" />
+                        <input class="col-md-12" ng-model="activeQuestion.label" />
                     </div>
-                    <div class="span6">
+                    <div class="col-md-6">
                         <label>Slug</label>
-                        <input class="span12" ng-model="activeQuestion.slug" />
+                        <input class="col-md-12" ng-model="activeQuestion.slug" />
                     </div>
                 </div>
-                <div class="row-fluid" ng-show="activeQuestion.id">
-                    <div class="span6">
+                <div class="row" ng-show="activeQuestion.id">
+                    <div class="col-md-6">
                         <label>Question Type</label>
-                        <select ng-model="activeQuestion.type">
+                        <div class="controls">
+                        <select ng-model="activeQuestion.type" style="margin-bottom: 10px;">
                             <option ng-repeat="(key, val) in activeQuestion.question_types" value="{{key}}" ng-selected="activeQuestion.type == key">{{val}}</option>
                         </select>
+                        </div>
                         <label>
                             <input type="checkbox" ng-model="activeQuestion.attach_to_profile" />Profile
                         </label>
@@ -148,7 +156,7 @@ input[type="checkbox"] {
                             Filter By
                         </label> -->
                     </div>
-                    <div class="span6">
+                    <div class="col-md-6">
                         <!--
                         <a class="btn" ng-click="newBlock = {}" ng-hide="newBlock">New Block</a>
                         <div ng-show="newBlock">
@@ -198,29 +206,29 @@ input[type="checkbox"] {
                         <div ng-show="activeQuestion.type == 'integer' || activeQuestion.type == 'number' || activeQuestion.type == 'number-with-unit'">
                             <h3>Validation Options</h3>
                             <label>Minimum Value</label>
-                            <input class="span12" ng-model="activeQuestion.integer_min" />
+                            <input class="col-md-12" ng-model="activeQuestion.integer_min" />
                             <label>Maximum Value</label>
-                            <input class="span12" ng-model="activeQuestion.integer_max" />
+                            <input class="col-md-12" ng-model="activeQuestion.integer_max" />
                             <label>Pre-Calculated</label>
-                            <textarea class="span12" ng-model="activeQuestion.pre_calculated" />
+                            <textarea class="col-md-12" ng-model="activeQuestion.pre_calculated" />
                         </div>                      
                         <div ng-show="activeQuestion.type == 'map-multipolygon'">
                             <h3>Map Settings</h3>
                             <label>Latitude</label>
-                            <input class="span12" ng-model="activeQuestion.lat" />
+                            <input class="col-md-12" ng-model="activeQuestion.lat" />
                             <label>Longitude</label>
-                            <input class="span12" ng-model="activeQuestion.lng" />
+                            <input class="col-md-12" ng-model="activeQuestion.lng" />
                             <label>Zoom Level</label>
-                            <input class="span12" ng-model="activeQuestion.zoom" />
+                            <input class="col-md-12" ng-model="activeQuestion.zoom" />
                         </div>
                     </div>
                 </div>
-                <div class="row-fluid" ng-show="activeQuestion.type == 'single-select' || activeQuestion.type == 'multi-select'">
-                    <div class="span4">
+                <div class="row" ng-show="activeQuestion.type == 'single-select' || activeQuestion.type == 'multi-select'">
+                    <div class="col-md-4">
                         <label>Options</label>
-                        <textarea class="input-block-level" rows="6" ng-model="activeQuestion.rows"></textarea>
+                        <textarea class="input-block-level" rows="6" ng-model="activeQuestion.rows" style="width: 100%"></textarea>
                     </div>
-                    <div class="span6" ng-show="activeQuestion.type == 'single-select' || activeQuestion.type == 'multi-select'">
+                    <div class="col-md-6" ng-show="activeQuestion.type == 'single-select' || activeQuestion.type == 'multi-select'">
                         <label>
                             <input type="checkbox" ng-model="activeQuestion.allow_other" />Allow Other
                         </label>
@@ -228,8 +236,8 @@ input[type="checkbox"] {
                         <input type="text" ng-model="activeQuestion.options_from_previous_answer">
                     </div>
                 </div>
-                <div class="row-fluid" ng-show="activeQuestion.type == 'grid'">
-                    <div class="span5">
+                <div class="row" ng-show="activeQuestion.type == 'grid'">
+                    <div class="col-md-5">
                         <h3>Row Options</h3>
                         <label>Options from previous answer</label>
                         <input type="text" ng-model="activeQuestion.options_from_previous_answer">
@@ -237,10 +245,10 @@ input[type="checkbox"] {
                         <label>Or Specify Options</label>
                         <textarea class="input-block-level" rows="6" ng-model="activeQuestion.rows"></textarea>
                     </div>
-                    <div class="span7">
+                    <div class="col-md-7">
                         <h3>Column Options</h3>
-                        <div class="row-fluid">
-                            <div class="span4">
+                        <div class="row">
+                            <div class="col-md-4">
                                 <ul class="nav nav-pills nav-stacked col-options" ng-model="activeQuestion.grid_cols" ui-sortable="{axis: 'y'}">
                                     <li ng-class="{'active': grid_col == activeQuestion.activeOption }" ng-repeat="grid_col in activeQuestion.grid_cols">
                                         <a ng-click="activeQuestion.activeOption=grid_col">{{grid_col.text}}</a>
@@ -248,17 +256,17 @@ input[type="checkbox"] {
                                 </ul>
                                 <a class="btn" ng-click="activeQuestion.newOption = true" ng-class="{ 'disabled': activeQuestion.newOption }">new grid col</a>
                             </div>
-                            <div class="span4" ng-show="activeQuestion.newOption">
+                            <div class="col-md-4" ng-show="activeQuestion.newOption">
                                 <label>New Option Name</label>
                                 <input type="text" ng-model="activeQuestion.newOptionText" />
                                 <a class="btn btn-primary" ng-click="newGridColumn(activeQuestion)">save new option</a>
                             </div>
-                            <div class="span6" ng-show="activeQuestion.activeOption && ! activeQuestion.newOption">
+                            <div class="col-md-6" ng-show="activeQuestion.activeOption && ! activeQuestion.newOption">
                                 <label>Column Name</label>
-                                <input type="text" class="span8" rows=5 ng-model="activeQuestion.activeOption.text">
+                                <input type="text" class="col-md-8" rows=5 ng-model="activeQuestion.activeOption.text">
                                 </textarea>
                                 <label>Column Label (should not contain a dash)</label>
-                                <input type="text" class="span8" rows=5 ng-model="activeQuestion.activeOption.label">
+                                <input type="text" class="col-md-8" rows=5 ng-model="activeQuestion.activeOption.label">
                                 </textarea>
                                 <label>Question Type</label>
                                 <select ng-model="activeQuestion.activeOption.type">
@@ -269,25 +277,25 @@ input[type="checkbox"] {
                                     <input type="checkbox" ng-model="activeQuestion.activeOption.required" />
                                 </label>
                                 <label>Slug for Either/Or Required Field</label>
-                                <input type="text" class="span8" rows=5 ng-model="activeQuestion.activeOption.either_or">
+                                <input type="text" class="col-md-8" rows=5 ng-model="activeQuestion.activeOption.either_or">
                                 <div ng-show="activeQuestion.activeOption && activeQuestion.activeOption.type == 'integer' || activeQuestion.activeOption.type == 'number'">
                                     <label>Min</label>
-                                    <input class="span12" type="text" ng-model="activeQuestion.activeOption.min">
+                                    <input class="col-md-12" type="text" ng-model="activeQuestion.activeOption.min">
                                     </textarea>
                                     <label>Max</label>
-                                    <input class="span12" type="text" ng-model="activeQuestion.activeOption.max">
+                                    <input class="col-md-12" type="text" ng-model="activeQuestion.activeOption.max">
                                     </textarea>
                                 </div>
                                 <div ng-show="activeQuestion.activeOption && activeQuestion.activeOption.type == 'single-select' || activeQuestion.activeOption.type == 'multi-select'">
                                     <label>{{ activeQuestion.activeOption.text }} Options</label>
-                                    <textarea class="span12" rows=5 ng-model="activeQuestion.activeOption.rows"></textarea>
+                                    <textarea class="col-md-12" rows=5 ng-model="activeQuestion.activeOption.rows"></textarea>
                                 </div>
                                 <a class="btn btn-danger" ng-click="deleteOption(activeQuestion.activeOption)">delete column</a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="row-fluid" ng-show="activeQuestion.type == 'grid'">
+                <div class="row" ng-show="activeQuestion.type == 'grid'">
 
                 </div>
             </form>
@@ -303,8 +311,8 @@ input[type="checkbox"] {
                 </button>
 
             </div>
-            <div class="clearfix">
-            </div>
+            <div class="clearfix"></div>
         </div>
     </div>
+    <div class="md-col-1"></div>
 </div>

@@ -38,15 +38,27 @@ a {
 }
 
 .btn-main {
-    font-size: 24px;
-    color: rgb(250, 189, 18);
+    /*font-size: 24px;*/
+    /*color: rgb(250, 189, 18);*/
     background-color: rgba(250, 189, 18, 0);
-    border-color: rgb(250, 189, 18);
+    /*border-color: rgb(250, 189, 18);*/
     border-radius: 0;
     border-width: 4px;
     text-transform: uppercase;
     padding: 7px 10px;
     margin-bottom: 5px;
+
+
+
+    font-weight: bolder;
+    text-align: left;
+    padding: 10px 10px;
+    margin-bottom: 10px;
+    border-radius: 3px;
+    font-size: 16px;
+    color: rgb(46, 46, 46) !important;
+    min-width: 100px;
+
 }
 .btn-main:hover, .btn-main:active {
     background-color: rgba(250, 189, 18, .2);
@@ -116,6 +128,7 @@ input.datepicker {
 
 .blue-btn {
     background-color: rgb(77,136,153);
+    border-color: rgb(77,136,153);
     color: white !important;
 }
 
@@ -138,7 +151,6 @@ input.datepicker {
     border-radius: 3px;
     cursor: pointer; 
     cursor: hand;
-    margin-bottom: 10px;
     text-transform: uppercase;
     text-align: left;
     font-weight: bold;

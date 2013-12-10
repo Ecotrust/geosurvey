@@ -1,0 +1,7 @@
+<nav id="global-navbar" class="navbar navbar-static-top" role="navigation" ng-controller="SurveyListMenuCtrl" ng-cloak>
+  <div class="container">
+    <a href="{{user.logout_url}}"><button type="button" class="navbar-btn navbar-right btn btn-default">Sign Out</button></a>
+    <a ng-show="user.is_staff" href="{{user.admin_url}}"><button type="button" class="navbar-btn navbar-right btn btn-info">Admin</button></a>
+    <p class="navbar-text navbar-right">Signed in as {{user.username}}</p>
+  </div>
+</nav>

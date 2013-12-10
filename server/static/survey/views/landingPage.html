@@ -1,0 +1,57 @@
+<div class="container">
+    <div class="row" ng-cloak>
+        <div class="col-md-12">
+            <!-- <i ng-hide="loaded" class="icon-spinner icon-spin"></i> -->
+            <table id="survey-landing-table" class="table table-striped">
+                <tbody>
+                    <tr ng-repeat="survey in surveys">
+                        <td>
+                            <a href="#/RespondantList/{{survey.slug}}"><h4>{{survey.name}}</h4></a>
+                        </td>
+                        <td>
+                            <h2 class="survey-num">{{survey.survey_responses || 0}}</h2>
+                            <p>Total</p>
+                        </td>
+                        <!-- <td>
+                            <h2 class="survey-num">{{survey.today || 0}}</h2>
+                            <p>Today</p>
+                        </td>
+                        <td>
+                            <h2 class="survey-num">{{survey.reviews_needed || 0}}</h2>
+                            <p>Need Review</p>
+                        </td>
+                        <td>
+                            <h2 class="survey-num">{{survey.flagged || 0}}</h2>
+                            <p>Flagged</p>
+                        </td> -->
+                        <td ng-hide="confirmDelete">
+                            <div class="btn-group pull-right">
+                                <!-- <a target="_blank" class="btn btn-default icon-plus" href="/respond/{{survey.slug}}"></a>
+                                <a target="_blank" class="btn btn-default icon-mobile-phone" href="/static/survey/mobile.html#/survey/{{survey.slug}}/{{survey.questions[0].slug}}/offline"></a> -->
+                                <!-- <a class="btn btn-default icon-edit" href="#/author/{{ survey.slug }}"></a> -->
+                                <a class="btn btn-default" href="#/author/{{ survey.slug }}">Edit</a>
+                                <!-- <a ng-show="user.is_staff" class="btn btn-default icon-trash" ng-click="confirmDelete = true"></a> -->
+                            </div>
+                        </td>
+                        <!-- <td ng-show="confirmDelete && user.is_staff">
+                            <div class="btn-group">
+                                <a class="btn btn-default btn-danger" ng-click="delete_survey(survey)">Delete</a>
+                                <a class="btn btn-default" ng-click="confirmDelete = false">Cancel</a>
+                            </div>
+                        </td> -->
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-2">
+            <a href="#/author"><button class="btn btn-success">New Survey</button></a>
+        </div>
+        <div class="col-md-10">
+            <div id="global-navbar" role="navigation" ng-controller="SurveyListMenuCtrl" ng-cloak>
+                <a href="{{user.logout_url}}"><button type="button" class="navbar-btn navbar-right btn btn-default">Sign Out</button></a>
+                <a ng-show="user.is_staff" href="{{user.admin_url}}"><button type="button" class="navbar-btn navbar-right btn btn-info">Admin</button></a>
+                <p class="navbar-text navbar-right">Signed in as {{user.username}}</p>
+            </div>
+        </div>
+    </div>
+</div>

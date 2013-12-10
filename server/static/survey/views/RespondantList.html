@@ -1,65 +1,87 @@
-<h1>{{ survey.name }}</h1>
-<div class="row-fluid">
-    <div class="span4">
-        <div class="well">
-            <h2>{{ survey.survey_responses |number}} surveys taken</h2>
-            <ul class="unstyled">
-                <!-- <li><strong>{{ survey.completes |number}}</strong> complete ({{(survey.completes/survey.survey_responses)*100 |number:2}}%)</li>
-                <li><strong>{{ survey.survey_responses - survey.completes | number}}</strong> incomplete ({{((survey.survey_responses - survey.completes)/survey.survey_responses) * 100|number:2}}%)</li> -->
-            </ul>
-           <!--  <ul class="unstyled">
-                <li><strong>{{ survey.activity_points | number }}</strong> activity points</li>
-                <li><strong>{{ survey.activity_points / survey.completes |number:2 }}</strong> activity points per survey</li>
-            </ul> -->
-        </div>
-    </div>
-    <div class="span8">
+<div ng-hide="busy" class="container">
+    
+    <h1>Completed {{ survey.name }}s -- <small>{{ survey.survey_responses |number}} reports submitted</small></h1>
+   
+    <div>
         <!-- <div class="row-fluid">
             <div heatmap question="question.slug"></div>
         </div> -->
         <div class="row-fluid">
-            <h3>Most Recent Responses</h3>
-            <table class="table">
+            <h3>{{ responsesShown }} Most Recent Responses</h3>
+
+
+
+            <div class="panel panel-default" ng-repeat="respondent in respondents">  <!-- track by $index is present to prevent 'Duplicates in repeater' error -->
+                <div class="panel-heading respondent-header" ng-click="openRespondent(respondent)" ng-class="{ 'darkSalmonBackground': respondent.open }">
+                    <h4 class="panel-title">
+                        {{ respondent.user.username }} -- 
+                        <span ng-show="respondent.complete">{{ respondent.ts | date: 'MM/dd/yyyy HH:mm' }}</span>
+                        <span ng-hide="respondent.complete">{{ respondent.ts | date: 'MM/dd/yyyy HH:mm' }} -- incomplete</span>
+                    </h4>
+                </div>
+
+
+                <div id="{{ respondent.survey_title }}" class="panel-collapse collapse" ng-class="{ 'in': respondent.open }">
+                    <div class="panel-body">
+                        <div ng-include="viewPath + 'views/surveyAnswers.html'"></div>
+                    </div>
+                </div>
+
+
+                <!-- <div class="row-fluid" ng-repeat="question in survey.questions">
+                    <div  ui-if="question.visualize">
+                        <div class="clearfix">
+                            <select class="pull-right" placeholder="filter by {{ question.slug }}" multiple=true ng-model="question.filters[question.slug]" ui-select2 style="width: 200px">
+                                <option value="{{answer.answer}}" ng-repeat="answer in question.answer_domain">
+                                    <strong>{{answer.answer}}</strong>
+                                </option>
+                            </select>
+                            <div ng-repeat="filterQuestion in question.filterQuestions">
+                                <select class="pull-right" placeholder="filter by {{ filterQuestion.slug }}" multiple=true ng-model="question.filters[filterQuestion.slug]" ui-select2 style="width: 200px">
+                                    <option value="{{answer.answer}}" ng-repeat="answer in filterQuestion.answer_domain">
+                                        <strong>{{answer.answer}}</strong>
+                                    </option>
+                                </select>
+                            </div>
+                            <dl ng-repeat="(slug, filter) in question.filters">
+                                <dt>{{ slug }}:</dt>                           
+                                <dd ng-show="filter.length" ng-repeat="filterItem in filter">{{filterItem}}</dd>
+                                <dd ng-hide="filter.length">all</dd>
+                            </dl>
+                        </div>
+                        <div ui-if="question.report_type == 'heatmap' || question.report_type == 'heatmap-distribution'">
+                            <div heatmap question="question" filteritems="question.filters" class="heatmap"></div>
+                        </div>
+                        <div ui-if="question.report_type == 'distribution' || question.report_type == 'heatmap-distribution'">
+                            <distribution filter="question.filters" question="question" survey-slug="survey.slug"></distribution>
+                        </div>
+                    </div>
+                </div> -->
+
+
+            </div>
+
+
+
+            <!-- <table class="table">
                 <tbody>
                     <tr ng-repeat="respondent in respondents">
                         <td>{{ respondent.user.username }}</td>
                         <td>{{ respondent.ts|date: 'dd-MM-yyyy HH:mm' }}</td>
                         <td><a href="#/RespondantDetail/{{survey.slug}}/{{ respondent.uuid }}">Responses ({{respondent.responses.length}})</a></td>
                         <td>
-<!--                             <a class="btn" target="_blank" href="/static/survey/mobile.html#/survey/{{survey.slug}}/{{ respondent.uuid }}/edit">edit</a>
- -->                        </td>
+                            <a class="btn" target="_blank" href="/static/survey/mobile.html#/survey/{{survey.slug}}/{{ respondent.uuid }}/edit">edit</a>
+                        </td>
                     </tr>
                 </tbody>
-            </table>
+            </table> -->
+            <a class="btn btn-default btn-lg btn-block panel-heading" style="margin-bottom: 20px; padding: 10px;" ng-click="showNext20(surveyFilter)">
+                Show More...
+                <i class="icon-spinner icon-spin" ng-show="gettingNext20"></i>
+            </a>
         </div>
-        <div class="row-fluid" ng-repeat="question in survey.questions">
-            <div  ui-if="question.visualize">
-                <div class="clearfix">
-                    <select class="pull-right" placeholder="filter by {{ question.slug }}" multiple=true ng-model="question.filters[question.slug]" ui-select2 style="width: 200px">
-                        <option value="{{answer.answer}}" ng-repeat="answer in question.answer_domain">
-                            <strong>{{answer.answer}}</strong>
-                        </option>
-                    </select>
-                    <div ng-repeat="filterQuestion in question.filterQuestions">
-                        <select class="pull-right" placeholder="filter by {{ filterQuestion.slug }}" multiple=true ng-model="question.filters[filterQuestion.slug]" ui-select2 style="width: 200px">
-                            <option value="{{answer.answer}}" ng-repeat="answer in filterQuestion.answer_domain">
-                                <strong>{{answer.answer}}</strong>
-                            </option>
-                        </select>
-                    </div>
-                    <dl ng-repeat="(slug, filter) in question.filters">
-                        <dt>{{ slug }}:</dt>                           
-                        <dd ng-show="filter.length" ng-repeat="filterItem in filter">{{filterItem}}</dd>
-                        <dd ng-hide="filter.length">all</dd>
-                    </dl>
-                </div>
-                <div ui-if="question.report_type == 'heatmap' || question.report_type == 'heatmap-distribution'">
-                    <div heatmap question="question" filteritems="question.filters" class="heatmap"></div>
-                </div>
-                <div ui-if="question.report_type == 'distribution' || question.report_type == 'heatmap-distribution'">
-                    <distribution filter="question.filters" question="question" survey-slug="survey.slug"></distribution>
-                </div>
-            </div>
-        </div>
+        
     </div>
 </div>
+
+<div ng-show="busy" ng-include="viewPath + 'static/survey/views/spinner.html'"></div>
