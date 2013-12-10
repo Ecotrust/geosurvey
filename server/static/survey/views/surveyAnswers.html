@@ -2,11 +2,11 @@
 <div class="panel panel-default">
 
     <div class="panel-heading">
-        <div class="span12 text-center survey-title"><h3 style="margin-top: 10px">{{getTitle()}}</h3></div>
+        <div class="span12 text-center survey-title"><h4>{{getTitle()}}</h4></div>
         <!-- <div class="span12 text-center margin-bottom-20"><h4>A separate form must be completed for each trip or month of no fishing</h4></div> -->
     </div>
 
-    <div class="panel-body">
+    <div class="panel-body paper-report">
 
         <!-- DID NOT FISH Report -->
         <div ng-show="respondent.survey == 'did-not-fish' || respondent.survey_slug == 'did-not-fish'" ng-include="viewPath + 'views/didNotFishAnswers.html'"></div>
