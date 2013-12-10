@@ -1,9 +1,14 @@
-[program:app]
-command=/usr/local/venv/<%= node[:project] %>/bin/gunicorn -b 0.0.0.0:8888 wsgi
-user=www-data
-directory=/usr/local/apps/<%= node[:project] %>/<%= node[:app] %>
-autostart=true
-autorestart=true
-killasgroup=true
+description "gunicorn app"
+author      "Edwin Knuth"
 
 
+start on filesystem
+stop on runlevel S
+
+script
+
+    export HOME="/usr/local/apps/geosurvey/server"
+    export VENV="/usr/local/venv/geosurvey"
+    cd $HOME
+    exec sudo -u nginx $VENV/bin/gunicorn -b 0.0.0.0:8888 wsgi
+end script

@@ -7,7 +7,7 @@
 body {
     background-color: rgb(77, 136, 153);
 }
-html, body {
+html, body, #app_shell, #app_shell > div, #wrap, .splash {
     height: 100%;
     /* The html and body elements cannot have any padding or margin. */
 }
@@ -43,8 +43,8 @@ a {
 
 .btn-main {
 font-size: 20px;
-color: rgb(17, 27, 29);
-background-color: rgba(250, 189, 18, 0.4);
+color: rgb(250, 189, 18);
+background-color: rgba(250, 189, 18, 0.2);
 border-color: rgb(250, 189, 18);
 border-width: 2px;
 text-transform: uppercase;
@@ -79,9 +79,9 @@ border-radius: 3px !important;
         width: 120px;
         font-size: 24px;
     }
-    .splash {
+  /*  .splash {
         position: relative;
-    }
+    }*/
     .splash .sign-up {
         left: 20px;
     }

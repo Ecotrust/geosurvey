@@ -1,7 +1,3 @@
-# example recipe
-# ============
-
-
 
 execute "clean it" do
     command "apt-get clean -y"
@@ -16,7 +12,6 @@ group "deploy" do
 end
 
 if node[:user] == "vagrant"
-
     user "vagrant" do
         group "deploy"
     end
@@ -57,6 +52,9 @@ else
             owner u[:name]
             mode 0700
         end
+
+        package "munin"
+
 
         cookbook_file "/var/cache/munin/www/.htpasswd" do
             source "htpasswd"
@@ -146,9 +144,6 @@ include_recipe "python"
 include_recipe "apt"
 include_recipe "nginx"
 include_recipe "postgresql::server"
-#include_recipe "supervisor"
-
-package "supervisor"
 
 # marine planner specific
 package "postgresql-#{node[:postgresql][:version]}-postgis"
@@ -185,19 +180,11 @@ end
 #     end
 # end
 
-template "/etc/supervisor/conf.d/app.conf" do
+template "/etc/init/app.conf" do
     source "app.conf.erb"
 end
 
-service "supervisor" do
-    action :stop
-end
-
-service "supervisor" do
-    action :start
-end
-
-cookbook_file "/etc/postgresql/#{node[:postgresql][:version]}/main/pg_hba.conf" do
+cookbook_file "/etc/postgresql/9.1/main/pg_hba.conf" do
     source "pg_hba.conf"
     owner "postgres"
 end
@@ -206,16 +193,11 @@ execute "restart postgres" do
     command "sudo /etc/init.d/postgresql restart"
 end
 
-
-execute "restart nginx" do
-    command "sudo /etc/init.d/nginx restart"
+if node[:user] == "www-data"
+    execute "restart nginx" do
+        command "sudo /etc/init.d/nginx restart"
+    end
 end
-
-
-execute "restart supervisor" do
-    command "sudo /etc/init.d/supervisor start"
-end
-
 
 # psql -d template_postgis -f /usr/share/postgresql/9.1/contrib/postgis-1.5/postgis.sql
 # psql -d template_postgis -f /usr/share/postgresql/9.1/contrib/postgis-1.5/spatial_ref_sys.sql

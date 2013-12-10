@@ -40,7 +40,11 @@
         </script>
     </head>
     
-    <body ng-app="askApp"  ng-view ng-animate="'animate'"></body>
+    <body ng-app="askApp" >
+        <div id="app_shell">
+            <div ng-view ng-animate="'animate'"></div>
+        </div>
+    </body>
     <script src="assets/lib/js/date.min.js"></script>
     <script src="assets/lib/js/jquery-1.8.2.min.js"></script>
     <script src="assets/lib/js/jquery-ui.min.js"></script>

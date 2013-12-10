@@ -7,7 +7,7 @@ angular.module('askApp', ['ui', 'ui.bootstrap', 'ngGrid'])
     // var initialHeight = $(window).height();
     // $('html').css({ 'min-height': initialHeight});
     // $('body').css({ 'min-height': initialHeight});
-
+    $('#app_shell').height($('body').height()).backstretch('assets/img/splash.png');
     if (localStorage.getItem('hapifis') && window.location.pathname !== '/respond') {
         app.username = JSON.parse(localStorage.getItem('hapifis')).currentUser;
         app.key = localStorage.getItem('hapifis-' + app.username);
