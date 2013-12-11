@@ -52,6 +52,10 @@ a {
     margin-bottom: 10px;
     border-radius: 3px !important;
 }
+.btn-main[disabled] {
+    background-color: rgba(250, 189, 18, 0);
+    border-color: rgb(250, 189, 18);
+}
 .btn-main.btn-block {
     text-align: left;
 }
@@ -65,6 +69,23 @@ border-color: rgb(250, 189, 18);
     width: 100%;
     height: 100%;
 }
+    .splash .branding {
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        width: 250px;
+        margin-left: -125px;
+    }
+        .splash .branding img {
+            height: 90px;
+        }
+        .splash .branding h1 {
+            font-size: 24px;
+            color: rgb(250,189, 18);
+            text-align: center;
+            padding: 0;
+            margin: -15px 0 0;
+        }
     .splash .splash-version {
         position: absolute;
         top: 25px;
@@ -153,7 +174,7 @@ input.datepicker {
     margin: 0px auto -40px;
     /* Pad bottom by footer height */
     padding-top: 80px;
-    background-color: rgb(231, 232, 234);
+    background-color: rgb(231, 232, 234, 0);
 }
 #history-wrap .panel-heading {
     background-color: rgb(251, 169, 152);
@@ -196,7 +217,7 @@ input.datepicker {
 
 #history-wrap > .container {
     padding: 20px 40px 50px;
-    background-color: rgb(231, 232, 234);
+    background-color: rgb(231, 232, 234, 0);
 }
 
 /* Wrapper for page content to push down footer */
@@ -225,14 +246,21 @@ input.datepicker {
     opacity: 0;
 
 }
+.keyboard-open .block-title {
+    display: none;
+}
 .keyboard-open .question-wrapper.active {
     position: absolute;
-    height: 100%;
+    /*height: 100%;*/
     z-index: 2000;
-    width: 95%;
-    background-color: rgb(77, 136, 153);
-    left: 10px;
-    top: 130px;
+    width: 100%;
+    
+    /*left: 10px;
+    top: 130px;*/
+    top: 0;
+    left: 0;
+    margin-top: 90px;
+    padding: 20px 50px 0;
     opacity: 1 !important;
 }
 
@@ -762,10 +790,22 @@ input.multi-select-other:-ms-input-placeholder {
 }
 .info {
   padding-top: 20px;
+  color: rgb(244,244,244);
 }
-  .info h3 {
-    color: rgb(244,244,244);
-  }
+
+.info h3 {
+  color: rgb(244,244,244);
+}
+
+.info  .panel {
+    color: rgb(0,0,0);
+}
+
+.leaflet-label:before {
+  display: none;
+}
+
+
 .leaflet-control-attribution,
 .leaflet-control-zoom {
   display: none;
@@ -776,16 +816,18 @@ input.multi-select-other:-ms-input-placeholder {
   padding: 20px 20px 20px 10px;
   background-color: rgba(49, 49, 49, .8);
   width: 100%;
-  color: rgb(22, 59, 66);
+  color: rgb(244,244,244);
   font-size: 12px;
 }
     .alert-notice div {
         margin-top: 5px;
     }
 .btn-outline-inverse {
-color: rgb(255, 255, 255);
-background-color: rgba(250, 189, 18, 0);
-border-color: rgb(250, 189, 18);
+
+    color: rgb(250, 189, 18);
+    background-color: rgba(250, 189, 18, 0.2);
+    border-color: rgb(250, 189, 18);
+
 }
     .btn-outline-inverse:active,.btn-outline-inverse:hover {
         color: rgb(244,244,244);

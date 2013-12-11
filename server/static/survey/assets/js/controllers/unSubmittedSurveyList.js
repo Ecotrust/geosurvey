@@ -12,6 +12,7 @@ angular.module('askApp')
             }
             
         });
+        $scope.hasReportsToSubmit = _.any(_.pluck($scope.respondents, 'complete'));
         $scope.respondentIndex = app.respondents;        
         if (app.user) {
             $scope.user = app.user;    
@@ -122,7 +123,6 @@ angular.module('askApp')
                 .success( function(data) {
                     //remove from app.respondents and save state
                     $scope.deleteRespondent(respondent);
-                    debugger
                     $scope.showSurveyList = true;
                 }).error( function(err) {
                     debugger;
@@ -146,8 +146,6 @@ angular.module('askApp')
             }
         };
 
-        $scope.$watch('respondents', function (newValue) {
-            $scope.hasReportsToSubmit = _.any(_.pluck(newValue, 'complete'));
-        }, true);
+        
 
 });
