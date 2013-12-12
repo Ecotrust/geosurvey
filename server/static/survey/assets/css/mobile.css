@@ -95,6 +95,7 @@ border-color: rgb(250, 189, 18);
         position: absolute;
         top: 25px;
         right: 10px;
+        color: rgb(200,200,200);
     }
     .splash .btn {
         position: absolute;
@@ -646,11 +647,12 @@ img.center {
     margin-top: -20px;
 }
 .question .other-checkbox {
-    background-color: rgb(49, 49, 49);
+    /*background-color: rgb(49, 49, 49);*/
+    background-image: url(../img/checkbox.png);
     position: relative;
     width: 20px;
     height: 20px;
-    top: 30px;
+    top: 32px;
     float: right;
     right: 10px;
 }
@@ -820,6 +822,7 @@ input.multi-select-other:-ms-input-placeholder {
   padding-top: 20px;
   color: rgb(244,244,244);
 }
+<<<<<<< HEAD
 
 .info h3 {
   color: rgb(244,244,244);
@@ -833,6 +836,11 @@ input.multi-select-other:-ms-input-placeholder {
 .info  .panel {
     color: rgb(0,0,0);
 }
+
+.info h3 {
+  color: rgb(244,244,244);
+}
+
 
 .leaflet-label:before {
   display: none;
