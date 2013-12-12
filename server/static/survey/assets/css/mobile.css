@@ -445,6 +445,10 @@ img.center {
     display: block;
 }
 
+.multi-select .select-name {
+    color: rgb(0,0,0);
+}
+
 /* nothing select, beige boxes */
 .select .option-unchecked .select-content {
   color: rgb(0,0,0);
@@ -453,10 +457,16 @@ img.center {
 
 
 /* option selected, selected is beige others are blue */
-.select .option-checked .select-checked .select-content {
-  color: rgb(0,0,0);
+.select .option-checked .select-checked .select-content .select-name {
+  color: rgb(0,0,0) !important;
   background-color: rgb(246, 236, 194) !important;
 }
+
+.select .option-unchecked .select-content .select-name {
+  color: rgb(0,0,0) !important;
+  
+}
+
 
 .select .option-checked .select-unchecked .select-content {
   color: rgb(0,0,0);
