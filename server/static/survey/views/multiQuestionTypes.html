@@ -103,7 +103,7 @@
             <!-- <div class="select mrm"> -->
             <!-- show if groupedOptions ARE present -->
             <div ng-show="question.groupedOptions">
-                <div class="panel-group">
+                <div class="panel-group grouped-options">
                     <div class="panel panel-default" ng-repeat="groupOption in question.groupedOptions">
                         <!-- <div class="panel-heading" ng-click="groupOption.open = !groupOption.open"> -->
                         <div class="panel-heading" ng-click="$parent.openOption(groupOption)">

@@ -462,7 +462,7 @@ img.center {
   background-color: rgb(246, 236, 194) !important;
 }
 
-.select .option-unchecked .select-content .select-name {
+.grouped-options .panel-title,.select .option-unchecked .select-content .select-name {
   color: rgb(0,0,0) !important;
   
 }
