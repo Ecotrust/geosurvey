@@ -53,9 +53,6 @@ a {
     border-radius: 3px !important;
 }
 .btn-main.btn-block {
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
     text-align: left;
 }
 .btn-main:hover, .btn-main:active {
@@ -72,6 +69,7 @@ border-color: rgb(250, 189, 18);
         position: absolute;
         top: 25px;
         right: 10px;
+        color: rgb(200,200,200);
     }
     .splash .btn {
         position: absolute;
@@ -133,7 +131,19 @@ input.datepicker {
 
 .panel-heading .survey-title h3 {
     color: rgb(51, 51, 51);
-    font-size: 18px;
+}
+
+.panel-heading .survey-title h4 {
+    font-size: 14px;
+    font-weight: bold;
+}
+.report-list .panel-heading .panel-heading {
+    padding: 0;
+    margin-bottom: 0;
+}
+
+.paper-report {
+    padding: 0 5px;
 }
 
 #history-wrap {
@@ -154,11 +164,15 @@ input.datepicker {
     text-transform: uppercase;
     text-align: left;
     font-weight: bold;
-
 }
+
 #history-wrap .panel-heading.darkSalmonBackground {
     background-color: rgb(239, 94, 70);
 
+}
+
+#history-wrap .report-list > .panel-collapse > .panel-body {
+    padding: 0;
 }
 
 #history-wrap .panel-default {
@@ -180,7 +194,7 @@ input.datepicker {
 }
 
 #history-wrap > .container {
-    padding: 20px 15px 50px;
+    padding: 20px 40px 50px;
     background-color: rgb(231, 232, 234);
 }
 
@@ -229,10 +243,10 @@ input.datepicker {
 }
 
 #wrap > .container {
-    padding: 40px 15px 20px;
+    padding: 40px 40px 20px;
 }
 #wrap.menu-page > .container {
-    padding: 110px 15px 100px;
+    padding: 110px 40px 100px;
 }
 .container .credit {
     margin: 20px 0;
@@ -449,12 +463,12 @@ img.center {
 }
 
 .question-title {
-    color: rgb(22, 59, 66);
+    color: rgb(255, 255, 255);
     text-transform: uppercase;
     font-size: 18px;
     margin-bottom: 5px;
     font-weight: bold;
-    text-align: center;
+    text-align: left;
 }
 
 .signin-form .eye, .new-user-form .eye {
@@ -575,11 +589,12 @@ img.center {
     margin-top: -20px;
 }
 .question .other-checkbox {
-    background-color: rgb(49, 49, 49);
+    /*background-color: rgb(49, 49, 49);*/
+    background-image: url(../img/checkbox.png);
     position: relative;
     width: 20px;
     height: 20px;
-    top: 30px;
+    top: 32px;
     float: right;
     right: 10px;
 }
@@ -748,9 +763,14 @@ input.multi-select-other:-ms-input-placeholder {
 .info {
   padding-top: 20px;
 }
-  .info h3 {
-    color: rgb(244,244,244);
-  }
+.info h3 {
+  color: rgb(244,244,244);
+}
+
+.leaflet-label:before {
+  display: none;
+}
+
 .leaflet-control-attribution,
 .leaflet-control-zoom {
   display: none;
