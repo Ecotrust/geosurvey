@@ -21,13 +21,13 @@
                 <a class="btn btn-main btn-default btn-block blue-btn" ng-click="showSubmitDone = false">return to dashboard</a>
             </div>
             <div ng-hide="confirmSubmit || showSubmitDone">
-                <div class="panel panel-default" ng-repeat="respondent in respondents track by $index">  <!-- track by $index is present to prevent 'Duplicates in repeater' error -->
+                <div class="panel report-list panel-default" ng-repeat="respondent in respondents track by $index">  <!-- track by $index is present to prevent 'Duplicates in repeater' error -->
                     <div class="panel-heading" ng-click="openRespondent(respondent)" ng-class="{ 'darkSalmonBackground': respondent.open }">
-                        <h4 class="panel-title">
+                        <h3 class="panel-title">
                             {{ respondent.survey_title }} -- 
                             <span ng-show="respondent.complete">{{ respondent.ts | date: 'MM/dd/yyyy HH:mm' }}</span>
                             <span ng-hide="respondent.complete">{{ respondent.ts | date: 'MM/dd/yyyy HH:mm' }} -- incomplete</span>
-                        </h4>
+                        </h3>
                     </div>
                     <div id="{{ respondent.survey_title }}" class="panel-collapse collapse" ng-class="{ 'in': respondent.open }">
                         <div class="panel-body">
