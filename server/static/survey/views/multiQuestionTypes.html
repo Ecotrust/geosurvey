@@ -80,7 +80,7 @@
     </div>
 
     <div ng-switch-when="yes-no">
-        <div class="question">
+        <div class="question yes-no">
             <div class="select mrm">
                 <ul ng-class="{'option-checked': $parent.question.answerSelected, 'option-unchecked': !$parent.question.answerSelected }">
                     <li class="option" ng-click="$parent.onSingleSelectClicked(option, $parent.question)" ng-repeat="option in question.options" ng-class="{'select-checked': option.checked, 'select-unchecked': ! option.checked  }">

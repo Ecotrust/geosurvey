@@ -141,11 +141,10 @@ angular.module('askApp')
                       + '&format=json';
             
             if (surveyFilter.start) {
-                url += '&ts__gte=' + surveyFilter.start; //new Date(surveyFilter.start).add(1).days().toString('yyyy-MM-dd');
+                url += '&ordering_date__gte=' + surveyFilter.start; 
             }
             if (surveyFilter.end) {
-
-                url += '&ts__lte=' + new Date(surveyFilter.end).add(2).days().toString('yyyy-MM-dd');
+                url += '&ordering_date__lte=' + new Date(surveyFilter.end).add(1).days().toString('yyyy-MM-dd');
             }
 
             return $http.get(url).error(function (err) {

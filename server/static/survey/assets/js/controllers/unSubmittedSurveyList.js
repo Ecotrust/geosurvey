@@ -7,8 +7,38 @@ angular.module('askApp')
         $scope.respondents = _.toArray(app.respondents).sort( function(a,b) { return new Date(b.ts).getTime() - new Date(a.ts).getTime();});
         _.each($scope.respondents, function(respondent) {
             respondent.open = false;
+
+            
             if (respondent.survey) {
-                respondent.survey_title = _.findWhere(app.surveys, {slug: respondent.survey}).name;    
+                var surveyName = _.findWhere(app.surveys, {slug: respondent.survey}).name,
+                    date,
+                    dateItems; 
+
+                if (respondent.survey === 'catch-report') {
+                    try {
+                        date = _.findWhere(respondent.responses, {question: 'landed-date'}).answer;
+                        dateItems = date.split('-');
+                        date = dateItems[1] + '/' + dateItems[2] + '/' + dateItems[0];
+                        respondent.survey_title = surveyName + " -- " + date;
+                    } catch (e) {
+                        respondent.survey_title = surveyName;
+                    }
+                    
+                } else if (respondent.survey === 'did-not-fish') {
+                    try {
+                        date = _.findWhere(respondent.responses, {question: 'did-not-fish-for-month-of'}).answer;
+                        dateItems = date.split('-');
+                        date = dateItems[1] + '/' + dateItems[0];
+                        respondent.survey_title = surveyName + " -- " + date;
+                    } catch (e) {
+                        respondent.survey_title = surveyName;
+                    }
+                    
+                } else {
+                    respondent.survey_title = respondent.survey;
+                }
+                
+                  
             }
             
         });
