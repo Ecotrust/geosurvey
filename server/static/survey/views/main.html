@@ -30,12 +30,12 @@
     <div id="map" mobile-map ng-show="user"></div>
     <div class="alert-notice" ng-show="message">
         <div class="pull-left">{{ message }}</div>
-        <button class="btn btn-default btn-outline-inverse pull-right" ng-tap="message = false">ok</button>
+        <button class="btn btn-default btn-outline-inverse pull-right" ng-tap="dismissMessage()">ok</button>
     </div>
     <div class="alert-notice" ng-show="update">
         <div>An update ({{newVersion}}) is available for Digital Deck.</div>
         <div class="pull-right">
-            <button class="btn btn-default btn-outline-inverse" ng-tap="update = false">not now</button>
+            <button class="btn btn-default btn-outline-inverse" ng-tap="dismissMessage()">not now</button>
             <button class="btn btn-default btn-outline-inverse" ng-tap="updateApp()">update</button>
         </div>
     </div>
