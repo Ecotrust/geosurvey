@@ -573,8 +573,8 @@ img.center {
 
 .form-control, .question .form-control:focus, .unit-select {
     background-color: rgb(246, 235, 194);
-    font-size: 20px;
-    padding: 0px 15px;
+    font-size: 18px;
+    padding: 0px 10px;
     height: 40px;
     margin-bottom: 15px;
     border-radius: 0;
