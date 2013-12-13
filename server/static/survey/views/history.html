@@ -13,12 +13,12 @@
 
         <div>
             <a class="btn btn-default btn-main btn-lg btn-block" href="#/unSubmittedSurveyList">
-                un-submitted reports <span class="badge pull-right" style="top: 0px">{{respondents.length}}</span>
+                un-submitted <span class="badge pull-right" style="top: 0px">{{respondents.length}}</span>
             </a>
         </div>
         <div>
             <a class="btn btn-default btn-main btn-lg btn-block" href="#/submittedSurveyList" ng-class="{ 'disabled': !respondentList }">
-                submitted reports <span class="badge pull-right" style="top: 0px">{{respondentList.length}}<i class="icon-spinner icon-spin" ng-hide="respondentList"></i></span>
+                submitted <span class="badge pull-right" style="top: 0px">{{respondentList.length}}<i class="icon-spinner icon-spin" ng-hide="respondentList"></i></span>
             </a>
         </div>
 
