@@ -59,6 +59,15 @@ a {
 .col-xs-6 .btn-main {
     font-size: 15px;
 }
+
+#map-question .button-row .col-xs-4 {
+    padding-right: 10px;
+    padding-left: 10px;
+}    
+#map-question .button-row .col-xs-4 .btn-main {
+    padding-left: 0px;
+    padding-right: 0px;
+}
 .btn-main.btn-block {
     text-align: left;
 }
@@ -212,6 +221,7 @@ input.datepicker {
 #history-wrap .report-list > .panel-collapse > .panel-body {
     padding: 0;
 }
+
 
 .report-list .button-row {
     padding: 10px;
