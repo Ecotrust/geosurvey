@@ -56,6 +56,9 @@ a {
     margin-bottom: 10px;
     border-radius: 3px !important;
 }
+.col-xs-6 .btn-main {
+    font-size: 15px;
+}
 .btn-main.btn-block {
     text-align: left;
 }
