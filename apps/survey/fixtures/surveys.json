@@ -1,0 +1,4094 @@
+[
+    {
+        "fields": {
+            "question": 9, 
+            "survey": 3
+        }, 
+        "model": "survey.page", 
+        "pk": 1
+    }, 
+    {
+        "fields": {
+            "question": 10, 
+            "survey": 3
+        }, 
+        "model": "survey.page", 
+        "pk": 2
+    }, 
+    {
+        "fields": {
+            "question": 11, 
+            "survey": 3
+        }, 
+        "model": "survey.page", 
+        "pk": 3
+    }, 
+    {
+        "fields": {
+            "question": 12, 
+            "survey": 3
+        }, 
+        "model": "survey.page", 
+        "pk": 4
+    }, 
+    {
+        "fields": {
+            "question": 13, 
+            "survey": 3
+        }, 
+        "model": "survey.page", 
+        "pk": 5
+    }, 
+    {
+        "fields": {
+            "question": 14, 
+            "survey": 3
+        }, 
+        "model": "survey.page", 
+        "pk": 6
+    }, 
+    {
+        "fields": {
+            "question": 15, 
+            "survey": 3
+        }, 
+        "model": "survey.page", 
+        "pk": 7
+    }, 
+    {
+        "fields": {
+            "question": 18, 
+            "survey": 3
+        }, 
+        "model": "survey.page", 
+        "pk": 8
+    }, 
+    {
+        "fields": {
+            "question": 19, 
+            "survey": 3
+        }, 
+        "model": "survey.page", 
+        "pk": 9
+    }, 
+    {
+        "fields": {
+            "question": 20, 
+            "survey": 3
+        }, 
+        "model": "survey.page", 
+        "pk": 15
+    }, 
+    {
+        "fields": {
+            "question": 21, 
+            "survey": 3
+        }, 
+        "model": "survey.page", 
+        "pk": 16
+    }, 
+    {
+        "fields": {
+            "question": 22, 
+            "survey": 3
+        }, 
+        "model": "survey.page", 
+        "pk": 17
+    }, 
+    {
+        "fields": {
+            "question": 23, 
+            "survey": 3
+        }, 
+        "model": "survey.page", 
+        "pk": 18
+    }, 
+    {
+        "fields": {
+            "question": 24, 
+            "survey": 3
+        }, 
+        "model": "survey.page", 
+        "pk": 19
+    }, 
+    {
+        "fields": {
+            "question": 25, 
+            "survey": 3
+        }, 
+        "model": "survey.page", 
+        "pk": 20
+    }, 
+    {
+        "fields": {
+            "question": 26, 
+            "survey": 3
+        }, 
+        "model": "survey.page", 
+        "pk": 21
+    }, 
+    {
+        "fields": {
+            "question": 27, 
+            "survey": 3
+        }, 
+        "model": "survey.page", 
+        "pk": 22
+    }, 
+    {
+        "fields": {
+            "question": 28, 
+            "survey": 3
+        }, 
+        "model": "survey.page", 
+        "pk": 23
+    }, 
+    {
+        "fields": {
+            "question": 29, 
+            "survey": 3
+        }, 
+        "model": "survey.page", 
+        "pk": 24
+    }, 
+    {
+        "fields": {
+            "question": 30, 
+            "survey": 3
+        }, 
+        "model": "survey.page", 
+        "pk": 25
+    }, 
+    {
+        "fields": {
+            "question": 42, 
+            "survey": 4
+        }, 
+        "model": "survey.page", 
+        "pk": 31
+    }, 
+    {
+        "fields": {
+            "question": 56, 
+            "survey": 4
+        }, 
+        "model": "survey.page", 
+        "pk": 42
+    }, 
+    {
+        "fields": {
+            "question": 57, 
+            "survey": 1
+        }, 
+        "model": "survey.page", 
+        "pk": 43
+    }, 
+    {
+        "fields": {
+            "question": 2, 
+            "survey": 1
+        }, 
+        "model": "survey.page", 
+        "pk": 44
+    }, 
+    {
+        "fields": {
+            "question": 6, 
+            "survey": 1
+        }, 
+        "model": "survey.page", 
+        "pk": 45
+    }, 
+    {
+        "fields": {
+            "question": 58, 
+            "survey": 1
+        }, 
+        "model": "survey.page", 
+        "pk": 46
+    }, 
+    {
+        "fields": {
+            "question": 59, 
+            "survey": 1
+        }, 
+        "model": "survey.page", 
+        "pk": 47
+    }, 
+    {
+        "fields": {
+            "question": 60, 
+            "survey": 4
+        }, 
+        "model": "survey.page", 
+        "pk": 48
+    }, 
+    {
+        "fields": {
+            "question": 61, 
+            "survey": 1
+        }, 
+        "model": "survey.page", 
+        "pk": 49
+    }, 
+    {
+        "fields": {
+            "question": 50, 
+            "survey": 4
+        }, 
+        "model": "survey.page", 
+        "pk": 50
+    }, 
+    {
+        "fields": {
+            "question": 51, 
+            "survey": 4
+        }, 
+        "model": "survey.page", 
+        "pk": 51
+    }, 
+    {
+        "fields": {
+            "question": 62, 
+            "survey": 2
+        }, 
+        "model": "survey.page", 
+        "pk": 52
+    }, 
+    {
+        "fields": {
+            "question": 63, 
+            "survey": 2
+        }, 
+        "model": "survey.page", 
+        "pk": 53
+    }, 
+    {
+        "fields": {
+            "question": 64, 
+            "survey": 2
+        }, 
+        "model": "survey.page", 
+        "pk": 54
+    }, 
+    {
+        "fields": {
+            "question": 65, 
+            "survey": 2
+        }, 
+        "model": "survey.page", 
+        "pk": 55
+    }, 
+    {
+        "fields": {
+            "question": 66, 
+            "survey": 2
+        }, 
+        "model": "survey.page", 
+        "pk": 56
+    }, 
+    {
+        "fields": {
+            "question": 67, 
+            "survey": 2
+        }, 
+        "model": "survey.page", 
+        "pk": 57
+    }, 
+    {
+        "fields": {
+            "question": 69, 
+            "survey": 2
+        }, 
+        "model": "survey.page", 
+        "pk": 58
+    }, 
+    {
+        "fields": {
+            "question": 70, 
+            "survey": 4
+        }, 
+        "model": "survey.page", 
+        "pk": 59
+    }, 
+    {
+        "fields": {
+            "question": 73, 
+            "survey": 4
+        }, 
+        "model": "survey.page", 
+        "pk": 60
+    }, 
+    {
+        "fields": {
+            "question": 74, 
+            "survey": 2
+        }, 
+        "model": "survey.page", 
+        "pk": 61
+    }, 
+    {
+        "fields": {
+            "question": 75, 
+            "survey": 2
+        }, 
+        "model": "survey.page", 
+        "pk": 62
+    }, 
+    {
+        "fields": {
+            "question": 76, 
+            "survey": 2
+        }, 
+        "model": "survey.page", 
+        "pk": 63
+    }, 
+    {
+        "fields": {
+            "question": 77, 
+            "survey": 2
+        }, 
+        "model": "survey.page", 
+        "pk": 64
+    }, 
+    {
+        "fields": {
+            "question": 78, 
+            "survey": 2
+        }, 
+        "model": "survey.page", 
+        "pk": 65
+    }, 
+    {
+        "fields": {
+            "question": 79, 
+            "survey": 2
+        }, 
+        "model": "survey.page", 
+        "pk": 66
+    }, 
+    {
+        "fields": {
+            "question": 80, 
+            "survey": 2
+        }, 
+        "model": "survey.page", 
+        "pk": 67
+    }, 
+    {
+        "fields": {
+            "question": 81, 
+            "survey": 2
+        }, 
+        "model": "survey.page", 
+        "pk": 68
+    }, 
+    {
+        "fields": {
+            "question": 82, 
+            "survey": 2
+        }, 
+        "model": "survey.page", 
+        "pk": 69
+    }, 
+    {
+        "fields": {
+            "question": 83, 
+            "survey": 2
+        }, 
+        "model": "survey.page", 
+        "pk": 70
+    }, 
+    {
+        "fields": {
+            "question": 84, 
+            "survey": 2
+        }, 
+        "model": "survey.page", 
+        "pk": 71
+    }, 
+    {
+        "fields": {
+            "question": 85, 
+            "survey": 2
+        }, 
+        "model": "survey.page", 
+        "pk": 72
+    }, 
+    {
+        "fields": {
+            "question": 86, 
+            "survey": 2
+        }, 
+        "model": "survey.page", 
+        "pk": 73
+    }, 
+    {
+        "fields": {
+            "question": 87, 
+            "survey": 2
+        }, 
+        "model": "survey.page", 
+        "pk": 74
+    }, 
+    {
+        "fields": {
+            "question": 72, 
+            "survey": 2
+        }, 
+        "model": "survey.page", 
+        "pk": 75
+    }, 
+    {
+        "fields": {
+            "question": 71, 
+            "survey": 3
+        }, 
+        "model": "survey.page", 
+        "pk": 76
+    }, 
+    {
+        "fields": {
+            "question": 88, 
+            "survey": 2
+        }, 
+        "model": "survey.page", 
+        "pk": 77
+    }, 
+    {
+        "fields": {
+            "anon": true, 
+            "name": "Test Survey", 
+            "slug": "test-survey", 
+            "states": null
+        }, 
+        "model": "survey.survey", 
+        "pk": 1
+    }, 
+    {
+        "fields": {
+            "anon": false, 
+            "name": "marco", 
+            "slug": "marco", 
+            "states": "MD,DE,NJ,NY,VA,DC"
+        }, 
+        "model": "survey.survey", 
+        "pk": 2
+    }, 
+    {
+        "fields": {
+            "anon": true, 
+            "name": "Washington Opt In", 
+            "slug": "washington-opt-in", 
+            "states": "WA"
+        }, 
+        "model": "survey.survey", 
+        "pk": 3
+    }, 
+    {
+        "fields": {
+            "anon": true, 
+            "name": "Washington Panel", 
+            "slug": "washington-panel", 
+            "states": "WA"
+        }, 
+        "model": "survey.survey", 
+        "pk": 4
+    }, 
+    {
+        "fields": {
+            "anon": true, 
+            "name": "Volume and Origin", 
+            "slug": "volume-and-origin", 
+            "states": ""
+        }, 
+        "model": "survey.survey", 
+        "pk": 6
+    }, 
+    {
+        "fields": {
+            "label": "NY", 
+            "text": "New York"
+        }, 
+        "model": "survey.option", 
+        "pk": 4
+    }, 
+    {
+        "fields": {
+            "label": "NJ", 
+            "text": "New Jersey"
+        }, 
+        "model": "survey.option", 
+        "pk": 5
+    }, 
+    {
+        "fields": {
+            "label": "DE", 
+            "text": "Delaware"
+        }, 
+        "model": "survey.option", 
+        "pk": 6
+    }, 
+    {
+        "fields": {
+            "label": "MD", 
+            "text": "Maryland"
+        }, 
+        "model": "survey.option", 
+        "pk": 7
+    }, 
+    {
+        "fields": {
+            "label": "VA", 
+            "text": "Virgina"
+        }, 
+        "model": "survey.option", 
+        "pk": 8
+    }, 
+    {
+        "fields": {
+            "label": "DC", 
+            "text": "District of Columbia"
+        }, 
+        "model": "survey.option", 
+        "pk": 9
+    }, 
+    {
+        "fields": {
+            "label": "washington", 
+            "text": "Washington"
+        }, 
+        "model": "survey.option", 
+        "pk": 10
+    }, 
+    {
+        "fields": {
+            "label": "oregon", 
+            "text": "Oregon"
+        }, 
+        "model": "survey.option", 
+        "pk": 11
+    }, 
+    {
+        "fields": {
+            "label": "british-columbia", 
+            "text": "British Columbia"
+        }, 
+        "model": "survey.option", 
+        "pk": 12
+    }, 
+    {
+        "fields": {
+            "label": "0", 
+            "text": "0 nights"
+        }, 
+        "model": "survey.option", 
+        "pk": 13
+    }, 
+    {
+        "fields": {
+            "label": "1", 
+            "text": "1 night"
+        }, 
+        "model": "survey.option", 
+        "pk": 14
+    }, 
+    {
+        "fields": {
+            "label": "2", 
+            "text": "2 nights"
+        }, 
+        "model": "survey.option", 
+        "pk": 15
+    }, 
+    {
+        "fields": {
+            "label": "3", 
+            "text": "3 nights"
+        }, 
+        "model": "survey.option", 
+        "pk": 16
+    }, 
+    {
+        "fields": {
+            "label": "4", 
+            "text": "4 nights"
+        }, 
+        "model": "survey.option", 
+        "pk": 17
+    }, 
+    {
+        "fields": {
+            "label": "5", 
+            "text": "5+ nights"
+        }, 
+        "model": "survey.option", 
+        "pk": 18
+    }, 
+    {
+        "fields": {
+            "label": "parking", 
+            "text": "Parking"
+        }, 
+        "model": "survey.option", 
+        "pk": 19
+    }, 
+    {
+        "fields": {
+            "label": "car-fuel", 
+            "text": "Car Fuel"
+        }, 
+        "model": "survey.option", 
+        "pk": 20
+    }, 
+    {
+        "fields": {
+            "label": "airline-flight", 
+            "text": "Airline Flight"
+        }, 
+        "model": "survey.option", 
+        "pk": 21
+    }, 
+    {
+        "fields": {
+            "label": "food-and-beverages-store", 
+            "text": "Food and beverages from a store"
+        }, 
+        "model": "survey.option", 
+        "pk": 22
+    }, 
+    {
+        "fields": {
+            "label": "food-and-beverages-restaurant-or-bar", 
+            "text": "Food and beverages at a restaurant or bar"
+        }, 
+        "model": "survey.option", 
+        "pk": 23
+    }, 
+    {
+        "fields": {
+            "label": "souvenirs-t-shirts-posters-gifts-etc", 
+            "text": "Souvenirs (t-shirts, posters, gifts, etc.)"
+        }, 
+        "model": "survey.option", 
+        "pk": 24
+    }, 
+    {
+        "fields": {
+            "label": "sundries-sunscreen-surf-wax-motion-sickness-pills-batteries-film", 
+            "text": "Sundries (sunscreen, surf wax, motion sickness pills, batteries, film and processing etc.)"
+        }, 
+        "model": "survey.option", 
+        "pk": 25
+    }, 
+    {
+        "fields": {
+            "label": "car-rental", 
+            "text": "Car rental"
+        }, 
+        "model": "survey.option", 
+        "pk": 26
+    }, 
+    {
+        "fields": {
+            "label": "dive-equiment-rental-and-airfills", 
+            "text": "Dive equiment rental and airfills"
+        }, 
+        "model": "survey.option", 
+        "pk": 27
+    }, 
+    {
+        "fields": {
+            "label": "equipment-rental-surfboard-bike-kayak-stand-paddleetc", 
+            "text": "Equipment rental (Surfboard, bike, kayak, stand up paddle,etc)"
+        }, 
+        "model": "survey.option", 
+        "pk": 28
+    }, 
+    {
+        "fields": {
+            "label": "lodging-if-you-stayed-overnight", 
+            "text": "Lodging (if you stayed overnight)"
+        }, 
+        "model": "survey.option", 
+        "pk": 29
+    }, 
+    {
+        "fields": {
+            "label": "charter-fee-whale-watching-etc", 
+            "text": "Charter fee (whale watching, etc.)"
+        }, 
+        "model": "survey.option", 
+        "pk": 30
+    }, 
+    {
+        "fields": {
+            "label": "museum-aquarium-or-other-entrance-fee", 
+            "text": "Museum, aquarium, or other entrance fee"
+        }, 
+        "model": "survey.option", 
+        "pk": 31
+    }, 
+    {
+        "fields": {
+            "label": "lessons-clinics-camps", 
+            "text": "Lessons, clinics, camps"
+        }, 
+        "model": "survey.option", 
+        "pk": 32
+    }, 
+    {
+        "fields": {
+            "label": "male", 
+            "text": "Male"
+        }, 
+        "model": "survey.option", 
+        "pk": 36
+    }, 
+    {
+        "fields": {
+            "label": "female", 
+            "text": "Female"
+        }, 
+        "model": "survey.option", 
+        "pk": 37
+    }, 
+    {
+        "fields": {
+            "label": "white", 
+            "text": "White"
+        }, 
+        "model": "survey.option", 
+        "pk": 38
+    }, 
+    {
+        "fields": {
+            "label": "black-or-african-american", 
+            "text": "Black or African American"
+        }, 
+        "model": "survey.option", 
+        "pk": 39
+    }, 
+    {
+        "fields": {
+            "label": "hispanic-spanish-or-latino", 
+            "text": "Hispanic, Spanish or Latino"
+        }, 
+        "model": "survey.option", 
+        "pk": 40
+    }, 
+    {
+        "fields": {
+            "label": "american-indian-or-alaska-native", 
+            "text": "American Indian or Alaska Native"
+        }, 
+        "model": "survey.option", 
+        "pk": 41
+    }, 
+    {
+        "fields": {
+            "label": "asianpacific-islander", 
+            "text": "Asian/Pacific Islander"
+        }, 
+        "model": "survey.option", 
+        "pk": 42
+    }, 
+    {
+        "fields": {
+            "label": "other", 
+            "text": "Other"
+        }, 
+        "model": "survey.option", 
+        "pk": 43
+    }, 
+    {
+        "fields": {
+            "label": "no-formal-education", 
+            "text": "No formal education"
+        }, 
+        "model": "survey.option", 
+        "pk": 44
+    }, 
+    {
+        "fields": {
+            "label": "less-high-school", 
+            "text": "Less than high school"
+        }, 
+        "model": "survey.option", 
+        "pk": 45
+    }, 
+    {
+        "fields": {
+            "label": "high-school", 
+            "text": "High School"
+        }, 
+        "model": "survey.option", 
+        "pk": 46
+    }, 
+    {
+        "fields": {
+            "label": "some-college", 
+            "text": "Some college"
+        }, 
+        "model": "survey.option", 
+        "pk": 47
+    }, 
+    {
+        "fields": {
+            "label": "bachelors-degree-or-higher", 
+            "text": "Bachelor's degree"
+        }, 
+        "model": "survey.option", 
+        "pk": 48
+    }, 
+    {
+        "fields": {
+            "label": "strongly-agree", 
+            "text": "Strongly Agree"
+        }, 
+        "model": "survey.option", 
+        "pk": 49
+    }, 
+    {
+        "fields": {
+            "label": "somewhat-agree", 
+            "text": "Somewhat Agree"
+        }, 
+        "model": "survey.option", 
+        "pk": 50
+    }, 
+    {
+        "fields": {
+            "label": "neither-agree-nor-disagree", 
+            "text": "Neither Agree nor Disagree"
+        }, 
+        "model": "survey.option", 
+        "pk": 51
+    }, 
+    {
+        "fields": {
+            "label": "somewhat-disagree", 
+            "text": "Somewhat Disagree"
+        }, 
+        "model": "survey.option", 
+        "pk": 52
+    }, 
+    {
+        "fields": {
+            "label": "strongly-disagree", 
+            "text": "Strongly Disagree"
+        }, 
+        "model": "survey.option", 
+        "pk": 53
+    }, 
+    {
+        "fields": {
+            "label": "yes", 
+            "text": "Yes"
+        }, 
+        "model": "survey.option", 
+        "pk": 54
+    }, 
+    {
+        "fields": {
+            "label": "no", 
+            "text": "No"
+        }, 
+        "model": "survey.option", 
+        "pk": 55
+    }, 
+    {
+        "fields": {
+            "label": "just-last-year", 
+            "text": "Just the last year"
+        }, 
+        "model": "survey.option", 
+        "pk": 56
+    }, 
+    {
+        "fields": {
+            "label": "one-three-years", 
+            "text": "One to three years"
+        }, 
+        "model": "survey.option", 
+        "pk": 57
+    }, 
+    {
+        "fields": {
+            "label": "about-four-ten-years", 
+            "text": "About four to ten years"
+        }, 
+        "model": "survey.option", 
+        "pk": 58
+    }, 
+    {
+        "fields": {
+            "label": "more-ten-years", 
+            "text": "More than ten years"
+        }, 
+        "model": "survey.option", 
+        "pk": 59
+    }, 
+    {
+        "fields": {
+            "label": "all-my-life", 
+            "text": "All my life"
+        }, 
+        "model": "survey.option", 
+        "pk": 60
+    }, 
+    {
+        "fields": {
+            "label": "bus", 
+            "text": "Bus"
+        }, 
+        "model": "survey.option", 
+        "pk": 61
+    }, 
+    {
+        "fields": {
+            "label": "bike", 
+            "text": "Bike"
+        }, 
+        "model": "survey.option", 
+        "pk": 62
+    }, 
+    {
+        "fields": {
+            "label": "fly", 
+            "text": "Fly"
+        }, 
+        "model": "survey.option", 
+        "pk": 63
+    }, 
+    {
+        "fields": {
+            "label": "walking", 
+            "text": "Walking"
+        }, 
+        "model": "survey.option", 
+        "pk": 64
+    }, 
+    {
+        "fields": {
+            "label": "drove-personal-car", 
+            "text": "Drove a personal car"
+        }, 
+        "model": "survey.option", 
+        "pk": 65
+    }, 
+    {
+        "fields": {
+            "label": "drove-rented-car", 
+            "text": "Drove a rented car"
+        }, 
+        "model": "survey.option", 
+        "pk": 66
+    }, 
+    {
+        "fields": {
+            "label": "rode-someone-else-carpooled", 
+            "text": "Rode with someone else -- carpooled"
+        }, 
+        "model": "survey.option", 
+        "pk": 67
+    }, 
+    {
+        "fields": {
+            "label": "first-option", 
+            "text": "First Option"
+        }, 
+        "model": "survey.option", 
+        "pk": 68
+    }, 
+    {
+        "fields": {
+            "label": "second-option", 
+            "text": "Second Option"
+        }, 
+        "model": "survey.option", 
+        "pk": 69
+    }, 
+    {
+        "fields": {
+            "label": "third-option", 
+            "text": "Third Option"
+        }, 
+        "model": "survey.option", 
+        "pk": 70
+    }, 
+    {
+        "fields": {
+            "label": "income-1-below-30000", 
+            "text": "Below $30,000"
+        }, 
+        "model": "survey.option", 
+        "pk": 76
+    }, 
+    {
+        "fields": {
+            "label": "income-2-30000-54999", 
+            "text": "$30,000 to $54,999"
+        }, 
+        "model": "survey.option", 
+        "pk": 77
+    }, 
+    {
+        "fields": {
+            "label": "income-3-55000-94999", 
+            "text": "$55,000 to $94,999"
+        }, 
+        "model": "survey.option", 
+        "pk": 78
+    }, 
+    {
+        "fields": {
+            "label": "income-4-95000-and-over", 
+            "text": "$95,000 and over"
+        }, 
+        "model": "survey.option", 
+        "pk": 79
+    }, 
+    {
+        "fields": {
+            "label": "income-5-dont-know", 
+            "text": "Don't know"
+        }, 
+        "model": "survey.option", 
+        "pk": 80
+    }, 
+    {
+        "fields": {
+            "label": "0-60-miles", 
+            "text": "0-60 miles"
+        }, 
+        "model": "survey.option", 
+        "pk": 81
+    }, 
+    {
+        "fields": {
+            "label": "61-120-miles", 
+            "text": "61-120 miles"
+        }, 
+        "model": "survey.option", 
+        "pk": 82
+    }, 
+    {
+        "fields": {
+            "label": "121-180-miles", 
+            "text": "121-180 miles"
+        }, 
+        "model": "survey.option", 
+        "pk": 83
+    }, 
+    {
+        "fields": {
+            "label": "180-miles", 
+            "text": "180+ miles"
+        }, 
+        "model": "survey.option", 
+        "pk": 84
+    }, 
+    {
+        "fields": {
+            "label": "i-do-not-live-coast", 
+            "text": " I do not live on the coast"
+        }, 
+        "model": "survey.option", 
+        "pk": 85
+    }, 
+    {
+        "fields": {
+            "label": "not-all", 
+            "text": "Not at all"
+        }, 
+        "model": "survey.option", 
+        "pk": 86
+    }, 
+    {
+        "fields": {
+            "label": "little", 
+            "text": "A little"
+        }, 
+        "model": "survey.option", 
+        "pk": 87
+    }, 
+    {
+        "fields": {
+            "label": "not-sure", 
+            "text": "Not sure"
+        }, 
+        "model": "survey.option", 
+        "pk": 88
+    }, 
+    {
+        "fields": {
+            "label": "lot", 
+            "text": "A lot"
+        }, 
+        "model": "survey.option", 
+        "pk": 89
+    }, 
+    {
+        "fields": {
+            "label": "main-reason-i-live-coast", 
+            "text": "Main reason I live on the coast"
+        }, 
+        "model": "survey.option", 
+        "pk": 90
+    }, 
+    {
+        "fields": {
+            "label": "graduate-or-professional-degree", 
+            "text": "Graduate or professional degree"
+        }, 
+        "model": "survey.option", 
+        "pk": 91
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": null, 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Name", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": null, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": null, 
+            "options_json": null, 
+            "order": 0, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "name", 
+            "term_condition": null, 
+            "title": "What is your name?", 
+            "type": "text", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 1
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": null, 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Age", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": null, 
+            "options_json": null, 
+            "order": 0, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "age", 
+            "term_condition": null, 
+            "title": "How old are you??", 
+            "type": "text", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 2
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": null, 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Enter your age", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": null, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": null, 
+            "options_json": null, 
+            "order": 0, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "marco-age", 
+            "term_condition": null, 
+            "title": "Please enter your age:", 
+            "type": "integer", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 3
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Pick a state", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": null, 
+            "modalQuestion": null, 
+            "options": [
+                4, 
+                5, 
+                6, 
+                7, 
+                8
+            ], 
+            "options_from_previous_answer": null, 
+            "options_json": "", 
+            "order": 0, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "state", 
+            "term_condition": null, 
+            "title": "What state do you live in?", 
+            "type": "auto-single-select", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 4
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": null, 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Pick a county", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": null, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": null, 
+            "options_json": null, 
+            "order": 0, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "county", 
+            "term_condition": null, 
+            "title": "What county do you live in?", 
+            "type": "auto-single-select", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 5
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Activity Locations", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": null, 
+            "modalQuestion": 8, 
+            "options": [], 
+            "options_from_previous_answer": "", 
+            "options_json": "/static/survey/surveys/activities.json", 
+            "order": 2, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "activity-locations", 
+            "term_condition": null, 
+            "title": "Move and zoom the map to precisely focus the crosshair at each of your activity locations.", 
+            "type": "map-multipoint", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 6
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": "true", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Activities Info Page", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": null, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": null, 
+            "options_json": "", 
+            "order": 0, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "info-activities", 
+            "term_condition": null, 
+            "title": "Activities", 
+            "type": "info", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 7
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Location Activities", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": null, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": null, 
+            "options_json": "/static/survey/surveys/activities.json", 
+            "order": 0, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "location-activities", 
+            "term_condition": null, 
+            "title": "Which activities did you conduct at this location?", 
+            "type": "multi-select", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 8
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "age", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": null, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 0, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "age", 
+            "term_condition": "<18", 
+            "title": "Please enter your age", 
+            "type": "integer", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 9
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "State or Province", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": null, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "", 
+            "options_json": "/static/survey/surveys/states-for-wa-opt-in.json", 
+            "order": 1, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "state-or-province", 
+            "term_condition": null, 
+            "title": "What state/province do you live in?", 
+            "type": "auto-single-select", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 10
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": true, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "County / Municipality", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": null, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "state-or-province", 
+            "options_json": "", 
+            "order": 2, 
+            "randomize_groups": false, 
+            "report_type": "distribution", 
+            "required": true, 
+            "slug": "county", 
+            "term_condition": "", 
+            "title": "You indicated you live in {{ getAnswer('state-or-province').text }}. What county/municipality do you live in?", 
+            "type": "auto-single-select", 
+            "visualize": true, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 11
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": "recreate-info", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "recreate-info", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": null, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 3, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "recreate-info", 
+            "term_condition": null, 
+            "title": " ", 
+            "type": "info", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 12
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": "activities", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "activities", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": null, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "", 
+            "options_json": "/static/survey/surveys/activities_wa.json", 
+            "order": 4, 
+            "randomize_groups": true, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "activities", 
+            "term_condition": null, 
+            "title": "Which of the following recreation activities have you participated in during the last 12 months in the  Pacific coast of Washington?  ", 
+            "type": "multi-select", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 13
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": "number-trips", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Number of Trips", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": null, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 5, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "number-of-trips", 
+            "term_condition": null, 
+            "title": "Please estimate how many trips you have made to the Pacific coast of Washington in the last 12 months primarily for recreation purposes (e.g., beach going, wildlife viewing, surfing, kayaking, etc.). A trip is defined as an intentional trip outside of daily routine. ", 
+            "type": "integer", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 14
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": "location-activities", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Location of Activities", 
+            "lat": "47.2500000", 
+            "lng": "-123.5000000", 
+            "min_zoom": 11, 
+            "modalQuestion": 16, 
+            "options": [], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 8, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "activity-locations", 
+            "term_condition": null, 
+            "title": "Navigate the map or use the search function to zoom to the areas which you conducted ocean and coastal recreation activities in last 12 months.", 
+            "type": "map-multipoint", 
+            "visualize": false, 
+            "zoom": 7
+        }, 
+        "model": "survey.question", 
+        "pk": 15
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": 13, 
+            "info": "location-activities", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Location of Activities", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": null, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "", 
+            "options_json": "/static/survey/surveys/activities_wa.json", 
+            "order": 0, 
+            "randomize_groups": true, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "activity-locations", 
+            "term_condition": null, 
+            "title": "Which of the following recreational activities did you participate in at this location?", 
+            "type": "multi-select", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 16
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": "primary-activity", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Primary Activity", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": null, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "activities", 
+            "options_json": "", 
+            "order": 0, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "primary-activity", 
+            "term_condition": null, 
+            "title": "Of the coastal and ocean recreation activities you just selected, what was your <strong>primary</strong> recreational activity during your last trip to Pacific coast of Washington? The primary activity is typically the main activity that brought you to the coast on your trip.  ", 
+            "type": "single-select", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 17
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": "last-info", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Last Trip", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": null, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 9, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "last-trip", 
+            "term_condition": null, 
+            "title": "Last Trip", 
+            "type": "info", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 18
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": "last-trip-activities", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Last Trip Activities", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": null, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "", 
+            "options_json": "/static/survey/surveys/activities_wa.json", 
+            "order": 10, 
+            "randomize_groups": true, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "last-trip-activities", 
+            "term_condition": null, 
+            "title": "Which of the following recreation activities did you participated in during your last trip  to the Pacific coast of Washington that was primary for recreation purposes?", 
+            "type": "multi-select", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 19
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": "primary-activity-last-trip", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Primary Activity of Last trip", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": null, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "last-trip-activities", 
+            "options_json": "/static/survey/surveys/activities_wa.json", 
+            "order": 11, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "last-trip-primary", 
+            "term_condition": null, 
+            "title": "Of the coastal and ocean recreation activities you just selected, what was your primary recreational activity during your last trip to Pacific coast of Washington? The primary activity is typically the main activity that brought you to the coast on your trip.  ", 
+            "type": "single-select", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 20
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": "number-nights", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Number of Nights", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": null, 
+            "modalQuestion": null, 
+            "options": [
+                13, 
+                14, 
+                15, 
+                16, 
+                17, 
+                18
+            ], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 12, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "number-of-nights", 
+            "term_condition": null, 
+            "title": "How many nights did you spend at the coast during your last trip to Pacific coast of Washington?", 
+            "type": "single-select", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 21
+    }, 
+    {
+        "fields": {
+            "allow_other": true, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Spent money on items", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": null, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "", 
+            "options_json": "/static/survey/surveys/expenditure_items.json", 
+            "order": 13, 
+            "randomize_groups": false, 
+            "report_type": "distribution", 
+            "required": true, 
+            "slug": "items-spent", 
+            "term_condition": "", 
+            "title": "During your last trip to the Pacific coast of Washington, please indicate if your party spent money on the following items.", 
+            "type": "multi-select", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 22
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Itemized Expenditures", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": null, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "items-spent", 
+            "options_json": "", 
+            "order": 14, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "itemized-expenditures", 
+            "term_condition": null, 
+            "title": "During your last trip to the Pacific coast of Washington, please estimate how much your party spent on the following items and the number of people it covered.", 
+            "type": "grid", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 23
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": "demo-info", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Demographic Info", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": null, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 15, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "demo-info", 
+            "term_condition": null, 
+            "title": "Demographic Info", 
+            "type": "info", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 24
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "household-income", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": null, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "", 
+            "options_json": "/static/survey/surveys/income.json", 
+            "order": 16, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "household-income", 
+            "term_condition": null, 
+            "title": "What was your total HOUSEHOLD income in the past 12 months?", 
+            "type": "multi-select", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 25
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "gender", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": null, 
+            "modalQuestion": null, 
+            "options": [
+                36, 
+                37
+            ], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 17, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "gender", 
+            "term_condition": null, 
+            "title": "What is your gender?", 
+            "type": "single-select", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 26
+    }, 
+    {
+        "fields": {
+            "allow_other": true, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Racial Background", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": null, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "", 
+            "options_json": "/static/survey/surveys/racial-background.json", 
+            "order": 18, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "racial-background", 
+            "term_condition": null, 
+            "title": "Please indicate what you consider your racial background to be.  We greatly appreciate your effort to describe your background using the standard categories provided.  These race categories may not fully describe you, but they do match those used by the Census Bureau.  It helps us compare our survey respondents to the U.S. population. \r\n\r\nPlease check one or more categories below to indicate what race(s) you consider yourself to be. \r\n\r\n", 
+            "type": "single-select", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 27
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Highest Level of Education", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": null, 
+            "modalQuestion": null, 
+            "options": [
+                44, 
+                45, 
+                46, 
+                47, 
+                48
+            ], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 19, 
+            "randomize_groups": false, 
+            "report_type": "distribution", 
+            "required": true, 
+            "slug": "education", 
+            "term_condition": "", 
+            "title": "What is the highest level of school you have completed?", 
+            "type": "single-select", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 28
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Mapping Feedback", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": null, 
+            "modalQuestion": null, 
+            "options": [
+                49, 
+                50, 
+                51, 
+                52, 
+                53
+            ], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 21, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "mapping-feedback", 
+            "term_condition": null, 
+            "title": "To help us improve future surveys, was the mapping portion of this survey easy to understand and use?", 
+            "type": "single-select", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 29
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Feedback", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": null, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 20, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": false, 
+            "slug": "feedback", 
+            "term_condition": "", 
+            "title": "To help us improve future surveys, please provide any comments or feedback you may have that will help us improve this survey.  Was there a specific section of the survey that you had trouble understanding? What would make it easier?  ", 
+            "type": "textarea", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 30
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Been to the Area?", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": null, 
+            "modalQuestion": null, 
+            "options": [
+                54, 
+                55
+            ], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 0, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "study-area", 
+            "term_condition": null, 
+            "title": "We are interested in knowing about your coastal and ocean recreation activity on the Pacific coast of Washington.  Have you been to the Pacific coast of Washington (dark blue area) at least once in the last 12 months?", 
+            "type": "single-select", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 31
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Number of Trips", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": null, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 1, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "number-of-trips", 
+            "term_condition": null, 
+            "title": "Please estimate how many trips you have made to the Pacific coast of Washington in the last 12 months for primarily recreation purposes (e.g., beach going, bird watching, fishing, surfing, boating, etc.). A trip is defined as an intentional trip to the Pacific coast of Washington separate from your daily routine.", 
+            "type": "integer", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 32
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Types of Activities", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": null, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "", 
+            "options_json": "/static/survey/surveys/activities_wa_panel.json", 
+            "order": 2, 
+            "randomize_groups": true, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "activities", 
+            "term_condition": null, 
+            "title": "We are interested in knowing what types of coastal and ocean recreational activities you do when you go to the Pacific coast of Washington. Which of the following activities have you participated in during the last 12 months on the Pacific coast of Washington?  ", 
+            "type": "multi-select", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 33
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Number of Visits to Each County", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": null, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 3, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "county-visits", 
+            "term_condition": null, 
+            "title": "Below is a map of the coastal counties within the Pacific coast of Washington. You previously responded that you visited this area {{ getAnswer('number-of-trips') }} time(s) to recreate in the last 12 months. Please indicate how many times you visited each of these coastal counties to recreate in the last 12 months on the map below. If you did not visit a particular coastal county, please choose \"zero\". Your best estimate of the county is fine.", 
+            "type": "integer", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 40
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "How long have you been visiting the coast?", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": null, 
+            "modalQuestion": null, 
+            "options": [
+                56, 
+                57, 
+                58, 
+                59, 
+                60
+            ], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 4, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "how-long", 
+            "term_condition": null, 
+            "title": " For how long have you been visiting the Pacific coast of Washington and enjoying one or more of the activities you identified?", 
+            "type": "single-select", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 41
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": "last-trip", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Last Trip", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": null, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 5, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "last-trip", 
+            "term_condition": null, 
+            "title": "Last Trip", 
+            "type": "info", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 42
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Date of last visit", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": null, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 6, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "date-last-visit", 
+            "term_condition": null, 
+            "title": "The following questions are about your last trip for primarily recreation purposes (e.g., beach going, bird watching, surfing, boating, etc) to the coastal and ocean areas of the Pacific coast of Washington. Again, a visit is defined as an intentional trip --separate from your daily routine.", 
+            "type": "text", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 44
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Date of last visit", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": null, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 7, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "date-last-visit", 
+            "term_condition": null, 
+            "title": "When was your last coastal recreation trip to the Pacific coast of Washington --defined as the area shown in this map. Your best estimate is fine. [SHOW STUDY REGION MAP]\r\n[INSERT CALENDAR FOR RESPONDENT TO INDICATE DATE]\r\n", 
+            "type": "text", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 45
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Did you start your last trip from home", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": null, 
+            "modalQuestion": null, 
+            "options": [
+                54, 
+                55
+            ], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 8, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "last-trip-origin", 
+            "term_condition": null, 
+            "title": "On your last coastal recreation trip, did you start your trip from your home?  ", 
+            "type": "single-select", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 46
+    }, 
+    {
+        "fields": {
+            "allow_other": true, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Primary Mode of Transportation", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": null, 
+            "modalQuestion": null, 
+            "options": [
+                61, 
+                62, 
+                63, 
+                64, 
+                65, 
+                66, 
+                67
+            ], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 9, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "primary-mode-transportation", 
+            "term_condition": null, 
+            "title": "What was the primary mode(s) of transportation you used to get to the Pacific coast of Washington on your last coastal recreation trip?", 
+            "type": "multi-select", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 47
+    }, 
+    {
+        "fields": {
+            "allow_other": true, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Primary Mode of Transportation Around Coast", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": null, 
+            "modalQuestion": null, 
+            "options": [
+                61, 
+                62, 
+                64, 
+                65, 
+                66, 
+                67
+            ], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 10, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "primary-mode-transportation-on-coast", 
+            "term_condition": null, 
+            "title": "What was the primary mode(s) of transportation you used to travel around the Pacific coast of Washington on your last coastal recreation trip?", 
+            "type": "single-select", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 48
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "How many people went on your last trip", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": null, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 11, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "how-many-people", 
+            "term_condition": null, 
+            "title": "Approximately how many people (including yourself) went on your last coastal recreation trip to the Pacific coast of Washington?  ", 
+            "type": "integer", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 49
+    }, 
+    {
+        "fields": {
+            "allow_other": true, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "What activities did you participate in on your last trip", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": null, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "", 
+            "options_json": "/static/survey/surveys/activities_wa_panel.json", 
+            "order": 12, 
+            "randomize_groups": true, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "activities-last-trip", 
+            "term_condition": null, 
+            "title": "What coastal and ocean recreation activities did you participate in during your last coastal recreation trip to the Pacific coast of Washington?", 
+            "type": "multi-select", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 50
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Primary Activity of Last trip", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": null, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "activities-last-trip", 
+            "options_json": "", 
+            "order": 14, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "last-trip-primary", 
+            "term_condition": null, 
+            "title": "Of the following coastal and ocean recreation activities you selected what was your primary activity during your last coastal recreation trip to the Pacific coast of Washington? (please select only one)", 
+            "type": "single-select", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 51
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Number of Nights", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": null, 
+            "modalQuestion": null, 
+            "options": [
+                13, 
+                14, 
+                15, 
+                16, 
+                17, 
+                18
+            ], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 14, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "number-of-nights", 
+            "term_condition": null, 
+            "title": "How many nights did you spend at the coast during your last coastal recreation trip to the Pacific coast of Washington?", 
+            "type": "single-select", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 52
+    }, 
+    {
+        "fields": {
+            "allow_other": true, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Last Trip Amount Spent", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": null, 
+            "modalQuestion": null, 
+            "options": [
+                19, 
+                20, 
+                21, 
+                22, 
+                23, 
+                24, 
+                25, 
+                26, 
+                27, 
+                28, 
+                29, 
+                30, 
+                31, 
+                32
+            ], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 15, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "last-trip-amount-spent", 
+            "term_condition": null, 
+            "title": "During your last coastal recreation trip to the Pacific coast of Washington, please indicate if your party spent money on the following items.", 
+            "type": "multi-select", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 53
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "How much was spent", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": null, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "last-trip-amount-spent", 
+            "options_json": "", 
+            "order": 16, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "how-much", 
+            "term_condition": null, 
+            "title": "During your last coastal recreation trip to the Pacific coast of Washington, please estimate how much your party spent on the following items and the number of people it covered.", 
+            "type": "grid", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 54
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": 50, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Activity at Location", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": null, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "", 
+            "options_json": "/static/survey/surveys/activities_wa_panel.json", 
+            "order": 0, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "activity-locations-wa-panel", 
+            "term_condition": null, 
+            "title": "Which activities did you participate in at this location?", 
+            "type": "multi-select", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 55
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Activity Locations", 
+            "lat": "47.2500000", 
+            "lng": "-123.5000000", 
+            "min_zoom": 11, 
+            "modalQuestion": 55, 
+            "options": [], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 17, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "activity-locations", 
+            "term_condition": null, 
+            "title": "Navigate the map or use the search function to zoom to the areas which you conducted ocean and coastal recreation activities in last 12 months.", 
+            "type": "map-multipoint", 
+            "visualize": false, 
+            "zoom": 7
+        }, 
+        "model": "survey.question", 
+        "pk": 56
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Your Name?", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": null, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 1, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "name", 
+            "term_condition": null, 
+            "title": "What is your name?", 
+            "type": "text", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 57
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Some Activities?", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": null, 
+            "modalQuestion": null, 
+            "options": [
+                68, 
+                69, 
+                70
+            ], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 4, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "some-activities", 
+            "term_condition": null, 
+            "title": "What are some activities?", 
+            "type": "multi-select", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 58
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "pennies", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": null, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "activity-locations", 
+            "options_json": "", 
+            "order": 6, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "pennies", 
+            "term_condition": null, 
+            "title": "Allocate 100 pennies across your locations to indicate how important each area is to your primary activity.", 
+            "type": "info", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 59
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Allocate Pennies", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": null, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "activity-locations,last-trip-primary", 
+            "options_json": "", 
+            "order": 19, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "pennies", 
+            "term_condition": null, 
+            "title": "Allocate 100 pennies across your locations to indicate how important each area is to your primary activity.", 
+            "type": "pennies", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 60
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Grid Question", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": null, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "some-activities", 
+            "options_json": "", 
+            "order": 5, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "grid-question", 
+            "term_condition": null, 
+            "title": "This is our test grid question", 
+            "type": "grid", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 61
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Your Age", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": null, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 0, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "age", 
+            "term_condition": null, 
+            "title": "Please enter your age:", 
+            "type": "integer", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 62
+    }, 
+    {
+        "fields": {
+            "allow_other": true, 
+            "filterBy": true, 
+            "filter_questions": [
+                64
+            ], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "State?", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": null, 
+            "modalQuestion": null, 
+            "options": [
+                4, 
+                5, 
+                6, 
+                7, 
+                8, 
+                9
+            ], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 1, 
+            "randomize_groups": false, 
+            "report_type": "distribution", 
+            "required": true, 
+            "slug": "state", 
+            "term_condition": "", 
+            "title": "What state do you live in?", 
+            "type": "single-select", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 63
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": true, 
+            "filter_questions": [
+                63, 
+                66
+            ], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "County?", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": null, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "state", 
+            "options_json": "", 
+            "order": 2, 
+            "randomize_groups": false, 
+            "report_type": "distribution", 
+            "required": true, 
+            "slug": "county", 
+            "term_condition": "", 
+            "title": "You indicated you live in {{ getAnswer('state').text }}.  What county do you live in?", 
+            "type": "single-select", 
+            "visualize": true, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 64
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": "info-activities", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Study Area", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 3, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "study-area", 
+            "term_condition": null, 
+            "title": "Your Coastal and Ocean Recreation Activities in the Last 12 Months", 
+            "type": "info", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 65
+    }, 
+    {
+        "fields": {
+            "allow_other": true, 
+            "filterBy": true, 
+            "filter_questions": [
+                64
+            ], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "activities", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "", 
+            "options_json": "/static/survey/surveys/activities_marco.json", 
+            "order": 4, 
+            "randomize_groups": true, 
+            "report_type": "distribution", 
+            "required": true, 
+            "slug": "activities", 
+            "term_condition": "", 
+            "title": "Which of the following recreation activities have you participated in <strong>during the last 12 months</strong> in Mid-Atlantic coastal and ocean areas? Select all that apply.", 
+            "type": "multi-select", 
+            "visualize": true, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 66
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "How Many Trips?", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 7, 
+            "randomize_groups": false, 
+            "report_type": "distribution", 
+            "required": true, 
+            "slug": "how-many-days", 
+            "term_condition": "", 
+            "title": "Please estimate how many trips you have made to Mid-Atlantic coastal and ocean areas in the last 12 months <strong>that were primarily for coastal or ocean recreation</strong> (e.g., beach going, wildlife viewing, surfing, kayaking, etc.). A trip is defined as an <strong>intentional trip outside of daily routine</strong>. Your best estimate is fine.", 
+            "type": "integer", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 67
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": 66, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Activity at Location?", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": null, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "", 
+            "options_json": "/static/survey/surveys/activities_marco.json", 
+            "order": 0, 
+            "randomize_groups": true, 
+            "report_type": "distribution", 
+            "required": true, 
+            "slug": "activity-locations", 
+            "term_condition": "", 
+            "title": "What activities did you engage in at this location?", 
+            "type": "multi-select", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 68
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Activity Locations", 
+            "lat": "38.5000000", 
+            "lng": "-72.0000000", 
+            "min_zoom": 14, 
+            "modalQuestion": 68, 
+            "options": [], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 9, 
+            "randomize_groups": false, 
+            "report_type": "heatmap", 
+            "required": true, 
+            "slug": "activity-locations", 
+            "term_condition": "", 
+            "title": "Navigate the map or use the search function to zoom to the areas which you conducted ocean and coastal recreation activities in last 12 months.", 
+            "type": "map-multipoint", 
+            "visualize": true, 
+            "zoom": 6
+        }, 
+        "model": "survey.question", 
+        "pk": 69
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": "activity-locations-intro", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Activity Locations Intro", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": null, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "activities-last-trip", 
+            "options_json": "", 
+            "order": 15, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "activity-locations-intro", 
+            "term_condition": null, 
+            "title": "Activity Locations", 
+            "type": "info", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 70
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": "activity-locations-intro", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Activity Locations Intro", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": null, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "activities", 
+            "options_json": "", 
+            "order": 7, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "activity-locations-intro", 
+            "term_condition": null, 
+            "title": "Activity Locations", 
+            "type": "info", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 71
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": "activity-locations-intro", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Activity Locations Intro", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": null, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "activities", 
+            "options_json": "", 
+            "order": 8, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "mapping-intro", 
+            "term_condition": "", 
+            "title": "Activity Locations", 
+            "type": "info", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 72
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": "pennies-intro", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Pennies Intro", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "activity-locations,last-trip-primary", 
+            "options_json": "", 
+            "order": 18, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "pennies-intro", 
+            "term_condition": null, 
+            "title": "Location Priorities", 
+            "type": "info", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 73
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": "last-time", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Info Page", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 10, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "last-time-info", 
+            "term_condition": "", 
+            "title": " ", 
+            "type": "info", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 74
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Primary Activity?", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "activities-last-trip", 
+            "options_json": "", 
+            "order": 12, 
+            "randomize_groups": false, 
+            "report_type": "distribution", 
+            "required": true, 
+            "slug": "primary-activity", 
+            "term_condition": "", 
+            "title": "Of the recreation activities you just selected, what was your <strong>primary</strong> recreation activity during your <strong><underline>last trip</underline></strong> to Mid-Atlantic coastal and ocean areas?", 
+            "type": "single-select", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 75
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "How many nights?", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [
+                13, 
+                14, 
+                15, 
+                16, 
+                17, 
+                18
+            ], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 13, 
+            "randomize_groups": false, 
+            "report_type": "distribution", 
+            "required": true, 
+            "slug": "nights-spent", 
+            "term_condition": "", 
+            "title": "How many nights did you spend at the coast during your <strong><underline>last trip</underline></strong> to Mid-Atlantic coastal and ocean areas?", 
+            "type": "integer", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 76
+    }, 
+    {
+        "fields": {
+            "allow_other": true, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Did you spend money on the following items?", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "", 
+            "options_json": "/static/survey/surveys/expenditure_items.json", 
+            "order": 14, 
+            "randomize_groups": false, 
+            "report_type": "distribution", 
+            "required": false, 
+            "slug": "expenses", 
+            "term_condition": "", 
+            "title": "During your <strong><underline>last trip</underline></strong> to Mid-Atlantic coastal and ocean areas, please indicate if your party spent money on the following items.", 
+            "type": "multi-select", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 77
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "itemized-expenditure", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "expenses", 
+            "options_json": "", 
+            "order": 15, 
+            "randomize_groups": false, 
+            "report_type": null, 
+            "required": true, 
+            "slug": "itemized-expenditure", 
+            "term_condition": "", 
+            "title": "During your <strong></underline>last trip</underline></strong> to Mid-Atlantic coastal and ocean areas, please estimate how much <strong>your party</strong> spent on the following items and the number of people it covered.", 
+            "type": "grid", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 78
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Miles from the coast", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "", 
+            "options_json": "/static/survey/surveys/miles-from-coast.json", 
+            "order": 26, 
+            "randomize_groups": false, 
+            "report_type": "distribution", 
+            "required": false, 
+            "slug": "miles-from-coast", 
+            "term_condition": "", 
+            "title": "Please estimate approximately how many miles (driving miles one way) do you live from the coast?", 
+            "type": "single-select", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 79
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "factors", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "", 
+            "options_json": "/static/survey/surveys/live-at-coast-because-recreate.json", 
+            "order": 27, 
+            "randomize_groups": false, 
+            "report_type": "distribution", 
+            "required": false, 
+            "slug": "factors", 
+            "term_condition": "", 
+            "title": "If you live or own a home on the coast, please tell us how much nearby coastal and ocean recreation opportunities played into your decision to live or own a home on the coast:", 
+            "type": "single-select", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 80
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": "demo-info", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "info page", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 25, 
+            "randomize_groups": false, 
+            "report_type": "distribution", 
+            "required": true, 
+            "slug": "demo-info", 
+            "term_condition": "", 
+            "title": "We have just a few more questions for you.  Please keep in mind that your answers are confidential and your personal information will also be kept private.", 
+            "type": "info", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 81
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Household Income", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "", 
+            "options_json": "/static/survey/surveys/income.json", 
+            "order": 34, 
+            "randomize_groups": false, 
+            "report_type": "distribution", 
+            "required": false, 
+            "slug": "household-income", 
+            "term_condition": "", 
+            "title": "What was your total HOUSEHOLD income in the past 12 months?", 
+            "type": "single-select", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 82
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Gender?", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [
+                36, 
+                37
+            ], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 28, 
+            "randomize_groups": false, 
+            "report_type": "distribution", 
+            "required": false, 
+            "slug": "gender", 
+            "term_condition": "", 
+            "title": "Are you..?", 
+            "type": "single-select", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 83
+    }, 
+    {
+        "fields": {
+            "allow_other": true, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "racial-background", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "", 
+            "options_json": "/static/survey/surveys/racial-background.json", 
+            "order": 32, 
+            "randomize_groups": false, 
+            "report_type": "distribution", 
+            "required": false, 
+            "slug": "racial-background", 
+            "term_condition": "", 
+            "title": "Please indicate what you consider your racial background to be.  We greatly appreciate your effort to describe your background using the standard categories provided.  These race categories may not fully describe you, but they do match those used by the Census Bureau.  It helps us compare our survey respondents to the U.S. population. \r\n\r\nPlease check one or more categories below to indicate what race(s) you consider yourself to be. ", 
+            "type": "multi-select", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 84
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "School", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "", 
+            "options_json": "/static/survey/surveys/education-level.json", 
+            "order": 30, 
+            "randomize_groups": false, 
+            "report_type": "distribution", 
+            "required": false, 
+            "slug": "school", 
+            "term_condition": "", 
+            "title": "What is the highest level of school you have completed?", 
+            "type": "single-select", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 85
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "mapping-feedback", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [
+                49, 
+                50, 
+                51, 
+                52, 
+                53
+            ], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 36, 
+            "randomize_groups": false, 
+            "report_type": "distribution", 
+            "required": false, 
+            "slug": "mapping-feedback", 
+            "term_condition": "", 
+            "title": "To help us improve future surveys, would you agree that the mapping portion of this survey was easy to understand and use?", 
+            "type": "single-select", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 86
+    }, 
+    {
+        "fields": {
+            "allow_other": false, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "feedback", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "", 
+            "options_json": "", 
+            "order": 38, 
+            "randomize_groups": false, 
+            "report_type": "distribution", 
+            "required": false, 
+            "slug": "feedback", 
+            "term_condition": "", 
+            "title": "To help us improve future surveys, please provide any comments or feedback you may have that will help us improve this survey.  Was there a specific section of the survey that you had trouble understanding? What would make it easier?  ", 
+            "type": "textarea", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 87
+    }, 
+    {
+        "fields": {
+            "allow_other": true, 
+            "filterBy": false, 
+            "filter_questions": [], 
+            "hoist_answers": null, 
+            "info": "", 
+            "integer_max": 365, 
+            "integer_min": 0, 
+            "label": "Activities Last Trip", 
+            "lat": null, 
+            "lng": null, 
+            "min_zoom": 10, 
+            "modalQuestion": null, 
+            "options": [], 
+            "options_from_previous_answer": "", 
+            "options_json": "/static/survey/surveys/activities_marco.json", 
+            "order": 11, 
+            "randomize_groups": false, 
+            "report_type": "distribution", 
+            "required": true, 
+            "slug": "activities-last-trip", 
+            "term_condition": "", 
+            "title": "During your <strong><underline>last trip</underline></strong> to Mid-Atlantic coastal and ocean areas, what recreation activities did you participate in? Select all that apply.", 
+            "type": "multi-select", 
+            "visualize": false, 
+            "zoom": null
+        }, 
+        "model": "survey.question", 
+        "pk": 88
+    }, 
+    {
+        "fields": {
+            "answer": "Photography", 
+            "label": "photography", 
+            "location": 46
+        }, 
+        "model": "survey.locationanswer", 
+        "pk": 75
+    }, 
+    {
+        "fields": {
+            "answer": "Swimming or body surfing", 
+            "label": "swimming", 
+            "location": 47
+        }, 
+        "model": "survey.locationanswer", 
+        "pk": 76
+    }, 
+    {
+        "fields": {
+            "answer": "Sitting in your car watching the scene", 
+            "label": "sitting-car", 
+            "location": 47
+        }, 
+        "model": "survey.locationanswer", 
+        "pk": 77
+    }, 
+    {
+        "fields": {
+            "answer": "Scenic enjoyment/sightseeing", 
+            "label": "sightseeing", 
+            "location": 47
+        }, 
+        "model": "survey.locationanswer", 
+        "pk": 78
+    }, 
+    {
+        "fields": {
+            "answer": "Photography", 
+            "label": "photography", 
+            "location": 47
+        }, 
+        "model": "survey.locationanswer", 
+        "pk": 79
+    }, 
+    {
+        "fields": {
+            "answer": "Beach going (sitting, walking, running, dog walking, kite flying, etc.)", 
+            "label": "beach-going", 
+            "location": 47
+        }, 
+        "model": "survey.locationanswer", 
+        "pk": 80
+    }, 
+    {
+        "fields": {
+            "answer": "Hang gliding/parasailing", 
+            "label": "hang-gliding", 
+            "location": 48
+        }, 
+        "model": "survey.locationanswer", 
+        "pk": 81
+    }, 
+    {
+        "fields": {
+            "answer": "Collection of non-living resources/beachcombing (agates, fossils, driftwood)", 
+            "label": "beachcombing", 
+            "location": 49
+        }, 
+        "model": "survey.locationanswer", 
+        "pk": 82
+    }, 
+    {
+        "fields": {
+            "answer": "Swimming or body surfing", 
+            "label": "swimming", 
+            "location": 50
+        }, 
+        "model": "survey.locationanswer", 
+        "pk": 83
+    }, 
+    {
+        "fields": {
+            "answer": "Scenic enjoyment/sightseeing", 
+            "label": "sightseeing", 
+            "location": 50
+        }, 
+        "model": "survey.locationanswer", 
+        "pk": 84
+    }, 
+    {
+        "fields": {
+            "answer": "Photography", 
+            "label": "photography", 
+            "location": 50
+        }, 
+        "model": "survey.locationanswer", 
+        "pk": 85
+    }, 
+    {
+        "fields": {
+            "answer": "Collection of non-living resources/beachcombing (beach glass, shells, fossils, driftwood)", 
+            "label": "beachcombing", 
+            "location": 51
+        }, 
+        "model": "survey.locationanswer", 
+        "pk": 86
+    }, 
+    {
+        "fields": {
+            "answer": "Surfing (from board or kayak or stand up board)", 
+            "label": "surfing", 
+            "location": 52
+        }, 
+        "model": "survey.locationanswer", 
+        "pk": 87
+    }, 
+    {
+        "fields": {
+            "answer": "Swimming or body surfing", 
+            "label": "swimming", 
+            "location": 53
+        }, 
+        "model": "survey.locationanswer", 
+        "pk": 88
+    }, 
+    {
+        "fields": {
+            "answer": "Scenic enjoyment/sightseeing", 
+            "label": "sightseeing", 
+            "location": 53
+        }, 
+        "model": "survey.locationanswer", 
+        "pk": 89
+    }, 
+    {
+        "fields": {
+            "answer": "Photography", 
+            "label": "photography", 
+            "location": 53
+        }, 
+        "model": "survey.locationanswer", 
+        "pk": 90
+    }, 
+    {
+        "fields": {
+            "answer": "Beach going (sitting, walking, running, dog walking, kite flying, etc.)", 
+            "label": "beach-going", 
+            "location": 53
+        }, 
+        "model": "survey.locationanswer", 
+        "pk": 91
+    }, 
+    {
+        "fields": {
+            "answer": "Collection of non-living resources/beachcombing (agates, fossils, driftwood)", 
+            "label": "beachcombing", 
+            "location": 54
+        }, 
+        "model": "survey.locationanswer", 
+        "pk": 92
+    }, 
+    {
+        "fields": {
+            "answer": "Watching birds, whales, seals and/or other marine life (from a charter boat)", 
+            "label": "wildlife-viewing-charter", 
+            "location": 55
+        }, 
+        "model": "survey.locationanswer", 
+        "pk": 93
+    }, 
+    {
+        "fields": {
+            "answer": "Sitting in your car watching the scene", 
+            "label": "sitting-car", 
+            "location": 56
+        }, 
+        "model": "survey.locationanswer", 
+        "pk": 94
+    }, 
+    {
+        "fields": {
+            "answer": "Scenic enjoyment/sightseeing", 
+            "label": "sightseeing", 
+            "location": 57
+        }, 
+        "model": "survey.locationanswer", 
+        "pk": 95
+    }, 
+    {
+        "fields": {
+            "answer": "Skim boarding", 
+            "label": "skimboarding", 
+            "location": 57
+        }, 
+        "model": "survey.locationanswer", 
+        "pk": 96
+    }, 
+    {
+        "fields": {
+            "answer": "Scenic enjoyment/sightseeing", 
+            "label": "sightseeing", 
+            "location": 58
+        }, 
+        "model": "survey.locationanswer", 
+        "pk": 97
+    }, 
+    {
+        "fields": {
+            "lat": "39.4430868", 
+            "lng": "-74.3276596", 
+            "response": 32
+        }, 
+        "model": "survey.location", 
+        "pk": 46
+    }, 
+    {
+        "fields": {
+            "lat": "40.1003972", 
+            "lng": "-74.0332603", 
+            "response": 6
+        }, 
+        "model": "survey.location", 
+        "pk": 47
+    }, 
+    {
+        "fields": {
+            "lat": "41.7225150", 
+            "lng": "-69.9315834", 
+            "response": 59
+        }, 
+        "model": "survey.location", 
+        "pk": 48
+    }, 
+    {
+        "fields": {
+            "lat": "47.4009055", 
+            "lng": "-124.2613792", 
+            "response": 80
+        }, 
+        "model": "survey.location", 
+        "pk": 49
+    }, 
+    {
+        "fields": {
+            "lat": "39.6894220", 
+            "lng": "-74.1422653", 
+            "response": 113
+        }, 
+        "model": "survey.location", 
+        "pk": 50
+    }, 
+    {
+        "fields": {
+            "lat": "39.3682791", 
+            "lng": "-75.1904297", 
+            "response": 132
+        }, 
+        "model": "survey.location", 
+        "pk": 51
+    }, 
+    {
+        "fields": {
+            "lat": "39.3658240", 
+            "lng": "-75.1826191", 
+            "response": 132
+        }, 
+        "model": "survey.location", 
+        "pk": 52
+    }, 
+    {
+        "fields": {
+            "lat": "39.9436339", 
+            "lng": "-74.0687943", 
+            "response": 50
+        }, 
+        "model": "survey.location", 
+        "pk": 53
+    }, 
+    {
+        "fields": {
+            "lat": "47.1782789", 
+            "lng": "-124.1899681", 
+            "response": 97
+        }, 
+        "model": "survey.location", 
+        "pk": 54
+    }, 
+    {
+        "fields": {
+            "lat": "38.7645242", 
+            "lng": "-74.8932838", 
+            "response": 148
+        }, 
+        "model": "survey.location", 
+        "pk": 55
+    }, 
+    {
+        "fields": {
+            "lat": "37.7488480", 
+            "lng": "-75.5514336", 
+            "response": 148
+        }, 
+        "model": "survey.location", 
+        "pk": 56
+    }, 
+    {
+        "fields": {
+            "lat": "38.2292808", 
+            "lng": "-75.1435232", 
+            "response": 23
+        }, 
+        "model": "survey.location", 
+        "pk": 57
+    }, 
+    {
+        "fields": {
+            "lat": "38.0917757", 
+            "lng": "-75.2038193", 
+            "response": 23
+        }, 
+        "model": "survey.location", 
+        "pk": 58
+    }
+]

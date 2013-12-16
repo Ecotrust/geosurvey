@@ -1,0 +1,52 @@
+[
+    {
+        "text": "Less than $25,000",
+        "label": "below-25k",
+        "group": "1"
+    },
+    {
+        "text": "$25,000 to $49,999",
+        "label": "25k-49999",
+        "group": "1"
+    },
+    {
+        "text": "$50,000 to $74,999",
+        "label": "50k-74999",
+        "group": "1"
+    },
+    {
+        "text": "$75,000 to $99,999",
+        "label": "75k-99999",
+        "group": "1"
+    },
+    {
+        "text": "$100,000 to $124,999",
+        "label": "100K-124999",
+        "group": "1"
+    },
+    {
+        "text": "$125,000 to $149,999",
+        "label": "125K-149999",
+        "group": "1"
+    },    
+      {
+        "text": "$150,000 to $174,999",
+        "label": "150K-174999",
+        "group": "1"
+    },
+      {
+        "text": "$175,000 to $199,999",
+        "label": "175K-199999",
+        "group": "1"
+    },
+    {
+        "text": "$200,000 and over",
+        "label": "200k-and-over",
+        "group": "1"
+    },
+    {
+        "text": "Don't know",
+        "label": "dont-know",
+        "group": "1"
+    }
+]

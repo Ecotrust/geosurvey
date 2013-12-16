@@ -1,0 +1,16 @@
+<div class="respondant" ng-class="{mapRespondant: question.type == 'map-multipoint'}">
+    <div ng-hide="question.type == 'map-multipoint'" class="row-fluid row-progress-bar" style="height:12px !important;">
+        <div class="offset9 span3" style="height:12px !important; line-height: 5px;">
+            <div class="progress">
+              <div class="bar noTransition" style="width: {{ ((survey.questions.indexOf(question) + 1) / survey.questions.length) * 100 }}%;"></div>
+            </div>
+        </div>
+    </div>
+    <a class="admin-edit" href="/admin/survey/question/{{question.id}}/" ng-show="isAuthenticated">edit</a>
+    <h2 class="question-title" ng-bind-html-unsafe="question.displayTitle" ng-hide="question.type == 'info' || question.type == 'map-multipoint'" >
+        
+    </h2>
+
+    <div ng-include="'/static/survey/views/questionTypes.html'"></div>
+
+</div>

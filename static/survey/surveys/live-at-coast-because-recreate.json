@@ -1,0 +1,37 @@
+[
+    {
+        "text": "I do not live on the coast",
+        "label": "not-living-on-coast",
+        "group": "1"
+    },
+    {
+        "text": "Not at all",
+        "label": "not-at-all",
+        "group": "1"
+    },
+    {
+        "text": "A little",
+        "label": "a-little",
+        "group": "1"
+    },
+    {
+        "text": "Somewhat",
+        "label": "somewhat",
+        "group": "1"
+    },
+    {
+        "text": "A lot",
+        "label": "a-lot",
+        "group": "1"
+    },
+    {
+        "text": "Main reason I live on the coast",
+        "label": "main-reason",
+        "group": "1"
+    },
+    {
+        "text": "Not sure",
+        "label": "not-sure",
+        "group": "1"
+    }
+]

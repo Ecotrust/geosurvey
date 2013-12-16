@@ -1,0 +1,48 @@
+<div class="modal-header">
+    <h3>&nbsp;{{ currentPane.title }}</h3>
+</div>
+
+<div class="modal-body">
+
+    <div ng-show="panes.pane1.showing" class="pane">
+
+        <p class="help-lead">Follow these steps <u>for each location</u> where you participated in your activities:</p>
+
+        <h3>Step 1:&nbsp;&nbsp;Zoom the map to your activity location.</h3>
+
+        <p>Use the <strong>search feature located above the map</strong> to quickly zoom into an area. Search for landmarks such as beaches, towns or parks.</p>
+
+        <p>Alternatively, you can manually zoom and drag the map to find your activity location. Zoom in and out using the <i class="icon-plus"></i> and <i class="icon-minus"></i> buttons located at the top left of the map. Click and drag the map in any direction to adjust the position.</p>
+
+
+        <h3>Step 2:&nbsp;&nbsp;Position the cross-hair over your activity location.</h3>
+        
+        <p>Zoom and drag the map to position the cross-hair over your activity location. Zoom in and out using the <i class="icon-plus"></i> and <i class="icon-minus"></i> buttons located at the top left of the map. Click and drag the map in any direction to adjust the position.</p>
+
+        <!-- <p>You may need to use the <strong>nautical charts</strong> to accurately place your marker far offshore in ocean. Turn on the nautical charts using the <img height="20px" width="20px" src="/static/survey/components/leaflet/dist/images/layers.png"> layers conrol located at the top right of the map.</p>  -->
+
+
+        <h3>Step 3:&nbsp;&nbsp;Add the location.</h3>
+
+        <p>Click the <i class="icon-plus"></i>&nbsp;<strong>Add Location</strong> button located at the top right of the map. This will add a marker where the cross-hair is positioned.</p>
+
+        <p>If might be prompted to zoom in closer to ensure accurate placement. If so, continue zooming in until the red cross-hair turns green, then re-adjust the map to position the cross-hair over your activity location and click the <i class="icon-plus"></i>&nbsp;<strong>Add Location</strong> button again.</p>
+
+        <p>You will be asked to confirm whether the new marker is correctly positioned.</p>
+
+
+        <h3>Step 4:&nbsp;&nbsp;Select activities.</h3>
+
+        <p>After adding a location marker to the map, you will be asked to select all of the activities that you engaged in at the added location. Click on the activities relavent to this location and then click <strong>Save</strong>.</p>
+
+    </div>
+
+</div>
+
+<div class="modal-footer">
+    <button ng-hide="panes.pane1.showing" class="btn btn-large pull-left" ng-click="show('pane1')">
+        <i class="icon-chevron-left"></i>
+        Back
+    </button>
+    <button class="btn btn-large cancel" ng-click="close()">Close</button>
+</div>

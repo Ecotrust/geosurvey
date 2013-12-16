@@ -1,0 +1,556 @@
+.mapRespondant .admin-edit {
+    position: absolute;
+    top: auto;
+    left: auto;
+    bottom: 22px;
+    right: 10px;
+    z-index: 2000;
+    background-color: rgba(255,255,255,0.6);
+    color: black;
+    padding: 5px;
+    }
+
+.not-for-phone { display: inherit !important; }
+.for-phone { display: none !important; }
+@media (max-width: 480px) {
+    .not-for-phone { display: none !important; }
+    .for-phone { display: inherit !important; }
+}
+
+/**
+ * The Map
+ */
+div[leaflet] {
+    position: absolute !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    }
+.leaflet-container .leaflet-control-attribution {
+    font-size: 9px;
+    background: white\9;
+    filter: alpha(opacity=70)\9;
+}
+@media (max-width: 480px) {
+    .leaflet-container .leaflet-control-attribution {
+        max-width: 220px;
+    }
+}
+
+
+/**
+ * Map Controls
+ */
+.map-controls-top-left {
+    position: absolute;
+    top: 0;
+    left: 5px;
+    z-index: 10;
+}
+.map-controls-top-right {
+    position: absolute;
+    top: 9px;
+    right: 5px;
+    z-index: 10;
+}
+.btn-done-mapping, .btn-add-marker {
+    margin-left: 5px
+}
+.btn-done-mapping.large-screen {
+    display: inline;
+}
+.btn-done-mapping.small-screen {
+    display: none;
+}
+.btn-my-activities, 
+.btn-done-mapping, 
+.btn-search, 
+.geosurvey-map-control-layers-toggle .btn {
+    background-color: #eee;
+    color: black;
+}
+.map-controls .btn, 
+.leaflet-control-layers a, 
+.btn-search, 
+.btn-my-activities, 
+.btn-done-mapping, 
+.geosurvey-map-control-layers-toggle .btn {
+    -webkit-box-shadow: 0 2px 2px rgba(0,0,0,.3);
+       -moz-box-shadow: 0 2px 2px rgba(0,0,0,.3);
+            box-shadow: 0 2px 2px rgba(0,0,0,.3);
+}
+.geosurvey-map-control-layers-toggle .btn {
+    font-size: 14px;
+    padding: 8px 11px;
+}
+.leaflet-control-container .leaflet-top.leaflet-left {
+    /* the zoom control is being forced to bottom left 
+    while staying in the top left class (if time available, 
+    we should just move the control the the bottom left class) */
+    bottom: 70px;
+    top: auto;
+    left: 15px;
+}
+.leaflet-control-container .leaflet-bottom.leaflet-left {
+    /* the layers control  just above the zoom control */
+    bottom: 15px;
+    left: 13px;
+    z-index: 10; /* higher than map attribution*/
+}
+
+@media (max-width: 790px) {
+    .btn-help .map-control-label {
+        display: none;
+    }
+}
+@media (max-width: 700px) {
+    .btn-my-activities .map-control-label {
+        display: none;
+    }
+}
+@media (max-width: 640px) {
+    .btn-add-marker .map-control-label {
+        display: none;  
+    }
+}
+@media (max-width: 510px) {
+    .btn-add-marker .map-control-label {
+        display: none;
+    }
+}
+@media (max-width: 480px) {
+    .leaflet-control-zoom {
+        display: none;
+        }
+    .leaflet-control-container .leaflet-bottom.leaflet-left {
+        /* since the zoom control is hidden, move the layers control down */
+        bottom: 18px;
+        left: auto;
+        right: 4px;
+        }
+    .leaflet-control-layers {
+        border: none !important;
+        }
+
+
+    .map-controls-top-left {
+        top: 5px;
+        left: 5px;
+    }
+    .map-controls-top-right {
+        top: 5px;
+        right: 3px;
+    }
+    .btn-done-mapping, .btn-add-marker {
+        margin-left: 5px
+    }
+    .btn-done-mapping {
+        margin-left: 0px;
+        margin-right: 0px;
+        font-size: 13px;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+}
+
+
+
+/* Zoomto/Search Control */
+div[zoomto] {
+    display: inline;
+    position: relative;
+    }
+div[zoomto] .large-screen .icon-search {
+    position: absolute;
+    left: 15px;
+    top: -1px;
+    }
+div[zoomto] input {
+    height: auto !important;
+    font-size: 18px !important;
+    line-height: 1.2 !important;
+    margin-top: 10px;
+    padding-left: 40px;
+    -webkit-box-shadow: 0 2px 2px rgba(0,0,0,.5);
+       -moz-box-shadow: 0 2px 2px rgba(0,0,0,.5);
+            box-shadow: 0 2px 2px rgba(0,0,0,.5);    
+    }
+div[zoomto] .large-screen {
+    display: inline;
+    }
+div[zoomto] .small-screen {
+    display: none;
+    }   
+@media (max-width: 510px) {
+    div[zoomto] input {
+        width: 100px;
+        }
+    }
+@media (max-width: 480px) {
+    div[zoomto] .large-screen {
+        display: none;
+        }
+    div[zoomto] .small-screen {
+        display: inline;
+        }
+}
+
+
+/* Enlarged Zoom In/Out Controls */
+.leaflet-control-zoom {
+    -moz-border-radius: 7px !important;
+    -webkit-border-radius: 7px !important;
+    border-radius: 7px !important;
+    }
+.leaflet-control-zoom {
+    margin-left: 8px !important;
+    padding: 0px !important;
+    background: rgba(0, 0, 0, 0.5) !important;
+    border: none;
+    }
+.leaflet-control-zoom a {
+    background-color: white !important;
+    }
+.leaflet-control-zoom a, .leaflet-control-layers a {
+    background-position: 50% 50% !important;
+    background-repeat: no-repeat !important;
+    display: block;
+    }
+.leaflet-control-zoom a {
+    -moz-border-bottom-radius: 0px !important;
+    -webkit-border-bottom-radius: 0px !important;
+    border-bottom-radius: 0px !important;    
+    width: 36px !important;
+    height: 33px !important;
+    font-size: 28px !important;
+    line-height: 32px !important;
+    }
+.leaflet-control-zoom a:hover {
+    background-color: white !important;
+    }
+.leaflet-touch .leaflet-control-zoom a {
+    width: 44px !important;
+    height: 39px !important;
+    }
+.leaflet-control-zoom-in {
+    background-size: 27px 27px !important;
+    margin-bottom: 1px !important;
+    }
+.leaflet-control-zoom-out {
+    background-size: 27px 27px !important;
+    font: 46px/40px !important;
+    }
+.leaflet-control-zoom-out a {
+    font-size: 46px !important;
+    line-height: 40px !important;
+    }
+
+/**
+ * Modals
+ */
+.map-multipoint .question-title {
+    margin-bottom: 5px;
+}
+.map-multipoint .question-sub-text {
+    margin-bottom: 15px;
+}
+
+.modal {
+    max-height: 500px;
+    overflow:hidden;
+}
+.modal-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+.modal-body {
+    margin-bottom: 73px;
+    max-height: 310px;
+    overflow-y: auto;
+}
+
+
+.modal-map-usage ul{
+    margin-top: 5px;
+    margin-left: 0;
+}
+
+.modal-body ul {
+    margin-bottom: 10px;
+}
+.modal-body .img-in-paragraph {
+    max-height: 35px;
+}
+.modal-body .icon-in-paragraph {
+    margin-top: 5px;
+}
+
+.modal-body p.col-p {
+    margin-left: 60px;
+}
+
+
+/* Map Thankyou Modal */
+.thx-modal .modal-header h3,
+.done-modal .modal-header h3,
+.activities-modal h3 {
+    font-size: 20px;
+    font-weight: 500 !important;
+}
+
+/* My Activities Modal */
+.activities-modal .my-activities-legend {
+    margin-left: 30px;
+    margin-right: 10px;
+}
+.activities-modal .my-activities-text {
+    margin-left: 20px;
+}
+.activities-modal .empty-text {
+    margin-left: 30px;
+}
+.activities-modal .location {
+    position: relative;
+    margin-bottom: 15px;
+}
+.activities-modal .location > .icon-map-marker {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.activities-modal .location .btn-group {
+    margin-left: 30px;
+}
+.activities-modal .location .location-activities {
+    margin-top: 5px;
+    margin-left: 55px;
+}
+
+/* Help Modal */
+.help-pane {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+.help-pane p,
+.help-pane h4 {
+    margin-left: 10px;
+    margin-right: 20px;
+}
+.help-pane p.help-lead {
+    font-size: 16px;
+    margin-left: 0;
+    font-weight: bold;
+}
+.help-pane h3 {
+    font-size: 16px;
+    font-weight: normal;
+}
+.help-pane h4 {
+    font-size: 13px;
+    font-weight: bold;
+}
+
+/* Out of bounds modal */
+.modal-outofbounds .modal-body {
+    max-height: 600px;
+}
+
+
+/* Search Modal */
+.modal-zoomto .modal {
+    max-height: 420px;
+    }
+.modal-zoomto .modal {
+    height: 50px;
+}
+.modal-zoomto .modal-body {
+    max-height: 200px;
+    min-height: 100px;
+    margin-bottom: 10px;
+}
+.modal-zoomto .question-title,
+.modal-zoomto .noresults-label {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+.modal-zoomto .question-title, 
+.modal-zoomto p.subtext,
+.modal-zoomto .noresults-label {
+    text-align: center;
+}
+
+.modal-zoomto .noresults-label {
+    color: #777;
+}
+
+.modal-zoomto .form-search {
+    width: 98%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.modal-zoomto .form-search .control-group {
+    position: relative;
+    width: 84%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.modal-zoomto .icon-search, .modal-zoomto .icon-spinner,
+.modal-zoomto .icon-search, .modal-zoomto .ajax-spinner {
+    position: absolute;
+    left: -10px;
+    top: 8px;
+}
+.modal-zoomto input.search-query {
+    height: 24px !important; 
+    padding-left: 45px;
+    margin-left: -23px;
+    width: 100%;
+}
+.modal-zoomto .modal-header {
+    border-bottom: 0px;
+}
+@media (max-width: 600px) {
+    .modal {
+        max-height: none;
+        overflow: hidden;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: 0;
+        border: none;
+        -webkit-border-radius: 0;
+           -moz-border-radius: 0;
+                border-radius: 0;
+    }
+    .modal-header {
+        /*padding: 5px !important;*/
+    }
+    .modal-body {
+        max-height: none !important;
+        min-height: none !important;
+        overflow-y: auto;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+        margin-bottom: 0 !important;
+    }
+    .modal-footer {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+
+    .modal-zoomto .modal-header {
+        padding: 0 !important;
+        padding-top: 2px !important;
+    }
+    .modal-zoomto .modal-footer {
+        margin-bottom: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+    .modal-zoomto .question-title,
+    .modal-zoomto .noresults-label {
+        font-size: 14px;
+    }
+
+    .modal-zoomto .for-phone .question-title, 
+    .modal-zoomto .for-phone .subtext,
+    .modal-zoomto .for-phone .control-group,
+    .modal-zoomto .for-phone .form-search {
+        margin-bottom: 0;
+        margin-top: 0;
+        padding-bottom: 0;
+        padding-top: 0;
+    }
+    .modal-zoomto .for-phone .question-title {
+        font-weight: 500;
+    }
+    .modal-zoomto .for-phone .subtext {
+        margin: 0;
+        padding: 0;
+        margin-bottom: 3px;
+    }
+    .modal-zoomto .for-phone .control-group {
+        margin-bottom: 10px;
+    }
+
+    div[zoomto] .large-screen .icon-search {
+        top: -5px;
+        }
+
+}
+
+
+/**
+ * Misc
+ */
+.leaflet-popup-content {
+    width: 225px;
+}
+.map-multipoint .popover {
+    width: 180px;
+}
+.map-multipoint .popover-title {
+    display: none;
+}
+
+
+h1.marker-popup-heading {
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 6px;
+    line-height: 20px;
+}
+
+ul.marker-popup-list {
+    margin-bottom: 15px;
+}
+ul.marker-popup-list li {
+    line-height: 16px;
+    margin-bottom: 4px;
+    white-space:nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.leaflet-popup-content-wrapper {
+    -webkit-border-radius: 0;
+    border-radius: 0;
+}
+
+
+/**
+ * IE hacks
+ */
+.btn-my-activities {
+    margin-left: 10px \9 !important;
+}
+@media (min-width: 481) {
+    .btn-my-activities {
+        margin-left: 20px \9 !important;
+    }
+}
+
+div[zoomto] .large-screen {
+    *margin-right: 8px !important;
+}
+
+.btn-my-activities {
+    margin-left: 10px \9 !important;
+}
+
+div[zoomto] .large-screen .icon-search {
+    *top: 20px !important;
+}

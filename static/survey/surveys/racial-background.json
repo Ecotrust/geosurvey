@@ -1,0 +1,27 @@
+[
+    {
+        "text": "White",
+        "label": "white",
+        "group": "1"
+    },
+    {
+        "text": "Black or African American",
+        "label": "black-african-american",
+        "group": "1"
+    },
+    {
+        "text": "Hispanic, Spanish or Latino",
+        "label": "hispanic-spanish-or-latino",
+        "group": "1"
+    },
+    {
+        "text": "American Indian or Alaska Native",
+        "label": "american-indian-or-alaska-native",
+        "group": "1"
+    },
+    {
+        "text": "Asian/Pacific Islander",
+        "label": "asian-pacific-islander",
+        "group": "1"
+    }
+]

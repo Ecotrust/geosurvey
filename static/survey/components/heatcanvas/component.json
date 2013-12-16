@@ -1,0 +1,22 @@
+{
+  "name": "heatcanvas",
+  "version": "1.2.3",
+  "main": [
+    "heatcanvas.js",
+    "heatcanvas-worker.js",
+    "heatcanvas-baidumap.js",
+    "heatcanvas-leaflet.js",
+    "heatcanvas-googlemaps.js",
+    "heatcanvas-openlayers.js"
+  ],
+  "dependencies": {},
+  "gitHead": "b33e9087d53bf799b0b35c38ef59a2d2c5e64d8a",
+  "readme": "heatcanvas\n======================\n\nThis is a simple heatmap api based on HTML5 canvas. A heat map is a graphical representation of data where the values taken by a variable in a two-dimensional table are represented as colors, according to Wikipedia.\n\nYou can find an interactive demo at [http://sunng87.github.com/heatcanvas](http://sunng87.github.com/heatcanvas \"Visit the live demo\")\n\nAvailable via bower\n-------------------\n\n`bower install heatcanvas`\n\nUsage\n-----\n\n### 1. Create the HeatCanvas object ###\n\nYou can pass the canvas element object or its id to the constructor:\n\n    var heatmap = new HeatCanvas(\"canvasId\");\n\n### 2. Add some data ###\n\nAdd *value* to point (*x*,*y*) in canvas coordinate system.\n\n    heatmap.add(x, y, value);\n\n### 3. Render the map ###\n\nCall the *render* function on *heatmap* to draw it.\n\n    heatmap.render();\n\nWe use a simple formula to determine value of a pixel, by its\ndistance to a point that holds data:\n\n    v = f(d)\n\nThe first two optional parameters of *render* define the formula.\n\n* *step* \n* *degree* \n\n    v = &Sigma;(data<sub>i</sub> - step * d<sup>degree</sup>)\n\nA set of constants are predefined for degree:\n\n* HeatCanvas.LINEAR\n* HeatCanvas.QUAD\n* HeatCanvas.CUBIC\n\nFor the third parameter of *render*, you can define a custom\nfunction to define color of pixels. For instance, we can use a \nmono-hue color scheme by this function:\n\n    var colorscheme = function(value){\n        return [0.3, 0.75, value, 1];\n    }\n    heatmap.render(null, null, colorscheme);\n\nThe *value* for this function is guaranteed in (0,1].\n\n### 4. Remove everything we just created ###\n\nCall *clear* to erase the canvas and remove all data cached \nin *heatmap* instance.\n\n    heatmap.clear();\n\nGoogleMap extension\n-------------------\n\nHeatCanvas can be used as an *OverlayView* in GoogleMaps API V3.\n\nSimply use the Map instance to create an *HeatCanvasOverlayView*    \n\n    var heatmap = new HeatCanvasOverlayView(map, options);\n\nAdditional options available:\n\n* *step*, same as described in HeatCanvas.render\n* *degree*, same as described in HeatCanvas.render\n* *colorscheme*, same as described in HeatCanvas.render\n* *opacity*, the opacity of overlay view, [0,1]\n\nAdd data to map:\n\n    heatmap.pushData(latitude, longitude, value);\n\nThe map will be rendered automatically.\n\nOpenLayers extension\n--------------------\n\nAlso we have a OpenLayer extension for you to embed heat map in your custom\nmap application and OpenStreetMap.\n\nThe usage is still similar to GoogleMaps. First, construct your heat map\nlayer with a *name*, *OpenLayers map instance*, *layer options* and\n*HeatCanvas options*:\n\n    var heatmap = new OpenLayers.Layer.HeatCanvas(\"HeatCanvas\", map, {},\n            {'step':0.3, 'degree':HeatCanvas.QUAD, 'opacity':0.8});\n\nAdd data to layer:\n\n    heatmap.pushData(latitude, longitude, value);\n\nAdd layer to map:\n\n    map.addLayer(heatmap);\n\nOther extensions\n----------------\n\nThere are also HeatCanvas extensions for:\n\n* Baidu Map ([demo](http://sunng87.github.com/heatcanvas/baidumap.html \"BaiduMap Demo\"))\n* Cloudmade Leaflet ([demo](http://sunng87.github.com/heatcanvas/leaflet.html \"Leaflet Demo\"))\n\nThese extensions share similar API mentioned above. You can browse the source\ncode of our demos to get detail.\n\nLicense\n-------\n\nHeatCanvas is released according to MIT License.\n\nThanks\n------\n\n* @lbt05 for his patches on GoogleMap extension and BaiduMap implementation \n* @dazuma for his suggestion to speed up canvas rendering.\n\n",
+  "readmeFilename": "README.md",
+  "_id": "heatcanvas@1.2.3",
+  "description": "heatcanvas ======================",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/sunng87/heatcanvas.git"
+  }
+}

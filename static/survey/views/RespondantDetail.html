@@ -1,0 +1,27 @@
+<div class="row-fluid">
+    <div class="span6">
+
+        <h2>Respondent Info</h2>
+        <dl>
+            <dt>identity</dt>
+            <dd>{{ response.email || response.uuid}}</dd>
+            <dt>timestamp</dt>
+            <dd>{{ response.ts  | date:'MM/dd/yyyy @ h:mma'}}</dd>
+        </dl>
+        <h2>Responses</h2>
+        <div ng-repeat="answer in response.responses">
+            <div ng-switch on="answer.question.type">
+                <div ng-switch-default>
+                    <dl class="{{ answer.question.slug }}">
+                        <dt>{{ answer.question.title }}</dt>
+                        <dd>{{ answer.ts  | date:'MM/dd/yyyy @ h:mma'}}</dd>
+                        <dd>{{ answer.answer }}</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="span6">
+        <!--<div leaflet multimarkers="mapResponse" center="map.center" zoom="map.zoom" popupfield="'answers'"></div>-->
+    </div>
+</div>
