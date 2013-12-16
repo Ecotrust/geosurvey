@@ -26,7 +26,7 @@ class Command(BaseCommand):
             make_option('--subject',
                 action='store',
                 dest='subject',
-                default='Reminder: Surfrider Coastal Recreation Survey',
+                default='Last Chance: Surfrider Coastal Recreation Survey by Dec 31',
                 type='string',
                 help='Text to be used as the subject line for all of the emails.'),
             make_option('--html',
@@ -64,7 +64,7 @@ class Command(BaseCommand):
 
         if self.is_dry_run:
             self.stdout.write('')
-            self.stdout.write('This is a DRY RUN... No emails will be sent. But here is the list of addresses for the %s survey on %s:' % (options['survey_slug'], current_site.domain))
+            self.stdout.write('This is a DRY RUN. No emails will be sent. But here is the list of addresses for the %s survey on %s:' % (options['survey_slug'], current_site.domain))
             self.stdout.write('')
 
         for respondant in respondants:
