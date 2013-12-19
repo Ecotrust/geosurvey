@@ -335,10 +335,8 @@ angular.module('askApp')
                 if (status === 202) {
                     if (! deferUpdatingList) {
                         result.grid_cols.sort(function(a, b) {return a.order - b.order});
-                        index = _.indexOf($scope.survey.questions, $scope.questionBeingEdited);
-                        $scope.survey.questions[index] = result;
-                        $scope.questionBeingEdited = result;
-                        $scope.stopWatchingQuestions = false;    
+                        angular.copy(result, $scope.questionBeingEdited);
+                        $scope.stopWatchingQuestions = false;
                     }
                     
                 } else if (status === 201) {                
@@ -348,9 +346,6 @@ angular.module('askApp')
                 } else if (status === 200) {
                     angular.extend($scope.questionBeingEdited, result);
                 }
-                
-                //$scope.startEditingQuestion($scope.questionBeingEdited);
-                //$scope.questionBeingEdited = result;
                 $scope.startEditingQuestion($scope.questionBeingEdited);
                 $scope.activeQuestion.updated_at = new Date();
             });
