@@ -152,3 +152,6 @@ def register(request, template='survey/register.html'):
             return render_to_response('survey/thankyou.html', RequestContext(request, {}))
 
     return render_to_response(template, RequestContext(request, {}))
+
+def closed(request, template='survey/closed.html'):
+    return render_to_response(template, RequestContext(request, {}))
