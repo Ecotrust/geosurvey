@@ -26,13 +26,22 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
 
-    # backend urls
+
+    # Now directing all traffic other than dash and admin 
+    # traffic to a message that the survey is closed.
+    url(r'^admin', include(admin.site.urls)),
+    url(r'^grappelli/', include('grappelli.urls')),
+    (r'^api/', include(v1_api.urls)),
+    url(r'^report', include(report_urls)),
     url(r'^dash/(?P<survey_slug>[\w\d-]+)$', 'apps.survey.views.dash'),
-    #survey responder with preassigned uuid
     url(r'^dash$', 'apps.survey.views.dash'),
-    #other survey urls
     url(r'^dash', include(survey_urls)),
+    # all other traffic goes to the closed message
     (r'^.*$', survey_urls.closed),
+
+
+    # Below is the url pattern set used while the survey was open.
+
     # url(r'^admin/', include(admin.site.urls)),
     # url(r'^grappelli/', include('grappelli.urls')),
     # (r'^api/', include(v1_api.urls)),
