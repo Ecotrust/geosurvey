@@ -25,6 +25,13 @@ v1_api.register(SurveyReportResource())
 admin.autodiscover()
 
 urlpatterns = patterns('',
+
+    # backend urls
+    url(r'^dash/(?P<survey_slug>[\w\d-]+)$', 'apps.survey.views.dash'),
+    #survey responder with preassigned uuid
+    url(r'^dash$', 'apps.survey.views.dash'),
+    #other survey urls
+    url(r'^dash', include(survey_urls)),
     (r'^.*$', survey_urls.closed),
     # url(r'^admin/', include(admin.site.urls)),
     # url(r'^grappelli/', include('grappelli.urls')),
