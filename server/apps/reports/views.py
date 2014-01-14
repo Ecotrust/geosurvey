@@ -637,3 +637,96 @@ def full_data_dump_csv(request, survey_slug):
     for resp in survey.respondant_set.all():
         writer.writerow(json.loads(resp.csv_row.json_data))
     return response
+
+
+# @api_user_passes_test(lambda u: u.is_staff or u.is_superuser)
+# def activity_locations_csv(request, survey_slug):
+#     response = _create_csv_response('activity_locations_{0}.csv'.format(
+#         datetime.date.today().strftime('%d-%m-%Y')))
+
+#     fields = OrderedDict((
+#         ('uuid', 'UUID'),
+#         ('lat', 'Latitude'),
+#         ('lng', 'Longitude'),
+#         ('activity', 'Activity'),
+#     ))
+
+#     writer = SlugCSVWriter(response, fields)
+#     writer.writeheader()
+
+#     resps = Response.objects.filter(respondant__survey__slug=survey_slug
+#         ).exclude(respondant__complete__exact=False
+#         ).filter(question__slug='activity-locations')
+
+#     for resp in resps:
+#         for location in resp.location_set.all():
+#             locationAnswers = LocationAnswer.objects.filter(location__exact=location)
+#             for locationAnswer in locationAnswers: 
+#                 writer.writerow({
+#                     'uuid': resp.respondant.uuid, 
+#                     'lat': str(location.lat), 
+#                     'lng': str(location.lng), 
+#                     'activity': locationAnswer.answer })
+
+#     return response
+
+
+
+# @api_user_passes_test(lambda u: u.is_staff or u.is_superuser)
+# def activity_locations_csv(request, survey_slug):
+#     response = _create_csv_response('activity_locations_{0}.csv'.format(
+#         datetime.date.today().strftime('%d-%m-%Y')))
+
+#     fields = OrderedDict((
+#         ('uuid', 'UUID'),
+#         ('lat', 'Latitude'),
+#         ('lng', 'Longitude'),
+#         ('activity', 'Activity'),
+#     ))
+
+#     writer = SlugCSVWriter(response, fields)
+#     writer.writeheader()
+
+#     respondants = Respondant.objects.filter(survey__slug=survey_slug).exclude(complete__exact=False).order_by('-ts')
+
+#     for respondant in respondants:
+#         for resp in respondant.response_set.filter(question__slug='activity-locations'):
+#             for location in resp.location_set.all():
+#                 locationAnswers = LocationAnswer.objects.filter(location__exact=location)
+#                 for locationAnswer in locationAnswers: 
+#                     writer.writerow({
+#                         'uuid': resp.respondant.uuid, 
+#                         'lat': str(location.lat), 
+#                         'lng': str(location.lng), 
+#                         'activity': locationAnswer.answer })
+
+#     return response
+
+
+@api_user_passes_test(lambda u: u.is_staff or u.is_superuser)
+def activity_locations_csv(request, survey_slug):
+    response = _create_csv_response('activity_locations_{0}.csv'.format(
+        datetime.date.today().strftime('%d-%m-%Y')))
+
+    fields = OrderedDict((
+        ('uuid', 'UUID'),
+        ('lat', 'Latitude'),
+        ('lng', 'Longitude'),
+        ('activity', 'Activity'),
+    ))
+
+    writer = SlugCSVWriter(response, fields)
+    writer.writeheader()
+
+    survey = Survey.objects.get(slug=survey_slug)
+    locations = Location.objects.filter(response__respondant__in=survey.respondant_set.filter(complete=True)).order_by('response__respondant__uuid')
+
+    for location in locations.filter(response__question__slug='activity-locations'):
+        for locationAnswer in LocationAnswer.objects.filter(location__exact=location): 
+            writer.writerow({
+                'uuid': location.response.respondant.uuid, 
+                'lat': str(location.lat), 
+                'lng': str(location.lng), 
+                'activity': locationAnswer.answer })
+
+    return response

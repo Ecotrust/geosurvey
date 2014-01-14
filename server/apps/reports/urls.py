@@ -10,7 +10,8 @@ from reports.views import (full_data_dump_csv, get_crosstab_json,
                            gear_type_frequency_csv,
                            gear_type_frequency_json,
                            vendor_resource_type_frequency_csv,
-                           vendor_resource_type_frequency_json)
+                           vendor_resource_type_frequency_json,
+                           activity_locations_csv)
 
 
 urlpatterns = patterns('',
@@ -66,4 +67,8 @@ urlpatterns = patterns('',
     url(r'/full-survey-data/(?P<survey_slug>[\w\d-]+)',
         full_data_dump_csv,
         name='reports_full_data_dump_csv'),
+
+    url(r'/activity-location-data/(?P<survey_slug>[\w\d-]+)',
+        activity_locations_csv,
+        name='reports_activity_locations_csv'),
 )
