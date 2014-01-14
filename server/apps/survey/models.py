@@ -437,7 +437,7 @@ class Response(caching.base.CachingMixin, models.Model):
                                       'timepicker', 'multi-select'):
                 flat[self.question.slug] = self.answer
             elif self.question.type in ('currency', 'integer', 'number'):
-                flat[self.question.slug] = str(self.answer_number)
+                flat[self.question.slug] = self.answer
             elif self.question.type == 'datepicker':
                 flat[self.question.slug] = self.answer_date.strftime('%d/%m/%Y')
             elif self.question.type == 'grid':
