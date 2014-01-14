@@ -1,4 +1,4 @@
 from django.contrib import admin
-from reports.models import *
+from reports.models import CSVRow
 
-admin.site.register(QuestionReport)
+admin.site.register(CSVRow)

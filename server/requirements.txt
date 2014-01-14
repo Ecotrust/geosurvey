@@ -15,3 +15,4 @@ redis
 hiredis
 gunicorn
 dj-static
+ordereddict==1.1
