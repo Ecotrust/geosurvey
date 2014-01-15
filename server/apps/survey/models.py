@@ -195,9 +195,10 @@ class Survey(caching.base.CachingMixin, models.Model):
                     for slug, text in rows:
                         fields[qu.slug + '-' + slug] = qu.label + ' - ' + text
             elif qu.type == 'map-multipoint':
-                locations = (qu.response_set.all().values_list('location__lat','location__lng').distinct())
-                for lat, lng in locations:
-                    fields[qu.slug + '-('+str(lat)+','+ str(lng) +')'] = qu.label + '-('+str(lat)+','+ str(lng) +')'
+                a = 0
+                #locations = (qu.response_set.all().values_list('location__lat','location__lng').distinct())
+                #for lat, lng in locations:
+                #    fields[qu.slug + '-('+str(lat)+','+ str(lng) +')'] = qu.label + '-('+str(lat)+','+ str(lng) +')'
             else:
                 fields[qu.slug] = qu.label
 
@@ -444,10 +445,11 @@ class Response(caching.base.CachingMixin, models.Model):
                 for answer in self.gridanswer_set.all():
                     flat[self.question.slug + '-' + answer.row_label] = answer.answer_text
             elif self.question.type == 'map-multipoint':
-                for location in self.location_set.all():
-                    locationAnswers = LocationAnswer.objects.filter(location__exact=location)
-                    for locationAnswer in locationAnswers: 
-                        flat[self.question.slug + '-(' + str(location.lat) + ',' + str(location.lng) +')'] = locationAnswer.answer
+                a = 0
+                # for location in self.location_set.all():
+                #     locationAnswers = LocationAnswer.objects.filter(location__exact=location)
+                #     for locationAnswer in locationAnswers: 
+                #         flat[self.question.slug + '-(' + str(location.lat) + ',' + str(location.lng) +')'] = locationAnswer.answer
             else:
                 raise NotImplementedError(
                     ('Found unknown question type of {0} while processing '
