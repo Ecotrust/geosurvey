@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand
 from optparse import make_option
 from survey.models import Respondant, Response
-
+import traceback
 
 class Command(BaseCommand):
     help = 'Save All Responses'
@@ -17,21 +17,20 @@ class Command(BaseCommand):
     )
 
     def handle(self, *args, **options):
-        repondents = Respondant.objects.all()
-        print "Saving %s repondents" % repondents.count()
-        for repondent in repondents:
+        white_space = options.get('white_space')
+        question_id = options.get('question_id')
+        responses = Response.objects.all().order_by('-id')
+        if question_id:
+            responses = responses.filter(question__id=question_id)
+        if white_space:
+            responses = responses.filter(answer__contains="\r")
+        print "Saving Answers for %s Responses" % responses.count()
+        for response in responses:
+            # print response.question.slug
             try:
-	            repondent.save()
-            except:
-               pass
-        # responses = Response.objects.all().order_by('-id')
-        # if question_id:
-        #     responses = responses.filter(question__id=question_id)
-        # if white_space:
-        #     responses = responses.filter(answer__contains="\r")
-        # print "Saving Answers for %s Responses" % responses.count()
-        # for response in responses:
-        #     try:
-        #         response.save_related()
-        #     except:
-        #         pass
+                response.save_related()
+            except Exception as e:
+                print 'EXCEPTION, question is:' + response.question.slug
+                print traceback.format_exc()
+                pass
+        print "Done"

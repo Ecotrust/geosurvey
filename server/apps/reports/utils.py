@@ -32,7 +32,12 @@ class SlugCSVWriter(object):
         return self.writer.writerow(self.fieldnames.values())
 
     def writerow(self, rowdict):
-        return self.writer.writerow(self._dict_to_list(rowdict))
+        result = None
+        try: 
+            result = self.writer.writerow(self._dict_to_list(rowdict))
+        except Exception as e:
+            print e
+        return result
 
     def writerows(self, rowdicts):
         rows = []

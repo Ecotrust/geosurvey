@@ -177,23 +177,27 @@ class Survey(caching.base.CachingMixin, models.Model):
         fields = OrderedDict()
         for qu in self.questions.all().order_by('order'):
             if qu.type == 'grid':
-                if hasattr(qu, 'rows'):
-                    for row in qu.rows.splitlines():
-                        row_slug = (row.lower().replace(' ', '-')
-                                               .replace('(', '')
-                                               .replace(')', '')
-                                               .replace('/', ''))
-                        field_slug = qu.slug + '-' + row_slug
-                        field_name = qu.label + ' - ' + row
-                        fields[field_slug] = field_name
-                else:
-                    rows = (qu.response_set
-                             .exclude(gridanswer__row_label__isnull=True)
-                             .values_list('gridanswer__row_label',
-                                          'gridanswer__row_text')
-                             .distinct())
-                    for slug, text in rows:
-                        fields[qu.slug + '-' + slug] = qu.label + ' - ' + text
+                # if hasattr(qu, 'rows'):
+                #     print '    generate grid has rows'
+                #     for row in qu.rows.splitlines():
+                #         row_slug = (row.lower().replace(' ', '-')
+                #                                .replace('(', '')
+                #                                .replace(')', '')
+                #                                .replace('/', ''))
+                #         field_slug = qu.slug + '-' + row_slug
+                #         field_name = qu.label + ' - ' + row
+                #         fields[field_slug] = field_name
+                # else:
+                rows = (qu.response_set
+                         .exclude(gridanswer__row_label__isnull=True)
+                         .values_list('gridanswer__row_label',
+                                      'gridanswer__row_text',
+                                      'gridanswer__col_label', 
+                                      'gridanswer__col_text')
+                         .distinct()
+                         .order_by('gridanswer__row_label', 'gridanswer__col_label'))
+                for row_slug, row_text, col_slug, col_text in rows:
+                    fields[qu.slug + '-' + row_slug + '-' + col_slug] = qu.label + ' - ' + row_text + ' - ' + col_text
             elif qu.type == 'map-multipoint':
                 a = 0
                 #locations = (qu.response_set.all().values_list('location__lat','location__lng').distinct())
@@ -328,6 +332,10 @@ class Question(caching.base.CachingMixin, models.Model):
                         answers = answers.filter(respondant__responses__in=filter_question.response_set.filter(answer__in=value))
         if self.type in ['map-multipoint']:
             return locations.values('answer').annotate(locations=Count('answer'), surveys=Count('location__respondant', distinct=True))
+        elif self.type in ['multi-select']:
+            return (MultiAnswer.objects.filter(response__in=answers)
+                                       .values('answer_text')
+                                       .annotate(surveys=Count('answer_text')))
         else:
             return answers.values('answer').annotate(locations=Sum('respondant__locations'), surveys=Count('answer'))
         
@@ -418,9 +426,9 @@ class GridAnswer(caching.base.CachingMixin, models.Model):
 class Response(caching.base.CachingMixin, models.Model):
     question = models.ForeignKey(Question)
     respondant = models.ForeignKey(Respondant)
-    answer = models.TextField()
+    answer = models.TextField(default=None, null=True, blank=True)
     answer_number = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
-    answer_raw = models.TextField()
+    answer_raw = models.TextField(null=True, blank=True)
     user_agent = models.TextField(default='')
     ts = models.DateTimeField(default=datetime.datetime.now())
     objects = caching.base.CachingManager()
@@ -443,7 +451,7 @@ class Response(caching.base.CachingMixin, models.Model):
                 flat[self.question.slug] = self.answer_date.strftime('%d/%m/%Y')
             elif self.question.type == 'grid':
                 for answer in self.gridanswer_set.all():
-                    flat[self.question.slug + '-' + answer.row_label] = answer.answer_text
+                    flat[self.question.slug + '-' + answer.row_label + '-' + answer.col_label] = answer.answer_text
             elif self.question.type == 'map-multipoint':
                 a = 0
                 # for location in self.location_set.all():
@@ -458,142 +466,93 @@ class Response(caching.base.CachingMixin, models.Model):
             return flat
 
     def save_related(self):
-        if self.answer_raw:
-            self.answer = simplejson.loads(self.answer_raw)
-            if self.question.type in ['datepicker']:
-                self.answer_date = datetime.datetime.strptime(self.answer, '%d/%m/%Y')
-            elif self.question.type in ['currency', 'integer', 'number']:
-                if isinstance(self.answer, (int, long, float, complex)):
-                    self.answer_number = self.answer
-                else:
-                    self.answer = None
-            elif self.question.type in ['auto-single-select', 'single-select', 'yes-no']:
+        try:    
+            if self.answer_raw:
+                self.answer = simplejson.loads(self.answer_raw)
+                if self.question.type in ['datepicker']:
+                    self.answer_date = datetime.datetime.strptime(self.answer, '%d/%m/%Y')
+                elif self.question.type in ['currency', 'integer', 'number']:
+                    if isinstance(self.answer, (int, long, float, complex)):
+                        self.answer_number = self.answer
+                    else:
+                        self.answer = None
+                elif self.question.type in ['auto-single-select', 'single-select', 'yes-no']:
 
-                answer = simplejson.loads(self.answer_raw)
-                if answer.get('name'):
-                    self.answer = answer['name'].strip()
-                elif answer.get('text'):
-                    self.answer = answer['text'].strip()
-            elif self.question.type in ['auto-multi-select', 'multi-select']:
-                answers = []
-                self.multianswer_set.all().delete()
-                for answer in simplejson.loads(self.answer_raw):
+                    answer = simplejson.loads(self.answer_raw)
                     if answer.get('name'):
-                        answer_text = answer['name'].strip()
+                        self.answer = answer['name'].strip()
                     elif answer.get('text'):
-                        answer_text = answer['text'].strip()
-                    answers.append(answer_text)
-                    answer_label = answer.get('label', None)
-                    multi_answer = MultiAnswer(response=self, answer_text=answer_text, answer_label=answer_label)
-                    multi_answer.save()
-                self.answer = ", ".join(answers)
-            elif self.question.type in ['map-multipoint'] and self.id:
-                answers = []
-                self.location_set.all().delete()
-                for point in simplejson.loads(simplejson.loads(self.answer_raw)):
-                        answers.append("%s,%s: %s" % (point['lat'], point['lng'], point['answers']))
-                        location = Location(lat=point['lat'], lng=point['lng'], response=self, respondant=self.respondant)
-                        location.save()
-                        for answer in point['answers']:
-                            answer = LocationAnswer(answer=answer['text'], label=answer['label'], location=location)
-                            answer.save()
-                        location.save()
-                self.answer = ", ".join(answers)
-            elif self.question.type == 'grid':
-                self.gridanswer_set.all().delete()
-                for answer in self.answer:
-                    for grid_col in self.question.grid_cols.all():
-                        if grid_col.type in ['currency', 'integer', 'number', 'single-select', 'text', 'yes-no']:
-                            try:
-                                grid_answer = GridAnswer(response=self,
-                                    answer_text=answer[grid_col.label.replace('-', '')],
-                                    answer_number=answer[grid_col.label.replace('-', '')],
-                                    row_label=answer['label'], row_text=answer['text'],
-                                    col_label=grid_col.label, col_text=grid_col.text)
-                                grid_answer.save()
-                            except Exception as e:
-                                print "problem with %s in response id %s" % (grid_col.label, self.id)
-                                print "not found in", self.answer_raw
-                                print e
+                        self.answer = answer['text'].strip()
+                elif self.question.type in ['auto-multi-select', 'multi-select']:
+                    answers = []
+                    self.multianswer_set.all().delete()
+                    for answer in simplejson.loads(self.answer_raw):
+                        if answer.get('name'):
+                            answer_text = answer['name'].strip()
+                        elif answer.get('text'):
+                            answer_text = answer['text'].strip()
+                        answers.append(answer_text)
+                        answer_label = answer.get('label', None)
+                        multi_answer = MultiAnswer(response=self, answer_text=answer_text, answer_label=answer_label)
+                        multi_answer.save()
+                    self.answer = "; ".join(answers)
+                elif self.question.type in ['map-multipoint'] and self.id:
+                    answers = []
+                    self.location_set.all().delete()
+                    for point in simplejson.loads(simplejson.loads(self.answer_raw)):
+                            answers.append("%s,%s: %s" % (point['lat'], point['lng'], point['answers']))
+                            location = Location(lat=point['lat'], lng=point['lng'], response=self, respondant=self.respondant)
+                            location.save()
+                            for answer in point['answers']:
+                                answer = LocationAnswer(answer=answer['text'], label=answer['label'], location=location)
+                                answer.save()
+                            location.save()
+                    self.answer = "; ".join(answers)
+                elif self.question.type == 'grid':
+                    # This is hard coded to match the hard coded expenditure grid question for marco.
+                    self.gridanswer_set.all().delete()
+                    for answer in self.answer:
+                        try: 
+                            grid_answer1 = GridAnswer(response=self,
+                                answer_text=answer['numPeople'],
+                                answer_number=answer['numPeople'],
+                                row_label=answer['label'], row_text=answer['text'],
+                                col_label='numPeople', col_text='Num People')
+                            grid_answer1.save()
 
-                        elif grid_col.type == 'multi-select':
-                            try:
-                                for this_answer in answer[grid_col.label.replace('-', '')]:
-                                    print this_answer
-                                    grid_answer = GridAnswer(response=self,
-                                        answer_text=this_answer,
-                                        row_label=answer['label'], row_text=answer['text'],
-                                        col_label=grid_col.label, col_text=grid_col.text)
-                                    grid_answer.save()
-                            except:
-                                print "problem with ", answer
-                                print e
-                        else:
-                            print grid_col.type
-                            print answer
-            question_slug = self.question.slug.replace('-', '_')
-            if hasattr(self.respondant, question_slug):
-                # Switched to filter and update rather than just modifying and
-                # saving. This doesn't trigger post_save, but still updates
-                # self.respondant and the related CSVRow object.
-                (Respondant.objects.filter(pk=self.respondant.pk)
-                                   .update(**{question_slug: self.answer}))
-                setattr(self.respondant, question_slug, self.answer)
-                self.respondant.save()
-                self.respondant.update_csv_row()
-            self.save()
+                            grid_answer2 = GridAnswer(response=self,
+                                answer_text= answer['cost'],
+                                answer_number=answer['cost'],
+                                row_label=answer['label'], row_text=answer['text'],
+                                col_label='cost', col_text='Cost')
+                            grid_answer2.save()
+                        except (KeyError, ValidationError):
+                            # print
+                            # print 'KeyError:'
+                            # print e 
+                            # print 'Answer: ' + str(answer)
+                            # print
+                            pass
+
+
+
+
+                question_slug = self.question.slug.replace('-', '_')
+                if hasattr(self.respondant, question_slug):
+                    # Switched to filter and update rather than just modifying and
+                    # saving. This doesn't trigger post_save, but still updates
+                    # self.respondant and the related CSVRow object.
+                    (Respondant.objects.filter(pk=self.respondant.pk)
+                                       .update(**{question_slug: self.answer}))
+                    setattr(self.respondant, question_slug, self.answer)
+                    self.respondant.save()
+                    self.respondant.update_csv_row()
+                self.save()
+        except TypeError:
+            pass
 
     def __str__(self):
         return "%s/%s/%s" % (self.respondant.email, self.question.survey_slug, self.question.slug)            
-    # def __unicode__(self):
-    #     if self.respondant and self.question:
-    #         return "%s/%s (%s)" % (self.respondant.survey.slug, self.question.slug, self.respondant.uuid)
-    #     else:
-    #         return "No Respondant"
-
-
-    # def save(self, *args, **kwargs):
-    #     ''' On save, update timestamps '''
-    #     if not self.id:
-    #         self.ts = datetime.datetime.now()
-    #     else:
-    #         self.answer = simplejson.loads(self.answer_raw)
-    #         if self.question.type in ['auto-single-select', 'single-select']:
-    #             answer = simplejson.loads(self.answer_raw)
-    #             if answer.get('text'):
-    #                 self.answer = answer['text']
-    #             if answer.get('name'):
-    #                 self.answer = answer['name']
-    #             #self.answer = self.answer_raw['name']
-    #         if self.question.type in ['auto-multi-select', 'multi-select']:
-    #             answers = []
-    #             self.multianswer_set.all().delete()
-    #             for answer in simplejson.loads(self.answer_raw):
-    #                 if answer.get('text'):
-    #                     answer_text = answer['text']
-    #                 if answer.get('name'):
-    #                     answer_text = answer['name']
-    #                 answers.append(answer_text)
-    #                 answer_label = answer.get('label', None)
-    #                 multi_answer = MultiAnswer(response=self, answer_text=answer_text, answer_label=answer_label)
-    #                 multi_answer.save()
-    #             self.answer = ", ".join(answers)
-    #         if self.question.type in ['map-multipoint'] and self.id:
-    #             answers = []
-    #             self.location_set.all().delete()
-    #             for point in simplejson.loads(simplejson.loads(self.answer_raw)):
-    #                     answers.append("%s,%s: %s" % (point['lat'], point['lng'] , point['answers']))
-    #                     location = Location(lat=point['lat'], lng=point['lng'], response=self, respondant=self.respondant)
-    #                     location.save()
-    #                     for answer in point['answers']:
-    #                         answer = LocationAnswer(answer=answer['text'], label=answer['label'], location=location)
-    #                         answer.save()
-    #                     location.save()
-    #             self.answer = ", ".join(answers)
-    #     if hasattr(self.respondant, self.question.slug):
-    #         setattr(self.respondant, self.question.slug, self.answer)
-    #         self.respondant.save()
-    #     super(Response, self).save(*args, **kwargs)
 
 
 class UsageTopic(caching.base.CachingMixin, models.Model):
