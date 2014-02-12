@@ -1,22 +1,27 @@
-<div class="row-fluid">
-    <div class="span4">
-        <ul class="unstyled pennies">
-            <li ng-repeat="location in locations">
-                <div class="pull-right">
-                    <span><i class="icon-circle" ng-style="{ color: location.color }"></i></span>
-                    <input class="span8" type="text" 
-                        ng-model="location.pennies" 
-                        />
-                        <strong>pennies</strong>
-                </div>
-            </li>
-        </ul>
-        <h3 ng-show="question.total >= 0">{{ question.total }} Pennies Remain</h3>
-        <h3 ng-show="question.total < 0">You have allocated too many pennies</h3>
+<div class="pennies">
+    <div class="row-fluid">
+        <div class="span4">
+            <ul class="unstyled pennies">
+                <li ng-repeat="(locationKey, location) in locations">
+                    <div class="pull-right">
+                        <span><i class="icon-circle" ng-style="{ color: location.color }"></i></span>
+                        <input class="span7" type="text" 
+                            ng-model="location.pennies" 
+                            ng-click="penniesTextBox_click($event)"
+                            ng-focus="penniesTextBox_click($event)"
+                            data-location-key="{{ locationKey }}" 
+                            />
+                            <strong>pennies</strong>
+                    </div>
+                </li>
+            </ul>
+            <h3 ng-show="question.total >= 0">{{ question.total }} Pennies Remain</h3>
+            <h3 ng-show="question.total < 0">You have allocated too many pennies</h3>
+        </div>
+        <div class="span8">
+            <div leaflet center="map.center" zoom="map.zoom" multimarkers="locations" popupfield="'answers'" zoomtoresult="zoomModel.zoomToResult" active-marker-key="map.activeMarkerKey"></div>
+        </div>
     </div>
-    <div class="span8">
-        <leaflet center="map.center" zoom="map.zoom" multimarkers="locations" popupfield="'answer'"></leaflet>
-    </div>
+    <br/>
+    <button class="btn btn-primary btn-block btn-large" ng-disabled="question.total != 0" ng-click="answerQuestion(locations)">continue</button>
 </div>
-<br/>
-<button class="btn btn-primary btn-block btn-large" ng-disabled="question.total != 0" ng-click="answerQuestion(answer)">continue</button>

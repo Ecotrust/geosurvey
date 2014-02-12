@@ -118,17 +118,18 @@ def complete(request, survey_slug, uuid, action=None, question_slug=None):
         respondant.save()
         return HttpResponse(simplejson.dumps({'success': True}))
     return HttpResponse(simplejson.dumps({'success': False}))
-def send_email(email, uuid):
+def send_email(email, uuid, survey_slug):
     from django.contrib.sites.models import Site
 
     current_site = Site.objects.get_current()
     
-    plaintext = get_template('survey/email.txt')
-    htmly = get_template('survey/email.html')
+    plaintext = get_template('survey/%s/email.txt' % (survey_slug))
+    htmly = get_template('survey/%s/email.html' % (survey_slug))
 
     d = Context({
         'uuid': uuid,
-        'SITE_URL': current_site.domain
+        'SITE_URL': current_site.domain,
+        'survey_slug': survey_slug
         })
 
     subject, from_email, to = 'Take The Survey', 'Coastal Recreation Survey <surveysupport@surfrider.org>', email
@@ -148,7 +149,7 @@ def register(request, template='survey/register.html'):
         if email is not None:
             survey = get_object_or_404(Survey, slug=survey_slug)
             respondant, created = Respondant.objects.get_or_create(email=email, survey=survey)
-            send_email(respondant.email, respondant.uuid)
+            send_email(respondant.email, respondant.uuid, survey_slug)
             return render_to_response('survey/thankyou.html', RequestContext(request, {}))
 
     return render_to_response(template, RequestContext(request, {}))

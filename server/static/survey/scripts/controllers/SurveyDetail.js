@@ -82,6 +82,23 @@ function DoneDialogCtrl($scope, dialog, remainingActivities, $location){
     };
 }
 
+function PrimaryRequiredDialogCtrl($scope, dialog, primaryActivityText, $location){
+    $scope.loaded = false;
+    $scope.$watch(function() {
+        return $location.path();
+    }, function () {
+        if ($scope.loaded && dialog.isOpen()) {
+            $scope.close();
+        }
+        $scope.loaded = true;
+    });
+
+    $scope.primaryActivityText = primaryActivityText;
+    $scope.close = function(result){
+        dialog.close(result);
+    };
+}
+
 function ActivitiesCtrl($scope, dialog, $location, $timeout) {
     $scope.loaded = false;
     $scope.$watch(function() {
@@ -506,7 +523,12 @@ angular.module('askApp')
     };
 
     $scope.answerMapQuestion = function (locations) {
-        $scope.answerQuestion(locations);
+        if ($scope.isPrimaryActivityMapped()) {
+            $scope.answerQuestion(locations);
+        } else {
+            $scope.showPrimaryRequiredDialog();
+        }
+
     };
 
     $scope.loadSurvey = function (data) {
@@ -753,7 +775,18 @@ angular.module('askApp')
                 });
             }
 
+            if ($scope.locations.length === 1) {
+                // One location with primary activity. 
+                // Auto-answer with all pennies go to the one location.
+                $scope.locations.pennies = 100;
+                $scope.answerQuestion($scope.locations);
+            }
+
             $scope.question.total = 100;
+
+            $timeout(function () { 
+               map.zoom = 'ALL_MARKERS';
+            }, 1000);
 
             _.each($scope.locations, function(location) {
                 location.pennies = null;
@@ -780,6 +813,15 @@ angular.module('askApp')
 
                 });
             });
+
+            $scope.penniesTextBox_click = function ($event) {
+                if (_.has($event.target.attributes, "data-location-key")) {
+                    var key = $event.target.attributes["data-location-key"].value;
+                    $scope.zoomModel.zoomToResult = $scope.locations[key];
+                    map.activeMarkerKey = key;
+                }
+            };
+
         }
 
         // map 
@@ -791,14 +833,6 @@ angular.module('askApp')
             } else {
                 $scope.locations = JSON.parse($scope.answer);
             }
-
-            // $scope.layers = [];
-            // $scope.layers[0] = {label: 'Satellite Imagery', mapId: 'bing'};
-            // $scope.layers[1] = {label: 'Nautical Charts', mapId: 'nautical'};
-            // $scope.toggleLayer = function () {
-            //     if ()
-            //     $scope.map.addLayer(, true).removeLayer();
-            // };
 
             $scope.updateCrosshair = function() {
                 if ($scope.activeMarker !== false) {
@@ -816,7 +850,7 @@ angular.module('askApp')
             };
 
 
-            $http.get("/static/survey/data/marco_dd.json?v=2").success(function(data) {
+            $http.get("/static/survey/data/boundaries/" + $routeParams.surveySlug + ".json").success(function(data) {
                 $scope.boundaryLayer = L.geoJson(data);
             });
 
@@ -828,7 +862,7 @@ angular.module('askApp')
                     // results is an array of L.Polygon objects containing that point
                     return results.length < 1;
                 }
-                return true; // not using a boundary layer
+                return false; // not using a boundary layer
             };
 
             $scope.addMarker = function () {
@@ -839,7 +873,6 @@ angular.module('askApp')
                     $scope.isCrosshairAlerting = true;
                     $scope.showZoomAlert();
                 } else if ($scope.isOutOfBounds()) {
-                    console.log('not in boundary');
                     $scope.showOutOfBoundsAlert();
                 } else {
                     // Add location
@@ -1002,9 +1035,11 @@ angular.module('askApp')
                     backdropClick: false,
                     templateUrl: '/static/survey/views/addMoreModal.html',
                     controller: 'addMoreDialogCtrl',
-                    resolve: { remainingActivities: function () {
+                    resolve: { 
+                        remainingActivities: function () {
                             return $scope.getRemainingActivities();
-                        }
+                        },
+
                     }
                 });
                 
@@ -1023,23 +1058,57 @@ angular.module('askApp')
             };
 
             $scope.showDoneDialog = function () {
-                var d = $dialog.dialog({
+                if ( ! $scope.isPrimaryActivityMapped()) {
+                    $scope.showPrimaryRequiredDialog();
+                } else {
+                    $dialog.dialog({
+                        backdrop: true,
+                        keyboard: false,
+                        backdropClick: false,
+                        templateUrl: '/static/survey/views/doneModal.html',
+                        controller: 'DoneDialogCtrl',
+                        resolve: { remainingActivities: function () {
+                                return $scope.getRemainingActivities();
+                            }
+                        }                    
+                    })
+                    .open()
+                    .then(function (result) {
+                        if (result == 'yes') {
+                            $scope.answerMapQuestion($scope.locations);
+                        }
+                    });
+                }
+            };
+
+            $scope.isPrimaryActivityMapped = function () {
+                var primaryText = ($scope.question.options || {text: "NONE"}).text,
+                    remaining = $scope.getRemainingActivities();
+
+                if (primaryText === 'NONE') {
+                    // This survey does not require mapping of the primary 
+                    // activity. Return as if the primary activity is mapped.
+                    return true;
+                }
+
+                return !_.contains(remaining, primaryText);
+            };
+
+            $scope.showPrimaryRequiredDialog = function () {
+                var primaryActivityText = ($scope.question.options || {text: "NONE"}).text;
+
+                $dialog.dialog({
                     backdrop: true,
                     keyboard: false,
                     backdropClick: false,
-                    templateUrl: '/static/survey/views/doneModal.html',
-                    controller: 'DoneDialogCtrl',
-                    resolve: { remainingActivities: function () {
-                            return $scope.getRemainingActivities();
+                    templateUrl: '/static/survey/views/primaryRequiredModal.html',
+                    controller: 'PrimaryRequiredDialogCtrl',
+                    resolve: { primaryActivityText: function () {
+                            return primaryActivityText;
                         }
                     }
-                });
                 
-                d.open().then(function (result) {
-                    if (result == 'yes') {
-                        $scope.answerMapQuestion($scope.locations);
-                    }
-                });
+                }).open()
             };
 
             $scope.myActivitiesPopoverShown = false;

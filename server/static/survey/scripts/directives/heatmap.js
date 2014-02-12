@@ -6,7 +6,7 @@
 
     var leafletDirective = angular.module('heatmap.directive', []);
 
-    leafletDirective.directive('heatmap', function($http) {
+    leafletDirective.directive('heatmap', function($http, $routeParams) {
         return {
             restrict: 'EA',
             replace: true,
@@ -38,7 +38,7 @@
                 var mapInitialized=false;
                 scope.$watch('question.slug', function() {
                     if (scope.question) {
-                        var url = '/reports/geojson/marco/' + scope.question.slug
+                        var url = '/reports/geojson/' + $routeParams.surveySlug + '/' + scope.question.slug
                         if (! mapInitialized) {
                             map.setView(new L.LatLng(scope.question.lat, scope.question.lng), scope.question.zoom); 
                             mapInitialized = true;
@@ -49,7 +49,7 @@
                 scope.selectedFilter = null;
                 scope.$watch('question.filters', function(newFilters) {
                     if (newFilters) {
-                        var url = '/reports/geojson/marco/' + scope.question.slug,
+                        var url = '/reports/geojson/' + $routeParams.surveySlug + '/' + scope.question.slug,
                             filter=[], 
                             filterJSON;
                         _.each(newFilters, function (v, k) {

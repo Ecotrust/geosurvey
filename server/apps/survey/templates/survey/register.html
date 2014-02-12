@@ -9,7 +9,7 @@
     <meta http-Equiv="Cache-Control" Content="no-cache"/>
     <meta http-Equiv="Pragma" Content="no-cache"/>
     <meta http-Equiv="Expires" Content="0"/>
-    <title>Mid-Atlantic Coastal and Ocean Recreation Survey</title>
+    <title>Washington Coastal and Ocean Recreation Survey</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
@@ -26,7 +26,7 @@
         #register-row {
           width: 100%;
           height: 500px;
-          background-image: url({{ STATIC_URL }}images/young-surfer-920x613.jpg);
+          background-image: url({{ STATIC_URL }}survey/img/washington/register-920x613.jpg);
           background-repeat:no-repeat;
           background-size: contain;
           position: relative;
@@ -90,43 +90,42 @@
     <div class="container">
       <div id="title-row" class="row">
         <div class="span">
-          <h3>Mid-Atlantic Coastal and Ocean Recreation Survey</h3>
+          <h3>Washington Coastal and Ocean Recreation Survey</h3>
         </div>
       </div>
       <div class="row">
         <div id="register-row" class="span">
           <div class="register-form well">
-          
-            <p>Welcome!  We are conducting a survey of coastal and ocean recreation in Connecticut, New York, New Jersey, Delaware, Maryland, and Virginia.  Please enter your email below and we will send you an individual link to fill out the survey. We will not use your email for anything except the survey – thank you!</p>
+            <p>Welcome! We are conducting a survey of coastal and ocean recreation in the Pacific coast of Washington. Survey results will help inform ocean planning.</p> 
+            <p>Please enter your email below and we will send you an individual link to fill out the survey. We will not use your email for anything except the survey – thank you!</p>
             <form class="form-inline" method="POST">
               <input type="email" name="emailAddress" placeholder="Email address" required/>
-              <input type="hidden" name="survey" value="marco"/>
+              <input type="hidden" name="survey" value="washington-opt-in"/>
               {% csrf_token %}
               <button class="btn btn-primary" type="submit">Submit</button>
             </form>
 
-            <p>This survey is being conducted to help inform ocean planning in the Mid-Atlantic region. Results will be posted to the <a href="http://portal.midatlanticocean.org/portal/" target="_blank">Mid-Atlantic Ocean Data Portal</a>.</p>
+            <!--<p> Results will be posted to the <a href="http://portal.midatlanticocean.org/portal/" target="_blank">Mid-Atlantic Ocean Data Portal</a>. --></p>
 
             <ul class="unstyled">
               <li><a href="#faq" data-toggle="modal">Frequently Asked Questions</a></li>
-              <li><a target="_blank" href="http://www.midatlanticocean.org/">MARCO</a></li>
               <li><a target="_blank" href="http://www.surfrider.org" target="_blank">Surfrider Foundation</a></li>
+              <li><a target="_blank" href="http://www.msp.wa.gov/" target="_blank">Washington MSP</a></li>
             </ul>
+
           </div> <!-- end register-form-well -->
 
         </div>
       </div>
       <div id="photo-credits-row" class="row">
         <div class="span">
-          <p><small>Photo: Beata Jancsik/<a href="http://www.shutterstock.com">Shutterstock.com</a></small></p>
+          <p><small>Photo: Casey Dennehy</small></p>
         </div>
       </div>
       <div id="logo-row" class="row">
-        <div style="width:100%;">
-          <a target="_blank" href="http://www.surfrider.org"><img src="{{ STATIC_URL }}images/logos/surfrider.jpg" style="width: 18%; margin-left: 0; padding-left: 0; margin-right: 30px;"></a>
-          <a target="_blank" href="http://www.ecotrust.org"><img src="{{ STATIC_URL }}images/logos/ecotrust.jpg" style="width: 22%; margin-right: 30px;"></a>
-          <a target="_blank" href="http://www.nature.org"><img src="{{ STATIC_URL }}images/logos/tnc.jpg" style="width: 22%; margin-right: 30px;"></a>
-          <a target="_blank" href="http://www.monmouth.edu"><img src="{{ STATIC_URL }}images/logos/monmouth.jpg" style="width: 22%;"></a>
+        <div style="width:100%;">        
+          <a target="_blank" href="http://www.surfrider.org"><img src="{{ STATIC_URL }}images/logos/surfrider.jpg" style="width: 15%; margin-left: 180px; padding-left: 0; margin-right: 100px;"></a>
+          <a target="_blank" href="http://www.ecotrust.org"><img src="{{ STATIC_URL }}images/logos/ecotrust.jpg" style="width: 19%; margin-right: 30px;"></a>
         </div>
       </div>
 
@@ -138,26 +137,21 @@
         </div>
         <div class="modal-body">
 
-            <h4 id="who-conducting">Who is conducting this survey?</h4>
-            <p>The <a target="_blank" href="http://www.surfrider.org">Surfrider Foundation</a> is conducting the survey in partnership with <a target="_blank" href="http://www.ecotrust.org">Ecotrust</a>, <a target="_blank" href="http://www.monmouth.edu/urban_coast_institute/default.asp">Monmouth University’s Urban Coast Institute</a>, and <a target="_blank" href="http://www.nature.org">The Nature Conservancy</a>, in close coordination with the Mid-Atlantic Regional Council on the Ocean (<a target="_blank" href="http://www.midatlanticocean.org">MARCO</a>).</p>
+            <p class="lead">Nation-wide coastal tourism & recreation drives $70 billion to the U.S. annually. It accounts for 1.7 million jobs, and it is part of our culture, providing enjoyment for the millions who visit our coasts each year.</p>
 
-            <h4 id="marco">What is MARCO and how does it relate to this survey?</h4>
-            <p>The Mid-Atlantic Regional Council on the Ocean, or MARCO, was formed by the Governors of New York, New Jersey, Delaware, Maryland, and Virginia to improve the health of Mid-Atlantic ocean and coastal resources, and ensure that they continue to contribute to the economic vitality of coastal communities. To further these goals, MARCO oversaw the development of the <a target="_blank" href="http://portal.midatlanticocean.org/portal/">Mid-Atlantic Ocean Data Portal</a> (Portal), an online tool created to help the public visualize and analyze coastal and ocean data. The data from this survey will be placed on the Portal. MARCO is also helping to lead a <a target="_blank" href="http://www.monmouth.edu/uciboatersurvey/default.asp">similar survey</a> focused solely on recreational boating.</p>
+            <h4 id="what-is-cmsp">What is Coastal and Marine Spatial Planning (CMSP)?</h4>
+            <p>Coastal and marine spatial planning is a method used to coordinate decisions about coastal and ocean use in a comprehensive plan. CMSP utilizes information about the location of significant human activities, marine resources, and other key data to determine the most suitable locations for particular uses.</p>
 
-            <h4 id="who-should-fill">Who should fill out the survey?</h4>
-            <p>Beach goers, swimmers, beach wildlife viewers, surfers, kayakers, windsurfers, divers, and other “non-consumptive” recreational users should complete the survey. Separate <a target="_blank" href="http://portal.midatlanticocean.org/portal/mid-atlantic-initiates-new-round-of-coastal-recreational-mapping/">studies</a> are focusing on uses like fishing and boating.</p>
+            <h4 id="why-cmsp">Why is Washington beginning to use CMSP?</h4>
+            <p>CMSP is anticipated to better coordinate management decisions among local, state, federal and tribal governments, and community stakeholders. It will reduce user conflicts, environmental impacts, and address emerging uses of the marine environment.</p>
 
-            <h4 id="how-to-participate">How do I participate?</h4>
-            <p>Participation is simple: go to <a target="_blank" href="http://www.surfrider.org/mid-atlantic-recreation">http://www.surfrider.org/mid-atlantic-recreation</a> and enter your email address. A unique survey link will then be sent to you via email.</p>
+            <h4 id="participate">Why Should You Participate in CMSP?</h4>
+            <p>Successful CMSP depends upon participation of stakeholders like you. Spatial and economic information on recreational uses is crucial – these uses provide benefits to coast communities and to WA state, and it is important they are captured in CMSP decisions.</p>
 
-            <h4 id="why-participate">Why should I participate?</h4>
-            <p>Your help is needed to ensure that your favorite recreation areas are considered in regional ocean planning. Recreational uses are poorly mapped and data is limited. To ensure that the interests and safety of recreational users are considered in management plans, better information is needed.
+            <h4 id="mission">Surfrider Mission, CMSP, and You</h4>
+            <p>The Surfrider Foundation is a grassroots environmental organization dedicated to the protection and enjoyment of the world’s oceans, waves, and beaches. Through our network of seventy-five chapters and membership of thousands of recreational ocean users, we are working to support effective CMSP.</p>
 
-            <h4 id="ocean-planning">What is regional ocean planning?</h4>
-            <p>As new coastal and ocean uses develop in the Mid-Atlantic, it is becoming clear that a more coordinated and thoughtful approach to planning and management is needed. Regional ocean planning gives stakeholders the opportunity to craft forward-looking plans with state and federal resource managers that reduce conflicts and help ensure our ocean resources continue to provide the benefits that people want and need. Regional ocean planning does not create new management authorities but rather provides guidance to agencies to meet planning goals using their existing authorities.</p>
-
-            <h4 id="reveal">Will my favorite recreation spot or personal imformation be revealed to everyone else?</h4>
-            <p>No, the data used to produce maps will be aggregated so as to not reveal individual locations. Personal data such as age and ethnicity will also be presented in aggregate form. Emails will not be shared.</p>
+            <p>We seek to collect data on recreational uses, and we have the capacity to foster the participation of recreational users in the CMSP process. Our organization represents a wide range of recreational users including: beach-goers, surfers, kayakers, wildlife viewers, divers, boaters, etc.</p>
              
         </div>
         <div class="modal-footer">

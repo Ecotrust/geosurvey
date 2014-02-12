@@ -22,7 +22,9 @@
             <h4>Most Common Last Questions</h4>
             <dl class="dl-horizontal dl-horizontal-compact" ng-repeat="group in survey.common_last_questions">
                 <dt ng-show="group.last_question != null && group.last_question != 'feedback'"><a href="/respond/{{ survey.slug }}/{{ group.last_question }}">{{ group.last_question }}</a></dt>
+
                 <dd ng-show="group.last_question != null && group.last_question != 'feedback'">{{ group.percent_exits * 100 | number:0 }}%</dd>
+
             </dl>
         </div>
     </div>

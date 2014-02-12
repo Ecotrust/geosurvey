@@ -1,0 +1,9 @@
+Hello,
+You recently submitted your e-mail address to take a survey on ocean and coastal recreation in the Pacific coast of Washington. The link below will take you to the survey. Use this same link again if you need to stop and come back to the survey, your information will be saved.
+
+http://{{ SITE_URL }}/respond#/survey/{{ survey_slug }}/{{ uuid }}
+
+The survey should take approximately 10 to 15 minutes to complete. By clicking on this link you verify that you are 18 years of age or older and agree to participate in this survey and provide your information to Surfrider. If you need technical assistance please contact us at surveysupport@surfrider.org.
+
+Thank you for participating!
+Surfrider Foundation
