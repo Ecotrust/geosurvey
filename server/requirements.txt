@@ -2,7 +2,7 @@ path.py
 Django==1.5.5
 south
 fabric
-django-grappelli
+django-grappelli==2.4.8
 django-extensions
 simplejson
 django-tastypie
