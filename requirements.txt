@@ -16,3 +16,4 @@ hiredis
 gunicorn
 django-storages
 boto
+ordereddict
