@@ -248,6 +248,7 @@ def vagrant(username='vagrant'):
     set_env_for_user(username)
     result = local('vagrant ssh-config', capture=True)
     data = parse_ssh_config(result)
+    env.role = 'staging'
     env.remote = 'vagrant'
     env.branch = branch
     env.host = '127.0.0.1'
