@@ -1,0 +1,76 @@
+<% if node[:user] == "vagrant" %>
+upstream example-vagrant {
+    server 127.0.0.1:8000;
+}
+<% end %>
+
+server {
+    listen 80;
+    listen 443 default ssl;
+    server_name <%= node[:servername] %>;
+
+    access_log /var/log/nginx/<%= node[:project] %>-access.log;
+    error_log /var/log/nginx/<%= node[:project] %>-error.log;
+    
+    <% if node[:ssl_certificate] %>
+    ssl_certificate <%= node[:ssl_certificate] %>;
+    ssl_certificate_key <%= node[:ssl_certificate_key] %>; 
+    if ($ssl_protocol = "") {
+        rewrite ^   https://$server_name$request_uri? permanent;
+    }
+    <% else %>
+    # default self signed cert
+    ssl_certificate /etc/nginx/ssl/server.crt;
+    ssl_certificate_key /etc/nginx/ssl/server.key; 
+    <% end %>
+    ssl_session_timeout  5m;
+    ssl_protocols  SSLv2 SSLv3 TLSv1;
+    ssl_ciphers  ALL:!ADH:!EXPORT56:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv2:+EXP;
+    ssl_prefer_server_ciphers   on;
+    
+    location / {
+        <% if node[:user] == "vagrant" %>
+        proxy_pass http://example-vagrant;
+        proxy_set_header Host <%= node[:servername] %>:3456;
+        <% else %>
+        proxy_pass http://127.0.0.1:8888;
+        proxy_set_header Host $host;
+        <% end %>
+
+        proxy_buffering off;
+        proxy_redirect off;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+
+    location /downloads {
+        alias /srv/downloads;
+    }
+    
+    index index.html;
+
+    <% if node[:staticfiles] %>
+
+    location /static/ {
+        alias <%= node[:staticfiles] %>/;
+    }
+
+    <% end %>
+
+    <% if node[:mediafiles] %>
+
+    location /media/ {
+        alias <%= node[:mediafiles] %>/;
+    }
+    
+    <% end %>
+    
+    <% if node[:adminmediafiles] %>
+
+    location /media/admin/ {
+        alias <%= node[:adminmediafiles] %>/;
+    }
+
+    <% end %>
+
+}

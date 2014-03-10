@@ -1,0 +1,13 @@
+description "gunicorn app"
+author      "Edwin Knuth"
+
+
+start on filesystem and net-device-up IFACE=eth0
+stop on runlevel S
+
+script
+    export HOME="/usr/local/apps/geosurvey/server"
+    export VENV="/usr/local/venv/geosurvey"
+    cd $HOME
+    exec sudo -u nginx /usr/bin/gunicorn -w 5 -b 0.0.0.0:8888 wsgi
+end script
