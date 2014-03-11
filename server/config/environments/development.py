@@ -2,28 +2,17 @@ from path import path
 from config.settings import *
 
 
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'geosurvey',
         'USER': 'vagrant',
-        'HOST': 'localhost',
-        'PORT': '5432'
     }
 }
-
 DEBUG = True
 
-CACHES = {
-    'default': {
-        'BACKEND': 'redis_cache.RedisCache',
-        'LOCATION': 'localhost:6379',
-        'OPTIONS': {
-            'DB': 1,
-            'PARSER_CLASS': 'redis.connection.HiredisParser'
-        },
-    },
-}
+
 COMPRESS_ENABLED = False
 
 MAP_API_KEY = "Av8HukehDaAvlflJLwOefJIyuZsNEtjCOnUB_NtSTCwKYfxzEMrxlKfL1IN7kAJF"
