@@ -15,4 +15,4 @@ server/static/survey/components/
 geosurvey_env
 logs
 scripts/heroku-env.sh
-
+backups/
