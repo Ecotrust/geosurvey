@@ -258,7 +258,7 @@ class Response(caching.base.CachingMixin, models.Model):
                 self.location_set.all().delete()
                 for point in simplejson.loads(simplejson.loads(self.answer_raw)):
                         answers.append("%s,%s: %s" % (point['lat'], point['lng'] , point['answers']))
-                        location = Location(lat=point['lat'], lng=point['lng'], response=self, respondant=self.respondant)
+                        location = Location(lat=str(point['lat']), lng=str(point['lng']), response=self, respondant=self.respondant)
                         location.save()
                         for answer in point['answers']:
                             answer = LocationAnswer(answer=answer['text'], label=answer['label'], location=location)
