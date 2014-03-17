@@ -6,7 +6,9 @@ from django.db import models
 
 
 class Migration(SchemaMigration):
-
+    depends_on = (
+        ("reports", "0001_initial"),
+    )
     def forwards(self, orm):
         # Adding field 'Respondant.ordering_date'
         db.add_column(u'survey_respondant', 'ordering_date',
