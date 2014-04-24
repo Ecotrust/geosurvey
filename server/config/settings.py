@@ -184,6 +184,8 @@ COMPRESS_ROOT = STATIC_ROOT
 COMPRESS_CSS_FILTERS = ['compressor.filters.cssmin.CSSMinFilter']
 COMPRESS_JS_FILTERS = ['compressor.filters.jsmin.JSMinFilter']
 
+COMPRESS_ENABLED = False
+
 # django-grappelli
 GRAPPELLI_ADMIN_TITLE = "Geosurvey Admin"
 
